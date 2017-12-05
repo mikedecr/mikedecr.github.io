@@ -1,0 +1,78 @@
+---
+title: "PoliSci 553: Introduction to R"
+description: "Brief introduction to this semester's R lessons. READ BEFORE CLASS."
+author: "Michael DeCrescenzo"
+date: '2017-11-29'
+slug: 553-intro
+categories: ["R", "PS553", "Teaching"]
+tags: []
+
+draft: true
+---
+
+
+# About this course
+
+Materials for this course are written for graduate students in political science at the University of Wisconsin--Madison. Individuals from wider audiences may find some material here useful, but they should be aware that they are not the intended audience. 
+
+Materials for this course will be hosted online. Materials will be easiest to read on this website, but source code for all analysis will also be available on my [Github page](https://www.github.com/mikedecr).
+
+We'll divide the material for this course across four documents (*not including* this page). 
+
+- [First is an overview of some basic R content.](ps-553-day0-basics) This covers some introductory guidance for installing R and running simple commands. ***Review this page on your own before the first in-class R lesson.*** 
+- [Day 1 covers data manipulation,](ps-553/ps-553-data) focusing specifically on useful tools in the suite of R packages commonly known as the `tidyverse`.
+- [Day 2 covers graphics,](ps-553/ps-553-graphics) with a particular focus on `ggplot2`.
+- [Day 3 covers statistical analysis,](ps-553/ps-553-analysis) including estimating models, generating model output, and incorporating statistical results into a social science workflow.
+
+
+
+
+
+# Bottom-up theory
+
+R is a more flexible and extensible programming language than Stata is. Depending on one's needs, this can be very valuable, but it sometimes requires some deeper knowledge of programming concepts. This section of the course will touch on some of these concepts as we go, providing resources for further learning along the way.
+
+Some of these concepts, such as variables and functions, may seem tedious at first. We will cover these not because you cannot be trusted to understand these concepts *in general*, but because these concepts relate to programming in not-always-obvious ways. The mathematical world and the programming world exhibit a handful of convenient similarities (or analogies), and understanding how these realms relate will help you become a stronger programmer and a better mathematical thinker.
+
+Having said that, the intent is not to overburden new R users with too much theory. The aim is to provide helpful exposition to build a foundation with R, so that individuals who are interested in pursuing R further have helpful mental maps for how to think about some things going forward.
+
+
+
+
+# R Pedagogy: 
+
+The R community is in a bit of an upheaval lately. While many have converted a workflow that is heavily influenced by a suite of efficient data-wrangling packages commonly called the "tidyverse," many still cling to R's older roots, commonly called "base R". A greater number insist that teaching base R is important, even if they themselves use the tidyverse for their own work. 
+
+
+Because many veteran R users "graduated" from base R to the tidyverse, they hold a belief that the way to understand the tidyverse is "through" their knowledge of base R. This is probably not necessary. I do not need to understand more primitive S methods in order to understand R. 
+
+Tidyverse is not the "more complicated" version of base R. Nor should we think about base R as being "vegetables" that we have to eat before getting to the fun stuff.
+
+
+
+We will focus on the tidyvese.
+
+R does work "out of the box," but the tidyverse is a worthwhile upgrade.
+
+
+
+base is "simple" while tidyverse is "advanced"
+
+[teach tidyverse](http://varianceexplained.org/r/teach-tidyverse/)
+
+[teach ggplot2](http://varianceexplained.org/r/teach_ggplot2_to_beginners/)
+
+[hard way first](http://varianceexplained.org/r/teach-hard-way/)
+
+[advanced base v gg debate](http://varianceexplained.org/r/why-I-use-ggplot2/)
+
+- base is about what you *do*
+- ggplot2 is about what the graph means
+
+Advantages in plotting:
+
+- group aesthetics vs loops
+- facetting vs loops
+- legends
+
+

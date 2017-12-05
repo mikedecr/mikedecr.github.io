@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Michael DeCrescenzo</title>
+    <link>https://mikedecr.github.io/</link>
+    <description>Recent content on Michael DeCrescenzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 04 Dec 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://mikedecr.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>https://mikedecr.github.io/about/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/about/</guid>
+      <description>I am a doctoral student in the Department of Political Science at the University of Wisconsin&amp;ndash;Madison. I study American politics and statistical methodology.
+My research focuses on electoral politics, broadly construed (representation, voting, public opinion, and election administration) and Bayesian data analysis. My dissertation explores primary elections and the representation of local constituency preferences.
+I am an affiliate of the Elections Research Center, where I also serve as the graduate student assistant.</description>
+    </item>
+    
+    <item>
+      <title>Research</title>
+      <link>https://mikedecr.github.io/research/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/research/</guid>
+      <description>Dissertation Do Primaries Work? Nomination Politics and the Representation of Local Partisan Preferences.
+Partisan voters are historically unlikely to cast their votes for the opposing party, so the primary nomination process is perhaps more consequential than ever. Theoretical and empirical scholarship on candidate positioning argues that the primary process is the predominant reason for divergent candidate positions across parties. I argue that the core predictions from the prevailing theory of primaries lacks direct empirical support.</description>
+    </item>
+    
+    <item>
+      <title>Teaching</title>
+      <link>https://mikedecr.github.io/teaching/</link>
+      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/teaching/</guid>
+      <description> Courses As instructor:
+ Political Science 553: Introduction to Statistical Computing in Political Science (UW&amp;ndash;Madison, Spring 2018). Materials  As teaching assistant:
+ Political Science 544: Introduction to Survey Research Methods (UW&amp;ndash;Madison, Spring 2017) Political Science 218: Understanding Political Numbers (UW&amp;ndash;Madison, Fall 2015 and Fall 2016)  Workshops  Political Science Grad Student Math Bootcamp (UW&amp;ndash;Madison, 2017). Materials Political Science $\mathrm{\LaTeX}$ Workshop (UW&amp;ndash;Madison, 2015&amp;ndash;2017). Materials  </description>
+    </item>
+    
+    <item>
+      <title>A Plain Markdown Post</title>
+      <link>https://mikedecr.github.io/post/2016/12/30/a-plain-markdown-post/</link>
+      <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
+      
+      <guid>https://mikedecr.github.io/post/2016/12/30/a-plain-markdown-post/</guid>
+      <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
+ You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</guid>
+      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
+You can embed an R code chunk like this:
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+    </item>
+    
+    <item>
+      <title>Lorem Ipsum</title>
+      <link>https://mikedecr.github.io/post/2015/01/01/lorem-ipsum/</link>
+      <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
+      
+      <guid>https://mikedecr.github.io/post/2015/01/01/lorem-ipsum/</guid>
+      <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Code</title>
+      <link>https://mikedecr.github.io/code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/code/</guid>
+      <description>Github This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my Github repositories.
+ Sublime Text User Settings Available on Github. Highlights include:
+ Keybindings for R and \(\mathrm{\LaTeX}\) (primarily) and associated macro files. Code snippets for \(\mathrm{\LaTeX}\) and R, plus some here and there for Stan, Stata, HTML, and Markdown. A modified Solarized color scheme based on the guts of the Cobalt2 scheme for Sublime, light and dark versions.</description>
+    </item>
+    
+    <item>
+      <title>Contact</title>
+      <link>https://mikedecr.github.io/contact/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/contact/</guid>
+      <description>How to reach me
+By mail: Department of Political Science 101A North Hall (Elections Research Center) 1050 Bascom Mall University of Wisconsin&amp;ndash;Madison Madison, WI 53706
+By email: decrescenzo [at] wisc [dot] edu
+During office hours: North Hall 101A (appointment only during fall 2017)
+On the Twitter: @mikedecr</description>
+    </item>
+    
+  </channel>
+</rss>

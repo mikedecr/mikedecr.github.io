@@ -1,0 +1,77 @@
+---
+title: "Day 3: Analysis"
+author: "Michael DeCrescenzo"
+description: "Statistical analysis, model output, and workflow integration"
+date: "2018-03-01"
+slug: "553-day3-analysis"
+categories: ["R", "PS553", "Teaching"]
+tags: []
+
+draft: true
+---
+
+
+# Nonstatistical approaches
+
+
+## tabulating
+
+## aggregating
+
+
+
+# Univariate statistics
+
+
+## means and CIs
+
+## comparing CIs across groups
+
+## simple means tests, chisq tests
+
+
+
+
+# Regression
+
+## lm
+
+
+## glm
+
+
+## lme4
+
+
+## bayesian models
+
+
+
+# Regression output
+
+
+## regression tables
+
+`xtable`, `stargazer`, `texreg`
+
+
+## regression coef plots
+
+don't use `coeftest`
+
+
+`broom`,
+
+
+## regression predictions
+
+maybe avoid `effects`
+
+use `sjplot`, `margins` for R
+
+
+## marginal effects
+
+
+
+

@@ -1,0 +1,26 @@
+---
+title: Code
+---
+
+
+# Github
+
+This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my [Github repositories](https://github.com/mikedecr).
+
+
+
+# Sublime Text User Settings
+
+Available on [Github](https://github.com/mikedecr/sublime-user-folder/blob/master/Default%20(OSX).sublime-keymap). Highlights include:
+
+- [Keybindings](https://github.com/mikedecr/sublime-user-folder/blob/master/Default%20(OSX).sublime-keymap) for R and $\mathrm{\LaTeX}$ (primarily) and associated [macro files](https://github.com/mikedecr/sublime-user-folder/tree/master/Macros).
+- Code snippets for [$\mathrm{\LaTeX}$](https://github.com/mikedecr/sublime-user-folder/tree/master/Snippets%20-%20Tex) and [R](https://github.com/mikedecr/sublime-user-folder/tree/master/Snippets%20-%20R), plus some here and there for Stan, Stata, HTML, and Markdown.
+- A modified Solarized color scheme based on the guts of the [Cobalt2](https://packagecontrol.io/packages/Theme%20-%20Cobalt2) scheme for Sublime, [light](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-light.tmTheme) and [dark](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-dark.tmTheme) versions.
+
+
+
+# $\mathrm{\LaTeX}$ files
+
+Coming soon: preambles for `article` and `memoir` classes
+
+

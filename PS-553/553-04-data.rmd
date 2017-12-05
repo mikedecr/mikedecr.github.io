@@ -1,0 +1,64 @@
+---
+title: "Day 1: Data in R"
+author: "Michael DeCrescenzo"
+description: "Creating, modifying, shaping, and piping data"
+date: "2018-01-01"
+slug: "553-day1-data"
+categories: ["R", "PS553", "Teaching"]
+tags: []
+
+draft: true
+---
+
+
+data lesson!
+
+
+# Data frames
+
+
+
+## Multiple data frames
+
+## Creating data
+
+
+
+# The tidyverse
+
+## Packages
+
+## Piping
+
+
+
+
+
+# Reading external data
+
+
+
+
+# Modifying existing data
+
+
+## Handy tools for different data types
+
+`stringr`, `forcats`, `case_when`, `ifelse()`, `seq()`
+
+
+
+# Shaping data
+
+
+
+
+# Analysis routines
+
+## Summarizing
+
+## Tabulating
+
+## Aggregating
+
+

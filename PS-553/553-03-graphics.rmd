@@ -1,0 +1,67 @@
+---
+title: "Day 2: Graphics"
+author: "Michael DeCrescenzo"
+description: "Graphics in R using ggplot2"
+date: '2018-02-01'
+slug: 553-day2-graphics
+categories: ["R", "PS553", "Teaching"]
+tags: []
+
+draft: true
+---
+
+
+# Brief Introduction to Base Graphics
+
+
+## Basic plotting
+
+`plot()`
+
+`hist()`
+
+Bar charts, box plots, all easier in other software
+
+
+## some handy tools
+
+pch
+
+linetype
+
+
+# Graphics packages, pros and cons
+
+
+# ggplot2
+
+
+## aesthetics
+
+## geoms
+
+## scales
+
+## themes and theme elements
+
+
+
+## Dos and Don'ts
+
+Multiple Y axes
+
+
+
+
+# Examples using ggplot2
+
+
+
+# out there things
+
+heatmaps, network stuff (ggraph), see drob posts
+
+# Graphics packages revisited
+
+
+

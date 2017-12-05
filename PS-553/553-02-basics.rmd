@@ -1,0 +1,224 @@
+---
+title: "Day 0: R Basics"
+description: "Getting R up and running. READ BEFORE CLASS."
+author: "Michael DeCrescenzo"
+date: '2017-12-01'
+slug: 553-basics
+categories: ["R", "PS553", "Teaching"]
+tags: []
+
+draft: true
+---
+
+
+
+# Installing R
+
+UW--Madison students click [here](https://mirror.las.iastate.edu/CRAN/) to download R for your operating system. 
+
+A little bit about what's going on here: R is open source and is distributed from various ["mirrors"](https://en.wikipedia.org/wiki/Mirror_website). The CRAN (Comprehensive R Archive Network) has [mirrors](https://cran.r-project.org/mirrors.html) hosted all over the world. It is generally recommended that you install R (and related software from CRAN, like packages) using mirrors that are near to you on the planet. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.
+
+Once R is downloaded, make sure that it is fully installed. 
+
+
+
+# Using R
+
+The most essential part of using R is the *console*. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly.
+
+Although you can type commands directly into the console, most commands should be written in a script file. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis.
+
+Although a script file can be imperfect while a project is being developed, a well-constructed script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that your research can be replicated.
+
+Just to demonstrate some basic R behavior, let's run a few commands.
+
+First, R works as a calculator. It can handle mathematical expressions.
+
+```{r, eval = FALSE}
+1 + 1
+2 + 2
+100 * 2
+500 / 4
+```
+
+You will notice that the results of each calculation will print beside a little `[1]`. Ignore this for now; we will explain it later.
+
+Commenting is done with the `#` character.
+
+```{r}
+print("This will print")
+# print("This will not print")
+```
+
+
+# Variables
+
+We can store and manipulate variables in R. Just as $x + 4$ can take different values depending on the value of $x$, we can do similar things with R. 
+
+First, we'll "assign" a value to a variable using the assignment operator `<-`. The `<-` is a combination of a less-than sign `<` and a hyphen `-`.
+
+For example,
+
+```{r}
+x <- 5
+x + 4
+```
+
+You can read the `<-` operator as "gets." So in the above example, `x` gets the value of 5. 
+
+We can assign a series of values to a variable. One way to do this in R is the `c()` function. The `c()` function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc). We will return to data types later.
+
+```{r}
+y <- c(2, 4, 6)
+```
+
+If we only assign values to a variable, this will not print the results. Printing can be accomplished by typing a variable name into the console.
+
+```{r}
+y
+```
+
+Or, if you wrap an assignment inside of parentheses, the result will print.
+
+```{r}
+(y <- c(2, 4, 6))
+```
+
+We can use multi-element variables to do math on the entire variable at once. Just as we could do real math...
+
+$\begin{align*} 2 \times \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} &= \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix}\end{align*}$
+
+```{r}
+2 * y
+y * y
+```
+
+
+## Accessing data in variables
+
+It is possible to access the elements of a variable using *indexing* notation. R uses square brackets to select a given element in a variable. Using the variable `y` from above, what are the first, second, and third elements?
+
+```{r}
+y
+y[1]
+y[2]
+y[3]
+```
+
+Indexing notation is why the console prints a little `[1]` next to all results. It is indicating that the adjacent element is the first element. This becomes clearer if we were to print a long vector with many more elements---for example, a sequence of 100 draws from a standard normal distribution.
+
+```{r}
+rnorm(n = 100, mean = 0, sd = 1)
+```
+
+We already saw the `y` variable above, which was a one-dimensional sequence of values, also known as a *vector*. 
+
+We could have two (or higher) dimensional objects. Let's make some simple two-dimensional objects:
+
+```{r}
+tall_m <- rbind(c(1, 2), 
+                c(3, 4), 
+                c(5, 6))
+tall_m
+
+wide_m <- cbind(c(1, 2), 
+                c(3, 4), 
+                c(5, 6))
+wide_m
+```
+
+The `rbind()` function combines vectors into rows, while the `cbind()` function combines vectors into columns.
+
+We can still use indexing notation to access the data within these objects.
+
+```{r}
+tall_m[2, 2]
+wide_m[1, 3]
+
+tall_m[ , 2]
+wide_m[1, ]
+```
+
+**Note** that although some languages are "zero-indexed" (meaning the first element of a variable is index position 0), R is "one-indexed." This makes more sense for statistical purposes, but may be different from other languages you have seen (for example *C*). Calling the 0'th element of a variable does not throw an error, however. Go figure.
+
+```{r}
+y[0]
+```
+
+
+# Objects (and other computer lingo)
+
+Although we can assign sequences of values to a variable name, assignment can get much more complicated in R. This is because R is an *object-oriented language*. If you want to research more about what that means, [feel free](https://en.wikipedia.org/wiki/Object-oriented_programming). For now, suffice it to say that we can create lots of objects that hold many different types of data, such as datasets, model output, graphs, and so on. R works on the same basic building blocks for all of these object types. This will become more apparent as you use R more.
+
+
+
+
+# Functions
+
+Although you can perform simple operations on data in R (adding, multiplying, and so on), sequences of operations can be simplified as functions. We have already seen some examples of functions. Here are some helpful ones. 
+
+```{r}
+(x <- rnorm(n = 100, mean = 0, sd = 1)) # create normally distributed random noise
+
+sum(x) 
+length(x) # number of elements in an object
+sum(x) / length(x)  # calculating an average by hand
+mean(x) # equivalent
+
+var(x) # variance
+sum((x - mean(x))^2) / (length(x) - 1) # variance by hand
+
+sd(x)
+sqrt(sum((x - mean(x))^2) / (length(x) - 1))
+```
+
+
+## Writing functions
+
+## Local variables
+
+
+
+
+
+# Packages
+
+
+
+# Data types
+
+
+
+# How R is similar to Stata
+
+REPL
+
+
+
+# How R is different from Stata
+
+
+Open Source
+
+Vectors
+
+Functions
+
+Interface
+
+Syntax more complex but grammatically coherent
+
+
+
+
+# R Style
+
+Explicit is always better than implicit
+
+Rely on permanent features of the data rather than happenstance features: Call something by a column name, not the column number
+
+
+
+
+
+
