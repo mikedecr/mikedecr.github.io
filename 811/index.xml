@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ps-811s on Michael DeCrescenzo</title>
-    <link>https://mikedecr.github.io/ps-811/</link>
-    <description>Recent content in Ps-811s on Michael DeCrescenzo</description>
+    <title>811s on Michael DeCrescenzo</title>
+    <link>https://mikedecr.github.io/811/</link>
+    <description>Recent content in 811s on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mikedecr.github.io/ps-811/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mikedecr.github.io/811/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>PoliSci 811: Introduction (to R)</title>
-      <link>https://mikedecr.github.io/ps-811/811-intro/</link>
+      <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/ps-811/811-intro/</guid>
+      <guid>https://mikedecr.github.io/811/811-intro/</guid>
       <description>Introduction Materials for this course are written for graduate students in political science at the University of Wisconsin–Madison. Individuals from wider audiences may find some material here useful, but they should be aware that they are not the intended audience.
  R: the Why As a researcher, you should always be doing automated analysis. That is, your analysis should be controlled by code, rather than spread sheet formulas or drop-down menus.</description>
     </item>

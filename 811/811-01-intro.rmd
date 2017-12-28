@@ -4,7 +4,7 @@ description: "Brief introduction to this semester's R lessons. READ BEFORE CLASS
 author: "Michael DeCrescenzo"
 date: '2017-11-29'
 slug: 811-intro
-categories: ["R", "PS811", "Teaching"]
+categories: ["R", "ps811", "Teaching"]
 tags: []
 
 # draft: true

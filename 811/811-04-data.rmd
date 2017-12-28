@@ -4,7 +4,7 @@ author: "Michael DeCrescenzo"
 description: "Creating, modifying, shaping, and piping data"
 date: "2018-01-01"
 slug: "811-day1-data"
-categories: ["R", "PS811", "Teaching"]
+categories: ["R", "ps811", "Teaching"]
 tags: []
 
 draft: true

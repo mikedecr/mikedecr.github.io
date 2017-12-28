@@ -45,10 +45,10 @@ Partisan voters are historically unlikely to cast their votes for the opposing p
     
     <item>
       <title>PoliSci 811: Introduction (to R)</title>
-      <link>https://mikedecr.github.io/ps-811/811-intro/</link>
+      <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/ps-811/811-intro/</guid>
+      <guid>https://mikedecr.github.io/811/811-intro/</guid>
       <description>Introduction Materials for this course are written for graduate students in political science at the University of Wisconsin–Madison. Individuals from wider audiences may find some material here useful, but they should be aware that they are not the intended audience.
  R: the Why As a researcher, you should always be doing automated analysis. That is, your analysis should be controlled by code, rather than spread sheet formulas or drop-down menus.</description>
     </item>

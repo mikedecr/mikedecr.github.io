@@ -4,7 +4,7 @@ author: "Michael DeCrescenzo"
 description: "Graphics in R using ggplot2"
 date: '2018-02-01'
 slug: 811-day2-graphics
-categories: ["R", "PS811", "Teaching"]
+categories: ["R", "ps811", "Teaching"]
 tags: []
 
 draft: true

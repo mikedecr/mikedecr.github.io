@@ -4,7 +4,7 @@ description: "Getting R up and running. READ BEFORE CLASS."
 author: "Michael DeCrescenzo"
 date: '2017-12-01'
 slug: 811-basics
-categories: ["R", "PS811", "Teaching"]
+categories: ["R", "ps811", "Teaching"]
 tags: []
 
 draft: true
