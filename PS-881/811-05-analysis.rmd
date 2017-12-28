@@ -1,0 +1,144 @@
+---
+title: "Day 3: Analysis"
+author: "Michael DeCrescenzo"
+description: "Statistical analysis, model output, and workflow integration"
+date: "2018-03-01"
+slug: "811-day3-analysis"
+categories: ["R", "PS811", "Teaching"]
+tags: []
+
+draft: true
+---
+
+# Sarah
+
+- "advanced topics"
+- things I plan to do already
+  + pipes
+  + dplyr
+  + tidyverse
+  + forcats
+  + haven
+  + readr
+  + tidyr
+  + stringr
+- what is the tidy time series thing? hms?
+- regex
+  + just explain what it is. Not worth learning and not worth teaching right now
+- text analysis: 
+  + tm
+  + tidytext
+- time series stuff
+  + lubridate
+  + what other time series packages are out there
+  + Stata is maybe better?
+- R as front end
+  + rcpp, sql, rpython (rselenium)
+- learning new packages
+- survey analysis
+  + Sarah has a good story example!
+  + Stata might be better
+- Bayesian analysis: 
+  + bugs, jags, stan
+    * Jags probably easiest for custom models
+      - learn JAGS from Gelman and Hill (who use BUGS but it's very similar)
+      - Jackman Bayes textbook
+    * Stan definitely the fastest but learn r-like (requires a C++ like file)
+      - Gelman et al BDA
+  + other packages for quick and dirty Bayes things
+    * `brms`
+    * `rethinking`
+  + *decide how much you want to preach*
+
+
+My advanced things:
+
+- hierarchical models
+  + figure out how badly you want this...
+  + you like these but don't actually do them all that much
+- function writing
+- bayesian example
+- apply and lapply
+- nest and map
+  + hierarchical: mrp?
+
+
+
+
+# Introduction
+
+- gelman quote about dumbest possible thing
+
+
+
+# Nonstatistical approaches
+
+
+## tabulating
+
+## aggregating
+
+
+
+# Univariate statistics
+
+
+## means and CIs
+
+## comparing CIs across groups
+
+## simple means tests, chisq tests
+
+
+
+
+# Regression
+
+## lm
+
+rescaling
+
+## glm
+
+Intuition of the GLM
+
+- $E[Y] = g^{-1}(X\beta)$
+- $Y = E[Y] + \epsilon$
+- or $Y \sim \mathcal{D}(\theta)$
+
+
+## lme4
+
+
+## bayesian models
+
+
+
+# Regression output
+
+
+## regression tables
+
+`xtable`, `stargazer`, `texreg`
+
+
+## regression coef plots
+
+don't use `coeftest`
+
+
+`broom`,
+
+
+## regression predictions
+
+maybe avoid `effects`
+
+use `sjplot`, `margins` for R
+
+
+## marginal effects
+
+
+
+

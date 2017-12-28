@@ -33,6 +33,18 @@ body
     background-color: #fff;
 }
 
+code{
+  font-family: 'Inconsolata-dz', 'Menlo', monospace;
+  color: #777;
+  background-color: #1111;
+ }    
+
+pre {
+  /*color: #666; */
+  font-size: 1.35rem;
+}
+
+
 
 
 h1 {

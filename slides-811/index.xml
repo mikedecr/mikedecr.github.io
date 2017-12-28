@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Slides-811s on Michael DeCrescenzo</title>
+    <link>/slides-811/</link>
+    <description>Recent content in Slides-811s on Michael DeCrescenzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/slides-811/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Political Science 553: Introductory Statistical Computing for Political Science</title>
+      <link>/slides-811/slides-day1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/slides-811/slides-day1/</guid>
+      <description>Part One Slide Title Here is some stuff!
+ bullet another bullet   Math for some basic modeling concepts OLS model: \(\begin{align} y_{i} &amp;amp;= \alpha + \beta x_{i} + \varepsilon_{i}\end{align}\)
+Residual sum of squares: \(\begin{align} \sum\limits_{i}^{N} \varepsilon_{i} &amp;amp;= \sum\limits_{i}^{N} \left( y_{i} - \alpha - \beta x_{i} \right) \end{align}\)
+  </description>
+    </item>
+    
+  </channel>
+</rss>

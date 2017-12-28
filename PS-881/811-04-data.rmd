@@ -1,0 +1,139 @@
+---
+title: "Day 1: Data in R"
+author: "Michael DeCrescenzo"
+description: "Creating, modifying, shaping, and piping data"
+date: "2018-01-01"
+slug: "811-day1-data"
+categories: ["R", "PS811", "Teaching"]
+tags: []
+
+draft: true
+---
+
+# Sarah
+
+- data management
+  + loading datasets
+    * *foreign vs haven, base vs. readr, readxl (is that right?)*
+- Creating new variables
+- dropping and keeping variables
+- missing data
+- merging and combining
+  + appending
+  + merging
+- reshaping
+  + long and wide
+- aggregating/collapsing
+- saving transformed data
+  + *for later use! eg if you want to do a state analysis from lower data*
+- intermediate logical functions
+  + vector `ifelse()` and atomic `if (condition && condition) {this} else {that}`
+  + `case_when()` for when you have lots of things you want to check, and the `ifelse()` idea gets too bloaty
+  + looping
+    * *You can*
+    * *You shouldn't*
+  + apply functions
+    * here's a list of elements
+    * perform function on every element individually
+
+
+- what sarah does not have
+  + tidy data
+    * https://www.jstatsoft.org/article/view/v059i10
+  + tidyverse
+    * make untidy data tidy with `tidyr` (hadley): https://blog.rstudio.com/2014/07/22/introducing-tidyr/
+    * manipulate tidy data with `dplyr`
+    * why dplyr: https://rpubs.com/justmarkham/dplyr-tutorial
+    * how i learned: https://rpubs.com/bradleyboehmke/data_wrangling
+  + manipulating strings and factors
+- Tidy
+  + now when I see base code, I see a wall of gibberish
+  + it's a *wall* because there is so much
+  + it's gibberish because it isn't fucking readable
+    * nested
+    * the syntax itself requires translation.
+    * tidy verbs mean what they say
+- what I should change
+  + directory management
+
+
+
+
+# Intro
+
+- should already download the ANES cumulative data file
+
+data lesson!
+
+
+# Data frames
+
+
+
+## Multiple data frames
+
+## Creating data
+
+
+
+# The tidyverse
+
+## Packages
+
+## Piping
+
+
+
+
+
+# Reading external data
+
+
+
+
+# Modifying existing data
+
+Principles?
+
+- identifiers in variables 
+  + (no named vectors)
+  + this is why I've stopped using `table()` or `tapply()` except for checking
+
+
+
+## Handy tools for different data types
+
+`stringr`, `forcats`, `case_when`, `ifelse()`, `seq()`
+
+time series (lag, lead)
+
+- Time series is just hard and you're going to spend a lot of time beating your head against a wall. There is nothing I can do to fix this. But here are some tools that you should check out to help you.
+- Fixing data: 
+  + stata has `tsset` and you feed it a date, maybe a group
+  + dplyr: `group_by(whatever)`, `arrange(date)`
+  + lags and leads just work on rows, so it won't *know* to grab the previous date
+- `zoo`? Creates an index variable
+- `xts` requires the index to be a date
+- lubridate for date/time modification
+- RcppRoll for rolling averages
+- tidyquant has period-level apply functions (apply something weekly, for example)
+
+
+
+
+
+
+# Shaping data
+
+
+
+
+# Analysis routines
+
+## Summarizing
+
+## Tabulating
+
+## Aggregating
+
+
