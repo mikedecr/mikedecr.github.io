@@ -6,13 +6,23 @@
     <description>Recent content in Teaching on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Nov 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 01 Dec 2017 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/categories/teaching/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>PoliSci 811: Introduction (to R)</title>
+      <title>Day &#34;0&#34;: R Basics</title>
+      <link>https://mikedecr.github.io/811/811-basics/</link>
+      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-basics/</guid>
+      <description>What is on this web page Please guide yourself through this web page before our first in-class R lesson. It would be best if you walked through this document in enough advance of class that you can ask me questions about any confusing parts in enough advance of class. I just want to use our class time as effectively as possible!
+This document describes how to get started with R and do some basic (but often useful) tricks.</description>
+    </item>
+    
+    <item>
+      <title>PoliSci 811: R Introduction</title>
       <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
       

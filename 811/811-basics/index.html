@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="https://mikedecr.github.io/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Day &#34;0&#34;: R Basics</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED DEC 1, 2017 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>, 
+      
+      <a class="meta" href="/categories/teaching">TEACHING</a>, 
+      
+      <a class="meta" href="/categories/ps811">PS811</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="what-is-on-this-web-page" class="section level1">
+<h1>What is on this web page</h1>
+<p>Please guide yourself through this web page <em>before our first in-class R lesson</em>. It would be best if you walked through this document in enough advance of class that you can ask me questions about any confusing parts in enough advance of class. I just want to use our class time as effectively as possible!</p>
+<p>This document describes how to get started with R and do some basic (but often useful) tricks. We discuss installing R, running simple commands, indexing, some elementary programming logic, and functions. We close with some slight discussion of how R and Stata differ, though we will be returning to that topic throughout the course.</p>
+<p><strong>Note:</strong> This lesson is a little “abstract” in that in demonstrates R’s <em>general</em> behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation.</p>
+<p>If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
+<p>Thanks, and I’ll see you in class!</p>
+</div>
+<div id="installing-r" class="section level1">
+<h1>Installing R</h1>
+<p>UW–Madison students click <a href="https://mirror.las.iastate.edu/CRAN/">here</a> to download R for your operating system (if you haven’t already).</p>
+<p>A little bit about what’s going on here: R is open source and is distributed from various <a href="https://en.wikipedia.org/wiki/Mirror_website">“mirrors”</a>, which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors <a href="https://cran.r-project.org/mirrors.html">all over the world</a>. It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.</p>
+<p>Once R is downloaded, make sure that it is fully installed.</p>
+</div>
+<div id="using-r" class="section level1">
+<h1>Using R</h1>
+<p>The most essential part of using R is the <em>console</em>. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly.</p>
+<center>
+<img src="img/r-console.png" alt="R console" style="width: 80%;"/>
+</center>
+<p>Although you can type commands directly into the console, most commands should be written in a <em>script file</em>. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete with future package versions, for example).</p>
+</div>
+<div id="open-a-script-file" class="section level1">
+<h1>Open a script file</h1>
+<p>Use whatever program you desire to open a script file. The basic R GUI application has a script editor that can be accessed using the <code>File</code> menu or a keyboard shortcut. Many R users prefer to manage R projects using <a href="https://www.rstudio.com/products/rstudio/">Rstudio</a>, an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> that provides several tools for interacting with R. Windows users may find Notepad++ or TextMate to be useful text editors. Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to the R console. I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for creating fast R code. Rstudio comes standard with many such shortcuts.</p>
+<p>Personally, I prefer to edit R script using the <a href="https://www.sublimetext.com/">Sublime Text</a> editor and the <a href="https://packagecontrol.io/packages/R-Box">R-Box package</a>.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> Sublime has a nice system for editing custom keyboard macros for any language you frequently use, which I use liberally.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<p>Script files should begin with some description of the script. You can include comments (text that will not be executed as R commands) after the <code>#</code> symbol. For example, your script file for this lesson might contain some comments at the top like…</p>
+<pre class="r"><code># ------------------------------------------------------------
+#  PS 811: statistical computing for political science
+#  Lesson 1: Basics of R
+# ------------------------------------------------------------</code></pre>
+<p>Comments are great for describing what code is doing, planning an analysis, writing notes to yourself. Comments are also great for <em>pseudocode</em>, which are notes to yourself that “translate” what code is doing into English. We will see some examples of this as the course progresses.</p>
+<p>At the top of my script files, I typically include some code that sets up my project:</p>
+<ul>
+<li>create subdirectories for storing output (we will talk about this in future lessons)</li>
+<li>load relevant packages</li>
+<li>set project-wide options (graphics themes, graphics colors, any other things I want to store)</li>
+</ul>
+<p>Although a script file can be imperfect while a project is being developed, a well-written script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that you can retrace the steps of your analysis.</p>
+<p>Save this file. In your <code>ps811</code> folder on your computer (which you should have…), create a section for R containing a “lessons” folder. Save this document in <code>ps811/R/lessons/</code>.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+</div>
+<div id="executing-commands" class="section level1">
+<h1>Executing commands</h1>
+<p>Just like Stata, the R interface is a REPL—that is, Read-Evaluate-Print Loop. That means R processes commands one at a time without the need to pre-compile any code (compilation essentially happens during execution).<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p>Just to demonstrate some basic R behavior, let’s run a few commands.</p>
+<p>First, R works as a calculator. It can handle mathematical expressions. Paste or type the following lines of code DIRECTLY into the console.</p>
+<pre class="r"><code>1 + 1
+2 + 2
+100 * 2
+500 / 4</code></pre>
+<p>You will notice that the results of each calculation will print beside a little <code>[1]</code>. Ignore this for now; we will explain it later.</p>
+<p>Now take the above block of code and paste the commands into your script file. Try to run the commands from the script file using a keyboard shortcut. Most computers and interfaces use <code>super + enter</code>, where <code>super</code> refers to <code>Ctrl</code> on PCs or <code>Cmd</code> on Macs. Windows machines may use a different shortcut, such as <code>Ctrl + R</code>. Take this opportunity to look up the appropriate keyboard shortcut on your own, <em>before coming to lecture!</em> :-)</p>
+</div>
+<div id="everything-is-an-object" class="section level1">
+<h1>Everything is an Object</h1>
+<p>We don’t usually manipulate mathematical expressions this atomically in R. Instead we treat data as variables. Before we jump into that, we should explain how R treats variables.</p>
+<p>In R, everything is an object. I can store an arbitrary value as a variable, which is an object. A text string can be an object. An entire dataset. A variable within a dataset can be thought of as an object within another object. It’s all objects. This makes R very flexible, although some object manipulations are obviously out of bounds (can’t add <code>4 + &quot;fish&quot;</code>, for example).</p>
+</div>
+<div id="variables" class="section level1">
+<h1>Variables</h1>
+<p>We can store and manipulate variables in R. Just as how in math the expression <span class="math inline">\(x + 4\)</span> can take different values depending on the value of <span class="math inline">\(x\)</span>, we can do similar things with R.</p>
+<p>First, we’ll “assign” a value to a variable using the assignment operator <code>&lt;-</code>. The <code>&lt;-</code> is a combination of a less-than sign <code>&lt;</code> and a hyphen <code>-</code>.</p>
+<p>For example,</p>
+<pre class="r"><code>x &lt;- 5</code></pre>
+<p>Now the variable <code>x</code> has the value of <code>5</code>, which is to say, <code>x</code> and <code>5</code> now mean the same thing!</p>
+<p>We can display the contents of any object by simply typing the object name. Print out <code>x</code>…</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>…and we get back a <code>5</code>.</p>
+<p>Do some math with <code>x</code>…</p>
+<pre class="r"><code>x + 4</code></pre>
+<pre><code>## [1] 9</code></pre>
+<p>You can read the <code>&lt;-</code> operator as “gets.” So in the above example, <code>x</code> “gets” the value of 5. For simple expressions, <code>&lt;-</code> can mean “equals,” but as we begin working with more complex objects (such as the results of a statistical model), saying “equals” in your head becomes a little more difficult to justify.</p>
+</div>
+<div id="more-variables-vectors" class="section level1">
+<h1>More variables: vectors</h1>
+<p>We can assign a series of values to a variable. One way to do this in R is the <code>c()</code> function. The <code>c()</code> function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc). We will return to the concept of <em>data types</em> later.</p>
+<pre class="r"><code>y &lt;- c(2, 4, 6)
+y</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>If you wrap an assignment inside of parentheses, the result will print at the same time that values are assigned.</p>
+<pre class="r"><code>(y &lt;- c(2, 4, 6))</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>We can use multi-element variables to do math on the entire variable at once. Just as we could do real math…</p>
+<p><span class="math inline">\(\begin{align*} 2 \times \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} &amp;= \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix}\end{align*}\)</span></p>
+<p>we can also do similar things with vectors in R.</p>
+<pre class="r"><code>2 * y</code></pre>
+<pre><code>## [1]  4  8 12</code></pre>
+<pre class="r"><code>y * y</code></pre>
+<pre><code>## [1]  4 16 36</code></pre>
+<div id="indexing" class="section level2">
+<h2>Indexing</h2>
+<p>It is possible to access the elements of a variable using <em>indexing</em> notation. R uses square brackets to select a given element in a variable. Using the variable <code>y</code> from above, what are the first, second, and third elements?</p>
+<pre class="r"><code>y</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<pre class="r"><code>y[1]</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>y[2]</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>y[3]</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>Indexing notation is why the console prints a little <code>[1]</code> next to all results. It is indicating that the adjacent element is the first element. This becomes clearer if we were to print a long vector with many more elements—for example, 100 repetitions of the same data.</p>
+<pre class="r"><code>rep(&quot;hello&quot;, 100)</code></pre>
+<pre><code>##   [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##   [9] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [17] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [25] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [33] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [41] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [49] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [57] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [65] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [73] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [81] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [89] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [97] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
+<p>We could have two (or higher) dimensional objects. Let’s make some simple two-dimensional objects:</p>
+<pre class="r"><code>tall_m &lt;- rbind(c(1, 2), 
+                c(3, 4), 
+                c(5, 6))
+tall_m</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<p>(Notice how <code>rbind()</code> binds vectors together as rows.)</p>
+<pre class="r"><code>wide_m &lt;- cbind(c(1, 2), 
+                c(3, 4), 
+                c(5, 6))
+wide_m</code></pre>
+<pre><code>##      [,1] [,2] [,3]
+## [1,]    1    3    5
+## [2,]    2    4    6</code></pre>
+<p>(And <code>cbind()</code> binds vectors as columns.)</p>
+<p>We can still use indexing notation to access the data within these objects. We use the notation <code>object[a, b]</code>, where <code>a</code> indicates the row number and <code>b</code> indicates the column number.</p>
+<pre class="r"><code>tall_m[2, 2]</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>wide_m[1, 3]</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>If we don’t specify a row, R grabs every row. Here we leave the row unspecified but grab the second column.</p>
+<pre class="r"><code>tall_m</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<pre class="r"><code>tall_m[ , 2]</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>And if we don’t specify a column, R returns every column. Here we specify the row but leave the column unspecified.</p>
+<pre class="r"><code>wide_m[1, ]</code></pre>
+<pre><code>## [1] 1 3 5</code></pre>
+<p><strong>Note:</strong> Although some languages are “zero-indexed” (meaning the first element of a variable is index position 0), R is “one-indexed.” This makes more sense for statistical purposes, but may be different from other languages you have seen (for example C). Calling the 0’th element of a variable does not throw an error, however. Go figure.</p>
+<pre class="r"><code>y[0]</code></pre>
+<pre><code>## numeric(0)</code></pre>
+<p><strong>Another important note:</strong> Indexing isn’t something you will use much in the tidyverse, but it is important to be familiar with it for a few reasons. First, it has useful mathematical parallels, where <span class="math inline">\(y_{i}\)</span> is analogous to <code>y[i]</code>. This sometimes comes in handy for dealing with the results from statistical models. Additionally, you will encounter it when searching through message boards for R help, especially when you see someone do some kind of <em>logical selection</em>. What does “logical selection” mean, exactly? Well…</p>
+</div>
+</div>
+<div id="logic" class="section level1">
+<h1>Logic</h1>
+<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, what we’re doing is dealing with <code>TRUE</code>s and <code>FALSE</code>s. An example to illustrate what I mean. We’ll make a vector.</p>
+<pre class="r"><code>(g &lt;- 1:10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p>We can ask R about things that are true and false about the values in the vector. For example, are the values greater than 5?</p>
+<pre class="r"><code>g &gt; 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>What happened here? The statement <code>g &gt; 5</code> is a “logical,” meaning that its underlying meaning is fundamentally <code>TRUE</code> or <code>FALSE</code>. R asks if <code>g</code> is greater than 5 for each element in <code>g</code>, and R returns an entire vector of logicals, each element corresponding to the original elements in <code>g</code>.</p>
+<p>We can do this kind of thing with several operators. Let’s see them in practice.</p>
+<pre class="r"><code># g &quot;is equal to&quot; 5
+g == 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code># g &quot;is greater than&quot; 5
+g &gt; 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="r"><code># g &quot;is less than&quot; 5
+g &lt; 5</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code># g &quot;is greater than or equal to&quot; 5
+g &gt;= 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="r"><code># g &quot;is less than or equal to&quot; 5
+g &lt;= 5</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>Relating this back to index notation, you will probably see R users online using indexing and logical evaluation to select observations from a dataset. For example, let’s say I want to multiply <code>g</code> by 10.</p>
+<pre class="r"><code>g * 10</code></pre>
+<pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
+<p>And now let’s say that I only want to do this for values of <code>g</code> less than 4. First I can limit my selection of <code>g</code> to the values I want…</p>
+<pre class="r"><code>g[g &lt; 4]</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<p>…and then do the operation I want.</p>
+<pre class="r"><code>g[g &lt; 4] * 10</code></pre>
+<pre><code>## [1] 10 20 30</code></pre>
+<p>This seems a little abstract right now, but here’s how you may see others do this online. Let’s say that I have a dataset of World Health Organization data, and I want to look only at the European data. You might see someone online limit the data like so.</p>
+<pre class="r"><code>who[region == &quot;Europe&quot;, ]</code></pre>
+<p>This block of code would be read as, “print the <code>who</code> object keeping only the observations (rows) from the Europe region, keeping every column”. The <code>tidyverse</code> uses other tools to do this kind of thing, which I find to be easier.</p>
+</div>
+<div id="data-types" class="section level1">
+<h1>Data types</h1>
+<p>There are a few different types of data in R.</p>
+<ul>
+<li>Logical: <code>TRUE</code>s and <code>FALSE</code>s.</li>
+<li>Numeric: including integers and doubles</li>
+<li>Strings: text strings that are contained in <code>&quot;quotes&quot;</code>. R calls these “character” type variables.</li>
+<li>Factors: ordered categories with text labels</li>
+</ul>
+<p>Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings. They are like text strings because they have text labels and you can’t do math with them. But they are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.</p>
+<p>You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs). Here we coerce numbers to characters.</p>
+<pre class="r"><code>1:3</code></pre>
+<pre><code>## [1] 1 2 3</code></pre>
+<pre class="r"><code>as.character(1:3)</code></pre>
+<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
+<p>Numbers to factors, notice the creation of the metadata—i.e. the factor “levels.”</p>
+<pre class="r"><code>as.factor(1:3)</code></pre>
+<pre><code>## [1] 1 2 3
+## Levels: 1 2 3</code></pre>
+<p>Character to factor. Notice how levels are assigned alphabetically by default. You can modify this with the <code>levels =</code> argument in the <code>factor()</code> function.</p>
+<pre class="r"><code>state.abb</code></pre>
+<pre><code>##  [1] &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; &quot;CA&quot; &quot;CO&quot; &quot;CT&quot; &quot;DE&quot; &quot;FL&quot; &quot;GA&quot; &quot;HI&quot; &quot;ID&quot; &quot;IL&quot; &quot;IN&quot;
+## [15] &quot;IA&quot; &quot;KS&quot; &quot;KY&quot; &quot;LA&quot; &quot;ME&quot; &quot;MD&quot; &quot;MA&quot; &quot;MI&quot; &quot;MN&quot; &quot;MS&quot; &quot;MO&quot; &quot;MT&quot; &quot;NE&quot; &quot;NV&quot;
+## [29] &quot;NH&quot; &quot;NJ&quot; &quot;NM&quot; &quot;NY&quot; &quot;NC&quot; &quot;ND&quot; &quot;OH&quot; &quot;OK&quot; &quot;OR&quot; &quot;PA&quot; &quot;RI&quot; &quot;SC&quot; &quot;SD&quot; &quot;TN&quot;
+## [43] &quot;TX&quot; &quot;UT&quot; &quot;VT&quot; &quot;VA&quot; &quot;WA&quot; &quot;WV&quot; &quot;WI&quot; &quot;WY&quot;</code></pre>
+<pre class="r"><code>as.factor(state.abb)</code></pre>
+<pre><code>##  [1] AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN
+## [24] MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA
+## [47] WA WV WI WY
+## 50 Levels: AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA ... WY</code></pre>
+<pre class="r"><code>factor(state.abb, levels = state.abb) # custom levels</code></pre>
+<pre><code>##  [1] AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN
+## [24] MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA
+## [47] WA WV WI WY
+## 50 Levels: AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME ... WY</code></pre>
+<p>You can go from text to numeric, but only by way of factors. This is because factors place text into numerical order, and then factors can be converted to numbers.</p>
+<pre class="r"><code>as.numeric(as.factor(state.abb))</code></pre>
+<pre><code>##  [1]  2  1  4  3  5  6  7  8  9 10 11 13 14 15 12 16 17 18 21 20 19 22 23
+## [24] 25 24 26 29 33 30 31 32 34 27 28 35 36 37 38 39 40 41 42 43 44 46 45
+## [47] 47 49 48 50</code></pre>
+<p>Note: data types are different from <em>object classes</em>. There are many classes of objects that can have different attributes. We’ll see these more in future lessons (but examples include matrices, data frames, tables, lists, tibbles, lm objects, and so on).</p>
+</div>
+<div id="missing-data" class="section level1">
+<h1>Missing data</h1>
+<p>Vectors might contain missing data. The missing data code in R is <code>NA</code>, without quotes.</p>
+<p>Missing data take the same data type as the vector in which they are located.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> For example:</p>
+<pre class="r"><code>h &lt;- c(1, 2, NA, 4)
+# what data type is h?
+str(h)</code></pre>
+<pre><code>##  num [1:4] 1 2 NA 4</code></pre>
+<p>By placing <code>NA</code> inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. As a result, a rule that applies to any number applies also to a missing numeric value, for example…</p>
+<pre class="r"><code>h^0</code></pre>
+<pre><code>## [1] 1 1 1 1</code></pre>
+<p>Any number raised to the 0 is 1, even if we don’t know what the number is!</p>
+<p>If the value of the number matters, however, some functions fail. For example, we don’t know the mean of <code>h</code>. Try the following.</p>
+<pre class="r"><code>mean(h)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>We get a missing value, which is to say, we know that there <em>should</em> be a numeric mean, we just don’t know what it is because we don’t know all of <code>h</code>. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.</p>
+<pre class="r"><code>mean(h, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 2.333333</code></pre>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+<p>Although you can perform simple operations on data in R (adding, multiplying, and so on), these get tedious for complex tasks. Sequences of operations can be simplified as functions. We have already seen some examples of functions, such as <code>c()</code> for making vectors.</p>
+<p>There are three things you need to use a function.</p>
+<ol style="list-style-type: decimal">
+<li>The function name itself. Self-explanatory</li>
+<li>Parentheses. This tells R that the object name is meant to be a function.</li>
+<li>Arguments inside the parentheses. Technically these can be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.</li>
+</ol>
+<p>Here are some common, helpful functions.</p>
+<pre class="r"><code># create normally distributed random noise
+(x &lt;- rnorm(n = 100, mean = 0, sd = 1)) </code></pre>
+<pre><code>##   [1]  0.50074044 -0.02395097 -0.67019109 -0.46807294 -0.74205194
+##   [6]  0.15770079  0.39788260  0.83826224  1.79555445  0.39572629
+##  [11]  0.16652261  0.31705998  0.67400765 -0.02878990  0.08420493
+##  [16]  0.02174763 -1.33227825 -0.19604106  0.55400309 -0.37126872
+##  [21]  0.13600616  0.85004049  0.24883215 -1.88860301 -1.46563503
+##  [26]  0.66325098  0.44567240 -0.68498908  0.95022259  0.84898730
+##  [31] -0.07716304 -0.75270602  0.80348452  0.06730815 -0.04368196
+##  [36] -0.59562068  0.78785748 -0.28874192 -0.06383372  0.21476482
+##  [41]  0.48586261  1.73443688  1.02959206  2.11380526  1.74532979
+##  [46]  1.51656224 -0.17184749 -0.38707043  1.93938369 -0.13609445
+##  [51]  0.41211232  0.40399927  1.34595343  0.11391144 -0.03748663
+##  [56]  0.34320617 -0.68044249  0.49568194  0.41799865 -1.27314747
+##  [61] -0.37966774  0.33269247  1.04463139  0.29150999 -0.84856960
+##  [66]  1.50990519  2.85115322 -0.90726593 -1.58628558  1.93767116
+##  [71] -1.89968767  1.37164090  1.01572424  0.17267252 -0.03067962
+##  [76] -1.40708188  0.54631652 -0.23590658 -0.23100462 -0.64426495
+##  [81]  0.16236907 -0.27273760  1.37277938 -0.78545800  1.50856085
+##  [86]  0.52104508 -0.37291114 -0.02953676 -0.63772262  1.53410117
+##  [91] -0.02472666 -0.07429453  0.44677549  0.50483471 -0.48432453
+##  [96]  1.90529190 -0.90944520 -1.44347594 -1.71345145  0.69625799</code></pre>
+<pre class="r"><code>sum(x) </code></pre>
+<pre><code>## [1] 18.4454</code></pre>
+<pre class="r"><code># number of elements in an object
+length(x) </code></pre>
+<pre><code>## [1] 100</code></pre>
+<pre class="r"><code># calculating an average by hand
+sum(x) / length(x)  </code></pre>
+<pre><code>## [1] 0.184454</code></pre>
+<pre class="r"><code># equivalent
+mean(x) </code></pre>
+<pre><code>## [1] 0.184454</code></pre>
+<pre class="r"><code># variance
+var(x) </code></pre>
+<pre><code>## [1] 0.8822293</code></pre>
+<pre class="r"><code># variance by hand
+sum((x - mean(x))^2) / (length(x) - 1) </code></pre>
+<pre><code>## [1] 0.8822293</code></pre>
+<pre class="r"><code># standard deviation
+sd(x)</code></pre>
+<pre><code>## [1] 0.9392706</code></pre>
+<pre class="r"><code>sqrt(sum((x - mean(x))^2) / (length(x) - 1))</code></pre>
+<pre><code>## [1] 0.9392706</code></pre>
+<p>Some common issues with functions.</p>
+<ol style="list-style-type: decimal">
+<li>As mentioned above, some functions don’t work as intended when you have missing values, so you may need to coerce R to skip over missing values.</li>
+<li>Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R what the dataset is. This is often done with a <code>data =</code> argument inside the function. For example, a linear model would work like <code>lm(y ~ x, data = dataset_name)</code>. This tells R and that the <code>y</code> and <code>x</code> variables can be found in the dataset called <code>dataset_name</code>. We’ll see more of this in future lessons.</li>
+<li>In math, we learn that if we give a function the same input, it returns the same output every time. (You may recall the “vertical line test.”) Statistics pushes on this definition a little bit: a function may return “random” results if they represent stochastic processes (such as coin flips). This works in the computer also (e.g. the <code>rnorm()</code> function, which simulates randomly distributed noise. There are other distribution sampling functions as well). Technically speaking though, they are only pseudorandom and can be made nonrandom by specifying a seed using the <code>set.seed()</code> function.</li>
+</ol>
+</div>
+<div id="packages-for-non-base-functions" class="section level1">
+<h1>Packages (for non-base functions)</h1>
+<p>Base R only contains a small number of functions. Most analyses require more complicated tools that are not standard with R. For these tasks, there are hundreds of packages available for download.</p>
+<p>Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the <code>tidyverse</code> package. Because the package depends on other packages, all packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it…we will use this package in class).</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+</div>
+<div id="user-defined-functions" class="section level1">
+<h1>User-defined functions</h1>
+<p>This section is a little complicated, so it’s okay if it doesn’t make perfect sense at first.</p>
+<p>In R, it is easy to write your own functions. Here is an example of a function that calculates a mean.</p>
+<pre class="r"><code>my_mean &lt;- function(z) {
+
+  sum_z &lt;- sum(z)
+  n &lt;- length(z)
+  the_mean &lt;- sum_z / n
+  
+  return(the_mean)
+
+}</code></pre>
+<p>Here’s how this works.</p>
+<p>First, we pick a name for the function. Here, we chose <code>my_mean</code>. If you don’t know if there are any existing functions with the same name, you can check the R help files.</p>
+<pre class="r"><code>?my_mean</code></pre>
+<pre><code>## No documentation for &#39;my_mean&#39; in specified packages and libraries:
+## you could try &#39;??my_mean&#39;</code></pre>
+<pre class="r"><code>??my_mean</code></pre>
+<pre><code>## No vignettes or demos or help files found with alias or concept or
+## title matching &#39;my_mean&#39; using regular expression matching.</code></pre>
+<p>Looks like we’re all clear to use the name <code>my_mean</code>. Now that we have a good name, we need to <em>define</em> what the function does. We do this by <em>assigning</em> a definition to the name <code>my_mean</code>. That’s what the <code>my_mean &lt;- function(z) {...}</code> means. (Yes, in R, even functions are objects).</p>
+<p>We must decide which <em>arguments</em> this function should have. An argument is information that gets <em>passed</em> to the function. That’s what the <code>function(z)</code> is doing—the function takes one argument called <code>z</code>. We could have written <code>function(banana)</code> if we wanted, and then manipulated the <code>banana</code> object inside the function. The <code>z</code> (or <code>banana</code>) object name is just a stand-in for information that we are going to manipulate inside the function definition.</p>
+<p>What manipulation takes place? That’s what the remainder of the definition lays out. If we passed some variable to <code>my_mean()</code>, what the function does is calculate the sum, find the length, and then divide the sum by the length. Finally, we ask the function to <em>return</em> the calculated value, meaning that when we pass in some <code>z</code> data, we get out some value that is the result of <code>the_mean</code>.</p>
+<p>For example, let’s make some data.</p>
+<pre class="r"><code>(some_data &lt;- seq(0, 10, 2))</code></pre>
+<pre><code>## [1]  0  2  4  6  8 10</code></pre>
+<p>(Notice that the <code>seq(a, b, c)</code> function creates a sequence of values from <code>a</code> to <code>b</code> with a skip interval of <code>c</code>.) And then we will find the mean of this variable using our new mean function.</p>
+<pre class="r"><code>my_mean(some_data)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>There is one potentially-confusing point I need to make about custom functions. The variables that are manipulated inside the function definition are called <em>local variables</em>. This means they only exist in the world of that function. Although the function manipulates variables called <code>z</code>, <code>sum_z</code>, and so on, those variables only exist to that function and are not accessible to you in the rest of R’s memory. They exist only to make the function work. To demonstrate the point, print out all of the objects in R’s memory using the <code>ls()</code> function.</p>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## [1] &quot;g&quot;         &quot;h&quot;         &quot;my_mean&quot;   &quot;some_data&quot; &quot;tall_m&quot;    &quot;wide_m&quot;   
+## [7] &quot;x&quot;         &quot;y&quot;</code></pre>
+<p>You will notice that none of the objects created by <code>my_mean()</code> are there. This is by design, because you don’t want any function you create to get confused about whether the object you want to manipulate is local or global.</p>
+<p>Let’s give this an example. If I have a variable called <code>abc</code> in R memory, and I manipulate a local variable called <code>abc</code> inside a function, have I manipulated the original <code>abc</code>? The answer is No.</p>
+<p>Let’s see how. We make some object…</p>
+<pre class="r"><code>(abc &lt;- 150)</code></pre>
+<pre><code>## [1] 150</code></pre>
+<p>and then write the following function…</p>
+<pre class="r"><code>zero_out &lt;- function(abc) {
+  abc &lt;- 0
+  return(abc)
+} </code></pre>
+<p>And we pass <code>abc</code> to the function, which returns a 0.</p>
+<pre class="r"><code>zero_out(abc)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p>The question is, have we overwritten the original <code>abc</code> to zero? No, we haven’t.</p>
+<pre class="r"><code>abc</code></pre>
+<pre><code>## [1] 150</code></pre>
+<p>That’s because the <code>abc</code> inside the function definition is a <em>local variable</em>, so it has no bearing on other objects in R memory. For this reason, it is important that the objects you manipulate within a function are either (a) <em>passed to the function as arguments</em> or (b) <em>created within the function</em>.</p>
+</div>
+<div id="r-vs-stata" class="section level1">
+<h1>R vs Stata</h1>
+<p>The two languages share some similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big similarity. This means you don’t have to compile an entire file of code before you can run it. Yay!</p>
+<p>The differences between R and Stata have benefits and drawbacks. Here is some rapid-fire accounting of some differences.</p>
+<p>R is free and open source.</p>
+<ul>
+<li>Pro: When you lose your university access license to Stata (which you will, eventually), you can still use R.</li>
+<li>Con: Some of the stuff in R may lower quality than the stuff in Stata. Granted, most of the stuff in R you use works just as well as Stata, but there is really nothing stopping some ding dong from writing some crappy code and putting it out there. Wisdom of the crowds generally holds though: if an R tool is popular, you can count on it to be reliable. There are <em>lots</em> of smart people using and constantly improving R!</li>
+</ul>
+<p>R is a fully formed programming language.</p>
+<ul>
+<li>Pro: R makes it very easy to directly access data as vectors, matrices, and dataframes with intuitive programming syntax such as indexing.</li>
+<li>Pro: R operates with <em>functions</em> rather than commands. In R, if I had the functions <code>f()</code>, <code>g()</code>, and <code>h()</code>, I could write <code>f(g(h(x)))</code> in one line of code and it just works. Not so in Stata.</li>
+<li>Con: This makes R a little tougher to learn at first for those with less computing experience.</li>
+</ul>
+<p>R is object-oriented.</p>
+<ul>
+<li>Pro: this lets R be very flexible.</li>
+<li>Pro: You can load and manipulate multiple datasets at once without being confined to one data table.</li>
+<li>Con: This makes R slower than Stata, because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You won’t notice this unless you work with larger datasets.</li>
+</ul>
+<p>Some difficult things:</p>
+<ul>
+<li>R’s interface is less graphical than Stata. For people who are very comfortable with code, this does not present a problem. For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.</li>
+<li>R syntax is more “programmy.” The drawback of this is that it is complicated <em>at first</em>. The benefit of this is that it is simpler in the long run, because the syntax is unified and coherent.</li>
+<li>Stata is almost always faster than R. That’s just how it be.</li>
+</ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Package control does not come default with Sublime Text, but it is a universal component of any Sublime user’s experience. Instructions for installing and using Package Control can be found <a href="https://packagecontrol.io/installation">here</a>.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Individuals who are already comfortable with Sublime should feel free to raid my custom settings, which can be obtained through my <a href="https://github.com/mikedecr/sublime-user-folder">Github page</a>.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>This notation signifies a folder directory pathway. Slashes indicate folders.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>Interestingly, this makes R slower than languages that require pre-compilation—such as C++, which is the basis of the Stan language for writing Bayesian models. Much of Bayesian analysis is waiting for models to compile (and then waiting for the sampler to run…lots of waiting in Bayes).<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>In fact, all elements in a vector must be the same data type. If you try to combine numbers and strings in the same vector, R coerces the vector to be the more inclusive data type, which is a string (so the number becomes the string-version of the number, i.e. <code>1</code> becomes <code>&quot;1&quot;</code>).<a href="#fnref5">↩</a></p></li>
+</ol>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-intro/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/811">811</a></span>
+  
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

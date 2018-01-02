@@ -3,7 +3,7 @@ title: "Day 3: Analysis"
 author: "Michael DeCrescenzo"
 description: "Statistical analysis, model output, and workflow integration"
 date: "2018-03-01"
-slug: "811-day3-analysis"
+slug: "811-analysis"
 categories: ["R", "ps811", "Teaching"]
 tags: []
 
