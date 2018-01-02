@@ -158,8 +158,9 @@ y</code></pre>
 <pre><code>## [1]  4  8 12</code></pre>
 <pre class="r"><code>y * y</code></pre>
 <pre><code>## [1]  4 16 36</code></pre>
-<div id="indexing" class="section level2">
-<h2>Indexing</h2>
+</div>
+<div id="indexing" class="section level1">
+<h1>Indexing</h1>
 <p>It is possible to access the elements of a variable using <em>indexing</em> notation. R uses square brackets to select a given element in a variable. Using the variable <code>y</code> from above, what are the first, second, and third elements?</p>
 <pre class="r"><code>y</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
@@ -222,7 +223,6 @@ wide_m</code></pre>
 <pre class="r"><code>y[0]</code></pre>
 <pre><code>## numeric(0)</code></pre>
 <p><strong>Another important note:</strong> Indexing isn’t something you will use much in the tidyverse, but it is important to be familiar with it for a few reasons. First, it has useful mathematical parallels, where <span class="math inline">\(y_{i}\)</span> is analogous to <code>y[i]</code>. This sometimes comes in handy for dealing with the results from statistical models. Additionally, you will encounter it when searching through message boards for R help, especially when you see someone do some kind of <em>logical selection</em>. What does “logical selection” mean, exactly? Well…</p>
-</div>
 </div>
 <div id="logic" class="section level1">
 <h1>Logic</h1>
@@ -335,48 +335,48 @@ str(h)</code></pre>
 <p>Here are some common, helpful functions.</p>
 <pre class="r"><code># create normally distributed random noise
 (x &lt;- rnorm(n = 100, mean = 0, sd = 1)) </code></pre>
-<pre><code>##   [1] -1.495403485  1.574938337  1.448201834  0.049710734  0.566539279
-##   [6] -1.039379251  0.026289314  0.308475741  0.781571666 -2.150043880
-##  [11]  1.487347642 -0.346098007  0.882849155 -0.457037456 -1.076372534
-##  [16] -1.660296202  0.452970844  0.265263602 -0.325394591  0.234057112
-##  [21] -0.769912813 -1.022845438  0.248847575 -0.360723128  0.052228076
-##  [26] -0.561710926  1.187309111 -0.118247723 -0.922431975  0.544034193
-##  [31] -0.898737268 -0.945777779  1.142925569 -0.978390097 -0.871902996
-##  [36]  0.431444274 -0.936446712 -0.302109317 -1.880926936 -0.613753580
-##  [41]  0.554280224 -0.091962737  0.394456759 -0.919115764 -0.965829512
-##  [46]  0.324165674 -0.827654084  0.003195077 -0.514351907 -0.884497870
-##  [51] -0.499120274  0.933055841  0.666095307  0.574717139 -0.094300181
-##  [56]  0.202620982  1.494353931  0.751979350  0.719224841 -0.225282519
-##  [61] -0.015521392  2.527403178 -1.024824216 -2.142675180  0.053049014
-##  [66] -0.327215977 -1.092863606 -0.077986254  0.888012147  0.306578286
-##  [71]  0.092505419  0.161511411  0.369570094 -0.184978547 -1.812832047
-##  [76]  2.035000304  1.575341122  2.669716842 -1.061254132  0.462874947
-##  [81] -0.158651088 -1.634812957 -1.172883753  1.016945202 -1.071814449
-##  [86] -0.695605698 -0.195580363 -0.267639800  0.723818134  0.616530292
-##  [91]  0.884541427  0.011555069 -0.195742992 -0.317911749  1.943623997
-##  [96]  0.470692319  0.130690615 -0.207736018  0.164206796 -0.812864442</code></pre>
+<pre><code>##   [1]  1.01668953 -0.81108779  2.32479894  1.17664652  0.23812868
+##   [6] -1.85382480  0.11371484 -0.55143801 -1.15298639  0.47758548
+##  [11]  1.82819896 -0.10171726 -0.36718199 -0.13226960 -2.02513819
+##  [16] -0.20358396  1.26232346  0.09284366  0.67656471 -0.10376021
+##  [21]  1.21848753  0.75384555  0.03729359 -1.09159744  0.53387962
+##  [26]  0.48882235  0.44637326  0.40193451  0.78297724  0.63699877
+##  [31]  0.37719392 -1.48181308 -0.43451261 -0.76947652  1.55496548
+##  [36] -0.95108766  1.65965116  1.53651107 -0.18645940 -0.46987478
+##  [41] -0.37816164  0.10225414 -0.55019646  0.18272321  0.64830788
+##  [46] -0.30459220 -1.81586347  0.65334461  2.55543523  1.18929262
+##  [51] -1.24485780  1.18661546 -0.21987363 -1.55367862  1.64178456
+##  [56]  0.80511319  0.37588331  0.18810699 -0.72808363 -0.09894544
+##  [61] -1.41934392 -0.38710816 -0.53678183  0.17840252  1.08055288
+##  [66] -0.56722202 -1.07891534  0.52420194  0.68382011  0.08628141
+##  [71]  0.23359775  0.72052450 -1.58805844 -0.07184723 -1.31349282
+##  [76] -0.15624883  0.57061948  0.30623904 -0.36363704  0.28814999
+##  [81] -1.26941529  0.82206409 -0.24502974  0.73552690 -0.23758509
+##  [86] -0.85961308 -0.23210617 -0.70461867 -0.94187301 -0.09354739
+##  [91] -0.39731775 -0.33390139  1.44323027 -0.62262048 -2.03548988
+##  [96]  1.03498333 -0.33335265  0.05597469  1.53525585 -0.46607600</code></pre>
 <pre class="r"><code>sum(x) </code></pre>
-<pre><code>## [1] -3.820136</code></pre>
+<pre><code>## [1] 3.62745</code></pre>
 <pre class="r"><code># number of elements in an object
 length(x) </code></pre>
 <pre><code>## [1] 100</code></pre>
 <pre class="r"><code># calculating an average by hand
 sum(x) / length(x)  </code></pre>
-<pre><code>## [1] -0.03820136</code></pre>
+<pre><code>## [1] 0.0362745</code></pre>
 <pre class="r"><code># equivalent
 mean(x) </code></pre>
-<pre><code>## [1] -0.03820136</code></pre>
+<pre><code>## [1] 0.0362745</code></pre>
 <pre class="r"><code># variance
 var(x) </code></pre>
-<pre><code>## [1] 0.9213309</code></pre>
+<pre><code>## [1] 0.9060019</code></pre>
 <pre class="r"><code># variance by hand
 sum((x - mean(x))^2) / (length(x) - 1) </code></pre>
-<pre><code>## [1] 0.9213309</code></pre>
+<pre><code>## [1] 0.9060019</code></pre>
 <pre class="r"><code># standard deviation
 sd(x)</code></pre>
-<pre><code>## [1] 0.9598598</code></pre>
+<pre><code>## [1] 0.9518413</code></pre>
 <pre class="r"><code>sqrt(sum((x - mean(x))^2) / (length(x) - 1))</code></pre>
-<pre><code>## [1] 0.9598598</code></pre>
+<pre><code>## [1] 0.9518413</code></pre>
 <p>Some common issues with functions.</p>
 <ol style="list-style-type: decimal">
 <li>As mentioned above, some functions don’t work as intended when you have missing values, so you may need to coerce R to skip over missing values.</li>

@@ -161,7 +161,7 @@ y * y
 ```
 
 
-## Indexing
+# Indexing
 
 It is possible to access the elements of a variable using *indexing* notation. R uses square brackets to select a given element in a variable. Using the variable `y` from above, what are the first, second, and third elements?
 
