@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="https://mikedecr.github.io/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Day 1: Data in R</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED JAN 1, 2018 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>, 
+      
+      <a class="meta" href="/categories/teaching">TEACHING</a>, 
+      
+      <a class="meta" href="/categories/ps811">PS811</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="objective" class="section level1">
+<h1>Objective</h1>
+<p>The goal of this lesson is to simulate some data manipulation for a research project. This requires…</p>
+<ul>
+<li>setting up the project on your computer</li>
+<li>Get data onto our computer (the <a href="http://electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf.htm">ANES</a> should already be downloaded!)</li>
+<li>Load the data into R</li>
+<li>Cleaning and modifying the data</li>
+<li>Doing some simple calculations using the data</li>
+</ul>
+<p>Future lessons pick up where this one leaves off. We will be <a href="811/811-graphics">making graphics</a> and doing <a href="811/811-analysis">statistical analysis</a>.</p>
+</div>
+<div id="project-folders" class="section level1">
+<h1>Project folders</h1>
+<p>Projects should have their own dedicated folder on your computer. Moreover, project folders should be internally organized, with separate folders for data, R script, writing, other documentation, and so on.</p>
+<p>Here is an example of one of my project folders. The <code>R/</code> folder itself is a little disorganized right now, but you get the idea.</p>
+<center>
+<br> <img src="img/dir.png" alt="project-directory" style="width: 90%;"/>
+</center>
+<p><br></p>
+<p>Place the ANES data into the <code>data/</code> folder, and save any .R files you are using in the <code>R/</code> folder. Here’s how I would recommend proceeding with R files for these lessons:</p>
+<ul>
+<li>Download any corresponding script files from <a href="https://canvas.wisc.edu/courses/86298">Canvas</a></li>
+<li>Create your own R file for following along and practicing with variations on the provided code</li>
+<li>Optional: download the <code>.Rmd</code> file for these webpages from my <a href="https://github.com/mikedecr/site-source/tree/master/content/811">Github</a>. These files contain both code and the text on the web pages, but they are fairly easy to interpret.</li>
+</ul>
+<p>Some tips:</p>
+<ul>
+<li>Name folders and files using hyphens instead of spaces. This is helpful for navigating the in the terminal</li>
+<li>Use short folder names when you can. File names as well.</li>
+<li>Avoid setting up the folders in ways that would require you to navigate <em>up</em> the directory tree. If that doesn’t immediately make sense, see the section below.</li>
+</ul>
+</div>
+<div id="directories" class="section level1">
+<h1>Directories</h1>
+<p>Just as you can look around your computer in the file browser (“Finder” on Mac and “Explorer” on Windows), R looks around your computer as well. The problem is, R is very stupid unless you tell it where to look for stuff.</p>
+<p>If you open R, it looks some place on your computer by default. Here’s where mine is looking right now.</p>
+<pre class="r"><code>getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/michaeldecrescenzo/Box Sync/site/source/content/811&quot;</code></pre>
+<p>If you type this command in R, it probably starts at the top of your user profile on your computer. If we want R to find our project files, however, we want R to be looking in our project folder. Do this by setting the working directory. For example…</p>
+<pre class="r"><code>setwd(&quot;~/folder/pathway/to/project&quot;)</code></pre>
+<p>You should set your directory to the top of the project folder. You should avoid setting your directory all the way into the data folder as a normal practice, because if you ever have to navigate out of the data folder, you have to use the pathway code for navigating up a file, <code>..</code>, which isn’t very informative. Assuming I had my directory in the <code>data/</code> folder and wanted to navigate out of the <code>data/</code> folder and into the <code>writing/</code> folder, it would look like this.</p>
+<pre class="r"><code>setwd(&quot;../writing&quot;)</code></pre>
+<p>It’s hard to understand what’s going on here. What folder is at <code>../</code>? This is why you should avoid creating a folder set up that might require you to do these upward movements.</p>
+</div>
+<div id="side-note-on-directories-and-replication" class="section level1">
+<h1>Side note on directories and replication</h1>
+<p>If you are making code that you expect will be shared to other individuals, using <code>setwd()</code> creates a problem any time you want to share your project. That’s because the pathway inside <code>setwd()</code> only exists on your computer, so it fails unless a new user changes your code.</p>
+<p>Using <code>setwd()</code> is fine for this class. As you progress with R, however, you may consider a few other ways to get around this problem.</p>
+<ul>
+<li>Rstudio users can <a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects">use <code>.Rproj</code> files</a>. When you open a project file for a specific project, Rstudio opens a fresh R session already in the appropriate directory. This allows you to drop the project anywhere in your computer, and R will set the appropriate directory regardless of where you move it. Courteous R users sometimes place a <code>.Rproj</code> file in their project even if they don’t use Rstudio.</li>
+<li>You can run R in your shell/terminal program. You do this by opening the shell, navigating to your project folder, and then opening R in the terminal by simply typing <code>r</code>. R then opens with the directory already set. This is what I do (because I don’t use R studio).</li>
+</ul>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<p>Let’s install some packages that we will use</p>
+<pre class="r"><code>install.packages(c(&quot;magrittr&quot;, &quot;tidyverse&quot;))</code></pre>
+<p>And load them into R</p>
+<pre class="r"><code>library(&quot;magrittr&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.3.4     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()</code></pre>
+<p>When you load the <code>tidyverse</code> package, you actually load several packages that are part of the Tidyverse. We’ll explain what the Tidyverse is below.</p>
+<p>You will notice that a warning message says that some function names in the <code>tidyverse</code> package masks some of the names in the <code>magrittr</code> package. This is okay. <code>tidyverse</code> borrows some things from <code>magrittr</code>, which is why these conflicts arise, but it’s going to be fine. Because <code>magrittr</code> contains some things that <code>tidyverse</code> does <em>not</em> borrow, we want to load both packages.</p>
+</div>
+<div id="loading-external-data" class="section level1">
+<h1>Loading external data</h1>
+<p>With your directory set at the top of your current project, find the ANES data file using <code>list.files()</code>. You can look inside folders by adding the folder path as an argument. The ANES data should be in the <code>data/</code> folder.</p>
+<pre class="r"><code>list.files()
+list.files(&quot;data&quot;)</code></pre>
+<p>R has many functions for reading datasets into memory. They typically follow a format of <code>read.xyz()</code> (for base functions) or <code>read_xyz()</code> (for Tidyverse functions), where <code>xyz</code> refers to the file extension of interest.</p>
+<p>We want to read a Stata file, which has the <code>.dta</code> extension. Many web pages will recommend using the <code>foreign</code> package, but <code>foreign</code> is pretty outdated and fails with newer Stata files. I’d recommend the <code>haven</code> package.</p>
+<pre class="r"><code># download the package
+install.packages(&quot;haven&quot;)
+
+# use the package to read the data
+library(&quot;haven&quot;)
+anes &lt;- read_dta(&quot;data/anes_timeseries_cdf.dta&quot;)</code></pre>
+<p>This should take a few moments to load, because the ANES cumulative file is a big file.</p>
+</div>
+<div id="data-frames" class="section level1">
+<h1>Data frames</h1>
+<p>Most datasets you will work with in R are called “data frames.” These are basically R’s default dataset object. They are two-dimensional tables, but the columns (variables) have names. These are like the variable names we saw with Stata. What’s different about Stata is that, with R, we can have as many of these tables in R’s current memory as we want. In Stata, you can only have one table at a time.</p>
+<p>Print the data to see what the data look like.</p>
+<pre class="r"><code>anes</code></pre>
+<pre><code>## # A tibble: 55,674 x 952
+##                         Version VCF0004 VCF0006 VCF0006a VCF0009x VCF0010x
+##                           &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 ANES_cdf-VERSION:2015-May-14    1948    1001 19481001        1        1
+##  2 ANES_cdf-VERSION:2015-May-14    1948    1002 19481002        1        1
+##  3 ANES_cdf-VERSION:2015-May-14    1948    1003 19481003        1        1
+##  4 ANES_cdf-VERSION:2015-May-14    1948    1004 19481004        1        1
+##  5 ANES_cdf-VERSION:2015-May-14    1948    1005 19481005        1        1
+##  6 ANES_cdf-VERSION:2015-May-14    1948    1006 19481006        1        1
+##  7 ANES_cdf-VERSION:2015-May-14    1948    1007 19481007        1        1
+##  8 ANES_cdf-VERSION:2015-May-14    1948    1008 19481008        1        1
+##  9 ANES_cdf-VERSION:2015-May-14    1948    1009 19481009        1        1
+## 10 ANES_cdf-VERSION:2015-May-14    1948    1010 19481010        1        1
+## # ... with 55,664 more rows, and 946 more variables: VCF0011x &lt;dbl&gt;,
+## #   VCF0009y &lt;dbl&gt;, VCF0010y &lt;dbl&gt;, VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;,
+## #   VCF0010z &lt;dbl&gt;, VCF0011z &lt;dbl&gt;, VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;,
+## #   VCF0012b &lt;dbl&gt;, VCF0013 &lt;dbl+lbl&gt;, VCF0014 &lt;dbl+lbl&gt;,
+## #   VCF0015a &lt;dbl+lbl&gt;, VCF0015b &lt;dbl+lbl&gt;, VCF0016 &lt;dbl+lbl&gt;,
+## #   VCF0017 &lt;dbl+lbl&gt;, VCF0018a &lt;dbl+lbl&gt;, VCF0018b &lt;dbl+lbl&gt;,
+## #   VCF0019 &lt;dbl+lbl&gt;, VCF0050a &lt;dbl+lbl&gt;, VCF0050b &lt;dbl+lbl&gt;,
+## #   VCF0070a &lt;dbl+lbl&gt;, VCF0070b &lt;dbl+lbl&gt;, VCF0071a &lt;dbl+lbl&gt;,
+## #   VCF0071b &lt;dbl+lbl&gt;, VCF0071c &lt;dbl+lbl&gt;, VCF0071d &lt;dbl+lbl&gt;,
+## #   VCF0072a &lt;dbl+lbl&gt;, VCF0072b &lt;dbl+lbl&gt;, VCF0101 &lt;dbl+lbl&gt;,
+## #   VCF0102 &lt;dbl+lbl&gt;, VCF0103 &lt;dbl+lbl&gt;, VCF0104 &lt;dbl+lbl&gt;,
+## #   VCF0105a &lt;dbl+lbl&gt;, VCF0105b &lt;dbl+lbl&gt;, VCF0106 &lt;dbl+lbl&gt;,
+## #   VCF0107 &lt;dbl+lbl&gt;, VCF0108 &lt;dbl+lbl&gt;, VCF0109 &lt;dbl+lbl&gt;,
+## #   VCF0110 &lt;dbl+lbl&gt;, VCF0111 &lt;dbl+lbl&gt;, VCF0112 &lt;dbl+lbl&gt;,
+## #   VCF0113 &lt;dbl+lbl&gt;, VCF0114 &lt;dbl+lbl&gt;, VCF0115 &lt;dbl+lbl&gt;,
+## #   VCF0116 &lt;dbl+lbl&gt;, VCF0117 &lt;dbl+lbl&gt;, VCF0118 &lt;dbl+lbl&gt;,
+## #   VCF0119 &lt;dbl+lbl&gt;, VCF0120 &lt;dbl+lbl&gt;, VCF0121 &lt;dbl+lbl&gt;,
+## #   VCF0122 &lt;dbl+lbl&gt;, VCF0123 &lt;dbl+lbl&gt;, VCF0124 &lt;dbl+lbl&gt;,
+## #   VCF0125 &lt;dbl+lbl&gt;, VCF0126 &lt;dbl+lbl&gt;, VCF0126a &lt;dbl+lbl&gt;,
+## #   VCF0126b &lt;dbl+lbl&gt;, VCF0126c &lt;dbl+lbl&gt;, VCF0127 &lt;dbl+lbl&gt;,
+## #   VCF0127a &lt;dbl+lbl&gt;, VCF0127b &lt;dbl+lbl&gt;, VCF0128 &lt;dbl+lbl&gt;,
+## #   VCF0128a &lt;dbl+lbl&gt;, VCF0128b &lt;dbl+lbl&gt;, VCF0129 &lt;dbl+lbl&gt;,
+## #   VCF0130 &lt;dbl+lbl&gt;, VCF0130a &lt;dbl+lbl&gt;, VCF0131 &lt;dbl+lbl&gt;,
+## #   VCF0132 &lt;dbl+lbl&gt;, VCF0133 &lt;dbl+lbl&gt;, VCF0134 &lt;dbl+lbl&gt;,
+## #   VCF0135 &lt;dbl+lbl&gt;, VCF0136 &lt;dbl+lbl&gt;, VCF0137 &lt;dbl+lbl&gt;,
+## #   VCF0138 &lt;dbl+lbl&gt;, VCF0138a &lt;dbl+lbl&gt;, VCF0138b &lt;dbl+lbl&gt;,
+## #   VCF0138c &lt;dbl+lbl&gt;, VCF0138d &lt;dbl+lbl&gt;, VCF0138e &lt;dbl+lbl&gt;,
+## #   VCF0139 &lt;dbl+lbl&gt;, VCF0140 &lt;dbl+lbl&gt;, VCF0140a &lt;dbl+lbl&gt;,
+## #   VCF0141 &lt;dbl+lbl&gt;, VCF0142 &lt;dbl+lbl&gt;, VCF0143 &lt;dbl+lbl&gt;,
+## #   VCF0144 &lt;dbl+lbl&gt;, VCF0145 &lt;dbl+lbl&gt;, VCF0146 &lt;dbl+lbl&gt;,
+## #   VCF0147 &lt;dbl+lbl&gt;, VCF0148 &lt;dbl+lbl&gt;, VCF0148a &lt;dbl+lbl&gt;,
+## #   VCF0149 &lt;dbl+lbl&gt;, VCF0150 &lt;dbl+lbl&gt;, VCF0151 &lt;dbl+lbl&gt;,
+## #   VCF0152 &lt;dbl+lbl&gt;, VCF0153a &lt;dbl+lbl&gt;, VCF0153b &lt;dbl+lbl&gt;,
+## #   VCF0153c &lt;dbl+lbl&gt;, ...</code></pre>
+<p>Technically speaking, the <code>anes</code> object is called a “tibble”, which is a special type of data frame created by the <code>tidyverse</code> package. Tibbles are different from ordinary data frames because they are prettier when they print out. If you want to see what I mean, you can coerce the <code>anes</code> object to a regular data frame and see the difference for yourself. You can enter the following code into R at your own risk and see the monstrosity that R tries to print out.</p>
+<pre class="r"><code>as.data.frame(anes)</code></pre>
+<p>Suffice it to say that R will try to print out what you ask it to. Tibble objects assume that you normally don’t want to print out something absolutely huge.</p>
+</div>
+<div id="learning-about-data-frames" class="section level1">
+<h1>Learning about data frames</h1>
+<p>There are a few handy functions for learning about data frames.</p>
+<p>We can get the number of rows. In this case, rows are survey respondents.</p>
+<pre class="r"><code>nrow(anes) </code></pre>
+<pre><code>## [1] 55674</code></pre>
+<p>We can also get the number of columns (variables).</p>
+<pre class="r"><code>ncol(anes)</code></pre>
+<pre><code>## [1] 952</code></pre>
+<p>You can print out the top or bottom of a data frame to get a glance of it.</p>
+<pre class="r"><code>head(anes) </code></pre>
+<pre><code>## # A tibble: 6 x 952
+##                        Version VCF0004 VCF0006 VCF0006a VCF0009x VCF0010x
+##                          &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 ANES_cdf-VERSION:2015-May-14    1948    1001 19481001        1        1
+## 2 ANES_cdf-VERSION:2015-May-14    1948    1002 19481002        1        1
+## 3 ANES_cdf-VERSION:2015-May-14    1948    1003 19481003        1        1
+## 4 ANES_cdf-VERSION:2015-May-14    1948    1004 19481004        1        1
+## 5 ANES_cdf-VERSION:2015-May-14    1948    1005 19481005        1        1
+## 6 ANES_cdf-VERSION:2015-May-14    1948    1006 19481006        1        1
+## # ... with 946 more variables: VCF0011x &lt;dbl&gt;, VCF0009y &lt;dbl&gt;,
+## #   VCF0010y &lt;dbl&gt;, VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;, VCF0010z &lt;dbl&gt;,
+## #   VCF0011z &lt;dbl&gt;, VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;, VCF0012b &lt;dbl&gt;,
+## #   VCF0013 &lt;dbl+lbl&gt;, VCF0014 &lt;dbl+lbl&gt;, VCF0015a &lt;dbl+lbl&gt;,
+## #   VCF0015b &lt;dbl+lbl&gt;, VCF0016 &lt;dbl+lbl&gt;, VCF0017 &lt;dbl+lbl&gt;,
+## #   VCF0018a &lt;dbl+lbl&gt;, VCF0018b &lt;dbl+lbl&gt;, VCF0019 &lt;dbl+lbl&gt;,
+## #   VCF0050a &lt;dbl+lbl&gt;, VCF0050b &lt;dbl+lbl&gt;, VCF0070a &lt;dbl+lbl&gt;,
+## #   VCF0070b &lt;dbl+lbl&gt;, VCF0071a &lt;dbl+lbl&gt;, VCF0071b &lt;dbl+lbl&gt;,
+## #   VCF0071c &lt;dbl+lbl&gt;, VCF0071d &lt;dbl+lbl&gt;, VCF0072a &lt;dbl+lbl&gt;,
+## #   VCF0072b &lt;dbl+lbl&gt;, VCF0101 &lt;dbl+lbl&gt;, VCF0102 &lt;dbl+lbl&gt;,
+## #   VCF0103 &lt;dbl+lbl&gt;, VCF0104 &lt;dbl+lbl&gt;, VCF0105a &lt;dbl+lbl&gt;,
+## #   VCF0105b &lt;dbl+lbl&gt;, VCF0106 &lt;dbl+lbl&gt;, VCF0107 &lt;dbl+lbl&gt;,
+## #   VCF0108 &lt;dbl+lbl&gt;, VCF0109 &lt;dbl+lbl&gt;, VCF0110 &lt;dbl+lbl&gt;,
+## #   VCF0111 &lt;dbl+lbl&gt;, VCF0112 &lt;dbl+lbl&gt;, VCF0113 &lt;dbl+lbl&gt;,
+## #   VCF0114 &lt;dbl+lbl&gt;, VCF0115 &lt;dbl+lbl&gt;, VCF0116 &lt;dbl+lbl&gt;,
+## #   VCF0117 &lt;dbl+lbl&gt;, VCF0118 &lt;dbl+lbl&gt;, VCF0119 &lt;dbl+lbl&gt;,
+## #   VCF0120 &lt;dbl+lbl&gt;, VCF0121 &lt;dbl+lbl&gt;, VCF0122 &lt;dbl+lbl&gt;,
+## #   VCF0123 &lt;dbl+lbl&gt;, VCF0124 &lt;dbl+lbl&gt;, VCF0125 &lt;dbl+lbl&gt;,
+## #   VCF0126 &lt;dbl+lbl&gt;, VCF0126a &lt;dbl+lbl&gt;, VCF0126b &lt;dbl+lbl&gt;,
+## #   VCF0126c &lt;dbl+lbl&gt;, VCF0127 &lt;dbl+lbl&gt;, VCF0127a &lt;dbl+lbl&gt;,
+## #   VCF0127b &lt;dbl+lbl&gt;, VCF0128 &lt;dbl+lbl&gt;, VCF0128a &lt;dbl+lbl&gt;,
+## #   VCF0128b &lt;dbl+lbl&gt;, VCF0129 &lt;dbl+lbl&gt;, VCF0130 &lt;dbl+lbl&gt;,
+## #   VCF0130a &lt;dbl+lbl&gt;, VCF0131 &lt;dbl+lbl&gt;, VCF0132 &lt;dbl+lbl&gt;,
+## #   VCF0133 &lt;dbl+lbl&gt;, VCF0134 &lt;dbl+lbl&gt;, VCF0135 &lt;dbl+lbl&gt;,
+## #   VCF0136 &lt;dbl+lbl&gt;, VCF0137 &lt;dbl+lbl&gt;, VCF0138 &lt;dbl+lbl&gt;,
+## #   VCF0138a &lt;dbl+lbl&gt;, VCF0138b &lt;dbl+lbl&gt;, VCF0138c &lt;dbl+lbl&gt;,
+## #   VCF0138d &lt;dbl+lbl&gt;, VCF0138e &lt;dbl+lbl&gt;, VCF0139 &lt;dbl+lbl&gt;,
+## #   VCF0140 &lt;dbl+lbl&gt;, VCF0140a &lt;dbl+lbl&gt;, VCF0141 &lt;dbl+lbl&gt;,
+## #   VCF0142 &lt;dbl+lbl&gt;, VCF0143 &lt;dbl+lbl&gt;, VCF0144 &lt;dbl+lbl&gt;,
+## #   VCF0145 &lt;dbl+lbl&gt;, VCF0146 &lt;dbl+lbl&gt;, VCF0147 &lt;dbl+lbl&gt;,
+## #   VCF0148 &lt;dbl+lbl&gt;, VCF0148a &lt;dbl+lbl&gt;, VCF0149 &lt;dbl+lbl&gt;,
+## #   VCF0150 &lt;dbl+lbl&gt;, VCF0151 &lt;dbl+lbl&gt;, VCF0152 &lt;dbl+lbl&gt;,
+## #   VCF0153a &lt;dbl+lbl&gt;, VCF0153b &lt;dbl+lbl&gt;, VCF0153c &lt;dbl+lbl&gt;, ...</code></pre>
+<pre class="r"><code>tail(anes)</code></pre>
+<pre><code>## # A tibble: 6 x 952
+##                        Version VCF0004 VCF0006 VCF0006a VCF0009x VCF0010x
+##                          &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+## 1 ANES_cdf_VERSION:2015-May-14    2012    6859 20126859        0        0
+## 2 ANES_cdf_VERSION:2015-May-14    2012    6860 20126860        0        0
+## 3 ANES_cdf_VERSION:2015-May-14    2012    6861 20126861        0        0
+## 4 ANES_cdf_VERSION:2015-May-14    2012    6862 20126862        0        0
+## 5 ANES_cdf_VERSION:2015-May-14    2012    6863 20126863        0        0
+## 6 ANES_cdf_VERSION:2015-May-14    2012    6864 20126864        0        0
+## # ... with 946 more variables: VCF0011x &lt;dbl&gt;, VCF0009y &lt;dbl&gt;,
+## #   VCF0010y &lt;dbl&gt;, VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;, VCF0010z &lt;dbl&gt;,
+## #   VCF0011z &lt;dbl&gt;, VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;, VCF0012b &lt;dbl&gt;,
+## #   VCF0013 &lt;dbl+lbl&gt;, VCF0014 &lt;dbl+lbl&gt;, VCF0015a &lt;dbl+lbl&gt;,
+## #   VCF0015b &lt;dbl+lbl&gt;, VCF0016 &lt;dbl+lbl&gt;, VCF0017 &lt;dbl+lbl&gt;,
+## #   VCF0018a &lt;dbl+lbl&gt;, VCF0018b &lt;dbl+lbl&gt;, VCF0019 &lt;dbl+lbl&gt;,
+## #   VCF0050a &lt;dbl+lbl&gt;, VCF0050b &lt;dbl+lbl&gt;, VCF0070a &lt;dbl+lbl&gt;,
+## #   VCF0070b &lt;dbl+lbl&gt;, VCF0071a &lt;dbl+lbl&gt;, VCF0071b &lt;dbl+lbl&gt;,
+## #   VCF0071c &lt;dbl+lbl&gt;, VCF0071d &lt;dbl+lbl&gt;, VCF0072a &lt;dbl+lbl&gt;,
+## #   VCF0072b &lt;dbl+lbl&gt;, VCF0101 &lt;dbl+lbl&gt;, VCF0102 &lt;dbl+lbl&gt;,
+## #   VCF0103 &lt;dbl+lbl&gt;, VCF0104 &lt;dbl+lbl&gt;, VCF0105a &lt;dbl+lbl&gt;,
+## #   VCF0105b &lt;dbl+lbl&gt;, VCF0106 &lt;dbl+lbl&gt;, VCF0107 &lt;dbl+lbl&gt;,
+## #   VCF0108 &lt;dbl+lbl&gt;, VCF0109 &lt;dbl+lbl&gt;, VCF0110 &lt;dbl+lbl&gt;,
+## #   VCF0111 &lt;dbl+lbl&gt;, VCF0112 &lt;dbl+lbl&gt;, VCF0113 &lt;dbl+lbl&gt;,
+## #   VCF0114 &lt;dbl+lbl&gt;, VCF0115 &lt;dbl+lbl&gt;, VCF0116 &lt;dbl+lbl&gt;,
+## #   VCF0117 &lt;dbl+lbl&gt;, VCF0118 &lt;dbl+lbl&gt;, VCF0119 &lt;dbl+lbl&gt;,
+## #   VCF0120 &lt;dbl+lbl&gt;, VCF0121 &lt;dbl+lbl&gt;, VCF0122 &lt;dbl+lbl&gt;,
+## #   VCF0123 &lt;dbl+lbl&gt;, VCF0124 &lt;dbl+lbl&gt;, VCF0125 &lt;dbl+lbl&gt;,
+## #   VCF0126 &lt;dbl+lbl&gt;, VCF0126a &lt;dbl+lbl&gt;, VCF0126b &lt;dbl+lbl&gt;,
+## #   VCF0126c &lt;dbl+lbl&gt;, VCF0127 &lt;dbl+lbl&gt;, VCF0127a &lt;dbl+lbl&gt;,
+## #   VCF0127b &lt;dbl+lbl&gt;, VCF0128 &lt;dbl+lbl&gt;, VCF0128a &lt;dbl+lbl&gt;,
+## #   VCF0128b &lt;dbl+lbl&gt;, VCF0129 &lt;dbl+lbl&gt;, VCF0130 &lt;dbl+lbl&gt;,
+## #   VCF0130a &lt;dbl+lbl&gt;, VCF0131 &lt;dbl+lbl&gt;, VCF0132 &lt;dbl+lbl&gt;,
+## #   VCF0133 &lt;dbl+lbl&gt;, VCF0134 &lt;dbl+lbl&gt;, VCF0135 &lt;dbl+lbl&gt;,
+## #   VCF0136 &lt;dbl+lbl&gt;, VCF0137 &lt;dbl+lbl&gt;, VCF0138 &lt;dbl+lbl&gt;,
+## #   VCF0138a &lt;dbl+lbl&gt;, VCF0138b &lt;dbl+lbl&gt;, VCF0138c &lt;dbl+lbl&gt;,
+## #   VCF0138d &lt;dbl+lbl&gt;, VCF0138e &lt;dbl+lbl&gt;, VCF0139 &lt;dbl+lbl&gt;,
+## #   VCF0140 &lt;dbl+lbl&gt;, VCF0140a &lt;dbl+lbl&gt;, VCF0141 &lt;dbl+lbl&gt;,
+## #   VCF0142 &lt;dbl+lbl&gt;, VCF0143 &lt;dbl+lbl&gt;, VCF0144 &lt;dbl+lbl&gt;,
+## #   VCF0145 &lt;dbl+lbl&gt;, VCF0146 &lt;dbl+lbl&gt;, VCF0147 &lt;dbl+lbl&gt;,
+## #   VCF0148 &lt;dbl+lbl&gt;, VCF0148a &lt;dbl+lbl&gt;, VCF0149 &lt;dbl+lbl&gt;,
+## #   VCF0150 &lt;dbl+lbl&gt;, VCF0151 &lt;dbl+lbl&gt;, VCF0152 &lt;dbl+lbl&gt;,
+## #   VCF0153a &lt;dbl+lbl&gt;, VCF0153b &lt;dbl+lbl&gt;, VCF0153c &lt;dbl+lbl&gt;, ...</code></pre>
+<p>When we print the <code>anes</code> object, we don’t get a full list of variable names (because there are so many). To get the full set of names, use the <code>names()</code> function.</p>
+<pre class="r"><code>names(anes)</code></pre>
+<pre><code>##   [1] &quot;Version&quot;  &quot;VCF0004&quot;  &quot;VCF0006&quot;  &quot;VCF0006a&quot; &quot;VCF0009x&quot; &quot;VCF0010x&quot;
+##   [7] &quot;VCF0011x&quot; &quot;VCF0009y&quot; &quot;VCF0010y&quot; &quot;VCF0011y&quot; &quot;VCF0009z&quot; &quot;VCF0010z&quot;
+##  [13] &quot;VCF0011z&quot; &quot;VCF0012&quot;  &quot;VCF0012a&quot; &quot;VCF0012b&quot; &quot;VCF0013&quot;  &quot;VCF0014&quot; 
+##  [19] &quot;VCF0015a&quot; &quot;VCF0015b&quot; &quot;VCF0016&quot;  &quot;VCF0017&quot;  &quot;VCF0018a&quot; &quot;VCF0018b&quot;
+##  [25] &quot;VCF0019&quot;  &quot;VCF0050a&quot; &quot;VCF0050b&quot; &quot;VCF0070a&quot; &quot;VCF0070b&quot; &quot;VCF0071a&quot;
+##  [31] &quot;VCF0071b&quot; &quot;VCF0071c&quot; &quot;VCF0071d&quot; &quot;VCF0072a&quot; &quot;VCF0072b&quot; &quot;VCF0101&quot; 
+##  [37] &quot;VCF0102&quot;  &quot;VCF0103&quot;  &quot;VCF0104&quot;  &quot;VCF0105a&quot; &quot;VCF0105b&quot; &quot;VCF0106&quot; 
+##  [43] &quot;VCF0107&quot;  &quot;VCF0108&quot;  &quot;VCF0109&quot;  &quot;VCF0110&quot;  &quot;VCF0111&quot;  &quot;VCF0112&quot; 
+##  [49] &quot;VCF0113&quot;  &quot;VCF0114&quot;  &quot;VCF0115&quot;  &quot;VCF0116&quot;  &quot;VCF0117&quot;  &quot;VCF0118&quot; 
+##  [55] &quot;VCF0119&quot;  &quot;VCF0120&quot;  &quot;VCF0121&quot;  &quot;VCF0122&quot;  &quot;VCF0123&quot;  &quot;VCF0124&quot; 
+##  [61] &quot;VCF0125&quot;  &quot;VCF0126&quot;  &quot;VCF0126a&quot; &quot;VCF0126b&quot; &quot;VCF0126c&quot; &quot;VCF0127&quot; 
+##  [67] &quot;VCF0127a&quot; &quot;VCF0127b&quot; &quot;VCF0128&quot;  &quot;VCF0128a&quot; &quot;VCF0128b&quot; &quot;VCF0129&quot; 
+##  [73] &quot;VCF0130&quot;  &quot;VCF0130a&quot; &quot;VCF0131&quot;  &quot;VCF0132&quot;  &quot;VCF0133&quot;  &quot;VCF0134&quot; 
+##  [79] &quot;VCF0135&quot;  &quot;VCF0136&quot;  &quot;VCF0137&quot;  &quot;VCF0138&quot;  &quot;VCF0138a&quot; &quot;VCF0138b&quot;
+##  [85] &quot;VCF0138c&quot; &quot;VCF0138d&quot; &quot;VCF0138e&quot; &quot;VCF0139&quot;  &quot;VCF0140&quot;  &quot;VCF0140a&quot;
+##  [91] &quot;VCF0141&quot;  &quot;VCF0142&quot;  &quot;VCF0143&quot;  &quot;VCF0144&quot;  &quot;VCF0145&quot;  &quot;VCF0146&quot; 
+##  [97] &quot;VCF0147&quot;  &quot;VCF0148&quot;  &quot;VCF0148a&quot; &quot;VCF0149&quot;  &quot;VCF0150&quot;  &quot;VCF0151&quot; 
+## [103] &quot;VCF0152&quot;  &quot;VCF0153a&quot; &quot;VCF0153b&quot; &quot;VCF0153c&quot; &quot;VCF0154a&quot; &quot;VCF0154b&quot;
+## [109] &quot;VCF0155&quot;  &quot;VCF0156&quot;  &quot;VCF0157&quot;  &quot;VCF0170a&quot; &quot;VCF0170b&quot; &quot;VCF0170c&quot;
+## [115] &quot;VCF0170d&quot; &quot;VCF0201&quot;  &quot;VCF0202&quot;  &quot;VCF0203&quot;  &quot;VCF0204&quot;  &quot;VCF0205&quot; 
+## [121] &quot;VCF0206&quot;  &quot;VCF0207&quot;  &quot;VCF0208&quot;  &quot;VCF0209&quot;  &quot;VCF0210&quot;  &quot;VCF0211&quot; 
+## [127] &quot;VCF0212&quot;  &quot;VCF0213&quot;  &quot;VCF0214&quot;  &quot;VCF0215&quot;  &quot;VCF0216&quot;  &quot;VCF0217&quot; 
+## [133] &quot;VCF0218&quot;  &quot;VCF0219&quot;  &quot;VCF0220&quot;  &quot;VCF0221&quot;  &quot;VCF0222&quot;  &quot;VCF0223&quot; 
+## [139] &quot;VCF0224&quot;  &quot;VCF0225&quot;  &quot;VCF0226&quot;  &quot;VCF0227&quot;  &quot;VCF0228&quot;  &quot;VCF0229&quot; 
+## [145] &quot;VCF0230&quot;  &quot;VCF0231&quot;  &quot;VCF0232&quot;  &quot;VCF0233&quot;  &quot;VCF0234&quot;  &quot;VCF0235&quot; 
+## [151] &quot;VCF0236&quot;  &quot;VCF0253&quot;  &quot;VCF0290&quot;  &quot;VCF0291&quot;  &quot;VCF0301&quot;  &quot;VCF0302&quot; 
+## [157] &quot;VCF0303&quot;  &quot;VCF0305&quot;  &quot;VCF0306&quot;  &quot;VCF0307&quot;  &quot;VCF0308&quot;  &quot;VCF0309&quot; 
+## [163] &quot;VCF0310&quot;  &quot;VCF0311&quot;  &quot;VCF0312&quot;  &quot;VCF0313&quot;  &quot;VCF0314&quot;  &quot;VCF0315&quot; 
+## [169] &quot;VCF0316&quot;  &quot;VCF0317&quot;  &quot;VCF0318&quot;  &quot;VCF0319&quot;  &quot;VCF0320&quot;  &quot;VCF0321&quot; 
+## [175] &quot;VCF0322&quot;  &quot;VCF0323&quot;  &quot;VCF0324&quot;  &quot;VCF0338&quot;  &quot;VCF0339&quot;  &quot;VCF0340&quot; 
+## [181] &quot;VCF0341&quot;  &quot;VCF0342&quot;  &quot;VCF0343&quot;  &quot;VCF0344&quot;  &quot;VCF0345&quot;  &quot;VCF0346&quot; 
+## [187] &quot;VCF0347&quot;  &quot;VCF0348&quot;  &quot;VCF0349&quot;  &quot;VCF0350&quot;  &quot;VCF0351&quot;  &quot;VCF0352&quot; 
+## [193] &quot;VCF0353&quot;  &quot;VCF0354&quot;  &quot;VCF0355&quot;  &quot;VCF0356&quot;  &quot;VCF0357&quot;  &quot;VCF0358&quot; 
+## [199] &quot;VCF0359&quot;  &quot;VCF0360&quot;  &quot;VCF0361&quot;  &quot;VCF0362&quot;  &quot;VCF0363&quot;  &quot;VCF0364&quot; 
+## [205] &quot;VCF0365&quot;  &quot;VCF0366&quot;  &quot;VCF0367&quot;  &quot;VCF0368&quot;  &quot;VCF0369&quot;  &quot;VCF0370&quot; 
+## [211] &quot;VCF0371&quot;  &quot;VCF0372&quot;  &quot;VCF0373&quot;  &quot;VCF0374&quot;  &quot;VCF0375a&quot; &quot;VCF0375b&quot;
+## [217] &quot;VCF0375c&quot; &quot;VCF0375d&quot; &quot;VCF0376a&quot; &quot;VCF0376b&quot; &quot;VCF0376c&quot; &quot;VCF0376d&quot;
+## [223] &quot;VCF0377a&quot; &quot;VCF0377b&quot; &quot;VCF0377c&quot; &quot;VCF0377d&quot; &quot;VCF0378a&quot; &quot;VCF0378b&quot;
+## [229] &quot;VCF0378c&quot; &quot;VCF0378d&quot; &quot;VCF0379a&quot; &quot;VCF0379b&quot; &quot;VCF0379c&quot; &quot;VCF0379d&quot;
+## [235] &quot;VCF0380&quot;  &quot;VCF0381a&quot; &quot;VCF0381b&quot; &quot;VCF0381c&quot; &quot;VCF0381d&quot; &quot;VCF0382a&quot;
+## [241] &quot;VCF0382b&quot; &quot;VCF0382c&quot; &quot;VCF0382d&quot; &quot;VCF0383a&quot; &quot;VCF0383b&quot; &quot;VCF0383c&quot;
+## [247] &quot;VCF0383d&quot; &quot;VCF0384a&quot; &quot;VCF0384b&quot; &quot;VCF0384c&quot; &quot;VCF0384d&quot; &quot;VCF0385a&quot;
+## [253] &quot;VCF0385b&quot; &quot;VCF0385c&quot; &quot;VCF0385d&quot; &quot;VCF0386&quot;  &quot;VCF0387a&quot; &quot;VCF0387b&quot;
+## [259] &quot;VCF0387c&quot; &quot;VCF0387d&quot; &quot;VCF0388a&quot; &quot;VCF0388b&quot; &quot;VCF0388c&quot; &quot;VCF0388d&quot;
+## [265] &quot;VCF0389a&quot; &quot;VCF0389b&quot; &quot;VCF0389c&quot; &quot;VCF0389d&quot; &quot;VCF0390a&quot; &quot;VCF0390b&quot;
+## [271] &quot;VCF0390c&quot; &quot;VCF0390d&quot; &quot;VCF0391a&quot; &quot;VCF0391b&quot; &quot;VCF0391c&quot; &quot;VCF0391d&quot;
+## [277] &quot;VCF0392&quot;  &quot;VCF0393a&quot; &quot;VCF0393b&quot; &quot;VCF0393c&quot; &quot;VCF0393d&quot; &quot;VCF0394a&quot;
+## [283] &quot;VCF0394b&quot; &quot;VCF0394c&quot; &quot;VCF0394d&quot; &quot;VCF0395a&quot; &quot;VCF0395b&quot; &quot;VCF0395c&quot;
+## [289] &quot;VCF0395d&quot; &quot;VCF0396a&quot; &quot;VCF0396b&quot; &quot;VCF0396c&quot; &quot;VCF0396d&quot; &quot;VCF0397a&quot;
+## [295] &quot;VCF0397b&quot; &quot;VCF0397c&quot; &quot;VCF0397d&quot; &quot;VCF0401&quot;  &quot;VCF0402&quot;  &quot;VCF0403&quot; 
+## [301] &quot;VCF0404&quot;  &quot;VCF0405&quot;  &quot;VCF0406&quot;  &quot;VCF0407&quot;  &quot;VCF0408&quot;  &quot;VCF0409&quot; 
+## [307] &quot;VCF0410&quot;  &quot;VCF0411&quot;  &quot;VCF0412&quot;  &quot;VCF0413&quot;  &quot;VCF0414&quot;  &quot;VCF0415&quot; 
+## [313] &quot;VCF0424&quot;  &quot;VCF0425&quot;  &quot;VCF0426&quot;  &quot;VCF0427&quot;  &quot;VCF0428&quot;  &quot;VCF0429&quot; 
+## [319] &quot;VCF0432&quot;  &quot;VCF0433&quot;  &quot;VCF0434&quot;  &quot;VCF0435&quot;  &quot;VCF0436&quot;  &quot;VCF0437&quot; 
+## [325] &quot;VCF0438&quot;  &quot;VCF0439&quot;  &quot;VCF0440&quot;  &quot;VCF0441&quot;  &quot;VCF0442&quot;  &quot;VCF0443&quot; 
+## [331] &quot;VCF0444&quot;  &quot;VCF0445&quot;  &quot;VCF0446&quot;  &quot;VCF0447&quot;  &quot;VCF0448&quot;  &quot;VCF0449&quot; 
+## [337] &quot;VCF0450&quot;  &quot;VCF0451&quot;  &quot;VCF0471&quot;  &quot;VCF0472&quot;  &quot;VCF0473&quot;  &quot;VCF0475&quot; 
+## [343] &quot;VCF0476a&quot; &quot;VCF0476b&quot; &quot;VCF0476c&quot; &quot;VCF0476d&quot; &quot;VCF0477a&quot; &quot;VCF0477b&quot;
+## [349] &quot;VCF0477c&quot; &quot;VCF0477d&quot; &quot;VCF0478a&quot; &quot;VCF0478b&quot; &quot;VCF0478c&quot; &quot;VCF0478d&quot;
+## [355] &quot;VCF0479a&quot; &quot;VCF0479b&quot; &quot;VCF0479c&quot; &quot;VCF0479d&quot; &quot;VCF0480a&quot; &quot;VCF0480b&quot;
+## [361] &quot;VCF0480c&quot; &quot;VCF0480d&quot; &quot;VCF0481&quot;  &quot;VCF0482a&quot; &quot;VCF0482b&quot; &quot;VCF0482c&quot;
+## [367] &quot;VCF0482d&quot; &quot;VCF0483a&quot; &quot;VCF0483b&quot; &quot;VCF0483c&quot; &quot;VCF0483d&quot; &quot;VCF0484a&quot;
+## [373] &quot;VCF0484b&quot; &quot;VCF0484c&quot; &quot;VCF0484d&quot; &quot;VCF0485a&quot; &quot;VCF0485b&quot; &quot;VCF0485c&quot;
+## [379] &quot;VCF0485d&quot; &quot;VCF0486a&quot; &quot;VCF0486b&quot; &quot;VCF0486c&quot; &quot;VCF0486d&quot; &quot;VCF0487&quot; 
+## [385] &quot;VCF0488a&quot; &quot;VCF0488b&quot; &quot;VCF0488c&quot; &quot;VCF0488d&quot; &quot;VCF0489a&quot; &quot;VCF0489b&quot;
+## [391] &quot;VCF0489c&quot; &quot;VCF0489d&quot; &quot;VCF0490a&quot; &quot;VCF0490b&quot; &quot;VCF0490c&quot; &quot;VCF0490d&quot;
+## [397] &quot;VCF0491a&quot; &quot;VCF0491b&quot; &quot;VCF0491c&quot; &quot;VCF0491d&quot; &quot;VCF0492a&quot; &quot;VCF0492b&quot;
+## [403] &quot;VCF0492c&quot; &quot;VCF0492d&quot; &quot;VCF0493&quot;  &quot;VCF0494a&quot; &quot;VCF0494b&quot; &quot;VCF0494c&quot;
+## [409] &quot;VCF0494d&quot; &quot;VCF0495a&quot; &quot;VCF0495b&quot; &quot;VCF0495c&quot; &quot;VCF0495d&quot; &quot;VCF0496a&quot;
+## [415] &quot;VCF0496b&quot; &quot;VCF0496c&quot; &quot;VCF0496d&quot; &quot;VCF0497a&quot; &quot;VCF0497b&quot; &quot;VCF0497c&quot;
+## [421] &quot;VCF0497d&quot; &quot;VCF0498a&quot; &quot;VCF0498b&quot; &quot;VCF0498c&quot; &quot;VCF0498d&quot; &quot;VCF0501&quot; 
+## [427] &quot;VCF0502&quot;  &quot;VCF0502a&quot; &quot;VCF0503&quot;  &quot;VCF0504&quot;  &quot;VCF0507&quot;  &quot;VCF0508&quot; 
+## [433] &quot;VCF0509&quot;  &quot;VCF0512&quot;  &quot;VCF0513&quot;  &quot;VCF0514&quot;  &quot;VCF0517&quot;  &quot;VCF0518&quot; 
+## [439] &quot;VCF0521&quot;  &quot;VCF0521a&quot; &quot;VCF0522&quot;  &quot;VCF0523&quot;  &quot;VCF0524&quot;  &quot;VCF0525&quot; 
+## [445] &quot;VCF0528&quot;  &quot;VCF0529&quot;  &quot;VCF0533&quot;  &quot;VCF0534&quot;  &quot;VCF0537&quot;  &quot;VCF0538&quot; 
+## [451] &quot;VCF0541&quot;  &quot;VCF0542&quot;  &quot;VCF0545&quot;  &quot;VCF0546&quot;  &quot;VCF0549&quot;  &quot;VCF0550&quot; 
+## [457] &quot;VCF0601&quot;  &quot;VCF0602&quot;  &quot;VCF0603&quot;  &quot;VCF0604&quot;  &quot;VCF0605&quot;  &quot;VCF0606&quot; 
+## [463] &quot;VCF0607&quot;  &quot;VCF0608&quot;  &quot;VCF0609&quot;  &quot;VCF0610&quot;  &quot;VCF0611&quot;  &quot;VCF0612&quot; 
+## [469] &quot;VCF0613&quot;  &quot;VCF0614&quot;  &quot;VCF0615&quot;  &quot;VCF0616&quot;  &quot;VCF0617&quot;  &quot;VCF0618&quot; 
+## [475] &quot;VCF0619&quot;  &quot;VCF0620&quot;  &quot;VCF0621&quot;  &quot;VCF0622&quot;  &quot;VCF0623&quot;  &quot;VCF0624&quot; 
+## [481] &quot;VCF0625&quot;  &quot;VCF0626&quot;  &quot;VCF0627&quot;  &quot;VCF0628&quot;  &quot;VCF0629&quot;  &quot;VCF0630&quot; 
+## [487] &quot;VCF0631&quot;  &quot;VCF0632&quot;  &quot;VCF0633&quot;  &quot;VCF0634&quot;  &quot;VCF0640&quot;  &quot;VCF0648&quot; 
+## [493] &quot;VCF0649&quot;  &quot;VCF0650&quot;  &quot;VCF0651&quot;  &quot;VCF0652&quot;  &quot;VCF0653&quot;  &quot;VCF0654&quot; 
+## [499] &quot;VCF0655&quot;  &quot;VCF0656&quot;  &quot;VCF0675&quot;  &quot;VCF0700&quot;  &quot;VCF0701&quot;  &quot;VCF0702&quot; 
+## [505] &quot;VCF0703&quot;  &quot;VCF0704&quot;  &quot;VCF0704a&quot; &quot;VCF0705&quot;  &quot;VCF0706&quot;  &quot;VCF0707&quot; 
+## [511] &quot;VCF0708&quot;  &quot;VCF0709&quot;  &quot;VCF0710&quot;  &quot;VCF0711&quot;  &quot;VCF0712&quot;  &quot;VCF0713&quot; 
+## [517] &quot;VCF0714&quot;  &quot;VCF0715&quot;  &quot;VCF0716&quot;  &quot;VCF0717&quot;  &quot;VCF0718&quot;  &quot;VCF0719&quot; 
+## [523] &quot;VCF0720&quot;  &quot;VCF0721&quot;  &quot;VCF0722&quot;  &quot;VCF0723&quot;  &quot;VCF0723a&quot; &quot;VCF0724&quot; 
+## [529] &quot;VCF0725&quot;  &quot;VCF0726&quot;  &quot;VCF0727&quot;  &quot;VCF0728&quot;  &quot;VCF0729&quot;  &quot;VCF0730&quot; 
+## [535] &quot;VCF0731&quot;  &quot;VCF0732&quot;  &quot;VCF0733&quot;  &quot;VCF0734&quot;  &quot;VCF0735&quot;  &quot;VCF0736&quot; 
+## [541] &quot;VCF0737&quot;  &quot;VCF0738&quot;  &quot;VCF0738a&quot; &quot;VCF0739&quot;  &quot;VCF0740&quot;  &quot;VCF0741&quot; 
+## [547] &quot;VCF0742&quot;  &quot;VCF0743&quot;  &quot;VCF0744&quot;  &quot;VCF0745&quot;  &quot;VCF0746&quot;  &quot;VCF0747&quot; 
+## [553] &quot;VCF0748&quot;  &quot;VCF0749&quot;  &quot;VCF0750&quot;  &quot;VCF0801&quot;  &quot;VCF0803&quot;  &quot;VCF0804&quot; 
+## [559] &quot;VCF0805&quot;  &quot;VCF0806&quot;  &quot;VCF0808&quot;  &quot;VCF0809&quot;  &quot;VCF0811&quot;  &quot;VCF0813&quot; 
+## [565] &quot;VCF0814&quot;  &quot;VCF0815&quot;  &quot;VCF0816&quot;  &quot;VCF0817&quot;  &quot;VCF0818&quot;  &quot;VCF0819&quot; 
+## [571] &quot;VCF0820&quot;  &quot;VCF0821&quot;  &quot;VCF0822&quot;  &quot;VCF0823&quot;  &quot;VCF0824&quot;  &quot;VCF0825&quot; 
+## [577] &quot;VCF0826&quot;  &quot;VCF0827&quot;  &quot;VCF0827a&quot; &quot;VCF0828&quot;  &quot;VCF0829&quot;  &quot;VCF0830&quot; 
+## [583] &quot;VCF0832&quot;  &quot;VCF0833&quot;  &quot;VCF0834&quot;  &quot;VCF0836&quot;  &quot;VCF0837&quot;  &quot;VCF0838&quot; 
+## [589] &quot;VCF0839&quot;  &quot;VCF0840&quot;  &quot;VCF0841&quot;  &quot;VCF0842&quot;  &quot;VCF0843&quot;  &quot;VCF0844&quot; 
+## [595] &quot;VCF0845&quot;  &quot;VCF0846&quot;  &quot;VCF0847&quot;  &quot;VCF0848&quot;  &quot;VCF0848a&quot; &quot;VCF0849&quot; 
+## [601] &quot;VCF0850&quot;  &quot;VCF0851&quot;  &quot;VCF0852&quot;  &quot;VCF0853&quot;  &quot;VCF0854&quot;  &quot;VCF0860&quot; 
+## [607] &quot;VCF0861&quot;  &quot;VCF0862&quot;  &quot;VCF0863&quot;  &quot;VCF0864&quot;  &quot;VCF0865&quot;  &quot;VCF0866&quot; 
+## [613] &quot;VCF0867&quot;  &quot;VCF0867a&quot; &quot;VCF0870&quot;  &quot;VCF0871&quot;  &quot;VCF0872&quot;  &quot;VCF0873&quot; 
+## [619] &quot;VCF0875&quot;  &quot;VCF0875a&quot; &quot;VCF0875b&quot; &quot;VCF0876&quot;  &quot;VCF0876a&quot; &quot;VCF0877&quot; 
+## [625] &quot;VCF0877a&quot; &quot;VCF0878&quot;  &quot;VCF0879&quot;  &quot;VCF0879a&quot; &quot;VCF0880&quot;  &quot;VCF0880a&quot;
+## [631] &quot;VCF0880b&quot; &quot;VCF0881&quot;  &quot;VCF0886&quot;  &quot;VCF0887&quot;  &quot;VCF0888&quot;  &quot;VCF0889&quot; 
+## [637] &quot;VCF0890&quot;  &quot;VCF0891&quot;  &quot;VCF0892&quot;  &quot;VCF0893&quot;  &quot;VCF0894&quot;  &quot;VCF0900&quot; 
+## [643] &quot;VCF0900a&quot; &quot;VCF0900b&quot; &quot;VCF0900c&quot; &quot;VCF0901&quot;  &quot;VCF0901a&quot; &quot;VCF0901b&quot;
+## [649] &quot;VCF0902&quot;  &quot;VCF0903&quot;  &quot;VCF0904&quot;  &quot;VCF0905&quot;  &quot;VCF0906&quot;  &quot;VCF0907&quot; 
+## [655] &quot;VCF0908&quot;  &quot;VCF0909&quot;  &quot;VCF0910&quot;  &quot;VCF0911&quot;  &quot;VCF0912&quot;  &quot;VCF0913&quot; 
+## [661] &quot;VCF0914&quot;  &quot;VCF0915&quot;  &quot;VCF0916&quot;  &quot;VCF0917&quot;  &quot;VCF0918&quot;  &quot;VCF0919&quot; 
+## [667] &quot;VCF0920&quot;  &quot;VCF0921&quot;  &quot;VCF0922&quot;  &quot;VCF0923&quot;  &quot;VCF0924&quot;  &quot;VCF0925&quot; 
+## [673] &quot;VCF0926&quot;  &quot;VCF0927&quot;  &quot;VCF0928&quot;  &quot;VCF0929&quot;  &quot;VCF0930&quot;  &quot;VCF0931&quot; 
+## [679] &quot;VCF0932&quot;  &quot;VCF0933&quot;  &quot;VCF0934&quot;  &quot;VCF0935&quot;  &quot;VCF0936&quot;  &quot;VCF0937&quot; 
+## [685] &quot;VCF0938&quot;  &quot;VCF0939&quot;  &quot;VCF0940&quot;  &quot;VCF0941&quot;  &quot;VCF0942&quot;  &quot;VCF0943&quot; 
+## [691] &quot;VCF0944&quot;  &quot;VCF0945&quot;  &quot;VCF0946&quot;  &quot;VCF0946a&quot; &quot;VCF0947&quot;  &quot;VCF0947a&quot;
+## [697] &quot;VCF0948&quot;  &quot;VCF0948a&quot; &quot;VCF0949&quot;  &quot;VCF0949a&quot; &quot;VCF0950&quot;  &quot;VCF0951&quot; 
+## [703] &quot;VCF0952&quot;  &quot;VCF0953&quot;  &quot;VCF0954&quot;  &quot;VCF0955&quot;  &quot;VCF0956&quot;  &quot;VCF0957&quot; 
+## [709] &quot;VCF0958&quot;  &quot;VCF0959&quot;  &quot;VCF0960&quot;  &quot;VCF0961&quot;  &quot;VCF0962&quot;  &quot;VCF0963&quot; 
+## [715] &quot;VCF0964&quot;  &quot;VCF0965&quot;  &quot;VCF0966&quot;  &quot;VCF0967&quot;  &quot;VCF0968&quot;  &quot;VCF0969&quot; 
+## [721] &quot;VCF0970&quot;  &quot;VCF0971&quot;  &quot;VCF0972&quot;  &quot;VCF0973&quot;  &quot;VCF0974&quot;  &quot;VCF0975&quot; 
+## [727] &quot;VCF0976&quot;  &quot;VCF0977&quot;  &quot;VCF0978&quot;  &quot;VCF0980&quot;  &quot;VCF0981&quot;  &quot;VCF0982&quot; 
+## [733] &quot;VCF0983&quot;  &quot;VCF0984&quot;  &quot;VCF0985&quot;  &quot;VCF0986&quot;  &quot;VCF0987&quot;  &quot;VCF0988&quot; 
+## [739] &quot;VCF0989&quot;  &quot;VCF0990&quot;  &quot;VCF0991&quot;  &quot;VCF0992&quot;  &quot;VCF0993&quot;  &quot;VCF0994&quot; 
+## [745] &quot;VCF0995&quot;  &quot;VCF0996&quot;  &quot;VCF0997&quot;  &quot;VCF0998&quot;  &quot;VCF0999&quot;  &quot;VCF1000&quot; 
+## [751] &quot;VCF1001&quot;  &quot;VCF1002&quot;  &quot;VCF1003&quot;  &quot;VCF1004&quot;  &quot;VCF1005&quot;  &quot;VCF1006&quot; 
+## [757] &quot;VCF1007&quot;  &quot;VCF1008&quot;  &quot;VCF1009&quot;  &quot;VCF1010&quot;  &quot;VCF1011&quot;  &quot;VCF1012&quot; 
+## [763] &quot;VCF1013&quot;  &quot;VCF1014&quot;  &quot;VCF1015&quot;  &quot;VCF1016&quot;  &quot;VCF1017&quot;  &quot;VCF1018&quot; 
+## [769] &quot;VCF1020&quot;  &quot;VCF1021a&quot; &quot;VCF1021b&quot; &quot;VCF1022a&quot; &quot;VCF1022b&quot; &quot;VCF1023a&quot;
+## [775] &quot;VCF1023b&quot; &quot;VCF1024a&quot; &quot;VCF1024b&quot; &quot;VCF1025a&quot; &quot;VCF1025b&quot; &quot;VCF1026&quot; 
+## [781] &quot;VCF1027a&quot; &quot;VCF1027b&quot; &quot;VCF1028a&quot; &quot;VCF1028b&quot; &quot;VCF1029a&quot; &quot;VCF1029b&quot;
+## [787] &quot;VCF1030a&quot; &quot;VCF1030b&quot; &quot;VCF1031a&quot; &quot;VCF1031b&quot; &quot;VCF1032&quot;  &quot;VCF1033a&quot;
+## [793] &quot;VCF1033b&quot; &quot;VCF1034a&quot; &quot;VCF1034b&quot; &quot;VCF1035a&quot; &quot;VCF1035b&quot; &quot;VCF1036a&quot;
+## [799] &quot;VCF1036b&quot; &quot;VCF1037a&quot; &quot;VCF1037b&quot; &quot;VCF1038&quot;  &quot;VCF1039a&quot; &quot;VCF1039b&quot;
+## [805] &quot;VCF1040a&quot; &quot;VCF1040b&quot; &quot;VCF1041a&quot; &quot;VCF1041b&quot; &quot;VCF1042a&quot; &quot;VCF1042b&quot;
+## [811] &quot;VCF1043a&quot; &quot;VCF1043b&quot; &quot;VCF9001&quot;  &quot;VCF9002&quot;  &quot;VCF9003&quot;  &quot;VCF9004&quot; 
+## [817] &quot;VCF9005&quot;  &quot;VCF9006&quot;  &quot;VCF9007&quot;  &quot;VCF9008&quot;  &quot;VCF9009&quot;  &quot;VCF9010&quot; 
+## [823] &quot;VCF9011&quot;  &quot;VCF9012&quot;  &quot;VCF9013&quot;  &quot;VCF9014&quot;  &quot;VCF9015&quot;  &quot;VCF9016&quot; 
+## [829] &quot;VCF9017&quot;  &quot;VCF9018&quot;  &quot;VCF9019&quot;  &quot;VCF9020&quot;  &quot;VCF9021&quot;  &quot;VCF9022&quot; 
+## [835] &quot;VCF9023&quot;  &quot;VCF9024&quot;  &quot;VCF9025&quot;  &quot;VCF9026&quot;  &quot;VCF9027&quot;  &quot;VCF9028&quot; 
+## [841] &quot;VCF9029&quot;  &quot;VCF9030&quot;  &quot;VCF9030a&quot; &quot;VCF9030b&quot; &quot;VCF9030c&quot; &quot;VCF9031&quot; 
+## [847] &quot;VCF9032&quot;  &quot;VCF9033&quot;  &quot;VCF9034&quot;  &quot;VCF9035&quot;  &quot;VCF9036&quot;  &quot;VCF9037&quot; 
+## [853] &quot;VCF9038&quot;  &quot;VCF9039&quot;  &quot;VCF9040&quot;  &quot;VCF9041&quot;  &quot;VCF9042&quot;  &quot;VCF9043&quot; 
+## [859] &quot;VCF9043a&quot; &quot;VCF9044&quot;  &quot;VCF9044a&quot; &quot;VCF9045&quot;  &quot;VCF9046&quot;  &quot;VCF9047&quot; 
+## [865] &quot;VCF9048&quot;  &quot;VCF9049&quot;  &quot;VCF9050&quot;  &quot;VCF9051&quot;  &quot;VCF9052&quot;  &quot;VCF9053&quot; 
+## [871] &quot;VCF9054&quot;  &quot;VCF9055&quot;  &quot;VCF9056&quot;  &quot;VCF9057&quot;  &quot;VCF9058&quot;  &quot;VCF9059&quot; 
+## [877] &quot;VCF9060&quot;  &quot;VCF9061&quot;  &quot;VCF9062&quot;  &quot;VCF9063&quot;  &quot;VCF9064&quot;  &quot;VCF9065&quot; 
+## [883] &quot;VCF9066&quot;  &quot;VCF9067&quot;  &quot;VCF9069&quot;  &quot;VCF9070&quot;  &quot;VCF9071&quot;  &quot;VCF9072&quot; 
+## [889] &quot;VCF9073&quot;  &quot;VCF9074&quot;  &quot;VCF9075&quot;  &quot;VCF9076&quot;  &quot;VCF9077&quot;  &quot;VCF9078&quot; 
+## [895] &quot;VCF9079&quot;  &quot;VCF9080&quot;  &quot;VCF9081&quot;  &quot;VCF9082&quot;  &quot;VCF9083&quot;  &quot;VCF9084&quot; 
+## [901] &quot;VCF9085&quot;  &quot;VCF9086&quot;  &quot;VCF9087&quot;  &quot;VCF9088&quot;  &quot;VCF9089&quot;  &quot;VCF9090&quot; 
+## [907] &quot;VCF9091&quot;  &quot;VCF9092&quot;  &quot;VCF9093&quot;  &quot;VCF9094&quot;  &quot;VCF9095&quot;  &quot;VCF9096&quot; 
+## [913] &quot;VCF9097&quot;  &quot;VCF9098&quot;  &quot;VCF9099&quot;  &quot;VCF9100&quot;  &quot;VCF9101&quot;  &quot;VCF9102&quot; 
+## [919] &quot;VCF9103&quot;  &quot;VCF9104&quot;  &quot;VCF9105&quot;  &quot;VCF9106&quot;  &quot;VCF9107&quot;  &quot;VCF9108&quot; 
+## [925] &quot;VCF9109&quot;  &quot;VCF9110&quot;  &quot;VCF9111&quot;  &quot;VCF9112&quot;  &quot;VCF9113&quot;  &quot;VCF9114&quot; 
+## [931] &quot;VCF9115&quot;  &quot;VCF9116&quot;  &quot;VCF9117&quot;  &quot;VCF9118&quot;  &quot;VCF9119&quot;  &quot;VCF9120&quot; 
+## [937] &quot;VCF9121&quot;  &quot;VCF9122&quot;  &quot;VCF9123&quot;  &quot;VCF9124&quot;  &quot;VCF9125&quot;  &quot;VCF9131&quot; 
+## [943] &quot;VCF9132&quot;  &quot;VCF9133&quot;  &quot;VCF9134&quot;  &quot;VCF9149&quot;  &quot;VCF9150&quot;  &quot;VCF9151&quot; 
+## [949] &quot;VCF9152&quot;  &quot;VCF9153&quot;  &quot;VCF9154&quot;  &quot;VCF9155&quot;</code></pre>
+</div>
+<div id="variables-in-a-data-frame" class="section level1">
+<h1>Variables in a data frame</h1>
+<p>Here’s a weird R thing.</p>
+<p>Let’s look at the <code>VCF0004</code> variable. The codebook (which you should have!) tells us that it’s the election cycle variable. Let’s print it out.</p>
+<pre class="r"><code>VCF0004</code></pre>
+<p>You should get an error.</p>
+<p>Why? Because that variable isn’t an object we can directly access.</p>
+<p>Why? Because it’s inside the <code>anes</code> object. What if some other object contained a variable with the same name? R would not know what to do.</p>
+<p>To get around this, we can use the <code>$</code> character to tell R that a variable is located within a dataset. Let’s tabulate the year variable with the <code>table()</code> function.</p>
+<pre class="r"><code>table(anes$VCF0004)</code></pre>
+<pre><code>## 
+## 1948 1952 1954 1956 1958 1960 1962 1964 1966 1968 1970 1972 1974 1976 1978 
+##  662 1899 1139 1762 1450 1181 1297 1571 1291 1557 1507 2705 1575 2248 2304 
+## 1980 1982 1984 1986 1988 1990 1992 1994 1996 1998 2000 2002 2004 2008 2012 
+## 1614 1418 2257 2176 2040 1980 2485 1795 1714 1281 1807 1511 1212 2322 5914</code></pre>
+<p>We find 662 respondents from 1948, 1899 respondents from 1952, and so on.</p>
+<p>You can see the objects that R can access directly like this:</p>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## [1] &quot;anes&quot;</code></pre>
+<p>This the current R workspace memory. These object may have other objects “inside of” them or other accessible attributes, each of which require some other method to access them (such as <code>$</code> for variables within data frames).<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+</div>
+<div id="diatribe-on-attaching" class="section level1">
+<h1>Diatribe on attaching</h1>
+<p>Others may have advised you that <em>attaching</em> packages is one way of getting around the annoying <code>$</code> notation for variables within data frames.</p>
+<p>Here’s my advice. <strong><em>Never attach.</em></strong> Do not do it. It does not do what you think it does, and it creates so many more (invisible) problems than it solves:</p>
+<ul>
+<li>You may have other objects in R memory with the same names. Many R functions create objects-within-objects that have the same names. Attaching is asking for trouble.</li>
+<li>If attaching leads to a name clash, it can make some objects directly inaccessible by name.</li>
+<li>Operations like sorting get weird when you attach. Sorting is usually something you want to do to a set of related variables at once. Attaching, however, conceptually ungroups these otherwise related vectors, and things like sorting become more difficult to mentally manage.</li>
+</ul>
+<p>And so on.</p>
+<p>Here’s a crazy thing. If you attach a dataset and modify the attached variables, what happens to the original dataset?</p>
+<pre class="r"><code># stock R dataset
+cars</code></pre>
+<pre><code>##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+## 4      7   22
+## 5      8   16
+## 6      9   10
+## 7     10   18
+## 8     10   26
+## 9     10   34
+## 10    11   17
+## 11    11   28
+## 12    12   14
+## 13    12   20
+## 14    12   24
+## 15    12   28
+## 16    13   26
+## 17    13   34
+## 18    13   34
+## 19    13   46
+## 20    14   26
+## 21    14   36
+## 22    14   60
+## 23    14   80
+## 24    15   20
+## 25    15   26
+## 26    15   54
+## 27    16   32
+## 28    16   40
+## 29    17   32
+## 30    17   40
+## 31    17   50
+## 32    18   42
+## 33    18   56
+## 34    18   76
+## 35    18   84
+## 36    19   36
+## 37    19   46
+## 38    19   68
+## 39    20   32
+## 40    20   48
+## 41    20   52
+## 42    20   56
+## 43    20   64
+## 44    22   66
+## 45    23   54
+## 46    24   70
+## 47    24   92
+## 48    24   93
+## 49    24  120
+## 50    25   85</code></pre>
+<pre class="r"><code>attach(cars)
+
+speed &lt;- 0
+dist &lt;- 0
+
+speed</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>dist</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code># what happens to cars?
+cars</code></pre>
+<pre><code>##    speed dist
+## 1      4    2
+## 2      4   10
+## 3      7    4
+## 4      7   22
+## 5      8   16
+## 6      9   10
+## 7     10   18
+## 8     10   26
+## 9     10   34
+## 10    11   17
+## 11    11   28
+## 12    12   14
+## 13    12   20
+## 14    12   24
+## 15    12   28
+## 16    13   26
+## 17    13   34
+## 18    13   34
+## 19    13   46
+## 20    14   26
+## 21    14   36
+## 22    14   60
+## 23    14   80
+## 24    15   20
+## 25    15   26
+## 26    15   54
+## 27    16   32
+## 28    16   40
+## 29    17   32
+## 30    17   40
+## 31    17   50
+## 32    18   42
+## 33    18   56
+## 34    18   76
+## 35    18   84
+## 36    19   36
+## 37    19   46
+## 38    19   68
+## 39    20   32
+## 40    20   48
+## 41    20   52
+## 42    20   56
+## 43    20   64
+## 44    22   66
+## 45    23   54
+## 46    24   70
+## 47    24   92
+## 48    24   93
+## 49    24  120
+## 50    25   85</code></pre>
+<p>Folks, this is <strong><em>insane</em></strong>. As best as I can understand it, attaching is a crutch that exists to pacify people who insist on using R irresponsibly.</p>
+<p>Here’s my rule for this course. You may not attach. Do not do it in your homework. Do not do it in your final project. It is a dangerous practice, and I will not condone it.</p>
+<p>Luckily for us (and all of the R community), the <code>tidyverse</code> package provides many tools that make attaching unnecessary.</p>
+</div>
+<div id="the-tidyverse" class="section level1">
+<h1>The Tidyverse</h1>
+<p>Now, the good stuff.</p>
+<p>The <a href="https://www.tidyverse.org/">Tidyverse</a> describes itself as…</p>
+<blockquote>
+<p>…an opinionated collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.</p>
+</blockquote>
+<p>That philosophy is based on <em>tidy data</em>, which refers to data organization where (1) rows contain cases, (2) columns contain variables, and (3) cells contain variable values.</p>
+<p>Although this sounds simple, there are many data formats that do not fit that pattern. Legislative data, for example, is often represented as a vote matrix with legislators in rows and bills in columns. A tidy legislative voting dataset might have a legislator variable, a bill variable, and a vote variable. Both datasets contain the same information, but the organization of the data allow for different sorts of manipulations. And it so happens that the tidy organization is particularly helpful for doing a lot of powerful stuff with R with very little code.</p>
+<p>The <a href="https://www.tidyverse.org/packages/">packages in the Tidyverse</a> are all designed to make data tidy or manipulate already-tidy data. Moreover, the tools are designed with a coherent syntax that makes them easy for beginners to learn, easy to understand (when you read the code), easy to integrate into complex analysis, and easy for visualizing data. It is hard for me, as someone who has been using R for years, to describe to newcomers just how much the Tidyverse has changed the way R is done in the past few years.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<p>One enormous change that the Tidyverse has brought to the world R is the integration and popularization of the pipe operator from the <a href="https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html"><code>magrittr</code> package</a>. Although we will not cover the pipe operator the end of this lesson I encourage you not to view it as an afterthought. To quote a passage from the previous link:</p>
+<blockquote>
+<p>At first encounter, you may wonder whether an operator such as <code>%&gt;%</code> can really be all that beneficial; but as you may notice, it semantically changes your code in a way that makes it more intuitive to both read and write.</p>
+</blockquote>
+<p>For more resources about the Tidyverse (aside from this course), you can visit a webpage devoted to <a href="https://www.tidyverse.org/learn/">such resources</a>, which links you to the <a href="http://r4ds.had.co.nz/">R 4 Data Science</a> book, a book on <a href="https://github.com/hadley/ggplot2-book"><code>ggplot2</code></a>, and various <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheets</a> for the constituent packages of the Tidyverse. I got my start using <a href="https://rpubs.com/bradleyboehmke/data_wrangling">this blog post</a>, which describes the pipe operator and two of the most important Tidyverse packages: <code>dplyr</code> and <code>tidyr</code>. We will cover the main points of the Tidyverse, but I would bookmark these resources for later browsing.</p>
+<p><strong>One last note before <em>really</em> jumping in:</strong> It is a conscious decision to focus on the Tidyverse at the expense of other approaches (namely, “base R”). As I wrote in <a href="811/811-intro">the online introduction to these R lessons</a>, this is because we have a limited time to make R fun and accessible, and base R is neither. That being said, you may encounter base R online and in replication materials for other studies, so you should be open to learning a little bit about it online. But I would encourage against making it your “default” mode of doing R. Hopefully you’ll see how easy the Tidyverse is as we proceed!</p>
+</div>
+<div id="how-tidyverse-functions-work" class="section level1">
+<h1>How <code>tidyverse</code> functions work</h1>
+<p>Tidyverse literature refers to “verbs.” These are functions that take a data frame and modify it.</p>
+<p>When you call one of these verbs, you declare the dataset name in the function. This removes the need to specify the dataset when you call a variable. R assumes that variables are located in the declared dataset. A generic example:</p>
+<pre class="r"><code>dataset &lt;- verb_name(dataset, verb_arguments = ...)</code></pre>
+<p>We will review the following <code>tidyverse</code> functions from the <code>dplyr</code> package…</p>
+<ul>
+<li><code>rename()</code>: renaming variables</li>
+<li><code>mutate()</code>: add/modify variables</li>
+<li><code>select()</code>: grab certain columns (variables)</li>
+<li><code>filter()</code>: grab certain rows (cases)</li>
+<li><code>summarize()</code>: collapse/aggregate data (e.g. means)</li>
+<li><code>group_by()</code>: create groups out of your data (e.g. for summarizing within group)</li>
+<li><code>arrange()</code>: reordering rows</li>
+<li>various <code>join</code> functions: for <em>merging</em> data</li>
+</ul>
+<p>And from the <code>tidyr</code> package (for making data tidy)</p>
+<ul>
+<li><code>gather()</code>: turn many columns into one column (wide to long)</li>
+<li><code>spread()</code>: turn one column into many columns (long to wide)</li>
+</ul>
+<p>Most data manipulation tasks can rely on one or more of these functions. This is what makes the Tidyverse so powerful: it has a small number of very poweful tools.</p>
+</div>
+<div id="renaming" class="section level1">
+<h1>Renaming</h1>
+<p>The <code>rename()</code> function takes a data frame with one set of names, and it returns a data frame with different names.</p>
+<p>Here, we rename the following variables:</p>
+<ul>
+<li>election year</li>
+<li>placement of the two major US parties and oneself on a 7-pt ideological scale (1 “extremely liberal” to 7 “extremely conservative”)</li>
+<li>and a 7-pt index of party ID (Strong Democrat, Weak Democrat, Independent leaning Democrat, True Independent, Leaning Republican……)</li>
+</ul>
+<pre class="r"><code>anes &lt;- rename(anes, 
+               cycle = VCF0004,
+               libcon_demparty = VCF0503, 
+               libcon_repparty = VCF0504, 
+               libcon_self = VCF9096,
+               pid7 = VCF0301)</code></pre>
+</div>
+<div id="modifying-data" class="section level1">
+<h1>Modifying data</h1>
+<p>You can modify the columns of a dataset by creating new variables or modifying existing variables. The <code>mutate()</code> function takes a data frame and either adds or overwrites columns as specified.</p>
+<p>We’ll use <code>mutate()</code> to recode some variables. To understand the recoding task, we’ll first look at the ideological self-placement variable.</p>
+<pre class="r"><code>table(anes$libcon_self, exclude = NULL)</code></pre>
+<pre><code>## 
+##     0     1     2     3     4     5     6     7     8     9  &lt;NA&gt; 
+##  2272   727  1152  1424  2919  3888  7521  2841  1989  1585 29356</code></pre>
+<p>Only the values 1–7 are valid. We want to recode everything else as <code>NA</code>. There are many ways to do this.</p>
+<div id="the-ifelse-function" class="section level2">
+<h2>The <code>ifelse()</code> function</h2>
+<p>The <code>ifelse()</code> function follows the following psueocode:</p>
+<pre><code>if (this) then {that} 
+  else {something else}</code></pre>
+<p>Phrased differently, it checks if something in the data is true, and does <em>A</em> if true, and <em>B</em> if false. Here it is in action within a call to <code>mutate()</code>. The function is long, so I have to get creative with code indentation to make it readable, so bear with me.</p>
+<pre class="r"><code># ifelse(logical test, result if TRUE, result if FALSE)
+anes &lt;- mutate(anes, 
+               libcon_self = ifelse(libcon_self == 0 | 
+                                      libcon_self &gt;= 8 | 
+                                      is.na(libcon_self), 
+                                    NA, 
+                                    libcon_self), 
+               libcon_demparty = ifelse(libcon_demparty %in% 1:7,
+                                        libcon_demparty, 
+                                        NA)) </code></pre>
+<p>We recode two variables in this <code>mutate()</code> call. We use <code>ifelse()</code> in slightly different ways.</p>
+<ul>
+<li>If <code>libcon_self</code> is 0 <em>or</em> greater than or equal to 8 <em>or</em> NA, then recode to <code>NA</code>, else recode to the existing value of <code>libcon_self</code> (i.e. no change).</li>
+<li>If <code>libcon_demparty</code> is an integer value 1 through 7, keep it the way it is, else recode to <code>NA</code>.</li>
+</ul>
+<p>Read the binary logical operators as follows:</p>
+<ul>
+<li><code>A == B</code>: A is equal to B</li>
+<li><code>A or B</code>: A or B</li>
+<li><code>A &amp; B</code>: A and B</li>
+</ul>
+</div>
+<div id="the-case_when-function" class="section level2">
+<h2>The <code>case_when()</code> function</h2>
+<p>When we have multiple rules stacked on top of another, things can get hairy. Pseudocode:</p>
+<pre><code>if (this) {that} 
+  else {if (this) {that} 
+         else {if (this) {that} 
+                 else {something else} } }</code></pre>
+<p>This would be tedious to code with <code>ifelse()</code>, because we would need to nest multiple <code>ifelse()</code> calls inside of each other, which is tedious and prone to mistakes.</p>
+<p>We can avoid this using the <code>case_when()</code> function, which bills itself as a “vectorized <code>ifelse()</code>.” Here it is in action:</p>
+<pre class="r"><code>anes &lt;- mutate(anes,
+  libcon_repparty = case_when(libcon_repparty == 1 ~ libcon_repparty,
+                              libcon_repparty == 2 ~ libcon_repparty,
+                              libcon_repparty %in% c(3, 4) ~ libcon_repparty,
+                              libcon_repparty %in% (5:7) ~ libcon_repparty),
+  pid7 = case_when(pid7 %in% 1:7 ~ pid7))</code></pre>
+<p>Translated:</p>
+<ul>
+<li>If <code>libcon_repparty</code> is equal to 1, keep the same. If it is 2, keep the same. Same with values 3 through 7. The only reason I break these into different conditions is to show you different ways to do this logical matching.</li>
+<li>If the <code>pid7</code> variable is an interger value 1 through 7, keep it the same.</li>
+</ul>
+<p>Something you should know about <code>case_when()</code> is that any value of an existing variable that is not logically matched will be automatically recoded to <code>NA</code>. You can override the automatic recoding by specifying a catch-all recode value (see the help file for <code>case_when</code>).</p>
+<p>The above code also features the <code>%in%</code> operator, which is a godsend. It is useful because…</p>
+<ul>
+<li><code>x == (1 | 2 | 3)</code> doesn’t work</li>
+<li><code>x == 1 | x == 2 | x == 3</code> works but annoying</li>
+</ul>
+<p>Instead, it is easier to type <code>x %in% c(1, 2, 3)</code> (or <code>x %in% 1:3</code> if matching adjacent integers). What this means is “x is in the set of {1, 2, 3}.” It works like the <span class="math inline">\(\in\)</span> operator in set theory.</p>
+</div>
+<div id="tips-for-recoding" class="section level2">
+<h2>Tips for recoding</h2>
+<p>Depending on what you’re doing, you may not find it valuable to recode the original data. Instead you might create a new variable that modifies the original. If you want to pitch the original variables later, you can do it with the <code>select()</code> function (described below), but at least you don’t need to muck through lots of code to get the originals back. You can just…not delete them.</p>
+<p>When you recode new variables, you might want to compare the new and old variables using the <code>table()</code> function.</p>
+<p>I try to consolidate all of my data cleaning tasks into as few calls to <code>mutate()</code> as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire <code>.R</code> file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned version, and then use the cleaned version in subsequent analyses.</p>
+</div>
+<div id="variables-from-other-variables" class="section level2">
+<h2>Variables from other variables</h2>
+<p>Intuitively, you can create variables from other variables.</p>
+<p>Here, we calculate the ideological distance between one’s self placement and their placement of the two parties. We also calculate how far apart they perceive the parties to be. The sign of the result (<span class="math inline">\(+/-\)</span>) indicates the ideological direction of the difference. Negative values indicate that respondents find themselves to be more liberal than a party, or that they find the Republican Party to be more liberal than the Democratic Party (which would be weird, but hey, that’s survey data for you).</p>
+<pre class="r"><code>anes &lt;- mutate(anes, 
+               dem_distance = libcon_self - libcon_demparty,
+               rep_distance = libcon_self - libcon_repparty,
+               party_distance = libcon_repparty - libcon_demparty)</code></pre>
+<p><code>mutate()</code> is great because you can create a variable in one line and use it in another line, without ending the <code>mutate()</code> call. Pretty convenient! Here’s an example.</p>
+<pre class="r"><code>(df &lt;- data_frame(x = 1:3, 
+                  y = 4:6))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##       x     y
+##   &lt;int&gt; &lt;int&gt;
+## 1     1     4
+## 2     2     5
+## 3     3     6</code></pre>
+<pre class="r"><code># create z and use z in the same function!
+mutate(df, 
+       z = x + y, 
+       abc = z * z)</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##       x     y     z   abc
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1     1     4     5    25
+## 2     2     5     7    49
+## 3     3     6     9    81</code></pre>
+<p>Side note: this also shows how you can create data frames using the <code>data_frame()</code> function.</p>
+</div>
+<div id="manipulating-factors-and-strings" class="section level2">
+<h2>Manipulating factors and strings</h2>
+<p>You should check out the <code>forcats</code> and <code>stringr</code> packages. They are tools for manipulating factors and strings, respectively, and are loaded when you load the <code>tidyverse</code> package. We will revisit these when we discuss graphics in the next lesson.</p>
+</div>
+</div>
+<div id="selecting-columns" class="section level1">
+<h1>Selecting columns</h1>
+<p>Maybe you don’t need all these variables for something. You can select specific variables using the <code>select()</code> function.</p>
+<pre class="r"><code>select(anes, cycle, pid7)</code></pre>
+<pre><code>## # A tibble: 55,674 x 2
+##    cycle      pid7
+##    &lt;dbl&gt; &lt;dbl+lbl&gt;
+##  1  1948        NA
+##  2  1948        NA
+##  3  1948        NA
+##  4  1948        NA
+##  5  1948        NA
+##  6  1948        NA
+##  7  1948        NA
+##  8  1948        NA
+##  9  1948        NA
+## 10  1948        NA
+## # ... with 55,664 more rows</code></pre>
+<p>(The <code>pid7</code> variable is only <code>NA</code> because the variable isn’t valid for very old survey years. There is nothing wrong here.)</p>
+<p>There are various “select helper” functions that aid us in selecting variables. Let’s look at the last of the variable names that we’ve created:</p>
+<pre class="r"><code>tail(names(anes))</code></pre>
+<pre><code>## [1] &quot;VCF9153&quot;        &quot;VCF9154&quot;        &quot;VCF9155&quot;        &quot;dem_distance&quot;  
+## [5] &quot;rep_distance&quot;   &quot;party_distance&quot;</code></pre>
+<p>We can select a range of variables using the <code>:</code> operator, kind of analogous to the way we can create sequences of integers. He we will grab the variables between <code>dem_distance</code> and <code>party_distance</code>.</p>
+<pre class="r"><code>select(anes, cycle, dem_distance:party_distance)</code></pre>
+<pre><code>## # A tibble: 55,674 x 4
+##    cycle dem_distance rep_distance party_distance
+##    &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl+lbl&gt;      &lt;dbl+lbl&gt;
+##  1  1948           NA           NA             NA
+##  2  1948           NA           NA             NA
+##  3  1948           NA           NA             NA
+##  4  1948           NA           NA             NA
+##  5  1948           NA           NA             NA
+##  6  1948           NA           NA             NA
+##  7  1948           NA           NA             NA
+##  8  1948           NA           NA             NA
+##  9  1948           NA           NA             NA
+## 10  1948           NA           NA             NA
+## # ... with 55,664 more rows</code></pre>
+<p>Again, the <code>NA</code> values are just because of the survey year that we can see in the preview.</p>
+<p>We can select variables by partial name matches.</p>
+<pre class="r"><code>select(anes, cycle, contains(&quot;libcon&quot;))</code></pre>
+<pre><code>## # A tibble: 55,674 x 4
+##    cycle libcon_demparty libcon_repparty libcon_self
+##    &lt;dbl&gt;           &lt;dbl&gt;       &lt;dbl+lbl&gt;       &lt;dbl&gt;
+##  1  1948              NA              NA          NA
+##  2  1948              NA              NA          NA
+##  3  1948              NA              NA          NA
+##  4  1948              NA              NA          NA
+##  5  1948              NA              NA          NA
+##  6  1948              NA              NA          NA
+##  7  1948              NA              NA          NA
+##  8  1948              NA              NA          NA
+##  9  1948              NA              NA          NA
+## 10  1948              NA              NA          NA
+## # ... with 55,664 more rows</code></pre>
+<p>Check out more in the help file (<code>?select</code>)</p>
+</div>
+<div id="filtering-rows-subsetting" class="section level1">
+<h1>Filtering rows (subsetting)</h1>
+<p>Let’s say we only want some of the cases. Use the <code>filter()</code> function and a logical test to identify the cases you want.</p>
+<pre class="r"><code>filter(anes, cycle == 2012)</code></pre>
+<pre><code>## # A tibble: 5,914 x 955
+##                         Version cycle VCF0006 VCF0006a VCF0009x VCF0010x
+##                           &lt;chr&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 ANES_cdf_VERSION:2015-May-14  2012       1 20120001   0.3802   0.3802
+##  2 ANES_cdf_VERSION:2015-May-14  2012       2 20120002   0.5470   0.5470
+##  3 ANES_cdf_VERSION:2015-May-14  2012       3 20120003   0.4975   0.4975
+##  4 ANES_cdf_VERSION:2015-May-14  2012       4 20120004   0.2549   0.2549
+##  5 ANES_cdf_VERSION:2015-May-14  2012       5 20120005   0.6028   0.6028
+##  6 ANES_cdf_VERSION:2015-May-14  2012       6 20120006   0.2864   0.2864
+##  7 ANES_cdf_VERSION:2015-May-14  2012       7 20120007   0.1948   0.1948
+##  8 ANES_cdf_VERSION:2015-May-14  2012       8 20120008   0.3941   0.3941
+##  9 ANES_cdf_VERSION:2015-May-14  2012       9 20120009   0.5062   0.5062
+## 10 ANES_cdf_VERSION:2015-May-14  2012      10 20120010   2.5067   2.5067
+## # ... with 5,904 more rows, and 949 more variables: VCF0011x &lt;dbl&gt;,
+## #   VCF0009y &lt;dbl&gt;, VCF0010y &lt;dbl&gt;, VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;,
+## #   VCF0010z &lt;dbl&gt;, VCF0011z &lt;dbl&gt;, VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;,
+## #   VCF0012b &lt;dbl&gt;, VCF0013 &lt;dbl+lbl&gt;, VCF0014 &lt;dbl+lbl&gt;,
+## #   VCF0015a &lt;dbl+lbl&gt;, VCF0015b &lt;dbl+lbl&gt;, VCF0016 &lt;dbl+lbl&gt;,
+## #   VCF0017 &lt;dbl+lbl&gt;, VCF0018a &lt;dbl+lbl&gt;, VCF0018b &lt;dbl+lbl&gt;,
+## #   VCF0019 &lt;dbl+lbl&gt;, VCF0050a &lt;dbl+lbl&gt;, VCF0050b &lt;dbl+lbl&gt;,
+## #   VCF0070a &lt;dbl+lbl&gt;, VCF0070b &lt;dbl+lbl&gt;, VCF0071a &lt;dbl+lbl&gt;,
+## #   VCF0071b &lt;dbl+lbl&gt;, VCF0071c &lt;dbl+lbl&gt;, VCF0071d &lt;dbl+lbl&gt;,
+## #   VCF0072a &lt;dbl+lbl&gt;, VCF0072b &lt;dbl+lbl&gt;, VCF0101 &lt;dbl+lbl&gt;,
+## #   VCF0102 &lt;dbl+lbl&gt;, VCF0103 &lt;dbl+lbl&gt;, VCF0104 &lt;dbl+lbl&gt;,
+## #   VCF0105a &lt;dbl+lbl&gt;, VCF0105b &lt;dbl+lbl&gt;, VCF0106 &lt;dbl+lbl&gt;,
+## #   VCF0107 &lt;dbl+lbl&gt;, VCF0108 &lt;dbl+lbl&gt;, VCF0109 &lt;dbl+lbl&gt;,
+## #   VCF0110 &lt;dbl+lbl&gt;, VCF0111 &lt;dbl+lbl&gt;, VCF0112 &lt;dbl+lbl&gt;,
+## #   VCF0113 &lt;dbl+lbl&gt;, VCF0114 &lt;dbl+lbl&gt;, VCF0115 &lt;dbl+lbl&gt;,
+## #   VCF0116 &lt;dbl+lbl&gt;, VCF0117 &lt;dbl+lbl&gt;, VCF0118 &lt;dbl+lbl&gt;,
+## #   VCF0119 &lt;dbl+lbl&gt;, VCF0120 &lt;dbl+lbl&gt;, VCF0121 &lt;dbl+lbl&gt;,
+## #   VCF0122 &lt;dbl+lbl&gt;, VCF0123 &lt;dbl+lbl&gt;, VCF0124 &lt;dbl+lbl&gt;,
+## #   VCF0125 &lt;dbl+lbl&gt;, VCF0126 &lt;dbl+lbl&gt;, VCF0126a &lt;dbl+lbl&gt;,
+## #   VCF0126b &lt;dbl+lbl&gt;, VCF0126c &lt;dbl+lbl&gt;, VCF0127 &lt;dbl+lbl&gt;,
+## #   VCF0127a &lt;dbl+lbl&gt;, VCF0127b &lt;dbl+lbl&gt;, VCF0128 &lt;dbl+lbl&gt;,
+## #   VCF0128a &lt;dbl+lbl&gt;, VCF0128b &lt;dbl+lbl&gt;, VCF0129 &lt;dbl+lbl&gt;,
+## #   VCF0130 &lt;dbl+lbl&gt;, VCF0130a &lt;dbl+lbl&gt;, VCF0131 &lt;dbl+lbl&gt;,
+## #   VCF0132 &lt;dbl+lbl&gt;, VCF0133 &lt;dbl+lbl&gt;, VCF0134 &lt;dbl+lbl&gt;,
+## #   VCF0135 &lt;dbl+lbl&gt;, VCF0136 &lt;dbl+lbl&gt;, VCF0137 &lt;dbl+lbl&gt;,
+## #   VCF0138 &lt;dbl+lbl&gt;, VCF0138a &lt;dbl+lbl&gt;, VCF0138b &lt;dbl+lbl&gt;,
+## #   VCF0138c &lt;dbl+lbl&gt;, VCF0138d &lt;dbl+lbl&gt;, VCF0138e &lt;dbl+lbl&gt;,
+## #   VCF0139 &lt;dbl+lbl&gt;, VCF0140 &lt;dbl+lbl&gt;, VCF0140a &lt;dbl+lbl&gt;,
+## #   VCF0141 &lt;dbl+lbl&gt;, VCF0142 &lt;dbl+lbl&gt;, VCF0143 &lt;dbl+lbl&gt;,
+## #   VCF0144 &lt;dbl+lbl&gt;, VCF0145 &lt;dbl+lbl&gt;, VCF0146 &lt;dbl+lbl&gt;,
+## #   VCF0147 &lt;dbl+lbl&gt;, VCF0148 &lt;dbl+lbl&gt;, VCF0148a &lt;dbl+lbl&gt;,
+## #   VCF0149 &lt;dbl+lbl&gt;, VCF0150 &lt;dbl+lbl&gt;, VCF0151 &lt;dbl+lbl&gt;,
+## #   VCF0152 &lt;dbl+lbl&gt;, VCF0153a &lt;dbl+lbl&gt;, VCF0153b &lt;dbl+lbl&gt;,
+## #   VCF0153c &lt;dbl+lbl&gt;, ...</code></pre>
+<p>This gives us the cases from the 2012 year. We can make these operations more complicated if we want—e.g. selecting presidential years using the modulo operator <code>%%</code>.</p>
+<pre class="r"><code># if (remainder from cycle / 4) is 0
+presidentials &lt;- filter(anes, (cycle %% 4) == 0) 
+table(presidentials$cycle, exclude = NULL)</code></pre>
+<pre><code>## 
+## 1948 1952 1956 1960 1964 1968 1972 1976 1980 1984 1988 1992 1996 2000 2004 
+##  662 1899 1762 1181 1571 1557 2705 2248 1614 2257 2040 2485 1714 1807 1212 
+## 2008 2012 
+## 2322 5914</code></pre>
+</div>
+<div id="summarizing" class="section level1">
+<h1>Summarizing</h1>
+<p><code>summarize()</code> will process multiple observations into summary statistics. This is also known as “collapsing” or “aggregating.”</p>
+<p>Here we try to find the mean ideological distance between the two parties (as judged by the respondents).</p>
+<pre class="r"><code>summarize(anes, 
+          mean_party_distance = mean(party_distance),
+          mean_party_distance_na = mean(party_distance, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   mean_party_distance mean_party_distance_na
+##                 &lt;dbl&gt;                  &lt;dbl&gt;
+## 1                  NA               1.920124</code></pre>
+<p>This example also highlights how some functions (such as <code>mean()</code>) fail if we don’t force it to remove <code>NA</code> values from the calculation.</p>
+</div>
+<div id="grouping-and-summarizing" class="section level1">
+<h1>Grouping and summarizing</h1>
+<p>Most of the time you will use <code>summarize()</code> in conjunction with <code>group_by()</code>, which (as it sounds) groups the data by some selection of variables. It doesn’t modify the cells in any way; it only implicitly partitions the data for later calculations.</p>
+<p>For instance, let’s say we want to do the above calculation but within each election year.</p>
+<pre class="r"><code># group the data
+s &lt;- group_by(anes, cycle)
+# filter out some cases so we can see the results
+s &lt;- filter(s, cycle &gt;= 1992)
+summarize(s, 
+          n = n(),
+          mean_party_distance_na = mean(party_distance, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 9 x 3
+##   cycle     n mean_party_distance_na
+##   &lt;dbl&gt; &lt;int&gt;                  &lt;dbl&gt;
+## 1  1992  2485               1.940470
+## 2  1994  1795               1.873850
+## 3  1996  1714               1.938749
+## 4  1998  1281               1.684116
+## 5  2000  1807               2.245719
+## 6  2002  1511                    NaN
+## 7  2004  1212               2.136657
+## 8  2008  2322               1.655714
+## 9  2012  5914               2.597977</code></pre>
+<p>A data frame can be ungrouped with (wait for it…) <code>ungroup()</code>.</p>
+<p>Here we also see the <code>n()</code> function, which acts as a filler for a sample size in <code>tidyverse</code> functions. If the dataset is grouped, <code>n()</code> returns the sample size in each group.</p>
+<p><code>group_by()</code> and <code>n()</code> also work with <code>mutate()</code>. For example, if we wanted to calculate an ideological Z-score for respondents in each election year, we could group by election year and then standardize.</p>
+<pre class="r"><code>z &lt;- mutate(group_by(anes, cycle), 
+            libcon_std = (libcon_self - mean(libcon_self, na.rm = TRUE)) / 
+                         sd(libcon_self, na.rm = TRUE))</code></pre>
+<p>To check this, the mean and standard deviation in each year should be about 0 and 1, respectively. I’m limiting the election cycles we’re looking at to presidential years. (We can see when they started asking respondents about ideological self-placement.)</p>
+<pre class="r"><code>summarize(filter(z, (cycle %% 4) == 0), 
+          mean = mean(libcon_std, na.rm = TRUE),
+          sd = sd(libcon_std, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 17 x 3
+##    cycle          mean    sd
+##    &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;
+##  1  1948           NaN   NaN
+##  2  1952           NaN   NaN
+##  3  1956           NaN   NaN
+##  4  1960           NaN   NaN
+##  5  1964           NaN   NaN
+##  6  1968           NaN   NaN
+##  7  1972 -4.630997e-17     1
+##  8  1976  2.338604e-16     1
+##  9  1980  2.383421e-16     1
+## 10  1984  3.319030e-17     1
+## 11  1988 -1.337554e-16     1
+## 12  1992  3.743799e-17     1
+## 13  1996  8.051765e-17     1
+## 14  2000  8.535584e-17     1
+## 15  2004 -1.739268e-16     1
+## 16  2008  2.196824e-16     1
+## 17  2012 -1.670745e-16     1</code></pre>
+<p>Note how I’m nesting these functions using the order of operations. The data I’m passing to <code>summarize()</code> is actually the result of the <code>filter()</code> command. The section on the pipe operator will help us unpack these operations and make them more linear(!).</p>
+</div>
+<div id="sorting-data" class="section level1">
+<h1>Sorting data</h1>
+<p>Or “arranging” with <code>arrange()</code>. By default, sorting happens in ascending order. You can coerce descending order using the <code>desc()</code> function. You can sort by multiple variables.</p>
+<pre class="r"><code>arr &lt;- select(anes, cycle, party_distance) 
+arrange(arr, desc(cycle), party_distance)</code></pre>
+<pre><code>## # A tibble: 55,674 x 2
+##    cycle party_distance
+##    &lt;dbl&gt;      &lt;dbl+lbl&gt;
+##  1  2012             -6
+##  2  2012             -6
+##  3  2012             -6
+##  4  2012             -6
+##  5  2012             -6
+##  6  2012             -6
+##  7  2012             -6
+##  8  2012             -6
+##  9  2012             -6
+## 10  2012             -6
+## # ... with 55,664 more rows</code></pre>
+</div>
+<div id="joining-merging" class="section level1">
+<h1>Joining (merging)</h1>
+<p>Because the ANES is so big, this concept will be clearer if we use a toy example. Here we have two datasets with some overlapping cases and some non-overlapping cases.</p>
+<pre class="r"><code>(data1 &lt;- data_frame(case = 1:3, var1 = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    case  var1
+##   &lt;int&gt; &lt;chr&gt;
+## 1     1     a
+## 2     2     b
+## 3     3     c</code></pre>
+<pre class="r"><code>(data2 &lt;- data_frame(case = 2:4, var2 = c(&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    case  var2
+##   &lt;int&gt; &lt;chr&gt;
+## 1     2     x
+## 2     3     y
+## 3     4     z</code></pre>
+<p>What we want to accomplish is putting these datasets together so that the appropriate data match to the appropriate cases.</p>
+<p>The <code>full_join()</code> function keeps all cases from both datasets.</p>
+<pre class="r"><code>full_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##    case  var1  var2
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1     a  &lt;NA&gt;
+## 2     2     b     x
+## 3     3     c     y
+## 4     4  &lt;NA&gt;     z</code></pre>
+<p>Note: could merge on multiple variables using <code>c()</code> (e.g. dyad-years). Here’s a pretend example using stylized Correlates of War and Mids data.</p>
+<pre class="r"><code>full_join(COW, MIDS, by = c(&quot;country1&quot;, &quot;country2&quot;, &quot;year&quot;))</code></pre>
+<p><code>left_join()</code> keeps all cases from left dataset. Unmatched variables default to <code>NA</code>.</p>
+<pre class="r"><code>left_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##    case  var1  var2
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1     a  &lt;NA&gt;
+## 2     2     b     x
+## 3     3     c     y</code></pre>
+<p><code>right_join()</code> is similar but keeps all cases from right dataset. Unmatched variables again default to <code>NA</code>.</p>
+<pre class="r"><code>right_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##    case  var1  var2
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     2     b     x
+## 2     3     c     y
+## 3     4  &lt;NA&gt;     z</code></pre>
+<p><code>inner_join()</code> keeps only cases with matches in both datasets.</p>
+<pre class="r"><code>inner_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##    case  var1  var2
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     2     b     x
+## 2     3     c     y</code></pre>
+<p><code>anti_join()</code> keeps only <em>unmatched</em> cases from left dataset. This is helpful for diagnosing any problems if you think a merge was unsuccessful in some way.</p>
+<pre class="r"><code>anti_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    case  var1
+##   &lt;int&gt; &lt;chr&gt;
+## 1     1     a</code></pre>
+<pre class="r"><code>anti_join(data2, data1, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    case  var2
+##   &lt;int&gt; &lt;chr&gt;
+## 1     4     z</code></pre>
+</div>
+<div id="tabulating" class="section level1">
+<h1>Tabulating</h1>
+<p>We’ll now introduce some simple functions for tabulating data.</p>
+<p>This is one area where base functions remain useful, because they’re quite easy to use.</p>
+<p><code>table()</code> produces a frequency table. We can include the <code>exclude</code> argument to force R to print the instances of <code>NA</code> (which it does not do by default).</p>
+<pre class="r"><code>table(anes$libcon_self, exclude = NULL)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7  &lt;NA&gt; 
+##   727  1152  1424  2919  3888  7521  2841 35202</code></pre>
+<p>We can turn frequencies into proportions with <code>prop.table()</code>.</p>
+<pre class="r"><code>prop.table(table(anes$libcon_self, exclude = NULL))</code></pre>
+<pre><code>## 
+##          1          2          3          4          5          6 
+## 0.01305816 0.02069188 0.02557747 0.05243022 0.06983511 0.13508999 
+##          7       &lt;NA&gt; 
+## 0.05102921 0.63228796</code></pre>
+<p>You may want to round these proportions to get more manageable values</p>
+<pre class="r"><code>round(prop.table(table(anes$libcon_self, exclude = NULL)), 3)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7  &lt;NA&gt; 
+## 0.013 0.021 0.026 0.052 0.070 0.135 0.051 0.632</code></pre>
+<p>Two way tables. The first included variable prints as rows, the second as columns.</p>
+<pre class="r"><code>round(prop.table(table(anes$pid7, anes$libcon_self, exclude = NULL)), 3)</code></pre>
+<pre><code>##       
+##            1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.005 0.005 0.005 0.008 0.007 0.023 0.019 0.121
+##   2    0.003 0.004 0.005 0.009 0.011 0.022 0.009 0.138
+##   3    0.002 0.003 0.004 0.006 0.007 0.019 0.009 0.065
+##   4    0.002 0.003 0.003 0.009 0.008 0.010 0.004 0.076
+##   5    0.000 0.002 0.003 0.008 0.012 0.017 0.003 0.053
+##   6    0.001 0.002 0.003 0.008 0.012 0.020 0.003 0.085
+##   7    0.001 0.001 0.002 0.005 0.012 0.024 0.004 0.066
+##   &lt;NA&gt; 0.000 0.000 0.000 0.000 0.000 0.001 0.000 0.028</code></pre>
+<p>By default, <code>prop.table()</code> estimates proportions out of the entire table. You can estimate proportions within rows or columns using the <code>margin</code> argument.</p>
+<pre class="r"><code>tab &lt;- table(anes$pid7, anes$libcon_self, exclude = NULL)
+ptab &lt;- prop.table(tab, margin = 1)
+round(ptab, 3)</code></pre>
+<pre><code>##       
+##            1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.027 0.028 0.026 0.039 0.038 0.117 0.100 0.625
+##   2    0.013 0.022 0.026 0.042 0.057 0.111 0.046 0.683
+##   3    0.016 0.028 0.033 0.053 0.064 0.162 0.076 0.567
+##   4    0.014 0.025 0.030 0.078 0.066 0.090 0.034 0.663
+##   5    0.005 0.017 0.032 0.078 0.125 0.171 0.027 0.545
+##   6    0.004 0.013 0.022 0.060 0.091 0.148 0.024 0.638
+##   7    0.005 0.009 0.016 0.048 0.101 0.212 0.032 0.576
+##   &lt;NA&gt; 0.004 0.005 0.002 0.012 0.007 0.021 0.005 0.944</code></pre>
+</div>
+<div id="tidy-tables" class="section level1">
+<h1>Tidy tables</h1>
+<p>Objects returned by tables are a <code>table</code> object type, which isn’t very useful for doing more stuff with. If you want to incorporate the results of a tabulation into other data frame operations (the likes of which we’ve been learning about), there are some Tidyverse-style tabulating functions.</p>
+<pre class="r"><code>count(anes, cycle, pid7)</code></pre>
+<pre><code>## # A tibble: 233 x 3
+##    cycle      pid7     n
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;
+##  1  1948        NA   662
+##  2  1952         1   392
+##  3  1952         2   435
+##  4  1952         3   173
+##  5  1952         4    83
+##  6  1952         5   128
+##  7  1952         6   237
+##  8  1952         7   241
+##  9  1952        NA   210
+## 10  1954         1   248
+## # ... with 223 more rows</code></pre>
+<p>Get proportions by mutating the resulting table. Here we get the proportion of each partisan identity for each election cycle.</p>
+<pre class="r"><code>tab &lt;- count(anes, cycle, pid7)
+
+mutate(group_by(tab, cycle), 
+       p = n / sum(n, na.rm = TRUE),
+       p = round(p, 3))</code></pre>
+<pre><code>## # A tibble: 233 x 4
+## # Groups:   cycle [30]
+##    cycle      pid7     n     p
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  1948        NA   662 1.000
+##  2  1952         1   392 0.206
+##  3  1952         2   435 0.229
+##  4  1952         3   173 0.091
+##  5  1952         4    83 0.044
+##  6  1952         5   128 0.067
+##  7  1952         6   237 0.125
+##  8  1952         7   241 0.127
+##  9  1952        NA   210 0.111
+## 10  1954         1   248 0.218
+## # ... with 223 more rows</code></pre>
+<p>The <code>count()</code> function also handles sample weights. Indenting for better legibility.</p>
+<pre class="r"><code>count(filter(anes, cycle &gt;= 2000), 
+      cycle, pid7, 
+      wt = VCF0009z)</code></pre>
+<pre><code>## # A tibble: 40 x 3
+##    cycle      pid7        n
+##    &lt;dbl&gt; &lt;dbl+lbl&gt;    &lt;dbl&gt;
+##  1  2000         1 344.6939
+##  2  2000         2 273.7651
+##  3  2000         3 275.2899
+##  4  2000         4 237.4360
+##  5  2000         5 231.3207
+##  6  2000         6 207.1033
+##  7  2000         7 220.8637
+##  8  2000        NA  16.5273
+##  9  2002         1 246.1232
+## 10  2002         2 249.9238
+## # ... with 30 more rows</code></pre>
+<p>The “counts” are no longer whole numbers, thanks to the survey weights.</p>
+</div>
+<div id="tidyr-functions" class="section level1">
+<h1>Tidyr functions</h1>
+<p>This concludes today’s foray into the <code>dplyr</code> family of functions. Now we’ll switch to the <code>tidyr</code> functions. The main difference is that <code>dplyr</code> tends to <em>change</em> data while <code>tidyr</code> shapes it and moves it around.</p>
+<p>We’ll talk about “wide” and “long” data.</p>
+<ul>
+<li>Wide data refers might be data from multiple time periods, where variables from different time periods are represented as different columns. So we might have different <code>x</code> and <code>y</code> variables from three different time periods as columns named <code>x1</code>, <code>x2</code>, <code>x3</code>, <code>y1</code>, <code>y2</code>, <code>y3</code>.</li>
+<li>Long data would have the same information as the wide data, but instead of different variables for time periods, we stack the time periods on top of one another into one variable. So we would have variables for <code>x</code>, <code>y</code>, and <code>period</code>.</li>
+</ul>
+<p>Shaping data essentially comes down actions that make your data long (elongating) or wide (widening).</p>
+</div>
+<div id="elongating-with-gather" class="section level1">
+<h1>Elongating with <code>gather()</code></h1>
+<p>Gathering will take multiple columns and stack the cells into one variable (with an accompanying variable for labeling).</p>
+<p>Here is an example using the ideological distance variables from above. First we have to prep some data so we can see how this works.</p>
+<pre class="r"><code># keep only certain variables
+d &lt;- select(anes, cycle, dem_distance, rep_distance)
+# keep certain election years
+d &lt;- filter(d, cycle %in% c(2004, 2008, 2012))
+# get mean in each year
+d &lt;- summarize(group_by(d, cycle), 
+               dem_distance = mean(dem_distance, na.rm = TRUE),
+               rep_distance = mean(rep_distance, na.rm = TRUE))
+d</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   cycle dem_distance rep_distance
+##   &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1  2004     2.200576   0.01719198
+## 2  2008     1.582681  -0.11209006
+## 3  2012     2.447530  -0.16987930</code></pre>
+<p>We’ll gather the two distance variables into one variable, with another variable to indicate which party we’re contrasting.</p>
+<pre class="r"><code># gather(data, resulting key, resulting value, initial varlist)
+l &lt;- gather(d, key = party, value = distance, dem_distance, rep_distance)
+l</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle        party    distance
+##   &lt;dbl&gt;        &lt;chr&gt;       &lt;dbl&gt;
+## 1  2004 dem_distance  2.20057582
+## 2  2008 dem_distance  1.58268102
+## 3  2012 dem_distance  2.44752975
+## 4  2004 rep_distance  0.01719198
+## 5  2008 rep_distance -0.11209006
+## 6  2012 rep_distance -0.16987930</code></pre>
+<p>You could maybe recode the <code>party</code> variable to make it prettier, depending on your needs later on.</p>
+<p>Select helper functions also work for selecting which variables to gather.</p>
+<pre class="r"><code># gather(data, key, value, varlist)
+gather(d, key = party, value = distance, contains(&quot;distance&quot;))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle        party    distance
+##   &lt;dbl&gt;        &lt;chr&gt;       &lt;dbl&gt;
+## 1  2004 dem_distance  2.20057582
+## 2  2008 dem_distance  1.58268102
+## 3  2012 dem_distance  2.44752975
+## 4  2004 rep_distance  0.01719198
+## 5  2008 rep_distance -0.11209006
+## 6  2012 rep_distance -0.16987930</code></pre>
+</div>
+<div id="widening-data-with-spread" class="section level1">
+<h1>Widening data with <code>spread()</code></h1>
+<p>Spreading is the opposite of gathering. It takes a column and unstacks it into several columns. We need a corresponding label variable also, which becomes the variable names. Observe:</p>
+<pre class="r"><code>l</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle        party    distance
+##   &lt;dbl&gt;        &lt;chr&gt;       &lt;dbl&gt;
+## 1  2004 dem_distance  2.20057582
+## 2  2008 dem_distance  1.58268102
+## 3  2012 dem_distance  2.44752975
+## 4  2004 rep_distance  0.01719198
+## 5  2008 rep_distance -0.11209006
+## 6  2012 rep_distance -0.16987930</code></pre>
+<pre class="r"><code>spread(l, key = party, value = distance) </code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   cycle dem_distance rep_distance
+## * &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1  2004     2.200576   0.01719198
+## 2  2008     1.582681  -0.11209006
+## 3  2012     2.447530  -0.16987930</code></pre>
+</div>
+<div id="piping-data" class="section level1">
+<h1>Piping data</h1>
+<p>Now that we have covered some essential tools for wrangling data, let’s tie it all together with the concept of piping.</p>
+<p>Let’s start by identifying the problem. Data processing requires a lot of steps (each represented by the functions we have learned so far). Many of these steps are related. How do sew these operations together in a way that is easy to understand and easy to write?</p>
+<p>One way to sew multiple operations together is with nested functions. Just as in math we can nest functions such as <span class="math inline">\(f(g(h(x)))\)</span>, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience—we have to read from the inside out. Further, the code itself becomes ugly and difficult to interpret.</p>
+<pre class="r"><code>tidy_data &lt;- gather(summarize(group_by(filter(select(dataset, ...), ...), ...), ...), ...)</code></pre>
+<p>Another way would be to break up the operation into multiple lines. Problem with this method is that it is verbose and creates a lot of redundancy with object assignment.</p>
+<pre class="r"><code>d &lt;- select(dataset, ...)
+d &lt;- filter(d, ...)
+d &lt;- group_by(d, ...)
+d &lt;- summarize(d, ...)
+d &lt;- gather(d, ...)</code></pre>
+<p>We’ll use the pipe operator <code>%&gt;%</code> to make this process easier. The pipe operator takes a left-hand side (LHS) object and “pipes” it into a right-hand side (RHS) function. It sounds trivial, but just wait. Here is how it works. We’ll use <code>x</code> to represent data and <code>f</code> to represent functions.</p>
+<ul>
+<li>By default, <code>x %&gt;% f()</code> sets <code>x</code> as the first argument in <code>f</code>. So <code>x %&gt;% f()</code> is equivalent to <code>f(x, ...)</code>.</li>
+<li>If <code>x</code> is needed elsewhere inside of <code>f</code> besides the first argument, we can use <code>.</code> to stand-in for <code>x</code>. For example, <code>x %&gt;% f(arguments, data = .)</code> is equivalent to <code>f(arguments, data = x)</code>.</li>
+<li>If only one argument is needed, the parentheses on <code>f()</code> could be omitted. So <code>x %&gt;% f(.)</code> is equivalent to <code>x %&gt;% f()</code> is equivalent to <code>x %&gt;% f</code> is equivalent to <code>f(x)</code>. I would recommend not omitting parentheses, however, so you can see which keywords are functions and which are data objects.</li>
+</ul>
+<p>The pipe operator allows you to do multiple operations to a dataset linearly and without creating a bunch of intermediary objects. The above processing task could be written as the following “pipe chain.”</p>
+<pre class="r"><code>d &lt;- dataset %&gt;%
+  select(...) %&gt;%
+  filter(...) %&gt;%
+  group_by(...) %&gt;%
+  summarize(...) %&gt;%
+  gather(...) %&gt;%
+  print() </code></pre>
+<p>Adding <code>print()</code> at the end of the chain will print <code>d</code> after the results of the pipe chain are assigned to <code>d</code>.</p>
+<p>As we can see: the pipe chain has made our code linear and readable, and it makes our workflow more straightforward and efficient (because we can think linearly again!). Here’s an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing. This is thanks both to the pipe itself, but also the ease with which <code>tidyverse</code> functions can be interpreted by an observer.</p>
+<pre class="r"><code>l &lt;- anes %&gt;%
+  select(cycle, contains(&quot;distance&quot;)) %&gt;%
+  filter(cycle %in% c(2004, 2008, 2012)) %&gt;%
+  group_by(cycle) %&gt;%
+  summarize(n = n(),
+            Democratic = mean(dem_distance, na.rm = TRUE),
+            Republican = mean(rep_distance, na.rm = TRUE)) %&gt;%
+  gather(key = party, value = distance, Democratic, Republican) %&gt;%
+  print() </code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   cycle     n      party    distance
+##   &lt;dbl&gt; &lt;int&gt;      &lt;chr&gt;       &lt;dbl&gt;
+## 1  2004  1212 Democratic  2.20057582
+## 2  2008  2322 Democratic  1.58268102
+## 3  2012  5914 Democratic  2.44752975
+## 4  2004  1212 Republican  0.01719198
+## 5  2008  2322 Republican -0.11209006
+## 6  2012  5914 Republican -0.16987930</code></pre>
+<p>We can use pipes to simplify tasks we did above, like processing a table using proportions and rounding.</p>
+<pre class="r"><code>table(anes$pid7, anes$libcon_self, exclude = NULL) %&gt;% 
+  prop.table(margin = 1) %&gt;%
+  round(3)</code></pre>
+<pre><code>##       
+##            1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.027 0.028 0.026 0.039 0.038 0.117 0.100 0.625
+##   2    0.013 0.022 0.026 0.042 0.057 0.111 0.046 0.683
+##   3    0.016 0.028 0.033 0.053 0.064 0.162 0.076 0.567
+##   4    0.014 0.025 0.030 0.078 0.066 0.090 0.034 0.663
+##   5    0.005 0.017 0.032 0.078 0.125 0.171 0.027 0.545
+##   6    0.004 0.013 0.022 0.060 0.091 0.148 0.024 0.638
+##   7    0.005 0.009 0.016 0.048 0.101 0.212 0.032 0.576
+##   &lt;NA&gt; 0.004 0.005 0.002 0.012 0.007 0.021 0.005 0.944</code></pre>
+<p>Pipe chains are efficient for modifying a dataset before plotting. Here is a quick plot from the data we just created.</p>
+<pre class="r"><code>ggplot(l, aes(x = cycle, y = distance)) +
+  geom_hline(yintercept = 0) +
+  geom_line(aes(color = party)) +
+  geom_point(aes(color = party), size = 2) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;orangered&quot;)) +
+  labs(x = &quot;Election Cycle&quot;,
+       y = &quot;Ideological Distance (self minus party)&quot;,
+       color = &quot;Party&quot;,
+       title = &quot;Ideological Distance from the Two Major Parties&quot;,
+       subtitle = &quot;Positive values indicate that the respondent identifies as more conservative than the target party&quot;,
+       caption = &quot;Data: ANES from select years&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/811/811-03-data_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+</div>
+<div id="other-helpful-pipes" class="section level1">
+<h1>Other helpful pipes</h1>
+<p>There is one other helpful pipe-like operator that we will talk about: <code>%$%</code>. It tells an RHS function that the variables referenced come from a LHS dataset. The two following commands do the same thing:</p>
+<pre class="r"><code>table(anes$pid7)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7 
+## 10805 11261  6396  6409  5382  7413  6354</code></pre>
+<pre class="r"><code>anes %$% table(pid7)</code></pre>
+<pre><code>## pid7
+##     1     2     3     4     5     6     7 
+## 10805 11261  6396  6409  5382  7413  6354</code></pre>
+<p>This will become more useful when you have a complex function that requires multiple variable names.</p>
+<pre class="r"><code># notice which pipe I use after &#39;anes&#39;
+anes %$% 
+  table(pid7, libcon_self, exclude = NULL) %&gt;% 
+  prop.table(margin = 1) %&gt;%
+  round(3)</code></pre>
+<pre><code>##       libcon_self
+## pid7       1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.027 0.028 0.026 0.039 0.038 0.117 0.100 0.625
+##   2    0.013 0.022 0.026 0.042 0.057 0.111 0.046 0.683
+##   3    0.016 0.028 0.033 0.053 0.064 0.162 0.076 0.567
+##   4    0.014 0.025 0.030 0.078 0.066 0.090 0.034 0.663
+##   5    0.005 0.017 0.032 0.078 0.125 0.171 0.027 0.545
+##   6    0.004 0.013 0.022 0.060 0.091 0.148 0.024 0.638
+##   7    0.005 0.009 0.016 0.048 0.101 0.212 0.032 0.576
+##   &lt;NA&gt; 0.004 0.005 0.002 0.012 0.007 0.021 0.005 0.944</code></pre>
+</div>
+<div id="saving-data" class="section level1">
+<h1>Saving data</h1>
+<p>You can write or save data from R with many <code>write.xyz</code> or <code>save.xyz</code> functions. I usually prefer to save data in an R-specific format.</p>
+<pre class="r"><code>saveRDS(anes, &quot;data/anes-modified.RDS&quot;)</code></pre>
+<p>If it’s possible that someone using Stata (or some other software) might be using your data, you might save in a more accessible format such as <code>.csv</code>.</p>
+<pre class="r"><code>write_csv(anes, &quot;data/anes-modified.csv&quot;)</code></pre>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>There is a lot more “nitty gritty” when it comes to data management in R than in Stata. Luckily, the <code>tidyverse</code> provides powerful tools that do a lot of heavy lifting for you.</p>
+<p>Although we covered piping last, you should not view it as an optional afterthought. It is extremely useful, and you will be much more efficient with R by embracing it.</p>
+<p>Some things we did not cover in this lesson include looping, apply functions,</p>
+<p>Make sure you are comfortable with piping, <code>dplyr</code>, and <code>tidyr</code> before beginning the <a href="811/811-graphics">lesson on graphics</a>.</p>
+</div>
+<div id="postscript-on-coding-style" class="section level1">
+<h1>Postscript on coding style</h1>
+<p>You can find lots of style guides for R online, and of course, not all of them agree. Here are some that I endorse:</p>
+<ul>
+<li>a <a href="http://adv-r.had.co.nz/Style.html">short style guide</a> by Hadley Wickham that will put you on the right track</li>
+<li>a <a href="http://style.tidyverse.org/">longer style guide</a> (again by Wickham) that has general style guidance but also guidance specifically for working with the <code>tidyverse</code>, for those who want to be a little more obsessive about their programming style</li>
+</ul>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>You can access attributes of objects with the <code>attributes()</code> functions. There is also list indexing notation, such as <code>list_name[[item_number]]</code>. We won’t talk about that right now.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>A helpful word is <em>joygret</em>, “that familiar feeling of the joy of optimization combined with the regret of past inefficiencies” (<a href="https://hilaryparker.com/category/advice/">source</a>)<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-basics/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/811">811</a></span>
+  
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+

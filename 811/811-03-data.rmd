@@ -6,8 +6,6 @@ date: "2018-01-01"
 slug: "811-data"
 categories: ["R", "ps811", "Teaching"]
 tags: []
-
-draft: true
 ---
 
 
