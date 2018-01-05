@@ -1,3 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Serif+Pro');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
+
+/*@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+@import url('https://fonts.googleapis.com/css?family=Lora');
+@import url('https://fonts.googleapis.com/css?family=Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Vollkorn+SC');
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');*/
+
+
 @-ms-viewport
 {
     width: device-width;
@@ -21,7 +34,7 @@ a:link
 }
 body
 {
-    font-family: 'Roboto Slab', 'Roboto', 'Lato', sans-serif;
+    font-family: 'Source Serif Pro', 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 400;
 
@@ -34,29 +47,37 @@ body
 }
 
 code{
-  font-family: 'Inconsolata-dz', 'Menlo', monospace;
+  font-family: 'Source Code Pro', 'Menlo', monospace;
+  /*font-size: 1.5rem;*/
   color: #777;
   background-color: #1111;
  }    
 
 pre {
   /*color: #666; */
-  font-size: 1.35rem;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 0;
 }
 
 
 
 
 h1 {
- font-size: 2.5rem;
+ font-size: 3rem;
  padding-top: 10px;
- font-family: 'Roboto Slab', 'Lato', serif;
+ font-family: 'Source Sans Pro', serif;
+ font-weight: bold;
+
 
 }
 
 h2 {
  font-size: 2rem;
- font-family: 'Roboto Slab', 'Lato', serif;
+ font-family: 'Source Sans Pro', serif;
+ font-weight: bold;
+ /*font-style: italic;*/
 }
 
 html
@@ -79,7 +100,7 @@ html
 .author h6,
 .author p
 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Source Serif Pro', serif;
 }
 .category
 {
@@ -89,7 +110,7 @@ html
 {
     overflow: auto;
 
-    max-width: 680px;
+    max-width: 720px;
     padding: 0 15px;
 }
 .content
@@ -97,29 +118,30 @@ html
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+/*body text*/
 div.content
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', sans-serif;
     font-size: 18px;
     font-weight: 300;
-
     color: #777;
 }
 .copyright
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', sans-serif;
     font-size: 12px;
     font-weight: 200;
 }
 .description
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', sans-serif;
     font-weight: 200;
     color: #bbb;
 }
 .error
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', sans-serif;
 
     margin-top: 100px;
 }
@@ -137,7 +159,7 @@ div.content
 }
 .excerpt
 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Source Serif Pro', sans-serif;
     font-size: 18px;
     font-weight: 200;
 
@@ -167,9 +189,10 @@ div.content
 }
 .intro
 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Source Serif Pro', serif;
     font-weight: 200;
     line-height: 30px;
+    font-size: 2.25rem;
     color: #777;
 }
 h3.intro
@@ -178,7 +201,7 @@ h3.intro
 }
 .list
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', serif;
 
     margin-top: 50px;
 }
@@ -188,7 +211,7 @@ h3.intro
 }
 .list-entry
 {
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 25px;
     font-weight: 400;
 
@@ -211,7 +234,7 @@ h3.intro
 }
 .menu-item
 {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 300;
 
@@ -221,7 +244,8 @@ h3.intro
 }
 .meta
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', serif;
+    text-transform: lowercase;
     font-size: 12px;
     font-weight: 200;
 
@@ -233,7 +257,7 @@ a.meta
 }
 h6.meta
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', serif;
     font-size: 12px;
     font-weight: 200;
 
@@ -244,7 +268,7 @@ section.meta {
 }
 .powered
 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Source Serif Pro', serif;
     font-size: 12px;
     font-weight: 300;
 }
@@ -259,10 +283,10 @@ section.meta {
 }
 .title
 {
-    font-family: 'Roboto Slab', serif;
-    font-weight: 400;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: bold;
+    /*font-weight: 400;*/
     font-size: 3.5rem;
-
     color: #555;
 }
 header.title
@@ -279,7 +303,7 @@ header.title
     }
     .list
     {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Source Serif Pro', sans-serif;
 
         margin-top: 30px;
     }

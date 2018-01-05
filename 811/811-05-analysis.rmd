@@ -13,6 +13,10 @@ draft: true
 # Sarah
 
 - "advanced topics"
+  + looping
+  + apply
+  + nesting and mapping
+  + lists
 - things I plan to do already
   + pipes
   + dplyr
@@ -139,6 +143,21 @@ use `sjplot`, `margins` for R
 
 ## marginal effects
 
+
+
+
+## Time Series
+
+- Time series is just hard and you're going to spend a lot of time beating your head against a wall. There is nothing I can do to fix this. But here are some tools that you should check out to help you.
+- Fixing data: 
+  + stata has `tsset` and you feed it a date, maybe a group
+  + dplyr: `group_by(whatever)`, `arrange(date)`
+  + lags and leads just work on rows, so it won't *know* to grab the previous date
+- `zoo`? Creates an index variable
+- `xts` requires the index to be a date
+- lubridate for date/time modification
+- RcppRoll for rolling averages
+- tidyquant has period-level apply functions (apply something weekly, for example)
 
 
 

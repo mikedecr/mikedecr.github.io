@@ -11,6 +11,459 @@ draft: true
 ---
 
 
+# Objective 
+
+The goal of this lesson is to provide an introduction to graphics in R, by way of `ggplot2` in particular. We will cover:
+
+- The "grammar of graphics"---the "gg" in `ggplot`
+- How `ggplot2` works
+- Common geoms for social science data
+- Customizing the appearance of ggplot graphic
+- Strategies for saving graphics
+- Some (not too much) discussion of the ways base graphics and `ggplot2` are different
+
+Some notes to get us started:
+
+- Some introductions to ggplot begin with an overview of the `qplot()`  (quick plot) function from the `ggplot2` package. We will not start there; `qplot` is a midway point between base and ggplot graphics, but we have covered neither yet, so we have no need to "transition" out of base graphics. Moreover, I think the differences between `qplot` and the workhorse `ggplot` function confuse new users and distract from a deeper exploration of `ggplot`. So we'll jump right in. 
+- ***MORE NOTES???***
+
+
+
+
+# Get started
+
+The `ggplot2` package is loaded whenever you load the `tidyverse` package (but I sometimes load the `ggplot2` package anyway because it gives my code editor has better auto-complete behavior).
+
+```{r}
+library("magrittr")
+library("tidyverse")
+library("ggplot2")
+```
+
+Set your directory where it was last lesson and load the modified ANES dataset from the previous lesson:
+
+```{r, eval = FALSE}
+setwd("~/path/to/wherever")
+anes <- readRDS("data/anes-modified.RDS") %>% 
+        mutate_all(labelled::remove_labels) # remove Stata labels from the data
+```
+
+```{r, include = FALSE, cache = TRUE}
+anes <- readRDS(here::here("static/data/anes-modified.RDS")) %>%
+        mutate_all(labelled::remove_labels)
+```
+
+You can verify that you imported the correct dataset when you notice the modified variable names.
+
+```{r, eval = FALSE}
+names(anes)
+```
+
+
+
+
+
+# The grammar of graphics
+
+The [grammar of graphics](https://www.springer.com/us/book/9780387245447) is a set of independent components that compose graphics. `ggplot2` is an R package that implements the grammar [in a layered fashion](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf) by iteratively adding grammatical components to a figure. By providing a set of interchangeable tools with a shared syntax and carefully chosen defaults, `ggplot2` allows R users to create complex graphics with relatively little hassle. 
+
+It is not essential for you to memorize the components of the grammar of graphics. In fact, thinking too hard about it is confusing at first. You will get an intuition for them as you use ggplot without being able to recite the tenets, but for the sake of exposition, here are the principles of the grammer. There is *no need* to memorize this list:
+
+- **data** to be visualized
+- **aesthetic mappings** that describe how variables are mapped to aesthetic attributes (such as axes and colors)
+- **geometric representations of the data**, "geoms" for short, such as lines, points, etc.
+- **scales** that map information in the "data space" into the "aesthetic space" of the plot. This includes axes details but also colors, sizes, etc
+- a **coordinate system**
+- **faceting system** for breaking the data into subsets
+- a **theme** that controls other display details, such as fonts
+
+The fact that `ggplot` is rooted in an underlying model allows is advantageous because it allows users to create many different types of plots that share an underlying philosophy. Other graphics systems in R (base, lattice...) don't exhibit the same conceptual hierarchy, so one tool may be vastly different from the next, and extending the behaviors of the systems has been ad-hoc. The ggplot framework, on the other hand, has led developers to created plenty of add-ons to `ggplot2` to provide support for additional `geoms` and aesthetic features that all follow the same basic rules, making it easier to learn and incorporate new tools into your graphics arsenal. 
+
+For the purposes of this introductory R course, we are especially interested in `ggplot` because it allows us to do a lot with a little. We will be making very interesting graphics in a very short amount of time.
+
+
+
+# Getting `ggplot` to work
+
+The `ggplot2` package contains tons of functions for plotting, but they begin with the titular `ggplot()` function. It works generically like so:
+
+```{r, eval = FALSE}
+ggplot(dataset, aes(x = xvariable, y = yvariable))
+```
+
+where `dataset` is the name of a tidy data frame, `xvariable` is the variable you want to plot on the horizontal axis, and `yvariable` is the variable you want to plot on the vertical axis.
+
+This function calls the `aes()` function, which maps variables in your dataset to an aesthetic feature. In general, we will use `aes()` when we want to modify the graphic's appearance *with features of our data*. We'll come back to this. 
+
+Let's see this with real data. We will first recode two variables, "feeling thermometer" scores for the Democratic and Republican presidential candidates. 
+
+Consult the codebook for information on the feeling thermometer. You'll notice that values 97-100 are represented with the number 97 in the codebook, while 98 and 99 are special codes for "don't know" and missing responses. So we'll want to remove those. 
+
+```{r}
+# feeling thermometers
+summary(anes$VCF0424)  # democratic candidate
+summary(anes$VCF0426)  # republican candidate
+
+anes <- anes %>% 
+  mutate(therm_demcand = case_when(VCF0424 > 0 & VCF0424 <= 97 ~ VCF0424),
+         therm_gopcand = case_when(VCF0426 > 0 & VCF0426 <= 97 ~ VCF0426))
+```
+
+We'll plot the Republican candidate thermometer over the 7-point index of party ID.
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand))
+```
+
+
+# Geoms
+
+You'll notice that the plot is blank. That is because we have not added any geoms to the plot, only a mapping of variables to $x$ and $y$ axes. It is important to note that we could visualize the data using a variety of geoms. It happens to be the cases that points make intuitive sense here. 
+
+You can layer on grammatical components to a plot using the plus sign `+` after the `ggplot()` function.
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point()
+```
+
+This is a little weird-looking, but let's proceed. We could add a quick regression line. I'm going to change some features of the points and the regression line so we can see some things better.
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+`geom_smooth()` fits a loess regression by default or, for large datasets, a gam model. We can change specify a linear model pretty easily (that is what the "lm" is for: the `lm()` function for linear regression. We'll cover that next week). It also adds a confidence interval, but we can't see this one because it is so small. 
+
+
+## Colors
+
+Now here is where `ggplot`'s advantage over base graphics shines. We'll color the points and regression lines by the liberal-conservative self-identification of each respondent. Because this value is numeric in the data (1 through 7), `ggplot` will try to map this to a continuous color scale. We would rather treat these values as discrete groups, so we'll coerce the variable to a factor when we plot it. (If the grouping variable were already a factor or a string, we wouldn't need to discretize it in the plot. It would already be discrete). 
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = "lm",
+              aes(color = as.factor(libcon_self)))
+```
+
+It kind of looks like a big ball of rainbow vomit, but we can customize colors in two ways. First is with color palettes:
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = "lm",
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_brewer(palette = "Set2")
+```
+
+Second is by manually feeling colors to each group (ugly graphic incoming):
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = "lm",
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_manual(values = c("red", "orange", "yellow", "green", "blue", "violet", "brown", "black"))
+```
+
+I can only assign colors to groups in my data by using `aes()` each time. This means that I'm grabbing a group from my data, and then `ggplot` intelligently puts colors to each group. I could specify colors without the data, but I lose all information about the groups. For example, I could change the point color on its own, but it would loose connection to the groups. 
+
+```{r}
+ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_brewer(palette = "Set2")
+```
+
+I could simplify this task by assigning a global color map in the `ggplot()` function. Then every geom would be colored according to the grouping variable.
+
+```{r}
+ggplot(data = anes, 
+       aes(x = pid7, y = therm_gopcand, color = as.factor(libcon_self))) +
+  geom_point(shape = 1) +
+  geom_smooth(method = "lm",
+              size = 0.5) +
+  scale_color_brewer(palette = "Set2")
+```
+
+Notice I also changed the point shape. You can learn about point shapes [here](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
+
+
+## Lines
+
+Let's make some data that will be better for line plots.
+
+```{r}
+anes <- anes %>%
+  mutate(pid3 = case_when(pid7 %in% 1:3 ~ "Democrat",
+                          pid7 == 4 ~ "Independent",
+                          pid7 %in% 5:7 ~ "Republican"))
+
+meantherms <- anes %>%
+  filter((cycle %% 4) == 0) %>% 
+  group_by(cycle, pid3) %>%
+  summarize(mean_therm_demcand = mean(therm_demcand, na.rm = TRUE),
+            mean_therm_gopcand = mean(therm_gopcand, na.rm = TRUE)) %>%
+  filter(!is.na(mean_therm_gopcand)) %>%
+  filter(!is.na(pid3))
+```
+
+
+We'll plot the mean thermometer rating for the Democratic candidate in each cycle, by partisanship.
+
+```{r}
+ggplot(meantherms, aes(x = cycle, y = mean_therm_demcand)) +
+  geom_point(aes(color = pid3)) +
+  geom_line(aes(color = pid3)) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon"))
+```
+
+
+
+
+# Axis labels
+
+Labeling is done with the `labs()` function. You can also modify the color label in the legend. `NULL` is a keyword in R for no information, so you can suppress a label using `NULL` (which we do for the color label).
+
+```{r}
+ggplot(meantherms, aes(x = cycle, y = mean_therm_demcand)) +
+  geom_point(aes(color = pid3)) +
+  geom_line(aes(color = pid3)) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Election Year",
+       y = "Mean Democratic Candidate Rating",
+       color = NULL)
+```
+
+
+
+# Shaping data for plotting
+
+Let's say we wanted to compare Democratic and Republican Thermometer ratings in the same plot. They are two separate variables to start with, so we would need to gather the data frame so we can map those variables as groups to an aesthetic.
+
+```{r}
+longtherms <- meantherms %>% 
+  gather(key = candidate, value = score, contains("therm")) %>%
+  mutate(candidate = case_when(str_detect(candidate, "gop") ~ "Republican Candidate",
+                           TRUE ~ "Democratic Candidate")) %>% 
+  print()
+```
+
+Now "Score" is one $y$ variable, and we will plot separate lines for each candidate's score using an aesthetic map.
+
+```{r}
+ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point(aes(shape = candidate)) +
+  geom_line(aes(lty = candidate)) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Election Year",
+       y = "Mean Candidate Rating",
+       color = "Party ID",
+       lty = "Candidate",
+       shape = "Candidate")
+```
+
+This is a little busy, so we will look for alternative ways to plot these data.
+
+
+
+
+# Facets
+
+Faceting takes a graphic and breaks it into separate panels. There are two ways to do this. One would be to wrap the panels using `facet_wrap()`. 
+
+```{r}
+ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ candidate) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Election Year",
+       y = "Mean Candidate Rating",
+       color = "Party ID")
+```
+We use the syntax `~ var` to tell the function that the variable comes from the data frame. However, it is often helpful to read the `~` as "as a function of" for when we do statistical models.
+
+If we had lots of categories, they would print side by side "wrap around" once they got to the end of a row. Here's an example where we wrap along the election cycle.
+
+```{r}
+ggplot(longtherms, aes(x = candidate, y = score, color = pid3)) +
+  geom_point() +
+  facet_wrap(~ cycle) + 
+  coord_flip() +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Candidate",
+       y = "Mean Candidate Rating",
+       color = "Party ID")
+```
+
+We can also specify a grid of panels using `facet_grid()`. We list the variable that creates rows, followed by the variable that creates columns. If we don't want either rows or columns, we can suppress them using a period.
+
+```{r}
+ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_grid(candidate ~ .) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Election Year",
+       y = "Mean Candidate Rating",
+       color = "Party ID")
+
+longtherms %>%
+  mutate(pid3 = ifelse(pid3 == "Democrat", "Democratic", pid3),
+         pid3 = paste(pid3, "Identifiers")) %>%
+    ggplot(aes(x = cycle, y = score)) +
+    geom_point() +
+    geom_line() +
+    facet_grid(candidate ~ pid3) +
+    scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+    labs(x = "Election Year",
+         y = "Mean Candidate Rating",
+         color = "Party ID")
+```
+
+Notice also that we can pipe data directly into `ggplot()` from a pipe chain. While possible, this is not usually recommended.
+
+
+
+# Coordinates
+
+We can modify with coordinates a few ways.
+
+First is to set the axis limits with `coord_cartesian()`. 
+
+```{r, fig.height = 4}
+ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ candidate) +
+  coord_cartesian(ylim = c(0, 100)) +
+  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
+  labs(x = "Election Year",
+       y = "Mean Candidate Rating",
+       color = "Party ID")
+```
+
+The other would be `coord_flip()`, which flips the $x$ and $y$ axes. We saw this a few plots ago in a `facet_wrap` example. 
+
+
+
+
+# Categorical variables (strings and factors)
+
+If you plot a categorical variable on one of the axes, `ggplot` will automatically interpret and plot categories side-by-side. Here is a toy example.
+
+One potential problem, though, is that `ggplot` will order categorical variables alphabetically or, if the variable is already an ordered factor, will interpret the factor order out of the metadata about the levels.
+
+Here we show what happens when plot a string variable that can be ordered alphabetically:
+
+```{r}
+d <- data_frame(x = rnorm(100, 0, 1),
+                y = 4 + (2 * x) + rnorm(100, 0, 1),
+                s = sample(c("a", "b", "c", "d"), 100, replace = TRUE),
+                f = factor(s, levels = c("c", "d", "a", "b")))
+
+ggplot(d, aes(x = s, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = "String", y = "Continuous") 
+```
+
+...and if we plot from a factor that already has ordered levels...
+
+```{r}
+ggplot(d, aes(x = f, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = "Ordered Factor", y = "Continuous") 
+```
+
+
+...or we wanted to assign colors using an ordered factor.
+
+```{r}
+ggplot(d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = f)) +
+  labs(x = "Continuous", 
+       y = "Continuous",
+       color = "Ordered Factor") 
+```
+
+To reorder these categories, I recommend using tools in the `forcats` package, which, conveniently, is part of the `tidyverse` package.
+
+- `fct_relevel()`: declare a factor variable, and then declare the order of levels. Any level not listed during reordering is given the same precedence as the original variable
+- `fct_rev()`: reverse the order of a factor's levels
+- `fct_recode()`: change the levels of a factor
+
+Here is an example where we take the `f` variable, a factor with ordered levels, and rearrange the order of the levels so that they appear in the legend with the proper order.
+
+```{r}
+fixed_d <- d %>%
+  mutate(fixed_f = fct_relevel(f, "a", "b", "c", "d")) %>%
+  print()
+
+ggplot(fixed_d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = fixed_f)) +
+  labs(x = "Continuous", 
+       y = "Continuous",
+       color = "Ordered Factor") 
+
+
+ggplot(fixed_d, aes(x = f, y = y)) +
+  geom_point(shape = 1) +
+  labs(x = "Ordered Factor", y = "Continuous") 
+```
+
+
+
+
+# More geoms
+
+one-axis
+
+- density
+- histogram
+
+two-axis
+
+- columns
+- ribbons
+- polygons
+
+
+
+## Dos and Don'ts
+
+Multiple Y axes
+
+
+
+
+# Examples using ggplot2
+
+
+
+# out there things
+
+heatmaps, network stuff (ggraph), see drob posts
+
+patchwork, ggforce, (?)ggproto, all the pederson stuff
+
+# Graphics packages revisited
+
+
+
+
+
+---
+
 # Sarah
 
 - why
@@ -186,26 +639,6 @@ linetype
 
 ## themes and theme elements
 
-
-
-## Dos and Don'ts
-
-Multiple Y axes
-
-
-
-
-# Examples using ggplot2
-
-
-
-# out there things
-
-heatmaps, network stuff (ggraph), see drob posts
-
-patchwork, ggforce, (?)ggproto, all the pederson stuff
-
-# Graphics packages revisited
 
 
 

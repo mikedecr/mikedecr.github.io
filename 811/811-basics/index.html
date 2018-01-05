@@ -19,6 +19,9 @@
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+
+
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -41,7 +44,7 @@
 
 
 <header class="row text-left title">
-  <h1 class="title">Day &#34;0&#34;: R Basics</h1>
+  <h1 class="title">Getting Started with R</h1>
 </header>
 <section id="category-pane" class="row meta">
   
@@ -72,22 +75,28 @@
 <h1>What is on this web page</h1>
 <p>Please guide yourself through this web page <em>before our first in-class R lesson</em>. It would be best if you walked through this document in enough advance of class that you can ask me questions about any confusing parts in enough advance of class. I just want to use our class time as effectively as possible!</p>
 <p>This document describes how to get started with R and do some basic (but often useful) tricks. We discuss installing R, running simple commands, indexing, some elementary programming logic, and functions. We close with some slight discussion of how R and Stata differ, though we will be returning to that topic throughout the course.</p>
-<p><strong>Note:</strong> This lesson is a little “abstract” in that in demonstrates R’s <em>general</em> behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation.</p>
-<p>If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
+<p><strong>Note:</strong> This lesson is a little “abstract” in that in demonstrates R’s <em>general</em> behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation. Take this slowly; mess around with some of the code if it helps you understand what it’s doing. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
 <p>Thanks, and I’ll see you in class!</p>
+</div>
+<div id="how-to-read-this-page" class="section level1">
+<h1>How to read this page</h1>
+<p>This page contains code snippets that you can paste into R.</p>
+<pre><code>Code appears in blocks like this. You can paste this text into R.</code></pre>
+<pre><code>## [1] &quot;Results appear with two ## signs&quot;</code></pre>
 </div>
 <div id="installing-r" class="section level1">
 <h1>Installing R</h1>
-<p>UW–Madison students click <a href="https://mirror.las.iastate.edu/CRAN/">here</a> to download R for your operating system (if you haven’t already).</p>
+<p>If you have not set up R already, click <a href="https://mirror.las.iastate.edu/CRAN/">here</a> to download R for your operating system (if you haven’t already).</p>
 <p>A little bit about what’s going on here: R is open source and is distributed from various <a href="https://en.wikipedia.org/wiki/Mirror_website">“mirrors”</a>, which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors <a href="https://cran.r-project.org/mirrors.html">all over the world</a>. It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.</p>
-<p>Once R is downloaded, make sure that it is fully installed.</p>
+<p>Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (<code>R.app</code> on OSX or <code>Rgui.exe</code> on Windows), as a terminal program (which I do for advanced reasons), or using the Rstudio application. Rstudio is discussed below.</p>
 </div>
 <div id="using-r" class="section level1">
 <h1>Using R</h1>
-<p>The most essential part of using R is the <em>console</em>. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly.</p>
+<p>The most essential part of using R is the <em>console</em>. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won’t be the same colors as mine, but it looks sort of like this:</p>
 <center>
-<img src="img/r-console.png" alt="R console" style="width: 80%;"/>
+<br> <img src="img/r-console.png"  alt="R console" style="width: 80%">
 </center>
+<p><br></p>
 <p>Although you can type commands directly into the console, most commands should be written in a <em>script file</em>. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete with future package versions, for example).</p>
 </div>
 <div id="open-a-script-file" class="section level1">
@@ -152,7 +161,7 @@ y</code></pre>
 <pre class="r"><code>(y &lt;- c(2, 4, 6))</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
 <p>We can use multi-element variables to do math on the entire variable at once. Just as we could do real math…</p>
-<p><span class="math inline">\(\begin{align*} 2 \times \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} &amp;= \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix}\end{align*}\)</span></p>
+<p><span class="math inline">\(\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}\)</span></p>
 <p>we can also do similar things with vectors in R.</p>
 <pre class="r"><code>2 * y</code></pre>
 <pre><code>## [1]  4  8 12</code></pre>
@@ -282,7 +291,8 @@ g &lt;= 5</code></pre>
 <pre><code>## [1] 1 2 3
 ## Levels: 1 2 3</code></pre>
 <p>Character to factor. Notice how levels are assigned alphabetically by default. You can modify this with the <code>levels =</code> argument in the <code>factor()</code> function.</p>
-<pre class="r"><code>state.abb</code></pre>
+<pre class="r"><code># This object comes with R, originally a character variable
+state.abb</code></pre>
 <pre><code>##  [1] &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; &quot;CA&quot; &quot;CO&quot; &quot;CT&quot; &quot;DE&quot; &quot;FL&quot; &quot;GA&quot; &quot;HI&quot; &quot;ID&quot; &quot;IL&quot; &quot;IN&quot;
 ## [15] &quot;IA&quot; &quot;KS&quot; &quot;KY&quot; &quot;LA&quot; &quot;ME&quot; &quot;MD&quot; &quot;MA&quot; &quot;MI&quot; &quot;MN&quot; &quot;MS&quot; &quot;MO&quot; &quot;MT&quot; &quot;NE&quot; &quot;NV&quot;
 ## [29] &quot;NH&quot; &quot;NJ&quot; &quot;NM&quot; &quot;NY&quot; &quot;NC&quot; &quot;ND&quot; &quot;OH&quot; &quot;OK&quot; &quot;OR&quot; &quot;PA&quot; &quot;RI&quot; &quot;SC&quot; &quot;SD&quot; &quot;TN&quot;
@@ -297,7 +307,7 @@ g &lt;= 5</code></pre>
 ## [24] MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA
 ## [47] WA WV WI WY
 ## 50 Levels: AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME ... WY</code></pre>
-<p>You can go from text to numeric, but only by way of factors. This is because factors place text into numerical order, and then factors can be converted to numbers.</p>
+<p>You can go from text to numeric, but only by way of factors. This is because <code>as.factor()</code> coerces text strings into ordered categories, and then <code>as.numeric()</code> interprets the ordering as numeric values.</p>
 <pre class="r"><code>as.numeric(as.factor(state.abb))</code></pre>
 <pre><code>##  [1]  2  1  4  3  5  6  7  8  9 10 11 13 14 15 12 16 17 18 21 20 19 22 23
 ## [24] 25 24 26 29 33 30 31 32 34 27 28 35 36 37 38 39 40 41 42 43 44 46 45
@@ -335,52 +345,52 @@ str(h)</code></pre>
 <p>Here are some common, helpful functions.</p>
 <pre class="r"><code># create normally distributed random noise
 (x &lt;- rnorm(n = 100, mean = 0, sd = 1)) </code></pre>
-<pre><code>##   [1]  1.01668953 -0.81108779  2.32479894  1.17664652  0.23812868
-##   [6] -1.85382480  0.11371484 -0.55143801 -1.15298639  0.47758548
-##  [11]  1.82819896 -0.10171726 -0.36718199 -0.13226960 -2.02513819
-##  [16] -0.20358396  1.26232346  0.09284366  0.67656471 -0.10376021
-##  [21]  1.21848753  0.75384555  0.03729359 -1.09159744  0.53387962
-##  [26]  0.48882235  0.44637326  0.40193451  0.78297724  0.63699877
-##  [31]  0.37719392 -1.48181308 -0.43451261 -0.76947652  1.55496548
-##  [36] -0.95108766  1.65965116  1.53651107 -0.18645940 -0.46987478
-##  [41] -0.37816164  0.10225414 -0.55019646  0.18272321  0.64830788
-##  [46] -0.30459220 -1.81586347  0.65334461  2.55543523  1.18929262
-##  [51] -1.24485780  1.18661546 -0.21987363 -1.55367862  1.64178456
-##  [56]  0.80511319  0.37588331  0.18810699 -0.72808363 -0.09894544
-##  [61] -1.41934392 -0.38710816 -0.53678183  0.17840252  1.08055288
-##  [66] -0.56722202 -1.07891534  0.52420194  0.68382011  0.08628141
-##  [71]  0.23359775  0.72052450 -1.58805844 -0.07184723 -1.31349282
-##  [76] -0.15624883  0.57061948  0.30623904 -0.36363704  0.28814999
-##  [81] -1.26941529  0.82206409 -0.24502974  0.73552690 -0.23758509
-##  [86] -0.85961308 -0.23210617 -0.70461867 -0.94187301 -0.09354739
-##  [91] -0.39731775 -0.33390139  1.44323027 -0.62262048 -2.03548988
-##  [96]  1.03498333 -0.33335265  0.05597469  1.53525585 -0.46607600</code></pre>
+<pre><code>##   [1] -0.494984943 -0.759275607  1.394456495 -0.144761512 -0.837138276
+##   [6] -0.246667801  0.346423279 -0.369603522 -0.067941036  2.097661238
+##  [11] -0.798363680 -0.100620737  0.628011643  0.517623545 -0.277078206
+##  [16]  0.531188076 -0.087440464 -0.406828413 -1.043836056  1.393768239
+##  [21] -0.266750687  1.100677569  0.119673100 -0.969013936  1.341554697
+##  [26]  0.558489383  0.026877691  1.450834513 -1.250233666 -0.188905672
+##  [31] -0.841484015 -1.274407466  0.794991561 -0.194656204  1.222740214
+##  [36]  0.271967444 -1.247572330  0.499749539  0.938401143  0.728749421
+##  [41] -0.583411771 -0.316749222  0.369570023 -0.146850020  0.177387728
+##  [46]  1.033423910  0.083508869  0.452264206 -0.016983993  0.379675852
+##  [51] -1.229394095  0.818365940 -1.089497337 -0.664722071  0.961962466
+##  [56] -0.897482969  0.633579701 -0.452343355 -0.447427226 -0.070930532
+##  [61]  0.499603470 -1.236018315  2.282141559  0.354621543 -1.257474497
+##  [66]  0.131970006 -0.439598055 -0.802269072  0.574027999  1.268834107
+##  [71] -1.852047786  0.373537523 -2.207528253 -1.229021264 -0.415689352
+##  [76] -0.750137869 -1.389967102  0.380557045  1.364622431 -0.228399527
+##  [81] -0.086627408  0.431879123  1.014014185 -1.036015823 -2.524171562
+##  [86]  2.077867447  0.911006790  0.136424950 -2.635428658 -0.724716273
+##  [91] -0.220162538 -0.811157464  0.283656634  0.362304631 -0.001124498
+##  [96] -0.188126586  1.161724970  1.613824607  2.415287775 -0.137304083</code></pre>
 <pre class="r"><code>sum(x) </code></pre>
-<pre><code>## [1] 3.62745</code></pre>
+<pre><code>## [1] 0.5551415</code></pre>
 <pre class="r"><code># number of elements in an object
 length(x) </code></pre>
 <pre><code>## [1] 100</code></pre>
 <pre class="r"><code># calculating an average by hand
 sum(x) / length(x)  </code></pre>
-<pre><code>## [1] 0.0362745</code></pre>
+<pre><code>## [1] 0.005551415</code></pre>
 <pre class="r"><code># equivalent
 mean(x) </code></pre>
-<pre><code>## [1] 0.0362745</code></pre>
+<pre><code>## [1] 0.005551415</code></pre>
 <pre class="r"><code># variance
 var(x) </code></pre>
-<pre><code>## [1] 0.9060019</code></pre>
+<pre><code>## [1] 0.9652383</code></pre>
 <pre class="r"><code># variance by hand
 sum((x - mean(x))^2) / (length(x) - 1) </code></pre>
-<pre><code>## [1] 0.9060019</code></pre>
+<pre><code>## [1] 0.9652383</code></pre>
 <pre class="r"><code># standard deviation
 sd(x)</code></pre>
-<pre><code>## [1] 0.9518413</code></pre>
+<pre><code>## [1] 0.9824654</code></pre>
 <pre class="r"><code>sqrt(sum((x - mean(x))^2) / (length(x) - 1))</code></pre>
-<pre><code>## [1] 0.9518413</code></pre>
+<pre><code>## [1] 0.9824654</code></pre>
 <p>Some common issues with functions.</p>
 <ol style="list-style-type: decimal">
 <li>As mentioned above, some functions don’t work as intended when you have missing values, so you may need to coerce R to skip over missing values.</li>
-<li>Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R what the dataset is. This is often done with a <code>data =</code> argument inside the function. For example, a linear model would work like <code>lm(y ~ x, data = dataset_name)</code>. This tells R and that the <code>y</code> and <code>x</code> variables can be found in the dataset called <code>dataset_name</code>. We’ll see more of this in future lessons.</li>
+<li>Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R which dataset you want to use. This is often done with a <code>data =</code> argument inside the function. For example, a linear model would work like <code>lm(y ~ x, data = dataset_name)</code>. This tells R and that the <code>y</code> and <code>x</code> variables can be found in the dataset called <code>dataset_name</code>. We’ll see more of this in future lessons.</li>
 <li>In math, we learn that if we give a function the same input, it returns the same output every time. (You may recall the “vertical line test.”) Statistics pushes on this definition a little bit: a function may return “random” results if they represent stochastic processes (such as coin flips). This works in the computer also (e.g. the <code>rnorm()</code> function, which simulates randomly distributed noise. There are other distribution sampling functions as well). Technically speaking though, they are only pseudorandom and can be made nonrandom by specifying a seed using the <code>set.seed()</code> function.</li>
 </ol>
 </div>
@@ -444,7 +454,7 @@ sd(x)</code></pre>
 </div>
 <div id="r-vs-stata" class="section level1">
 <h1>R vs Stata</h1>
-<p>The two languages share some similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big similarity. This means you don’t have to compile an entire file of code before you can run it. Yay!</p>
+<p>As we continue these lessons, you will see more about how these languages are similar and different. There are definitely <em>some</em> similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don’t have to compile an entire file of code before you can run it. Yay!</p>
 <p>The differences between R and Stata have benefits and drawbacks. Here is some rapid-fire accounting of some differences.</p>
 <p>R is free and open source.</p>
 <ul>
@@ -461,14 +471,21 @@ sd(x)</code></pre>
 <ul>
 <li>Pro: this lets R be very flexible.</li>
 <li>Pro: You can load and manipulate multiple datasets at once without being confined to one data table.</li>
-<li>Con: This makes R slower than Stata, because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You won’t notice this unless you work with larger datasets.</li>
+<li>Con: This makes accessing variables within datasets more difficult, because you have to specify <em>which</em> dataset to look inside of. We will cover this in the future. Luckily, the <code>tidyverse</code> provides tools for making this easier.</li>
+<li>Con: This also makes R slower than Stata, generally speaking. This is because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You generally won’t notice this unless you work with larger datasets. When your dataset is truly massive, there are ways to use R as a front-end to interact with other programming languages, such as <code>RSQL</code> to talk to SQL from R.</li>
 </ul>
-<p>Some difficult things:</p>
+<p>R’s interface is less graphical than Stata. It’s all about the code.</p>
 <ul>
-<li>R’s interface is less graphical than Stata. For people who are very comfortable with code, this does not present a problem. For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.</li>
-<li>R syntax is more “programmy.” The drawback of this is that it is complicated <em>at first</em>. The benefit of this is that it is simpler in the long run, because the syntax is unified and coherent.</li>
-<li>Stata is almost always faster than R. That’s just how it be.</li>
+<li>Pro: This makes replication easier (or, harder to mess up) in R, because there is less dependence on pointing-and-clicking to create analysis and graphics.</li>
+<li>Con: For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.</li>
+<li>Con: R syntax is more “programmy” and less English-seeming. The drawback of this is that it is complicated <em>at first</em>. The benefit of this is that it is simpler in the long run, because the rules of the syntax create long-run structure and coherence in the R language.</li>
 </ul>
+</div>
+<div id="moving-on" class="section level1">
+<h1>Moving on</h1>
+<p>If you have made it this far, take a break!</p>
+<p>I want to remind you that future lessons will be far less abstract than this one. Many concepts in this lesson are <em>important</em> in the sense that you will see them again during your R career, but they are not all <em>essential</em> for surviving this course. Future lessons will be far more concrete and dataset-driven.</p>
+<p>Continue with the next lesson: <a href="811/811-data">Data Manipulation</a></p>
 </div>
 <div class="footnotes">
 <hr />
@@ -550,6 +567,15 @@ sd(x)</code></pre>
 
 
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
 
 
 

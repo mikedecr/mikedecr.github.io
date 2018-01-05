@@ -1,5 +1,5 @@
 ---
-title: "Day \"0\": R Basics"
+title: Getting Started with R
 description: "Getting R up and running. READ BEFORE CLASS."
 author: "Michael DeCrescenzo"
 date: '2017-12-01'
@@ -14,30 +14,44 @@ Please guide yourself through this web page *before our first in-class R lesson*
 
 This document describes how to get started with R and do some basic (but often useful) tricks. We discuss installing R, running simple commands, indexing, some elementary programming logic, and functions. We close with some slight discussion of how R and Stata differ, though we will be returning to that topic throughout the course.
 
-**Note:** This lesson is a little "abstract" in that in demonstrates R's *general* behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation.
-
-If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.
+**Note:** This lesson is a little "abstract" in that in demonstrates R's *general* behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation. Take this slowly; mess around with some of the code if it helps you understand what it's doing. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.
 
 Thanks, and I'll see you in class!
 
 
+# How to read this page
+
+This page contains code snippets that you can paste into R. 
+
+```
+Code appears in blocks like this. You can paste this text into R.
+```
+
+```{r, echo = FALSE}
+"Results appear with two ## signs"
+```
+
+
+
 # Installing R
 
-UW--Madison students click [here](https://mirror.las.iastate.edu/CRAN/) to download R for your operating system (if you haven't already). 
+If you have not set up R already, click [here](https://mirror.las.iastate.edu/CRAN/) to download R for your operating system (if you haven't already). 
 
 A little bit about what's going on here: R is open source and is distributed from various ["mirrors"](https://en.wikipedia.org/wiki/Mirror_website), which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors [all over the world](https://cran.r-project.org/mirrors.html). It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.
 
-Once R is downloaded, make sure that it is fully installed.
+Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (`R.app` on OSX or `Rgui.exe` on Windows), as a terminal program (which I do for advanced reasons), or using the Rstudio application. Rstudio is discussed below.
 
 
 
 # Using R
 
-The most essential part of using R is the *console*. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly.
+The most essential part of using R is the *console*. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won't be the same colors as mine, but it looks sort of like this:
 
 <center>
-  <img src="img/r-console.png" alt="R console" style="width: 80%;"/>
+  <br>
+  <img src="img/r-console.png"  alt="R console" style="width: 80%">
 </center>
+<br>
 
 Although you can type commands directly into the console, most commands should be written in a *script file*. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete with future package versions, for example).
 
@@ -151,7 +165,7 @@ If you wrap an assignment inside of parentheses, the result will print at the sa
 
 We can use multi-element variables to do math on the entire variable at once. Just as we could do real math...
 
-$\begin{align*} 2 \times \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} &= \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix}\end{align*}$
+$\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}$
 
 we can also do similar things with vectors in R.
 
@@ -317,12 +331,13 @@ as.factor(1:3)
 Character to factor. Notice how levels are assigned alphabetically by default. You can modify this with the `levels = ` argument in the `factor()` function.
 
 ```{r}
+# This object comes with R, originally a character variable
 state.abb
 as.factor(state.abb)
 factor(state.abb, levels = state.abb) # custom levels
 ```
 
-You can go from text to numeric, but only by way of factors. This is because factors place text into numerical order, and then factors can be converted to numbers.
+You can go from text to numeric, but only by way of factors. This is because `as.factor()` coerces text strings into ordered categories, and then `as.numeric()` interprets the ordering as numeric values.
 
 ```{r}
 as.numeric(as.factor(state.abb))
@@ -400,7 +415,7 @@ sqrt(sum((x - mean(x))^2) / (length(x) - 1))
 Some common issues with functions.
 
 1. As mentioned above, some functions don't work as intended when you have missing values, so you may need to coerce R to skip over missing values.
-2. Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R what the dataset is. This is often done with a `data =` argument inside the function. For example, a linear model would work like `lm(y ~ x, data = dataset_name)`. This tells R and that the `y` and `x` variables can be found in the dataset called `dataset_name`. We'll see more of this in future lessons.
+2. Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R which dataset you want to use. This is often done with a `data =` argument inside the function. For example, a linear model would work like `lm(y ~ x, data = dataset_name)`. This tells R and that the `y` and `x` variables can be found in the dataset called `dataset_name`. We'll see more of this in future lessons.
 3. In math, we learn that if we give a function the same input, it returns the same output every time. (You may recall the "vertical line test.") Statistics pushes on this definition a little bit: a function may return "random" results if they represent stochastic processes (such as coin flips). This works in the computer also (e.g. the `rnorm()` function, which simulates randomly distributed noise. There are other distribution sampling functions as well). Technically speaking though, they are only pseudorandom and can be made nonrandom by specifying a seed using the `set.seed()` function.
 
 
@@ -506,7 +521,7 @@ That's because the `abc` inside the function definition is a *local variable*, s
 
 # R vs Stata
 
-The two languages share some similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big similarity. This means you don't have to compile an entire file of code before you can run it. Yay! 
+As we continue these lessons, you will see more about how these languages are similar and different. There are definitely *some* similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don't have to compile an entire file of code before you can run it. Yay! 
 
 The differences between R and Stata have benefits and drawbacks. Here is some rapid-fire accounting of some differences. 
 
@@ -521,19 +536,30 @@ R is a fully formed programming language.
 - Pro: R operates with *functions* rather than commands. In R, if I had the functions `f()`, `g()`, and `h()`, I could write `f(g(h(x)))` in one line of code and it just works. Not so in Stata. 
 - Con: This makes R a little tougher to learn at first for those with less computing experience.
 
+
 R is object-oriented.
 
 - Pro: this lets R be very flexible.
 - Pro: You can load and manipulate multiple datasets at once without being confined to one data table. 
-- Con: This makes R slower than Stata, because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You won't notice this unless you work with larger datasets.
+- Con: This makes accessing variables within datasets more difficult, because you have to specify *which* dataset to look inside of. We will cover this in the future. Luckily, the `tidyverse` provides tools for making this easier.
+- Con: This also makes R slower than Stata, generally speaking. This is because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You generally won't notice this unless you work with larger datasets. When your dataset is truly massive, there are ways to use R as a front-end to interact with other programming languages, such as `RSQL` to talk to SQL from R.
+
+
+R's interface is less graphical than Stata. It's all about the code.
+
+- Pro: This makes replication easier (or, harder to mess up) in R, because there is less dependence on pointing-and-clicking to create analysis and graphics. 
+- Con: For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.
+- Con: R syntax is more "programmy" and less English-seeming. The drawback of this is that it is complicated *at first*. The benefit of this is that it is simpler in the long run, because the rules of the syntax create long-run structure and coherence in the R language.
 
 
 
-Some difficult things:
+# Moving on
 
-- R's interface is less graphical than Stata. For people who are very comfortable with code, this does not present a problem. For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata. 
-- R syntax is more "programmy." The drawback of this is that it is complicated *at first*. The benefit of this is that it is simpler in the long run, because the syntax is unified and coherent.
-- Stata is almost always faster than R. That's just how it be. 
+If you have made it this far, take a break! 
+
+I want to remind you that future lessons will be far less abstract than this one. Many concepts in this lesson are *important* in the sense that you will see them again during your R career, but they are not all *essential* for surviving this course. Future lessons will be far more concrete and dataset-driven.
+
+Continue with the next lesson: [Data Manipulation](811/811-data)
 
 
 
