@@ -68,23 +68,7 @@ If you type this command in R, it probably starts at the top of your user profil
 setwd("~/folder/pathway/to/project")
 ```
 
-You should set your directory to the top of the project folder. You should avoid setting your directory all the way into the data folder as a normal practice, because if you ever have to navigate out of the data folder, you have to use the pathway code for navigating up a file, `..`, which isn't very informative. Assuming I had my directory in the `data/` folder and wanted to navigate out of the `data/` folder and into the `writing/` folder, it would look like this.
-
-```{r, eval = FALSE}
-setwd("../writing")
-```
-
-It's hard to understand what's going on here. What folder is at `../`? This is why you should avoid creating a folder set up that might require you to do these upward movements.
-
-
-# Side note on directories and replication
-
-If you are making code that you expect will be shared to other individuals, using `setwd()` creates a problem any time you want to share your project. That's because the pathway inside `setwd()` only exists on your computer, so it fails unless a new user changes your code.
-
-Using `setwd()` is fine for this class. As you progress with R, however, you may consider a few other ways to get around this problem. 
-
-- Rstudio users can [use `.Rproj` files](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects). When you open a project file for a specific project, Rstudio opens a fresh R session already in the appropriate directory. This allows you to drop the project anywhere in your computer, and R will set the appropriate directory regardless of where you move it. Courteous R users sometimes place a `.Rproj` file in their project even if they don't use Rstudio. 
-- You can run R in your shell/terminal program. You do this by opening the shell, navigating to your project folder, and then opening R in the terminal by simply typing `r`. R then opens with the directory already set. This is what I do (because I don't use R studio). 
+You should set your directory to the top of the project folder. You should avoid setting your directory all the way into the data folder as a normal practice, because if you ever have to navigate out of the data folder, you have to use the pathway code for navigating *out* a folder, `..`, which isn't very informative.
 
 
 
@@ -144,7 +128,7 @@ Most datasets you will work with in R are called "data frames." These are basica
 
 Print the data to see what the data look like.
 
-```{r}
+```{r, eval = FALSE}
 anes
 ```
 
@@ -175,14 +159,14 @@ ncol(anes)
 
 You can print out the top or bottom of a data frame to get a glance of it.
 
-```{r}
+```{r, eval = FALSE}
 head(anes) 
 tail(anes)
 ```
 
 When we print the `anes` object, we don't get a full list of variable names (because there are so many). To get the full set of names, use the `names()` function.
 
-```{r}
+```{r, eval = FALSE}
 names(anes)
 ```
 
@@ -199,17 +183,13 @@ VCF0004
 
 You should get an error. 
 
-Why? Because that variable isn't an object we can directly access. 
+Why? Because that variable isn't an object we can directly access. Why? Because it's *inside* the `anes` object, and R doesn't know if we have variables with similar names in different datasets, so it's being safe. This is different from what we're used to with Stata, but that's because Stata confines you to one data table at a time. R lets you have as many objects loaded as you want, so we have to be careful about which object we want to access.
 
-Why? Because it's inside the `anes` object. What if some other object contained a variable with the same name? R would not know what to do.
-
-To get around this, we can use the `$` character to tell R that a variable is located within a dataset. Let's tabulate the year variable with the `table()` function.
+To deal with this, we use the `$` character to tell R that a variable is located within a dataset. Let's demonstrate using the `head()` function (to shorten the output).
 
 ```{r}
-table(anes$VCF0004)
+head(anes$VCF0004)
 ```
-
-We find 662 respondents from 1948, 1899 respondents from 1952, and so on.
 
 You can see the objects that R can access directly like this:
 
@@ -217,10 +197,12 @@ You can see the objects that R can access directly like this:
 ls()
 ```
 
-This the current R workspace memory. These object may have other objects "inside of" them or other accessible attributes, each of which require some other method to access them (such as `$` for variables within data frames).^[You can access attributes of objects with the `attributes()` functions. There is also list indexing notation, such as `list_name[[item_number]]`. We won't talk about that right now.]
+This is sometimes called R's "workspace" or R's current memory. There's no telling what these objects are from this output, only that there are objects with names in memory. They may have other objects "inside of" them or other accessible attributes, each of which require some other method to access them (such as `$` for variables within data frames).^[You can access attributes of objects with the `attributes()` functions. There is also list indexing notation, such as `list_name[[item_number]]`. We won't talk about that right now.]
 
 
-# Diatribe on attaching
+# Class policy on the concept of "attaching" data
+
+Or, "my diatribe on attaching"...
 
 Others may have advised you that *attaching* packages is one way of getting around the annoying `$` notation for variables within data frames. 
 
@@ -236,7 +218,7 @@ Here's a crazy thing. If you attach a dataset and modify the attached variables,
 
 ```{r}
 # stock R dataset
-cars
+head(cars)
 
 attach(cars)
 
@@ -247,12 +229,12 @@ speed
 dist
 
 # what happens to cars?
-cars
+head(cars)
 ```
 
-Folks, this is ***insane***. As best as I can understand it, attaching is a crutch that exists to pacify people who insist on using R irresponsibly.
+The original dataset is unaffected by the things we do to the *attached* version of the dataset. This is, I think, pretty crazy behavior, and it demonstrates how weird attaching is, as a concept. 
 
-Here's my rule for this course. You may not attach. Do not do it in your homework. Do not do it in your final project. It is a dangerous practice, and I will not condone it.
+As a result, I'm drawing a pretty draconian policy around attaching: **You may not attach.** Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. Attaching is a dangerous practice, and I will not endorse any use of it, especially not for newcomers to R.
 
 Luckily for us (and all of the R community), the `tidyverse` package provides many tools that make attaching unnecessary. 
 
@@ -268,13 +250,11 @@ The [Tidyverse](https://www.tidyverse.org/) describes itself as...
 
 That philosophy is based on *tidy data*, which refers to data organization where (1) rows contain cases, (2) columns contain variables, and (3) cells contain variable values. 
 
-Although this sounds simple, there are many data formats that do not fit that pattern. Legislative data, for example, is often represented as a vote matrix with legislators in rows and bills in columns. A tidy legislative voting dataset might have a legislator variable, a bill variable, and a vote variable. Both datasets contain the same information, but the organization of the data allow for different sorts of manipulations. And it so happens that the tidy organization is particularly helpful for doing a lot of powerful stuff with R with very little code. 
+Although this sounds simple, there are many data formats that do not fit that pattern. Legislative data, for example, is often represented as a vote matrix with legislators in rows and bills in columns. The cells, in turn, would contain `1`s and `0`s to indicate legislators' Yea and Nay votes, respectively, on each bill. A tidy legislative voting dataset, on the other hand, would have a legislator variable, a bill variable, and a vote variable. Both datasets contain the same information, but the organization of the data allow for different sorts of manipulations. And it so happens that the tidy organization is particularly helpful for doing a lot of powerful stuff with R with very little code. 
 
 The [packages in the Tidyverse](https://www.tidyverse.org/packages/) are all designed to make data tidy or manipulate already-tidy data. Moreover, the tools are designed with a coherent syntax that makes them easy for beginners to learn, easy to understand (when you read the code), easy to integrate into complex analysis, and easy for visualizing data. It is hard for me, as someone who has been using R for years, to describe to newcomers just how much the Tidyverse has changed the way R is done in the past few years.^[A helpful word is *joygret*, "that familiar feeling of the joy of optimization combined with the regret of past inefficiencies" ([source](https://hilaryparker.com/category/advice/))]
 
-One enormous change that the Tidyverse has brought to the world R is the integration and popularization of the pipe operator from the [`magrittr` package](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). Although we will not cover the pipe operator the end of this lesson I encourage you not to view it as an afterthought. To quote a passage from the previous link:
-
-> At first encounter, you may wonder whether an operator such as `%>%` can really be all that beneficial; but as you may notice, it semantically changes your code in a way that makes it more intuitive to both read and write.
+One enormous change that the Tidyverse has brought to the world R is the integration and popularization of the pipe operator from the [`magrittr` package](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). Although we will not cover the pipe operator until the end of this lesson, I encourage you ***not*** to view it as an afterthought. It drastically changes the way R is written and read.
 
 For more resources about the Tidyverse (aside from this course), you can visit a webpage devoted to [such resources](https://www.tidyverse.org/learn/), which links you to the [R 4 Data Science](http://r4ds.had.co.nz/) book, a book on [`ggplot2`](https://github.com/hadley/ggplot2-book), and various [cheatsheets](https://www.rstudio.com/resources/cheatsheets/) for the constituent packages of the Tidyverse. I got my start using [this blog post](https://rpubs.com/bradleyboehmke/data_wrangling), which describes the pipe operator and two of the most important Tidyverse packages: `dplyr` and `tidyr`. We will cover the main points of the Tidyverse, but I would bookmark these resources for later browsing.
 
@@ -307,7 +287,7 @@ And from the `tidyr` package (for making data tidy)
 - `gather()`: turn many columns into one column (wide to long)
 - `spread()`: turn one column into many columns (long to wide)
 
-Most data manipulation tasks can rely on one or more of these functions. This is what makes the Tidyverse so powerful: it has a small number of very poweful tools.
+Most data manipulation tasks can rely on one or more of these functions. This is what makes the Tidyverse so useful: it has a small number of very powerful tools.
 
 
 # Renaming
@@ -374,7 +354,9 @@ We recode two variables in this `mutate()` call. We use `ifelse()` in slightly d
 Read the binary logical operators as follows:
 
 - `A == B`: A is equal to B
-- `A or B`: A or B
+- `A >= B`: A is greater than or equal to B
+- `A <= B`: A is less than or equal to B
+- `A | B`: A or B
 - `A & B`: A and B
 
 ## The `case_when()` function
@@ -387,7 +369,7 @@ if (this) {that}
                  else {something else} } }
 ```
 
-This would be tedious to code with `ifelse()`, because we would need to nest multiple `ifelse()` calls inside of each other, which is tedious and prone to mistakes.
+This would be difficult to code with `ifelse()`, because we would need to nest multiple `ifelse()` calls inside of each other, which is tedious and prone to mistakes.
 
 We can avoid this using the `case_when()` function, which bills itself as a "vectorized `ifelse()`." Here it is in action:
 
@@ -421,7 +403,7 @@ Depending on what you're doing, you may not find it valuable to recode the origi
 
 When you recode new variables, you might want to compare the new and old variables using the `table()` function.
 
-I try to consolidate all of my data cleaning tasks into as few calls to `mutate()` as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire `.R` file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned version, and then use the cleaned version in subsequent analyses.
+I try to consolidate all of my data cleaning tasks into as few calls to `mutate()` as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire `.R` file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned dataset, and then load the cleaned dataset for subsequent analyses.
 
 
 ## Variables from other variables
@@ -440,12 +422,10 @@ anes <- mutate(anes,
 `mutate()` is great because you can create a variable in one line and use it in another line, without ending the `mutate()` call. Pretty convenient! Here's an example.
 
 ```{r}
-(df <- data_frame(x = 1:3, 
-                  y = 4:6))
-# create z and use z in the same function!
-mutate(df, 
-       z = x + y, 
-       abc = z * z)
+data_frame(x = 1:3, 
+           y = 4:6, 
+           z = x + y, 
+           abc = z * z)
 ```
 
 Side note: this also shows how you can create data frames using the `data_frame()` function.
@@ -530,16 +510,19 @@ Most of the time you will use `summarize()` in conjunction with `group_by()`, wh
 For instance, let's say we want to do the above calculation but within each election year. 
 
 ```{r}
-# group the data
-s <- group_by(anes, cycle)
 # filter out some cases so we can see the results
-s <- filter(s, cycle >= 1992)
+s <- filter(anes, cycle >= 1992)
+
+# group the data
+s <- group_by(s, cycle)
+
+# summarize the grouped data
 summarize(s, 
           n = n(),
           mean_party_distance_na = mean(party_distance, na.rm = TRUE))
 ```
 
-A data frame can be ungrouped with (wait for it...) `ungroup()`.
+A data frame can later be ungrouped with (wait for it...) `ungroup()`.
 
 Here we also see the `n()` function, which acts as a filler for a sample size in `tidyverse` functions. If the dataset is grouped, `n()` returns the sample size in each group. 
 
@@ -547,8 +530,7 @@ Here we also see the `n()` function, which acts as a filler for a sample size in
 
 ```{r}
 z <- mutate(group_by(anes, cycle), 
-            libcon_std = (libcon_self - mean(libcon_self, na.rm = TRUE)) / 
-                         sd(libcon_self, na.rm = TRUE))
+  libcon_std = (libcon_self - mean(libcon_self, na.rm = TRUE)) / sd(libcon_self, na.rm = TRUE))
 ```
 
 To check this, the mean and standard deviation in each year should be about 0 and 1, respectively. I'm limiting the election cycles we're looking at to presidential years. (We can see when they started asking respondents about ideological self-placement.)
@@ -656,7 +638,7 @@ Two way tables. The first included variable prints as rows, the second as column
 round(prop.table(table(anes$pid7, anes$libcon_self, exclude = NULL)), 3)
 ```
 
-By default, `prop.table()` estimates proportions out of the entire table. You can estimate proportions within rows or columns using the `margin` argument.
+By default, `prop.table()` estimates proportions out of the entire table. You can estimate proportions within rows or columns using the `margin` argument. `margin = 1` sums row-wise, `margin = 2` sums column-wise.
 
 ```{r}
 tab <- table(anes$pid7, anes$libcon_self, exclude = NULL)
@@ -666,19 +648,20 @@ round(ptab, 3)
 
 # Tidy tables
 
-Objects returned by tables are a `table` object type, which isn't very useful for doing more stuff with. If you want to incorporate the results of a tabulation into other data frame operations (the likes of which we've been learning about), there are some Tidyverse-style tabulating functions.
+Objects returned by tables are a `table` object type, which isn't very useful for doing more stuff with. If you want to incorporate the results of a tabulation into other data frame operations (the likes of which we've been learning about), there are some Tidyverse-style tabulating functions. They have the added benefit of playing nicely with $n$ many variables instead of two at a time (that's tidy data for you).
 
 ```{r}
 count(anes, cycle, pid7)
 ```
 
-Get proportions by mutating the resulting table. Here we get the proportion of each partisan identity for each election cycle.
+Get proportions by mutating the resulting table. Here we get the proportion of each partisan identity for each election cycle by grouping on the cycle and then dividing each count by the sum in the cycle.
 
 ```{r}
-tab <- count(anes, cycle, pid7)
+(tab <- count(anes, cycle, pid7))
 
 mutate(group_by(tab, cycle), 
-       p = n / sum(n, na.rm = TRUE),
+       sum_cycle = sum(n, na.rm = TRUE),
+       p = n / sum_cycle,
        p = round(p, 3))
 ```
 
@@ -700,8 +683,8 @@ This concludes today's foray into the `dplyr` family of functions. Now we'll swi
 
 We'll talk about "wide" and "long" data. 
 
-- Wide data refers might be data from multiple time periods, where variables from different time periods are represented as different columns. So we might have different `x` and `y` variables from three different time periods as columns named `x1`, `x2`, `x3`, `y1`, `y2`, `y3`.
-- Long data would have the same information as the wide data, but instead of different variables for time periods, we stack the time periods on top of one another into one variable. So we would have variables for `x`, `y`, and `period`. 
+- Wide data might be data from multiple time periods, where variables from different time periods are represented as different columns. So we might have different `x` and `y` variables from three different time periods as columns named `x1`, `x2`, `x3`, `y1`, `y2`, `y3`.
+- Long data would have the same information as the wide data, but instead of different variables for time periods, we stack the time periods on top of one another into one variable. So we would have variables for `x` and `y` as well as a `time_period` variable to indicate which observations come from which wave. 
 
 Shaping data essentially comes down actions that make your data long (elongating) or wide (widening). 
 
@@ -757,15 +740,15 @@ spread(l, key = party, value = distance)
 
 Now that we have covered some essential tools for wrangling data, let's tie it all together with the concept of piping.
 
-Let's start by identifying the problem. Data processing requires a lot of steps (each represented by the functions we have learned so far). Many of these steps are related. How do sew these operations together in a way that is easy to understand and easy to write?
+Let's start by identifying the problem. Data processing requires a lot of steps (each represented by the functions we have learned so far). Many of these steps are related. Can we string these operations together in a way that is easy to understand and easy to write?
 
-One way to sew multiple operations together is with nested functions. Just as in math we can nest functions such as $f(g(h(x)))$, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience---we have to read from the inside out. Further, the code itself becomes ugly and difficult to interpret.
+One way to sew multiple operations together is with nested functions. Just as we can nest functions in math like $f(g(h(x)))$, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience---we have to read from the inside out. The code becomes ugly and difficult to interpret.
 
 ```{r, eval = FALSE}
 tidy_data <- gather(summarize(group_by(filter(select(dataset, ...), ...), ...), ...), ...)
 ```
 
-Another way would be to break up the operation into multiple lines. Problem with this method is that it is verbose and creates a lot of redundancy with object assignment.
+Another way would be to break up the operation into multiple lines. The problem with this method is that it is verbose and creates a lot of redundancy with object assignment (which can slow down your code with big datasets).
 
 ```{r, eval = FALSE}
 d <- select(dataset, ...)
@@ -775,9 +758,9 @@ d <- summarize(d, ...)
 d <- gather(d, ...)
 ```
 
-We'll use the pipe operator `%>%` to make this process easier. The pipe operator takes a left-hand side (LHS) object and "pipes" it into a right-hand side (RHS) function. It sounds trivial, but just wait. Here is how it works. We'll use `x` to represent data and `f` to represent functions. 
+We'll use the pipe operator `%>%` to make this process easier. The pipe operator takes a left-hand side object and "pipes" it into a right-hand side function. It sounds trivial, but just wait. Here is how it works. We'll use `x` to represent data and `f` to represent functions. 
 
-- By default, `x %>% f()` sets `x` as the first argument in `f`. So `x %>% f()` is equivalent to `f(x, ...)`.
+- By default, `x %>% f()` sets `x` as the first argument in `f`. So `x %>% f()` is equivalent to `f(x)`.
 - If `x` is needed elsewhere inside of `f` besides the first argument, we can use `.` to stand-in for `x`. For example, `x %>% f(arguments, data = .)` is equivalent to `f(arguments, data = x)`. 
 - If only one argument is needed, the parentheses on `f()` could be omitted. So `x %>% f(.)` is equivalent to `x %>% f()` is equivalent to `x %>% f` is equivalent to `f(x)`. I would recommend not omitting parentheses, however, so you can see which keywords are functions and which are data objects.
 
@@ -795,7 +778,9 @@ d <- dataset %>%
 
 Adding `print()` at the end of the chain will print `d` after the results of the pipe chain are assigned to `d`.
 
-As we can see: the pipe chain has made our code linear and readable, and it makes our workflow more straightforward and efficient (because we can think linearly again!). Here's an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing. This is thanks both to the pipe itself, but also the ease with which `tidyverse` functions can be interpreted by an observer.
+As we can see: the pipe chain has made our code linear and readable, and it makes our workflow more straightforward and efficient (because we can think linearly again!). *To say it again: we can trace what the code is doing by reading it in linear order,* which isn't normally something you can do when you string multiple functions together! 
+
+Here's an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing. This is thanks both to the pipe itself, but also the ease with which `tidyverse` functions can be interpreted by an observer.
 
 ```{r}
 l <- anes %>%
@@ -838,10 +823,13 @@ ggplot(l, aes(x = cycle, y = distance)) +
 ```
 
 
+If your text editor has the capability, *create a keyboard shortcut for the pipe operator!* I create this kind of thing with Sublime Text all the time. Rstudio can do it as well.
+
+
 
 # Other helpful pipes
 
-There is one other helpful pipe-like operator that we will talk about: `%$%`. It tells an RHS function that the variables referenced come from a LHS dataset. The two following commands do the same thing:
+There is one other helpful pipe-like operator that we will talk about: `%$%`. It tells a right-hand function that the variable names in the function come from the left-hand dataset. The two following commands do the same thing:
 
 ```{r}
 table(anes$pid7)

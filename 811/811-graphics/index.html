@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Day 2: Graphics</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED FEB 1, 2018 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>, 
+      
+      <a class="meta" href="/categories/teaching">TEACHING</a>, 
+      
+      <a class="meta" href="/categories/ps811">PS811</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="objective" class="section level1">
+<h1>Objective</h1>
+<p>The goal of this lesson is to provide an introduction to graphics in R, by way of <code>ggplot2</code> in particular. We will cover:</p>
+<ul>
+<li>The “grammar of graphics”—the “gg” in <code>ggplot</code></li>
+<li>How <code>ggplot2</code> works</li>
+<li>Common geoms for social science data</li>
+<li>Customizing the appearance of ggplot graphic</li>
+<li>Strategies for saving graphics</li>
+<li>Some (not too much) discussion of the ways base graphics and <code>ggplot2</code> are different</li>
+</ul>
+<p>Some notes to get us started:</p>
+<ul>
+<li>Some introductions to ggplot begin with an overview of the <code>qplot()</code> (quick plot) function from the <code>ggplot2</code> package. We will not start there; <code>qplot</code> is a midway point between base and ggplot graphics, but we have covered neither yet, so we have no need to “transition” out of base graphics. Moreover, I think the differences between <code>qplot</code> and the workhorse <code>ggplot</code> function confuse new users and distract from a deeper exploration of <code>ggplot</code>. So we’ll jump right in.</li>
+<li><strong><em>MORE NOTES???</em></strong></li>
+</ul>
+</div>
+<div id="get-started" class="section level1">
+<h1>Get started</h1>
+<p>The <code>ggplot2</code> package is loaded whenever you load the <code>tidyverse</code> package (but I sometimes load the <code>ggplot2</code> package anyway because it gives my code editor has better auto-complete behavior).</p>
+<pre class="r"><code>library(&quot;magrittr&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.3.4     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()</code></pre>
+<pre class="r"><code>library(&quot;ggplot2&quot;)</code></pre>
+<p>Set your directory where it was last lesson and load the modified ANES dataset from the previous lesson:</p>
+<pre class="r"><code>setwd(&quot;~/path/to/wherever&quot;)
+anes &lt;- readRDS(&quot;data/anes-modified.RDS&quot;) %&gt;% 
+        mutate_all(labelled::remove_labels) # remove Stata labels from the data</code></pre>
+<p>You can verify that you imported the correct dataset when you notice the modified variable names.</p>
+<pre class="r"><code>names(anes)</code></pre>
+</div>
+<div id="the-grammar-of-graphics" class="section level1">
+<h1>The grammar of graphics</h1>
+<p>The <a href="https://www.springer.com/us/book/9780387245447">grammar of graphics</a> is a set of independent components that compose graphics. <code>ggplot2</code> is an R package that implements the grammar <a href="http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">in a layered fashion</a> by iteratively adding grammatical components to a figure. By providing a set of interchangeable tools with a shared syntax and carefully chosen defaults, <code>ggplot2</code> allows R users to create complex graphics with relatively little hassle.</p>
+<p>It is not essential for you to memorize the components of the grammar of graphics. In fact, thinking too hard about it is confusing at first. You will get an intuition for them as you use ggplot without being able to recite the tenets, but for the sake of exposition, here are the principles of the grammer. There is <em>no need</em> to memorize this list:</p>
+<ul>
+<li><strong>data</strong> to be visualized</li>
+<li><strong>aesthetic mappings</strong> that describe how variables are mapped to aesthetic attributes (such as axes and colors)</li>
+<li><strong>geometric representations of the data</strong>, “geoms” for short, such as lines, points, etc.</li>
+<li><strong>scales</strong> that map information in the “data space” into the “aesthetic space” of the plot. This includes axes details but also colors, sizes, etc</li>
+<li>a <strong>coordinate system</strong></li>
+<li><strong>faceting system</strong> for breaking the data into subsets</li>
+<li>a <strong>theme</strong> that controls other display details, such as fonts</li>
+</ul>
+<p>The fact that <code>ggplot</code> is rooted in an underlying model allows is advantageous because it allows users to create many different types of plots that share an underlying philosophy. Other graphics systems in R (base, lattice…) don’t exhibit the same conceptual hierarchy, so one tool may be vastly different from the next, and extending the behaviors of the systems has been ad-hoc. The ggplot framework, on the other hand, has led developers to created plenty of add-ons to <code>ggplot2</code> to provide support for additional <code>geoms</code> and aesthetic features that all follow the same basic rules, making it easier to learn and incorporate new tools into your graphics arsenal.</p>
+<p>For the purposes of this introductory R course, we are especially interested in <code>ggplot</code> because it allows us to do a lot with a little. We will be making very interesting graphics in a very short amount of time.</p>
+</div>
+<div id="getting-ggplot-to-work" class="section level1">
+<h1>Getting <code>ggplot</code> to work</h1>
+<p>The <code>ggplot2</code> package contains tons of functions for plotting, but they begin with the titular <code>ggplot()</code> function. It works generically like so:</p>
+<pre class="r"><code>ggplot(dataset, aes(x = xvariable, y = yvariable))</code></pre>
+<p>where <code>dataset</code> is the name of a tidy data frame, <code>xvariable</code> is the variable you want to plot on the horizontal axis, and <code>yvariable</code> is the variable you want to plot on the vertical axis.</p>
+<p>This function calls the <code>aes()</code> function, which maps variables in your dataset to an aesthetic feature. In general, we will use <code>aes()</code> when we want to modify the graphic’s appearance <em>with features of our data</em>. We’ll come back to this.</p>
+<p>Let’s see this with real data. We will first recode two variables, “feeling thermometer” scores for the Democratic and Republican presidential candidates.</p>
+<p>Consult the codebook for information on the feeling thermometer. You’ll notice that values 97-100 are represented with the number 97 in the codebook, while 98 and 99 are special codes for “don’t know” and missing responses. So we’ll want to remove those.</p>
+<pre class="r"><code># feeling thermometers
+summary(anes$VCF0424)  # democratic candidate</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    0.00   40.00   60.00   58.74   85.00   99.00   27799</code></pre>
+<pre class="r"><code>summary(anes$VCF0426)  # republican candidate</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    0.00   40.00   60.00   55.94   85.00   99.00   27799</code></pre>
+<pre class="r"><code>anes &lt;- anes %&gt;% 
+  mutate(therm_demcand = case_when(VCF0424 &gt; 0 &amp; VCF0424 &lt;= 97 ~ VCF0424),
+         therm_gopcand = case_when(VCF0426 &gt; 0 &amp; VCF0426 &lt;= 97 ~ VCF0426))</code></pre>
+<p>We’ll plot the Republican candidate thermometer over the 7-point index of party ID.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="geoms" class="section level1">
+<h1>Geoms</h1>
+<p>You’ll notice that the plot is blank. That is because we have not added any geoms to the plot, only a mapping of variables to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes. It is important to note that we could visualize the data using a variety of geoms. It happens to be the cases that points make intuitive sense here.</p>
+<p>You can layer on grammatical components to a plot using the plus sign <code>+</code> after the <code>ggplot()</code> function.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>This is a little weird-looking, but let’s proceed. We could add a quick regression line. I’m going to change some features of the points and the regression line so we can see some things better.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><code>geom_smooth()</code> fits a loess regression by default or, for large datasets, a gam model. We can change specify a linear model pretty easily (that is what the “lm” is for: the <code>lm()</code> function for linear regression. We’ll cover that next week). It also adds a confidence interval, but we can’t see this one because it is so small.</p>
+<div id="colors" class="section level2">
+<h2>Colors</h2>
+<p>Now here is where <code>ggplot</code>’s advantage over base graphics shines. We’ll color the points and regression lines by the liberal-conservative self-identification of each respondent. Because this value is numeric in the data (1 through 7), <code>ggplot</code> will try to map this to a continuous color scale. We would rather treat these values as discrete groups, so we’ll coerce the variable to a factor when we plot it. (If the grouping variable were already a factor or a string, we wouldn’t need to discretize it in the plot. It would already be discrete).</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = as.factor(libcon_self)))</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>It kind of looks like a big ball of rainbow vomit, but we can customize colors in two ways. First is with color palettes:</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_brewer(palette = &quot;Set2&quot;)</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 37299 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Second is by manually feeling colors to each group (ugly graphic incoming):</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(aes(color = as.factor(libcon_self))) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_manual(values = c(&quot;red&quot;, &quot;orange&quot;, &quot;yellow&quot;, &quot;green&quot;, &quot;blue&quot;, &quot;violet&quot;, &quot;brown&quot;, &quot;black&quot;))</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 37299 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>I can only assign colors to groups in my data by using <code>aes()</code> each time. This means that I’m grabbing a group from my data, and then <code>ggplot</code> intelligently puts colors to each group. I could specify colors without the data, but I lose all information about the groups. For example, I could change the point color on its own, but it would loose connection to the groups.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = therm_gopcand)) +
+  geom_point(color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = as.factor(libcon_self)),
+              size = 0.5) +
+  scale_color_brewer(palette = &quot;Set2&quot;)</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>I could simplify this task by assigning a global color map in the <code>ggplot()</code> function. Then every geom would be colored according to the grouping variable.</p>
+<pre class="r"><code>ggplot(data = anes, 
+       aes(x = pid7, y = therm_gopcand, color = as.factor(libcon_self))) +
+  geom_point(shape = 1) +
+  geom_smooth(method = &quot;lm&quot;,
+              size = 0.5) +
+  scale_color_brewer(palette = &quot;Set2&quot;)</code></pre>
+<pre><code>## Warning: Removed 31170 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 37299 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Notice I also changed the point shape. You can learn about point shapes <a href="http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r">here</a>.</p>
+</div>
+<div id="lines" class="section level2">
+<h2>Lines</h2>
+<p>Let’s make some data that will be better for line plots.</p>
+<pre class="r"><code>anes &lt;- anes %&gt;%
+  mutate(pid3 = case_when(pid7 %in% 1:3 ~ &quot;Democrat&quot;,
+                          pid7 == 4 ~ &quot;Independent&quot;,
+                          pid7 %in% 5:7 ~ &quot;Republican&quot;))
+
+meantherms &lt;- anes %&gt;%
+  filter((cycle %% 4) == 0) %&gt;% 
+  group_by(cycle, pid3) %&gt;%
+  summarize(mean_therm_demcand = mean(therm_demcand, na.rm = TRUE),
+            mean_therm_gopcand = mean(therm_gopcand, na.rm = TRUE)) %&gt;%
+  filter(!is.na(mean_therm_gopcand)) %&gt;%
+  filter(!is.na(pid3))</code></pre>
+<p>We’ll plot the mean thermometer rating for the Democratic candidate in each cycle, by partisanship.</p>
+<pre class="r"><code>ggplot(meantherms, aes(x = cycle, y = mean_therm_demcand)) +
+  geom_point(aes(color = pid3)) +
+  geom_line(aes(color = pid3)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+</div>
+<div id="axis-labels" class="section level1">
+<h1>Axis labels</h1>
+<p>Labeling is done with the <code>labs()</code> function. You can also modify the color label in the legend. <code>NULL</code> is a keyword in R for no information, so you can suppress a label using <code>NULL</code> (which we do for the color label).</p>
+<pre class="r"><code>ggplot(meantherms, aes(x = cycle, y = mean_therm_demcand)) +
+  geom_point(aes(color = pid3)) +
+  geom_line(aes(color = pid3)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Mean Democratic Candidate Rating&quot;,
+       color = NULL)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="shaping-data-for-plotting" class="section level1">
+<h1>Shaping data for plotting</h1>
+<p>Let’s say we wanted to compare Democratic and Republican Thermometer ratings in the same plot. They are two separate variables to start with, so we would need to gather the data frame so we can map those variables as groups to an aesthetic.</p>
+<pre class="r"><code>longtherms &lt;- meantherms %&gt;% 
+  gather(key = candidate, value = score, contains(&quot;therm&quot;)) %&gt;%
+  mutate(candidate = case_when(str_detect(candidate, &quot;gop&quot;) ~ &quot;Republican Candidate&quot;,
+                           TRUE ~ &quot;Democratic Candidate&quot;)) %&gt;% 
+  print()</code></pre>
+<pre><code>## # A tibble: 72 x 4
+## # Groups:   cycle [12]
+##    cycle        pid3            candidate    score
+##    &lt;dbl&gt;       &lt;chr&gt;                &lt;chr&gt;    &lt;dbl&gt;
+##  1  1968    Democrat Democratic Candidate 73.35776
+##  2  1968 Independent Democratic Candidate 59.41463
+##  3  1968  Republican Democratic Candidate 51.09512
+##  4  1972    Democrat Democratic Candidate 64.78986
+##  5  1972 Independent Democratic Candidate 53.21581
+##  6  1972  Republican Democratic Candidate 43.54042
+##  7  1976    Democrat Democratic Candidate 74.32839
+##  8  1976 Independent Democratic Candidate 63.11388
+##  9  1976  Republican Democratic Candidate 52.28637
+## 10  1980    Democrat Democratic Candidate 69.34694
+## # ... with 62 more rows</code></pre>
+<p>Now “Score” is one <span class="math inline">\(y\)</span> variable, and we will plot separate lines for each candidate’s score using an aesthetic map.</p>
+<pre class="r"><code>ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point(aes(shape = candidate)) +
+  geom_line(aes(lty = candidate)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Mean Candidate Rating&quot;,
+       color = &quot;Party ID&quot;,
+       lty = &quot;Candidate&quot;,
+       shape = &quot;Candidate&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>This is a little busy, so we will look for alternative ways to plot these data.</p>
+</div>
+<div id="facets" class="section level1">
+<h1>Facets</h1>
+<p>Faceting takes a graphic and breaks it into separate panels. There are two ways to do this. One would be to wrap the panels using <code>facet_wrap()</code>.</p>
+<pre class="r"><code>ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ candidate) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Mean Candidate Rating&quot;,
+       color = &quot;Party ID&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" /> We use the syntax <code>~ var</code> to tell the function that the variable comes from the data frame. However, it is often helpful to read the <code>~</code> as “as a function of” for when we do statistical models.</p>
+<p>If we had lots of categories, they would print side by side “wrap around” once they got to the end of a row. Here’s an example where we wrap along the election cycle.</p>
+<pre class="r"><code>ggplot(longtherms, aes(x = candidate, y = score, color = pid3)) +
+  geom_point() +
+  facet_wrap(~ cycle) + 
+  coord_flip() +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Candidate&quot;,
+       y = &quot;Mean Candidate Rating&quot;,
+       color = &quot;Party ID&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>We can also specify a grid of panels using <code>facet_grid()</code>. We list the variable that creates rows, followed by the variable that creates columns. If we don’t want either rows or columns, we can suppress them using a period.</p>
+<pre class="r"><code>ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_grid(candidate ~ .) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Mean Candidate Rating&quot;,
+       color = &quot;Party ID&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code>longtherms %&gt;%
+  mutate(pid3 = ifelse(pid3 == &quot;Democrat&quot;, &quot;Democratic&quot;, pid3),
+         pid3 = paste(pid3, &quot;Identifiers&quot;)) %&gt;%
+    ggplot(aes(x = cycle, y = score)) +
+    geom_point() +
+    geom_line() +
+    facet_grid(candidate ~ pid3) +
+    scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+    labs(x = &quot;Election Year&quot;,
+         y = &quot;Mean Candidate Rating&quot;,
+         color = &quot;Party ID&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<p>Notice also that we can pipe data directly into <code>ggplot()</code> from a pipe chain. While possible, this is not usually recommended.</p>
+</div>
+<div id="coordinates" class="section level1">
+<h1>Coordinates</h1>
+<p>We can modify with coordinates a few ways.</p>
+<p>First is to set the axis limits with <code>coord_cartesian()</code>.</p>
+<pre class="r"><code>ggplot(longtherms, aes(x = cycle, y = score, color = pid3)) +
+  geom_point() +
+  geom_line() +
+  facet_wrap(~ candidate) +
+  coord_cartesian(ylim = c(0, 100)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Mean Candidate Rating&quot;,
+       color = &quot;Party ID&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>The other would be <code>coord_flip()</code>, which flips the <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes. We saw this a few plots ago in a <code>facet_wrap</code> example.</p>
+</div>
+<div id="categorical-variables-strings-and-factors" class="section level1">
+<h1>Categorical variables (strings and factors)</h1>
+<p>If you plot a categorical variable on one of the axes, <code>ggplot</code> will automatically interpret and plot categories side-by-side. Here is a toy example.</p>
+<p>One potential problem, though, is that <code>ggplot</code> will order categorical variables alphabetically or, if the variable is already an ordered factor, will interpret the factor order out of the metadata about the levels.</p>
+<p>Here we show what happens when plot a string variable that can be ordered alphabetically:</p>
+<pre class="r"><code>d &lt;- data_frame(x = rnorm(100, 0, 1),
+                y = 4 + (2 * x) + rnorm(100, 0, 1),
+                s = sample(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 100, replace = TRUE),
+                f = factor(s, levels = c(&quot;c&quot;, &quot;d&quot;, &quot;a&quot;, &quot;b&quot;)))
+
+ggplot(d, aes(x = s, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = &quot;String&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>…and if we plot from a factor that already has ordered levels…</p>
+<pre class="r"><code>ggplot(d, aes(x = f, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>…or we wanted to assign colors using an ordered factor.</p>
+<pre class="r"><code>ggplot(d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = f)) +
+  labs(x = &quot;Continuous&quot;, 
+       y = &quot;Continuous&quot;,
+       color = &quot;Ordered Factor&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>To reorder these categories, I recommend using tools in the <code>forcats</code> package, which, conveniently, is part of the <code>tidyverse</code> package.</p>
+<ul>
+<li><code>fct_relevel()</code>: declare a factor variable, and then declare the order of levels. Any level not listed during reordering is given the same precedence as the original variable</li>
+<li><code>fct_rev()</code>: reverse the order of a factor’s levels</li>
+<li><code>fct_recode()</code>: change the levels of a factor</li>
+</ul>
+<p>Here is an example where we take the <code>f</code> variable, a factor with ordered levels, and rearrange the order of the levels so that they appear in the legend with the proper order.</p>
+<pre class="r"><code>fixed_d &lt;- d %&gt;%
+  mutate(fixed_f = fct_relevel(f, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)) %&gt;%
+  print()</code></pre>
+<pre><code>## # A tibble: 100 x 5
+##             x         y     s      f fixed_f
+##         &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; &lt;fctr&gt;  &lt;fctr&gt;
+##  1  0.6844053 5.5126263     a      a       a
+##  2  2.5372780 7.5868221     b      b       b
+##  3  0.6138414 6.2381298     c      c       c
+##  4  1.0709282 5.1566937     a      a       a
+##  5  1.7740128 6.9458844     b      b       b
+##  6 -2.1576270 0.1592212     a      a       a
+##  7 -0.2909942 6.2808771     b      b       b
+##  8 -0.4529066 3.7418871     c      c       c
+##  9  1.1050420 6.0245482     c      c       c
+## 10 -0.4985478 4.6020331     c      c       c
+## # ... with 90 more rows</code></pre>
+<pre class="r"><code>ggplot(fixed_d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = fixed_f)) +
+  labs(x = &quot;Continuous&quot;, 
+       y = &quot;Continuous&quot;,
+       color = &quot;Ordered Factor&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(fixed_d, aes(x = f, y = y)) +
+  geom_point(shape = 1) +
+  labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+</div>
+<div id="more-geoms" class="section level1">
+<h1>More geoms</h1>
+<p>one-axis</p>
+<ul>
+<li>density</li>
+<li>histogram</li>
+</ul>
+<p>two-axis</p>
+<ul>
+<li>columns</li>
+<li>ribbons</li>
+<li>polygons</li>
+</ul>
+<div id="dos-and-donts" class="section level2">
+<h2>Dos and Don’ts</h2>
+<p>Multiple Y axes</p>
+</div>
+</div>
+<div id="examples-using-ggplot2" class="section level1">
+<h1>Examples using ggplot2</h1>
+</div>
+<div id="out-there-things" class="section level1">
+<h1>out there things</h1>
+<p>heatmaps, network stuff (ggraph), see drob posts</p>
+<p>patchwork, ggforce, (?)ggproto, all the pederson stuff</p>
+</div>
+<div id="graphics-packages-revisited" class="section level1">
+<h1>Graphics packages revisited</h1>
+<hr />
+</div>
+<div id="sarah" class="section level1">
+<h1>Sarah</h1>
+<ul>
+<li>why</li>
+<li>helpful to see what the data look like</li>
+<li>tell persuasive stories</li>
+<li>important that you know relevant features of the data</li>
+<li>shape of the data indicate appropriate modeling
+<ul>
+<li><em>long right tails, logging</em></li>
+</ul></li>
+<li>Understanding data</li>
+<li><em>know thy data</em></li>
+<li>unit of analysis</li>
+<li>number of observations</li>
+<li>where is there variation</li>
+<li>units of measurement</li>
+<li>values within variable</li>
+<li>missing data</li>
+<li>relationships among variables</li>
+<li>summary statistics</li>
+<li><code>summary, cor, quantile</code></li>
+<li><code>table()</code></li>
+<li><code>group_by() %&gt;% summarize()</code></li>
+<li><code>group.CI()</code> or whatever it’s called</li>
+<li>simple base plots</li>
+<li>scatterplots</li>
+<li>histograms</li>
+<li>kernel density estimation</li>
+<li><em>transition to ggplot</em></li>
+<li><em>data, axis aesthetics, geoms, scales, theme options</em></li>
+<li><em>ggplot() and qplot() functions. qplot() is just confusing IMO</em></li>
+<li><em>justify gglot</em>
+<ul>
+<li><em>more with less code</em></li>
+<li><em>grouping</em></li>
+<li><em>faceting</em></li>
+<li><em>legends</em></li>
+<li><em>prevents you from doing stupid shit</em></li>
+<li>multiple y axes</li>
+<li>bad aesthetic choices (multiple DVs at once)</li>
+<li><em>saving is easier</em></li>
+<li><em>they look better</em></li>
+<li><em>easy to customize your own cute theme (help guides online but don’t include a link [don’t want them to get sidetracked] but don’t overdo it)</em></li>
+</ul></li>
+<li><em>once in GGplot</em></li>
+<li>scatterplots (two continuous)</li>
+<li>dot plots (factor x continuous) <em>replace bar plots</em></li>
+<li>line graphs (two continuous where order matters, need to be sorted)</li>
+<li>don’t use pie charts
+<ul>
+<li><em>anything in a pie chart should be a bar graph</em></li>
+</ul></li>
+<li>bar graphs
+<ul>
+<li><em>only things in a bar graphs should be counts and proportions, IMO</em></li>
+<li><em>stacks of things that have a zero lower bound</em></li>
+<li><em>don’t use them for 1-5 scales</em></li>
+<li><em>IMO don’t use them for treatment effects. This makes no sense</em></li>
+<li><em>they also make you use error bars on top of columns for CIs, which looks fugly IMO</em></li>
+</ul></li>
+<li><em>coefficient plots (wait on this?)</em></li>
+<li><em>acf pacf</em> with some package</li>
+<li>aesthetic choices</li>
+<li>contrasting colors may be bad for colorblindness</li>
+<li>gradients of the same color may be good for computer screens, but maybe not for print or shitty projectors</li>
+<li>does the journal accept color? might want to think about ways around color</li>
+<li>resources
+<ul>
+<li><a href="http://mkweb.bcgsc.ca/colorblind/" class="uri">http://mkweb.bcgsc.ca/colorblind/</a></li>
+<li><a href="http://www.somersault1824.com/tips-for-designing-scientific-figures-for-color-blind-readers/" class="uri">http://www.somersault1824.com/tips-for-designing-scientific-figures-for-color-blind-readers/</a></li>
+<li><a href="http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3" class="uri">http://colorbrewer2.org/#type=sequential&amp;scheme=BuGn&amp;n=3</a></li>
+<li><a href="http://ggplot2.tidyverse.org/reference/scale_brewer.html" class="uri">http://ggplot2.tidyverse.org/reference/scale_brewer.html</a></li>
+<li><code>viridis</code>! <em>but don’t overdo it</em></li>
+</ul></li>
+<li>saving</li>
+<li>base
+<ul>
+<li><code>pdf(&quot;file.pdf&quot;, width =, height =); par(whatever); plot(whatever); dev.off()</code></li>
+</ul></li>
+<li>ggplot
+<ul>
+<li><code>ggplot(whatever); ggsave(whatever, width =, height =)</code></li>
+</ul></li>
+<li>Complex data analysis</li>
+<li><em>note to self: learn about arm, rms</em>
+<ul>
+<li><em>if you don’t get to this, just say that you don’t do regressions that much, and you don’t do frequentist regression when you do, LOL</em></li>
+</ul></li>
+<li>regression functions
+<ul>
+<li>transform within function call (logs, interaction, factor dummies)</li>
+</ul></li>
+<li>glms
+<ul>
+<li>ols: y = (XB)</li>
+<li>glm: link(y) = XB; y = inv_link(XB)</li>
+<li>logit(p(y)) = XB. invlogit(XB) = p(y)</li>
+</ul></li>
+<li>interpreting model output</li>
+<li>generating model output
+<ul>
+<li>table packages</li>
+<li>list: <a href="https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r" class="uri">https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r</a></li>
+<li>stargazer: <a href="https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf" class="uri">https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf</a></li>
+<li>apsrtable: <a href="https://cran.r-project.org/web/packages/apsrtable/apsrtable.pdf" class="uri">https://cran.r-project.org/web/packages/apsrtable/apsrtable.pdf</a></li>
+<li><em>I like xtable and texreg</em></li>
+<li>there are pros and cons. Some are better for regression, summary statistics, just other tables you might make (xtable)</li>
+<li><code>arm::coefplot</code></li>
+<li><code>coefplot</code> package</li>
+<li><code>coefplot2</code></li>
+<li>I’d say: coefplots by hand using <code>broom</code> and <code>ggplot2</code>. Easy for jamming multiple models together</li>
+<li><a href="http://varianceexplained.org/r/broom-intro/" class="uri">http://varianceexplained.org/r/broom-intro/</a></li>
+<li><a href="https://arxiv.org/pdf/1412.3565.pdf" class="uri">https://arxiv.org/pdf/1412.3565.pdf</a></li>
+<li><em>I’ve seen people do coefplots using base graphics and it’s like half the entire file. It’s fugly</em></li>
+</ul></li>
+<li>marginal effects
+<ul>
+<li>effects</li>
+<li>zelig</li>
+<li><em>sjplot</em></li>
+</ul></li>
+<li>post-estimation
+<ul>
+<li>residuals</li>
+<li>(most models: normal on the index. OLS index = link)</li>
+<li><em>Log Likelihood</em> (coef.test? where are there model things for GLMs?)</li>
+<li><em>information criteria: AIC, WAIC</em></li>
+<li>meant to estimate out-of-sample performance</li>
+<li>see McElreath videos</li>
+<li>since every fit is a combination of true + noise (even assuming perfect model)</li>
+<li>don’t BIC</li>
+<li>neither Bayesian nor IC</li>
+</ul></li>
+</ul>
+<p>Improving on Sarah</p>
+<ul>
+<li>how tidy data becomes good for ggplot</li>
+<li>stacking factors for grouping aesthetics</li>
+<li>nail grouping as a benefit</li>
+<li>if you have multiple countries, multiple states, multiple datasets</li>
+<li>you <em>can</em> gather multiple DVs, but then you can’t get different axis labels, so do this only for private use OR with conceptually related variables for public use
+<ul>
+<li><em>use var-ecm graphic as a bad example</em></li>
+</ul></li>
+<li>What to do about model graphics</li>
+<li>a simple regression example</li>
+<li>use broom for coefficient plot</li>
+<li>sjplot for a simple marginal effects?</li>
+<li>broom: learn how <code>glance</code> works</li>
+<li><code>predict(new.data)</code></li>
+<li>effects?</li>
+<li>margins?</li>
+<li>arm?</li>
+<li>rms?</li>
+<li><em>and then save complex predictions for modeling day?</em></li>
+<li>Other graphics tips</li>
+<li>confidence interval things:
+<ul>
+<li>steep change look like narrow confidence intervals</li>
+<li>confidence intervals are <em>vertical</em> for a given x value (find tumblr example)</li>
+</ul></li>
+<li>log(0)
+<ul>
+<li>are they counts? use a count model instead of a log</li>
+<li>are they unequal probability? use an ordinal model</li>
+</ul></li>
+<li>stata vs R</li>
+<li>if you have a simple OLS or GLM and want to do a simple prediction or simple MFX, Stata does this pretty well</li>
+<li>R is way better for visualizing multiple models together (tidy data, broom, ggplot)</li>
+</ul>
+</div>
+<div id="brief-introduction-to-base-graphics" class="section level1">
+<h1>Brief Introduction to Base Graphics</h1>
+<div id="basic-plotting" class="section level2">
+<h2>Basic plotting</h2>
+<p><code>plot()</code></p>
+<p><code>hist()</code></p>
+<p>Bar charts, box plots, all easier in other software</p>
+</div>
+<div id="some-handy-tools" class="section level2">
+<h2>some handy tools</h2>
+<p>pch</p>
+<p>linetype</p>
+</div>
+</div>
+<div id="graphics-packages-pros-and-cons" class="section level1">
+<h1>Graphics packages, pros and cons</h1>
+</div>
+<div id="ggplot2" class="section level1">
+<h1>ggplot2</h1>
+<div id="aesthetics" class="section level2">
+<h2>aesthetics</h2>
+</div>
+<div id="geoms-1" class="section level2">
+<h2>geoms</h2>
+</div>
+<div id="scales" class="section level2">
+<h2>scales</h2>
+</div>
+<div id="themes-and-theme-elements" class="section level2">
+<h2>themes and theme elements</h2>
+</div>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/811/811-data/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/811">811</a></span>
+  
+  
+  <span><a class="menu-item" href="/811/811-analysis/"> | next &gt;</a></span>
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
