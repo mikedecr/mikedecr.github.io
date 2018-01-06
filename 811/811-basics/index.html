@@ -153,7 +153,7 @@
 </div>
 <div id="more-variables-vectors" class="section level1">
 <h1>More variables: vectors</h1>
-<p>We can assign a series of values to a variable. One way to do this in R is the <code>c()</code> function. The <code>c()</code> function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc). We will return to the concept of <em>data types</em> later.</p>
+<p>We can assign a series of values to a variable. One way to do this in R is the <code>c()</code> function. The <code>c()</code> function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc).</p>
 <pre class="r"><code>y &lt;- c(2, 4, 6)
 y</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
@@ -280,53 +280,22 @@ g &lt;= 5</code></pre>
 <li>Strings: text strings that are contained in <code>&quot;quotes&quot;</code>. R calls these “character” type variables.</li>
 <li>Factors: ordered categories with text labels</li>
 </ul>
-<p>Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings. They are like text strings because they have text labels and you can’t do math with them. But they are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.</p>
-<p>You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs). Here we coerce numbers to characters.</p>
-<pre class="r"><code>1:3</code></pre>
-<pre><code>## [1] 1 2 3</code></pre>
-<pre class="r"><code>as.character(1:3)</code></pre>
-<pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
-<p>Numbers to factors, notice the creation of the metadata—i.e. the factor “levels.”</p>
-<pre class="r"><code>as.factor(1:3)</code></pre>
-<pre><code>## [1] 1 2 3
-## Levels: 1 2 3</code></pre>
-<p>Character to factor. Notice how levels are assigned alphabetically by default. You can modify this with the <code>levels =</code> argument in the <code>factor()</code> function.</p>
-<pre class="r"><code># This object comes with R, originally a character variable
-state.abb</code></pre>
-<pre><code>##  [1] &quot;AL&quot; &quot;AK&quot; &quot;AZ&quot; &quot;AR&quot; &quot;CA&quot; &quot;CO&quot; &quot;CT&quot; &quot;DE&quot; &quot;FL&quot; &quot;GA&quot; &quot;HI&quot; &quot;ID&quot; &quot;IL&quot; &quot;IN&quot;
-## [15] &quot;IA&quot; &quot;KS&quot; &quot;KY&quot; &quot;LA&quot; &quot;ME&quot; &quot;MD&quot; &quot;MA&quot; &quot;MI&quot; &quot;MN&quot; &quot;MS&quot; &quot;MO&quot; &quot;MT&quot; &quot;NE&quot; &quot;NV&quot;
-## [29] &quot;NH&quot; &quot;NJ&quot; &quot;NM&quot; &quot;NY&quot; &quot;NC&quot; &quot;ND&quot; &quot;OH&quot; &quot;OK&quot; &quot;OR&quot; &quot;PA&quot; &quot;RI&quot; &quot;SC&quot; &quot;SD&quot; &quot;TN&quot;
-## [43] &quot;TX&quot; &quot;UT&quot; &quot;VT&quot; &quot;VA&quot; &quot;WA&quot; &quot;WV&quot; &quot;WI&quot; &quot;WY&quot;</code></pre>
-<pre class="r"><code>as.factor(state.abb)</code></pre>
-<pre><code>##  [1] AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN
-## [24] MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA
-## [47] WA WV WI WY
-## 50 Levels: AK AL AR AZ CA CO CT DE FL GA HI IA ID IL IN KS KY LA MA ... WY</code></pre>
-<pre class="r"><code>factor(state.abb, levels = state.abb) # custom levels</code></pre>
-<pre><code>##  [1] AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN
-## [24] MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA
-## [47] WA WV WI WY
-## 50 Levels: AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME ... WY</code></pre>
-<p>You can go from text to numeric, but only by way of factors. This is because <code>as.factor()</code> coerces text strings into ordered categories, and then <code>as.numeric()</code> interprets the ordering as numeric values.</p>
-<pre class="r"><code>as.numeric(as.factor(state.abb))</code></pre>
-<pre><code>##  [1]  2  1  4  3  5  6  7  8  9 10 11 13 14 15 12 16 17 18 21 20 19 22 23
-## [24] 25 24 26 29 33 30 31 32 34 27 28 35 36 37 38 39 40 41 42 43 44 46 45
-## [47] 47 49 48 50</code></pre>
+<p>Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings, just like in Stata. They are like text strings because they have text labels and you can’t do math with them. But they are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.</p>
+<p>You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs).</p>
+<pre class="r"><code>as.character(variable)
+as.numeric(variable)
+as.factor(variable)</code></pre>
 <p>Note: data types are different from <em>object classes</em>. There are many classes of objects that can have different attributes. We’ll see these more in future lessons (but examples include matrices, data frames, tables, lists, tibbles, lm objects, and so on).</p>
 </div>
 <div id="missing-data" class="section level1">
 <h1>Missing data</h1>
 <p>Vectors might contain missing data. The missing data code in R is <code>NA</code>, without quotes.</p>
-<p>Missing data take the same data type as the vector in which they are located.<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> For example:</p>
+<p>Missing data take the same data type as the vector in which they are located. For example:</p>
 <pre class="r"><code>h &lt;- c(1, 2, NA, 4)
 # what data type is h?
 str(h)</code></pre>
 <pre><code>##  num [1:4] 1 2 NA 4</code></pre>
-<p>By placing <code>NA</code> inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. As a result, a rule that applies to any number applies also to a missing numeric value, for example…</p>
-<pre class="r"><code>h^0</code></pre>
-<pre><code>## [1] 1 1 1 1</code></pre>
-<p>Any number raised to the 0 is 1, even if we don’t know what the number is!</p>
-<p>If the value of the number matters, however, some functions fail. For example, we don’t know the mean of <code>h</code>. Try the following.</p>
+<p>By placing <code>NA</code> inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. If the value of the number data, some functions fail. For example, we don’t know the mean of <code>h</code>. Try the following.</p>
 <pre class="r"><code>mean(h)</code></pre>
 <pre><code>## [1] NA</code></pre>
 <p>We get a missing value, which is to say, we know that there <em>should</em> be a numeric mean, we just don’t know what it is because we don’t know all of <code>h</code>. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.</p>
@@ -343,56 +312,38 @@ str(h)</code></pre>
 <li>Arguments inside the parentheses. Technically these can be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.</li>
 </ol>
 <p>Here are some common, helpful functions.</p>
-<pre class="r"><code># create normally distributed random noise
+<pre class="r"><code># random samples from a normal distribution
 (x &lt;- rnorm(n = 100, mean = 0, sd = 1)) </code></pre>
-<pre><code>##   [1]  1.412833259  0.694538124 -0.021366443 -1.437312194  0.268002002
-##   [6]  0.662352529  0.882636461  2.615938164 -1.858388514  1.804459746
-##  [11]  0.398376119 -2.256677892  0.249478240  1.811118269 -2.221079160
-##  [16] -0.824668922  0.044510275 -0.238338811  1.149081865 -1.188125564
-##  [21] -1.319580587 -1.717357270 -0.593526277  0.953932365  1.627882656
-##  [26] -1.542788782 -0.943641465  0.058631911 -0.842979803 -0.926965162
-##  [31]  0.379608132 -0.489457682  0.245305780 -0.481855821 -0.212275833
-##  [36] -0.940932125  0.169559206 -0.049629493 -0.940986569  0.657333472
-##  [41] -0.834826927  2.019753646 -0.095647780 -2.020019557 -0.153636863
-##  [46] -0.678257363 -0.433636544 -0.367154767 -0.199193165 -1.051541422
-##  [51] -0.812738145 -0.975431432 -0.886530054  1.855072275  0.545110165
-##  [56] -0.506349880  0.165657752 -1.039148550 -0.682315758  0.969978538
-##  [61] -0.159803961  0.693643544  0.355291642  0.093858294  1.241669011
-##  [66] -0.340755356 -0.154072452 -0.775461166  1.176154040  1.516290696
-##  [71] -1.419837718 -0.399798932 -0.335905680  1.695513887 -0.003494517
-##  [76] -0.956216209  0.449690943  0.751662582  0.381488057  0.153292514
-##  [81] -0.065240881  0.520617633  1.743880032 -0.328096552  0.291015601
-##  [86] -0.452050979  0.639374245  0.344025548 -0.649429899 -0.614719092
-##  [91] -0.296827178  2.043361697  0.294595835  0.001555783  0.383045819
-##  [96]  0.026244249  0.257600586 -0.411426987  0.558246428  0.137717225</code></pre>
+<pre><code>##   [1]  0.181923703 -1.328216245 -1.164500600  0.974316939  1.023222204
+##   [6] -1.174345281 -0.982835658 -1.314110720 -0.276120990  0.177272250
+##  [11]  0.188459865  0.566362548 -0.285110341  1.407297980 -0.094800723
+##  [16]  1.718615638  0.576981440 -0.778246335  1.376346166 -0.781671702
+##  [21] -0.167791829  0.880950792 -0.621297801 -1.025344524  0.649161304
+##  [26] -0.217770419  0.024588825 -0.378949996 -0.307876811 -1.281859157
+##  [31]  0.104602688 -0.283855992 -0.423572103 -0.394520695 -1.027946060
+##  [36] -1.466017058 -0.650166804 -0.191933187 -0.688845672 -0.936038816
+##  [41] -0.069764328 -0.108987693  0.243504234  0.378447270  0.092973271
+##  [46]  2.010747364  0.602875182  0.757867481  0.009814013  0.496573533
+##  [51]  2.604679527 -0.098799396  0.637613965 -0.488964448 -1.084680148
+##  [56]  0.413654322  1.216874463  0.781116801  0.314976234  0.201830445
+##  [61] -0.614278384  0.462404624 -0.277233862 -0.303883602 -1.065720553
+##  [66] -0.490699274  0.556228066 -0.596008095 -1.312400486 -0.637346646
+##  [71] -0.547358234 -1.599991136 -0.319880353  0.049228418 -0.524535298
+##  [76] -0.874306789  0.696802941  0.672065943  0.248578566 -0.080244742
+##  [81] -0.709761022 -0.727113534  0.755190320 -1.946124405  0.124702053
+##  [86]  0.310979075 -0.404208688 -1.746841995 -0.565823257  0.522498567
+##  [91]  1.564422619 -1.584745080 -1.172821470 -0.093909321  0.253327597
+##  [96]  0.727622058 -0.223042730 -1.289044005  0.879471461  0.083203852</code></pre>
 <pre class="r"><code>sum(x) </code></pre>
-<pre><code>## [1] -1.756513</code></pre>
-<pre class="r"><code># number of elements in an object
-length(x) </code></pre>
+<pre><code>## [1] -11.28189</code></pre>
+<pre class="r"><code>length(x) # number of elements in an object</code></pre>
 <pre><code>## [1] 100</code></pre>
-<pre class="r"><code># calculating an average by hand
-sum(x) / length(x)  </code></pre>
-<pre><code>## [1] -0.01756513</code></pre>
-<pre class="r"><code># equivalent
-mean(x) </code></pre>
-<pre><code>## [1] -0.01756513</code></pre>
-<pre class="r"><code># variance
-var(x) </code></pre>
-<pre><code>## [1] 0.9717716</code></pre>
-<pre class="r"><code># variance by hand
-sum((x - mean(x))^2) / (length(x) - 1) </code></pre>
-<pre><code>## [1] 0.9717716</code></pre>
-<pre class="r"><code># standard deviation
-sd(x)</code></pre>
-<pre><code>## [1] 0.9857847</code></pre>
-<pre class="r"><code>sqrt(sum((x - mean(x))^2) / (length(x) - 1))</code></pre>
-<pre><code>## [1] 0.9857847</code></pre>
-<p>Some common issues with functions.</p>
-<ol style="list-style-type: decimal">
-<li>As mentioned above, some functions don’t work as intended when you have missing values, so you may need to coerce R to skip over missing values.</li>
-<li>Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R which dataset you want to use. This is often done with a <code>data =</code> argument inside the function. For example, a linear model would work like <code>lm(y ~ x, data = dataset_name)</code>. This tells R and that the <code>y</code> and <code>x</code> variables can be found in the dataset called <code>dataset_name</code>. We’ll see more of this in future lessons.</li>
-<li>In math, we learn that if we give a function the same input, it returns the same output every time. (You may recall the “vertical line test.”) Statistics pushes on this definition a little bit: a function may return “random” results if they represent stochastic processes (such as coin flips). This works in the computer also (e.g. the <code>rnorm()</code> function, which simulates randomly distributed noise. There are other distribution sampling functions as well). Technically speaking though, they are only pseudorandom and can be made nonrandom by specifying a seed using the <code>set.seed()</code> function.</li>
-</ol>
+<pre class="r"><code>mean(x) </code></pre>
+<pre><code>## [1] -0.1128189</code></pre>
+<pre class="r"><code>var(x) # variance</code></pre>
+<pre><code>## [1] 0.727964</code></pre>
+<pre class="r"><code>sd(x) # standard deviation</code></pre>
+<pre><code>## [1] 0.8532081</code></pre>
 </div>
 <div id="packages-for-non-base-functions" class="section level1">
 <h1>Packages (for non-base functions)</h1>
@@ -414,16 +365,9 @@ sd(x)</code></pre>
 
 }</code></pre>
 <p>Here’s how this works.</p>
-<p>First, we pick a name for the function. Here, we chose <code>my_mean</code>. If you don’t know if there are any existing functions with the same name, you can check the R help files.</p>
-<pre class="r"><code>?my_mean</code></pre>
-<pre><code>## No documentation for &#39;my_mean&#39; in specified packages and libraries:
-## you could try &#39;??my_mean&#39;</code></pre>
-<pre class="r"><code>??my_mean</code></pre>
-<pre><code>## No vignettes or demos or help files found with alias or concept or
-## title matching &#39;my_mean&#39; using regular expression matching.</code></pre>
-<p>Looks like we’re all clear to use the name <code>my_mean</code>. Now that we have a good name, we need to <em>define</em> what the function does. We do this by <em>assigning</em> a definition to the name <code>my_mean</code>. That’s what the <code>my_mean &lt;- function(z) {...}</code> means. (Yes, in R, even functions are objects).</p>
-<p>We must decide which <em>arguments</em> this function should have. An argument is information that gets <em>passed</em> to the function. That’s what the <code>function(z)</code> is doing—the function takes one argument called <code>z</code>. We could have written <code>function(banana)</code> if we wanted, and then manipulated the <code>banana</code> object inside the function. The <code>z</code> (or <code>banana</code>) object name is just a stand-in for information that we are going to manipulate inside the function definition.</p>
-<p>What manipulation takes place? That’s what the remainder of the definition lays out. If we passed some variable to <code>my_mean()</code>, what the function does is calculate the sum, find the length, and then divide the sum by the length. Finally, we ask the function to <em>return</em> the calculated value, meaning that when we pass in some <code>z</code> data, we get out some value that is the result of <code>the_mean</code>.</p>
+<p>First, we pick a name for the function. Here, we chose <code>my_mean</code>. If you don’t know if there are any existing functions with the same name, you can search for it in R’s help files (<code>?my_mean</code> and <code>??my_mean</code>).</p>
+<p>Second, we decide which <em>arguments</em> this function should have. An argument is information that gets <em>passed</em> to the function. That’s what the <code>function(z)</code> is doing—the function takes one argument called <code>z</code>. We could have written <code>function(banana)</code> if we wanted, and then manipulated the <code>banana</code> object inside the function. The <code>z</code> (or <code>banana</code>) object name is just a stand-in for information that we are going to manipulate inside the function definition.</p>
+<p>Third, the function needs a <em>definition</em> inside curly braces, meaning, what the function does. Technically, we <em>assign</em> a definition to the object called <code>my_mean</code>. (Yes, even functions are objects.) If we passed some variable to <code>my_mean()</code>, the function calculates the sum, finds the length, and then divides the sum by the length. Finally, the function <em>returns</em> the calculated value. In all, when we pass in some <code>z</code> data, we get out some value that is the result of <code>the_mean</code>.</p>
 <p>For example, let’s make some data.</p>
 <pre class="r"><code>(some_data &lt;- seq(0, 10, 2))</code></pre>
 <pre><code>## [1]  0  2  4  6  8 10</code></pre>
@@ -435,22 +379,6 @@ sd(x)</code></pre>
 <pre><code>## [1] &quot;g&quot;         &quot;h&quot;         &quot;my_mean&quot;   &quot;some_data&quot; &quot;tall_m&quot;    &quot;wide_m&quot;   
 ## [7] &quot;x&quot;         &quot;y&quot;</code></pre>
 <p>You will notice that none of the objects created by <code>my_mean()</code> are there. This is by design, because you don’t want any function you create to get confused about whether the object you want to manipulate is local or global.</p>
-<p>Let’s give this an example. If I have a variable called <code>abc</code> in R memory, and I manipulate a local variable called <code>abc</code> inside a function, have I manipulated the original <code>abc</code>? The answer is No.</p>
-<p>Let’s see how. We make some object…</p>
-<pre class="r"><code>(abc &lt;- 150)</code></pre>
-<pre><code>## [1] 150</code></pre>
-<p>and then write the following function…</p>
-<pre class="r"><code>zero_out &lt;- function(abc) {
-  abc &lt;- 0
-  return(abc)
-} </code></pre>
-<p>And we pass <code>abc</code> to the function, which returns a 0.</p>
-<pre class="r"><code>zero_out(abc)</code></pre>
-<pre><code>## [1] 0</code></pre>
-<p>The question is, have we overwritten the original <code>abc</code> to zero? No, we haven’t.</p>
-<pre class="r"><code>abc</code></pre>
-<pre><code>## [1] 150</code></pre>
-<p>That’s because the <code>abc</code> inside the function definition is a <em>local variable</em>, so it has no bearing on other objects in R memory. For this reason, it is important that the objects you manipulate within a function are either (a) <em>passed to the function as arguments</em> or (b) <em>created within the function</em>.</p>
 </div>
 <div id="r-vs-stata" class="section level1">
 <h1>R vs Stata</h1>
@@ -494,7 +422,6 @@ sd(x)</code></pre>
 <li id="fn2"><p>Individuals who are already comfortable with Sublime should feel free to raid my custom settings, which can be obtained through my <a href="https://github.com/mikedecr/sublime-user-folder">Github page</a>.<a href="#fnref2">↩</a></p></li>
 <li id="fn3"><p>This notation signifies a folder directory pathway. Slashes indicate folders.<a href="#fnref3">↩</a></p></li>
 <li id="fn4"><p>Interestingly, this makes R slower than languages that require pre-compilation—such as C++, which is the basis of the Stan language for writing Bayesian models. Much of Bayesian analysis is waiting for models to compile (and then waiting for the sampler to run…lots of waiting in Bayes).<a href="#fnref4">↩</a></p></li>
-<li id="fn5"><p>In fact, all elements in a vector must be the same data type. If you try to combine numbers and strings in the same vector, R coerces the vector to be the more inclusive data type, which is a string (so the number becomes the string-version of the number, i.e. <code>1</code> becomes <code>&quot;1&quot;</code>).<a href="#fnref5">↩</a></p></li>
 </ol>
 </div>
 

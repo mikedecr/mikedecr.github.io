@@ -70,7 +70,7 @@ This document describes how to get started with R and do some basic (but often u
       
       <guid>https://mikedecr.github.io/811/811-intro/</guid>
       <description>Introduction Materials for this course are written for graduate students in political science at the University of Wisconsin–Madison. Individuals from wider audiences may find some material here useful, but they should be aware that they are not the intended audience.
- R: the Why As a researcher, you should always be doing automated analysis. That is, your analysis should be controlled by code, rather than spread sheet formulas or drop-down menus.</description>
+ A Little about R As a researcher, you should always be doing automated analysis. That is, your analysis should be controlled by code, rather than spread sheet formulas or drop-down menus.</description>
     </item>
     
     <item>

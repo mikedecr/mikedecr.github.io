@@ -232,9 +232,9 @@ dist
 head(cars)
 ```
 
-The original dataset is unaffected by the things we do to the *attached* version of the dataset. This is, I think, pretty crazy behavior, and it demonstrates how weird attaching is, as a concept. 
+The original dataset is unaffected by the things we do to the *attached* version of the dataset. This is, I think, pretty crazy behavior, and it demonstrates how weird attaching is as a concept. 
 
-As a result, I'm drawing a pretty draconian policy around attaching: **You may not attach.** Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. Attaching is a dangerous practice, and I will not endorse any use of it, especially not for newcomers to R.
+As a result, I'm declaring a strict (but in my opinion, defensible) policy around attaching: **You may not attach.** Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. Attaching is a dangerous practice, and I will not endorse any use of it, especially not for newcomers to R.
 
 Luckily for us (and all of the R community), the `tidyverse` package provides many tools that make attaching unnecessary. 
 

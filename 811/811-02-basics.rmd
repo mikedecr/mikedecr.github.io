@@ -150,7 +150,7 @@ You can read the `<-` operator as "gets." So in the above example, `x` "gets" th
 
 # More variables: vectors
 
-We can assign a series of values to a variable. One way to do this in R is the `c()` function. The `c()` function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc). We will return to the concept of *data types* later.
+We can assign a series of values to a variable. One way to do this in R is the `c()` function. The `c()` function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc). 
 
 ```{r}
 y <- c(2, 4, 6)
@@ -313,34 +313,14 @@ There are a few different types of data in R.
 - Strings: text strings that are contained in `"quotes"`. R calls these "character" type variables.
 - Factors: ordered categories with text labels
 
-Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings. They are like text strings because they have text labels and you can't do math with them. But they are like numbers because you can put them in order. Put another way, factors are *ordered categories* that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.
+Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings, just like in Stata. They are like text strings because they have text labels and you can't do math with them. But they are like numbers because you can put them in order. Put another way, factors are *ordered categories* that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.
 
-You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs). Here we coerce numbers to characters.
+You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs).
 
-```{r}
-1:3
-as.character(1:3)
-```
-
-Numbers to factors, notice the creation of the metadata---i.e. the factor "levels."
-
-```{r}
-as.factor(1:3)
-```
-
-Character to factor. Notice how levels are assigned alphabetically by default. You can modify this with the `levels = ` argument in the `factor()` function.
-
-```{r}
-# This object comes with R, originally a character variable
-state.abb
-as.factor(state.abb)
-factor(state.abb, levels = state.abb) # custom levels
-```
-
-You can go from text to numeric, but only by way of factors. This is because `as.factor()` coerces text strings into ordered categories, and then `as.numeric()` interprets the ordering as numeric values.
-
-```{r}
-as.numeric(as.factor(state.abb))
+```{r, eval = FALSE}
+as.character(variable)
+as.numeric(variable)
+as.factor(variable)
 ```
 
 Note: data types are different from *object classes*. There are many classes of objects that can have different attributes. We'll see these more in future lessons (but examples include matrices, data frames, tables, lists, tibbles, lm objects, and so on).
@@ -350,7 +330,7 @@ Note: data types are different from *object classes*. There are many classes of 
 
 Vectors might contain missing data. The missing data code in R is `NA`, without quotes. 
 
-Missing data take the same data type as the vector in which they are located.^[In fact, all elements in a vector must be the same data type. If you try to combine numbers and strings in the same vector, R coerces the vector to be the more inclusive data type, which is a string (so the number becomes the string-version of the number, i.e. `1` becomes `"1"`).] For example:
+Missing data take the same data type as the vector in which they are located. For example:
 
 ```{r}
 h <- c(1, 2, NA, 4)
@@ -358,15 +338,7 @@ h <- c(1, 2, NA, 4)
 str(h)
 ```
 
-By placing `NA` inside a numeric vector, what we've told R is that we know that the missing data is numeric, we just don't know what the number is. As a result, a rule that applies to any number applies also to a missing numeric value, for example...
-
-```{r}
-h^0
-```
-
-Any number raised to the 0 is 1, even if we don't know what the number is!
-
-If the value of the number matters, however, some functions fail. For example, we don't know the mean of `h`. Try the following.
+By placing `NA` inside a numeric vector, what we've told R is that we know that the missing data is numeric, we just don't know what the number is. If the value of the number data, some functions fail. For example, we don't know the mean of `h`. Try the following.
 
 ```{r}
 mean(h)
@@ -377,6 +349,8 @@ We get a missing value, which is to say, we know that there *should* be a numeri
 ```{r}
 mean(h, na.rm = TRUE)
 ```
+
+
 
 # Functions
 
@@ -391,32 +365,15 @@ There are three things you need to use a function.
 Here are some common, helpful functions. 
 
 ```{r}
-# create normally distributed random noise
+# random samples from a normal distribution
 (x <- rnorm(n = 100, mean = 0, sd = 1)) 
 
 sum(x) 
-# number of elements in an object
-length(x) 
-# calculating an average by hand
-sum(x) / length(x)  
-# equivalent
+length(x) # number of elements in an object
 mean(x) 
-
-# variance
-var(x) 
-# variance by hand
-sum((x - mean(x))^2) / (length(x) - 1) 
-
-# standard deviation
-sd(x)
-sqrt(sum((x - mean(x))^2) / (length(x) - 1))
+var(x) # variance
+sd(x) # standard deviation
 ```
-
-Some common issues with functions.
-
-1. As mentioned above, some functions don't work as intended when you have missing values, so you may need to coerce R to skip over missing values.
-2. Some functions require multiple variables from one dataset. Because R can contain multiple datasets at once, these functions want you to tell R which dataset you want to use. This is often done with a `data =` argument inside the function. For example, a linear model would work like `lm(y ~ x, data = dataset_name)`. This tells R and that the `y` and `x` variables can be found in the dataset called `dataset_name`. We'll see more of this in future lessons.
-3. In math, we learn that if we give a function the same input, it returns the same output every time. (You may recall the "vertical line test.") Statistics pushes on this definition a little bit: a function may return "random" results if they represent stochastic processes (such as coin flips). This works in the computer also (e.g. the `rnorm()` function, which simulates randomly distributed noise. There are other distribution sampling functions as well). Technically speaking though, they are only pseudorandom and can be made nonrandom by specifying a seed using the `set.seed()` function.
 
 
 # Packages (for non-base functions)
@@ -451,18 +408,13 @@ my_mean <- function(z) {
 
 Here's how this works. 
 
-First, we pick a name for the function. Here, we chose `my_mean`. If you don't know if there are any existing functions with the same name, you can check the R help files. 
+First, we pick a name for the function. Here, we chose `my_mean`. If you don't know if there are any existing functions with the same name, you can search for it in R's help files (`?my_mean` and `??my_mean`).
 
-```{r}
-?my_mean
-??my_mean
-```
+Second, we decide which *arguments* this function should have. An argument is information that gets *passed* to the function. That's what the `function(z)` is doing---the function takes one argument called `z`. We could have written `function(banana)` if we wanted, and then manipulated the `banana` object inside the function. The `z` (or `banana`) object name is just a stand-in for information that we are going to manipulate inside the function definition. 
 
-Looks like we're all clear to use the name `my_mean`. Now that we have a good name, we need to *define* what the function does. We do this by *assigning* a definition to the name `my_mean`. That's what the `my_mean <- function(z) {...}` means. (Yes, in R, even functions are objects). 
 
-We must decide which *arguments* this function should have. An argument is information that gets *passed* to the function. That's what the `function(z)` is doing---the function takes one argument called `z`. We could have written `function(banana)` if we wanted, and then manipulated the `banana` object inside the function. The `z` (or `banana`) object name is just a stand-in for information that we are going to manipulate inside the function definition. 
+Third, the function needs a *definition* inside curly braces, meaning, what the function does. Technically, we *assign* a definition to the object called `my_mean`. (Yes, even functions are objects.) If we passed some variable to `my_mean()`, the function calculates the sum, finds the length, and then divides the sum by the length. Finally, the function *returns* the calculated value. In all, when we pass in some `z` data, we get out some value that is the result of `the_mean`.
 
-What manipulation takes place? That's what the remainder of the definition lays out. If we passed some variable to `my_mean()`, what the function does is calculate the sum, find the length, and then divide the sum by the length. Finally, we ask the function to *return* the calculated value, meaning that when we pass in some `z` data, we get out some value that is the result of `the_mean`.
 
 For example, let's make some data. 
 
@@ -484,36 +436,6 @@ ls()
 
 You will notice that none of the objects created by `my_mean()` are there. This is by design, because you don't want any function you create to get confused about whether the object you want to manipulate is local or global. 
 
-Let's give this an example. If I have a variable called `abc` in R memory, and I manipulate a local variable called `abc` inside a function, have I manipulated the original `abc`? The answer is No. 
-
-Let's see how. We make some object...
-
-```{r}
-(abc <- 150)
-```
-
-and then write the following function...
-
-```{r}
-zero_out <- function(abc) {
-  abc <- 0
-  return(abc)
-} 
-``` 
-
-And we pass `abc` to the function, which returns a 0.
-
-```{r}
-zero_out(abc)
-```
-
-The question is, have we overwritten the original `abc` to zero? No, we haven't.
-
-```{r}
-abc
-```
-
-That's because the `abc` inside the function definition is a *local variable*, so it has no bearing on other objects in R memory. For this reason, it is important that the objects you manipulate within a function are either (a) *passed to the function as arguments* or (b) *created within the function*. 
 
 
 
