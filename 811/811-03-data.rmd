@@ -1,5 +1,5 @@
 ---
-title: "Day 1: Data in R"
+title: "Lecture 1: Data Manipulation"
 author: "Michael DeCrescenzo"
 description: "Creating, modifying, shaping, and piping data"
 date: "2018-01-01"

@@ -1,5 +1,5 @@
 ---
-title: "Day 3: Analysis"
+title: "Lecture 3: Analysis"
 author: "Michael DeCrescenzo"
 description: "Statistical analysis, model output, and workflow integration"
 date: "2018-03-01"

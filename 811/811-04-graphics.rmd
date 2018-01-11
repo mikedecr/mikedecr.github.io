@@ -1,5 +1,5 @@
 ---
-title: "Day 2: Graphics"
+title: "Lecture 2: Graphics"
 author: "Michael DeCrescenzo"
 description: "Graphics in R using ggplot2"
 date: '2018-02-01'
@@ -7,7 +7,7 @@ slug: 811-graphics
 categories: ["R", "ps811", "Teaching"]
 tags: []
 
-draft: true
+# draft: true
 ---
 
 
