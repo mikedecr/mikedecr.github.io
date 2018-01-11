@@ -8,27 +8,24 @@ categories: ["R", "ps811", "Teaching"]
 tags: []
 ---
 
-# What is on this web page
+# Objectives
 
-Please guide yourself through this web page *before our first in-class R lesson*. It would be best if you walked through this document in enough advance of class that you can ask me questions about any confusing parts in enough advance of class. I just want to use our class time as effectively as possible!
+This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata. 
 
-This document describes how to get started with R and do some basic (but often useful) tricks. We discuss installing R, running simple commands, indexing, some elementary programming logic, and functions. We close with some slight discussion of how R and Stata differ, though we will be returning to that topic throughout the course.
-
-**Note:** This lesson is a little "abstract" in that in demonstrates R's *general* behavior rather than a concrete application of R workflow. We get much more concrete in the following lesson on data manipulation. Take this slowly; mess around with some of the code if it helps you understand what it's doing. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.
-
-Thanks, and I'll see you in class!
+**Note:** This lesson will be more "abstract" than other lessons in this series. This is because we exploring R's *general* behavior rather than a concrete application of R workflow. We get much more concrete in future lessons. As a result, take this lesson slowly at first. Mess around with some of the code if it helps you understand what it's doing. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.
 
 
-# How to read this page
+# How to read these lessons
 
-This page contains code snippets that you can paste into R. 
+Pages in this series contain code blocks that you can paste into R. Some of the code blocks are included with their results.
 
-```
-Code appears in blocks like this. You can paste this text into R.
+```{r, eval = FALSE}
+"Code appears in blocks like this."
+"You can paste this code directly into R."
 ```
 
 ```{r, echo = FALSE}
-"Results appear with two ## signs"
+"Results appear on this page with two '##' signs"
 ```
 
 
@@ -37,9 +34,9 @@ Code appears in blocks like this. You can paste this text into R.
 
 If you have not set up R already, click [here](https://mirror.las.iastate.edu/CRAN/) to download R for your operating system (if you haven't already). 
 
-A little bit about what's going on here: R is open source and is distributed from various ["mirrors"](https://en.wikipedia.org/wiki/Mirror_website), which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors [all over the world](https://cran.r-project.org/mirrors.html). It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.
+A little bit about what's going on here: R is open source and is distributed from various ["mirrors,"](https://en.wikipedia.org/wiki/Mirror_website) which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors [all over the world](https://cran.r-project.org/mirrors.html). It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.
 
-Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (`R.app` on OSX or `Rgui.exe` on Windows), as a terminal program (which I do for advanced reasons), or using the Rstudio application. Rstudio is discussed below.
+Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (`R.app` on OSX or `Rgui.exe` on Windows), using the Rstudio application (which we discuss below), or as a program in your computer's command-line shell (which I do, for technical reasons).
 
 
 
@@ -53,15 +50,15 @@ The most essential part of using R is the *console*. This is where results of al
 </center>
 <br>
 
-Although you can type commands directly into the console, most commands should be written in a *script file*. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete with future package versions, for example).
+Although you can type commands directly into the console, most commands should be written in a *script file*. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).
 
 
 
 # Open a script file
 
-Use whatever program you desire to open a script file. The basic R GUI application has a script editor that can be accessed using the `File` menu or a keyboard shortcut. Many R users prefer to manage R projects using [Rstudio](https://www.rstudio.com/products/rstudio/), an [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) that provides several tools for interacting with R. Windows users may find Notepad++ or TextMate to be useful text editors. Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to the R console. I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for creating fast R code. Rstudio comes standard with many such shortcuts.
+Use whatever program you desire to open a script file. The basic R GUI application has a script editor that can be accessed using the `File` menu or a keyboard shortcut. Many R users prefer to manage R projects using [Rstudio](https://www.rstudio.com/products/rstudio/), an [IDE](https://en.wikipedia.org/wiki/Integrated_development_environment) that provides several tools for interacting with R. Windows users may find Notepad++ or TextMate to be useful text editors. Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to an R console. I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for writing code quickly. Rstudio comes standard with many such shortcuts.
 
-Personally, I prefer to edit R script using the [Sublime Text](https://www.sublimetext.com/) editor and the [R-Box package](https://packagecontrol.io/packages/R-Box).^[Package control does not come default with Sublime Text, but it is a universal component of any Sublime user's experience. Instructions for installing and using Package Control can be found [here](https://packagecontrol.io/installation).] Sublime has a nice system for editing custom keyboard macros for any language you frequently use, which I use liberally.^[Individuals who are already comfortable with Sublime should feel free to raid my custom settings, which can be obtained through my [Github page](https://github.com/mikedecr/sublime-user-folder).]
+Personally, I R scripts using the [Sublime Text](https://www.sublimetext.com/) editor with the [R-Box package](https://packagecontrol.io/packages/R-Box) installed. Sublime has a nice system for installing supplemental packages and editing custom keyboard shortcuts for any language you frequently use. If you use Sublime already, feel free to [pilfer from my custom settings](https://github.com/mikedecr/sublime-user-folder).
 
 Script files should begin with some description of the script. You can include comments (text that will not be executed as R commands) after the `#` symbol. For example, your script file for this lesson might contain some comments at the top like...
 
@@ -72,25 +69,24 @@ Script files should begin with some description of the script. You can include c
 # ------------------------------------------------------------
 ```
 
-Comments are great for describing what code is doing, planning an analysis, writing notes to yourself. Comments are also great for *pseudocode*, which are notes to yourself that "translate" what code is doing into English. We will see some examples of this as the course progresses.
+Comments are great for describing what code is doing, planning an analysis, writing notes to yourself, and so on. Comments are great for *pseudocode*, which are notes to yourself that "translate" what code is doing into English. We will see some examples of this as the course progresses.
 
 At the top of my script files, I typically include some code that sets up my project:
 
-- create subdirectories for storing output (we will talk about this in future lessons)
+- create subdirectories for storing output (we'll cover this later)
 - load relevant packages
-- set project-wide options (graphics themes, graphics colors, any other things I want to store)
+- set other project-wide options (graphics themes, graphics colors, any other things I want to store)
 
 Although a script file can be imperfect while a project is being developed, a well-written script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that you can retrace the steps of your analysis.
 
-Save this file. In your `ps811` folder on your computer (which you should have...), create a section for R containing a "lessons" folder. Save this document in `ps811/R/lessons/`.^[This notation signifies a folder directory pathway. Slashes indicate folders.] 
+We should save this file. Navigate to your `ps811` folder on your computer (which you should have...), create a subfolder for R, and then within the R folder, create another "lessons" folder. Save this document in `ps811/R/lessons/`. (This syntax represents folder pathways in your computer's file system. We'll be seeing more of this later.)
 
 
 
 
 # Executing commands
 
-Just like Stata, the R interface is 
-a REPL---that is, Read-Evaluate-Print Loop. That means R processes commands one at a time without the need to pre-compile any code (compilation essentially happens during execution).^[Interestingly, this makes R slower than languages that require pre-compilation---such as C++, which is the basis of the Stan language for writing Bayesian models. Much of Bayesian analysis is waiting for models to compile (and then waiting for the sampler to run...lots of waiting in Bayes).]
+Just like Stata, the R interface is a REPL---that is, Read-Evaluate-Print Loop. That means R processes commands one at a time without the need to pre-compile any code.
 
 Just to demonstrate some basic R behavior, let's run a few commands.
 
@@ -109,17 +105,10 @@ Now take the above block of code and paste the commands into your script file. T
 
 
 
-# Everything is an Object
-
-We don't usually manipulate mathematical expressions this atomically in R. Instead we treat data as variables. Before we jump into that, we should explain how R treats variables. 
-
-In R, everything is an object. I can store an arbitrary value as a variable, which is an object. A text string can be an object. An entire dataset. A variable within a dataset can be thought of as an object within another object. It's all objects. This makes R very flexible, although some object manipulations are obviously out of bounds (can't add `4 + "fish"`, for example).
-
-
 
 # Variables
 
-We can store and manipulate variables in R. Just as how in math the expression $x + 4$ can take different values depending on the value of $x$, we can do similar things with R. 
+We don't usually manipulate mathematical expressions this atomically in R. Instead we treat data as variables. Just as how in math the expression $x + 4$ can take different values depending on the value of $x$, we can do similar things with R. 
 
 First, we'll "assign" a value to a variable using the assignment operator `<-`. The `<-` is a combination of a less-than sign `<` and a hyphen `-`.
 
@@ -137,7 +126,7 @@ We can display the contents of any object by simply typing the object name. Prin
 x
 ```
 
-...and we get back a `5`.
+...and we get back a `5`. That is to say, R "evaluated" the object called `x` and the result is simply equal to 5.
 
 Do some math with `x`...
 
@@ -145,7 +134,7 @@ Do some math with `x`...
 x + 4
 ```
 
-You can read the `<-` operator as "gets." So in the above example, `x` "gets" the value of 5. For simple expressions, `<-` can mean "equals," but as we begin working with more complex objects (such as the results of a statistical model), saying "equals" in your head becomes a little more difficult to justify.
+You can read the `<-` operator as "gets." A left-hand side object "gets" the results of whatever operation is on the right-hand side. So in the above example, `x` "gets" the value of 5. For simple expressions, `<-` can mean "equals," but as we begin working with more complex objects (such as the results of a statistical model), saying "equals" in your head becomes a little more difficult to justify.
 
 
 # More variables: vectors
@@ -163,16 +152,26 @@ If you wrap an assignment inside of parentheses, the result will print at the sa
 (y <- c(2, 4, 6))
 ```
 
-We can use multi-element variables to do math on the entire variable at once. Just as we could do real math...
+We can use multi-element variables to do math on the entire vector at once. Just as we could do real math with a vector...
 
 $\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}$
 
-we can also do similar things with vectors in R.
+we can also do similar things in R.
 
 ```{r}
 2 * y
 y * y
 ```
+
+
+
+
+# Everything is an Object
+
+In R, everything is an object. I can store an arbitrary value as a variable, which is an object. A text string can be an object. An entire dataset. A variable within a dataset can be thought of as an object within another object. It's all objects. This makes R very flexible, although some object manipulations are obviously out of bounds (can't add `4 + "fish"`, for example).
+
+
+
 
 
 # Indexing
@@ -186,7 +185,7 @@ y[2]
 y[3]
 ```
 
-Indexing notation is why the console prints a little `[1]` next to all results. It is indicating that the adjacent element is the first element. This becomes clearer if we were to print a long vector with many more elements---for example, 100 repetitions of the same data.
+Indexing notation is why the console prints a little `[1]` next to all results. It is indicating that the adjacent element is the first element of the results. This becomes clearer if we were to print a long vector with many more elements---for example, 100 repetitions of the same data.
 
 ```{r}
 rep("hello", 100)
@@ -219,31 +218,36 @@ tall_m[2, 2]
 wide_m[1, 3]
 ```
 
-If we don't specify a row, R grabs every row. Here we leave the row unspecified but grab the second column.
-
-```{r}
-tall_m
-tall_m[ , 2]
-```
-
-And if we don't specify a column, R returns every column. Here we specify the row but leave the column unspecified.
+If we specify a row but don't specify a column, R returns every column from the specified row. Here we specify the row `1` but don't specify a column. 
 
 ```{r}
 wide_m[1, ]
 ```
 
-**Note:** Although some languages are "zero-indexed" (meaning the first element of a variable is index position 0), R is "one-indexed." This makes more sense for statistical purposes, but may be different from other languages you have seen (for example C). Calling the 0'th element of a variable does not throw an error, however. Go figure.
+And if we don't specify a row, R grabs every row. Here we leave the row unspecified but grab the second column.
+
+```{r}
+tall_m[ , 2]
+```
+
+Even though `tall_m[ , 2]` is the second *column* of `tall_m`, the results don't print as a vertical column. Why? Because once R evaluates `tall_m[ , 2]`, the results are just another object. It's nothing more than a vector floating there. R no longer remembers that it comes from `tall_m`. You could use that vector for more stuff; indeed, as far as R is concerned, `tall_m[ , 2]` is exactly equivalent to a vector `c(2, 4, 6)`.
+
+*This is the kind of flexibility that is valuable in R.* You can ask R to evaluate some complex thing, and its results become available to you as just another vector that you can manipulate further. This allows you to sew together a complicated series of commands and, as long as you don't trip some kind of error, it just works. 
+
+## A note about indexing
+
+Although some languages are "zero-indexed" (meaning the first element of a variable is index position 0), R is "one-indexed." This makes more sense for statistical purposes, but it may be different from other languages you have seen (for example C). Calling the 0'th element of a variable does not throw an error, however. Go figure.
 
 ```{r}
 y[0]
 ```
 
-**Another important note:** Indexing isn't something you will use much in the tidyverse, but it is important to be familiar with it for a few reasons. First, it has useful mathematical parallels, where $y_{i}$ is analogous to `y[i]`. This sometimes comes in handy for dealing with the results from statistical models. Additionally, you will encounter it when searching through message boards for R help, especially when you see someone do some kind of *logical selection*. What does "logical selection" mean, exactly? Well...
+**Another important note:** Although it is important that you understand the intuition of indexing for thinking about how R works, this kind of *explicit* indexing is not something you will do much when we move to the `tidyverse`. Indexing remains important for several reasons though. First, it has useful mathematical parallels, where $y_{i}$ is analogous to `y[i]`. This sometimes comes in handy for dealing with the results from statistical models. Additionally, you will encounter it when searching through message boards for R help, especially when you see someone do some kind of *logical selection*. `tidyverse` functions implicitly use indexing by logical selection all the time. What does "logical selection" mean, exactly? Well...
 
 
 # Logic
 
-Logic as a concept in programming is less daunting than it sounds. At it's core, what we're doing is dealing with `TRUE`s and `FALSE`s. An example to illustrate what I mean. We'll make a vector.
+Logic as a concept in programming is less daunting than it sounds. At it's core, what we're doing is dealing with is statements that evaluate to either `TRUE` or `FALSE`j. An example to illustrate what I mean: we'll make a vector.
 
 ```{r}
 (g <- 1:10)
@@ -255,7 +259,7 @@ We can ask R about things that are true and false about the values in the vector
 g > 5
 ```
 
-What happened here? The statement `g > 5` is a "logical," meaning that its underlying meaning is fundamentally `TRUE` or `FALSE`. R asks if `g` is greater than 5 for each element in `g`, and R returns an entire vector of logicals, each element corresponding to the original elements in `g`. 
+The statement `g > 5` is a "logical," meaning that its underlying meaning is fundamentally `TRUE` or `FALSE`. R asks if `g` is greater than 5, and since `g` is a vector, and R returns a vector of logicals, each element corresponding to the original elements in `g`. 
 
 We can do this kind of thing with several operators. Let's see them in practice.
 
@@ -288,7 +292,9 @@ And now let's say that I only want to do this for values of `g` less than 4. Fir
 g[g < 4]
 ```
 
-...and then do the operation I want.
+...which is to say, "give me the elements of `g` where `g` is less than 4" (or more literally, "give me the elements of `g` where the statement `g < 4` evaluates to `TRUE`").
+
+Once we have these elements, we do the operation.
 
 ```{r}
 g[g < 4] * 10
@@ -300,13 +306,12 @@ This seems a little abstract right now, but here's how you may see others do thi
 who[region == "Europe", ]
 ```
 
-This block of code would be read as, "print the `who` object keeping only the observations (rows) from the Europe region, keeping every column". The `tidyverse` uses other tools to do this kind of thing, which I find to be easier.
-
+This block of code would read as, "give me the `who` object, but only the rows where `region` is `"Europe"`." (Or, again more literally, give me the `who` object, but only the rows where the statement `region == "Europe"` evaluates to `TRUE`). The `tidyverse` uses other tools to do this selection. Cases are still kept using logical syntax (which is very useful), but you don't have to think so hard about index positions evaluating to `TRUE`. It ends up being much more intuitive.
 
 
 # Data types
 
-There are a few different types of data in R. 
+We have hinted so far that there are a few different types of data in R. 
 
 - Logical: `TRUE`s and `FALSE`s.
 - Numeric: including integers and doubles
@@ -315,13 +320,7 @@ There are a few different types of data in R.
 
 Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings, just like in Stata. They are like text strings because they have text labels and you can't do math with them. But they are like numbers because you can put them in order. Put another way, factors are *ordered categories* that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.
 
-You can coerce data from type to another, and they follow some intuitive rules (with certain trade-offs).
-
-```{r, eval = FALSE}
-as.character(variable)
-as.numeric(variable)
-as.factor(variable)
-```
+It is possible to coerce data from type to another, which follows some intuitive rules that we can cover in future lessons.
 
 Note: data types are different from *object classes*. There are many classes of objects that can have different attributes. We'll see these more in future lessons (but examples include matrices, data frames, tables, lists, tibbles, lm objects, and so on).
 
@@ -338,17 +337,19 @@ h <- c(1, 2, NA, 4)
 str(h)
 ```
 
-By placing `NA` inside a numeric vector, what we've told R is that we know that the missing data is numeric, we just don't know what the number is. If the value of the number data, some functions fail. For example, we don't know the mean of `h`. Try the following.
+By placing `NA` inside a numeric vector, what we've told R is that we know that the missing data is numeric, we just don't know what the number is. If some function requires that we know every value, it will probably fail. Try the following.
 
 ```{r}
 mean(h)
 ```
 
-We get a missing value, which is to say, we know that there *should* be a numeric mean, we just don't know what it is because we don't know all of `h`. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.
+Notice that this doesn't cause an *error*. Instead, the result is a missing value. What this means is, we know that there *should* be a numeric mean (which is why there is no error), we just don't know what the mean is because we don't know what all of `h` is. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.
 
 ```{r}
 mean(h, na.rm = TRUE)
 ```
+
+Many functions have `na.rm` ("remove `NA`") arguments that can be flipped on, such as `sum()`, `sd()`, and so on. 
 
 
 
@@ -365,22 +366,33 @@ There are three things you need to use a function.
 Here are some common, helpful functions. 
 
 ```{r}
-# random samples from a normal distribution
-(x <- rnorm(n = 100, mean = 0, sd = 1)) 
+# 10 thousand random samples from a normal distribution
+x <- rnorm(n = 10000, mean = 0, sd = 1)
 
+# sum
 sum(x) 
-length(x) # number of elements in an object
+# number of elements in an object
+length(x) 
+# mean
 mean(x) 
-var(x) # variance
-sd(x) # standard deviation
+# variance
+var(x) 
+# standard deviation
+sd(x) 
 ```
 
+It is fairly easy to write your own functions in R. We will come back to that in a later lesson.
 
-# Packages (for non-base functions)
+# Help files
+
+Get help on any function using `?function_name` or `help(function_name)`.
+
+
+# External Packages (for non-base functions)
 
 Base R only contains a small number of functions. Most analyses require more complicated tools that are not standard with R. For these tasks, there are hundreds of packages available for download. 
 
-Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the `tidyverse` package. Because the package depends on other packages, all packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it...we will use this package in class).
+Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the `tidyverse` package. Because the package depends on other packages, all required packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it...we will use this package in class).
 
 ```{r, eval = FALSE}
 install.packages("tidyverse")
@@ -388,60 +400,11 @@ install.packages("tidyverse")
 
 
 
-# User-defined functions
-
-This section is a little complicated, so it's okay if it doesn't make perfect sense at first.
-
-In R, it is easy to write your own functions. Here is an example of a function that calculates a mean. 
-
-```{r}
-my_mean <- function(z) {
-
-  sum_z <- sum(z)
-  n <- length(z)
-  the_mean <- sum_z / n
-  
-  return(the_mean)
-
-}
-```
-
-Here's how this works. 
-
-First, we pick a name for the function. Here, we chose `my_mean`. If you don't know if there are any existing functions with the same name, you can search for it in R's help files (`?my_mean` and `??my_mean`).
-
-Second, we decide which *arguments* this function should have. An argument is information that gets *passed* to the function. That's what the `function(z)` is doing---the function takes one argument called `z`. We could have written `function(banana)` if we wanted, and then manipulated the `banana` object inside the function. The `z` (or `banana`) object name is just a stand-in for information that we are going to manipulate inside the function definition. 
-
-
-Third, the function needs a *definition* inside curly braces, meaning, what the function does. Technically, we *assign* a definition to the object called `my_mean`. (Yes, even functions are objects.) If we passed some variable to `my_mean()`, the function calculates the sum, finds the length, and then divides the sum by the length. Finally, the function *returns* the calculated value. In all, when we pass in some `z` data, we get out some value that is the result of `the_mean`.
-
-
-For example, let's make some data. 
-
-```{r}
-(some_data <- seq(0, 10, 2))
-```
-
-(Notice that the `seq(a, b, c)` function creates a sequence of values from `a` to `b` with a skip interval of `c`.) And then we will find the mean of this variable using our new mean function.
-
-```{r}
-my_mean(some_data)
-```
-
-There is one potentially-confusing point I need to make about custom functions. The variables that are manipulated inside the function definition are called *local variables*. This means they only exist in the world of that function. Although the function manipulates variables called `z`, `sum_z`, and so on, those variables only exist to that function and are not accessible to you in the rest of R's memory. They exist only to make the function work. To demonstrate the point, print out all of the objects in R's memory using the `ls()` function.
-
-```{r}
-ls()
-```
-
-You will notice that none of the objects created by `my_mean()` are there. This is by design, because you don't want any function you create to get confused about whether the object you want to manipulate is local or global. 
-
-
-
-
 
 
 # R vs Stata
+
+**keep?**
 
 As we continue these lessons, you will see more about how these languages are similar and different. There are definitely *some* similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don't have to compile an entire file of code before you can run it. Yay! 
 
@@ -450,12 +413,12 @@ The differences between R and Stata have benefits and drawbacks. Here is some ra
 R is free and open source. 
 
 - Pro: When you lose your university access license to Stata (which you will, eventually), you can still use R.
-- Con: Some of the stuff in R may lower quality than the stuff in Stata. Granted, most of the stuff in R you use works just as well as Stata, but there is really nothing stopping some ding dong from writing some crappy code and putting it out there. Wisdom of the crowds generally holds though: if an R tool is popular, you can count on it to be reliable. There are *lots* of smart people using and constantly improving R!
+- Con: Some of the stuff in R may lower quality than the stuff in Stata. Granted, most of the stuff in R you use works just as well as Stata, but there is really nothing stopping some jerk from writing some sloppy code and putting it out there. Wisdom of the crowds generally holds though: if an R tool is popular, you can count on it to be reliable. There are *lots* of smart people using and constantly improving R!
 
 R is a fully formed programming language.
 
-- Pro: R makes it very easy to directly access data as vectors, matrices, and dataframes with intuitive programming syntax such as indexing.
-- Pro: R operates with *functions* rather than commands. In R, if I had the functions `f()`, `g()`, and `h()`, I could write `f(g(h(x)))` in one line of code and it just works. Not so in Stata. 
+- Pro: R makes it very easy to directly access data as vectors, matrices, and dataframes with a coherent and vertically integrated programming syntax.
+- Pro: R operates with *functions* rather than mere *commands*. In R, if I had the functions `f()`, `g()`, and `h()`, I could write `f(g(h(x)))` in one line of code and it just works.
 - Con: This makes R a little tougher to learn at first for those with less computing experience.
 
 
@@ -471,7 +434,7 @@ R's interface is less graphical than Stata. It's all about the code.
 
 - Pro: This makes replication easier (or, harder to mess up) in R, because there is less dependence on pointing-and-clicking to create analysis and graphics. 
 - Con: For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.
-- Con: R syntax is more "programmy" and less English-seeming. The drawback of this is that it is complicated *at first*. The benefit of this is that it is simpler in the long run, because the rules of the syntax create long-run structure and coherence in the R language.
+- Con: R syntax is more "programmy" and less English-seeming. The drawback of this is that it is complicated *at first*. The benefit of this is that it is simpler in the long run, because the rules of the syntax impose long-run structure and coherence in the R language.
 
 
 
