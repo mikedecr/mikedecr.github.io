@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="https://mikedecr.github.io/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.31.1" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Lecture 2: Graphics</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED JAN 1, 2018 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>, 
+      
+      <a class="meta" href="/categories/teaching">TEACHING</a>, 
+      
+      <a class="meta" href="/categories/ps811">PS811</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <div id="objective" class="section level1">
+<h1>Objective</h1>
+<p>The goal of this lesson is to provide an introduction to graphics in R, by way of <code>ggplot2</code> in particular. We will cover:</p>
+<ul>
+<li>The “grammar of graphics”—the “gg” in <code>ggplot</code></li>
+<li>How <code>ggplot2</code> works</li>
+<li>Common geoms for social science data</li>
+<li>Customizing the appearance of ggplot graphic</li>
+<li>Saving graphics</li>
+<li>Some (not too much) discussion of the ways base graphics and <code>ggplot2</code> are different</li>
+</ul>
+<p>Some notes to get us started:</p>
+<ul>
+<li>Some introductions to ggplot begin with an overview of the <code>qplot()</code> (quick plot) function from the <code>ggplot2</code> package. We will not start there; <code>qplot</code> is a midway point between base and ggplot graphics, but we have covered neither yet, so we have no need to “transition” out of base graphics. Moreover, I think the differences between <code>qplot</code> and the workhorse <code>ggplot</code> function confuse new users and distract from a deeper exploration of <code>ggplot</code>. So we’ll jump right in.</li>
+<li>Plots created using <code>ggplot</code> generally look good by default. As we get started, however, they may look a little awkward. This is because we’re making plots that demonstrate ggplot functionality (which we don’t want to rush though), not create the prettiest plot imaginable. As we introduce more and more ggplot concepts, plots will begin to look more publication-ready.</li>
+<li>If you want more help with <code>ggplot</code>, I’d recommend that you consult resources I list in the syllabus, in other lessons, and Hadley Wickham’s <code>ggplot2</code> book (which you can build into a PDF on your own computer [after installing some other tools]).</li>
+</ul>
+</div>
+<div id="get-started" class="section level1">
+<h1>Get started</h1>
+<p>The <code>ggplot2</code> package is loaded whenever you load the <code>tidyverse</code> package (but I sometimes load the <code>ggplot2</code> package anyway because it gives my code editor has better auto-complete behavior).</p>
+<pre class="r"><code>library(&quot;magrittr&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.3.4     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()</code></pre>
+<pre class="r"><code>library(&quot;ggplot2&quot;)</code></pre>
+<p>We’ll also install <code>labelled</code>, which we’ll use to remove Stata’s labels from the data.</p>
+<pre class="r"><code># If labelled isn&#39;t installed, install it
+if (!require(&quot;labelled&quot;))
+  install.packages(&quot;labelled&quot;)</code></pre>
+<pre><code>## Loading required package: labelled</code></pre>
+<p>Set your directory where it was last lesson and load the modified ANES dataset from the previous lesson:</p>
+<pre class="r"><code>setwd(&quot;~/path/to/wherever&quot;)
+anes &lt;- readRDS(&quot;data/anes-modified.RDS&quot;) %&gt;% 
+        mutate_all(labelled::remove_labels) 
+        # remove Stata labels from the data
+        # pkg::function lets us use functions without loading the full package</code></pre>
+<p>Notice the use of <code>mutate_all()</code>. It= applies a function to every column in the data (in this case, the <code>remove_labels()</code> function). If you’re familiar with R’s <code>apply()</code> functions or functional programming in general, this is a similar idea. We’ll cover those things more at the end of the next lesson.</p>
+<p>You can verify that you imported the correct dataset when you notice the modified variable names.</p>
+<pre class="r"><code>names(anes)</code></pre>
+</div>
+<div id="the-grammar-of-graphics" class="section level1">
+<h1>The grammar of graphics</h1>
+<p>The <a href="https://www.springer.com/us/book/9780387245447">grammar of graphics</a> is a set of independent components that compose graphics. <code>ggplot2</code> is an R package that implements the grammar <a href="http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf">in a layered fashion</a> by iteratively adding grammatical components to a figure. By providing a set of interchangeable tools with a shared syntax and carefully chosen defaults, <code>ggplot2</code> allows R users to create complex graphics with relatively little hassle.</p>
+<p>It is not essential for you to memorize the components of the grammar of graphics. In fact, thinking too hard about it is confusing at first. You will get an intuition for them as you use ggplot without being able to recite the tenets, but for the sake of exposition, here are the principles of the grammer. There is <em>no need</em> to memorize this list:</p>
+<ul>
+<li><strong>data</strong> to be visualized</li>
+<li><strong>aesthetic mappings</strong> that describe how variables are mapped to aesthetic attributes (such as axes and colors)</li>
+<li><strong>geometric representations of the data</strong>, “geoms” for short, such as lines, points, etc., that control how the cells in your data are presented on the page</li>
+<li><strong>scales</strong> which modify how aesthetic mappings are presented. You can use scales to modify how variables are presented along axes, as colors, and so on.</li>
+<li>a <strong>coordinate system</strong> that defines the plane on which you’re plotting. Most plots use a Cartesian plane but could use e.g. polar coordinates.</li>
+<li><strong>faceting system</strong> for breaking the data into subsets</li>
+<li>a <strong>theme</strong> that controls other display details, such as fonts</li>
+</ul>
+<p>Our examples today will build increasingly complex graphics that touch on all of these components.</p>
+<p>The fact that <code>ggplot</code> is rooted in an underlying model allows is advantageous because it allows users to create many different types of plots that share an underlying philosophy. This has enabled developers to create tons of extensions to <code>ggplot2</code> to provide support for additional <code>geoms</code> and aesthetic features that all follow the same basic rules, making it easier for a users to learn and incorporate new tools into their graphics arsenals. For this course, we like ggplot because it allows us to do a lot with a little. We will be making very interesting graphics in a very short amount of time.</p>
+<p>Having said that, there is some effort we need to expend getting mentally used to the <em>gg</em> model and how it works. Base graphics are more direct: put a line here, put points there. But base graphics requires a ton of work and wonky code to do the same kind of stuff that <code>ggplot</code> does with its hands tied behind its back. For that reason, I think we’ll like how quickly we can do cool stuff using <code>ggplot</code>.</p>
+</div>
+<div id="getting-ggplot-to-work" class="section level1">
+<h1>Getting <code>ggplot</code> to work</h1>
+<p>The <code>ggplot2</code> package contains tons of functions for plotting, but they begin with the titular <code>ggplot()</code> function. It works generically like so:</p>
+<pre class="r"><code>ggplot(dataset, aes(x = xvariable, y = yvariable))</code></pre>
+<p>where <code>dataset</code> is the name of a tidy data frame, <code>xvariable</code> is the variable you want to plot on the horizontal axis, and <code>yvariable</code> is the variable you want to plot on the vertical axis. The <code>aes()</code> function maps variables in your data to an aesthetic feature of the plot. We use <code>aes()</code> when we want to modify the plot’s according to <em>features of the dataset</em>. (We’ll come back to this.) This function is how nearly every graphic begins.</p>
+<p>Let’s see this with real data. We will first recode two variables, “feeling thermometer” scores for the Democratic and Republican presidential candidates.</p>
+<p>Consult the codebook for information on the “feeling thermometer.” You’ll notice that values 97-100 are represented with the number 97 in the codebook, while 98 and 99 are special codes for “don’t know” and missing responses. So we’ll want to remove those. We’ll also take the difference between the thermometer scores and create a <em>relative</em> thermometer score, where positive values indicate that an individual feels more warmly to the Republican candidate than to the Democratic candidate.</p>
+<pre class="r"><code># feeling thermometers
+summary(anes$VCF0424)  # democratic candidate</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    0.00   40.00   60.00   58.74   85.00   99.00   27799</code></pre>
+<pre class="r"><code>summary(anes$VCF0426)  # republican candidate</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##    0.00   40.00   60.00   55.94   85.00   99.00   27799</code></pre>
+<pre class="r"><code>anes &lt;- anes %&gt;% 
+  mutate(therm_demcand = case_when(VCF0424 &gt; 0 &amp; VCF0424 &lt;= 97 ~ VCF0424),
+         therm_gopcand = case_when(VCF0426 &gt; 0 &amp; VCF0426 &lt;= 97 ~ VCF0426),
+         reltherm_cand = therm_gopcand - therm_demcand)</code></pre>
+<p>We’ll plot the Republican candidate thermometer over the 7-point index of party ID.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="geoms" class="section level1">
+<h1>Geoms</h1>
+<p>You’ll notice that the plot is blank. That is because we have not added any geoms to the plot, only a mapping of variables to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes. It is important to note that we could visualize the data using a variety of geoms. It happens to be the cases that points make intuitive sense here.</p>
+<p>You can layer on grammatical components to a plot using the plus sign <code>+</code> after the <code>ggplot()</code> function.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_point()</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>We have a lot of data printing overtop one another because we have so many observations. We could jitter point using a jitter geom. We will specify the width of the jittering (the standard deviation), make the points empty circles, and reduce the opacity (alpha) of the points. You can learn more about the available point shapes <a href="http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r">here</a>.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>We could add a quick regression line. The regression line won’t be biased by the jittering because it is estimated using the data from the original aesthetic mapping (<code>x = pid7, y = reltherm_cand</code>), not the jittered data geom from <code>geom_jitter()</code>. The geom affects only the way the data are <em>displayed</em>, not the underlying values. This is why you should jitter the points as they appear in the plot (using the geom) rather than jittering the underlying data before plotting. (It is part of <code>ggplot</code> philosophy to provide tools that modify the way things appear in the plot without needing to modify the underlying data in problematic ways. Neat!)</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
+  geom_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><code>geom_smooth()</code> fits a loess estimate (<code>method = loess</code>) by default or, for large datasets, a polynomial estimate (<code>method = &quot;gam&quot;</code>). We can specify a linear model pretty easily (that is what the “lm” is for: the <code>lm()</code> function for linear regression, which we discuss more next week.). We can add more complex formulas to <code>geom_smooth()</code> using the <code>formula =</code> argument. Adding a smooth also adds a confidence interval to the plot by default, but we can’t see this one because it is so narrow.</p>
+</div>
+<div id="more-aesthetics" class="section level1">
+<h1>More aesthetics</h1>
+<p>As we said above, aesthetic mappings apply features of the data to some aesthetic property in the plot. So far, we have mapped two variables to <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> axes. We can also map colors, fill colors, point/line sizes, and so on.</p>
+<p>Instead of one regression line, we’ll add separate regression lines for two different groups in the data. Let’s use gender, so first we need to recode it.</p>
+<pre class="r"><code>anes %$% table(VCF0104)</code></pre>
+<pre><code>## VCF0104
+##     0     1     2 
+##   103 24862 30709</code></pre>
+<pre class="r"><code># 0 is NA/missing, implicitly recoded
+anes &lt;- anes %&gt;%
+  mutate(gender = case_when(VCF0104 == 1 ~ &quot;Men&quot;,
+                            VCF0104 == 2 ~ &quot;Women&quot;)) </code></pre>
+<p>Now that we have this variable, we can map color using it as so.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>That was easy. These colors are automatically added to a legend. (If you’re ever created a legend using base graphics, you know how awesome it is that you no longer have to struggle with that).</p>
+<p>When you map a variable to an aesthetic, ggplot automatically picks some default values. You can do this for colors, fills (e.g. the color of the confidence interval shading), point sizes, line widths, and so on. You can change defaults using scales.</p>
+<p>If you desire, you can add these aesthetic mappings to the first <code>aes()</code> call in the <code>ggplot()</code> function. This will automatically apply the aesthetic mapping to every <code>geom()</code> you call in the plot. In the current example, this would add color to both the smooth line and the points.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand, color = gender)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
+  geom_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>If you add overall plot aesthetics to <code>ggplot()</code>, you can always override them in any specific geom function. Here we map color inside the <code>ggplot()</code> function, but we override that coloring in <code>geom_jitter()</code> to make all the points the same color.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand, color = gender)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25,
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Note this general behavior. You can always add color to a geom, and it it applies to the entire geom. However, if you want the color to be responsive to be conditioned on some other grouping variable in the data, you must use <code>aes()</code>. This is also true for fill, size, alpha, and so on.</p>
+</div>
+<div id="scales" class="section level1">
+<h1>Scales</h1>
+<p>Scales are used to modify the defaults of any aesthetic mapping. First we’ll use it to control gender’s mapping by selecting our own colors.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender)) +
+  scale_color_brewer(palette = &quot;Set2&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Scale functions follow a format of <code>scale_aesthetic_xyz()</code>, where <code>aesthetic</code> is color, size, and so on. You can control color using color palettes with <code>scale_color_brewer()</code>. If you want to specify colors manually, use <code>scale_color_manual()</code>.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25,) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p>Here we also map the confidence interval’s fill color and the linetype of the smooth using gender.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Again, pardon the ugliness of the graphic as we demonstrate ggplot behaviors.</p>
+<p>Because <code>x</code> and <code>y</code> are also aesthetics, we can also modify them using <code>scale</code> functions.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>I can also add text labels to the tick positions.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>The <code>\n</code> character inserts a line break.</p>
+<div id="aesthetics-scales-and-labels" class="section level2">
+<h2>Aesthetics, scales, and labels</h2>
+<p>Related to aesthetics and scales is the labels we give these aesthetics. Notice that when we map variables to <code>x</code> and <code>y</code>, axis titles are created, and as we map variables to color, fill, and so on, a legend title was created. These can be modified with the <code>labs()</code> function.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID Index&quot;, y = &quot;Relative Candidate Thermometer Score&quot;,
+       color = &quot;Gender&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Notice how if I don’t specify every aesthetic name, the legend only changes the names that I specified. I should specify the name for color, fill, and linetype.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID Index&quot;, y = &quot;Relative Candidate Thermometer Score&quot;,
+       color = &quot;Gender&quot;, fill = &quot;Gender&quot;, linetype = &quot;Gender&quot;)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>I could also remove labels by feeding them a <code>NULL</code> value. In this case, we’re pretty sure what men and women signify, so maybe including the “Gender” label is redundant. So we can suppress the legend title.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID Index&quot;, y = &quot;Relative Candidate Thermometer Score&quot;,
+       color = NULL, fill = NULL, linetype = NULL)</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+</div>
+<div id="coordinate-systems" class="section level1">
+<h1>Coordinate systems</h1>
+<p>Coordinates are not very complicated. Most of the time you will use a Cartesian grid, so you’ll probably do one of two things.</p>
+<p>First, set the axis limits. This is an unrealistic application just to demonstrate the functionality.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID Index&quot;, y = &quot;Relative Candidate Thermometer Score&quot;,
+       color = NULL, fill = NULL, linetype = NULL) +
+  coord_cartesian(xlim = c(0, 8), ylim = c(-125, 125))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p>Remember, because the underlying values in the <code>x</code> aesthetic are 1 to 7, setting the <code>xlim</code> to 0 through 8 will pad each side by one unit. We use the <code>c()</code> function to pass a two-element vector of limits (minimum and maximum).</p>
+<p>Second is flipping <code>x</code> and <code>y</code>, which is handy for dot plots and coefficient plots (which we’ll see later). This is going to look strange in this example, of course, but again we’re just demonstrating the functionality.</p>
+<pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = &quot;slategray&quot;) +
+  geom_smooth(method = &quot;lm&quot;,
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) + 
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_linetype_manual(values = c(&quot;dotted&quot;, &quot;solid&quot;)) +
+  scale_x_continuous(breaks = 1:7, 
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID Index&quot;, y = &quot;Relative Candidate Thermometer Score&quot;,
+       color = NULL, fill = NULL, linetype = NULL) +
+  coord_flip(xlim = c(0.5, 7.5))</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>What’s important to remember here is that the <code>x</code> and <code>y</code> aesthetics have not changed, only the way they are <em>displayed</em> in the graphic. The <code>scale_x_continuous()</code> function, therefore, still modifies the party ID variable scale even though it’s now the vertical axis. That’s because <code>scale_x_continuous()</code> modifies the <em>x aesthetic</em>, not the <em>horizontal axis</em> per se. This same intuition works when we specify <code>xlim</code> inside the <code>coord_flip()</code> function.</p>
+</div>
+<div id="switching-to-another-example" class="section level1">
+<h1>Switching to another example</h1>
+<p>Here we will start to get serious about pretty graphics by switching to another example: party ID among men and women over time, with confidence intervals.</p>
+<p>First, we have to create the data. I’ll do this with my own confidence interval function that can handle survey weights. Don’t sweat too much how these data are created, but do note the structure of the data that we are working with. We have a proportion estimate of each party ID group, plus upper and lower bounds on that proportion estimate. We’ll aggregate this into a dataset called <code>pid_gendergap</code>.</p>
+<pre class="r"><code># CI function
+prop_ci &lt;- function(successes, n, level=0.05) {
+
+  # get parameters
+  p1 &lt;- successes/n
+  q1 &lt;- 1 - p1
+
+  # compute standard error
+  SE &lt;- sqrt((p1*q1)/n)
+
+  # find upper and lower bound
+  lower &lt;- p1 - qnorm(1-(level/2))*SE
+  upper &lt;- p1 + qnorm(0.975)*SE
+
+  # return data frame
+  return(data.frame(lower, upper))
+
+}
+
+# rename weight variable and
+# collapse the party variable into 3 categories
+anes &lt;- anes %&gt;% 
+  rename(wt = VCF0009z) %&gt;%
+  mutate(party = case_when(pid7 %in% 1:3 ~ &quot;Dem&quot;, 
+                           pid7 == 4 ~ &quot;Ind&quot;, 
+                           pid7 %in% 5:7 ~ &quot;Rep&quot;))
+
+# proportion in each PID in each year
+pid_gendergap &lt;- anes %&gt;%
+  select(cycle, gender, party, wt) %&gt;%
+  # weighted count in each cycle x gender x party category
+  group_by(gender, cycle, party) %&gt;%
+  count(wt = wt) %&gt;%
+  rename(x = n) %&gt;% 
+  # get the denominator by summing within gender x cycle
+  group_by(gender, cycle) %&gt;%
+  mutate(n = sum(x)) %&gt;% 
+  ungroup() %&gt;%
+  # proportion in each party ID, with CIs
+  mutate(prop = x / n,
+         lower = prop_ci(successes = x, n = n)$lower,
+         upper = prop_ci(successes = x, n = n)$upper) %&gt;%
+  # drop NAs
+  filter(cycle &gt; 1948 &amp; !is.na(party)) %&gt;%
+  select(cycle, gender, party, prop:upper) %&gt;%
+  print()</code></pre>
+<pre><code>## # A tibble: 174 x 6
+##    cycle gender party       prop      lower      upper
+##    &lt;dbl&gt;  &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+##  1  1952    Men   Dem 0.57125457 0.53740204 0.60510710
+##  2  1952    Men   Ind 0.05846529 0.04241644 0.07451413
+##  3  1952    Men   Rep 0.32399513 0.29198255 0.35600771
+##  4  1954    Men   Dem 0.59586466 0.55416529 0.63756403
+##  5  1954    Men   Ind 0.07706767 0.05440488 0.09973046
+##  6  1954    Men   Rep 0.30451128 0.26540567 0.34361688
+##  7  1956    Men   Dem 0.53621347 0.50137263 0.57105431
+##  8  1956    Men   Ind 0.09529860 0.07478431 0.11581290
+##  9  1956    Men   Rep 0.34307497 0.30990744 0.37624250
+## 10  1958    Men   Dem 0.56874266 0.53546831 0.60201700
+## # ... with 164 more rows</code></pre>
+<p>Now we’ll use this dataset to demonstrate some more concepts.</p>
+</div>
+<div id="facets" class="section level1">
+<h1>Facets</h1>
+<p>Faceting creates subsets for plotting. Here we create separate panels for men and women.</p>
+<p>Note the rest of the graphic. We plot cycle as the <code>x</code>, the proportion in each party ID as the <code>y</code>, and color according to party ID. This is possible because we created a nice tidy dataset that has columns dedicated to each variable we want to incorporate when plotting.</p>
+<p>Note we also use the <code>geom_line()</code> geom, which obviously plots a line.</p>
+<p>There are two faceting functions. <code>facet_wrap()</code> wraps categories. If we had a lot of categories, the panels would wrap across rows.</p>
+<pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+  facet_wrap(~ gender) +
+  geom_line()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>We use the <code>~</code> notation so that ggplot knows that <code>gender</code> is in the <code>pid_gendergap</code> data frame.</p>
+<p>The <code>facet_grid()</code> function, rather than wrapping, lets you specify a grid of variables to be divided into rows and columns (using <code>facet_grid(rowvar ~ colvar)</code>. Let’s do an example where gender is in rows and partisanship is in columns.</p>
+<pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+  facet_grid(gender ~ party) +
+  geom_line()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>You can suppress a row or column variable using <code>.</code></p>
+<pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+  facet_grid(. ~ gender) +
+  geom_line()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="confidence-intervals-as-ribbons" class="section level1">
+<h1>Confidence intervals as ribbons</h1>
+<p>Here’s a cool geom: <code>geom_ribbon()</code>. It lets you color in regions of the plot, which is especially useful for confidence intervals. We will use the <code>lower</code> and <code>upper</code> variables in our dataset for the upper and lower bounds of the ribbon. Let’s also add points.</p>
+<pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point() +
+  geom_ribbon(aes(ymin = lower, ymax = upper))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>So the “color” of the ribbon is mapped to party. For a ribbon, “color” is the outline color, while “fill” is the interior. We should map party to fill, therefore.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point() +
+  geom_ribbon(aes(ymin = lower, ymax = upper))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>We’ll turn down the opacity (alpha) of the ribbon so we can see what’s going on inside it. We’ll also make the points smaller.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>Let’s just remove the ribbon color. It’s getting in the way.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3, 
+              color = NA)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p>We’ll continue making this plot prettier by modifying the coordinates, aesthetics, scales, and labels. Note: we have to change the color and fill separately, since they’re separate aesthetics.</p>
+<p>We’ll also change the <code>y</code> labels using the <code>percent()</code> function in the <code>scales</code> package, which should be automatically installed and loaded with <code>ggplot2</code> (install it if not!). Note that this only changes the printing of the labels, not the underlying data. This is convenient because if we ever want to change from proportions to percentages, we don’t have to change the underlying data.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;)</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>The scales package also lets us easily do log transformations, print large numbers with commas for the thousands places, and so on. I encourage you to do your own research those needs arise.</p>
+</div>
+<div id="themes" class="section level1">
+<h1>Themes</h1>
+<p>Themes control ancillary aesthetic components of the plot. There are several preloaded themes that you can learn about <a href="http://ggplot2.tidyverse.org/reference/ggtheme.html">here</a>, and you can learn about <a href="https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html">other ggplot theme packages online</a>.</p>
+<p>We’ll use <code>theme_bw()</code>.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>There is also a <code>theme()</code> function, which allows you to change details of the theme without changing the entire theme. Here we will suppress the “minor” grid lines for the y axis only.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank())</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>If we wanted to modify the x axis scale, it might get cluttered.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank())</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>We could use the theme function to print the x axis diagonally and shift it down.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank(),
+        axis.text.x = element_text(angle = 45, vjust=0.75))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+<div id="finishing-touches-and-saving-a-graphic" class="section level1">
+<h1>Finishing touches and saving a graphic</h1>
+<p>Let’s use the <code>labs()</code> function to add some titles and captions. We’ll also tweak the caption color.</p>
+<pre class="r"><code>ggplot(pid_gendergap, 
+       aes(x = cycle, y = prop, color = party, fill = party)) +
+  facet_grid(. ~ gender) +
+  geom_line() +
+  geom_point(size = 1) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = 0.3,
+              color = NA) +
+  coord_cartesian(ylim = c(0, 0.65)) +
+  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray50&quot;, &quot;maroon&quot;)) +
+  labs(x = &quot;Election Year&quot;,
+       y = &quot;Proportion Identifiers&quot;,
+       color = &quot;Partisanship&quot;,
+       fill = &quot;Partisanship&quot;,
+       title = &quot;Party Identification of Men and Women&quot;,
+       subtitle = &quot;Leaning independents coded as partisans&quot;,
+       caption = &quot;Data source: ANES Cumulative File&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor.y = element_blank(),
+        axis.text.x = element_text(angle = 45, vjust=0.75),
+        plot.caption = element_text(color = &quot;gray&quot;, size = rel(0.75)))</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>This looks like a darn good graphic now, and it didn’t take much code at all!</p>
+<p>Saving this graphic is easy with the <code>ggsave</code> function. You generally want to save graphic as vector images in order to scale (that is, embiggen) a graphic without any pixelation. PDF is usually good for papers and presentations.</p>
+<pre class="r"><code># generally want to save it into your paper&#39;s dedicated folder, inside the graphics folder
+# set height and width (usually requires some trial and error)
+ggsave(&quot;paper/graphics/party-gender-gap.PDF&quot;, width = 5, height = 3)</code></pre>
+</div>
+<div id="other-graphics" class="section level1">
+<h1>Other graphics</h1>
+<p>There are plenty of other geoms that use slightly different aesthetics. Let’s just breeze through some now.</p>
+<div id="histrograms-and-density-plots" class="section level2">
+<h2>Histrograms and density plots</h2>
+<p>Histrograms and density plots, because they only show the distribution of one variable, only need one axis aesthetic (<code>x</code>).</p>
+<pre class="r"><code>anes %&gt;%
+  filter(!is.na(party)) %&gt;% 
+  ggplot(aes(x = reltherm_cand)) +
+    geom_histogram(aes(color = party)) +
+    labs(x = &quot;Relative Candidate Thermometer Score&quot;,
+         y = &quot;Frequency&quot;,
+         color = &quot;Partisanship&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Histogram bars are stacked by default, which is weird. Let’s make them dodge each other.</p>
+<pre class="r"><code>anes %&gt;%
+  filter(!is.na(party)) %&gt;% 
+  ggplot(aes(x = reltherm_cand)) +
+    geom_histogram(aes(color = party,
+                       fill = party),
+                   alpha = 0.5,
+                   position = &quot;dodge&quot;) +
+    scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray20&quot;, &quot;maroon&quot;)) +
+    scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray20&quot;, &quot;maroon&quot;)) +
+    labs(x = &quot;Relative Candidate Thermometer Score&quot;,
+         y = &quot;Frequency&quot;,
+         color = &quot;Partisanship&quot;,
+         fill = &quot;Partisanship&quot;)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_bin).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>You can also do kernel density estimates (which allow you set the kernel bandwidth):</p>
+<pre class="r"><code>anes %&gt;%
+  filter(!is.na(party)) %&gt;% 
+  ggplot(aes(x = reltherm_cand)) +
+    geom_density(aes(color = party, fill = party),
+                   alpha = 0.5,
+                   bw = 7) +
+    scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;gray20&quot;, &quot;maroon&quot;)) +
+    scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;gray20&quot;, &quot;maroon&quot;)) +
+    labs(x = &quot;Relative Candidate Thermometer Score&quot;,
+         y = &quot;Density&quot;,
+         color = &quot;Partisanship&quot;,
+         fill = &quot;Partisanship&quot;)</code></pre>
+<pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_density).</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+<div id="bar-graphs" class="section level2">
+<h2>Bar graphs</h2>
+<p>It’s a personal preference of mine that I think just about anything that you can show with a bar graph would be better with a dot plot. I tend to think that bar graphs are awkward and misused (e.g. for treatment effects). In my head, bars should be for counts or other things where zero is a hard lower bound (such as proportions). Bah! Anyway, here’s how you do them.</p>
+<p>Let’s make some data of the Democratic share of the two-party vote choice for each partisanship category.</p>
+<pre class="r"><code># dummy variable for Dem vote (0 = Rep vote, else NA)
+anes &lt;- anes %&gt;%
+  mutate(vote = VCF0706,
+         vote = case_when(vote == 1 ~ &quot;Democratic Candidate&quot;,
+                          vote == 2 ~ &quot;Republican Candidate&quot;))
+
+# calculate averages for each party
+# presidential years since 2000
+mean_votes &lt;- anes %&gt;%
+  filter(cycle &gt;= 2000 &amp; (cycle %% 4) == 0) %&gt;%
+  filter(!is.na(pid7)) %&gt;% 
+  group_by(cycle, pid7, vote) %&gt;%
+  # weighted count of vote choice for each party ID
+  count(wt = wt) %&gt;%
+  filter(!is.na(vote)) %&gt;%
+  rename(x = n) %&gt;%
+  # denominator for proportion
+  group_by(pid7, cycle) %&gt;% 
+  mutate(n = sum(x, na.rm = TRUE),
+         prop = x / n) %&gt;%
+  filter(vote == &quot;Democratic Candidate&quot;) %&gt;% 
+  print()</code></pre>
+<pre><code>## # A tibble: 28 x 6
+## # Groups:   pid7, cycle [28]
+##    cycle  pid7                 vote        x        n       prop
+##    &lt;dbl&gt; &lt;dbl&gt;                &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1  2000     1 Democratic Candidate 226.3032 233.3809 0.96967318
+##  2  2000     2 Democratic Candidate 139.2629 162.9099 0.85484615
+##  3  2000     3 Democratic Candidate 104.6395 134.6471 0.77713891
+##  4  2000     4 Democratic Candidate  32.7809  73.4962 0.44602170
+##  5  2000     5 Democratic Candidate  19.4899 135.5557 0.14377780
+##  6  2000     6 Democratic Candidate  20.7502 127.6704 0.16252945
+##  7  2000     7 Democratic Candidate   3.1975 180.9091 0.01767462
+##  8  2004     1 Democratic Candidate 136.5594 140.0645 0.97497510
+##  9  2004     2 Democratic Candidate  94.1009 110.5912 0.85088958
+## 10  2004     3 Democratic Candidate 104.1500 118.5958 0.87819299
+## # ... with 18 more rows</code></pre>
+<p>And then plot these averages.</p>
+<pre class="r"><code>ggplot(mean_votes, aes(x = pid7, y = prop)) +
+  geom_col(fill = &quot;gray50&quot;) +
+  facet_wrap(~ cycle) +
+  scale_x_continuous(breaks = 1:7,
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Ind&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  labs(x = &quot;Party ID&quot;,
+       y = &quot;Democratic Share of Two-Party Vote&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Here is the same plot as a dot plot, also changing the scales.</p>
+<pre class="r"><code>ggplot(mean_votes, aes(x = pid7, y = prop)) +
+  geom_point() +
+  facet_wrap(~ cycle) +
+  scale_x_continuous(breaks = 1:7,
+                     labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Ind&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = &quot;Party ID&quot;,
+       y = &quot;Democratic Share of Two-Party Vote&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>And you can often rotate dot plots so that their labels have more space to print out.</p>
+<pre class="r"><code>ggplot(mean_votes, aes(x = pid7, y = prop)) +
+  geom_point() +
+  facet_wrap(~ cycle) +
+  scale_x_continuous(breaks = 1:7,
+                     labels = c(&quot;Strong Democrat&quot;, &quot;Weak Democrat&quot;, &quot;Lean Democrat&quot;, &quot;Independent&quot;, &quot;Lean Republican&quot;, &quot;Weak Republican&quot;, &quot;Strong Republican&quot;)) +
+  scale_y_continuous(breaks = seq(0, 1, .2),
+                     labels = scales::percent) +
+  labs(x = &quot;Party Identification&quot;,
+       y = &quot;Democratic Share of Two-Party Vote&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  coord_flip()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>There are some other things you can do with geoms. One thing you can do for dot plots is use <code>geom_pointrange</code>, which adds a point and an error bar. Like <code>geom_ribbon</code>, it takes a <code>ymin</code> and <code>ymax</code> aesthetic. This makes it good for confidence intervals. Here, we’ll use it in a slightly hacky way to help us trace which point goes with which category, making it a little easier to read the plot. Notice how I set the min and max aesthetics.</p>
+<pre class="r"><code>ggplot(mean_votes, aes(x = pid7, y = prop)) +
+  geom_pointrange(aes(ymin = 0, ymax = prop),
+                  linetype = &quot;dotted&quot;) +
+  facet_wrap(~ cycle) +
+  scale_x_continuous(breaks = 1:7,
+                     labels = c(&quot;Strong Democrat&quot;, &quot;Weak Democrat&quot;, &quot;Lean Democrat&quot;, &quot;Independent&quot;, &quot;Lean Republican&quot;, &quot;Weak Republican&quot;, &quot;Strong Republican&quot;)) +
+  scale_y_continuous(breaks = seq(0, 1, .2),
+                     labels = scales::percent) +
+  labs(x = &quot;Party Identification&quot;,
+       y = &quot;Democratic Share of Two-Party Vote&quot;) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank()) +
+  coord_flip()</code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<hr />
+</div>
+</div>
+<div id="categorical-variables-strings-and-factors" class="section level1">
+<h1>Categorical variables (strings and factors)</h1>
+<p>If you plot a categorical variable on one of the axes, <code>ggplot</code> will automatically interpret it and plot categories side-by-side. We’ll demonstrate this with a toy example.</p>
+<p>One potential problem, though, is that <code>ggplot</code> will order categorical variables alphabetically or, if the variable is already an ordered factor, will interpret the factor order out of the metadata about the levels.</p>
+<p>Here we show what happens when we plot a string variable that can be ordered alphabetically:</p>
+<pre class="r"><code># x and y: continuous variables
+# s: string variable
+# f: factor variable with weird order
+d &lt;- data_frame(x = rnorm(100, 0, 1),
+                y = 4 + (2 * x) + rnorm(100, 0, 1),
+                s = sample(c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;), 100, replace = TRUE),
+                f = factor(s, levels = c(&quot;c&quot;, &quot;d&quot;, &quot;a&quot;, &quot;b&quot;)))
+
+ggplot(d, aes(x = s, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = &quot;String&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p>…and if we plot from a factor that already has ordered levels…</p>
+<pre class="r"><code>ggplot(d, aes(x = f, y = y)) +
+  geom_jitter(shape = 1, width = 0.15) +
+  labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>…or we wanted to assign colors using an ordered factor.</p>
+<pre class="r"><code>ggplot(d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = f)) +
+  labs(x = &quot;Continuous&quot;, 
+       y = &quot;Continuous&quot;,
+       color = &quot;Ordered Factor&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>To reorder these categories, I recommend using tools in the <code>forcats</code> package, which, conveniently, is part of the <code>tidyverse</code> package.</p>
+<ul>
+<li><code>fct_relevel()</code>: declare a factor variable, and then declare the order of levels. Any level not listed during reordering is given the same precedence as the original variable</li>
+<li><code>fct_rev()</code>: reverse the order of a factor’s levels</li>
+<li><code>fct_recode()</code>: change the levels of a factor</li>
+</ul>
+<p>Here is an example where we take the <code>f</code> variable, a factor with ordered levels, and rearrange the order of the levels so that they appear in the legend with the proper order. This is called “releveling” (changing the order of levels), as opposed to “recoding” (changing the labels themselves).</p>
+<pre class="r"><code>fixed_d &lt;- d %&gt;%
+  mutate(fixed_f = fct_relevel(f, &quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;)) %&gt;%
+  print()</code></pre>
+<pre><code>## # A tibble: 100 x 5
+##             x        y     s      f fixed_f
+##         &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;fctr&gt;  &lt;fctr&gt;
+##  1  0.3015809 4.381665     a      a       a
+##  2 -0.2191171 3.728997     a      a       a
+##  3  0.6798580 3.960966     b      b       b
+##  4 -0.9064171 1.895744     a      a       a
+##  5  2.0929533 6.851081     d      d       d
+##  6 -1.3797361 1.154825     d      d       d
+##  7  0.7210708 5.832154     d      d       d
+##  8  0.8421729 4.522019     b      b       b
+##  9  0.4087040 4.856370     b      b       b
+## 10  0.6462117 7.014090     c      c       c
+## # ... with 90 more rows</code></pre>
+<p>You’ll note that the variables <code>f</code> and <code>fixed_f</code> now have the same values, but the ordering of <code>fixed_f</code>’s levels has been modified.</p>
+<pre class="r"><code>ggplot(fixed_d, aes(x = x, y = y)) +
+  geom_point(shape = 1,
+             aes(color = fixed_f)) +
+  labs(x = &quot;Continuous&quot;, 
+       y = &quot;Continuous&quot;,
+       color = &quot;Ordered Factor&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(fixed_d, aes(x = f, y = y)) +
+  geom_point(shape = 1) +
+  labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous&quot;) </code></pre>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-53-2.png" width="672" /></p>
+<div id="an-aside-on-stringr" class="section level2">
+<h2>An aside on <code>stringr</code></h2>
+<p>The <code>stringr</code> package contains a few useful functions for modifying character vectors.</p>
+<p>Let’s take the <code>state.name</code> vector that comes with R.</p>
+<pre class="r"><code>state.name</code></pre>
+<pre><code>##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;Arkansas&quot;      
+##  [5] &quot;California&quot;     &quot;Colorado&quot;       &quot;Connecticut&quot;    &quot;Delaware&quot;      
+##  [9] &quot;Florida&quot;        &quot;Georgia&quot;        &quot;Hawaii&quot;         &quot;Idaho&quot;         
+## [13] &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;           &quot;Kansas&quot;        
+## [17] &quot;Kentucky&quot;       &quot;Louisiana&quot;      &quot;Maine&quot;          &quot;Maryland&quot;      
+## [21] &quot;Massachusetts&quot;  &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Mississippi&quot;   
+## [25] &quot;Missouri&quot;       &quot;Montana&quot;        &quot;Nebraska&quot;       &quot;Nevada&quot;        
+## [29] &quot;New Hampshire&quot;  &quot;New Jersey&quot;     &quot;New Mexico&quot;     &quot;New York&quot;      
+## [33] &quot;North Carolina&quot; &quot;North Dakota&quot;   &quot;Ohio&quot;           &quot;Oklahoma&quot;      
+## [37] &quot;Oregon&quot;         &quot;Pennsylvania&quot;   &quot;Rhode Island&quot;   &quot;South Carolina&quot;
+## [41] &quot;South Dakota&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Utah&quot;          
+## [45] &quot;Vermont&quot;        &quot;Virginia&quot;       &quot;Washington&quot;     &quot;West Virginia&quot; 
+## [49] &quot;Wisconsin&quot;      &quot;Wyoming&quot;</code></pre>
+<p>Here are some useful functions.</p>
+<pre class="r"><code># look for pattern, return a logical vector
+str_detect(state.name, &quot; &quot;) #  spaces</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [23] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [34]  TRUE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE FALSE FALSE FALSE
+## [45] FALSE FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<pre class="r"><code># example: return all two-word state names
+state.name[str_detect(state.name, &quot; &quot;)]</code></pre>
+<pre><code>##  [1] &quot;New Hampshire&quot;  &quot;New Jersey&quot;     &quot;New Mexico&quot;     &quot;New York&quot;      
+##  [5] &quot;North Carolina&quot; &quot;North Dakota&quot;   &quot;Rhode Island&quot;   &quot;South Carolina&quot;
+##  [9] &quot;South Dakota&quot;   &quot;West Virginia&quot;</code></pre>
+<pre class="r"><code># substring based on character position
+str_sub(state.name, 1L, 3L)</code></pre>
+<pre><code>##  [1] &quot;Ala&quot; &quot;Ala&quot; &quot;Ari&quot; &quot;Ark&quot; &quot;Cal&quot; &quot;Col&quot; &quot;Con&quot; &quot;Del&quot; &quot;Flo&quot; &quot;Geo&quot; &quot;Haw&quot;
+## [12] &quot;Ida&quot; &quot;Ill&quot; &quot;Ind&quot; &quot;Iow&quot; &quot;Kan&quot; &quot;Ken&quot; &quot;Lou&quot; &quot;Mai&quot; &quot;Mar&quot; &quot;Mas&quot; &quot;Mic&quot;
+## [23] &quot;Min&quot; &quot;Mis&quot; &quot;Mis&quot; &quot;Mon&quot; &quot;Neb&quot; &quot;Nev&quot; &quot;New&quot; &quot;New&quot; &quot;New&quot; &quot;New&quot; &quot;Nor&quot;
+## [34] &quot;Nor&quot; &quot;Ohi&quot; &quot;Okl&quot; &quot;Ore&quot; &quot;Pen&quot; &quot;Rho&quot; &quot;Sou&quot; &quot;Sou&quot; &quot;Ten&quot; &quot;Tex&quot; &quot;Uta&quot;
+## [45] &quot;Ver&quot; &quot;Vir&quot; &quot;Was&quot; &quot;Wes&quot; &quot;Wis&quot; &quot;Wyo&quot;</code></pre>
+<pre class="r"><code>str_sub(state.name, -3L, -1L)</code></pre>
+<pre><code>##  [1] &quot;ama&quot; &quot;ska&quot; &quot;ona&quot; &quot;sas&quot; &quot;nia&quot; &quot;ado&quot; &quot;cut&quot; &quot;are&quot; &quot;ida&quot; &quot;gia&quot; &quot;aii&quot;
+## [12] &quot;aho&quot; &quot;ois&quot; &quot;ana&quot; &quot;owa&quot; &quot;sas&quot; &quot;cky&quot; &quot;ana&quot; &quot;ine&quot; &quot;and&quot; &quot;tts&quot; &quot;gan&quot;
+## [23] &quot;ota&quot; &quot;ppi&quot; &quot;uri&quot; &quot;ana&quot; &quot;ska&quot; &quot;ada&quot; &quot;ire&quot; &quot;sey&quot; &quot;ico&quot; &quot;ork&quot; &quot;ina&quot;
+## [34] &quot;ota&quot; &quot;hio&quot; &quot;oma&quot; &quot;gon&quot; &quot;nia&quot; &quot;and&quot; &quot;ina&quot; &quot;ota&quot; &quot;see&quot; &quot;xas&quot; &quot;tah&quot;
+## [45] &quot;ont&quot; &quot;nia&quot; &quot;ton&quot; &quot;nia&quot; &quot;sin&quot; &quot;ing&quot;</code></pre>
+<pre class="r"><code># cut a string based on a pattern match (returns a list)
+str_split(state.name, pattern = &quot; &quot;)</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;Alabama&quot;
+## 
+## [[2]]
+## [1] &quot;Alaska&quot;
+## 
+## [[3]]
+## [1] &quot;Arizona&quot;
+## 
+## [[4]]
+## [1] &quot;Arkansas&quot;
+## 
+## [[5]]
+## [1] &quot;California&quot;
+## 
+## [[6]]
+## [1] &quot;Colorado&quot;
+## 
+## [[7]]
+## [1] &quot;Connecticut&quot;
+## 
+## [[8]]
+## [1] &quot;Delaware&quot;
+## 
+## [[9]]
+## [1] &quot;Florida&quot;
+## 
+## [[10]]
+## [1] &quot;Georgia&quot;
+## 
+## [[11]]
+## [1] &quot;Hawaii&quot;
+## 
+## [[12]]
+## [1] &quot;Idaho&quot;
+## 
+## [[13]]
+## [1] &quot;Illinois&quot;
+## 
+## [[14]]
+## [1] &quot;Indiana&quot;
+## 
+## [[15]]
+## [1] &quot;Iowa&quot;
+## 
+## [[16]]
+## [1] &quot;Kansas&quot;
+## 
+## [[17]]
+## [1] &quot;Kentucky&quot;
+## 
+## [[18]]
+## [1] &quot;Louisiana&quot;
+## 
+## [[19]]
+## [1] &quot;Maine&quot;
+## 
+## [[20]]
+## [1] &quot;Maryland&quot;
+## 
+## [[21]]
+## [1] &quot;Massachusetts&quot;
+## 
+## [[22]]
+## [1] &quot;Michigan&quot;
+## 
+## [[23]]
+## [1] &quot;Minnesota&quot;
+## 
+## [[24]]
+## [1] &quot;Mississippi&quot;
+## 
+## [[25]]
+## [1] &quot;Missouri&quot;
+## 
+## [[26]]
+## [1] &quot;Montana&quot;
+## 
+## [[27]]
+## [1] &quot;Nebraska&quot;
+## 
+## [[28]]
+## [1] &quot;Nevada&quot;
+## 
+## [[29]]
+## [1] &quot;New&quot;       &quot;Hampshire&quot;
+## 
+## [[30]]
+## [1] &quot;New&quot;    &quot;Jersey&quot;
+## 
+## [[31]]
+## [1] &quot;New&quot;    &quot;Mexico&quot;
+## 
+## [[32]]
+## [1] &quot;New&quot;  &quot;York&quot;
+## 
+## [[33]]
+## [1] &quot;North&quot;    &quot;Carolina&quot;
+## 
+## [[34]]
+## [1] &quot;North&quot;  &quot;Dakota&quot;
+## 
+## [[35]]
+## [1] &quot;Ohio&quot;
+## 
+## [[36]]
+## [1] &quot;Oklahoma&quot;
+## 
+## [[37]]
+## [1] &quot;Oregon&quot;
+## 
+## [[38]]
+## [1] &quot;Pennsylvania&quot;
+## 
+## [[39]]
+## [1] &quot;Rhode&quot;  &quot;Island&quot;
+## 
+## [[40]]
+## [1] &quot;South&quot;    &quot;Carolina&quot;
+## 
+## [[41]]
+## [1] &quot;South&quot;  &quot;Dakota&quot;
+## 
+## [[42]]
+## [1] &quot;Tennessee&quot;
+## 
+## [[43]]
+## [1] &quot;Texas&quot;
+## 
+## [[44]]
+## [1] &quot;Utah&quot;
+## 
+## [[45]]
+## [1] &quot;Vermont&quot;
+## 
+## [[46]]
+## [1] &quot;Virginia&quot;
+## 
+## [[47]]
+## [1] &quot;Washington&quot;
+## 
+## [[48]]
+## [1] &quot;West&quot;     &quot;Virginia&quot;
+## 
+## [[49]]
+## [1] &quot;Wisconsin&quot;
+## 
+## [[50]]
+## [1] &quot;Wyoming&quot;</code></pre>
+<pre class="r"><code># grab the nth element of a split string list
+sapply(str_split(state.name, pattern = &quot; &quot;) , function(x) x[2])</code></pre>
+<pre><code>##  [1] NA          NA          NA          NA          NA         
+##  [6] NA          NA          NA          NA          NA         
+## [11] NA          NA          NA          NA          NA         
+## [16] NA          NA          NA          NA          NA         
+## [21] NA          NA          NA          NA          NA         
+## [26] NA          NA          NA          &quot;Hampshire&quot; &quot;Jersey&quot;   
+## [31] &quot;Mexico&quot;    &quot;York&quot;      &quot;Carolina&quot;  &quot;Dakota&quot;    NA         
+## [36] NA          NA          NA          &quot;Island&quot;    &quot;Carolina&quot; 
+## [41] &quot;Dakota&quot;    NA          NA          NA          NA         
+## [46] NA          NA          &quot;Virginia&quot;  NA          NA</code></pre>
+<pre class="r"><code># replace a pattern with another pattern
+str_replace(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;)</code></pre>
+<pre><code>##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;Arkansas&quot;      
+##  [5] &quot;California&quot;     &quot;Colorado&quot;       &quot;Connecticut&quot;    &quot;Delaware&quot;      
+##  [9] &quot;Florida&quot;        &quot;Georgia&quot;        &quot;Hawaii&quot;         &quot;Idaho&quot;         
+## [13] &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;           &quot;Kansas&quot;        
+## [17] &quot;Kentucky&quot;       &quot;Louisiana&quot;      &quot;Maine&quot;          &quot;Maryland&quot;      
+## [21] &quot;Massachusetts&quot;  &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Mississippi&quot;   
+## [25] &quot;Missouri&quot;       &quot;Montana&quot;        &quot;Nebraska&quot;       &quot;Nevada&quot;        
+## [29] &quot;New-Hampshire&quot;  &quot;New-Jersey&quot;     &quot;New-Mexico&quot;     &quot;New-York&quot;      
+## [33] &quot;North-Carolina&quot; &quot;North-Dakota&quot;   &quot;Ohio&quot;           &quot;Oklahoma&quot;      
+## [37] &quot;Oregon&quot;         &quot;Pennsylvania&quot;   &quot;Rhode-Island&quot;   &quot;South-Carolina&quot;
+## [41] &quot;South-Dakota&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Utah&quot;          
+## [45] &quot;Vermont&quot;        &quot;Virginia&quot;       &quot;Washington&quot;     &quot;West-Virginia&quot; 
+## [49] &quot;Wisconsin&quot;      &quot;Wyoming&quot;</code></pre>
+<pre class="r"><code># for strings that might contain multiple instances of the pattern
+# (won&#39;t notice a difference here)
+str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;)</code></pre>
+<pre><code>##  [1] &quot;Alabama&quot;        &quot;Alaska&quot;         &quot;Arizona&quot;        &quot;Arkansas&quot;      
+##  [5] &quot;California&quot;     &quot;Colorado&quot;       &quot;Connecticut&quot;    &quot;Delaware&quot;      
+##  [9] &quot;Florida&quot;        &quot;Georgia&quot;        &quot;Hawaii&quot;         &quot;Idaho&quot;         
+## [13] &quot;Illinois&quot;       &quot;Indiana&quot;        &quot;Iowa&quot;           &quot;Kansas&quot;        
+## [17] &quot;Kentucky&quot;       &quot;Louisiana&quot;      &quot;Maine&quot;          &quot;Maryland&quot;      
+## [21] &quot;Massachusetts&quot;  &quot;Michigan&quot;       &quot;Minnesota&quot;      &quot;Mississippi&quot;   
+## [25] &quot;Missouri&quot;       &quot;Montana&quot;        &quot;Nebraska&quot;       &quot;Nevada&quot;        
+## [29] &quot;New-Hampshire&quot;  &quot;New-Jersey&quot;     &quot;New-Mexico&quot;     &quot;New-York&quot;      
+## [33] &quot;North-Carolina&quot; &quot;North-Dakota&quot;   &quot;Ohio&quot;           &quot;Oklahoma&quot;      
+## [37] &quot;Oregon&quot;         &quot;Pennsylvania&quot;   &quot;Rhode-Island&quot;   &quot;South-Carolina&quot;
+## [41] &quot;South-Dakota&quot;   &quot;Tennessee&quot;      &quot;Texas&quot;          &quot;Utah&quot;          
+## [45] &quot;Vermont&quot;        &quot;Virginia&quot;       &quot;Washington&quot;     &quot;West-Virginia&quot; 
+## [49] &quot;Wisconsin&quot;      &quot;Wyoming&quot;</code></pre>
+</div>
+</div>
+<div id="concluding-notes" class="section level1">
+<h1>Concluding notes</h1>
+<div id="why-plot" class="section level2">
+<h2>Why plot</h2>
+<p>You should be plotting your data often, even if you don’t expect the plot to make it into your final product.</p>
+<ul>
+<li>Plotting shows you the distribution of your data, which can help you decide on certain modeling assumptions or variable transformations.</li>
+<li>Plotting shows outliers.</li>
+<li>Plotting gives you a sense of the underlying trends in your data so you can be a better thinker about the problem at hand.</li>
+</ul>
+<p>You can see Hadley Wickham do some exploratory analysis <a href="https://www.youtube.com/watch?v=go5Au01Jrvs">here</a>, which shows how graphics (and <code>ggplot</code> in particular) facilitates principled and <em>fast</em> exploration of your data.</p>
+</div>
+<div id="data-and-ggplot" class="section level2">
+<h2>Data and <code>ggplot</code></h2>
+<p>If you haven’t already picked up on it, <code>ggplot</code> is designed to complement the philosophy of tidy data. It does this mainly by forcing you to declare a data frame from which you are plotting. This helps ensure that the data you are plotting are conceptually related and can be easily mapped to plot aesthetics. And in order to shape your data so that these mappings are done correctly, the tools in <code>tidyr</code> and <code>dplyr</code> are extremely helpful.</p>
+<p>As we have seen, many tools in <code>ggplot</code> are designed to prevent you from modifying the underlying data too much. This is generally a tenet of the Tidyverse philosophy. Your original data frames are sacrosanct, and they serve as the raw material from which analyses and plots are extracted. This is why pipe chains begin with a tidy dataset and work out from there. Changes that you make to the data that <em>only</em> exist for the purpose of plotting (or modeling, etc.) should be temporary, as they are not essential to the core underlying data.</p>
+<p>Say that you have raw data that has an ugly text label, and every time you plot that variable, you want a prettier text label. Rather than change the underlying data, you might make another table that serves as a dictionary for converting the ugly label to a prettier label. You can then merge this table into your data just before plotting. Practices such as this keep your original data free of extraneous stuff while still allowing you to produce beautiful graphics.</p>
+</div>
+<div id="graphics-approaches-base-vs-ggplot" class="section level2">
+<h2>Graphics approaches, base vs <code>ggplot</code></h2>
+<p>Base graphics, on the other hand, do not rely on an underlying data model in order to work. You can plot points, lines, labels, and so on, with no conceptual connection between the data used for any of these geoms. Furthermore, legends and labels are entirely detached from the data. This makes base graphics inefficient and prone to human error in a number of ways, mainly because updates to the elements of your graphics need to made separately from updates to legends, labels, axes and so on. These elements are all conceptually independent in base graphics. so they have know knowledge about how you change the data or the appearance of the graphics. That said, it isn’t impossible to create a <code>ggplot</code>-esque graphic using base tools; it will just take more work and more time to do it.</p>
+<p>All this being said, base graphics do have some advantage on <code>ggplot</code> graphics if you have to create a plot that contains many unrelated elements that don’t share a common data frame. (It isn’t impossible to plot from multiple data frames in <code>ggplot</code>, but it isn’t easy.)</p>
+<p>You can find plenty of disagreements online about how and when base or <code>ggplot</code> tools are better. I have an opinionated stance on it, but I’m making the bet that this lesson will lead you to agree with me.</p>
+</div>
+<div id="other-graphical-dos-and-donts" class="section level2">
+<h2>Other graphical Dos and Don’ts</h2>
+<p>Some general advice for plotting:</p>
+<ul>
+<li>Never use multiple Y axes. It’s easy to use multiple Y axis scales to make variables look more or less related, so you shouldn’t do it. In fact, <code>ggplot</code> won’t let you (because it’s opinionated like that).</li>
+<li>Try to make your graphics as minimal as possible. Add elements where it improves the graphic. Otherwise, you don’t want to create clutter.</li>
+<li>If you can label points or trends <em>in the plot</em> rather than in a legend, do so. You can do this with <code>geom_text</code> or the <code>annotate()</code> function.</li>
+</ul>
+</div>
+<div id="other-gg-tools" class="section level2">
+<h2>Other <code>gg</code> tools</h2>
+<p>There are many extensions for <code>ggplot</code> that you can install. Rather than tediously describe them, I’ll point you to a <a href="http://www.ggplot2-exts.org/gallery/?utm_content=buffer6d153&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">web page</a> discussing many of the tools out there. These let you create heatmaps, choropleths, network graphs, mosaic plots, autocorrelation plots, and much more. Extensions I have used in the past include <code>ggfortify</code>, <code>ggridges</code>, <code>ggthemes</code>, <code>ggsci</code>, <code>GGally</code>, and <code>ggalt</code>.</p>
+</div>
+<div id="graphics-in-future-lessons" class="section level2">
+<h2>Graphics in future lessons</h2>
+<p>We will further explore graphics using <code>ggplot</code> in the final lesson on statistical analysis. In particular, we’ll discuss how to use <code>ggplot</code> tools to summarize statistical models and create post-estimation graphics.</p>
+</div>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-basics/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/811">811</a></span>
+  
+  
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-data/"> | next &gt;</a></span>
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
+
+
