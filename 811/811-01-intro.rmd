@@ -1,6 +1,6 @@
 ---
 title: "PoliSci 811: R Introduction"
-description: "Brief introduction to this semester's R lessons. READ BEFORE CLASS."
+description: "Brief introduction to this semester's R lessons"
 author: "Michael DeCrescenzo"
 date: '2017-11-29'
 slug: 811-intro

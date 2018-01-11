@@ -1,6 +1,6 @@
 ---
 title: Getting Started with R
-description: "Getting R up and running. READ BEFORE CLASS."
+description: "Getting R up and running"
 author: "Michael DeCrescenzo"
 date: '2017-12-01'
 slug: 811-basics
