@@ -6,15 +6,25 @@
     <description>Recent content on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Lecture 2: Graphics</title>
+      <link>https://mikedecr.github.io/811/811-graphics/</link>
+      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-graphics/</guid>
+      <description>Objective The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
+ The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common geoms for social science data Customizing the appearance of ggplot graphic Saving graphics Some (not too much) discussion of the ways base graphics and ggplot2 are different  Some notes to get us started:</description>
+    </item>
+    
+    <item>
       <title>Lecture 1: Data Manipulation</title>
       <link>https://mikedecr.github.io/811/811-data/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://mikedecr.github.io/811/811-data/</guid>
       <description>Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
@@ -22,13 +32,14 @@
     </item>
     
     <item>
-      <title>Lecture 2: Graphics</title>
-      <link>https://mikedecr.github.io/811/811-graphics/</link>
+      <title>PoliSci 811: R Introduction</title>
+      <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-graphics/</guid>
-      <description>Objective The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
- The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common geoms for social science data Customizing the appearance of ggplot graphic Saving graphics Some (not too much) discussion of the ways base graphics and ggplot2 are different  Some notes to get us started:</description>
+      <guid>https://mikedecr.github.io/811/811-intro/</guid>
+      <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
+A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.
+Compared to other popular statistical software for the social scientists (such as Stata), R stands out as a more general programming language.</description>
     </item>
     
     <item>
@@ -66,22 +77,11 @@ Partisan voters are historically unlikely to cast their votes for the opposing p
     <item>
       <title>Getting Started with R</title>
       <link>https://mikedecr.github.io/811/811-basics/</link>
-      <pubDate>Fri, 01 Dec 2017 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate>
       
       <guid>https://mikedecr.github.io/811/811-basics/</guid>
       <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
 Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
-    </item>
-    
-    <item>
-      <title>PoliSci 811: R Introduction</title>
-      <link>https://mikedecr.github.io/811/811-intro/</link>
-      <pubDate>Wed, 29 Nov 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://mikedecr.github.io/811/811-intro/</guid>
-      <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
-A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.
-Compared to other popular statistical software for the social scientists (such as Stata), R stands out as a more general programming language.</description>
     </item>
     
     <item>

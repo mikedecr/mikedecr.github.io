@@ -2,7 +2,7 @@
 title: "PoliSci 811: R Introduction"
 description: "Brief introduction to this semester's R lessons"
 author: "Michael DeCrescenzo"
-date: '2017-11-29'
+date: '2018-01-01'
 slug: 811-intro
 categories: ["R", "ps811", "Teaching"]
 tags: []

@@ -2,7 +2,7 @@
 title: "Lecture 1: Data Manipulation"
 author: "Michael DeCrescenzo"
 description: "Creating, modifying, shaping, and piping data"
-date: "2018-01-01"
+date: "2018-01-03"
 slug: "811-data"
 categories: ["R", "ps811", "Teaching"]
 tags: []

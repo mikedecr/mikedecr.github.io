@@ -2,14 +2,462 @@
 title: "Lecture 3: Analysis"
 author: "Michael DeCrescenzo"
 description: "Statistical analysis, model output, and workflow integration"
-date: "2018-03-01"
-slug: "811-analysis"
+date: "2018-01-05"
+slug: "811-analysis-draft"
 categories: ["R", "ps811", "Teaching"]
 tags: []
 
 draft: true
 ---
 
+
+# Objective
+
+In this lesson, we will introduce how to do statistical analysis using R. This includes...
+
+- simple tests of means and proportions
+- estimating regression models and formatting model output
+- post-estimation diagnosis and visualization
+- a preview of advanced analysis tools
+
+We will also cover some intermediate R routines such as `apply()` functions and other methods for functional programming (such as nesting and mapping).
+
+Since we should be getting used to R, I will sprinkle some more interesting data manipulation tricks into the analysis. Pay careful attention, as some of these tricks may come in handy.
+
+
+# Data and packages
+
+Set your directory and read data from that we saved at the end of the previous lesson.
+
+```{r, eval = FALSE}
+setwd("~/path/to/wherever")
+anes <- readRDS("data/anes-modified-2.RDS")
+```
+
+```{r, include = FALSE, cache = TRUE}
+anes <- readRDS(here::here("static/data/anes-modified-2.RDS"))
+```
+
+Load packages. 
+
+```{r, eval = FALSE}
+if (!require("Rmisc"))
+  install.packages("Rmisc")
+
+library("Rmisc")
+library("magrittr")
+library("tidyverse")
+library("ggplot2")
+library("broom")
+```
+
+
+```{r, include = FALSE}
+if (!require("Rmisc"))
+  install.packages("Rmisc")
+
+library("Rmisc")
+library("magrittr")
+library("tidyverse")
+library("ggplot2")
+library("broom")
+```
+
+
+
+# Non-statistical analysis
+
+Previous lessons covered two major types of non-statistical analysis. We saw how to create some simple tables of variables in your data (using either the `table()` function or the `count()` function). We also saw how to create graphics, which are a major arena of non-statistical analysis. 
+
+
+# Estimates and confidence intervals
+
+When we generate estimates from data, we are usually interested in the point estimate and the uncertainty in that estimate. 
+
+The `Rmisc` package has straightforward `CI` and `group.CI` functions, for estimating means and simple confidence intervals. For some reason, the `group.CI()` function, which estimates confidence intervals for some variable within groups of another variable, is much better behaved. You can make it estimate a simple mean and confidence interval using the following syntax. Here is the mean liberal-conservative self-placement.
+
+```{r}
+group.CI(libcon_self ~ 1, data = anes)
+```
+
+The `y ~ 1` syntax comes from regression modeling in R, which we'll return to. Just know that for right now, this is how you estimate a mean and confidence interval using no grouping variables.
+
+Remember that every confidence interval has associated assumptions. This interval assumes that the sampling distribution of the mean is normally distributed. This is often a fine assumption, but the fact that we have only seven valid values makes this variable slightly problematic. (You would probably not get pushback for doing this though).
+
+You can add a grouping variable like so. We'll estimate the mean ideological self-placement within each grouping on the 7-point partisanship index.
+
+```{r}
+group.CI(libcon_self ~ pid7, data = anes)
+```
+
+The `group.CI()` function returns a data frame, so you could plot this pretty easily. We'll add a dividing line at "moderate."
+
+```{r}
+mean_ideo <- anes %>%
+  group.CI(libcon_self ~ pid7, data = .) %>%
+  rename(party = pid7, 
+         upper = libcon_self.upper,
+         mean = libcon_self.mean,
+         lower = libcon_self.lower) %>% 
+  print()
+
+ggplot(mean_ideo, aes(x = as.factor(party), y = mean)) + 
+  geom_hline(yintercept = 4, color = "gray50") +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  labs(y = "Ideological Self-Placement",
+       x = "Party ID") +
+  theme_bw()
+```
+
+It turns out, the confidence intervals are so small that you can't really see them. 
+
+We could make this prettier using tools from last week. We will mainly modify the axis scales.
+
+```{r}
+ggplot(mean_ideo, aes(x = as.factor(party), y = mean)) + 
+  geom_hline(yintercept = 4, color = "gray50") +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  labs(y = "Ideological Self-Placement",
+       x = "Party ID") +
+  scale_x_discrete(labels = c("Strong\nDem", "Weak\nDem", "Lean\nDem", "Independent", "Lean\nRep", "Weak\nRep", "Strong\nRep")) +
+  scale_y_continuous(breaks = 1:7,
+                     labels = c("Very Lib", "Lib", "Slight Lib", 
+                                "Moderate", 
+                                "Slight Con", "Con", "Very Con")) +
+  coord_cartesian(ylim = c(1, 7)) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())
+```
+
+Be warned. Because the `group.CI()` function returns a data frame and not just a single value, it will make `dplyr::summarize()` upset if you try to group a data frame and estimate that way. We can show an advanced way of dealing with this later (nesting and mapping). 
+
+For proportions, one could use `prop.test()` for the normal approximation method (which most people learn in school), or `binom.test()` for "exact" Clopper-Pearson intervals, which have better boundary assumptions and small-sample properties but can be conservative (a little wide). They both work in R basically the same way though.
+
+```{r}
+# democratic voters in 2012, say. Sum the TRUEs
+dem_voters <- anes %>%
+  filter(cycle == 2012) %$% 
+  sum(vote == "Democratic Candidate", na.rm = TRUE) %>%
+  print()
+
+# major party voters in 2012
+twoparty_voters <- anes %>%
+  filter(cycle == 2012) %$% 
+  sum(vote %in% c("Democratic Candidate", "Republican Candidate"), 
+      na.rm = TRUE) %>%
+  print()
+
+# estimate
+(results <- anes %$% prop.test(dem_voters, twoparty_voters))
+
+# this is a complex object. See what's inside of it
+attributes(results)
+
+# let's grab the results. We can use $ to go "inside" this object
+results$estimate
+
+# and the confidence interval, which is a two-element vector
+results$conf.int
+```
+
+As you can see, these old hypothesis testing functions are ancient and complex. It gets worse if you want to do multiple groups.
+
+```{r}
+grp_raw <- anes %>%
+  filter(cycle == 2012) %>%
+  filter(!is.na(pid7)) %>% 
+  group_by(pid7) %>%
+  summarize(dem_voters = sum(vote == "Democratic Candidate", na.rm = TRUE),
+            twoparty_voters = sum(vote %in% c("Democratic Candidate", "Republican Candidate"), na.rm = TRUE)) %>%
+  print()
+
+# grouped dataset, 
+# so think of binom.test() as being run separately for each row of data
+grp_prop <- grp_raw %>%
+  group_by(pid7) %>%  
+  mutate(prop = binom.test(dem_voters, twoparty_voters)$estimate,
+         lower = binom.test(dem_voters, twoparty_voters)$conf.int[1],
+         upper = binom.test(dem_voters, twoparty_voters)$conf.int[2]) %>%
+  print()
+
+ggplot(grp_prop, aes(x = as.factor(pid7), y = prop)) +
+  geom_pointrange(shape = 1,
+                  aes(ymin = lower, ymax = upper)) +
+  labs(x = "Party ID",
+       y = "Democratic share of two-party vote") +
+  theme_bw()
+```
+
+Some people have developed tools to make it easier to work with these old functions. The `broom` package is amazing one. Let's use the `broom::tidy` function to clean up the output from the `prop.test()` function from above.
+
+```{r}
+# results object from before
+results 
+# tidy results
+tidy(results)
+```
+
+The `tidy()` function returns a tidy frame with columns for estimates, test statistics, $p$-values, confidence interval bounds, and so on. You could run `tidy()` on lots of different proportions tests, stack them into one data frame, and then plot the results in cool ways. We'll do something like that later when we cover nesting and mapping.
+
+For formal hypothesis testing of means, the `t.test()` function works a lot like `prop.test()` and `binom.test()`. I won't beat this lesson to death though.
+
+
+
+# Regression
+
+And now, the good stuff.
+
+R has functions for linear and generalized linear models. They work pretty similarly, with some important exceptions. First, we'll review what the deal is.
+
+A linear model estimates a "predicted value of $y$," assuming that the observed data are a predicted value plus a (normally distributed) residual. We could write that a few ways, but let's start with a familiar way from PS-813.
+
+$\begin{align} y_{i} &= \hat{y}_{i} + \varepsilon_{i} \\[6pt] \hat{y}_{i} &= X_{i}\beta \\[6pt] \varepsilon_{i} &\sim \mathrm{Normal}\left( 0, \, \sigma \right)\end{align}$
+
+...which is to say, each predicted $\hat{y}_{i}$ is a regression on a set of $X$ variables and coefficients $\beta$ (or, the expected value of $y$ conditional on $X$), and residuals are normally distributed with mean of $0$ and some estimated standard deviation $\sigma$.
+
+Here's how we do that in R, generically.
+
+```{r, eval = FALSE}
+model_results <- lm(y ~ x1 + x2 + x3, data = dataset_name)
+```
+
+The syntax can read that `y` is a function of `x1`, `x2`, and so on. We specify the data set where these data come from. We could estimate an intercept-only model using `y ~ 1`, which is effectively what we did with the `group.CI()` function.
+
+We can look at detailed results using the `summary()` function.
+
+```{r, eval = FALSE}
+summary(model_results)
+```
+
+Here's a real example using relative thermometers, predicted by ideology, and 2000 data only.
+
+```{r}
+therm_mod <- lm(reltherm_cand ~ libcon_self, 
+                data = filter(anes, cycle == 2000))
+summary(therm_mod)
+```
+
+The results show us the estimated coefficients (for the intercept and predictor), the standard errors, test statistics, p-values, and significance levels. We also get some information about the F test and variance explained.
+
+Let's do a multiple regression example. How about we just do this ideological scale as a set of dummy variables.
+
+```{r}
+dummy_mod <- lm(reltherm_cand ~ as.factor(libcon_self), 
+                data = filter(anes, cycle == 2000))
+summary(dummy_mod)
+```
+
+When these categories are factorized, R interprets them as a set of dummy variables automatically! It's important to remember that when we have dummy variables, each coefficients should be interpret as an *offset* relative to the intercept. 
+
+If we want, we could rewrite this model by suppressing the intercept entirely with `-1`. In that case, each estimated coefficient would essentially represent the mean for each group, since there would be no overall model intercept.
+
+```{r}
+int_mod <- lm(reltherm_cand ~ -1 + as.factor(libcon_self), 
+                data = filter(anes, cycle == 2000))
+summary(int_mod)
+```
+
+This model makes a great deal of sense just looking at it. As respondents are more liberal, they like the Democratic candidate more than the Republican candidate, and vice versa for more conservative respondents.
+
+
+
+# Model output: tables
+
+My advice is that you should never, never, ***NEVER*** write up a regression table by hand. Not in $\mathrm{\LaTeX}$, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as $\mathrm{\LaTeX}$ code, as HTML code, as plain text, and so on.
+
+The `stargazer` package is solid and highly customizable. I find that it requires a lot of customization to look *great* though.
+
+```{r, eval = FALSE}
+library("stargazer")
+# latex by default
+stargazer(therm_mod, dummy_mod, int_mod)
+# as plain text
+stargazer(therm_mod, dummy_mod, int_mod, type = "text")
+```
+
+I *think*(?) I like `texreg` better. Pretty sure it supports more model types, and its defaults are a bit more sensible than `stargazer` in my experience.
+
+```{r, eval = FALSE}
+library("texreg")
+texreg(list(therm_mod, dummy_mod, int_mod))
+```
+
+
+I *love* `xtable` for non-regression tables such as marginals and summary statistics, but it tougher for combining multiple models together.
+
+```{r, eval = FALSE}
+library("xtable")
+print(xtable(therm_mod))
+```
+
+
+My general practice is to rely *only* on code to make tables. This ensures that you don't make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using $\mathrm{\LaTeX}$). 
+
+
+
+# Exporting model tables
+
+
+This is not that difficult, but it requires some thinking about your project directory.
+
+We should have a directory set up with separate folders for `R/`, `data/`, and your writing (which I call `tex/` or `paper/`). Let's assume that we're writing a $\mathrm{\LaTeX}$ document inside a folder called `tex/`, and we want to save a regression table. We should also assume that our directory in R is  set to the *project root*, i.e. the top of the project folder.
+
+We can use R to create a subfolder inside of the `tex/` folder dedicated to tables, if we don't already have one.
+
+```{r, eval = FALSE}
+# make a tables/ folder inside of tex/
+dir.create("tex/tables")
+```
+
+We can then save model output as a `.tex` file.
+
+```{r, eval = FALSE}
+texreg(list(therm_mod, dummy_mod, int_mod),
+       caption = "Estimated regression results, various specifications",
+       file = "tex/tables/reg-table.tex")
+```
+
+And then in your `research-paper.tex` file, you can include a code to insert code from another `.tex` file somewhere else.
+
+```
+\input{tables/reg-table}
+```
+
+
+# Model output: graphics
+
+New tools in R make it very easy to produce graphical model output.
+
+We'll talk about the `broom` package, which we've already introduced somewhat. We can turn model output into a tidy data frame using `tidy()`.
+
+```{r}
+tidy(int_mod)
+```
+
+You can combine models like so. This creates tidy data frames form the models, adds a column for the model name using `mutate()`, and then binds all tables into one table using `bind_rows()`. We use the `as_data_frame()` function to convert the table to a tibble (for nicer printing).
+
+```{r}
+mods <- bind_rows(mutate(tidy(therm_mod, conf.int = TRUE), 
+                           model = "Continuous"), 
+                  mutate(tidy(dummy_mod, conf.int = TRUE), 
+                           model = "Dummies"), 
+                  mutate(tidy(int_mod, conf.int = TRUE), 
+                           model = "Intercepts")) %>%
+  as_data_frame() %>%
+  print() 
+```
+
+We can then plot coefficients straight away.
+
+```{r}
+ggplot(mods, aes(x = term, y = estimate)) +
+  geom_hline(yintercept = 0, color = "gray50") +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
+                      color = model),
+                  position = position_dodge(width = -1)) +
+  coord_flip() +
+  theme_bw() +
+  labs(x = NULL, y = "Estimated Coefficient", color = "Specification")
+```
+
+So easy! You could then save this plot...
+
+```{r, eval = FALSE}
+dir.create("tex/graphics")
+ggsave("tex/graphics/coefplot.PDF", height = 5, width = 5)
+# or whatever dimensions you want
+```
+
+
+
+# Saving other quantities (from R to $\mathrm{\LaTeX}$)
+
+Just like with tables, you can save many other quantities to `tex` files. This way, the quantities in your paper reflect quantities in the analysis *perfectly*, with no error.
+
+For example, let's calculate the mean GOP candidate thermometer and save it.
+
+```{r, eval = FALSE}
+# create a subdirectory for referenced values from R
+dir.create("tex/refs")
+
+anes %$% 
+  mean(therm_gopcand, na.rm = TRUE) %>%
+  round() %>%
+  print() %>% # check it out, see what it is
+  write("tex/refs/mean-gop-therm.tex") # save it
+```
+
+
+Then, in your `.tex` file, you're writing your stuff and can grab import this quantity...
+
+```
+...and the mean thermometer rating for the Republican candidate was $\input{refs/mean-gop-therm}$
+```
+
+...which would automatically grab the contents of that saved `tex` file and place it into your paper when you compile the `tex` document! This practice cuts down human error, saves time (you no longer have to update everything in your `.tex` file by hand every time you slightly change an analysis), and enhances the *reproducibility* of your work. I highly recommend it!
+
+
+
+
+
+# Predicted values
+
+
+`predict(mod, newdata = )`, `augment()`, `sjplot` (and for coefplots?)
+
+
+
+# Generalized linear models
+
+intuition and math
+
+estimation
+
+Shouldn't really compare coefficients across GLMs, only the predictions for Y
+
+predicted values using a link function
+
+
+# Model diagnostics
+
+- residuals v fit
+- qqplots
+- log likelihood
+- likelihood ratios
+- PRE?
+- AIC
+- bootstrapping and cross-validation
+
+For advanced models, you should consult the 
+
+
+
+# hard stuff
+
+type coercion
+
+user functions
+
+lists
+
+apply
+
+nesting
+
+mapping
+
+
+
+
+# bonus topics
+
+time series
+
+hlm
+
+panel?
+
+bayes
 
 
 ---

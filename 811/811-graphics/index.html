@@ -50,7 +50,7 @@
   
   <div class="col-md-12">
     <h6 class="text-left meta">
-        UPDATED JAN 1, 2018 
+        UPDATED JAN 4, 2018 
       
       
       
@@ -231,7 +231,7 @@ anes &lt;- anes %&gt;%
 <pre><code>## Warning: Removed 33520 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 33520 rows containing missing values (geom_point).</code></pre>
 <p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p>Scale functions follow a format of <code>scale_aesthetic_xyz()</code>, where <code>aesthetic</code> is color, size, and so on. You can control color using color palettes with <code>scale_color_brewer()</code>. If you want to specify colors manually, use <code>scale_color_manual()</code>.</p>
+<p>Scale functions follow a format of <code>scale_aesthetic_xyz()</code>, where <code>aesthetic</code> is color, size, and so on. You can control color using color palettes with <code>scale_color_brewer()</code>. If you want to specify colors manually, use <code>scale_color_manual()</code>. Learn about the stock colors available in R <a href="http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf">here</a>.</p>
 <pre class="r"><code>ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25,) +
   geom_smooth(method = &quot;lm&quot;,
@@ -1139,6 +1139,10 @@ str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;
 <p>We will further explore graphics using <code>ggplot</code> in the final lesson on statistical analysis. In particular, we’ll discuss how to use <code>ggplot</code> tools to summarize statistical models and create post-estimation graphics.</p>
 </div>
 </div>
+<div id="save-data-from-this-session" class="section level1">
+<h1>Save data from this session</h1>
+<pre class="r"><code>saveRDS(anes, &quot;data/anes-modified-2.RDS&quot;)</code></pre>
+</div>
 
   </div>
 </section>
@@ -1165,13 +1169,11 @@ str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-basics/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-data/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/811">811</a></span>
   
-  
-  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-data/"> | next &gt;</a></span>
   
   
 

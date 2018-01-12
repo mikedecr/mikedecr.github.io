@@ -2,7 +2,7 @@
 title: "Lecture 2: Graphics"
 author: "Michael DeCrescenzo"
 description: "Graphics in R using ggplot2"
-date: '2018-01-01'
+date: '2018-01-04'
 slug: 811-graphics
 categories: ["R", "ps811", "Teaching"]
 tags: []
@@ -218,7 +218,7 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   scale_color_brewer(palette = "Set2")
 ```
 
-Scale functions follow a format of `scale_aesthetic_xyz()`, where `aesthetic` is color, size, and so on. You can control color using color palettes with `scale_color_brewer()`. If you want to specify colors manually, use `scale_color_manual()`.
+Scale functions follow a format of `scale_aesthetic_xyz()`, where `aesthetic` is color, size, and so on. You can control color using color palettes with `scale_color_brewer()`. If you want to specify colors manually, use `scale_color_manual()`. Learn about the stock colors available in R [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf).
 
 ```{r}
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
@@ -1013,5 +1013,12 @@ There are many extensions for `ggplot` that you can install. Rather than tedious
 We will further explore graphics using `ggplot` in the final lesson on statistical analysis. In particular, we'll discuss how to use `ggplot` tools to summarize statistical models and create post-estimation graphics.
 
 
+# Save data from this session
 
+```{r, eval = FALSE}
+saveRDS(anes, "data/anes-modified-2.RDS")
+```
 
+```{r, include = FALSE}
+saveRDS(anes, here::here("static/data/anes-modified-2.RDS"))
+```
