@@ -32,6 +32,16 @@
     </item>
     
     <item>
+      <title>Getting Started with R</title>
+      <link>https://mikedecr.github.io/811/811-basics/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-basics/</guid>
+      <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
+Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
+    </item>
+    
+    <item>
       <title>PoliSci 811: R Introduction</title>
       <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
@@ -72,16 +82,6 @@ Partisan voters are historically unlikely to cast their votes for the opposing p
       <description> Courses As instructor:
  Political Science 811: Introduction to Statistical Computing in Political Science (UW&amp;ndash;Madison, Spring 2018). Materials  As teaching assistant:
  Political Science 544: Introduction to Survey Research Methods (UW&amp;ndash;Madison, Spring 2017) Political Science 218: Understanding Political Numbers (UW&amp;ndash;Madison, Fall 2015 and Fall 2016)  Workshops  Political Science Grad Student Math Bootcamp (UW&amp;ndash;Madison, 2017). Materials Political Science $\mathrm{\LaTeX}$ Workshop (UW&amp;ndash;Madison, 2015&amp;ndash;2017). Materials  </description>
-    </item>
-    
-    <item>
-      <title>Getting Started with R</title>
-      <link>https://mikedecr.github.io/811/811-basics/</link>
-      <pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://mikedecr.github.io/811/811-basics/</guid>
-      <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
-Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
     </item>
     
     <item>

@@ -32,6 +32,16 @@
     </item>
     
     <item>
+      <title>Getting Started with R</title>
+      <link>https://mikedecr.github.io/811/811-basics/</link>
+      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-basics/</guid>
+      <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
+Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
+    </item>
+    
+    <item>
       <title>PoliSci 811: R Introduction</title>
       <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
@@ -40,16 +50,6 @@
       <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
 A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.
 Compared to other popular statistical software for the social scientists (such as Stata), R stands out as a more general programming language.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with R</title>
-      <link>https://mikedecr.github.io/811/811-basics/</link>
-      <pubDate>Mon, 02 Jan 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://mikedecr.github.io/811/811-basics/</guid>
-      <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
-Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
     </item>
     
     <item>

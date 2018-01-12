@@ -2,8 +2,8 @@
 title: Getting Started with R
 description: "Getting R up and running"
 author: "Michael DeCrescenzo"
-date: '2017-01-02'
-slug: 811-basics
+date: '2018-01-02'
+slug: "811-basics"
 categories: ["R", "ps811", "Teaching"]
 tags: []
 ---
