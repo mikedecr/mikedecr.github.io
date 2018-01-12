@@ -22,6 +22,7 @@ The goal of this lesson is to provide an introduction to graphics in R, by way o
 
 Some notes to get us started:
 
+- This lesson makes heavy use of pipe chains, which string m any operations together in one block of code. I will not painstakingly describe every step of every step chain, so here is what I advise you do. In order to understand each step of a pipe chain, run it command by command.  You can see the results of each step and how they feed into subsequent steps.
 - Some introductions to ggplot begin with an overview of the `qplot()`  (quick plot) function from the `ggplot2` package. We will not start there; `qplot` is a midway point between base and ggplot graphics, but we have covered neither yet, so we have no need to "transition" out of base graphics. Moreover, I think the differences between `qplot` and the workhorse `ggplot` function confuse new users and distract from a deeper exploration of `ggplot`. So we'll jump right in. 
 - Plots created using `ggplot` generally look good by default. As we get started, however, they may look a little awkward. This is because we're making plots that demonstrate ggplot functionality (which we don't want to rush though), not create the prettiest plot imaginable. As we introduce more and more ggplot concepts, plots will begin to look more publication-ready.
 - If you want more help with `ggplot`, I'd recommend that you consult resources I list in the syllabus, in other lessons, and Hadley Wickham's `ggplot2` book (which you can build into a PDF on your own computer [after installing some other tools]).

@@ -38,7 +38,7 @@
       
       <guid>https://mikedecr.github.io/811/811-basics/</guid>
       <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
-Note: This lesson will be more “abstract” than other lessons in this series. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
+Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
     </item>
     
     <item>
