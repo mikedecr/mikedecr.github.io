@@ -315,19 +315,19 @@ x &lt;- rnorm(n = 10000, mean = 0, sd = 1)
 
 # sum
 sum(x) </code></pre>
-<pre><code>## [1] 85.18628</code></pre>
+<pre><code>## [1] -169.5341</code></pre>
 <pre class="r"><code># number of elements in an object
 length(x) </code></pre>
 <pre><code>## [1] 10000</code></pre>
 <pre class="r"><code># mean
 mean(x) </code></pre>
-<pre><code>## [1] 0.008518628</code></pre>
+<pre><code>## [1] -0.01695341</code></pre>
 <pre class="r"><code># variance
 var(x) </code></pre>
-<pre><code>## [1] 0.9962946</code></pre>
+<pre><code>## [1] 0.9891794</code></pre>
 <pre class="r"><code># standard deviation
 sd(x) </code></pre>
-<pre><code>## [1] 0.9981456</code></pre>
+<pre><code>## [1] 0.994575</code></pre>
 <p>It is fairly easy to write your own functions in R. We will come back to that in a later lesson.</p>
 </div>
 <div id="help-files" class="section level1">
@@ -340,9 +340,8 @@ sd(x) </code></pre>
 <p>Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the <code>tidyverse</code> package. Because the package depends on other packages, all required packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it…we will use this package in class).</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
 </div>
-<div id="r-vs-stata" class="section level1">
-<h1>R vs Stata</h1>
-<p><strong>keep?</strong></p>
+<div id="comparing-and-contrasting-r-and-stata" class="section level1">
+<h1>Comparing and contrasting R and Stata</h1>
 <p>As we continue these lessons, you will see more about how these languages are similar and different. There are definitely <em>some</em> similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don’t have to compile an entire file of code before you can run it. Yay!</p>
 <p>The differences between R and Stata have benefits and drawbacks. Here is some rapid-fire accounting of some differences.</p>
 <p>R is free and open source.</p>

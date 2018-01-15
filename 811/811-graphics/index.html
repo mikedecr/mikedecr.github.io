@@ -1129,11 +1129,14 @@ str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;
 <li>Never use multiple Y axes. It’s easy to use multiple Y axis scales to make variables look more or less related, so you shouldn’t do it. In fact, <code>ggplot</code> won’t let you (because it’s opinionated like that).</li>
 <li>Try to make your graphics as minimal as possible. Add elements where it improves the graphic. Otherwise, you don’t want to create clutter.</li>
 <li>If you can label points or trends <em>in the plot</em> rather than in a legend, do so. You can do this with <code>geom_text</code> or the <code>annotate()</code> function.</li>
+<li>If you can use aesthetic features <em>besides</em> color to distinguish groups, that would be ideal. Some forms of color-blindness are remarkably common, and at any rate, journals may not allow your article to print in color.</li>
+<li>If you must use colors, you should check out some colorblindness-friendly color palettes and packages. You could check out the <code>dichromat</code> package to investigate how your color selections look to individuals with various forms of colorblindness. The <code>viridis</code> package also provides a variety of scales for colorblind-friendly graphics.</li>
 </ul>
 </div>
 <div id="other-gg-tools" class="section level2">
 <h2>Other <code>gg</code> tools</h2>
 <p>There are many extensions for <code>ggplot</code> that you can install. Rather than tediously describe them, I’ll point you to a <a href="http://www.ggplot2-exts.org/gallery/?utm_content=buffer6d153&amp;utm_medium=social&amp;utm_source=twitter.com&amp;utm_campaign=buffer">web page</a> discussing many of the tools out there. These let you create heatmaps, choropleths, network graphs, mosaic plots, autocorrelation plots, and much more. Extensions I have used in the past include <code>ggfortify</code>, <code>ggridges</code>, <code>ggthemes</code>, <code>ggsci</code>, <code>GGally</code>, and <code>ggalt</code>.</p>
+<p>Many more extensions are in development and cannot be found on CRAN, but they can be downloaded and installed. One that I particularly like is <a href="https://github.com/thomasp85/patchwork"><code>patchwork</code></a>, which combines multiple graphics into the same image using an extremely simple syntax.</p>
 </div>
 <div id="graphics-in-future-lessons" class="section level2">
 <h2>Graphics in future lessons</h2>
@@ -1175,6 +1178,8 @@ str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;
   
   <span><a class="menu-item" href="/811">811</a></span>
   
+  
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-analysis/"> | next &gt;</a></span>
   
   
 

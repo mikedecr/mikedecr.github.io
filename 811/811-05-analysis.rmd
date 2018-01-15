@@ -6,23 +6,33 @@ date: "2018-01-05"
 slug: "811-analysis"
 categories: ["R", "ps811", "Teaching"]
 tags: []
-
-draft: true
 ---
 
 
 # Objective
 
-In this lesson, we will introduce how to do statistical analysis using R. This includes...
+In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include...
 
-- simple tests of means and proportions
-- estimating regression models and formatting model output
+- Confidence intervals and tests of population means and proportions
+- regression models and formatting model output
 - post-estimation diagnosis and visualization
-- a preview of advanced analysis tools
 
-We will also cover some intermediate R routines such as `apply()` functions and other methods for functional programming (such as nesting and mapping).
+This page also contains some content on more advanced topics, but these won't be necessary for the take-home exercise. These include...
 
-Since we should be getting used to R, I will sprinkle some more interesting data manipulation tricks into the analysis. Pay careful attention, as some of these tricks may come in handy.
+- intermediate R tools and routines
+  + lists
+  + `apply()` functions
+  + mapping functions to nested data frames
+  + custom functions
+  + type coercion
+- a preview of tools for advanced analysis
+  + time series
+  + panel models
+  + multilevel models
+  + Bayesian models
+  + etc.
+
+Since we should be getting used to R, I will sprinkle some more interesting data manipulation tricks into the analysis. Pay careful attention, as some of these tricks may come in handy in the future! As always, I recommend you run pipe chains chunk by chunk so you can see how each function in the chain contributes to the final result. 
 
 
 # Data and packages
@@ -53,9 +63,6 @@ library("broom")
 
 
 ```{r, include = FALSE}
-if (!require("Rmisc"))
-  install.packages("Rmisc")
-
 library("Rmisc")
 library("magrittr")
 library("tidyverse")
@@ -74,7 +81,7 @@ Previous lessons covered two major types of non-statistical analysis. We saw how
 
 When we generate estimates from data, we are usually interested in the point estimate and the uncertainty in that estimate. 
 
-The `Rmisc` package has straightforward `CI` and `group.CI` functions, for estimating means and simple confidence intervals. For some reason, the `group.CI()` function, which estimates confidence intervals for some variable within groups of another variable, is much better behaved. You can make it estimate a simple mean and confidence interval using the following syntax. Here is the mean liberal-conservative self-placement.
+The `Rmisc` package has `CI` and `group.CI` functions for estimating means and simple confidence intervals. For some reason, the `group.CI()` function, which estimates confidence intervals for some variable within groups of another variable, is a bit better behaved, so I recommend using it over `CI()` even when you have no subgroups. You can do that with the following syntax. We will estimate the mean liberal-conservative self-placement (for the whole dataset).
 
 ```{r}
 group.CI(libcon_self ~ 1, data = anes)
@@ -131,38 +138,82 @@ ggplot(mean_ideo, aes(x = as.factor(party), y = mean)) +
 
 Be warned. Because the `group.CI()` function returns a data frame and not just a single value, it will make `dplyr::summarize()` upset if you try to group a data frame and estimate that way. We can show an advanced way of dealing with this later (nesting and mapping). 
 
-For proportions, one could use `prop.test()` for the normal approximation method (which most people learn in school), or `binom.test()` for "exact" Clopper-Pearson intervals, which have better boundary assumptions and small-sample properties but can be conservative (a little wide). They both work in R basically the same way though.
+Let's do one more example where we try to detect some evidence of ideological polarization/sorting over time. We'll track how the mean ideology among Democrats and Republicans changes over time. We use the `as_data_frame()` function to convert the table to a tibble (for nicer printing).
 
 ```{r}
-# democratic voters in 2012, say. Sum the TRUEs
+# collapse PID into Rs and Ds, else NA
+sorting <- anes %>%
+  mutate(party = case_when(pid7 %in% 1:3 ~ "Democrat",
+                           pid7 %in% 5:7 ~ "Republicans")) %>%
+  group.CI(libcon_self ~ party + cycle, data = .) %>%
+  as_data_frame() %>%
+  rename(upper = libcon_self.upper,
+         mean = libcon_self.mean,
+         lower = libcon_self.lower) %>% 
+  print()
+
+ggplot(sorting, aes(x = cycle, y = mean, color = party)) +
+  geom_line(show.legend = FALSE) +
+  geom_point(show.legend = FALSE) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = party),
+              alpha = 0.3,
+              color = NA,
+              show.legend = FALSE) +
+  coord_cartesian(ylim = c(1, 7)) +
+  annotate("text", x = 2000, y = 2.5, label = "Democrats") +
+  annotate("text", x = 2000, y = 6.25, label = "Republicans") +
+  scale_y_continuous(breaks = 1:7,
+                     labels = c("Very\nLiberal", "Liberal", "Slightly\nLiberal", 
+                                "Moderate", 
+                                "Slightly\nConservative", "Conservative", "Very\nConservative")) +
+  scale_x_continuous(breaks = seq(1972, 2012, 8)) +
+  scale_color_manual(values = c("maroon", "dodgerblue")) +
+  scale_fill_manual(values = c("maroon", "dodgerblue")) +
+  theme_bw() +
+  labs(x = "Election Cycle",
+       y = "Mean Ideological Self-Placement",
+       color = NULL, fill = NULL) +
+  theme(panel.grid.minor = element_blank())
+```
+
+## Proportions
+
+For proportions, one could use `prop.test()` for the normal approximation method (which most people learn in school), or `binom.test()` for "exact" Clopper-Pearson intervals, which have better boundary assumptions and small-sample properties (they are estimated using quantiles of the beta distribution), but they can be conservative (a little wide, more than 95% coverage in some cases). They both work in R basically the same way though.
+
+```{r}
+# find the number of democratic voters in 2012, say. Sum the TRUEs
 dem_voters <- anes %>%
   filter(cycle == 2012) %$% 
   sum(vote == "Democratic Candidate", na.rm = TRUE) %>%
   print()
 
-# major party voters in 2012
+# find the num. of major party voters in 2012
 twoparty_voters <- anes %>%
   filter(cycle == 2012) %$% 
   sum(vote %in% c("Democratic Candidate", "Republican Candidate"), 
       na.rm = TRUE) %>%
   print()
 
-# estimate
+# estimate demvoters / majorparty voters, with CI
 (results <- anes %$% prop.test(dem_voters, twoparty_voters))
 
 # this is a complex object. See what's inside of it
 attributes(results)
 
-# let's grab the results. We can use $ to go "inside" this object
+# let's grab the point estimate. 
+# We can use $ to go "inside" this object
 results$estimate
 
-# and the confidence interval, which is a two-element vector
+# grab the confidence interval in the same way
+# it is a two-element vector (with some metadata)
 results$conf.int
 ```
 
-As you can see, these old hypothesis testing functions are ancient and complex. It gets worse if you want to do multiple groups.
+As you can see, these old hypothesis testing functions produce weird objects as output, making them feel ancient and complex. It gets slightly tougher to organize mentally if you need to estimate proportions for multiple groups
 
 ```{r}
+# raw data, groups = party ID
+# find number of dem voters and major party voters per PID
 grp_raw <- anes %>%
   filter(cycle == 2012) %>%
   filter(!is.na(pid7)) %>% 
@@ -171,8 +222,8 @@ grp_raw <- anes %>%
             twoparty_voters = sum(vote %in% c("Democratic Candidate", "Republican Candidate"), na.rm = TRUE)) %>%
   print()
 
-# grouped dataset, 
-# so think of binom.test() as being run separately for each row of data
+# think of binom.test() as being run separately for each row (group)
+# since each row is a group in this case
 grp_prop <- grp_raw %>%
   group_by(pid7) %>%  
   mutate(prop = binom.test(dem_voters, twoparty_voters)$estimate,
@@ -215,21 +266,23 @@ $\begin{align} y_{i} &= \hat{y}_{i} + \varepsilon_{i} \\[6pt] \hat{y}_{i} &= X_{
 
 ...which is to say, each predicted $\hat{y}_{i}$ is a regression on a set of $X$ variables and coefficients $\beta$ (or, the expected value of $y$ conditional on $X$), and residuals are normally distributed with mean of $0$ and some estimated standard deviation $\sigma$.
 
-Here's how we do that in R, generically.
+Here's how we do the estimation in R, generically, using the `lm()` function.
 
 ```{r, eval = FALSE}
 model_results <- lm(y ~ x1 + x2 + x3, data = dataset_name)
 ```
 
-The syntax can read that `y` is a function of `x1`, `x2`, and so on. We specify the data set where these data come from. We could estimate an intercept-only model using `y ~ 1`, which is effectively what we did with the `group.CI()` function.
+The syntax can read that `y` is a function of `x1`, `x2`, and so on. We also must specify the data set where these data come from. 
 
-We can look at detailed results using the `summary()` function.
+We could, if we want, estimate an intercept-only model ($\hat{y}_{i} = \alpha$) by writing the formula as `y ~ 1`.  This is also how we used the `group.CI()` to estimate means without any groups.
+
+After estimating, we usually look at detailed results using the `summary()` function.
 
 ```{r, eval = FALSE}
 summary(model_results)
 ```
 
-Here's a real example using relative thermometers, predicted by ideology, and 2000 data only.
+Here's a real example, predicting relative thermometer ratings ($y$) using ideological self-placement ($x$), with data from the 2000 election only (note the use of `filter()` in the `data = ` argument).
 
 ```{r}
 therm_mod <- lm(reltherm_cand ~ libcon_self, 
@@ -237,9 +290,9 @@ therm_mod <- lm(reltherm_cand ~ libcon_self,
 summary(therm_mod)
 ```
 
-The results show us the estimated coefficients (for the intercept and predictor), the standard errors, test statistics, p-values, and significance levels. We also get some information about the F test and variance explained.
+The `summary` function shows us the estimated coefficients (for the intercept and predictor), standard errors, test statistics, p-values, and significance levels. We also get some information about the F test and explained variance.
 
-Let's do a multiple regression example. How about we just do this ideological scale as a set of dummy variables.
+Let's do a multiple regression example. How about we just do this ideological scale as a series of dummy variables instead of as a continuous predictor.
 
 ```{r}
 dummy_mod <- lm(reltherm_cand ~ as.factor(libcon_self), 
@@ -247,9 +300,9 @@ dummy_mod <- lm(reltherm_cand ~ as.factor(libcon_self),
 summary(dummy_mod)
 ```
 
-When these categories are factorized, R interprets them as a set of dummy variables automatically! It's important to remember that when we have dummy variables, each coefficients should be interpret as an *offset* relative to the intercept. 
+The `as.factor()` coerced the `libcon_self` variable, which is originally numeric (integers) to be treated as a factor variable. This is useful because whenever `lm()` encounters a factor as an independent variable, R interprets the factor as a set of dummy variables automatically (treating the "first" level as the omitted category)! It's important to remember that when we have dummy variables, each coefficient should be interpret as an *offset* relative to the intercept. Normally you want to take great care to specify which category should be omitted, because hypothesis testing on the other variables will be relatively to that baseline category.
 
-If we want, we could rewrite this model by suppressing the intercept entirely with `-1`. In that case, each estimated coefficient would essentially represent the mean for each group, since there would be no overall model intercept.
+If we want, we could rewrite this model by suppressing the intercept entirely with `-1`. In that case, we would have no omitted category, so each estimated coefficient would essentially represent the mean for each group.
 
 ```{r}
 int_mod <- lm(reltherm_cand ~ -1 + as.factor(libcon_self), 
@@ -261,9 +314,11 @@ This model makes a great deal of sense just looking at it. As respondents are mo
 
 
 
+
+
 # Model output: tables
 
-My advice is that you should never, never, ***NEVER*** write up a regression table by hand. Not in $\mathrm{\LaTeX}$, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as $\mathrm{\LaTeX}$ code, as HTML code, as plain text, and so on.
+My advice is that you should never, never, ***NEVER*** write up a regression table by hand. Not in $\mathrm{\LaTeX}$, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as $\mathrm{\LaTeX}$ code, as HTML code, as plain text, and so on. We'll play with some table packages using the models we just estimated.
 
 The `stargazer` package is solid and highly customizable. I find that it requires a lot of customization to look *great* though.
 
@@ -275,7 +330,7 @@ stargazer(therm_mod, dummy_mod, int_mod)
 stargazer(therm_mod, dummy_mod, int_mod, type = "text")
 ```
 
-I *think*(?) I like `texreg` better. Pretty sure it supports more model types, and its defaults are a bit more sensible than `stargazer` in my experience.
+I *think* I like `texreg` better. I'm pretty sure it supports more model types than `stargazer`, and its defaults are a bit more sensible than `stargazer`'s are, in my experience.
 
 ```{r, eval = FALSE}
 library("texreg")
@@ -283,7 +338,7 @@ texreg(list(therm_mod, dummy_mod, int_mod))
 ```
 
 
-I *love* `xtable` for non-regression tables such as marginals and summary statistics, but it tougher for combining multiple models together.
+I *love* `xtable` for non-regression tables such as marginals and summary statistics. The tables are clean, slick, and you can get them to do what you want. (See the tables at the end of [this document](https://elections.wisc.edu/news/Voter-ID-Study/Voter-ID-Study-Supporting-Info.pdf), for example.) However, `xtable` is weird when combining multiple models together. It's strange in general because it often requires you to place more arguments into the `print()` function, which is counter-intuitive. But they definitely look good when you can make it work.
 
 ```{r, eval = FALSE}
 library("xtable")
@@ -291,11 +346,13 @@ print(xtable(therm_mod))
 ```
 
 
-My general practice is to rely *only* on code to make tables. This ensures that you don't make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using $\mathrm{\LaTeX}$). 
+These aren't the only tools for making tables in R. Check [here](https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r) for more info.
+
+My general practice is to rely *only* on code to make tables. This ensures that you don't make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using $\mathrm{\LaTeX}$). I'd encourage you to figure out what table package and modifications suite you best, and save that code somewhere you can come back to it.
 
 
 
-# Exporting model tables
+# Exporting regression tables
 
 
 This is not that difficult, but it requires some thinking about your project directory.
@@ -309,7 +366,7 @@ We can use R to create a subfolder inside of the `tex/` folder dedicated to tabl
 dir.create("tex/tables")
 ```
 
-We can then save model output as a `.tex` file.
+We can then save model output as a `.tex` file. These functions allow to you specify where you want the table to save. Specify the name of the `.tex` file you want to save.
 
 ```{r, eval = FALSE}
 texreg(list(therm_mod, dummy_mod, int_mod),
@@ -320,7 +377,11 @@ texreg(list(therm_mod, dummy_mod, int_mod),
 And then in your `research-paper.tex` file, you can include a code to insert code from another `.tex` file somewhere else.
 
 ```
+... blah blah blah. See the table for results.
+
 \input{tables/reg-table}
+
+The results show ...
 ```
 
 
@@ -334,7 +395,7 @@ We'll talk about the `broom` package, which we've already introduced somewhat. W
 tidy(int_mod)
 ```
 
-You can combine models like so. This creates tidy data frames form the models, adds a column for the model name using `mutate()`, and then binds all tables into one table using `bind_rows()`. We use the `as_data_frame()` function to convert the table to a tibble (for nicer printing).
+You can combine models like so. This creates tidy data frames form the models, adds a column for the model name using `mutate()`, and then binds all tables into one table using `bind_rows()`. 
 
 ```{r}
 mods <- bind_rows(mutate(tidy(therm_mod, conf.int = TRUE), 
@@ -355,6 +416,7 @@ ggplot(mods, aes(x = term, y = estimate)) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
                       color = model),
                   position = position_dodge(width = -1)) +
+  scale_color_brewer(palette = "Set2") +
   coord_flip() +
   theme_bw() +
   labs(x = NULL, y = "Estimated Coefficient", color = "Specification")
@@ -368,30 +430,35 @@ ggsave("tex/graphics/coefplot.PDF", height = 5, width = 5)
 # or whatever dimensions you want
 ```
 
+Some other tools create these sorts of plots for you. Some folks like [`sjPlot`](http://www.strengejacke.de/sjPlot/sjp.lm/), but I have never bothered to use it. I normally don't like packages to make plots for me. I like packages to create things that I can plot how I want. Speaking for myself, though.
 
 
-# Saving other quantities (from R to $\mathrm{\LaTeX}$)
 
-Just like with tables, you can save many other quantities to `tex` files. This way, the quantities in your paper reflect quantities in the analysis *perfectly*, with no error.
 
-For example, let's calculate the mean GOP candidate thermometer and save it.
+
+# Related: saving other quantities (from R to $\mathrm{\LaTeX}$)
+
+Just like with tables, you can save many other quantities to `tex` files. This way, the quantities in your paper reflect quantities in the analysis *perfectly* (except rounding error).
+
+For example, let's calculate the mean GOP candidate thermometer in (say) 2012, and save it.
 
 ```{r, eval = FALSE}
 # create a subdirectory for referenced values from R
 dir.create("tex/refs")
 
-anes %$% 
+anes %>% 
+  filter(cycle == 2012) %$% # <--- note the pipe!
   mean(therm_gopcand, na.rm = TRUE) %>%
   round() %>%
   print() %>% # check it out, see what it is
-  write("tex/refs/mean-gop-therm.tex") # save it
+  write("tex/refs/mean-gop-therm-2012.tex") # save it
 ```
 
 
 Then, in your `.tex` file, you're writing your stuff and can grab import this quantity...
 
 ```
-...and the mean thermometer rating for the Republican candidate was $\input{refs/mean-gop-therm}$
+...the mean rating for Mitt Romney was $\input{refs/mean-gop-therm}$
 ```
 
 ...which would automatically grab the contents of that saved `tex` file and place it into your paper when you compile the `tex` document! This practice cuts down human error, saves time (you no longer have to update everything in your `.tex` file by hand every time you slightly change an analysis), and enhances the *reproducibility* of your work. I highly recommend it!
@@ -402,408 +469,736 @@ Then, in your `.tex` file, you're writing your stuff and can grab import this qu
 
 # Predicted values
 
+We'll construct a slightly more complicated model here. We saw from the all-intercepts model above that the ideological index behaves fairly linearly. So let's treat it as a continuous predictor and interact it with a dummy variable for gender. Let's have women be 1 and men be 0 (these are the only gender categories in the ANES).
 
-`predict(mod, newdata = )`, `augment()`, `sjplot` (and for coefplots?)
+```{r}
+anes <- anes %>%
+  mutate(woman = as.numeric(gender == "Women"))
+```
+
+It maybe isn't the best practice to create a dummy variable in this way, but I'm doing it to show you something about R. `gender == "Women"` is a logical. It returns `TRUE` for women, `FALSE` for men, and crucially `NA` where gender was originally `NA`. If you don't believe me...
+
+```{r}
+anes %$% table(gender, woman, exclude = NULL)
+```
+
+We'll not fit a model where we predict relative candidate thermometers using an interaction of `woman` and `libcon_self`. We'll again use 2000 data.
+
+```{r}
+newmod <- lm(reltherm_cand ~ libcon_self + woman + libcon_self*woman,
+             data = filter(anes, cycle == 2000))
+
+summary(newmod)
+```
+
+Note that we could just write the formula as `reltherm_cand ~ (libcon_self*woman)` and R would figure it out.
+
+```{r}
+newmod <- lm(reltherm_cand ~ libcon_self*woman,
+             data = filter(anes, cycle == 2000))
+
+summary(newmod)
+```
+
+
+The `lm` function creates offers some handy objects for you to dig through for post-estimation things. 
+
+```{r}
+attributes(newmod)
+``` 
+
+The `$fitted.values` object contains predicted values for all of the observations used for estimation. 
+
+You can create predictions for different observations, but you need to create a new data frame that had the data you want. Since this example is fairly simple, we'll create a data frame that has every value of ideology for both men and women.
+
+```{r}
+new_x <- 
+  data_frame(libcon_self = c(1:7, 1:7), 
+             woman = c(rep(1, 7), rep(0, 7)), 
+             `libcon_self:woman` = libcon_self*woman) %>%
+  print()
+```
+
+The `:` character is usually not allowed in variable names, but if we wrap the variable name in backticks, we can make it work. The reason we need to the variable names to match exactly is because we can use a handy function called `predict()`. 
+
+```{r}
+predict(newmod, newdata = new_x)
+```
+
+We could even use it to add stuff to our original data frame pretty sensibly.
+
+```{r}
+predictions <- new_x %>%
+  mutate(pred = predict(newmod, newdata = .)) %>%
+  print()
+```
+
+And plotting these predictions would then be pretty straightforward.
+
+```{r}
+ggplot(predictions, aes(x = libcon_self, y = pred)) +
+  geom_line(aes(color = as.factor(woman)))
+```
+
+You can see that the slopes are different but only slightly, consistent with the model results.
+
+If you want confidence intervals on these predictions? The `predict()` function has an `interval` argument, which makes the function return an array (not a data-frame! Though see [here](https://github.com/leeper/prediction) for some tidy-friendly predict tools).
+
+```{r}
+predict(newmod, newdata = new_x, interval = "confidence")
+```
+
+You could add this to the original data frame column-by-column, but it looks a little hacky with the base index notation to grab named columns. 
+
+```{r}
+predictions <- new_x %>%
+  mutate(pred = predict(newmod, newdata = .),
+         lower = predict(newmod, newdata = ., interval = "confidence")[, "lwr"],
+         upper = predict(newmod, newdata = ., interval = "confidence")[, "upr"]) %>%
+  print()
+```
+
+It might be easier to save the output from `predict()` as a separate object, and then add its columns to a new data frame. You will want to save the `predict` object as a data frame. 
+
+```{r}
+fits <- newmod %>%
+  predict(newdata = new_x, interval = "confidence") %>%
+  as_data_frame() 
+
+predictions <- new_x %>%
+  mutate(pred = fits$fit,
+         lower = fits$lwr,
+         upper = fits$upr) %>%
+  print()
+```
+
+You could then plot.
+
+```{r}
+ggplot(predictions, aes(x = libcon_self, y = pred)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = as.factor(woman)),
+              color = NA, alpha = 0.5) +
+  geom_line(aes(color = as.factor(woman))) +
+  scale_color_brewer(palette = "Accent") +
+  scale_fill_brewer(palette = "Accent") +
+  theme_bw()
+```
+
+The `broom` package (where `tidy()` comes from) provides the `augment` function, for augmenting a data frame with predictions from an accompanying model. Rather than providing a confidence interval, however, it provides a standard error of the fit, rather than a confidence interval of a pre-specified level. Although seemingly less convenient, this lets you set however wide a confidence interval you like by setting the critical value. 
+
+```{r}
+aug_predict <- 
+  augment(newmod, newdata = new_x) %>%
+  mutate(lower = .fitted - (1.96 * .se.fit),
+         upper = .fitted + (1.96 * .se.fit)) %>%
+  print()
+```
+
+Using a critical value of 1.96 assumes asymptotic normality. For linear models with smaller samples, you may want to use a $t$-statistic to create your critical value instead, but you need to know the residual degrees of freedom to get the critical value from the appropriate distribution. There are a few ways to get that.
+
+```{r}
+newmod$df.residual
+```
+
+`broom::glance()` creates one-row summaries of a model, where you can get the residual $df$s and other things.
+
+```{r}
+glance(newmod)
+```
+
+You can use this to find the t-value like so. This function returns the 97.5th quantile of the `t` distribution, which is the critical value of a two-tailed $t$-test. 
+
+```{r}
+(critical <- qt(p = 0.975, df = newmod$df.residual))
+```
+
+You could use this critical value to create intervals with the results from `augment()`. 
+
+```{r}
+aug_predict <- 
+  augment(newmod, newdata = new_x) %>%
+  mutate(lower = .fitted - (critical * .se.fit),
+         upper = .fitted + (critical * .se.fit)) %>%
+  print()
+```
+
+In short, you can get confidence intervals for a model prediction using this workflow: 
+
+- estimate model
+- create a data frame for predictions
+- generate predictions with confidence intervals
+- plot
+
+It is similar to the `reg, margins, marginsplot` workflow in Stata, but you are allowed more flexibility with how you set up your new data for prediction purposes. 
+
+When you need to create more complicated predictions, contrasts that show the *difference* between men and women, or the *marginal effect* of `woman` at different values of `libcon_self`, you'll want a more powerful tool. You should packages such as the `margins` package (which is meant to approximate the interface of Stata's `margins` workflow), `sjPlot`, `Zelig`, or `effects` (which is older but people still regularly advocated). I haven't messed much with these packages, so I don't have specific recommendations. That is because I tend to do uncertainty slightly differently...
+
+
+## Uncertainty by simulation
+
+When *I* need to calculate complicated quantities of interest where the uncertainty intervals are weird to derive analytically, I often use simulations. This method is a bit more complicated, and I would not recommend it unless you are comfortable with matrix-form regression math. It is done by simulating coefficients from the model's uncertainty estimates and using those to generate a distribution of predicted values. The workflow looks like this:
+
+- Estimate a model.
+- The model coefficients and variance-covariance matrix can be used to build a multivariate normal distribution of coefficients. 
+- Simulate lots of random coefficient vectors from this multivariate normal distribution
+- Set up a dataset of predictor data and generate a predicted value for each draw of simulated coefficients. This gives you a distribution of predictions that follows the distribution of simulated coefficients. 
+- Perform your calculation-of-interest on each simulated set of predictions as needed. The uncertainty in your coefficients proliferates into your uncertainty about the eventual quantity-of-interest.
+
+This is essentially what the ye olde `Clarify` tool for Stata does. Here is what it might look like in R, using the same interval we've been constructing so far.
+
+```{r}
+# dataset
+library(mvtnorm)
+
+# predictor matrix (with column of 1s for the intercept)
+# You'll get familiar with this in 813
+design <- as.matrix(cbind(int = 1, new_x))
+
+# (k x r) matrix of simulated coefficients
+# r = simulation itereations
+# transpose to make a matrix of column vectors
+matrix_of_draws <- t(rmvnorm(n = 10000, 
+                             mean = coef(newmod), 
+                             sigma = vcov(newmod)))
+
+# predicted value
+preds <- design %*% coef(newmod)
+
+# interval bounds: 
+# grab the 2.5th, 97.5th quantiles of the prediction distribution
+sim_preds <- design %*% matrix_of_draws
+intervals <- apply(sim_preds, 1, quantile, c(.025, .975)) %>%
+  t() %>% # transpose
+  as_data_frame() %>%
+  setNames(c("lower", "upper")) 
+
+# join into original prediction data
+sim_predictions <- new_x %>%
+  mutate(pred = preds,
+         lower = intervals$lower,
+         upper = intervals$upper) %>%
+  mutate_if(is.numeric, round, 3) %>% 
+  print()  
+
+# compare to analytic intervals
+compare_ints <- bind_rows(mutate(predictions, method = "predict()"), 
+                          mutate(sim_predictions, method = "Simulation"))
+
+ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
+  facet_wrap(~ method) +
+  geom_ribbon(aes(ymin = lower, ymax = upper, fill = as.factor(woman)),
+              color = NA, alpha = 0.5) +
+  geom_line(aes(color = as.factor(woman))) +
+  scale_color_brewer(palette = "Accent") +
+  scale_fill_brewer(palette = "Accent") +
+  theme_bw() +
+  labs(title = "Comparison of analytic and simulated CIs",
+       x = "Ideological Self-Placement",
+       y = "Relative Candidate Thermometer",
+       color = "Woman",
+       fill = "Woman")
+```
+
+And *violà*, these intervals look just about the same as the others.
+
+Technical disclaimer: You should be careful not to give the multivariate distribution of coefficients a Bayesian interpretation. This distribution is handy only insofar as you can use it to create a set of predictions whose inner 95% approximate the analytic CIs from model predictions. That is not the same as saying that the coefficient distribution represents "a distribution of plausible coefficient values"---that would be a posterior distribution, which you only obtain if you had prior distributions on your parameter values. My affinity for this method of uncertainty probably primed me for becoming interested in Bayesian analysis: 
+
+- I thought that it was intuitive to think about a distribution of plausible coefficient values (which Bayes can give you)
+- I liked that you could use a set of parameter samples to generate complicated quantities of interest that necessarily accounted for parameter uncertainty. This is how most Bayesian estimation works: generating a set of posterior parameter samples using cool algorithms.
+
 
 
 
 # Generalized linear models
 
-intuition and math
+Generalized linear models (such as logit, poisson regression, negative binomial regression, and so on) are similar to linear models in R. The main difference is the need to use inverse-link functions. 
 
-estimation
+Some background. We'll rewrite the linear model slightly. Rather than normally distributed residuals that are mean zero, let's talk about linear regression as a "normal model," where each $y$ observation is a normal draw from a mean $\mu_{i}$, where $\mu_{i}$ is the expected value of $y_{i}$ conditional on its corresponding $X_{i}$. 
 
-Shouldn't really compare coefficients across GLMs, only the predictions for Y
+$\begin{align} y_{i} &\sim \mathrm{Normal}\left( \mu_{i},  \, \sigma \right) \\[6pt] \mu_{i} &= X_{i}\beta \end{align}$
 
-predicted values using a link function
+A generalized linear model is similar, but we suspect that $y_{i}$ is distributed according to some non-normal distribution. We are still interested in predicting the expected value of $y$, which is still $\mu_{i}$.
+
+$\begin{align} y_{i} &\sim \mathrm{Some \, Distribution}\left( \mu_{i} \right) \end{align}$
+
+Because we use GLMs for situations where covariates are *non-linearly* related to $y$, the linear component of the regression ($\alpha + \beta_{1}x_{1} + \beta_{2}x_{2}\ldots$), must be transformed in order to estimate $\mu_{i}$. 
+
+$\begin{align} \mu_{i} &= f\left(X_{i}\beta\right) \end{align}$
+
+This transformation happens by way of a "link function." The link function transforms the expected value of $y$ to the linear scale, and the inverse link function transforms the linear scale to the $y$ scale. 
+
+$\begin{align} \mathrm{link}(\mu_{i}) &= X_{i}\beta \\[6pt] \mu_{i} &= \mathrm{link}^{-1}\left( X_{i}\beta \right) \end{align}$
+
+To summarize, in linear regression, the prediction formula is directly related to $\hat{y}$. Constant changes in predictors are related to constant changes in the response variable. In a GLM, the prediction formula may be on some unintuitive scale, so we convert it to an intuitive scale using an inverse link function. We can analyze and visualize GLMs in R with one additional step: transforming predictions from the linear equation using the inverse link function.
+
+## An example using logit
+
+We'll use logistic regression to predict a vote for the Republican presidential candidate using ideological self-placement and gender as covariates. Here are the data from 1996 only.
+
+```{r}
+logit_data <- anes %>%
+  filter(cycle == 1996) %>%
+  select(vote, libcon_self, gender) %>%
+  print()
+```
+
+Let's transform this data to make it play nicely with modeling math.
+
+```{r}
+logit_data <- logit_data %>%
+  mutate(rvote = as.numeric(vote == "Republican Candidate"),
+         woman = as.numeric(gender == "Women"),
+         ideo = libcon_self - 4) %>%
+  print()
+```
+
+You'll see `NA`s in the data. Cases with missing values are automatically dropped during estimation. You may cover missing data imputation in your maximum likelihood course.
+
+The estimation formula in R looks like `lm()`, but we specify a family of probability distributions. Here we'll use the binomial family, which automatically uses the logit link function to transform the probability of a success (nonlinear) into the log odds of a success (linear). Technically speaking, $y$ observations are successes or failures (1s or 0s) based on an underlying probability $\pi$, which is related to the prediction formula via the link function (the logit function):
+
+$\begin{align} y_{i} &\sim \mathrm{Bernoulli}(\pi_{i}) \\[6pt] \mathrm{logit}\left( \pi_{i} \right) &=  X_i \beta, \text{ or}\ldots \\[6pt] \pi_{i} &= \mathrm{logit}^{-1}\left( X_{i}\beta \right) \end{align}$
+
+Here we predict Republican voting using liberal-conservative ideology and gender in a logit model in R. We've centered the liberalism scale on 4 (moderate) so the constant represents the expected value for moderates who are also men. 
+
+```{r}
+vote_logit <- glm(rvote ~ ideo + woman,
+                  family = "binomial",
+                  data = logit_data)
+summary(vote_logit)
+```
+
+We can create coefficient plots and tables as before, so I won't demonstrate those. I will say that when you want to compare GLMs to one another, it is usually smarter to compare predictions or model fit statistics than it is to compare coefficients themselves. Because coefficients are on unintuitive scales and sometimes involve ancillary parameters that help adjust the fit (such as cutoff parameters in ordinal logit), small changes to the model may change coefficients in ways that *look* large, but the effects on the actual predicted value may be negligible.
+
+Visualizing the predictions from a GLM is similar to linear modeling, but we add one step.
+
+- Create data for simulated predictions
+- Generate linear predictions using model coefficients
+- *Transform predictions with inverse link function*
+- Plot as desired
+
+```{r}
+# new data frame of values -3 through 3, 
+#   which is the rescaled ideology scale
+# for GLMs, the critical value is always 1.96 
+# (assumes normal coefficients on the link scale)
+logit_preds <- data_frame(ideo = rep(-3:3, 2),
+                          woman = c(rep(1, 7), rep(0, 7))) %>%
+  augment(vote_logit, newdata = .) %>%
+  mutate(lower = .fitted - (1.96 * .se.fit),
+         upper = .fitted + (1.96 * .se.fit)) %>% 
+  print()
+```
+
+If we don't transform logit predictions, then we get predictions on the log odds scale. That's how we can have negative predicted values, for example. We could plot them, and they'd look like straight lines (just like OLS), but log odds are hard to interpret. Instead, we will transform the log odds predictions using the `plogis()` function, which is the inverse of the logit link function (a.k.a. the cumulative distribution function of the logistic distribution).
+
+```{r}
+logit_preds <- logit_preds %>%
+  select(-.se.fit) %>%
+  # mutate only the selected variables
+  mutate_at(vars(.fitted:upper), plogis) %>%
+  print()
+
+logit_preds %>%
+  mutate(woman = case_when(woman == 1 ~ "Women",
+                           woman == 0 ~ "Men")) %>%
+  ggplot(aes(x = ideo, y = .fitted)) +
+  geom_pointrange(aes(ymin = lower, ymax = upper, 
+                      color = as.factor(woman)),
+                  position = position_dodge(width = 0.5),
+                  show.legend = FALSE) +
+  annotate("text", x = 0.5, y = .59, label = "Men") +
+  annotate("text", x = 1.7, y = .59, label = "Women") +
+  scale_x_continuous(breaks = -3:3,
+                    labels = c("Very\nLiberal", 
+                               "Liberal", 
+                               "Slightly\nLiberal", 
+                               "Moderate", 
+                               "Slightly\nConservative", 
+                               "Conservative", 
+                               "Very\nConservative")) +
+  labs(color = NULL,
+       x = "Ideological Self-Placement",
+       y = "Probability of Republican Vote") +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())
+```
+
+Note how the predictions are non-linear. The predictions approach 0% and 100% but never exceed them. These models are useful because they accurately capture these sorts of ceiling and floor effects.
+
+
+
 
 
 # Model diagnostics
 
-- residuals v fit
-- qqplots
-- log likelihood
-- likelihood ratios
-- PRE?
-- AIC
-- bootstrapping and cross-validation
+The model objects created by `lm()` and `glm()` do include some model diagnosis tools, such as F-statistics, $R^{2}$ values, deviance, AIC, so on. We'll walk through some here.
 
-For advanced models, you should consult the 
-
-
-
-# hard stuff
-
-type coercion
-
-user functions
-
-lists
-
-apply
-
-nesting
-
-mapping
-
-
-
-
-# bonus topics
-
-time series
-
-hlm
-
-panel?
-
-bayes
-
-
----
-
-# Sarah
-
-- why
-  + helpful to see what the data look like
-  + tell persuasive stories
-  + important that you know relevant features of the data
-  + shape of the data indicate appropriate modeling
-    * *long right tails, logging*
-- Understanding data
-  + *know thy data*
-  + unit of analysis
-  + number of observations
-  + where is there variation
-  + units of measurement
-  + values within variable
-  + missing data
-  + relationships among variables
-- summary statistics
-  + `summary, cor, quantile`
-  + `table()`
-  + `group_by() %>% summarize()`
-  + `group.CI()` or whatever it's called
-- simple base plots
-  + scatterplots
-  + histograms
-  + kernel density estimation
-- *transition to ggplot*
-  + *data, axis aesthetics, geoms, scales, theme options*
-  + *ggplot() and qplot() functions. qplot() is just confusing IMO* 
-  + *justify gglot*
-    * *more with less code*
-      - *grouping*
-      - *faceting*
-      - *legends*
-    * *prevents you from doing stupid shit*
-      - multiple y axes
-      - bad aesthetic choices (multiple DVs at once)
-    * *saving is easier*
-    * *they look better*
-    * *easy to customize your own cute theme (help guides online but don't include a link [don't want them to get sidetracked] but don't overdo it)*
-- *once in GGplot*
-  + scatterplots (two continuous)
-  + dot plots (factor x continuous) *replace bar plots*
-  + line graphs (two continuous where order matters, need to be sorted)
-  + don't use pie charts
-    * *anything in a pie chart should be a bar graph*
-  + bar graphs
-    * *only things in a bar graphs should be counts and proportions, IMO*
-    * *stacks of things that have a zero lower bound*
-    * *don't use them for 1-5 scales*
-    * *IMO don't use them for treatment effects. This makes no sense*
-    * *they also make you use error bars on top of columns for CIs, which looks fugly IMO*
-  + *coefficient plots (wait on this?)*
-  + *acf pacf* with some package
-- aesthetic choices
-  + contrasting colors may be bad for colorblindness
-  + gradients of the same color may be good for computer screens, but maybe not for print or shitty projectors
-  + does the journal accept color? might want to think about ways around color
-  + resources
-    * http://mkweb.bcgsc.ca/colorblind/
-    * http://www.somersault1824.com/tips-for-designing-scientific-figures-for-color-blind-readers/
-    * http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3
-    * http://ggplot2.tidyverse.org/reference/scale_brewer.html
-    * `viridis`! *but don't overdo it*
-- saving
-  + base
-    * `pdf("file.pdf", width =, height =); par(whatever); plot(whatever); dev.off()`
-  + ggplot
-    * `ggplot(whatever); ggsave(whatever, width =, height =)`
-- Complex data analysis
-  + *note to self: learn about arm, rms*
-    * *if you don't get to this, just say that you don't do regressions that much, and you don't do frequentist regression when you do, LOL*
-  + regression functions
-    * transform within function call (logs, interaction, factor dummies)
-  + glms
-    * ols: y = (XB)
-    * glm: link(y) = XB; y = inv_link(XB)
-      - logit(p(y)) = XB. invlogit(XB) = p(y)
-  + interpreting model output
-  + generating model output
-    * table packages
-      - list: https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r
-      - stargazer: https://cran.r-project.org/web/packages/stargazer/vignettes/stargazer.pdf
-      - apsrtable: https://cran.r-project.org/web/packages/apsrtable/apsrtable.pdf
-      - *I like xtable and texreg*
-      - there are pros and cons. Some are better for regression, summary statistics, just other tables you might make (xtable)
-    * `arm::coefplot`
-    * `coefplot` package
-    * `coefplot2`
-    * I'd say: coefplots by hand using `broom` and `ggplot2`. Easy for jamming multiple models together
-      - http://varianceexplained.org/r/broom-intro/
-      - https://arxiv.org/pdf/1412.3565.pdf
-    * *I've seen people do coefplots using base graphics and it's like half the entire file. It's fugly*
-  + marginal effects
-    * effects
-    * zelig
-    * *sjplot*
-  + post-estimation
-    * residuals 
-    * (most models: normal on the index. OLS index = link)
-    * *Log Likelihood* (coef.test? where are there model things for GLMs?)
-    * *information criteria: AIC, WAIC*
-      - meant to estimate out-of-sample performance
-      - see McElreath videos
-      - since every fit is a combination of true + noise (even assuming perfect model)
-    * don't BIC
-      - neither Bayesian nor IC
-
-
-Improving on Sarah
-
-- how tidy data becomes good for ggplot
-  + stacking factors for grouping aesthetics
-- nail grouping as a benefit
-  + if you have multiple countries, multiple states, multiple datasets
-  + you *can* gather multiple DVs, but then you can't get different axis labels, so do this only for private use OR with conceptually related variables for public use
-    * *use var-ecm graphic as a bad example*
-- What to do about model graphics
-  + a simple regression example
-  + use broom for coefficient plot
-  + sjplot for a simple marginal effects?
-  + broom: learn how `glance` works
-  + `predict(new.data)`
-  + effects?
-  + margins?
-  + arm?
-  + rms?
-  + *and then save complex predictions for modeling day?*
-- Other graphics tips
-  + confidence interval things:
-    * steep change look like narrow confidence intervals
-    * confidence intervals are *vertical* for a given x value (find tumblr example)
-  + log(0)
-    * are they counts? use a count model instead of a log
-    * are they unequal probability? use an ordinal model
-- stata vs R
-  + if you have a simple OLS or GLM and want to do a simple prediction or simple MFX, Stata does this pretty well
-  + R is way better for visualizing multiple models together (tidy data, broom, ggplot)
-
-
-
-
-# more Sarah
-
-- "advanced topics"
-  + looping
-  + apply
-  + nesting and mapping
-  + lists
-  + type coercion
-- things I plan to do already
-  + pipes
-  + dplyr
-  + tidyverse
-  + forcats
-  + haven
-  + readr
-  + tidyr
-  + stringr
-- what is the tidy time series thing? hms?
-- regex
-  + just explain what it is. Not worth learning and not worth teaching right now
-- text analysis: 
-  + tm
-  + tidytext
-- time series stuff
-  + lubridate
-  + what other time series packages are out there
-  + Stata is maybe better?
-- R as front end
-  + rcpp, sql, rpython (rselenium)
-- learning new packages
-- survey analysis
-  + Sarah has a good story example!
-  + Stata might be better
-- Bayesian analysis: 
-  + bugs, jags, stan
-    * Jags probably easiest for custom models
-      - learn JAGS from Gelman and Hill (who use BUGS but it's very similar)
-      - Jackman Bayes textbook
-    * Stan definitely the fastest but learn r-like (requires a C++ like file)
-      - Gelman et al BDA
-  + other packages for quick and dirty Bayes things
-    * `brms`
-    * `rethinking`
-  + *decide how much you want to preach*
-
-
-My advanced things:
-
-- hierarchical models
-  + figure out how badly you want this...
-  + you like these but don't actually do them all that much
-- function writing
-- bayesian example
-- apply and lapply
-- nest and map
-  + hierarchical: mrp?
-
-
-
-
-# Introduction
-
-- gelman quote about dumbest possible thing
-
-
-
-# Nonstatistical approaches
-
-
-## tabulating
-
-## aggregating
-
-
-
-# Univariate statistics
-
-
-## means and CIs
-
-## comparing CIs across groups
-
-## simple means tests, chisq tests
-
-
-
-
-# Regression
-
-## lm
-
-rescaling
-
-## glm
-
-Intuition of the GLM
-
-- $E[Y] = g^{-1}(X\beta)$
-- $Y = E[Y] + \epsilon$
-- or $Y \sim \mathcal{D}(\theta)$
-
-
-## lme4
-
-
-## bayesian models
-
-
-
-# Regression output
-
-
-## regression tables
-
-`xtable`, `stargazer`, `texreg`
-
-
-## regression coef plots
-
-don't use `coeftest`
-
-
-`broom`,
-
-
-## regression predictions
-
-maybe avoid `effects`
-
-use `sjplot`, `margins` for R
-
-
-## marginal effects
-
-
-
-
-## Time Series
-
-- Time series is just hard and you're going to spend a lot of time beating your head against a wall. There is nothing I can do to fix this. But here are some tools that you should check out to help you.
-- Fixing data: 
-  + stata has `tsset` and you feed it a date, maybe a group
-  + dplyr: `group_by(whatever)`, `arrange(date)`
-  + lags and leads just work on rows, so it won't *know* to grab the previous date
-- `zoo`? Creates an index variable
-- `xts` requires the index to be a date
-- lubridate for date/time modification
-- RcppRoll for rolling averages
-- tidyquant has period-level apply functions (apply something weekly, for example)
-
-
-
-
-
-# User-defined functions
-
-This section is a little complicated, so it's okay if it doesn't make perfect sense at first.
-
-In R, it is easy to write your own functions. Here is an example of a function that calculates a mean. 
+Some diagnostics for linear models can be easily visualized using `plot()`, including quantile plots, and analyses of residuals.
 
 ```{r}
-my_mean <- function(z) {
+plot(therm_mod)
+```
 
-  sum_z <- sum(z)
-  n <- length(z)
-  the_mean <- sum_z / n
+There are certain functions and packages that can be used to generate model fit statistics. I think the easiest tool for comparing models is `broom::glance()`. Just like `broom::tidy()`, you can stack the data frames created by `glance()` to compare models easily or plot the statistics.
+
+```{r}
+bind_rows(mutate(glance(therm_mod), mod = "LibCon"), 
+          mutate(glance(dummy_mod), mod = "Dummies"),
+          mutate(glance(int_mod), mod = "Intercepts"),
+          mutate(glance(newmod), mod = "Interactions"))
+```
+
+This works for GLMs as well, but maximum likelihood models have some different fit statistics than least-squares models. If you want to compare linear and nonlinear models, you could estimate the linear model as a GLM model of Gaussian family with an "identity" link.
+
+```{r}
+glance(vote_logit)
+```
+
+
+Some additional tips and tools.
+
+- Some of these diagnostics will show an improvement in model fit even if the improvement comes from fitting noise (such as $R^{2}$). These diagnostics are statistics that take a distribution, so you want to compare models using a statistical comparison---i.e. is the fit improvement *enough* given that you've added an extra variable to the model. Examples include F-tests and likelihood-ratio tests. If you go down this route, you might check out tools such as `epicalc::lrtest()` or the `lmtest` package. Other packages for model assistance (such as `arm` or `rms`) may have similar tools as well. Other diagnostic measures will penalize you for adding variables on the front-end, such as BIC, so they don't require formal statistical tests. 
+- My advice is that if you want to be doing this kind of intense model comparison, make sure you know what these statistics are checking and that the use is appropriate for your task at hand. There really are no hard and fast rules here, so you want to do what makes sense for your use case. 
+- Out-of-sample prediction is a good test for model over-fitting. This can be evaluated using cross-validation. The `loo` package provides tools for easier CV performance. (Also, the AIC is intended to estimate out-of-sample model accuracy).
+- Simulating artificial data can be a useful face-validity check. If you are estimating a generative model of your data (and you are...), the model should generate data that look like your data. 
+
+
+
+
+# Intermediate R tricks
+
+Now we will quickly introduce some more nitty-gritty R tricks. These are not essential for the tasks you are likely to do for this class. But over the long run, you will be a much more efficient R user if you take these concepts seriously.
+
+
+## Type coercion
+
+As we covered early in the course, there are a few different data types in R: logical, numeric, factor, and character. Data can be *coerced* from one type to another with `as.type()` functions, where `type` refers to the resulting data type.
+
+Let's start as broad as possible with characters. As the broadest of these data types, anything can be coerced to a character.
+
+```{r}
+# logical to character
+as.character(TRUE)
+# numeric to character
+as.character(c(1, 2, 3))
+# factor to character
+(F <- factor(c("hello", "world")))
+as.character(F)
+```
+
+Converting to factor is similar. Each unique value is given its own factor level, and the order of levels is assigned alphabetically unless specified with `factor(..., levels = c(...))`. 
+
+```{r}
+as.factor(c(TRUE, FALSE))
+as.factor(c(1, 2, 3))
+# note the level order
+factor(c("1", "2", "3"), levels = c("3", "2", "1"))
+```
+
+Converting to numeric is slightly more confusing. Logical variables are easy and can be converted to `1`a and `0`s. 
+
+```{r}
+as.numeric(c(TRUE, FALSE))
+```
+
+Factors also work, but the coercion gives numeric meaning to the underlying factor labels. 
+
+```{r}
+# levels assigned in reverse order
+(F <- factor(c("hello", "world"), levels = c("world", "hello")))
+# note the mapping to numeric...
+# Making a data frame to visualize
+data_frame(factor = F, 
+           numeric = as.numeric(F))
+```
+
+Character vectors cannot be directly mapped to numeric. They need to be converted to factor first.
+
+```{r}
+char <- c("a", "b", "z")
+# direct coercion leads to NAs
+as.numeric(char)
+# coercion through factor works
+as.numeric(as.factor(char))
+```
+
+
+Here's where you typically see these forms of coercion.
+
+- using logicals to convert categorical variables into dummy variables
+- using `as.factor()` to convert a numeric index into a set of dummy variables in a regression function
+- converting numeric caseID variables to character in order to fix any problems with leading zeroes. This is common with geocodes like FIPS codes.
+- Converting character vectors to factors for plotting (placing categories in order for legends or panel titles). 
+
+
+## User-defined functions
+
+In R, we can write our own functions to perform repetitive tasks. Let's demonstrate the a task for finding a mean.
+
+```{r}
+my_mean <- function(x) {
+  
+  the_sum <- sum(x) 
+  n <- length(x)
+  the_mean <- the_sum / n 
   
   return(the_mean)
 
 }
+
+z <- 1:5
+my_mean(z)
 ```
 
-Here's how this works. 
+User-defined functions have three components.
 
-First, we pick a name for the function. Here, we chose `my_mean`. If you don't know if there are any existing functions with the same name, you can search for it in R's help files (`?my_mean` and `??my_mean`).
+- The function name, which is what we assign the function to.
+- Arguments, passed to the function, manipulated within the function
+- The definition, which details how arguments are manipulated and what the function returns
 
-Second, we decide which *arguments* this function should have. An argument is information that gets *passed* to the function. That's what the `function(z)` is doing---the function takes one argument called `z`. We could have written `function(banana)` if we wanted, and then manipulated the `banana` object inside the function. The `z` (or `banana`) object name is just a stand-in for information that we are going to manipulate inside the function definition. 
+It is important to note that the variables inside the function definition are called *local variables*. This means they only exist in the world of that function. They are not accessible elsewhere in R. In the above example, `x`, `the_sum`, `n`, and `the_mean` are manipulated by the function but are not available to you to play with. Furthermore, if there are other objects currently in R memory that share those same names, they have no bearing on how the function works. Local variables help define a function and perform its intended purpose, but they do not affect and are not affected by the other objects in your current R workspace.
 
 
-Third, the function needs a *definition* inside curly braces, meaning, what the function does. Technically, we *assign* a definition to the object called `my_mean`. (Yes, even functions are objects.) If we passed some variable to `my_mean()`, the function calculates the sum, finds the length, and then divides the sum by the length. Finally, the function *returns* the calculated value. In all, when we pass in some `z` data, we get out some value that is the result of `the_mean`.
 
+## Lists
 
-For example, let's make some data. 
+There is one data structure that we have not yet discussed: lists. Lists are like vectors, but unlike vectors, their elements can be of any data type. Let's demonstrate. 
 
 ```{r}
-(some_data <- seq(0, 10, 2))
+# create a list of named elements
+el <- list(num = 1, 
+           fact = factor(c("a", "b", "c")),
+           char = c("x", "y", "z"))
+# check it out
+el
+
+# numeric indexing gives you the named element (including the name)
+el[1]
+
+# to get all the way down to the data...
+el$num
+el[[2]]
+el[["char"]]
+
+
 ```
 
-(Notice that the `seq(a, b, c)` function creates a sequence of values from `a` to `b` with a skip interval of `c`.) And then we will find the mean of this variable using our new mean function.
+This can be handy for stacks of data frames. For example, the `anes` dataset, but element is a data frame corresponding to each survey year.
+
+```{r, eval = FALSE}
+# This will print a big monstrosity, 
+# but you should see what it looks like
+anes_list <- split(anes, anes$cycle)
+```
+
+
+## Functional programming with `apply()` functions.
+
+You'll see stuff about `apply()` functions online. They are scary at first, but they make sense if you give them a chance. 
+
+Let's see what we mean. Let's create a two-D object.
 
 ```{r}
-my_mean(some_data)
+df <- data_frame(a = 1:5, b = a, c = a) %>%
+  print()
 ```
 
-There is one potentially-confusing point I need to make about custom functions. The variables that are manipulated inside the function definition are called *local variables*. This means they only exist in the world of that function. Although the function manipulates variables called `z`, `sum_z`, and so on, those variables only exist to that function and are not accessible to you in the rest of R's memory. They exist only to make the function work. To demonstrate the point, print out all of the objects in R's memory using the `ls()` function.
+An `apply()` function takes an object, and applies a function across its dimension(s). This is easier to explain using an example: here, we will apply the `mean` function to the rows and columns of this `df` object.
 
 ```{r}
-ls()
+# 1 = row
+apply(df, 1, mean)
 ```
 
-You will notice that none of the objects created by `my_mean()` are there. This is by design, because you don't want any function you create to get confused about whether the object you want to manipulate is local or global. 
+It returns an object the same length as the number of rows in the object, containing the result of the `mean()` function for each row. 
+
+Here it is for each column.
+
+```{r}
+apply(df, 2, mean)
+```
+
+You could pass a user-defined function to `apply()`, or you could define a function within `apply()` using "anonymous functions." Example:
+
+```{r}
+df 
+apply(df, 2, function(x) {x * x})
+```
+
+This anonymous basically applies the function `x^2` to each column in `df`. 
+
+There are a few types of apply functions, but you're only likely to use a few of them. 
+
+- `apply`: apply a function over the margins of an object
+- `sapply`: simplify the `apply()` results to a one-D vector, if possible
+- `lapply`: apply for each element in a list
+
+Here is an `lapply` example, using the `anes_list` object we created above. We'll use an anonymous function to find the mean `party_distance` in each election cycle.
+
+```{r, eval = FALSE}
+lapply(anes_list, function(x) mean(x$party_distance, na.rm = TRUE))
+```
+
+From there, you can do cool things like "melt" the list into a data frame using `reshape2::melt()`.
+
+```{r, eval = FALSE}
+lapply(anes_list, function(x) mean(x$party_distance, na.rm = TRUE)) %>%
+  reshape2::melt()
+```
 
 
+
+## Nesting: superpowered lists
+
+When you get *really* comfortable with function programming, you can do crazy stuff like nest a data frame. What is that?
+
+```{r}
+anes %>%
+  group_by(cycle) %>%
+  nest() 
+```
+
+A nested data frame is a data frame where columns can themselves be a list of data frames (a.k.a. a "list column"). In this data frame, the `data` column isn't really a variable; it contains a list of data frames, each corresponding to the grouping variable (`cycle`). 
+
+Unnest a list column from a data frame like so: 
+
+```{r, eval = FALSE}
+anes %>%
+  group_by(cycle) %>%
+  nest() %>%
+  # unnest the `data` column
+  unnest(data)
+```
+
+
+## Mapping a function over a list column
+
+This is another functional programming trick, like apply, but applied to a list column in a nested data frame.
+
+Let's say we had the above nested frame (a data frame for each survey wave), but we wanted to estimate a regression for separate data frame. 
+
+Here, well estimate the effect of gender on Republican voting using `map()`, which is like `apply()` but it works across a list column in nested data frame.
+
+```{r}
+# nesting the data
+#   removing NAs
+#   map glm() into each data frame in the list column
+#   using an intercepts model for easier comparisons (no constant)
+gender_gaps <- anes %>%
+  mutate(rvote = as.numeric(vote == "Republican Candidate")) %>% 
+  filter(!is.na(rvote) & !is.na(woman)) %>%
+  group_by(cycle) %>%
+  nest() %>% 
+  mutate(model = map(data, 
+                     ~ glm(rvote ~ -1 + as.factor(woman), 
+                           data = ., family = "binomial") %>%
+                       tidy(conf.int = TRUE))) %>%
+  unnest(model) %>%
+  mutate(term = case_when(str_detect(term, "0") ~ "Man",
+                          TRUE ~ "Woman")) %>% 
+  print()
+
+# plot coefficients over time
+# map pt shape, solid and empty points, generic white fill
+ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
+  geom_hline(yintercept = 0) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
+                      shape = term),
+                  fill = "white",
+                  position = position_dodge(width = 0.5)) +
+  scale_shape_manual(values = c(16, 21)) +
+  scale_x_continuous(breaks = seq(1948, 2012, 8)) +
+  theme_bw() +
+  labs(y = "Effect on Republican Voting (Log Odds Scale)",
+       x = "Election Cycle",
+       color = NULL, shape = NULL)
+```
+
+Mapping is a tool that takes some getting used to at first. In particular, you have to get a feel for the formula syntax where a function follows a `~` symbol, and you use `.` to represent element names in the `data` column. Once you get this down, however, mapping is an extremely powerful tool for scaling up analysis because not only can you do a lot of repetitive work with very little code, the code is executed using parallel processing when possible. This makes it much faster because it distributes tasks across processing cores on your computer (nice!). 
+
+
+
+
+# References for advanced topics
+
+As you develop your substantive scholarly interests, it is likely that you will develop a methodological expertise to fit your topic of study. Luckily, many others have come before you and have developed R tools for doing these analyses. Better yet, these computational tools are being increasingly folded into a `tidyverse`-style tools. We'll quickly point out a few of these resources. You will *NOT* be required to use these tools for any take-home exercises.
+
+Some higher-level advice for navigating these packages:
+
+- My philosophy is that I like to rely on external packages for computation and estimation, but not for graphics. If there is a tool that estimates a model for me, or performs a particular statistical test, then that's great. But I tend not to like the graphics that these tools produce. *As a result*, I look for tools that make it easy for me to extract the data that I want to plot. 
+- Sometimes it is tedious to extract the data from these objects. In these situations, I tend to write my own functions to process the output from these packages into a tidy format for plotting or tabulating.
+- If you want a quick and easy way to learn about packages, make a Twitter for your "academic self" and follow some researchers and R developers.
+
+
+## Survey analysis
+
+The statistics that we learn apply to data collected from simple random samples. In the real world, however, survey data often require some kind of clustered sample design and contain accompanying sample weights. Analyzing surveys requires (or, should require) accounting for weights and design as separate elements of the analysis.
+
+If you have a non-clustered sample design but some degree of oversampling, you might handle weights analytically---calculating weighted means and weighted sample sizes. If you have a more advanced sample design, you should incorporate elements of the design into the estimation. To that end, I'd recommend Thomas Lumley's [`survey`](https://cran.r-project.org/web/packages/survey/) package. You use your dataset to create a new object that contains metadata about the cluster structure of the sample. Functions in the `survey` package then use the metadata about the sample design to estimate things properly. This is similar to the way you can declare survey design information using `svy`-based commands in Stata.
+
+
+## Time series
+
+For time series, you will want some special tools to deal with the accompanying statistical pitfalls: functional forms for autocorrelated errors, standard errors for autocorrelation, and the estimation of ancillary parameters for models designed for certain temporal interventions. 
+
+First, for data manipulation, you will want some kind of data structure that contains metadata about which variable defines the time period. This structure will allow you to properly calculate differenced variables, lags, and leads. To create tidy, time-aware tibble datasets, you could use [`tibbletime`](https://github.com/business-science/tibbletime) or the more recent (and supposedly more capable) [`tsibble`](http://pkg.earo.me/tsibble/index.html). You could also check out the `lubridate`, `zoo`, and `hms` (Tidyverse!) packages for manipulating data-time variables, since the baked in R tools for dealing with `POSIXct` and `POSIXlt` data are very difficult to figure out. If you read that sentence and were like "wtf are `POSIXct` and `POSIXlt`?", that's exactly what I mean.
+
+For time series *modeling*, you will want tools that perform a variety of functions.
+
+- ARIMA modeling
+- Unit root and (fractional) integration testing
+- modeling for interventions, autoregressive distributed lag (ADL), error-correction (ECOM) vector autoregression (VAR), granger causality tests, impulse-response functions, and so on
+
+I don't have expert-level advice here, but when I took our time series ITV course, I found the following packages useful for several of these needs: `TSA`, `fUnitRoots`, `egcm`, `fracdiff`, `forecast`. 
+
+
+
+## Panel data
+
+Panel data tends to be the realm of "fixed-effects" modeling, meaning that when you measure features over time, time-invariant predictors are absorbed into fixed unit-level averages. I don't typically do this kind of analysis, but those who do often use the `plm` dataset for these types of models. 
+
+Alternatives to `plm` include hierarchical modeling approaches, which we'll cover in a separate subsection.
+
+
+##  Hierarchical/multilevel models
+
+For complex hierarchical data structures (individuals within time periods, individuals within geographic groups, observations within countries within regions within time periods...), hierarchical models may more be a more direct modeling approach to attributing variation in the data to covariates at different levels of analysis without as much scrutiny about clustered variance estimators and so on. This is because hierarchical modeling allows you to directly model parameter estimates as functions of covariates at other levels of the data. For example, the probability that an individual votes Republican may be a function of their demographic characteristics but also the context of state the state in which they live.
+
+$\begin{align} y_{i} &\sim \mathrm{Bernoulli}\left( \pi_{i} \right) \\[6pt] \mathrm{logit} \left( \pi_{i} \right) &= \alpha + \gamma^{\mathtt{demographics}}_{j[i]} + \delta^{\mathtt{state}}_{s[i]} \end{align}$
+
+The state effect applies to every individual in that state and could itself be a regression on state-level features such as the presidential vote in the state, state-level economics, and so on.
+
+$\begin{align} \delta^{\mathtt{state}}_{s} &\sim \mathrm{Normal}\left( \beta_{1} \mathrm{pvote}_{s} + \beta_{2} \mathrm{GDP}_{s} + \ldots , \, \sigma^{\mathtt{state}} \right)\end{align}$
+
+This kind of modeling is useful because it elegantly captures the way we think theoretically about the effects of nested data and partial pooling. "Partial pooling" is the idea that we can build reasonable estimates for small groups by taking information from other groups. In other words, for small-$n$ groups, we assume that the group-level effect looks like the other group-level effects *unless* the data give us a strong signal to the contrary. This is a key example of the bias-variance trade-off you heard about in stats courses. 
+
+Although hierarchical models are "essentially Bayesian" because of the partial pooling setup, there are packages for fitting approximate maximum-likelihood versions. The most common would be `lme4`, which provides [syntax](https://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4) similar to `nlme` for varying ("random") effects, but it is more updated than `nlme`. The `arm` package provides additional tools for interacting with `lme4` hierarchical models, including the `bayesglm` function with just says "screw-it" and fits the Bayesian version of the model. On that subject...
+
+
+## Bayesian analysis
+
+Bayesian analysis varies from "frequentist" statistics in a few fundamental ways. The main source of difference is philosophical, where uncertainty estimates are understood as your uncertainty about the actual value of the parameter, and not uncertainty about the *data*. Stated differently, frequentism measures the *probability of the data* given an assumed model of null parameter values and infinitely repeated sampling. Bayes statistics rejects the null model and instead measures the *probability of the parameters* after having observed the data, which requires prior information over the parameter values. When it comes to the actual parameter estimates, you can think about maximum likelihood models as being *special cases of Bayesian models* where the researcher inserts no prior information about the parameter values. 
+
+There are a few ways to fit Bayesian models. For reduced-form regression models (like `lm` and `glm` functional forms), you can use packages such as `arm`, `brms`, and `rethinking` to write Bayesian models using a [syntax](https://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4) similar to `glm` and `lme4` models.
+
+For complicated structural models that are not easily expressed in a single regression equation (e.g. when you have a complex multi-level structure), you should set up a fully Bayesian model using external Bayesian modeling software that can be accessed by R. For simpler models, one could use `JAGS`, which samples a posterior distribution using a Gibbs sampling algorithm. You would use the `rjags` package to talk to JAGS using R. For more complex hierarhical models, randomly-walking algorithms for Gibbs sampling do a poor job, so I recommend using `Stan` (and talking to it with R using the `rstan` package). Stan fits the model using a pre-compiled `C++` model definition file and a version of Hamiltonian Monte Carlo, both of which drastically increase the speed and quality of posterior sampling. The `Stan` syntax is more complicated than `JAGS`, but the payoff of using `Stan` is worth it. 
+
+For diagnosing and visualizing Bayesian model results, `rstan` has some tools baked in. The `ggmcmc` package turns posterior samples into a tidy data frame (good for ggplot!), and `bayesplot` provides other tools for easy Bayes graphics.
+
+
+## R as front-end
+
+As the Bayes packages indicate, R can serve as a front-end interface to other programs and syntaxes. Some further examples include the following packages...
+
+- `rsql` and `RSQLite` for SQL and SQLite
+- `Rcpp` for C++
+- `rPython` for Python
+
+...and so on
+
+
+## More materials from past years
+
+Sarah Bouchat (former instructor for this course) has online materials for some additional topics, including text analysis, Regular Expressions (RegEx), base graphics, loops, and so on. (I purposefully don't teach loops because `apply()` functions are better!) 
+
+View Sarah's site [here](https://bouchat.github.io/553). 

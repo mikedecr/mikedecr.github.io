@@ -1002,11 +1002,15 @@ Some general advice for plotting:
 - Never use multiple Y axes. It's easy to use multiple Y axis scales to make variables look more or less related, so you shouldn't do it. In fact, `ggplot` won't let you (because it's opinionated like that).
 - Try to make your graphics as minimal as possible. Add elements where it improves the graphic. Otherwise, you don't want to create clutter.
 - If you can label points or trends *in the plot* rather than in a legend, do so. You can do this with `geom_text` or the `annotate()` function.
+- If you can use aesthetic features *besides* color to distinguish groups, that would be ideal. Some forms of color-blindness are remarkably common, and at any rate, journals may not allow your article to print in color. 
+- If you must use colors, you should check out some colorblindness-friendly color palettes and packages. You could check out the `dichromat` package to investigate how your color selections look to individuals with various forms of colorblindness. The `viridis` package also provides a variety of scales for colorblind-friendly graphics. 
 
 
 ## Other `gg` tools
 
 There are many extensions for `ggplot` that you can install. Rather than tediously describe them, I'll point you to a [web page](http://www.ggplot2-exts.org/gallery/?utm_content=buffer6d153&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer) discussing many of the tools out there. These let you create heatmaps, choropleths, network graphs, mosaic plots, autocorrelation plots, and much more. Extensions I have used in the past include `ggfortify`, `ggridges`, `ggthemes`, `ggsci`, `GGally`, and `ggalt`.
+
+Many more extensions are in development and cannot be found on CRAN, but they can be downloaded and installed. One that I particularly like is [`patchwork`](https://github.com/thomasp85/patchwork), which combines multiple graphics into the same image using an extremely simple syntax.
 
 
 ## Graphics in future lessons

@@ -404,9 +404,7 @@ install.packages("tidyverse")
 
 
 
-# R vs Stata
-
-**keep?**
+# Comparing and contrasting R and Stata
 
 As we continue these lessons, you will see more about how these languages are similar and different. There are definitely *some* similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don't have to compile an entire file of code before you can run it. Yay! 
 
@@ -416,6 +414,7 @@ R is free and open source.
 
 - Pro: When you lose your university access license to Stata (which you will, eventually), you can still use R.
 - Con: Some of the stuff in R may lower quality than the stuff in Stata. Granted, most of the stuff in R you use works just as well as Stata, but there is really nothing stopping some jerk from writing some sloppy code and putting it out there. Wisdom of the crowds generally holds though: if an R tool is popular, you can count on it to be reliable. There are *lots* of smart people using and constantly improving R!
+
 
 R is a fully formed programming language.
 

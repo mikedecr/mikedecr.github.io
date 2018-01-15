@@ -6,10 +6,21 @@
     <description>Recent content in Ps811 on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 04 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/categories/ps811/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 3: Analysis</title>
+      <link>https://mikedecr.github.io/811/811-analysis/</link>
+      <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-analysis/</guid>
+      <description>Objective In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
+ Confidence intervals and tests of population means and proportions regression models and formatting model output post-estimation diagnosis and visualization  This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise. These include…
+ intermediate R tools and routines lists apply() functions mapping functions to nested data frames custom functions type coercion a preview of tools for advanced analysis time series panel models multilevel models Bayesian models etc.</description>
+    </item>
     
     <item>
       <title>Lecture 2: Graphics</title>
