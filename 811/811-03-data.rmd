@@ -1,36 +1,42 @@
 ---
 title: "Lecture 1: Data Manipulation"
-author: "Michael DeCrescenzo"
 description: "Creating, modifying, shaping, and piping data"
+author: "Michael DeCrescenzo"
 date: "2018-01-03"
 slug: "811-data"
 categories: ["R", "ps811", "Teaching"]
 tags: []
 ---
 
+# Schedule:
 
+Read this before our first R lecture.
 
 # Objective
 
 The goal of this lesson is to simulate some data manipulation for a research project. This requires...
 
 - setting up the project on your computer
-- Get data onto our computer (the [ANES](http://electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf.htm) should already be downloaded!)
+- Get data onto the computer (the [ANES](http://electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf.htm) should already be downloaded!)
 - Load the data into R
 - Cleaning and modifying the data
-- Doing some simple calculations using the data
+- Doing some simple calculations
 
 
-Future lessons pick up where this one leaves off. We will be [making graphics](811/811-graphics) and doing [statistical analysis](811/811-analysis).
+Future lessons pick up where this one leaves off, so you must complete this lesson!. We will be [making graphics](811/811-graphics) and doing [statistical analysis](811/811-analysis) that depend on the changes we make in this document.
 
 
+
+<!-- # How to read this document -->
+
+<!-- I have also uploaded an R file containing the commands from this document. You can use this other file to follow along with the code on this webpage. You may also benefit from transcribing the code from this page into your own script file, as a way to practice writing the code yourself. -->
 
 
 # Setting up a project
 
-Projects should have their own dedicated folder on your computer. Moreover, project folders should be internally organized, with separate folders for data, R scripts, writing, other documentation, and so on. 
+Each projects should have a dedicated folder on your computer. These folders should be internally organized: separate folders for data, R scripts, writing, other documentation, and so on. 
 
-Here is an example of one of my project folders. The `R/` folder itself is a little disorganized at the moment, but you get the idea.
+Here is an example of one of my project folders.
 
 <center>
   <br>
@@ -38,82 +44,93 @@ Here is an example of one of my project folders. The `R/` folder itself is a lit
 </center>
 <br>
 
-You should already have an `ps811/R/lessons/` folder. In that folder, create a `data/` folder to store the ANES data. You'll want to save any `.R` files you are using in the `R/` folder. Here's how I would recommend proceeding with R files for these lessons:
 
-- Download any corresponding script files from [Canvas](https://canvas.wisc.edu/courses/86298)
-- Create your own R file for following along and practicing with variations on the provided code (this will be largely based on the script file from Canvas)
-- Optional: download the `.Rmd` file for these webpages from my [Github](https://github.com/mikedecr/site-source/tree/master/content/811). These files contain both code and the text on the web pages, but they are fairly easy to interpret. These files are easiest to use with Rstudio. Learn more [here](http://rmarkdown.rstudio.com/).
+For this class, set up your class folder like this:
 
-Some tips for setting up projects: 
+- You should already have a dedicated `ps811` folder
+- Inside of `ps811`, create an `R` folder for all of your R materials.
+- Inside of `R`, create folders for `data`, `lessons`, and `exercises`. Put all data in the `data` folder, and put any R files corresponding to online lessons and lecture in the `lessons` folder. 
+- (Exercise files will go in the `exercises` folder). 
+
+
+
+## Tips for project folders
 
 - When you name your folders and files, use hyphens or underscores to separate words, not spaces. Something like `811-data-lesson.R` is better than `811 data lesson.R`. 
-- Use short folder names when you can. File names as well. This makes your life easier for navigating directory pathways and version-controlling your work (e.g. with Git, which I recommend learning at some point soon).
-- Avoid setting up the folders in ways that would require you to navigate *up* the directory tree. If that doesn't immediately make sense, see the section below.
+- Use short folder and file names names when you can. This makes your life easier in the long run (e.g. with Git, which I recommend learning).
+- Avoid setting up the folders in ways that would require you to navigate *up* the directory tree. See below for more about what I mean.
 
 
 
 # Directories
 
-Just as you can look around your computer in the file browser ("Finder" on Mac and "Explorer" on Windows), R looks around your computer as well. The problem is, R is very stupid unless you tell it where to look for stuff.
+Just as you can look around your computer in the file browser ("Finder" on Mac and "Explorer" on Windows), R looks around your computer as well, but it needs your help knowing where to look.
 
-If you open R, it looks some place on your computer by default. Here's where mine is looking right now.
+Find the current working directory with `getwd()`. 
 
 ```{r}
+# "get working directory" 
+# prints the current directory pathway (here is mine)
 getwd()
 ```
 
-If you type this command in R, it probably starts at the top of your user profile on your computer (e.g. `"/Users/michaeldecrescenzo/"`). If we want R to find our project files, however, we need to tell R to look in our project folder. Do this by setting the working directory. For example...
+To find your project folder, *set your working directory* to the appropriate path (the `ps811/R/lessons` folder).
 
 ```{r, eval = FALSE}
-setwd("~/folder/pathway/to/project")
+# setwd() = "set working directory" 
+# changes the directory to the specified file path
+# the "~" is a shortcut that means "the top of my user profile" 
+setwd("~/pathway/to/ps811/R/lessons")
+
+# confirm directory location
+getwd()
 ```
 
-You should set your directory to the `top` of the project folder, not all the way into the `data/` folder. You should do this because it's always easier to navigate down a folder tree than up a folder tree. The code for navigating *out* a folder, `..`, doesn't tell you which folder is the destination, so it can be confusing to depend on it. 
+As with many R functions, you know `setwd()` worked when it gives you no feedback whatsoever. 
+
+You should always set your directory to the *top* of the project folder (also called the "project root" of the project). Do *not* set it all the way into the `data/` folder. This is because it is always easier to navigate *down* into the data folder than it is to navigate *up* back into the project folder. That's because the keyword for doing up a folder, `..`, is very uninformative. 
 
 
 
 # Getting started
 
-Let's install some packages that we will use. 
-
-```{r, eval = FALSE}
-install.packages("magrittr")
-install.packages("tidyverse")
-```
-
-Once you install these packages, you should comment out the installation commands in your script file. We don't need to install them each time. 
-
-Now load the packages so they can be used in this R session.
+Load some packages so they can be used in this R session. These should already be downloaded from the previous lesson. 
 
 ```{r}
+# package loading is done using library().
+# Quotes around the package name aren't necessary 
+# but recommended for technical reasons
+
 library("magrittr")
 library("tidyverse")
 ```
 
-When you load the `tidyverse` package, you actually load several packages that are *part of* the Tidyverse. We'll explain what the Tidyverse is below.
-
-You will notice that a warning message says that some function names in the `tidyverse` package "masks" some of the names in the `magrittr` and other packages. This means some of the object names in the packages are the same. This is *generally* something you should be watching out for, as your code may not work as intended. It is, however, not going to be a problem in this particular instance.
+When you load `tidyverse`, you should see a warning that it "masks" some names in the `magrittr` and other packages. This means some of the function names in the packages are the same. This is *generally* something you should be watching out for, since your code may not work as intended. It won't be a problem right now, though.
 
 
-# Loading external data
+# Read external data
 
-With your directory set at the top of your current project, find the ANES data file using `list.files()`. You can look inside folders by adding the folder path as an argument. The ANES data should be in the `data/` folder.
+With your directory set at `ps811/R/lessons`, confirm that the ANES data file
+are where they should be using `list.files()`. You can look inside folders by adding the folder path as an argument. The ANES data should be in the `data/` folder.
 
 ```{r, eval = FALSE}
+# this is similar to typing `ls` in your computer's shell / command line
 list.files()
+
+# you should see the "data" folder.
+# Now look inside the "data" folder; should see the ANES file
 list.files("data")
 ```
 
-R has many functions for reading datasets into memory. They typically follow a format of `read.xyz()` (for base functions) or `read_xyz()` (for Tidyverse functions), where `xyz` refers to the file extension of interest. 
+R has many functions for "reading" datasets into memory, depending on the file format. They typically follow a format of `read.xyz()` or `read_xyz()`, where `xyz` refers to the file type. 
 
-We want to read a Stata file, which has the `.dta` extension. Many web pages will recommend using the `foreign` package, but `foreign` is pretty outdated and fails with newer Stata files. I'd recommend the `haven` package. 
+We want to read a Stata file, which uses the `.dta` file extension. Although many tutorials will recommend using the `foreign` package for Stata files, `foreign` is outdated and can fail with newer Stata files. I usually use the `haven` package.
 
 ```{r, eval = FALSE}
-# download the package
-install.packages("haven")
-
-# use the package to read the data
+# should already be installed
 library("haven")
+
+# read_dta("path/to/data-file.dta")
 anes <- read_dta("data/anes_timeseries_cdf.dta")
 ```
 
@@ -123,11 +140,13 @@ This should take a few moments to load because the ANES cumulative file is a big
 anes <- haven::read_dta(here::here("static/data/anes_timeseries_cdf.dta"))
 ```
 
+You may want to check out the `rio` package for more generic file-reading functions.
+
 
 
 # Data frames
 
-Most datasets you will work with in R are called "data frames." These are basically R's default dataset object. They are two-dimensional tables, but the columns (variables) have names. These are like the variable names we saw with Stata. What's different about Stata is that, with R, we can have as many datasets in R's current memory as we want. In Stata, you work with one table at a time.
+Data sets in R are known as "data frames." Data frames are tabular objects where the columns are variables with variable names. This is just like Stata, but what makes R different is that we can have many data frames in R at one time. 
 
 Print the data to see what the table looks like.
 
@@ -135,87 +154,105 @@ Print the data to see what the table looks like.
 anes
 ```
 
-Technically speaking, the `anes` object is called a "tibble", which is a special type of data frame created by the `tidyverse` package. Tibbles are different from ordinary data frames because they are prettier when they print out. If you want to see what I mean, you can coerce the `anes` object to a regular data frame and see the difference for yourself. You can enter the following code into R *at your own risk* and see the monstrosity that R tries to print out.
+Technically speaking, the `anes` object isn't an ordinary data frame. It's a "tibble", which is a modified data frame object, the main differences being that tibbles are often faster and prettier when printed to the console. 
+
+You can always print a full data frame by coercing a tibble to the standard data frame class, but be warned: the results can be ugly if R tries to print a full data frame.
 
 ```{r, eval = FALSE}
+# as.data.frame() coerces an object to be data.frame class
+# (there are many different as.class() functions for coercing data)
+
+# You should run this command to see how it works, but be warned: 
+# this is gonna look gnarsty
 as.data.frame(anes)
 ```
 
-Suffice it to say that R will try to print out what you ask it to. Tibble objects assume that you normally don't want to print out something absolutely huge. 
 
-There are a few handy functions for learning about data frames. 
-
-We can get the number of rows. In this case, rows are survey respondents.
+You can create your own data frame using `data_frame()`. An example:
 
 ```{r}
+# create x and y variables,
+# then use x and y to create other variables 
+#   (inside the same function!)
+data_frame(x = 1:3, 
+           y = 4:6, 
+           z = x + y, 
+           abc = z * z)
+```
+
+
+
+
+## Learning about data frames
+
+Some functions for learning about your data:
+
+Find the number of rows (observations). In this case, rows are survey respondents.
+
+```{r}
+# number of rows
 nrow(anes) 
 ```
 
-We can also get the number of columns (variables).
+Find the number of columns (variables).
 
 ```{r}
+# number of columns
 ncol(anes)
 ```
 
-You can print out the top or bottom of a data frame to get a glance of it.
+Print the top or bottom of a data frame to get a glance of it.
 
 ```{r, eval = FALSE}
+# top 6 and bottom 6 rows
+# can set n != 6 if you desire
 head(anes) 
 tail(anes)
 ```
 
-When we print the `anes` object, we don't get a full list of variable names (because there are so many). To get the full set of names, use the `names()` function.
+Print a vector of variable names.
 
 ```{r, eval = FALSE}
+# vector of variable names
 names(anes)
 ```
 
 
+## Other functions for viewing data
+
+There are two for interacting directly with a data table as if it were a spreadsheet: `View()` and `edit()`. I recommend against using these, because these functions often make R freak out and freeze. The *only time this has ever worked for me* is when I was using Rstudio, which has a handy spread sheet window for datasets. 
+
+If you must edit data as a spread sheet, you may want to save it as a `csv` file and open it in Numbers, Excel, or some other similar program. 
+
+
 # Variables in a data frame
 
-Here's a weird R thing.
+Here is a funky but *extremely important* R thing. Variables in a dataset cannot be accessed by typing only the variable name. 
 
-Let's look at the `VCF0004` variable. The codebook (which you should have!) tells us that it's the election cycle variable. Let's print it out.
+Try to print `VCF0004` variable. The codebook (which you should have!) tells us that it's the election cycle variable.
 
 ```{r, eval = FALSE}
 VCF0004
 ```
 
-You should get an error. 
+You should get an error. To prevent the error, use `dataset$variable`.
 
-Why? Because that variable isn't an object we can directly access. Why? Because it's *inside* the `anes` object, and R doesn't know if we have variables with similar names in different datasets, so it's being safe by not letting us access it directly. This is different from what we're used to with Stata, but that's because Stata confines you to one data table at a time. R lets you have as many objects as you want, so we have to be specific about which object we want to access.
-
-To deal with this, we use the `$` character to tell R that a variable is located within a dataset. Let's demonstrate (using the `head()` function to shorten the output).
-
-```{r}
-head(anes$VCF0004)
+```{r, eval = FALSE}
+# this should work
+anes$VCF0004
 ```
 
-That works. 
-
-You can see the full list of objects that R can access directly like this:
-
-```{r}
-ls()
-```
-
-This is sometimes called R's "workspace" or R's current memory. There's no telling what these objects are from this output, only that there are objects with names in memory. They may have other objects "inside of" them or other accessible attributes, each of which require some other method to access them (the `$` for variables within data frames is *one way* of accessing an object's attributes).
+The `$` symbol tells R that the variable is *inside* the `anes` dataset. This is necessary because we may have multiple datasets in R with the same variable names, so we have to be specific when we want one particular variable. Yes, this is more complicated than Stata, but it lets us do a lot of cool stuff that Stata makes difficult or tedious.
 
 
-# "Attaching" data, and why you should never do it
 
-Or, "my rant on attaching"...
 
-Others may have advised you that *attaching* packages is one way of getting around the annoying `$` notation for variables within data frames. 
 
-Here's my advice. ***Never attach.*** Do not do it. It does not do what you think it does, and it creates so many more (invisible) problems than it solves:
+# DO NOT attach data
 
-- You may have other objects in R memory with the same names. Many R functions create objects-within-objects that have the same names. Attaching is asking for trouble.
-- If attaching leads to a name clash, it can make some objects directly inaccessible by name. 
-- Operations like sorting get weird when you attach. Sorting is usually something you want to do to a table of related variables at once. Attaching, however, conceptually ungroups these otherwise related vectors, and things like sorting become more difficult to mentally manage.
-- As you become more advanced with R, you will have many related datasets with the same names floating around, and attaching will mess things up. I promise.
+Others may have advised you that you can sidestep the `dataset$variable` syntax by attaching data (`attach(dataset)`). *Ignore that advice*. You should not attach data. It does not do what you think it does, and it creates so many more (invisible) problems than it solves. Attaching data is playing with fire.
 
-And so on. As a result, I'm declaring a strict (but in my opinion, defensible) policy around attaching: **You may not attach.** Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. Attaching is a dangerous practice, and I will not endorse any use of it, especially not for newcomers to R.
+My policy for this class is that attaching is forbidden. Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. If you are used to attaching data, I'm sorry, but you will thank me later.
 
 Luckily for us (and all of the R community), the `tidyverse` package provides many tools that make attaching unnecessary. 
 
@@ -223,52 +260,59 @@ Luckily for us (and all of the R community), the `tidyverse` package provides ma
 
 # The Tidyverse
 
-Now, the good stuff.
-
-The [Tidyverse](https://www.tidyverse.org/) describes itself as...
+Now, the good stuff. The [Tidyverse](https://www.tidyverse.org/) describes itself as...
 
 > ...an opinionated collection of R packages designed for data science. All packages share an underlying philosophy and common APIs. 
 
-That philosophy is based on *tidy data*, which refers to data organization where (1) rows contain cases, (2) columns contain variables, and (3) cells contain variable values. 
+## In short
+
+There are lots of R packages out there. Some of them exist under umbrellas of shared use and interface. You can think about the Tidyverse as an umbrella of similar packages that are designed to have similar interfaces and intuitions.
+
+The "Tidyverse" as a *concept* refers to the collection of packages, including `tidyr`, `dplyr`, and so on. The `tidyverse` package *unto itself* is a relatively recent entity. It is simply a bundling of the most-used Tidyverse tools (not *every* tool, however). 
+
+The [packages in the Tidyverse](https://www.tidyverse.org/packages/) are all designed to clean and manipulate data according to the principle of "tidy data" (described below). Moreover, the tools are designed with a coherent syntax that makes them easy for beginners to learn, easy to understand (when you read the code), easy to integrate into complex analysis, and easy for visualizing data. It is hard for me, as someone who has been using R for years, to describe to newcomers just how much the Tidyverse has improved the world of R in recent years.
+
+## In medium
+
+The Tidyverse is based on a philosophy is based on *tidy data*, which refers to data organization where (1) rows contain cases, (2) columns contain variables, and (3) cells contain variable values. 
 
 Although this sounds simple, there are many data formats that do not fit that pattern. Legislative data, for example, is often represented as a vote matrix with legislators in rows and bills in columns. The cells, in turn, would contain `1`s and `0`s to indicate legislators' Yea and Nay votes, respectively, on each bill. A tidy legislative voting dataset, on the other hand, would have a legislator variable, a bill variable, and a vote variable. Both datasets contain the same information, but the organization of the data allow for different sorts of manipulations. And it so happens that the tidy organization is particularly helpful for doing a lot of powerful stuff with R with very little code. 
 
-The Tidyverse is, historically, a collection of philosophicallly unified packages. The eponymous `tidyverse` package is a relatively new entity, which takes some of the most heavily used (but not all) Tidyverse components and places them into one package for convenience. The [packages in the Tidyverse](https://www.tidyverse.org/packages/) are all designed to make data tidy or manipulate already-tidy data. Moreover, the tools are designed with a coherent syntax that makes them easy for beginners to learn, easy to understand (when you read the code), easy to integrate into complex analysis, and easy for visualizing data. It is hard for me, as someone who has been using R for years, to describe to newcomers just how much the Tidyverse has changed the way R is done in the past few years.
+For more resources about the Tidyverse (aside from this course), you can visit a webpage devoted to [such resources](https://www.tidyverse.org/learn/), which links you to the [R 4 Data Science](http://r4ds.had.co.nz/) book, a book on [`ggplot2`](https://github.com/hadley/ggplot2-book), and various [cheatsheets](https://www.rstudio.com/resources/cheatsheets/) for the constituent packages of the Tidyverse. I got my start using [this blog post](https://rpubs.com/bradleyboehmke/data_wrangling), which describes the concept of "piping data" (which we will cover later) and two of the most important Tidyverse packages: `dplyr` and `tidyr`. We will cover the main points of the Tidyverse, but I would bookmark these resources for later browsing.
 
-One enormous change that the Tidyverse has brought to the world R is the integration and popularization of the pipe operator from the [`magrittr` package](https://cran.r-project.org/web/packages/magrittr/vignettes/magrittr.html). Although we will not cover the pipe operator until the end of this lesson, I encourage you ***not*** to view it as an afterthought. It drastically changes the way R is written and read, and I'd recommend you use it constantly.
+**One last note before *really* jumping in:** It is a conscious decision to focus on the Tidyverse at the expense of other approaches (namely, "base R"). As I wrote in [the online introduction to these R lessons](811/811-intro), this is because we have a limited time to make R fun and accessible, and base R is not ideal for that purpose. That being said, you may encounter base R online and in replication materials for other studies, so you should be open to learning a little bit about it on your own time. But I would encourage against making it your "default" mode of doing R, because it is quite old and inefficient compared to the tools we'll learn in class. Hopefully you'll see how easy the Tidyverse is as we proceed!
 
-For more resources about the Tidyverse (aside from this course), you can visit a webpage devoted to [such resources](https://www.tidyverse.org/learn/), which links you to the [R 4 Data Science](http://r4ds.had.co.nz/) book, a book on [`ggplot2`](https://github.com/hadley/ggplot2-book), and various [cheatsheets](https://www.rstudio.com/resources/cheatsheets/) for the constituent packages of the Tidyverse. I got my start using [this blog post](https://rpubs.com/bradleyboehmke/data_wrangling), which describes the pipe operator and two of the most important Tidyverse packages: `dplyr` and `tidyr`. We will cover the main points of the Tidyverse, but I would bookmark these resources for later browsing.
-
-**One last note before *really* jumping in:** It is a conscious decision to focus on the Tidyverse at the expense of other approaches (namely, "base R"). As I wrote in [the online introduction to these R lessons](811/811-intro), this is because we have a limited time to make R fun and accessible, and base R is neither. That being said, you may encounter base R online and in replication materials for other studies, so you should be open to learning a little bit about it online. But I would encourage against making it your "default" mode of doing R. Hopefully you'll see how easy the Tidyverse is as we proceed!
 
 
 # How `tidyverse` functions work
 
 Tidyverse literature refers to its core functions as "verbs." These are functions that take a data frame and modify it. 
 
-When you call one of these verbs, you declare the dataset name in the function. This removes the need to specify the dataset when you call a variable. R assumes that variables are located in the declared dataset. A generic example:
+When you call one of these verbs, you declare the dataset name in the function, so you don't need to use the `$` to reference a variable (nice!). The function assumes that the variable is located in the declared dataset, and if not, it will check the global R memory for objects of the same name. A generic example:
 
 ```{r, eval = FALSE}
+# overwrite the old dataset with the results
+# declare the dataset as the first argument, then specify any arguments
 dataset <- verb_name(dataset, verb_arguments = ...)
 ```
 
-We will review the following `tidyverse` functions from the `dplyr` package...
+We will review the following `tidyverse` functions from the `dplyr` package. The `dplyr` tools are designed to manipulate data that is already in a tidy format.
 
 - `rename()`: renaming variables
-- `mutate()`: add/modify variables
-- `select()`: grab certain columns (variables)
-- `filter()`: grab certain rows (cases)
-- `summarize()`: collapse/aggregate data (e.g. means)
+- `mutate()`: create and recode variables
+- `select()`: keep/eliminate variables (columns)
+- `filter()`: keep/eliminate observations (rows)
+- `summarize()`: collapse/aggregate data (e.g. summary statistics, group means...)
 - `group_by()`: create groups out of your data (e.g. for summarizing within group)
-- `arrange()`: reordering rows
-- various `join` functions: for *merging* data
+- `arrange()`: sorting data
+- various `join` functions: merging data
 
-And from the `tidyr` package (for making data tidy)
+The `tidyr` package is designed to take un-tidy data and make it tidy. We'll cover these functions:
 
 - `gather()`: turn many columns into one column (wide to long)
 - `spread()`: turn one column into many columns (long to wide)
 
-Most data manipulation tasks fall under the umbrella of one or more of these functions. This is what makes the Tidyverse so useful: it has a small number of very powerful tools that facilitate nearly all common data munging tasks.
+Most data manipulation tasks fall under the umbrella of one or more of these functions. This is what makes the Tidyverse so useful: it has a small number of very powerful tools that facilitate nearly all common data munging tasks!
 
 
 # Renaming
@@ -279,10 +323,14 @@ Here, we rename the following variables:
 
 - election year
 - respondents' ratings of the two major US parties on a 7-pt ideological scale (1 "extremely liberal" to 7 "extremely conservative")
-- respondents' placement of themselves on the same scale
-- and a 7-pt index of party ID (Strong Democrat, Weak Democrat, Independent leaning Democrat, True Independent, Leaning Republican......)
+- respondents' ratings of themselves on the same scale
+- and a 7-pt index of party ID (Strong Democrat, Weak Democrat, Independent leaning Democrat, True Independent, Leaning Republican, and so on)
 
 ```{r}
+# rename(dataset, 
+#        new_name = old_name,
+#        new_name2 = old_name2)
+
 anes <- rename(anes, 
                cycle = VCF0004,
                libcon_demparty = VCF0503, 
@@ -291,101 +339,146 @@ anes <- rename(anes,
                pid7 = VCF0301)
 ```
 
+Be warned: this command *overwrites the original `anes` dataset* with a new version with different variables names. If you want to keep the original variables, copy the old variable into a new variable with a new name. How would you do that? Well...
+
 
 # Modifying data
 
-You can modify the columns of a dataset by creating new variables or modifying existing variables. The `mutate()` function takes a data frame and either adds or overwrites columns as specified.
+Modify the columns of a dataset with `mutate()`. We can create new variables or modify existing variables (a.k.a. "recoding").
 
-We'll use `mutate()` to recode some variables. To understand the recoding task, we'll first look at the ideological self-placement variable.
+How it works: declare an existing data frame, modify variables within it, and the result is a new data frame with the specified changes.
+
+Let's test it out. Let's look at the ideological self-placement variable.
 
 ```{r}
 table(anes$libcon_self, exclude = NULL)
 ```
 
-Only the values 1--7 are valid. We want to recode everything else as `NA`. There are many ways to do this.
+We only care about the values 1 through 7. We want to recode everything else as missing (`NA`). Here are the two methods I use most often to modify variables.
+
+
 
 ## The `ifelse()` function
 
-The `ifelse()` function follows the following psueocode:
+The `ifelse()` function follows the following psueocode intuition:
 
 ```
 if (this) then {that} 
   else {something else}
 ```
 
-Phrased differently, it checks if something in the data is true, and if it's true it does *A*, and if it's false it does *B*. Here it is in action within a call to `mutate()`. The function is long, so I have to get creative with code indentation to make it readable, so bear with me.
+You may have seen these sorts of if-else statements in other programming languages. In R, we can use the `ifelse()` function to apply an if-else statement to an entire vector (variable).
+
+A dummy example: 
+
+```{r, eval = FALSE}
+my_result <- ifelse(condition, A, B)
+```
+
+The `ifelse()` function checks a condition in the data. This condition is a logical statement: is something equal to something, greater than something, and so on. If the condition applies (meaning, if the statement evaluates to `TRUE`), the result is `A`, and if the condition does not apply, the result is `B`. 
+
+We will use it within the `mutate()` function. I have to get creative with code indentation to make this example more legible, so bear with me.
 
 ```{r}
-# ifelse(logical test, result if TRUE, result if FALSE)
-anes <- mutate(anes, 
-  libcon_self = 
-    ifelse(libcon_self == 0 | libcon_self >= 8 | is.na(libcon_self), 
-           NA, 
-           libcon_self),
-  libcon_demparty = ifelse(libcon_demparty %in% 1:7, libcon_demparty, NA))
+# translation: 
+#   modify anes
+#   recode libson_self, the result of ifelse()
+#   ifelse(logical test, result if TRUE, result if FALSE)
+#   and recode demparty
+
+# Notes: 
+#   notice how I can break lines after the <- symbol
+#   this is because <- needs a left-side and right-side object
+#   if there is no right-side object, R looks for on next line
+#   this works for all "binary operators" such as +, -, *, and so on
+#   In general, R will look at the next line until a statement is complete
+#   so you should be careful to close all "quotes" and (parentheses)
+anes <- 
+  mutate(anes, 
+         libcon_self = ifelse(libcon_self == 0 | 
+                                libcon_self >= 8 | 
+                                is.na(libcon_self), 
+                              NA, 
+                              libcon_self), 
+         libcon_demparty = ifelse(libcon_demparty %in% 1:7, 
+                                  libcon_demparty, 
+                                  NA))
  ```
 
-We recode two variables in this `mutate()` call. We use `ifelse()` in slightly different ways.
+We recode two variables in this `mutate()` call. We use `ifelse()` in slightly different ways. Here is the translation:
 
-- If `libcon_self` is 0 *or* greater than or equal to 8 *or* NA, then recode to `NA`, else recode to the existing value of `libcon_self` (i.e. no change). 
+- If `libcon_self` is 0 *or* greater than *or* equal to 8 *or* NA, *then* recode to `NA`, *else* recode to the existing value of `libcon_self` (i.e. no change). 
 - If `libcon_demparty` is an integer value 1 through 7, keep it the way it is, else recode to `NA`. We'll return to the `%in%` operator at the end of this section.
 
-Read the binary logical operators as follows:
+Read the binary logical operations as follows:
 
 - `A == B`: A is equal to B
+- `A > B`: A is greater than to B
+- `A < B`: A is less than to B
 - `A >= B`: A is greater than or equal to B
 - `A <= B`: A is less than or equal to B
 - `A | B`: A or B
 - `A & B`: A and B
+- `A %in% c(B, C, D)`: A is equal to any of the following: `B`, `C`, or `D`. Or, `A` is some element of the set `{B, C, D}`.
+- `is.na(A)`: A is `NA`.
+- `!is.na(A)`: A is *not* `NA`. 
 
-Notice that nothing can be *equal to* `NA`. That's because `NA` isn't a value; it's a stand-in. Use the `is.na()` function instead.
+Heads up: nothing can be *equal to* `NA`. That's because `NA` isn't a value; it's a stand-in for an unknown value. This is why we use the `is.na()` function.
+
+Also: the `%in%` operator is a godsend because...
+
+- `x == (1 | 2 | 3)` doesn't work
+- `x == 1 | x == 2 | x == 3` works but is annoying
+
+Instead, it is easier to type `x %in% c(1, 2, 3)` (or `x %in% 1:3` if we want to match adjacent integers). 
+
 
 ## The `case_when()` function
 
-When we have multiple rules stacked on top of another, things can get hairy. Pseudocode: 
-```
-if (this) {that} 
-  else {if (this) {that} 
-         else {if (this) {that} 
-                 else {something else} } }
-```
+Whenever we have multiple conditions that we want to check in the same function, we could nest several `ifelse()` functions within each other or use a very complicated logical test, but it gets quickly gets ugly and is easy to mess up.
 
-This would be difficult to code with `ifelse()`, because we would need to nest multiple `ifelse()` calls inside of each other, which is tedious and prone to mistakes.
-
-We can avoid this using the `case_when()` function, which bills itself as a "vectorized `ifelse()`." Here it is in action:
+In situations like this, you should use the `case_when()` function, which is a more flexible version of `ifelse()`, but it's a little different. See the comments in the code chunk below for how it works. 
 
 ```{r}
+# case_when(test ~ result if test is true,
+#           test2 ~ result if test2 is true,
+#           test3 ~ you get the idea)
+
+# NOTE: all non-matched cases are given an NA by default
+# to override this, use the catch-all replacement: TRUE ~ x
+
+# case_when(test ~ result,
+#           test2 ~ result2,
+#           test3 ~ result3,
+#           TRUE ~ result4)
+
+# read as "and everything else should be recoded as result4"
+
 anes <- mutate(anes,
   libcon_repparty = case_when(
                       libcon_repparty == 1 ~ libcon_repparty,
                       libcon_repparty == 2 ~ libcon_repparty,
                       libcon_repparty %in% c(3, 4) ~ libcon_repparty,
                       libcon_repparty %in% (5:7) ~ libcon_repparty),
-  pid7 = case_when(pid7 %in% 1:7 ~ pid7))
+  pid7 = case_when( (pid7 %in% 1:7) ~ pid7) )
 ```
 
-The replacement value comes after the `~`. Translated:
+You may find it helpful to place the tests in parentheses, as I do in the `pid7` example. It doesn't affect the code, but is sometimes easier to read, especially if the logical test is complicated or lengthy.
+
+The above code, translated:
 
 - If `libcon_repparty` is equal to 1, replace with `libcon_repparty` (i.e. keep the same). If it is 2, keep the same. Same with values 3 and 4, and 5 through 7. The only reason I break these into different conditions is to show you different ways to do this logical matching.
 - If the `pid7` variable is an integer value 1 through 7, keep it the same.
 
-Something you should know about `case_when()` is that any value of an existing variable that is not logically matched will be automatically recoded to `NA`. You can override the automatic recoding by specifying a catch-all recode value, `TRUE ~ catch_all_replacement`. 
-
-The above code also features the `%in%` operator, which is a godsend. It is useful because...
-
-- `x == (1 | 2 | 3)` doesn't work
-- `x == 1 | x == 2 | x == 3` works but is annoying
-
-Instead, it is easier to type `x %in% c(1, 2, 3)` (or `x %in% 1:3` if matching adjacent integers). What this means is "x is in the set of {1, 2, 3}." It works like the $\in$ operator in set theory.
 
 
-## Tips for recoding
+## General tips for recoding
 
-Depending on what you're doing, you may not find it valuable to recode the original data. Instead you might create a new variable that modifies the original. If you want to pitch the original variables later, you can do it with the `select()` function (described below), but at least you don't need to muck through lots of code to get the originals back. You can just...not delete them.
+Depending on what you're doing, you may not want to overwrite the original data. Instead you might create a new variable that modifies the original.
 
-When you recode new variables, you might want to compare the new and old variables using the `table()` function.
+When you recode new variables, you can compare the new and old variables using the `table()` function.
 
-I try to consolidate all of my data cleaning tasks into as few calls to `mutate()` as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire `.R` file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned dataset, and then load the cleaned dataset for subsequent analyses.
+I try to consolidate all of my data cleaning tasks into as few calls to `mutate()` as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire `.R` file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned dataset, and then load the cleaned dataset in a separate `.R` file for subsequent analyses.
 
 
 ## Variables from other variables
@@ -401,21 +494,22 @@ anes <- mutate(anes,
                party_distance = libcon_repparty - libcon_demparty)
 ```
 
-`mutate()` is great because you can create a variable in one line and use it in another line, without ending the `mutate()` call. Pretty convenient! Here's an example.
+`mutate()` is great because you can create a variable in one line and use it in another line, without ending the `mutate()` call. 
 
-```{r}
-data_frame(x = 1:3, 
-           y = 4:6, 
-           z = x + y, 
-           abc = z * z)
-```
-
-Side note: this also shows how you can create data frames using the `data_frame()` function.
 
 
 ## Manipulating factors and strings
 
-You should check out the `forcats` and `stringr` packages. They are tools for manipulating factors and strings, respectively, and are loaded when you load the `tidyverse` package. We will revisit these when we discuss graphics in the next lesson.
+You should check out the `forcats` and `stringr` packages. They are tools for manipulating factors and character variables (a.k.a. "strings"), respectively, and are loaded when you load the `tidyverse` package. We will revisit these when we discuss graphics in the next lesson, but the functions from these packages that I use the most are (using the `pkg::function` notation)...
+
+- `fct_relevel()`: reorder the levels in a factor
+- `fct_recode()`: recoding a factor, but `case_when` works here also
+- `str_sub()`: extract a pattern from a string
+- `str_split()`: split a string at a certain character 
+- `str_detect()`: returns `TRUE` if a string contains a pattern 
+- `str_replace()`: replace a pattern in a string with a different pattern 
+
+Check online or investigate the help files to learn about how they're used. We'll see some examples next week when we do graphics.
 
 
 
@@ -425,123 +519,80 @@ You should check out the `forcats` and `stringr` packages. They are tools for ma
 Maybe you don't need all these variables for something. You can select specific variables using the `select()` function.
 
 ```{r}
-select(anes, cycle, pid7)
+# from the anes dataset, grab only the cycle variable
+select(anes, cycle)
 ```
 
-(The `pid7` variable is only `NA` because the variable isn't valid for very old survey years. There is nothing wrong here.)
+There are various "select helper" functions that aid us in selecting variables. 
 
-There are various "select helper" functions that aid us in selecting variables. Let's look at the last of the variable names that we've created:
-
-```{r}
-tail(names(anes))
-```
-
-We can select a range of variables using the `:` operator, kind of analogous to the way we can create sequences of integers. He we will grab the variables between `dem_distance` and `party_distance`.
-
-```{r}
+```{r, eval = FALSE}
+# select a series of variables in the data frame using `:` 
+# grab cycle, and all variables between dem_distance and party_distance
 select(anes, cycle, dem_distance:party_distance)
-```
-Again, the `NA` values are just because of the survey year that we can see in the preview.
 
-We can select variables by partial name matches.
-
-```{r}
+# select cycle and any variable containing "libcon" in the variable name
 select(anes, cycle, contains("libcon"))
-```
 
+# drop variables using negative sign `-`
+# matches(".") means "all remaining variables"
 
-We can specify variables to *drop* a negative sign, or include a code that says "all of the remaining variables." 
-
-```{r}
+# drop cycle, keep all remaining variables
 select(anes, -cycle, matches("."))
 ```
 
-Learn more about select helpers in the help file (`?select`).
+Learn more about "select helper functions" in the help file (`?select`).
 
 
 # Filtering rows (subsetting)
 
-Let's say we only want some of the cases. Use the `filter()` function and a logical test to identify the cases you want.
-
-The following code says, keep the cases where `cycle` is equal to `2012`. 
+Let's say we only want some of the observations. Use the `filter()` function and a logical test to identify the cases you want.
 
 ```{r}
+# keep cases from 2012 cycle
 filter(anes, cycle == 2012)
 ```
-
-We can make these operations more complicated if we want---e.g. selecting presidential years using the modulo operator `%%`.
-
-```{r}
-# if (remainder from cycle / 4) is 0
-presidentials <- filter(anes, (cycle %% 4) == 0) 
-table(presidentials$cycle, exclude = NULL)
-```
-
-Because `cycle %% 4` is just a logical vector, we can use it (and other complex expressions) to specify the criteria for our case selection.
 
 
 # Summarizing
 
 `summarize()` will process multiple observations into summary statistics. This is also known as "collapsing" or "aggregating."
 
-Here we try to find the mean ideological distance between the two parties (as judged by the respondents).
+Find the mean ideological distance between the two parties (as judged by the respondents).
 
 ```{r}
+# data contain NAs so we use na.rm = TRUE
 summarize(anes, 
-          mean_party_distance = mean(party_distance),
           mean_party_distance_na = mean(party_distance, na.rm = TRUE))
 ```
 
-This example also highlights how some functions (such as `mean()`) fail if we don't force it to remove `NA` values from the calculation.
 
 
 # Grouping and summarizing
 
-Most of the time you will use `summarize()` in conjunction with `group_by()`, which (as it sounds) groups the data by some selection of variables. It doesn't modify the cells in any way; it only implicitly partitions the data for later calculations.
+Most of the time you will use `summarize()` in conjunction with `group_by()`, which groups the data by some selection of variables. It doesn't modify the cells in any way; it only implicitly partitions the data for later calculations.
 
-For instance, let's say we want to do the above calculation but within each election year. 
+For instance, let's say we want to do find the number of observations within each election year the above calculation but within each election year. The `n()` function, when used inside of `summarize()` or `mutate()`, will find the number of observations.
 
 ```{r}
-# filter out some cases so we can see the results
-s <- filter(anes, cycle >= 1992)
-
-# group the data
-s <- group_by(s, cycle)
+# group by cycle
+s <- group_by(anes, cycle)
 
 # summarize the grouped data
-summarize(s, 
-          n = n(),
-          mean_party_distance_na = mean(party_distance, na.rm = TRUE))
+summarize(s, n = n())
 ```
 
 A data frame can later be ungrouped with (wait for it...) `ungroup()`.
 
-Here we also see the `n()` function, which behaves like `nrow()` but within `tidyverse` functions. If the dataset is grouped, `n()` returns the sample size in each group. 
 
-`group_by()` and `n()` also work with `mutate()`. For example, if we wanted to calculate an ideological Z-score for respondents in each election year, we could group by election year and then standardize the scores.
-
-```{r}
-z <- mutate(group_by(anes, cycle), 
-            libcon_std = (libcon_self - mean(libcon_self, na.rm = TRUE)) / 
-                         sd(libcon_self, na.rm = TRUE))
-```
-
-To check this, the mean and standard deviation in each year should be about 0 and 1, respectively. I'm limiting the election cycles we're looking at to presidential years. (We can see when they started asking respondents about ideological self-placement.)
-
-```{r}
-summarize(filter(z, (cycle %% 4) == 0), 
-          mean = mean(libcon_std, na.rm = TRUE),
-          sd = sd(libcon_std, na.rm = TRUE))
-```
-
-Note how I'm nesting these functions using the order of operations. The data I'm passing to `summarize()` is actually the result of the `filter()` command. The section on the pipe operator will help us unpack these operations and make them more linear(!).
 
 
 # Sorting data
 
-We can sort data frames using `arrange()`. By default, sorting happens in ascending order: 1 followed by 2, and son on. You can sort variables by descending order using the `desc()` function within `arrange()`. You can also sort by multiple variables at once. 
+Sort data frames using `arrange()`. By default, sorting is done in ascending order. Sort variables in descending order using the `desc()` function within `arrange()`. You can also sort by multiple variables at once. 
 
 ```{r}
+# keep cycle and party distance variables
+# sort by cycle (descending order) and then by party distance
 arr <- select(anes, cycle, party_distance) 
 arrange(arr, desc(cycle), party_distance)
 ```
@@ -549,6 +600,7 @@ arrange(arr, desc(cycle), party_distance)
 Get a sense for the sorting precedence with this toy example.
 
 ```{r}
+# create some data to sort
 d <- data_frame(x = c(1, 1, 2, 2), 
                 y = c(1, 2, 1, 2))
 d
@@ -559,40 +611,40 @@ arrange(d, y, x)
 
 # Joining (merging) 
 
-Because the ANES is so big, this concept will be clearer if we use a toy example. Here we have two datasets with some overlapping cases and some non-overlapping cases.
+Merging is done with `join` functions. 
+
+Because the ANES is so big, this concept will be easier to demonstrate with a toy example. Create two datasets with some overlapping cases and some non-overlapping cases:
 
 ```{r}
+# cases 2 and 3 appear in both data sets
+# cases 1 and 4 exist in one dataset but not the other
 (data1 <- data_frame(case = 1:3, 
                      var1 = c("a", "b", "c")))
 (data2 <- data_frame(case = 2:4, 
                      var2 = c("x", "y", "z")))
 ```
 
-Both datasets contain cases 2 and 3, but only one dataset contains case 1 and the other dataset contains case 4. So we have partially-overlapping data frames.
-
-What we want to accomplish is putting these datasets together into one table, matching data to the appropriate cases.
+We want to put these datasets together into one table, matching data to the appropriate cases.
 
 The `full_join()` function keeps all cases from both datasets. Non-matching cells are filled with `NA` by default, but you can specify replacement values for non-matches if you wish.
 
 ```{r}
+# join all cases, keep non-matches
 full_join(data1, data2, by = "case")
 ```
 
-Note: You can merge along multiple variables using `by = c("var1", "var2", ...)`. If you want to match dyad-years, you would want to match both the dyad and the year.Here's a pretend example using stylized Correlates of War and M.I.D.s data.
+You can merge along multiple variables using `by = c("var1", "var2", ...)`. 
 
-```{r, eval = FALSE}
-full_join(cow, mids, by = c("country1", "country2", "year"))
-```
-
-
-`left_join()` keeps all cases from left dataset. If the right dataset can't fill a cell in the left dataset, the result is `NA`. If the right dataset has cases that don't fit into the left, they disappear.
+`left_join()` keeps all cases from left dataset. If the right dataset can't fill a cell in the left dataset, the result is `NA`. If the right dataset has other cases that aren't present in the left, they disappear.
 
 ```{r}
+# keep left data in tact, 
+# merge only matching cases from right data
 left_join(data1, data2, by = "case")
 ```
 
 
-`right_join()` is similar but keeps all cases from right dataset. Unmatched variables again default to `NA`.
+`right_join()` is the mirror of `left_join`.
 
 ```{r}
 right_join(data1, data2, by = "case")
@@ -603,12 +655,15 @@ right_join(data1, data2, by = "case")
 `inner_join()` keeps only cases with matches in both datasets.
 
 ```{r}
+# keep only matching cases, drop everything else
 inner_join(data1, data2, by = "case")
 ```
 
-`anti_join()` is different. It keeps only the *unmatched* cases (from the left dataset only). This is helpful for diagnosing a problem with an imperfect attempt to join two data frames.
+
+`anti_join()` is a little funky and different. It keeps only the *unmatched* cases from the left dataset only. This is helpful for diagnosing a problem with an imperfect attempt to join two data frames.
 
 ```{r}
+# what doesn't match?
 anti_join(data1, data2, by = "case")
 anti_join(data2, data1, by = "case")
 ```
@@ -617,23 +672,26 @@ anti_join(data2, data1, by = "case")
 
 # Tabulating
 
-We'll now introduce some simple functions for tabulating data. This is one area where base functions remain useful, because they're quite easy to use.
+Here are two ways to tabulate data: `table()` and `count()`. `table()` produces a table object; `count()` produces a data frame.
 
-`table()` produces a frequency table. We can add the `exclude = NULL` argument to force R to print the instances of `NA` (which it does not do by default).
+## `table()`
+
+First, `table()`. The `exclude = NULL` argument will force R to print the number of missing values (which it does not do by default).
 
 ```{r}
 table(anes$libcon_self, exclude = NULL)
 ```
 
-We can turn frequencies into proportions by wrapping a table object with `prop.table()`.
+Turn frequencies into proportions by wrapping a table object with `prop.table()`.
 
 ```{r}
 prop.table(table(anes$libcon_self, exclude = NULL))
 ```
 
-You may want to round these proportions to get more manageable values.
+You can round these proportions to get more manageable values.
 
 ```{r}
+# round to 3 decimal positions
 round(prop.table(table(anes$libcon_self, exclude = NULL)), 3)
 ```
 
@@ -642,32 +700,45 @@ Notice how these are nested functions, like $f(g(h(x)))$. This is the kind of fl
 To make two-way tables, the first variable prints as rows, and the second as columns. 
 
 ```{r}
+# pid7 as rows, libcon_self as columns
 table(anes$pid7, anes$libcon_self, exclude = NULL)
 ```
 
-By default, `prop.table()` estimates proportions out of the entire table. You can estimate proportions within rows or columns using the `margin` argument. `margin = 1` calculates the fraction within a row, `margin = 2` calculates the fraction within a column.
+By default, `prop.table()` estimates proportions out of the entire table. To estimate proportions within rows or columns, use the `margin` argument (`margin = 1` for the fraction within a row, `margin = 2` for the fraction within a column).
 
 ```{r}
+# two-way table
 tab <- table(anes$pid7, anes$libcon_self, exclude = NULL)
+
+# proportions as fractions of each row
 ptab <- prop.table(tab, margin = 1)
+
+# round the result
 round(ptab, 3)
 ```
 
-# Tidy tables
 
-Objects returned by tables are a `table` object type, which are useful for examining things on your own but don't play nicely with other tools, especially not when you want to export your results (e.g. to ${\mathrm{\LaTeX}}$). If you want to incorporate the results of a tabulation into other data frame operations (the likes of which we've been learning about), there are some Tidyverse-style tabulating functions. They have the added benefit of playing nicely with $n$ many variables instead of two at a time (that's tidy data for you).
+## `count()`
+
+If you want your table to be organized as a data frame (which you often do want), use `count()`. This is nice for doing further calculations, exporting results (e.g. to ${\mathrm{\LaTeX}}$), and so on. 
 
 ```{r}
+# from the anes data, count the intersections of cycle and party ID
 count(anes, cycle, pid7)
 ```
 
-They contain the same information as a `table()` object, but the tidy data format puts variables into columns, cases in rows, and values in cells.
+This contains the same information as `table(anes$cycle, anes$pid7)`, but the result is a "tidy" data frame. 
 
-To get proportions, mutate the resulting table as desired. Here we get the proportion of each partisan identity within each election cycle. Group on the cycle and then dividing each count by the sum within the cycle.
+To get proportions, mutate the resulting table as desired. Here we get the proportion of each partisan identity within each election cycle. Group on the cycle and then dividing each count by the number of individuals in each cycle.
 
 ```{r}
+# tabulate these variables, party by cycle
 (tab <- count(anes, cycle, pid7))
 
+# group by cycle
+# find n per cycle
+# divide counts by n_in_cycle
+# round
 mutate(group_by(tab, cycle), 
        n_in_cycle = sum(n, na.rm = TRUE),
        p = n / n_in_cycle,
@@ -677,11 +748,15 @@ mutate(group_by(tab, cycle),
 The `count()` function also handles sample weights. 
 
 ```{r}
+# keep only elections since 2000
+# tabulate cycle and party
+# apply sample weights
 count(filter(anes, cycle >= 2000), 
-      cycle, pid7, wt = VCF0009z)
+      cycle, pid7, 
+      wt = VCF0009z)
 ```
 
-The "counts" are no longer whole numbers, thanks to the survey weights.
+The "counts" are no longer whole numbers, thanks to the survey weights (some people count as "partial observations" due to sample design).
 
 
 
@@ -697,7 +772,7 @@ We'll talk about "wide" and "long" data.
 When we shape data, what we're really doing is moving data around (also called "reshaping") to make it long (elongating) or wide (widening). 
 
 
-# Elongating with `gather()`
+# Reshape wide to long, with `gather()`
 
 Gathering will take multiple columns and stack the cells into one variable (with an accompanying variable for labeling). 
 
@@ -706,24 +781,26 @@ Here is an example using the ideological distance variables from above. First we
 ```{r}
 # keep only certain variables
 d <- select(anes, cycle, dem_distance, rep_distance)
+
 # keep certain election years
 d <- filter(d, cycle %in% c(2004, 2008, 2012))
+
 # get mean in each year
 d <- summarize(group_by(d, cycle), 
                dem_distance = mean(dem_distance, na.rm = TRUE),
                rep_distance = mean(rep_distance, na.rm = TRUE))
+
+# show results
 d
 ```
 
-We'll gather the two distance variables into one variable, with another variable to indicate which party we're contrasting.
+We'll gather the two distance variables into one variable, with another variable to indicate which party we're contrasting from.
 
 ```{r}
 # gather(data, resulting key, resulting value, initial varlist)
 l <- gather(d, key = party, value = distance, dem_distance, rep_distance)
 l
 ```
-
-You could maybe recode the `party` variable to make it prettier, depending on your needs later on. 
 
 Select helper functions also work for selecting which variables to gather.
 
@@ -733,12 +810,15 @@ gather(d, key = party, value = distance, contains("distance"))
 ```
 
 
-# Widening data with `spread()`
+# Reshaping long to wide, with `spread()`
 
 Spreading is the opposite of gathering. It takes a column and unstacks it into several columns. We need a corresponding label variable also, which becomes the variable names. Observe:
 
 ```{r}
 l
+
+# 'key' variable becomes new variable names. 
+# 'value' variable becomes new variable values
 spread(l, key = party, value = distance) 
 ```
 
@@ -746,19 +826,25 @@ spread(l, key = party, value = distance)
 
 # Piping data
 
-Now that we have covered some essential tools for wrangling data, let's tie it all together with the concept of piping.
+This section is *extremely important*.
+
+Now that we have covered some essential tools for wrangling data, let's tie it all together with the concept of ***piping***.
 
 Let's start by identifying the problem. Data processing requires a lot of steps (each represented by the functions we have learned so far). Many of these steps are related. Can we string these operations together in a way that is easy to understand and easy to write?
 
-One way to sew multiple operations together is with nested functions. Just as we can nest functions in math like $f(g(h(x)))$, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience---we have to read from the inside out. The code becomes ugly and difficult to interpret.
+One (suboptimal) way to sew multiple operations together is with nested functions. Just as we can nest functions in math like $f(g(h(x)))$, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience---we have to read from the inside out. The code becomes ugly and difficult to interpret.
 
 ```{r, eval = FALSE}
+# this works, and it follows order of operations, but it's annoying
 tidy_data <- gather(summarize(group_by(filter(select(dataset, ...), ...), ...), ...), ...)
 ```
 
-Another way would be to break up the operation into multiple lines. The problem with this method is that it is verbose and creates a lot of redundancy with object assignment (which can slow down your code with big datasets).
+Another (suboptimal) way would be to break up the operation into multiple lines. The problem with this method is that it is verbose and creates a lot of redundancy with object assignment (which can slow down your code with big datasets).
 
 ```{r, eval = FALSE}
+# each function takes the results from the previous function
+# this also works, but requires overwriting the data a lot
+# and lots of redundant `d <- ` instances
 d <- select(dataset, ...)
 d <- filter(d, ...)
 d <- group_by(d, ...)
@@ -766,15 +852,20 @@ d <- summarize(d, ...)
 d <- gather(d, ...)
 ```
 
-We'll use the pipe operator `%>%` to make this process easier. The pipe operator takes a left-hand side object and "pipes" it into a right-hand side function. It sounds trivial, but just wait. Here is how it works. We'll use `x` to represent data and `f` to represent functions. 
+We'll use the *pipe operator* `%>%` to make this process easier. The pipe operator takes a left-hand side object and "pipes" it into a right-hand side function. It sounds trivial, but just wait. 
+
+Here is how it works. We'll use `x` to represent data and `f` to represent functions. 
 
 - By default, `x %>% f()` sets `x` as the first argument in `f`. So `f(x)` is equivalent to `x %>% f()`.
 - If `x` is needed elsewhere inside of `f` besides the first argument, we can use `.` to stand-in for `x`. For example, `f(arguments, data = x)` is equivalent to `x %>% f(arguments, data = .)`. 
-- If only one argument is needed, the parentheses on `f()` could be omitted. So `f(x)` is equivalent to `x %>% f(.)` is equivalent to `x %>% f()` is equivalent to `x %>% f`. I would recommend not omitting parentheses, however, because keeping parentheses makes it easier to see which names are associated with data and which names are associated with functions. 
+- If only one argument is needed, you can drop the parentheses on `f()`. So `f(x)` is equivalent to `x %>% f()`, which is equivalent to `x %>% f`. I would recommend you keep the parentheses, however, because it's easier to see which names are associated with data and which names are associated with functions. 
 
 The pipe operator allows you to do multiple dataset operations in a *linear* fashion without creating a ton of intermediary objects. The above processing task could be written as the following "pipe chain."
 
 ```{r, eval = FALSE}
+# take `dataset` object and pass it to select
+# the result from select is passed to filter
+# and so on
 d <- dataset %>%
   select(...) %>%
   filter(...) %>%
@@ -784,13 +875,19 @@ d <- dataset %>%
   print() 
 ```
 
-Adding `print()` at the end of the chain will print `d` after the results of the pipe chain are assigned to `d`.
+Adding `print()` at the end of the chain will print the results even if you are assigning the results to `d`.
 
-As we can see, the pipe chain has made our code linear and readable, and it makes our workflow more straightforward and efficient (because we can *think* linearly again). Reading a complex set of operations linearly isn't normally something you can easily do with programming, so we should really appreciate this!
+What has the pipe chain done? It has made our code linear and readable, and it makes our workflow more straightforward because we can *think* linearly again. Reading a complex set of operations linearly isn't normally something you can easily do with programming, so we should really appreciate this!
 
-Here's an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing. This is thanks both to the pipe itself, but also the ease with which each `tidyverse` function can be interpreted by an observer.
+Here's an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing. 
 
 ```{r}
+# start with anes
+#   keep certain variables
+#   keep certain observations
+#   group and summarize
+#   gather
+#   print result of the chain
 l <- anes %>%
   select(cycle, contains("distance")) %>%
   filter(cycle %in% c(2004, 2008, 2012)) %>%
@@ -805,29 +902,20 @@ l <- anes %>%
 We can use pipes to simplify other tasks from earlier in this lesson, like processing a table using proportions and rounding but without all of the nested functions.
 
 ```{r}
+# create a table
+# send table to prop.table to calculate proportions
+# send proportions to round() 
 table(anes$pid7, anes$libcon_self, exclude = NULL) %>% 
   prop.table(margin = 1) %>%
   round(3)
 ```
 
+Although we covered piping last, you should not view it as afterthought. The pipe operator will change the way you use R forever. 
 
 
-Pipe chains are efficient for modifying a dataset before plotting. Here is a quick plot from the data we just created (showing that the mean individual sees themselves as more conservative than the Democrats and more liberal than the Republicans).
+# Tips for piping
 
-```{r, fig.height = 5, fig.width = 7}
-ggplot(l, aes(x = cycle, y = distance)) +
-  geom_hline(yintercept = 0) +
-  geom_line(aes(color = party)) +
-  geom_point(aes(color = party), size = 2) +
-  scale_color_manual(values = c("dodgerblue", "orangered")) +
-  labs(x = "Election Cycle",
-       y = "Ideological Distance (self minus party)",
-       color = "Party",
-       title = "Ideological Distance from the Two Major Parties",
-       subtitle = "Positive values indicate that the respondent identifies as more conservative than the target party",
-       caption = "Data: ANES from select years") +
-  theme_bw()
-```
+## Create a keyboard shortcut
 
 If your text editor has the capability, *create a keyboard shortcut for the pipe operator!* I create this kind of thing with Sublime Text all the time. Rstudio can do it as well. Here's what I do:
 
@@ -837,20 +925,25 @@ If your text editor has the capability, *create a keyboard shortcut for the pipe
 
 
 
-# Other helpful pipes
+## Other helpful pipes
 
 There is one other helpful pipe-like operator that we will talk about: `%$%`. It tells a right-hand function that the variable names in the function come from the left-hand dataset. It doesn't pipe the entire dataset per se; it only says "look here for variable names." The two following commands do the same thing:
 
 ```{r}
+# look in anes for pid7 variable
 table(anes$pid7)
+
+# look in anes for pid7 variable
 anes %$% table(pid7)
 ```
 
-This will become more useful when you have a complex function that requires multiple variable names.
+This is useful when you need to reference multiple variables.
 
 ```{r}
 # notice which pipe I use after 'anes'
-# I use the ordinary pipe to pass entire objects to the following function
+# %$% for piping just variable names
+# %>% for piping the entire object
+
 anes %$% 
   table(pid7, libcon_self, exclude = NULL) %>% 
   prop.table(margin = 1) %>%
@@ -860,7 +953,9 @@ anes %$%
 
 # Saving data
 
-You can write or save data from R with many `write.xyz` or `save.xyz` functions. I usually prefer to save data in an R-specific format. 
+You can write or save data from R with many `write.xyz` or `save.xyz` functions. I usually prefer to save data in an R-specific format.
+
+You should save the data from this lesson so we can come back to it next week.
 
 ```{r, eval = FALSE}
 saveRDS(anes, "data/anes-modified.RDS")
@@ -876,14 +971,17 @@ If it's possible that someone using Stata (or some other software) might be usin
 write_csv(anes, "data/anes-modified.csv")
 ```
 
-R can read and save to a multitude of file types, including `.dta` for Stata (RIP Stat/Transfer). Some packages provide "swiss-army-knife" data input/output services, such as the `import()` function in Thomas Leeper's `rio` package.
+R can read and save to a multitude of file types, including `.dta` for Stata. R could put Stat/Transfer out of business if more people knew about it. 
+
+Some packages provide "swiss-army-knife" data input/output services, such as the `import()` and `export()` functions in Thomas Leeper's `rio` package.
 
 
-# Summary
 
-There is a lot more "nitty gritty" when it comes to data management in R than in Stata. Luckily, the `tidyverse` provides powerful tools that do a lot of heavy lifting for you. Moreover, these tools have a coherent, shared interface which makes them easy to use and understand. Although we covered piping last, you should not view it as an optional afterthought. It is extremely useful, and you will be much more efficient with R if you embrace it. Make sure you are comfortable with piping, `dplyr`, and `tidyr` before beginning the [lesson on graphics](811/811-graphics).
+# Looking forward
 
-There are some data-munging tasks that we will cover in the final lesson:
+Make sure you are comfortable with piping, `dplyr`, and `tidyr` before beginning the [lesson on graphics](811/811-graphics), because we will use those concepts throughout. 
+
+There are some other common data-munging tasks that we will put off until the final lesson:
 
 - Writing your own functions
 - Loops (and why you should not use them)

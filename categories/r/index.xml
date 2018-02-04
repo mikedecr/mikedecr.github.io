@@ -19,7 +19,7 @@
       <guid>https://mikedecr.github.io/811/811-analysis/</guid>
       <description>Objective In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
  Confidence intervals and tests of population means and proportions regression models and formatting model output post-estimation diagnosis and visualization  This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise. These include…
- intermediate R tools and routines lists apply() functions mapping functions to nested data frames custom functions type coercion a preview of tools for advanced analysis time series panel models multilevel models Bayesian models etc.</description>
+ intermediate R tools and routines lists apply() functions mapping functions to nested data frames custom functions type coercion a reference list of tools for advanced analysis time series panel models multilevel models Bayesian models etc.</description>
     </item>
     
     <item>
@@ -38,8 +38,9 @@
       <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://mikedecr.github.io/811/811-data/</guid>
-      <description>Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
- setting up the project on your computer Get data onto our computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations using the data  Future lessons pick up where this one leaves off. We will be making graphics and doing statistical analysis.</description>
+      <description>Schedule: Read this before our first R lecture.
+ Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
+ setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
     </item>
     
     <item>
@@ -48,8 +49,9 @@
       <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://mikedecr.github.io/811/811-basics/</guid>
-      <description>Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
-Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others. This is because we exploring R’s general behavior rather than a concrete application of R workflow.</description>
+      <description>Schedule: Read this before our first R lecture.
+ Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
+Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others.</description>
     </item>
     
     <item>
@@ -59,8 +61,9 @@ Note: Although I promised concrete lessons, this one unfortunately has to be a l
       
       <guid>https://mikedecr.github.io/811/811-intro/</guid>
       <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
-A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.
-Compared to other popular statistical software for the social scientists (such as Stata), R stands out as a more general programming language.</description>
+This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.
+Schedule: Read this before our first R lecture.
+ A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.</description>
     </item>
     
     <item>

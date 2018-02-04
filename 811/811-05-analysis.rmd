@@ -1,7 +1,7 @@
 ---
 title: "Lecture 3: Analysis"
-author: "Michael DeCrescenzo"
 description: "Statistical analysis, model output, and workflow integration"
+author: "Michael DeCrescenzo"
 date: "2018-01-05"
 slug: "811-analysis"
 categories: ["R", "ps811", "Teaching"]
@@ -25,7 +25,7 @@ This page also contains some content on more advanced topics, but these won't be
   + mapping functions to nested data frames
   + custom functions
   + type coercion
-- a preview of tools for advanced analysis
+- a reference list of tools for advanced analysis
   + time series
   + panel models
   + multilevel models

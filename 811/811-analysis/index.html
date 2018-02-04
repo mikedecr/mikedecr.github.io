@@ -19,7 +19,7 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
 
 
 
@@ -87,7 +87,7 @@
 <li>mapping functions to nested data frames</li>
 <li>custom functions</li>
 <li>type coercion</li>
-<li>a preview of tools for advanced analysis</li>
+<li>a reference list of tools for advanced analysis</li>
 <li>time series</li>
 <li>panel models</li>
 <li>multilevel models</li>
@@ -186,18 +186,18 @@ sorting &lt;- anes %&gt;%
          lower = libcon_self.lower) %&gt;% 
   print()</code></pre>
 <pre><code>## # A tibble: 38 x 5
-##          party cycle    upper     mean    lower
-##          &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1    Democrat  1972 3.862067 3.771907 3.681748
-##  2 Republicans  1972 4.728262 4.636975 4.545687
-##  3    Democrat  1974 3.843094 3.734729 3.626365
-##  4 Republicans  1974 4.846745 4.735149 4.623552
-##  5    Democrat  1976 3.887895 3.791724 3.695553
-##  6 Republicans  1976 4.979131 4.884682 4.790232
-##  7    Democrat  1978 3.846109 3.760092 3.674075
-##  8 Republicans  1978 4.956948 4.859680 4.762412
-##  9    Democrat  1980 3.946971 3.825243 3.703514
-## 10 Republicans  1980 5.089444 4.976127 4.862810
+##    party       cycle upper  mean lower
+##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 Democrat     1972  3.86  3.77  3.68
+##  2 Republicans  1972  4.73  4.64  4.55
+##  3 Democrat     1974  3.84  3.73  3.63
+##  4 Republicans  1974  4.85  4.74  4.62
+##  5 Democrat     1976  3.89  3.79  3.70
+##  6 Republicans  1976  4.98  4.88  4.79
+##  7 Democrat     1978  3.85  3.76  3.67
+##  8 Republicans  1978  4.96  4.86  4.76
+##  9 Democrat     1980  3.95  3.83  3.70
+## 10 Republicans  1980  5.09  4.98  4.86
 ## # ... with 28 more rows</code></pre>
 <pre class="r"><code>ggplot(sorting, aes(x = cycle, y = mean, color = party)) +
   geom_line(show.legend = FALSE) +
@@ -283,13 +283,13 @@ grp_raw &lt;- anes %&gt;%
 <pre><code>## # A tibble: 7 x 3
 ##    pid7 dem_voters twoparty_voters
 ##   &lt;dbl&gt;      &lt;int&gt;           &lt;int&gt;
-## 1     1       1219            1234
-## 2     2        519             605
-## 3     3        451             486
-## 4     4        174             331
-## 5     5         47             428
-## 6     6         61             448
-## 7     7         18             645</code></pre>
+## 1  1.00       1219            1234
+## 2  2.00        519             605
+## 3  3.00        451             486
+## 4  4.00        174             331
+## 5  5.00         47             428
+## 6  6.00         61             448
+## 7  7.00         18             645</code></pre>
 <pre class="r"><code># think of binom.test() as being run separately for each row (group)
 # since each row is a group in this case
 grp_prop &lt;- grp_raw %&gt;%
@@ -300,15 +300,15 @@ grp_prop &lt;- grp_raw %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 7 x 6
 ## # Groups:   pid7 [7]
-##    pid7 dem_voters twoparty_voters       prop      lower      upper
-##   &lt;dbl&gt;      &lt;int&gt;           &lt;int&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-## 1     1       1219            1234 0.98784441 0.98003034 0.99318108
-## 2     2        519             605 0.85785124 0.82745336 0.88470120
-## 3     3        451             486 0.92798354 0.90126326 0.94932832
-## 4     4        174             331 0.52567976 0.47035294 0.58054305
-## 5     5         47             428 0.10981308 0.08181015 0.14334372
-## 6     6         61             448 0.13616071 0.10577803 0.17144313
-## 7     7         18             645 0.02790698 0.01662150 0.04374743</code></pre>
+##    pid7 dem_voters twoparty_voters   prop  lower  upper
+##   &lt;dbl&gt;      &lt;int&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1  1.00       1219            1234 0.988  0.980  0.993 
+## 2  2.00        519             605 0.858  0.827  0.885 
+## 3  3.00        451             486 0.928  0.901  0.949 
+## 4  4.00        174             331 0.526  0.470  0.581 
+## 5  5.00         47             428 0.110  0.0818 0.143 
+## 6  6.00         61             448 0.136  0.106  0.171 
+## 7  7.00         18             645 0.0279 0.0166 0.0437</code></pre>
 <pre class="r"><code>ggplot(grp_prop, aes(x = as.factor(pid7), y = prop)) +
   geom_pointrange(shape = 1,
                   aes(ymin = lower, ymax = upper)) +
@@ -498,25 +498,24 @@ The results show ...</code></pre>
   as_data_frame() %&gt;%
   print() </code></pre>
 <pre><code>## # A tibble: 16 x 8
-##                       term   estimate  std.error   statistic      p.value
-##                      &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;
-##  1             (Intercept) -56.105902  4.2143054 -13.3132025 1.328757e-35
-##  2             libcon_self  13.036784  0.9445934  13.8014763 8.179967e-38
-##  3             (Intercept) -33.583333  9.2917092  -3.6143332 3.267050e-04
-##  4 as.factor(libcon_self)2   6.887681 10.0673131   0.6841628 4.941396e-01
-##  5 as.factor(libcon_self)3  13.121795  9.9808968   1.3146910 1.891220e-01
-##  6 as.factor(libcon_self)4  26.888333  9.5664001   2.8107055 5.106593e-03
-##  7 as.factor(libcon_self)5  45.275641  9.8131386   4.6137778 4.848540e-06
-##  8 as.factor(libcon_self)6  58.575000  9.7452268   6.0106348 3.229097e-09
-##  9 as.factor(libcon_self)7  60.289216 12.1358486   4.9678616 8.867327e-07
-## 10 as.factor(libcon_self)1 -33.583333  9.2917092  -3.6143332 3.267050e-04
-## 11 as.factor(libcon_self)2 -26.695652  3.8749106  -6.8893595 1.434794e-11
-## 12 as.factor(libcon_self)3 -20.461538  3.6445082  -5.6143483 3.033553e-08
-## 13 as.factor(libcon_self)4  -6.695000  2.2759946  -2.9415711 3.392997e-03
-## 14 as.factor(libcon_self)5  11.692308  3.1562367   3.7045092 2.316008e-04
-## 15 as.factor(libcon_self)6  24.991667  2.9382964   8.5054953 1.475278e-16
-## 16 as.factor(libcon_self)7  26.705882  7.8065972   3.4209377 6.669782e-04
-## # ... with 3 more variables: conf.low &lt;dbl&gt;, conf.high &lt;dbl&gt;, model &lt;chr&gt;</code></pre>
+##    term   estimate std.error statistic    p.value conf.low conf.high model
+##    &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;
+##  1 (Inte…   -56.1      4.21    -13.3     1.33e⁻³⁵   -64.4     -47.8  Cont…
+##  2 libco…    13.0      0.945    13.8     8.18e⁻³⁸    11.2      14.9  Cont…
+##  3 (Inte…   -33.6      9.29    - 3.61    3.27e⁻ ⁴   -51.8     -15.3  Dumm…
+##  4 as.fa…     6.89    10.1       0.684   4.94e⁻ ¹   -12.9      26.7  Dumm…
+##  5 as.fa…    13.1      9.98      1.31    1.89e⁻ ¹   - 6.48     32.7  Dumm…
+##  6 as.fa…    26.9      9.57      2.81    5.11e⁻ ³     8.10     45.7  Dumm…
+##  7 as.fa…    45.3      9.81      4.61    4.85e⁻ ⁶    26.0      64.5  Dumm…
+##  8 as.fa…    58.6      9.75      6.01    3.23e⁻ ⁹    39.4      77.7  Dumm…
+##  9 as.fa…    60.3     12.1       4.97    8.87e⁻ ⁷    36.5      84.1  Dumm…
+## 10 as.fa…   -33.6      9.29    - 3.61    3.27e⁻ ⁴   -51.8     -15.3  Inte…
+## 11 as.fa…   -26.7      3.87    - 6.89    1.43e⁻¹¹   -34.3     -19.1  Inte…
+## 12 as.fa…   -20.5      3.64    - 5.61    3.03e⁻ ⁸   -27.6     -13.3  Inte…
+## 13 as.fa…   - 6.69     2.28    - 2.94    3.39e⁻ ³   -11.2     - 2.23 Inte…
+## 14 as.fa…    11.7      3.16      3.70    2.32e⁻ ⁴     5.49     17.9  Inte…
+## 15 as.fa…    25.0      2.94      8.51    1.48e⁻¹⁶    19.2      30.8  Inte…
+## 16 as.fa…    26.7      7.81      3.42    6.67e⁻ ⁴    11.4      42.0  Inte…</code></pre>
 <p>We can then plot coefficients straight away.</p>
 <pre class="r"><code>ggplot(mods, aes(x = term, y = estimate)) +
   geom_hline(yintercept = 0, color = &quot;gray50&quot;) +
@@ -638,20 +637,20 @@ summary(newmod)</code></pre>
 <pre><code>## # A tibble: 14 x 3
 ##    libcon_self woman `libcon_self:woman`
 ##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;
-##  1           1     1                   1
-##  2           2     1                   2
-##  3           3     1                   3
-##  4           4     1                   4
-##  5           5     1                   5
-##  6           6     1                   6
-##  7           7     1                   7
-##  8           1     0                   0
-##  9           2     0                   0
-## 10           3     0                   0
-## 11           4     0                   0
-## 12           5     0                   0
-## 13           6     0                   0
-## 14           7     0                   0</code></pre>
+##  1           1  1.00                1.00
+##  2           2  1.00                2.00
+##  3           3  1.00                3.00
+##  4           4  1.00                4.00
+##  5           5  1.00                5.00
+##  6           6  1.00                6.00
+##  7           7  1.00                7.00
+##  8           1  0                   0   
+##  9           2  0                   0   
+## 10           3  0                   0   
+## 11           4  0                   0   
+## 12           5  0                   0   
+## 13           6  0                   0   
+## 14           7  0                   0</code></pre>
 <p>The <code>:</code> character is usually not allowed in variable names, but if we wrap the variable name in backticks, we can make it work. The reason we need to the variable names to match exactly is because we can use a handy function called <code>predict()</code>.</p>
 <pre class="r"><code>predict(newmod, newdata = new_x)</code></pre>
 <pre><code>##          1          2          3          4          5          6 
@@ -665,22 +664,22 @@ summary(newmod)</code></pre>
   mutate(pred = predict(newmod, newdata = .)) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 14 x 4
-##    libcon_self woman `libcon_self:woman`       pred
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;      &lt;dbl&gt;
-##  1           1     1                   1 -43.171895
-##  2           2     1                   2 -30.931399
-##  3           3     1                   3 -18.690904
-##  4           4     1                   4  -6.450408
-##  5           5     1                   5   5.790088
-##  6           6     1                   6  18.030583
-##  7           7     1                   7  30.271079
-##  8           1     0                   0 -41.465389
-##  9           2     0                   0 -28.074222
-## 10           3     0                   0 -14.683054
-## 11           4     0                   0  -1.291887
-## 12           5     0                   0  12.099280
-## 13           6     0                   0  25.490448
-## 14           7     0                   0  38.881615</code></pre>
+##    libcon_self woman `libcon_self:woman`   pred
+##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;
+##  1           1  1.00                1.00 -43.2 
+##  2           2  1.00                2.00 -30.9 
+##  3           3  1.00                3.00 -18.7 
+##  4           4  1.00                4.00 - 6.45
+##  5           5  1.00                5.00   5.79
+##  6           6  1.00                6.00  18.0 
+##  7           7  1.00                7.00  30.3 
+##  8           1  0                   0    -41.5 
+##  9           2  0                   0    -28.1 
+## 10           3  0                   0    -14.7 
+## 11           4  0                   0    - 1.29
+## 12           5  0                   0     12.1 
+## 13           6  0                   0     25.5 
+## 14           7  0                   0     38.9</code></pre>
 <p>And plotting these predictions would then be pretty straightforward.</p>
 <pre class="r"><code>ggplot(predictions, aes(x = libcon_self, y = pred)) +
   geom_line(aes(color = as.factor(woman)))</code></pre>
@@ -710,22 +709,22 @@ summary(newmod)</code></pre>
          upper = predict(newmod, newdata = ., interval = &quot;confidence&quot;)[, &quot;upr&quot;]) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`       pred      lower      upper
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1           1     1                   1 -43.171895 -51.709954 -34.633837
-##  2           2     1                   2 -30.931399 -37.249519 -24.613280
-##  3           3     1                   3 -18.690904 -23.144763 -14.237044
-##  4           4     1                   4  -6.450408 -10.007534  -2.893282
-##  5           5     1                   5   5.790088   1.504359  10.075816
-##  6           6     1                   6  18.030583  11.949478  24.111688
-##  7           7     1                   7  30.271079  21.995195  38.546963
-##  8           1     0                   0 -41.465389 -51.673876 -31.256902
-##  9           2     0                   0 -28.074222 -35.782417 -20.366026
-## 10           3     0                   0 -14.683054 -20.147089  -9.219020
-## 11           4     0                   0  -1.291887  -5.232875   2.649101
-## 12           5     0                   0  12.099280   8.044231  16.154329
-## 13           6     0                   0  25.490448  19.781527  31.199368
-## 14           7     0                   0  38.881615  30.883087  46.880143</code></pre>
+##    libcon_self woman `libcon_self:woman`   pred  lower  upper
+##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1           1  1.00                1.00 -43.2  -51.7  -34.6 
+##  2           2  1.00                2.00 -30.9  -37.2  -24.6 
+##  3           3  1.00                3.00 -18.7  -23.1  -14.2 
+##  4           4  1.00                4.00 - 6.45 -10.0  - 2.89
+##  5           5  1.00                5.00   5.79   1.50  10.1 
+##  6           6  1.00                6.00  18.0   11.9   24.1 
+##  7           7  1.00                7.00  30.3   22.0   38.5 
+##  8           1  0                   0    -41.5  -51.7  -31.3 
+##  9           2  0                   0    -28.1  -35.8  -20.4 
+## 10           3  0                   0    -14.7  -20.1  - 9.22
+## 11           4  0                   0    - 1.29 - 5.23   2.65
+## 12           5  0                   0     12.1    8.04  16.2 
+## 13           6  0                   0     25.5   19.8   31.2 
+## 14           7  0                   0     38.9   30.9   46.9</code></pre>
 <p>It might be easier to save the output from <code>predict()</code> as a separate object, and then add its columns to a new data frame. You will want to save the <code>predict</code> object as a data frame.</p>
 <pre class="r"><code>fits &lt;- newmod %&gt;%
   predict(newdata = new_x, interval = &quot;confidence&quot;) %&gt;%
@@ -737,22 +736,22 @@ predictions &lt;- new_x %&gt;%
          upper = fits$upr) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`       pred      lower      upper
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
-##  1           1     1                   1 -43.171895 -51.709954 -34.633837
-##  2           2     1                   2 -30.931399 -37.249519 -24.613280
-##  3           3     1                   3 -18.690904 -23.144763 -14.237044
-##  4           4     1                   4  -6.450408 -10.007534  -2.893282
-##  5           5     1                   5   5.790088   1.504359  10.075816
-##  6           6     1                   6  18.030583  11.949478  24.111688
-##  7           7     1                   7  30.271079  21.995195  38.546963
-##  8           1     0                   0 -41.465389 -51.673876 -31.256902
-##  9           2     0                   0 -28.074222 -35.782417 -20.366026
-## 10           3     0                   0 -14.683054 -20.147089  -9.219020
-## 11           4     0                   0  -1.291887  -5.232875   2.649101
-## 12           5     0                   0  12.099280   8.044231  16.154329
-## 13           6     0                   0  25.490448  19.781527  31.199368
-## 14           7     0                   0  38.881615  30.883087  46.880143</code></pre>
+##    libcon_self woman `libcon_self:woman`   pred  lower  upper
+##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1           1  1.00                1.00 -43.2  -51.7  -34.6 
+##  2           2  1.00                2.00 -30.9  -37.2  -24.6 
+##  3           3  1.00                3.00 -18.7  -23.1  -14.2 
+##  4           4  1.00                4.00 - 6.45 -10.0  - 2.89
+##  5           5  1.00                5.00   5.79   1.50  10.1 
+##  6           6  1.00                6.00  18.0   11.9   24.1 
+##  7           7  1.00                7.00  30.3   22.0   38.5 
+##  8           1  0                   0    -41.5  -51.7  -31.3 
+##  9           2  0                   0    -28.1  -35.8  -20.4 
+## 10           3  0                   0    -14.7  -20.1  - 9.22
+## 11           4  0                   0    - 1.29 - 5.23   2.65
+## 12           5  0                   0     12.1    8.04  16.2 
+## 13           6  0                   0     25.5   19.8   31.2 
+## 14           7  0                   0     38.9   30.9   46.9</code></pre>
 <p>You could then plot.</p>
 <pre class="r"><code>ggplot(predictions, aes(x = libcon_self, y = pred)) +
   geom_ribbon(aes(ymin = lower, ymax = upper, fill = as.factor(woman)),
@@ -899,22 +898,22 @@ sim_predictions &lt;- new_x %&gt;%
   mutate_if(is.numeric, round, 3) %&gt;% 
   print()  </code></pre>
 <pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`    pred   lower   upper
-##          &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-##  1           1     1                   1 -43.172 -51.660 -34.692
-##  2           2     1                   2 -30.931 -37.228 -24.666
-##  3           3     1                   3 -18.691 -23.103 -14.271
-##  4           4     1                   4  -6.450  -9.962  -2.864
-##  5           5     1                   5   5.790   1.529  10.061
-##  6           6     1                   6  18.031  11.973  24.089
-##  7           7     1                   7  30.271  21.949  38.476
-##  8           1     0                   0 -41.465 -51.652 -31.181
-##  9           2     0                   0 -28.074 -35.761 -20.305
-## 10           3     0                   0 -14.683 -20.133  -9.231
-## 11           4     0                   0  -1.292  -5.249   2.712
-## 12           5     0                   0  12.099   8.060  16.214
-## 13           6     0                   0  25.490  19.696  31.133
-## 14           7     0                   0  38.882  30.892  46.791</code></pre>
+##    libcon_self woman `libcon_self:woman`   pred  lower  upper
+##          &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1        1.00  1.00                1.00 -43.2  -51.7  -34.6 
+##  2        2.00  1.00                2.00 -30.9  -37.3  -24.6 
+##  3        3.00  1.00                3.00 -18.7  -23.2  -14.2 
+##  4        4.00  1.00                4.00 - 6.45 -10.1  - 2.90
+##  5        5.00  1.00                5.00   5.79   1.41   9.97
+##  6        6.00  1.00                6.00  18.0   11.8   24.0 
+##  7        7.00  1.00                7.00  30.3   21.9   38.5 
+##  8        1.00  0                   0    -41.5  -51.3  -31.4 
+##  9        2.00  0                   0    -28.1  -35.5  -20.4 
+## 10        3.00  0                   0    -14.7  -20.0  - 9.24
+## 11        4.00  0                   0    - 1.29 - 5.20   2.63
+## 12        5.00  0                   0     12.1    7.95  16.1 
+## 13        6.00  0                   0     25.5   19.7   31.0 
+## 14        7.00  0                   0     38.9   30.9   46.8</code></pre>
 <pre class="r"><code># compare to analytic intervals
 compare_ints &lt;- bind_rows(mutate(predictions, method = &quot;predict()&quot;), 
                           mutate(sim_predictions, method = &quot;Simulation&quot;))
@@ -961,18 +960,18 @@ ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
   select(vote, libcon_self, gender) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 1,714 x 3
-##                    vote libcon_self gender
-##                   &lt;chr&gt;       &lt;dbl&gt;  &lt;chr&gt;
-##  1                 &lt;NA&gt;           4  Women
-##  2 Democratic Candidate           4  Women
-##  3                 &lt;NA&gt;          NA    Men
-##  4 Democratic Candidate           4    Men
-##  5 Republican Candidate           4  Women
-##  6                 &lt;NA&gt;          NA    Men
-##  7 Republican Candidate           7    Men
-##  8 Democratic Candidate          NA    Men
-##  9 Democratic Candidate           4  Women
-## 10                 &lt;NA&gt;           7    Men
+##    vote                 libcon_self gender
+##    &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; 
+##  1 &lt;NA&gt;                        4.00 Women 
+##  2 Democratic Candidate        4.00 Women 
+##  3 &lt;NA&gt;                       NA    Men   
+##  4 Democratic Candidate        4.00 Men   
+##  5 Republican Candidate        4.00 Women 
+##  6 &lt;NA&gt;                       NA    Men   
+##  7 Republican Candidate        7.00 Men   
+##  8 Democratic Candidate       NA    Men   
+##  9 Democratic Candidate        4.00 Women 
+## 10 &lt;NA&gt;                        7.00 Men   
 ## # ... with 1,704 more rows</code></pre>
 <p>Let’s transform this data to make it play nicely with modeling math.</p>
 <pre class="r"><code>logit_data &lt;- logit_data %&gt;%
@@ -981,18 +980,18 @@ ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
          ideo = libcon_self - 4) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 1,714 x 6
-##                    vote libcon_self gender rvote woman  ideo
-##                   &lt;chr&gt;       &lt;dbl&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1                 &lt;NA&gt;           4  Women    NA     1     0
-##  2 Democratic Candidate           4  Women     0     1     0
-##  3                 &lt;NA&gt;          NA    Men    NA     0    NA
-##  4 Democratic Candidate           4    Men     0     0     0
-##  5 Republican Candidate           4  Women     1     1     0
-##  6                 &lt;NA&gt;          NA    Men    NA     0    NA
-##  7 Republican Candidate           7    Men     1     0     3
-##  8 Democratic Candidate          NA    Men     0     0    NA
-##  9 Democratic Candidate           4  Women     0     1     0
-## 10                 &lt;NA&gt;           7    Men    NA     0     3
+##    vote                 libcon_self gender rvote woman  ideo
+##    &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 &lt;NA&gt;                        4.00 Women  NA     1.00  0   
+##  2 Democratic Candidate        4.00 Women   0     1.00  0   
+##  3 &lt;NA&gt;                       NA    Men    NA     0    NA   
+##  4 Democratic Candidate        4.00 Men     0     0     0   
+##  5 Republican Candidate        4.00 Women   1.00  1.00  0   
+##  6 &lt;NA&gt;                       NA    Men    NA     0    NA   
+##  7 Republican Candidate        7.00 Men     1.00  0     3.00
+##  8 Democratic Candidate       NA    Men     0     0    NA   
+##  9 Democratic Candidate        4.00 Women   0     1.00  0   
+## 10 &lt;NA&gt;                        7.00 Men    NA     0     3.00
 ## # ... with 1,704 more rows</code></pre>
 <p>You’ll see <code>NA</code>s in the data. Cases with missing values are automatically dropped during estimation. You may cover missing data imputation in your maximum likelihood course.</p>
 <p>The estimation formula in R looks like <code>lm()</code>, but we specify a family of probability distributions. Here we’ll use the binomial family, which automatically uses the logit link function to transform the probability of a success (nonlinear) into the log odds of a success (linear). Technically speaking, <span class="math inline">\(y\)</span> observations are successes or failures (1s or 0s) based on an underlying probability <span class="math inline">\(\pi\)</span>, which is related to the prediction formula via the link function (the logit function):</p>
@@ -1184,9 +1183,9 @@ data_frame(factor = F,
            numeric = as.numeric(F))</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   factor numeric
-##   &lt;fctr&gt;   &lt;dbl&gt;
-## 1  hello       2
-## 2  world       1</code></pre>
+##   &lt;fct&gt;    &lt;dbl&gt;
+## 1 hello     2.00
+## 2 world     1.00</code></pre>
 <p>Character vectors cannot be directly mapped to numeric. They need to be converted to factor first.</p>
 <pre class="r"><code>char &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;z&quot;)
 # direct coercion leads to NAs
@@ -1323,18 +1322,18 @@ apply(df, 1, mean)</code></pre>
   group_by(cycle) %&gt;%
   nest() </code></pre>
 <pre><code>## # A tibble: 30 x 2
-##    cycle                   data
-##    &lt;dbl&gt;                 &lt;list&gt;
-##  1  1948   &lt;tibble [662 x 961]&gt;
-##  2  1952 &lt;tibble [1,899 x 961]&gt;
-##  3  1954 &lt;tibble [1,139 x 961]&gt;
-##  4  1956 &lt;tibble [1,762 x 961]&gt;
-##  5  1958 &lt;tibble [1,450 x 961]&gt;
-##  6  1960 &lt;tibble [1,181 x 961]&gt;
-##  7  1962 &lt;tibble [1,297 x 961]&gt;
-##  8  1964 &lt;tibble [1,571 x 961]&gt;
-##  9  1966 &lt;tibble [1,291 x 961]&gt;
-## 10  1968 &lt;tibble [1,557 x 961]&gt;
+##    cycle data                  
+##    &lt;dbl&gt; &lt;list&gt;                
+##  1  1948 &lt;tibble [662 × 961]&gt;  
+##  2  1952 &lt;tibble [1,899 × 961]&gt;
+##  3  1954 &lt;tibble [1,139 × 961]&gt;
+##  4  1956 &lt;tibble [1,762 × 961]&gt;
+##  5  1958 &lt;tibble [1,450 × 961]&gt;
+##  6  1960 &lt;tibble [1,181 × 961]&gt;
+##  7  1962 &lt;tibble [1,297 × 961]&gt;
+##  8  1964 &lt;tibble [1,571 × 961]&gt;
+##  9  1966 &lt;tibble [1,291 × 961]&gt;
+## 10  1968 &lt;tibble [1,557 × 961]&gt;
 ## # ... with 20 more rows</code></pre>
 <p>A nested data frame is a data frame where columns can themselves be a list of data frames (a.k.a. a “list column”). In this data frame, the <code>data</code> column isn’t really a variable; it contains a list of data frames, each corresponding to the grouping variable (<code>cycle</code>).</p>
 <p>Unnest a list column from a data frame like so:</p>
@@ -1367,19 +1366,19 @@ gender_gaps &lt;- anes %&gt;%
                           TRUE ~ &quot;Woman&quot;)) %&gt;% 
   print()</code></pre>
 <pre><code>## # A tibble: 34 x 8
-##    cycle  term   estimate  std.error  statistic      p.value    conf.low
-##    &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
-##  1  1948   Man -0.2277839 0.14452271 -1.5761117 1.150001e-01 -0.51304555
-##  2  1948 Woman -0.1129404 0.14345132 -0.7873083 4.311014e-01 -0.39531176
-##  3  1952   Man  0.2856639 0.08403905  3.3991808 6.758802e-04  0.12149918
-##  4  1952 Woman  0.3724042 0.08286230  4.4942542 6.981420e-06  0.21071748
-##  5  1956   Man  0.2591901 0.08145853  3.1818660 1.463295e-03  0.09999739
-##  6  1956 Woman  0.5165469 0.08089096  6.3857186 1.705945e-10  0.35897929
-##  7  1960   Man -0.1073290 0.09669994 -1.1099181 2.670343e-01 -0.29732193
-##  8  1960 Woman  0.1238254 0.09252840  1.3382415 1.808177e-01 -0.05731241
-##  9  1964   Man -0.6403490 0.09341484 -6.8548960 7.136442e-12 -0.82530552
-## 10  1964 Woman -0.8097348 0.08814013 -9.1869023 4.043166e-20 -0.98451433
-## # ... with 24 more rows, and 1 more variables: conf.high &lt;dbl&gt;</code></pre>
+##    cycle term  estimate std.error statistic     p.value conf.low conf.high
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1  1948 Man     -0.228    0.145     -1.58     1.15e⁻ ¹  -0.513     0.0544
+##  2  1948 Woman   -0.113    0.143     -0.787    4.31e⁻ ¹  -0.395     0.168 
+##  3  1952 Man      0.286    0.0840     3.40     6.76e⁻ ⁴   0.121     0.451 
+##  4  1952 Woman    0.372    0.0829     4.49     6.98e⁻ ⁶   0.211     0.536 
+##  5  1956 Man      0.259    0.0815     3.18     1.46e⁻ ³   0.1000    0.419 
+##  6  1956 Woman    0.517    0.0809     6.39     1.71e⁻¹⁰   0.359     0.676 
+##  7  1960 Man     -0.107    0.0967    -1.11     2.67e⁻ ¹  -0.297     0.0820
+##  8  1960 Woman    0.124    0.0925     1.34     1.81e⁻ ¹  -0.0573    0.306 
+##  9  1964 Man     -0.640    0.0934    -6.85     7.14e⁻¹²  -0.825    -0.459 
+## 10  1964 Woman   -0.810    0.0881    -9.19     4.04e⁻²⁰  -0.985    -0.639 
+## # ... with 24 more rows</code></pre>
 <pre class="r"><code># plot coefficients over time
 # map pt shape, solid and empty points, generic white fill
 ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +

@@ -19,7 +19,7 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/rainbow.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-light.min.css">
 
 
 
@@ -71,24 +71,29 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
-    <div id="objectives" class="section level1">
+    <div id="schedule" class="section level1">
+<h1>Schedule:</h1>
+<p>Read this before our first R lecture.</p>
+</div>
+<div id="objectives" class="section level1">
 <h1>Objectives</h1>
 <p>This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.</p>
 <p><strong>Note:</strong> Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others. This is because we exploring R’s <em>general</em> behavior rather than a concrete application of R workflow. Luckily, this will be short, and we get much more concrete in future lessons.</p>
-<p>You should take this lesson slowly at first if you have not played with R before. Mess around with some of the code if it helps you understand what it’s doing. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
+<p>You should take this lesson slowly at first if you have not played with R before. Mess around with some of the code if it helps you understand what it’s doing. Type it yourself bit by bit, so you can see what each component does. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
 </div>
 <div id="how-to-read-these-lessons" class="section level1">
 <h1>How to read these lessons</h1>
 <p>Pages in this series contain code blocks that you can paste into R. Some of the code blocks are included with their results.</p>
 <pre class="r"><code>&quot;Code appears in blocks like this.&quot;
 &quot;You can paste this code directly into R.&quot;</code></pre>
-<pre><code>## [1] &quot;Results appear on this page with two &#39;##&#39; signs&quot;</code></pre>
+<pre><code>## [1] &quot;Results appear on this page with two &#39;##&#39; signs on the left&quot;</code></pre>
 </div>
 <div id="installing-r" class="section level1">
 <h1>Installing R</h1>
 <p>If you have not set up R already, click <a href="https://mirror.las.iastate.edu/CRAN/">here</a> to download R for your operating system (if you haven’t already).</p>
 <p>A little bit about what’s going on here: R is open source and is distributed from various <a href="https://en.wikipedia.org/wiki/Mirror_website">“mirrors,”</a> which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors <a href="https://cran.r-project.org/mirrors.html">all over the world</a>. It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.</p>
 <p>Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (<code>R.app</code> on OSX or <code>Rgui.exe</code> on Windows), using the Rstudio application (which we discuss below), or as a program in your computer’s command-line shell (which I do, for technical reasons).</p>
+<p>If you have a Chromebook or some other computing machine that makes it impossible to install R, try the <a href="https://rstudio.cloud/">Rstudio Cloud</a> platform.</p>
 </div>
 <div id="using-r" class="section level1">
 <h1>Using R</h1>
@@ -99,149 +104,167 @@
 <p><br></p>
 <p>Although you can type commands directly into the console, most commands should be written in a <em>script file</em>. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).</p>
 </div>
-<div id="open-a-script-file" class="section level1">
-<h1>Open a script file</h1>
-<p>Use whatever program you desire to open a script file. The basic R GUI application has a script editor that can be accessed using the <code>File</code> menu or a keyboard shortcut. Many R users prefer to manage R projects using <a href="https://www.rstudio.com/products/rstudio/">Rstudio</a>, an <a href="https://en.wikipedia.org/wiki/Integrated_development_environment">IDE</a> that provides several tools for interacting with R. Windows users may find Notepad++ or TextMate to be useful text editors. Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to an R console. I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for writing code quickly. Rstudio comes standard with many such shortcuts.</p>
-<p>Personally, I R scripts using the <a href="https://www.sublimetext.com/">Sublime Text</a> editor with the <a href="https://packagecontrol.io/packages/R-Box">R-Box package</a> installed. Sublime has a nice system for installing supplemental packages and editing custom keyboard shortcuts for any language you frequently use. If you use Sublime already, feel free to <a href="https://github.com/mikedecr/sublime-user-folder">pilfer from my custom settings</a>.</p>
-<p>Script files should begin with some description of the script. You can include comments (text that will not be executed as R commands) after the <code>#</code> symbol. For example, your script file for this lesson might contain some comments at the top like…</p>
+<div id="editing-an-r-script-file" class="section level1">
+<h1>Editing an R script file</h1>
+<p>Script files in R are similar to Stata. They are a place where your code should live, and you should execute code by sending it to the console to be evaluated.</p>
+<p>Use whatever program you desire to open a script file.</p>
+<ul>
+<li>The basic R application has a script editor (accessed using the <code>File</code> menu or a keyboard shortcut).</li>
+<li>Many newcomers enjoy <a href="https://www.rstudio.com/products/rstudio/">Rstudio</a> an application that provides tons of tools for R. Rstudio has many advanced features as well, so it isn’t only for newcomers.</li>
+<li>You can also use third-party editors, but you will need to figure out how to send commands to the R console. I use <a href="https://www.sublimetext.com/">Sublime Text</a> with the <a href="https://packagecontrol.io/packages/R-Box">R-Box package</a> to send commands to R.</li>
+<li>Windows users may find Notepad++ or TextMate to be useful text editors.</li>
+<li>Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to an R console.</li>
+</ul>
+<p>I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for writing code quickly. Rstudio, it so happens, comes standard with many such shortcuts.</p>
+</div>
+<div id="what-goes-in-an-r-file-code-and-comments" class="section level1">
+<h1>What goes in an R file (code and comments)</h1>
+<p>Script files should begin with some description of the script’s purpose. You can include comments (text that will not be executed as R commands) after the <code>#</code> symbol. For example, your script file for this lesson might contain some comments at the top like…</p>
 <pre class="r"><code># ------------------------------------------------------------
 #  PS 811: statistical computing for political science
 #  Lesson 1: Basics of R
 # ------------------------------------------------------------</code></pre>
-<p>Comments are great for describing what code is doing, planning an analysis, writing notes to yourself, and so on. Comments are great for <em>pseudocode</em>, which are notes to yourself that “translate” what code is doing into English. We will see some examples of this as the course progresses.</p>
-<p>At the top of my script files, I typically include some code that sets up my project:</p>
+<p>Comments are great for describing what code is doing, planning an analysis, writing notes to yourself, and so on. Comments are also great for <em>pseudocode</em>, which are notes to yourself that “translate” what code is doing into English. We will see some examples of this as the course progresses.</p>
+<p>An R script file may begin with some common operations:</p>
 <ul>
-<li>create subdirectories for storing output (we’ll cover this later)</li>
-<li>load relevant packages</li>
-<li>set other project-wide options (graphics themes, graphics colors, any other things I want to store)</li>
+<li>Setting a working directory (see the next lesson)</li>
+<li>setting up a log file (if desired… I don’t do this though!)</li>
+<li>Loading packages for extra functionality</li>
+<li>Setting other project-wide options (e.g. graphics options)</li>
 </ul>
 <p>Although a script file can be imperfect while a project is being developed, a well-written script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that you can retrace the steps of your analysis.</p>
-<p>We should save this file. Navigate to your <code>ps811</code> folder on your computer (which you should have…), create a subfolder for R, and then within the R folder, create another “lessons” folder. Save this document in <code>ps811/R/lessons/</code>. (This syntax represents folder pathways in your computer’s file system. We’ll be seeing more of this later.)</p>
+<p>We should save this file in a designated location for this course. Navigate to your <code>ps811</code> folder on your computer (which you should already have…), create a subfolder called <code>R</code>, and then within the R folder, create another <code>lessons</code> folder. Save this document in the <code>ps811/R/lessons/</code> folder. (This syntax represents folder pathways in your computer’s file system. We’ll be seeing more of this later.)</p>
 </div>
 <div id="executing-commands" class="section level1">
 <h1>Executing commands</h1>
-<p>Just like Stata, the R interface is a REPL—that is, Read-Evaluate-Print Loop. That means R processes commands one at a time without the need to pre-compile any code.</p>
+<p>Just like Stata, R processes commands one at a time. Commands are compiled while they are executed, so if something is wrong with your code, you may not realize it until you try to run it.</p>
 <p>Just to demonstrate some basic R behavior, let’s run a few commands.</p>
 <p>First, R works as a calculator. It can handle mathematical expressions. Paste or type the following lines of code DIRECTLY into the console.</p>
 <pre class="r"><code>1 + 1
 2 + 2
 100 * 2
 500 / 4</code></pre>
-<p>You will notice that the results of each calculation will print beside a little <code>[1]</code>. Ignore this for now; we will explain it later.</p>
-<p>Now take the above block of code and paste the commands into your script file. Try to run the commands from the script file using a keyboard shortcut. Most computers and interfaces use <code>super + enter</code>, where <code>super</code> refers to <code>Ctrl</code> on PCs or <code>Cmd</code> on Macs. Windows machines may use a different shortcut, such as <code>Ctrl + R</code>. Take this opportunity to look up the appropriate keyboard shortcut on your own, <em>before coming to lecture!</em> :-)</p>
+<p>Ignore the <code>[1]</code> that prints in the results for now. We will explain it later.</p>
+<p>Now take the above block of code and paste the commands into your script file. Try to run the commands from the script file using the appropriate keyboard shortcut. Most computers and interfaces use <code>super + enter</code>, where <code>super</code> refers to <code>Ctrl</code> on PCs or <code>Cmd</code> on Macs. Windows machines may use a different shortcut, such as <code>Ctrl + R</code>. Take this opportunity to look up the appropriate keyboard shortcut on your own, <em>before coming to lecture!</em> :-)</p>
 </div>
-<div id="variables" class="section level1">
-<h1>Variables</h1>
-<p>We don’t usually manipulate mathematical expressions this atomically in R. Instead we treat data as variables. Just as how in math the expression <span class="math inline">\(x + 4\)</span> can take different values depending on the value of <span class="math inline">\(x\)</span>, we can do similar things with R.</p>
-<p>First, we’ll “assign” a value to a variable using the assignment operator <code>&lt;-</code>. The <code>&lt;-</code> is a combination of a less-than sign <code>&lt;</code> and a hyphen <code>-</code>.</p>
-<p>For example,</p>
+<div id="variables-and-assignment" class="section level1">
+<h1>Variables and assignment</h1>
+<p>Most of your R code will work with variables rather than raw numbers. Variables generally work the same way they do with math. The expression <span class="math inline">\(x + 4\)</span> can take different values, depending on the value of <span class="math inline">\(x\)</span>.</p>
+<p>Data must be “assigned” to a variable using the assignment operator <code>&lt;-</code>. The <code>&lt;-</code> is a combination of a less-than sign <code>&lt;</code> and a hyphen <code>-</code>.</p>
+<p>For example, assign the value of <code>5</code> to a variable called <code>x</code>.</p>
 <pre class="r"><code>x &lt;- 5</code></pre>
-<p>Now the variable <code>x</code> has the value of <code>5</code>, which is to say, <code>x</code> and <code>5</code> now mean the same thing!</p>
-<p>We can display the contents of any object by simply typing the object name. Print out <code>x</code>…</p>
+<p>After this variable has been created, <code>x</code> and <code>5</code> mean the same thing as far as R is concerned.</p>
+<p>You can read the <code>&lt;-</code> operator as “gets.” A left-hand side object name “gets” the results of whatever operation is on the right-hand side. So in the above example, <code>x</code> “gets” the value of 5.</p>
+</div>
+<div id="printing-the-contents-of-an-object" class="section level1">
+<h1>Printing the contents of an object</h1>
+<p>We can display the contents of any object in R by simply typing the object name.</p>
 <pre class="r"><code>x</code></pre>
 <pre><code>## [1] 5</code></pre>
-<p>…and we get back a <code>5</code>. That is to say, R “evaluated” the object called <code>x</code> and the result is simply equal to 5.</p>
-<p>Do some math with <code>x</code>…</p>
+<p>That is to say, R “evaluated” the statement <code>x</code>, and the result is 5. We could have written some more complex statement for R to evaluate, like a mathematical expression using <code>x</code>…</p>
 <pre class="r"><code>x + 4</code></pre>
 <pre><code>## [1] 9</code></pre>
-<p>You can read the <code>&lt;-</code> operator as “gets.” A left-hand side object “gets” the results of whatever operation is on the right-hand side. So in the above example, <code>x</code> “gets” the value of 5. For simple expressions, <code>&lt;-</code> can mean “equals,” but as we begin working with more complex objects (such as the results of a statistical model), saying “equals” in your head becomes a little more difficult to justify.</p>
 </div>
-<div id="more-variables-vectors" class="section level1">
-<h1>More variables: vectors</h1>
-<p>We can assign a series of values to a variable. One way to do this in R is the <code>c()</code> function. The <code>c()</code> function will bind several elements into one variable, as long as the elements can be coerced to be the same data type (numeric, factor, string, etc).</p>
-<pre class="r"><code>y &lt;- c(2, 4, 6)
-y</code></pre>
+<div id="vectors-multi-element-variables" class="section level1">
+<h1>Vectors: multi-element variables</h1>
+<p>Most of the variables you will work with in R (such as the variables in a data set) have multiple values. That is, they are <em>vectors</em>.</p>
+<p>We can create our own vectors with <code>c()</code>, which assigns a series of values to one variable. It can be helpful to think of <code>c()</code> as “combine.”</p>
+<pre class="r"><code>y &lt;- c(2, 4, 6)</code></pre>
+<p>The <code>y</code> object now contains 2, 4, and 6.</p>
+<pre class="r"><code>y</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
-<p>If you wrap an assignment inside of parentheses, the result will print at the same time that values are assigned.</p>
+<p>If you wrap an assignment statement inside of parentheses, R will assign the values <em>and</em> print the result.</p>
 <pre class="r"><code>(y &lt;- c(2, 4, 6))</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
-<p>We can use multi-element variables to do math on the entire vector at once. Just as we could do real math with a vector…</p>
+<p>Vectors are useful for performing operations on every element in the vector. Just as we could do math with a vector…</p>
 <p><span class="math inline">\(\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}\)</span></p>
 <p>we can also do similar things in R.</p>
 <pre class="r"><code>2 * y</code></pre>
 <pre><code>## [1]  4  8 12</code></pre>
-<pre class="r"><code>y * y</code></pre>
+<p>A note about multiplying vectors: by default, R does element-wise multiplication (the “Hadamard product”). To do matrix-style multiplication (dot product/inner product) with vectors, we have a different operator.</p>
+<pre class="r"><code># element-wise product:
+y * y</code></pre>
 <pre><code>## [1]  4 16 36</code></pre>
+<pre class="r"><code># dot product
+y %*% y</code></pre>
+<pre><code>##      [,1]
+## [1,]   56</code></pre>
 </div>
 <div id="everything-is-an-object" class="section level1">
 <h1>Everything is an Object</h1>
-<p>In R, everything is an object. I can store an arbitrary value as a variable, which is an object. A text string can be an object. An entire dataset. A variable within a dataset can be thought of as an object within another object. It’s all objects. This makes R very flexible, although some object manipulations are obviously out of bounds (can’t add <code>4 + &quot;fish&quot;</code>, for example).</p>
+<p>In R, everything is an object. I can store any value as a variable, which is an object. A text string is an object. A dataset. A variable within a dataset is an object within an object. It’s objects all the way down. This makes R very flexible.</p>
 </div>
 <div id="indexing" class="section level1">
 <h1>Indexing</h1>
-<p>It is possible to access the elements of a variable using <em>indexing</em> notation. R uses square brackets to select a given element in a variable. Using the variable <code>y</code> from above, what are the first, second, and third elements?</p>
-<pre class="r"><code>y</code></pre>
+<p>You can access individual elements in a vector using <em>indexing</em> notation with square brackets. Using the variable <code>y</code> from above, what are the first, second, and third elements?</p>
+<pre class="r"><code># entire y vector
+y</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
-<pre class="r"><code>y[1]</code></pre>
+<pre class="r"><code># first element of y
+y[1]</code></pre>
 <pre><code>## [1] 2</code></pre>
-<pre class="r"><code>y[2]</code></pre>
+<pre class="r"><code># second element of y
+y[2]</code></pre>
 <pre><code>## [1] 4</code></pre>
-<pre class="r"><code>y[3]</code></pre>
+<pre class="r"><code># third element of y
+y[3]</code></pre>
 <pre><code>## [1] 6</code></pre>
-<p>Indexing notation is why the console prints a little <code>[1]</code> next to all results. It is indicating that the adjacent element is the first element of the results. This becomes clearer if we were to print a long vector with many more elements—for example, 100 repetitions of the same data.</p>
-<pre class="r"><code>rep(&quot;hello&quot;, 100)</code></pre>
-<pre><code>##   [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##   [9] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [17] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [25] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [33] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [41] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [49] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [57] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [65] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [73] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [81] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [89] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
-##  [97] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
-<p>We could have two (or higher) dimensional objects. Let’s make some simple two-dimensional objects:</p>
-<pre class="r"><code>tall_m &lt;- rbind(c(1, 2), 
-                c(3, 4), 
-                c(5, 6))
-tall_m</code></pre>
+<p>This is akin to indexing in math, where we could write <span class="math inline">\(y_{1} = 2\)</span>, <span class="math inline">\(y_{2} = 4\)</span>, and so on.</p>
+<p>This is why the console prints a little <code>[1]</code> next to all results. The <code>[1]</code> indicates that the adjacent element is the first element of the results. If we print a longer object, this becomes clearer. For example, 30 repetitions of the word <code>&quot;hello&quot;</code>.</p>
+<pre class="r"><code># repeat &quot;hello&quot; 30 times
+rep(&quot;hello&quot;, 30)</code></pre>
+<pre><code>##  [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [9] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+## [17] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+## [25] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
+<p>Indexing works with higher-dimensional data as well. Here are some two-dimensional arrays of numbers.</p>
+<pre class="r"><code># row-bind separate vectors
+m &lt;- rbind(c(1, 2), 
+           c(3, 4), 
+           c(5, 6))
+m</code></pre>
 <pre><code>##      [,1] [,2]
 ## [1,]    1    2
 ## [2,]    3    4
 ## [3,]    5    6</code></pre>
-<p>(Notice how <code>rbind()</code> binds vectors together as rows.)</p>
-<pre class="r"><code>wide_m &lt;- cbind(c(1, 2), 
-                c(3, 4), 
-                c(5, 6))
-wide_m</code></pre>
-<pre><code>##      [,1] [,2] [,3]
-## [1,]    1    3    5
-## [2,]    2    4    6</code></pre>
-<p>(And <code>cbind()</code> binds vectors as columns.)</p>
-<p>We can still use indexing notation to access the data within these objects. We use the notation <code>object[a, b]</code>, where <code>a</code> indicates the row number and <code>b</code> indicates the column number.</p>
-<pre class="r"><code>tall_m[2, 2]</code></pre>
+<p>(Notice how <code>rbind()</code> binds vectors together as rows. The <code>cbind()</code> function would bind vectors as columns.)</p>
+<p>To index a multi-dimensional object, use commas to separate the dimensions. The notation <code>object[a, b]</code> would reference the value in row <code>a</code> and column <code>b</code>.</p>
+<pre class="r"><code>m[2, 2]</code></pre>
 <pre><code>## [1] 4</code></pre>
-<pre class="r"><code>wide_m[1, 3]</code></pre>
-<pre><code>## [1] 5</code></pre>
-<p>If we specify a row but don’t specify a column, R returns every column from the specified row. Here we specify the row <code>1</code> but don’t specify a column.</p>
-<pre class="r"><code>wide_m[1, ]</code></pre>
-<pre><code>## [1] 1 3 5</code></pre>
-<p>And if we don’t specify a row, R grabs every row. Here we leave the row unspecified but grab the second column.</p>
-<pre class="r"><code>tall_m[ , 2]</code></pre>
+<p>If we specify a row but don’t specify a column, R returns every column from the specified row.</p>
+<pre class="r"><code>m[1, ]</code></pre>
+<pre><code>## [1] 1 2</code></pre>
+<p>If we specify a column but don’t specify a row, R returns every row from the specified column.</p>
+<pre class="r"><code>m[ , 2]</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
-<p>Even though <code>tall_m[ , 2]</code> is the second <em>column</em> of <code>tall_m</code>, the results don’t print as a vertical column. Why? Because once R evaluates <code>tall_m[ , 2]</code>, the results are just another object. It’s nothing more than a vector floating there. R no longer remembers that it comes from <code>tall_m</code>. You could use that vector for more stuff; indeed, as far as R is concerned, <code>tall_m[ , 2]</code> is exactly equivalent to a vector <code>c(2, 4, 6)</code>.</p>
-<p><em>This is the kind of flexibility that is valuable in R.</em> You can ask R to evaluate some complex thing, and its results become available to you as just another vector that you can manipulate further. This allows you to sew together a complicated series of commands and, as long as you don’t trip some kind of error, it just works.</p>
-<div id="a-note-about-indexing" class="section level2">
-<h2>A note about indexing</h2>
-<p>Although some languages are “zero-indexed” (meaning the first element of a variable is index position 0), R is “one-indexed.” This makes more sense for statistical purposes, but it may be different from other languages you have seen (for example C). Calling the 0’th element of a variable does not throw an error, however. Go figure.</p>
-<pre class="r"><code>y[0]</code></pre>
-<pre><code>## numeric(0)</code></pre>
-<p><strong>Another important note:</strong> Although it is important that you understand the intuition of indexing for thinking about how R works, this kind of <em>explicit</em> indexing is not something you will do much when we move to the <code>tidyverse</code>. Indexing remains important for several reasons though. First, it has useful mathematical parallels, where <span class="math inline">\(y_{i}\)</span> is analogous to <code>y[i]</code>. This sometimes comes in handy for dealing with the results from statistical models. Additionally, you will encounter it when searching through message boards for R help, especially when you see someone do some kind of <em>logical selection</em>. <code>tidyverse</code> functions implicitly use indexing by logical selection all the time. What does “logical selection” mean, exactly? Well…</p>
+<p>Even though <code>m[ , 2]</code> is the second <em>column</em> of <code>m</code>, the results don’t print as a vertical column. Why? Because once R evaluates <code>m[ , 2]</code>, it simply returns an object. R no longer remembers that it comes from <code>m</code>. The result is nothing more than a vector floating there. As far as R is concerned, <code>m[ , 2]</code> is exactly equivalent to a vector <code>c(2, 4, 6)</code>. <em>This is the kind of flexibility that is valuable in R.</em></p>
+<div id="r-is-one-indexed" class="section level2">
+<h2>R is one-indexed</h2>
+<p>R is one-indexed, meaning the first element of a vector is element <code>1</code>. Some languages (like <code>C</code>) are zero-indexed. Even though R is one-indexed, calling the 0’th element of a variable does not throw an error, so be careful.</p>
+</div>
+<div id="indexing-in-practice" class="section level2">
+<h2>Indexing in practice</h2>
+<p>The code we use in this course (heavily derived from the <code>tidyverse</code> suite of packages) does not require much explicit indexing. However, you should understand the intuition of indexing for a few reasons.</p>
+<ul>
+<li>It has useful mathematical parallels, where <span class="math inline">\(y_{i}\)</span> is analogous to <code>y[i]</code>. This sometimes comes in handy for dealing with the results from statistical models.</li>
+<li>You will encounter it when searching through message boards for R help.</li>
+</ul>
 </div>
 </div>
 <div id="logic" class="section level1">
 <h1>Logic</h1>
-<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, what we’re doing is dealing with is statements that evaluate to either <code>TRUE</code> or <code>FALSE</code>j. An example to illustrate what I mean: we’ll make a vector.</p>
+<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, what we’re doing is dealing with is statements that evaluate to either <code>TRUE</code> or <code>FALSE</code>.</p>
+<p>Example: is 1 greater than 0?</p>
+<pre class="r"><code>1 &gt; 0</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Let’s make a new vector, a sequence of values from 1 to 10.</p>
 <pre class="r"><code>(g &lt;- 1:10)</code></pre>
 <pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
-<p>We can ask R about things that are true and false about the values in the vector. For example, are the values greater than 5?</p>
+<p>Now that we have this vector, we can derive logical statements about it. Which elements are greater than 5?</p>
 <pre class="r"><code>g &gt; 5</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
-<p>The statement <code>g &gt; 5</code> is a “logical,” meaning that its underlying meaning is fundamentally <code>TRUE</code> or <code>FALSE</code>. R asks if <code>g</code> is greater than 5, and since <code>g</code> is a vector, and R returns a vector of logicals, each element corresponding to the original elements in <code>g</code>.</p>
-<p>We can do this kind of thing with several operators. Let’s see them in practice.</p>
+<p>The statement <code>g &gt; 5</code> is a “logical” vector, meaning that its values are either <code>TRUE</code> or <code>FALSE</code>, which are keywords in R (and must be capital). R asks if <code>g</code> is greater than 5, and since <code>g</code> is a vector, R returns a vector of logicals with each element corresponding to the original elements in <code>g</code>.</p>
+<p>There are many logical operators. Here are some:</p>
 <pre class="r"><code># g &quot;is equal to&quot; 5
 g == 5</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
@@ -257,36 +280,28 @@ g &gt;= 5</code></pre>
 <pre class="r"><code># g &quot;is less than or equal to&quot; 5
 g &lt;= 5</code></pre>
 <pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<p>Relating this back to index notation, you will probably see R users online using indexing and logical evaluation to select observations from a dataset. For example, let’s say I want to multiply <code>g</code> by 10.</p>
-<pre class="r"><code>g * 10</code></pre>
-<pre><code>##  [1]  10  20  30  40  50  60  70  80  90 100</code></pre>
-<p>And now let’s say that I only want to do this for values of <code>g</code> less than 4. First I can limit my selection of <code>g</code> to the values I want…</p>
-<pre class="r"><code>g[g &lt; 4]</code></pre>
-<pre><code>## [1] 1 2 3</code></pre>
-<p>…which is to say, “give me the elements of <code>g</code> where <code>g</code> is less than 4” (or more literally, “give me the elements of <code>g</code> where the statement <code>g &lt; 4</code> evaluates to <code>TRUE</code>”).</p>
-<p>Once we have these elements, we do the operation.</p>
-<pre class="r"><code>g[g &lt; 4] * 10</code></pre>
-<pre><code>## [1] 10 20 30</code></pre>
-<p>This seems a little abstract right now, but here’s how you may see others do this online. Let’s say that I have a dataset of World Health Organization data, and I want to look only at the European data. You might see someone online limit the data like so.</p>
-<pre class="r"><code>who[region == &quot;Europe&quot;, ]</code></pre>
-<p>This block of code would read as, “give me the <code>who</code> object, but only the rows where <code>region</code> is <code>&quot;Europe&quot;</code>.” (Or, again more literally, give me the <code>who</code> object, but only the rows where the statement <code>region == &quot;Europe&quot;</code> evaluates to <code>TRUE</code>). The <code>tidyverse</code> uses other tools to do this selection. Cases are still kept using logical syntax (which is very useful), but you don’t have to think so hard about index positions evaluating to <code>TRUE</code>. It ends up being much more intuitive.</p>
+<p>This seems a little abstract right now, but here’s how you may see others use logic for indexing. Let’s say that I have some data from countries around the world, and I want to look only at the European data. You might see someone online limit the data like so.</p>
+<pre class="r"><code>world_data[region == &quot;Europe&quot;, ]</code></pre>
+<p>Translated: retrieve the <code>world_data</code> object, but only the rows (notice the comma in the indexing) where <code>region</code> is equal to <code>&quot;Europe&quot;</code>.</p>
+<p>More literally, the statement <code>region == &quot;Europe&quot;</code> is either <code>TRUE</code> or <code>FALSE</code> for every observation in the data. The above statement returns the rows from <code>world_data</code> where <code>region == &quot;Europe&quot;</code> evaluates to <code>TRUE</code>.</p>
+<p>As mentioned above, we will perform this kind of case selection with a more intuitive syntax that is easier to wrap your brain around.</p>
 </div>
 <div id="data-types" class="section level1">
 <h1>Data types</h1>
-<p>We have hinted so far that there are a few different types of data in R.</p>
+<p>There are a few different types of data in R.</p>
 <ul>
 <li>Logical: <code>TRUE</code>s and <code>FALSE</code>s.</li>
 <li>Numeric: including integers and doubles</li>
 <li>Strings: text strings that are contained in <code>&quot;quotes&quot;</code>. R calls these “character” type variables.</li>
 <li>Factors: ordered categories with text labels</li>
 </ul>
-<p>Factors require some explanation, because they are somewhat like numbers, but also somewhat like text strings, just like in Stata. They are like text strings because they have text labels and you can’t do math with them. But they are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata. You can interact with them as text strings, but they are stored in the computer as numbers to conserve memory. As a result, factors are really only good for variables with finite categories, such as a 1-to-5 Likert scale.</p>
-<p>It is possible to coerce data from type to another, which follows some intuitive rules that we can cover in future lessons.</p>
-<p>Note: data types are different from <em>object classes</em>. There are many classes of objects that can have different attributes. We’ll see these more in future lessons (but examples include matrices, data frames, tables, lists, tibbles, lm objects, and so on).</p>
+<p>Factors are akin to labelled variables in Stata. They are somewhat like numbers, somewhat like text strings. They are like strings because they havea text label, and you can’t do math with them. They are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata.</p>
+<p>It is possible to coerce data from type to another. We cover this in our final lesson.</p>
+<p>Note: data types are different from <em>object classes</em>. Data type describes the values, but object classes describes the organization of values. Classes include vectors, matrices, data frames, tables, lists, and so on.</p>
 </div>
 <div id="missing-data" class="section level1">
 <h1>Missing data</h1>
-<p>Vectors might contain missing data. The missing data code in R is <code>NA</code>, without quotes.</p>
+<p>Vectors might contain missing data. The missing data code in R is capital <code>NA</code>, without quotes.</p>
 <p>Missing data take the same data type as the vector in which they are located. For example:</p>
 <pre class="r"><code>h &lt;- c(1, 2, NA, 4)
 # what data type is h?
@@ -295,40 +310,40 @@ str(h)</code></pre>
 <p>By placing <code>NA</code> inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. If some function requires that we know every value, it will probably fail. Try the following.</p>
 <pre class="r"><code>mean(h)</code></pre>
 <pre><code>## [1] NA</code></pre>
-<p>Notice that this doesn’t cause an <em>error</em>. Instead, the result is a missing value. What this means is, we know that there <em>should</em> be a numeric mean (which is why there is no error), we just don’t know what the mean is because we don’t know what all of <code>h</code> is. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.</p>
+<p>This doesn’t cause an <em>error</em>. Instead, the result is a missing value. What this means is, we know that there <em>should</em> be a numeric mean (which is why there is no error), we just don’t know what the mean is because we don’t know what all of <code>h</code> is. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.</p>
 <pre class="r"><code>mean(h, na.rm = TRUE)</code></pre>
 <pre><code>## [1] 2.333333</code></pre>
 <p>Many functions have <code>na.rm</code> (“remove <code>NA</code>”) arguments that can be flipped on, such as <code>sum()</code>, <code>sd()</code>, and so on.</p>
 </div>
 <div id="functions" class="section level1">
 <h1>Functions</h1>
-<p>Although you can perform simple operations on data in R (adding, multiplying, and so on), these get tedious for complex tasks. Sequences of operations can be simplified as functions. We have already seen some examples of functions, such as <code>c()</code> for making vectors.</p>
+<p>In math, you can manipulate a variable with a function, <span class="math inline">\(f(x)\)</span>. There are tons of functions that you can use in R.</p>
 <p>There are three things you need to use a function.</p>
 <ol style="list-style-type: decimal">
-<li>The function name itself. Self-explanatory</li>
+<li>The function name itself. Self-explanatory.</li>
 <li>Parentheses. This tells R that the object name is meant to be a function.</li>
-<li>Arguments inside the parentheses. Technically these can be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.</li>
+<li>Arguments inside the parentheses. These may be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.</li>
 </ol>
-<p>Here are some common, helpful functions.</p>
+<p>Some easy, common functions.</p>
 <pre class="r"><code># 10 thousand random samples from a normal distribution
 x &lt;- rnorm(n = 10000, mean = 0, sd = 1)
 
 # sum
 sum(x) </code></pre>
-<pre><code>## [1] -169.5341</code></pre>
+<pre><code>## [1] -6.332489</code></pre>
 <pre class="r"><code># number of elements in an object
 length(x) </code></pre>
 <pre><code>## [1] 10000</code></pre>
 <pre class="r"><code># mean
 mean(x) </code></pre>
-<pre><code>## [1] -0.01695341</code></pre>
+<pre><code>## [1] -0.0006332489</code></pre>
 <pre class="r"><code># variance
 var(x) </code></pre>
-<pre><code>## [1] 0.9891794</code></pre>
+<pre><code>## [1] 1.008224</code></pre>
 <pre class="r"><code># standard deviation
 sd(x) </code></pre>
-<pre><code>## [1] 0.994575</code></pre>
-<p>It is fairly easy to write your own functions in R. We will come back to that in a later lesson.</p>
+<pre><code>## [1] 1.004103</code></pre>
+<p>It is easy to write your own functions in R. We will cover this in the final lesson.</p>
 </div>
 <div id="help-files" class="section level1">
 <h1>Help files</h1>
@@ -339,35 +354,8 @@ sd(x) </code></pre>
 <p>Base R only contains a small number of functions. Most analyses require more complicated tools that are not standard with R. For these tasks, there are hundreds of packages available for download.</p>
 <p>Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the <code>tidyverse</code> package. Because the package depends on other packages, all required packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it…we will use this package in class).</p>
 <pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
-</div>
-<div id="comparing-and-contrasting-r-and-stata" class="section level1">
-<h1>Comparing and contrasting R and Stata</h1>
-<p>As we continue these lessons, you will see more about how these languages are similar and different. There are definitely <em>some</em> similarities. The REPL interface (commands are evaluated instantly and results displayed in a console) is a big one. This means you don’t have to compile an entire file of code before you can run it. Yay!</p>
-<p>The differences between R and Stata have benefits and drawbacks. Here is some rapid-fire accounting of some differences.</p>
-<p>R is free and open source.</p>
-<ul>
-<li>Pro: When you lose your university access license to Stata (which you will, eventually), you can still use R.</li>
-<li>Con: Some of the stuff in R may lower quality than the stuff in Stata. Granted, most of the stuff in R you use works just as well as Stata, but there is really nothing stopping some jerk from writing some sloppy code and putting it out there. Wisdom of the crowds generally holds though: if an R tool is popular, you can count on it to be reliable. There are <em>lots</em> of smart people using and constantly improving R!</li>
-</ul>
-<p>R is a fully formed programming language.</p>
-<ul>
-<li>Pro: R makes it very easy to directly access data as vectors, matrices, and dataframes with a coherent and vertically integrated programming syntax.</li>
-<li>Pro: R operates with <em>functions</em> rather than mere <em>commands</em>. In R, if I had the functions <code>f()</code>, <code>g()</code>, and <code>h()</code>, I could write <code>f(g(h(x)))</code> in one line of code and it just works.</li>
-<li>Con: This makes R a little tougher to learn at first for those with less computing experience.</li>
-</ul>
-<p>R is object-oriented.</p>
-<ul>
-<li>Pro: this lets R be very flexible.</li>
-<li>Pro: You can load and manipulate multiple datasets at once without being confined to one data table.</li>
-<li>Con: This makes accessing variables within datasets more difficult, because you have to specify <em>which</em> dataset to look inside of. We will cover this in the future. Luckily, the <code>tidyverse</code> provides tools for making this easier.</li>
-<li>Con: This also makes R slower than Stata, generally speaking. This is because R has to check to make sure that the commands you want to run make sense (checking data types, sizes of objects, and so on). You generally won’t notice this unless you work with larger datasets. When your dataset is truly massive, there are ways to use R as a front-end to interact with other programming languages, such as <code>RSQL</code> to talk to SQL from R.</li>
-</ul>
-<p>R’s interface is less graphical than Stata. It’s all about the code.</p>
-<ul>
-<li>Pro: This makes replication easier (or, harder to mess up) in R, because there is less dependence on pointing-and-clicking to create analysis and graphics.</li>
-<li>Con: For newcomers who are used to seeing their data in front of them as a spreadsheet, this makes R more psychologically difficult to pick up than Stata.</li>
-<li>Con: R syntax is more “programmy” and less English-seeming. The drawback of this is that it is complicated <em>at first</em>. The benefit of this is that it is simpler in the long run, because the rules of the syntax impose long-run structure and coherence in the R language.</li>
-</ul>
+<p>Install multiple packages using <code>c()</code> to combine package names. Run this command as well. We will use all of these packages throughout our lessons.</p>
+<pre class="r"><code>install.packages(c(&quot;magrittr&quot;, &quot;haven&quot;, &quot;labelled&quot;, &quot;broom&quot;, &quot;ggplot2&quot;, &quot;stargazer&quot;, &quot;texreg&quot;, &quot;xtable&quot;, &quot;Rmisc&quot;, &quot;mvtnorm&quot;))</code></pre>
 </div>
 <div id="moving-on" class="section level1">
 <h1>Moving on</h1>
