@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Michael DeCrescenzo</title>
-    <link>https://mikedecr.github.io/</link>
+    <link>/</link>
     <description>Recent content on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 05 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://mikedecr.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lecture 3: Analysis</title>
-      <link>https://mikedecr.github.io/811/811-analysis/</link>
-      <pubDate>Fri, 05 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/811/811-analysis/</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-analysis/</guid>
+      <guid>/811/811-analysis/</guid>
       <description>Objective In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
  Confidence intervals and tests of population means and proportions regression models and formatting model output post-estimation diagnosis and visualization  This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise. These include…
  intermediate R tools and routines lists apply() functions mapping functions to nested data frames custom functions type coercion a reference list of tools for advanced analysis time series panel models multilevel models Bayesian models etc.</description>
@@ -24,20 +24,21 @@
     
     <item>
       <title>Lecture 2: Graphics</title>
-      <link>https://mikedecr.github.io/811/811-graphics/</link>
-      <pubDate>Thu, 04 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/811/811-graphics/</link>
+      <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-graphics/</guid>
-      <description>Objective The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
- The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common geoms for social science data Customizing the appearance of ggplot graphic Saving graphics Some (not too much) discussion of the ways base graphics and ggplot2 are different  Some notes to get us started:</description>
+      <guid>/811/811-graphics/</guid>
+      <description>Schedule: Read this before our second R lecture, after the data lesson.
+ Objective The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
+ The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common geoms for social science data Customizing the appearance of ggplot graphic Saving graphics Some (not too much) discussion of the ways base graphics and ggplot2 are different  Some notes to get us started:  This lesson makes liberal use of pipe chains, which bundle many operations together in one block of code.</description>
     </item>
     
     <item>
       <title>Lecture 1: Data Manipulation</title>
-      <link>https://mikedecr.github.io/811/811-data/</link>
-      <pubDate>Wed, 03 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/811/811-data/</link>
+      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-data/</guid>
+      <guid>/811/811-data/</guid>
       <description>Schedule: Read this before our first R lecture.
  Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
  setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
@@ -45,10 +46,10 @@
     
     <item>
       <title>Getting Started with R</title>
-      <link>https://mikedecr.github.io/811/811-basics/</link>
-      <pubDate>Tue, 02 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/811/811-basics/</link>
+      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-basics/</guid>
+      <guid>/811/811-basics/</guid>
       <description>Schedule: Read this before our first R lecture.
  Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
 Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others.</description>
@@ -56,10 +57,10 @@ Note: Although I promised concrete lessons, this one unfortunately has to be a l
     
     <item>
       <title>PoliSci 811: R Introduction</title>
-      <link>https://mikedecr.github.io/811/811-intro/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      <link>/811/811-intro/</link>
+      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/811/811-intro/</guid>
+      <guid>/811/811-intro/</guid>
       <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
 This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.
 Schedule: Read this before our first R lecture.
@@ -68,10 +69,10 @@ Schedule: Read this before our first R lecture.
     
     <item>
       <title>About</title>
-      <link>https://mikedecr.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>I am a doctoral student in the Department of Political Science at the University of Wisconsin&amp;ndash;Madison. I study American politics and statistical methodology.
 My research focuses on electoral politics, broadly construed (representation, voting, public opinion, and election administration) and Bayesian data analysis. My dissertation explores primary elections and the representation of local constituency preferences.
 I am an affiliate of the Elections Research Center, where I also serve as the graduate student assistant.</description>
@@ -79,20 +80,20 @@ I am an affiliate of the Elections Research Center, where I also serve as the gr
     
     <item>
       <title>Research</title>
-      <link>https://mikedecr.github.io/research/</link>
+      <link>/research/</link>
       <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/research/</guid>
+      <guid>/research/</guid>
       <description>Dissertation Do Primaries Work? Nomination Politics and the Representation of Local Partisan Preferences.
 Partisan voters are historically unlikely to cast their votes for the opposing party, so the primary nomination process is perhaps more consequential than ever. Theoretical and empirical scholarship on candidate positioning argues that the primary process is the predominant reason for divergent candidate positions across parties. I argue that the core predictions from the prevailing theory of primaries lacks direct empirical support.</description>
     </item>
     
     <item>
       <title>Teaching</title>
-      <link>https://mikedecr.github.io/teaching/</link>
+      <link>/teaching/</link>
       <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/teaching/</guid>
+      <guid>/teaching/</guid>
       <description> Courses As instructor:
  Political Science 811: Introduction to Statistical Computing in Political Science (UW&amp;ndash;Madison, Spring 2018). Materials  As teaching assistant:
  Political Science 544: Introduction to Survey Research Methods (UW&amp;ndash;Madison, Spring 2017) Political Science 218: Understanding Political Numbers (UW&amp;ndash;Madison, Fall 2015 and Fall 2016)  Workshops  Political Science Grad Student Math Bootcamp (UW&amp;ndash;Madison, 2017). Materials Political Science $\mathrm{\LaTeX}$ Workshop (UW&amp;ndash;Madison, 2015&amp;ndash;2017). Materials  </description>
@@ -100,20 +101,20 @@ Partisan voters are historically unlikely to cast their votes for the opposing p
     
     <item>
       <title>A Plain Markdown Post</title>
-      <link>https://mikedecr.github.io/post/2016/12/30/a-plain-markdown-post/</link>
+      <link>/post/2016/12/30/a-plain-markdown-post/</link>
       <pubDate>Fri, 30 Dec 2016 21:49:57 -0700</pubDate>
       
-      <guid>https://mikedecr.github.io/post/2016/12/30/a-plain-markdown-post/</guid>
+      <guid>/post/2016/12/30/a-plain-markdown-post/</guid>
       <description>This is a post written in plain Markdown (*.md) instead of R Markdown (*.Rmd). The major differences are:
  You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (```{r}); A plain Markdown post is rendered through Blackfriday, and an R Markdown document is compiled by rmarkdown and Pandoc.  There are many differences in syntax between Blackfriday&amp;rsquo;s Markdown and Pandoc&amp;rsquo;s Markdown.</description>
     </item>
     
     <item>
       <title>Hello R Markdown</title>
-      <link>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</link>
+      <link>/post/2015/07/23/hello-r-markdown/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
       
-      <guid>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</guid>
+      <guid>/post/2015/07/23/hello-r-markdown/</guid>
       <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
 You can embed an R code chunk like this:
 summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
@@ -121,19 +122,19 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     
     <item>
       <title>Lorem Ipsum</title>
-      <link>https://mikedecr.github.io/post/2015/01/01/lorem-ipsum/</link>
+      <link>/post/2015/01/01/lorem-ipsum/</link>
       <pubDate>Thu, 01 Jan 2015 13:09:13 -0600</pubDate>
       
-      <guid>https://mikedecr.github.io/post/2015/01/01/lorem-ipsum/</guid>
+      <guid>/post/2015/01/01/lorem-ipsum/</guid>
       <description>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
     </item>
     
     <item>
       <title>Code</title>
-      <link>https://mikedecr.github.io/code/</link>
+      <link>/code/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/code/</guid>
+      <guid>/code/</guid>
       <description>Github This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my Github repositories.
  Sublime Text User Settings Available on Github. Highlights include:
  Keybindings for R and \(\mathrm{\LaTeX}\) (primarily) and associated macro files. Code snippets for \(\mathrm{\LaTeX}\) and R, plus some here and there for Stan, Stata, HTML, and Markdown. A modified Solarized color scheme based on the guts of the Cobalt2 scheme for Sublime, light and dark versions.</description>
@@ -141,10 +142,10 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     
     <item>
       <title>Contact</title>
-      <link>https://mikedecr.github.io/contact/</link>
+      <link>/contact/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://mikedecr.github.io/contact/</guid>
+      <guid>/contact/</guid>
       <description>How to reach me
 By mail: Department of Political Science 101A North Hall (Elections Research Center) 1050 Bascom Mall University of Wisconsin&amp;ndash;Madison Madison, WI 53706
 By email: decrescenzo [at] wisc [dot] edu

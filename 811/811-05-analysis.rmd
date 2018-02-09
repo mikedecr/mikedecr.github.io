@@ -2,7 +2,7 @@
 title: "Lecture 3: Analysis"
 description: "Statistical analysis, model output, and workflow integration"
 author: "Michael DeCrescenzo"
-date: "2018-01-05"
+date: '2018-02-23'
 slug: "811-analysis"
 categories: ["R", "ps811", "Teaching"]
 tags: []

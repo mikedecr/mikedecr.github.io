@@ -2,11 +2,16 @@
 title: "Lecture 2: Graphics"
 description: "Graphics in R using ggplot2"
 author: "Michael DeCrescenzo"
-date: '2018-01-04'
+date: '2018-02-16'
 slug: "811-graphics"
 categories: ["R", "ps811", "Teaching"]
 tags: []
 ---
+
+
+# Schedule:
+
+Read this before our second R lecture, after the [data lesson](811/811-data).
 
 
 # Objective 
@@ -20,11 +25,11 @@ The goal of this lesson is to provide an introduction to graphics in R, by way o
 - Saving graphics
 - Some (not too much) discussion of the ways base graphics and `ggplot2` are different
 
-Some notes to get us started:
+## Some notes to get us started:
 
-- This lesson makes heavy use of pipe chains, which string many operations together in one block of code. I will not painstakingly describe every step of every step chain, so here is what I advise you do. In order to understand each step of a pipe chain, run it command by command. You can see the results of each step and how they feed into subsequent steps.
-- We will not talk about the `qplot` function in `ggplot2`. Some `ggplot` lessons start here because `qplot` is like a midway point between base and ggplot graphics. But since we won't cover base graphics at all, I see no point in talking about `qplot`. You won't use it anyway.
-- Plots created using `ggplot` generally look good by default. As we get started, however, they may look a little awkward. This is because we're making plots that demonstrate ggplot functionality (which we don't want to rush though), not create the prettiest plot imaginable. As we introduce more and more ggplot concepts, plots will begin to look better.
+- This lesson makes liberal use of pipe chains, which bundle many operations together in one block of code. After last week's lesson, you should be getting comfortable with these. Hopefully my heavy use of them in this (and the next) lesson will demonstrate how essential piping is to the cutting-edge of using R. 
+- Because piping is so essential that it appears nearly everywhere, I cannot painstakingly describe every step of every pipe chain---it will take too much of your attention away from what I'm trying to teach in the moment. If you want to dissect what a particular pipe chain is doing, you should run the chain *up to a point* and notice what the results look like when you stop the chain *here* as opposed to *there*. This is often how you write pipe chains as well---writing a line of code, checking the results, and planning what the next step should be.
+- Plots created using `ggplot` generally look good by default. As we get started, however, they may look a little awkward. This is because I want to begin by demonstrating ggplot *functionality* (which we don't want to rush though), not creating the prettiest plot imaginable. As we introduce more and more ggplot concepts, plots will begin to look better.
 - If you want more help with `ggplot`, I'd recommend that you consult resources I list in the syllabus, in other lessons, and Hadley Wickham's `ggplot2` book (which you can build into a PDF on your own computer [after installing some other tools]). 
 - For advice about the principles of creating *good* graphics, you can also check books by folks such as [Claus Wilke](http://serialmentor.com/dataviz/index.html) (author of the `ggridges` and `cowplot` packages for augmenting `ggplot2`) and [Kieran Healy](http://socviz.co/) (author of the brilliant "[Fuck Nuance](https://kieranhealy.org/files/papers/fuck-nuance.pdf)" paper, which isn't about graphics but is worth reading anyway).
 
@@ -33,21 +38,23 @@ Some notes to get us started:
 
 # Get started
 
-The `ggplot2` package is loaded whenever you load the `tidyverse` package (but I sometimes load the `ggplot2` package anyway because it gives my code editor has better auto-complete behavior).
+The `ggplot2` package is loaded whenever you load the `tidyverse` package (but I sometimes load the `ggplot2` package anyway because it sometimes gives your code editor better auto-complete behavior). We'll also install and load `labelled`, which we'll use to remove Stata labels from the data (we don't need them). 
 
-```{r}
+
+```{r, eval = FALSE, message = FALSE}
+library("magrittr")
+library("tidyverse")
+library("ggplot2")
+install.packages("labelled")
+```
+
+```{r, include = FALSE, message = FALSE}
 library("magrittr")
 library("tidyverse")
 library("ggplot2")
 ```
 
-We'll also install `labelled`, which we'll use to remove Stata's labels from the data. 
-
-```{r, eval = FALSE}
-install.packages("labelled")
-```
-
-Set your directory where it was last lesson and load the modified ANES dataset from the previous lesson:
+Set your directory where it was last lesson and load the *modified ANES dataset from the previous lesson*:
 
 ```{r, eval = FALSE}
 # set directory
@@ -59,6 +66,8 @@ anes <- readRDS("data/anes-modified.RDS") %>%
         mutate_all(labelled::remove_labels) 
 
 # pkg::function lets us use functions without loading the full package
+# mutate_all applies a function to every variable in the dataset
+#   similar to apply() functions, which we'll cover next lesson
 ```
 
 ```{r, include = FALSE, cache = TRUE}
@@ -66,9 +75,8 @@ anes <- readRDS(here::here("static/data/anes-modified.RDS")) %>%
         mutate_all(labelled::remove_labels)
 ```
 
-Notice the use of `mutate_all()`. This function is like `mutate`, but it applies a function to every column in the data (in this case, the `remove_labels()` function). If you're familiar with R's `apply()` functions or functional programming in general, this is a similar idea. We'll cover those things at the end of the next lesson.
 
-You can verify that you imported the correct dataset when you notice the modified variable names.
+Verify that you imported the correct dataset when you notice the modified variable names.
 
 ```{r, eval = FALSE}
 names(anes)
@@ -80,27 +88,28 @@ names(anes)
 
 # The grammar of graphics
 
-The [grammar of graphics](https://www.springer.com/us/book/9780387245447) is a set of independent components that compose graphics. `ggplot2` is an R package that implements the grammar [in a layered fashion](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf) by iteratively adding grammatical components to a figure. By providing a set of interchangeable tools with a shared syntax and carefully chosen defaults, `ggplot2` allows R users to create complex graphics with relatively little hassle. 
+The [grammar of graphics](https://www.springer.com/us/book/9780387245447) is essentially a theory/model that describing the components of a graphic. `ggplot2` is an R package that implements the grammar [in a layered fashion](http://byrneslab.net/classes/biol607/readings/wickham_layered-grammar.pdf) by iteratively adding grammatical components to a figure using functions. 
 
-It is not necessary to consciously memorize the theoretical components of the grammar of graphics. In fact, thinking too hard about it can be confusing at first. You will get an intuition for them as you use ggplot without being able to recite the tenets, but for the sake of exposition, here are the principles of the grammer. There is *no need* to memorize this list:
+It is not necessary to consciously memorize the theoretical components of the grammar of graphics---you get an unconscious feel for it---though we will briefly describe it. Suffice it to say that what matters most for you is that the underlying grammar provides a *structure* to `ggplot2` that makes it easy to create complex graphics with an integrated syntax and carefully chosen defaults.
 
-- **data**, which are visualized
-- **aesthetic mappings** that describe how variables are mapped to aesthetic attributes (such as plot axes, colors)
-- **geoms**, geometric representations of the data, such as lines, points, etc., that control how the cells in your data are presented on the page
-- **scales** which modify how aesthetic mappings are presented. These are used to change colors, axes, and so on.
-- a **coordinate system** that defines the plane on which you're plotting. Most plots use a Cartesian plane but could use less conventional planes (e.g. polar coordinates).
-- a **faceting system** for breaking the data into subsets. Subsets are displayed in separate plot panels
-- a **theme** that controls other display details, such as fonts
+Here are the core components of the grammar of graphics:
 
-Our examples today will build increasingly complex graphics that touch on all of these components.
+- **Data**: what gets visualized
+- **Aesthetic mappings**: Attributes of the plot that come directly from the data (plot axes, color groupings)
+- **Geoms**: geometric representations of the data (lines, points, etc.); the shapes used to present the values in your data in the plot
+- **Scales**: modify how aesthetic mappings are presented. Every mapping from data to plot can be altered (e.g. changing colors, modifying axes, etc.)
+- **Coordinates**: the plane on which you're plotting. Most plots use a Cartesian plane ($x$ and $y$ coordinates), but less conventional planes are also possible (e.g. polar coordinates)
+- **Faceting system**: how to plot subsets of data in different panels. 
+- **Theme**: other aesthetic minutia, such as fonts
 
-The fact that `ggplot` is rooted in an underlying model allows is advantageous because it allows users to create many different types of plots that share an underlying philosophy. This makes is easy to get a feel for how ggplot works, since it's so thoroughly integrated. It has also enabled developers to create loads of extensions to `ggplot2` to provide support for additional `geoms` and aesthetic features that all follow the same basic rules, making it easier for a users to learn and incorporate new tools into their graphics arsenals. For this course, we like ggplot because it allows us to do a lot with a little. We will be making very interesting graphics in a very short amount of time.
+Our examples today will start from the basics and build outward, touching on all of these components of the grammar. 
 
-Having said that, there is some effort we need to expend getting mentally used to the *gg* model and how it works. Base graphics are more direct: put a line here, put points there. But in order to make a complex graphic, base graphics require a ton of work and wonky code. `ggplot` can make complex graphics with its hands tied behind its back. For that reason, I think we'll like how quickly we can do cool stuff using `ggplot`.
+Because `ggplot` is rooted in an underlying model, it's easy to create many different types of plots that share an underlying philosophy and syntax structure. Even if you have never made a particular sort of plot before, you know how you *would* create it, because all plots come from the same building blocks. For instructional purposes, this is great because we will be making very interesting graphics in a very short amount of time.
 
 
 
-# Getting `ggplot` to work
+
+# Using `ggplot2` 
 
 Graphics from `ggplot2` begin with the titular `ggplot()` function. It works generically like so:
 
@@ -108,18 +117,34 @@ Graphics from `ggplot2` begin with the titular `ggplot()` function. It works gen
 ggplot(dataset, aes(x = xvariable, y = yvariable))
 ```
 
-where `dataset` is the name of a tidy data frame, `xvariable` is the variable you want to plot on the horizontal axis, and `yvariable` is the variable you want to plot on the vertical axis. The `aes()` function maps variables in your data to an aesthetic feature of the plot. We use `aes()` when we want to modify the plot's according to *features of the dataset*. (We'll come back to this.) This function is how nearly every graphic begins.
+where `dataset` is the name of your dataset, `xvariable` is the variable you want to plot on the horizontal axis, and `yvariable` is the variable you want to plot on the vertical axis. Some details:
 
-Let's see this with real data. We will first recode two variables, "feeling thermometer" scores for the Democratic and Republican presidential candidates. 
+- All `ggplot` graphics begin with a data frame. It must be tidy, because we must specify the columns that are mapped to plot aesthetics. As such, we can see why the other components of the Tidyverse work with ggplot---ggplot requires tidy data, and the rest of the Tidyverse is designed to make that easy. 
+- The `aes()` function maps variables in your data to an aesthetic feature of the plot. We will use `aes()` whenever we want to modify the plot's according to *features of the dataset*. 
+- Every graphic will begin with a declaration of a dataset and a declaration of at least one aesthetic mapping. 
 
-Consult the codebook for information on the "feeling thermometer." You'll notice that values 97-100 are represented with the number 97 in the codebook, while 98 and 99 are special codes for "don't know" and missing responses. I have no idea why this decision was made, but we have to work with it. We'll want to recode these as `NA`. 
 
-Once we do that, We'll also take the difference between the thermometer scores and create a *relative* thermometer score, where positive values indicate that an individual feels more warmly to the Republican candidate than to the Democratic candidate.
+## ANES example
+
+Let's see this with real data. 
+
+We will first recode two variables, "feeling thermometer" scores for the Democratic and Republican presidential candidates. These variables ask respondents to rate candidates on a 0-100 scale, where 100 is "most warm" and 0 is "most cold," with 50 in the middle.
+
+If we consult the codebook for information on the "feeling thermometer," We will notice that all values 97-100 are represented with the number 97 in the codebook, while 98 and 99 are special codes for "don't know" and missing responses. I have no idea why this decision was made, but we have to work with it. We'll want to keep only values 0--97 as valid, and recode everything else to `NA`. 
+
+Once we do that, we will take the difference between the thermometer scores to create a *relative* candidate thermometer rating. Positive values will indicate that an individual feels more warmly to the Republican candidate than to the Democratic candidate, so we will calculate this as the Republican rating minus the Democratic rating.
 
 ```{r}
-# feeling thermometers
+# learn some stuff about the feeling therm variables
 summary(anes$VCF0424)  # democratic candidate
 summary(anes$VCF0426)  # republican candidate
+
+# bonus: try the skim() function in the 'skimr' package
+#   skim() is like summarize(), but it creates data frames
+
+# now that we have a sense of the values of this variable, we'll recode 
+# keep 0-97 with case_when(), which implicitly converts all else to NA
+# then calculate the difference
 
 anes <- anes %>% 
   mutate(therm_demcand = case_when(VCF0424 > 0 & VCF0424 <= 97 ~ VCF0424),
@@ -127,110 +152,118 @@ anes <- anes %>%
          reltherm_cand = therm_gopcand - therm_demcand)
 ```
 
-We'll plot the Republican candidate thermometer over the 7-point index of party ID.
+We'll plot the Republican candidate thermometer over the 7-point index of party ID, which we recoded last week.
 
 ```{r}
-# data come from anes
+# data come from anes dataset
 # x = party ID, y = candidate thermometer difference
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand))
 ```
 
+This creates a blank plot, but if you think about the grammar, you will understand what happened. We mapped these variables to the `x` and `y` aesthetics, but we haven't chosen how to present the data yet. 
+
 
 # Geoms
 
-You'll notice that the plot is blank. That is because we have not added any geoms to the plot, only a mapping of variables to $x$ and $y$ axes. It is important to note that we could visualize the data using a variety of geoms. It happens to be the cases that points make intuitive sense here. 
+It is important to note that we could visualize the data using a variety of geoms. It happens to be the cases that points make intuitive sense here. 
 
-You can layer on grammatical components to a plot using the plus sign `+` after the `ggplot()` function.
+We layer on grammatical components to a plot using the plus sign `+` after the `ggplot()` function. Each thing that we layer on is done with a function. For geoms, there are a bunch of functions that share the prefix `geom_`. Points are done with `geom_point()`, lines with `geom_line()`, and so on. 
 
 ```{r}
-# add data to the plot as points
+# represent the data as points
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_point()
 ```
 
-We have a lot of data printing overtop one another because we have so many observations. We could jitter point using a jitter geom. We will specify the width of the jittering (the standard deviation), make the points empty circles, and reduce the opacity (alpha) of the points. You can learn more about the available point shapes [here](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
+What happened here?
 
-```{r}
-# jitter the points IN THE PLOT, not in the underlying data
-# modify the jitter amount (width), point shape, and opacity
+- We got a warning about missing data not being plotted. This is helpful, but I will suppress these for the remainder of the lesson.
+- We have a lot of data printing overtop one another because we have so many observations at relatively few combinations of values (only 7 $x$ values). 
+
+## Jittering points
+
+To prevent data from printing overtop one another, it is often helpful to *jitter* the points. Jittering is no more than adding a little bit of noise to the data. We also change the "shape" of the point. Learn more about the available point shapes [here](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
+
+```{r, warning = FALSE}
+# geom_jitter() plots jittered points
+# we jitter the points IN THE PLOT, not in the underlying data
+# we specify how much noise to add (width = )
+# shape = 1 plots empty points
+# alpha controls the opacity of the points
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3)
 ```
 
-We could add a quick regression line. The regression line won't be biased by the jittering because it is estimated using the data from the original aesthetic mapping (`x = pid7, y = reltherm_cand`), not the jittered data geom from `geom_jitter()`. The geom affects only the way the data are *displayed*, not the underlying values. This is why you should jitter the points as they appear in the plot (using the geom) rather than jittering the underlying data before plotting. (It is part of `ggplot` philosophy to provide tools that modify the way things appear in the plot without needing to modify the underlying data in problematic ways. Neat!)
+## Fit lines
 
-```{r}
-# add a fit line from a linear regression of y on x
+Let's add a regression line with `geom_smooth()`. "Smooth" refers to any model-fit curve we might impose on the plot. We specify that we want a linear curve with `method = lm`. Adding a smooth also adds a confidence interval to the plot by default, but we can't see this one because it is so narrow. I will also demonstrate how you can directly change colors (learn more about available colors [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf)).
+
+```{r, warning = FALSE}
+# geom_smooth() adds a model fit line
+# method = "lm" specifies a Linear Model
+#   By default, `geom_smooth()` fits a loess regression (method = "loess") 
+#   for large datasets, it will fit a polynomial model (method = "gam")
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm", color = "red")
 ```
 
-`geom_smooth()` fits a loess estimate (`method = loess`) by default or, for large datasets, a polynomial estimate (`method = "gam"`). We can specify a linear model pretty easily (that is what the "lm" is for: the `lm()` function for linear regression, which we discuss more next week.). We can add more complex formulas to `geom_smooth()` using the `formula = ` argument. Adding a smooth also adds a confidence interval to the plot by default, but we can't see this one because it is so narrow. 
+You could plot your own custom regression using the `formula = ` argument. 
+
+Here's an important point. The regression line gets fit to the underlying data (the `x` and `y` aesthetics), so it does not get biased by the jittering. This is because jittering is only applied to the points *as they are printed in the plot*; it does not jitter the underlying data directly. This is an example of an important philosophical point about plotting: if you need to perform any weird tricks to make the plot look good, you should strive to modify the *plot* rather than the underlying data. Because ggplot is another "opinionated" package, it has many tools that make it easy to adhere to this philosophy. 
 
 
 
-# More aesthetics
+# More aesthetics (color, etc)
 
-As we said above, aesthetic mappings apply features of the data to some aesthetic property in the plot. So far, we have mapped two variables to $x$ and $y$ axes. We can also map colors, fill colors, point/line sizes, and so on. 
+As we said above, aesthetic mappings apply features of the data to some aesthetic property in the plot. So far, we have mapped two variables to $x$ and $y$ axes. We can also map colors, fills (interior colors), the sizes of points and lines sizes, line patterns (called "linetypes"), and so on.
 
-Instead of one regression line, we'll add separate regression lines for two different groups in the data. Let's use gender, so first we need to recode it.
+Instead of plotting one regression line, we'll add separate regression lines for two different groups in the data. Let's use gender, so first we need to recode it.
 
 ```{r}
-anes %$% table(VCF0104)
+# here is the raw gender variable in the data
+count(anes, VCF0104)
 
-# 0 is NA/missing, implicitly recoded
+# 0 means NA/missing
+# use case_when() to implicitly recode 0 as NA
+
 anes <- anes %>%
-  mutate(gender = case_when(VCF0104 == 1 ~ "Men",
-                            VCF0104 == 2 ~ "Women")) 
+  mutate(gender = case_when(VCF0104 == 1 ~ "Men", 
+                            VCF0104 == 2 ~ "Women"))
 ```
 
-Now that we have this variable, we can map color using it as so.
+Now that we have this variable cleaned up, we can map it to the color aesthetic.
 
-```{r}
-# color the fit line according by gender
+```{r, warning = FALSE}
+# create different colored lines by gender
 # that is, map color according to gender (from the data)
+# any time we want to map from the data, we must use aes().
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
   geom_smooth(method = "lm",
               aes(color = gender))
 ```
 
-That was easy. These colors are automatically added to a legend. (If you're ever created a legend using base graphics, you know how awesome it is that you no longer have to struggle with that).
+Simple! These colors are also automatically added to a legend. (If you're ever created a legend using base graphics, you know how awesome it is that you no longer have to struggle with that).
 
-When you map a variable to an aesthetic, ggplot automatically picks some default values. You can do this for colors, fills (e.g. the color of the confidence interval shading), point sizes, line widths, and so on. You can change defaults using scales.
-
-If you desire, you can add these aesthetic mappings to the first `aes()` call in the `ggplot()` function. This will automatically apply the aesthetic mapping to every `geom()` you call in the plot. In the current example, this would add color to both the smooth line and the points.
-
-```{r}
-# if color is declared in ggplot(), it is automatically added to geoms
-# (where applicable)
-ggplot(data = anes, aes(x = pid7, y = reltherm_cand, color = gender)) +
-  geom_jitter(width = 0.2, shape = 1, alpha = 0.3) +
-  geom_smooth(method = "lm")
-```
-
-If you add overall plot aesthetics to `ggplot()`, you can always override them in any specific geom function. Here we map color inside the `ggplot()` function, but we override that coloring in `geom_jitter()` to make all the points the same color. 
-
-```{r}
-# global colors can overridden in geom functions
-ggplot(data = anes, aes(x = pid7, y = reltherm_cand, color = gender)) +
-  geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25,
-              color = "slategray") +
-  geom_smooth(method = "lm")
-```
-
-Note this general behavior. You can always add color to a geom, and it it applies to the entire geom. However, if you want the color to be responsive to be conditioned on some other grouping variable in the data, you must use `aes()`. This is also true for fill, size, alpha, and so on.
+When you map a variable to an aesthetic, ggplot automatically picks some default values. This happens for colors, fills (e.g. the color of the confidence interval shading), point sizes, line widths, and so on. You can change defaults using scales, which we'll describe below.
 
 
 # Scales
 
-Scales are used to modify the defaults of any aesthetic mapping. First we'll use it to control gender's mapping by selecting our own colors.
+When you use `aes()`, ggplot picks some default mapping settings, such as axis scales, color defaults, and so on. Use `scale_` functions to modify the defaults of any aesthetic mapping. 
 
-```{r}
+First we'll use it to control gender's mapping by selecting our own colors.
+
+```{r, warning = FALSE}
 # aesthetic mapping makes default choices
 # modify those default mapping choices using scale_aes_something() functions
 # scale_color_brewer modifies color using color palettes
+#   (can do your own googling about color palettes)
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25) +
   geom_smooth(method = "lm",
@@ -238,12 +271,13 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   scale_color_brewer(palette = "Set2")
 ```
 
-Scale functions follow a format of `scale_aesthetic_xyz()`, where `aesthetic` is color, size, and so on. You can control color using color palettes with `scale_color_brewer()`. If you want to specify colors manually, use `scale_color_manual()`. Learn about the stock colors available in R [here](http://www.stat.columbia.edu/~tzheng/files/Rcolor.pdf).
+Scale functions follow a format of `scale_aesthetic_xyz()`, where `aesthetic` is color, size, and so on. You can control color using color palettes with `scale_color_brewer()`. If you want to specify colors manually, use `scale_color_manual()` with the `values =` argument. 
 
-```{r}
-# manual specification of color (scale_color_manual())
+```{r, warning = FALSE}
+# manual specification of color: scale_color_manual()
 # one color for each category from the aesthetic mapping
 # this will fail if you don't supply the correct number of colors
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, shape = 1, alpha = 0.3, size = 0.25,) +
   geom_smooth(method = "lm",
@@ -253,9 +287,13 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
 
 Here we also map the confidence interval's fill color and the linetype of the smooth using gender.
 
-```{r}
+```{r, warning = FALSE}
 # modifying more mappings
 # such as fill color, linetype
+# (Again, pardon the ugliness of the graphic 
+#  as we demonstrate general ggplot functionality)
+
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -267,14 +305,15 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   scale_linetype_manual(values = c("dotted", "solid"))
 ```
 
-Again, pardon the ugliness of the graphic as we demonstrate ggplot behaviors.
 
 Because `x` and `y` are also aesthetics, we can also modify them using `scale` functions.
 
-```{r}
+```{r, warning = FALSE}
 # axes are aesthetics, so you also modify axes with scale functions
-# breaks are where ticks are drawn
-# minor_breaks can be specified separately from breaks
+#   breaks are where ticks are drawn
+#   `labels =` can be used to specify the label for each break
+#   minor_breaks can be specified separately from breaks
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -289,8 +328,10 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
 
 I can also add text labels to the tick positions.
 
-```{r}
-# axis labels can be specified separately from breaks
+```{r, warning = FALSE}
+# Specify axis labels for each break
+# The `\n` character inserts a line break.
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -301,18 +342,21 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   scale_fill_manual(values = c("dodgerblue", "maroon")) +
   scale_linetype_manual(values = c("dotted", "solid")) +
   scale_x_continuous(breaks = 1:7, 
-                     labels = c("Strong\nDem", "Weak\nDem", "Lean\nDem", "Independent", "Lean\nRep", "Weak\nRep", "Strong\nRep"))
+                     labels = c("Strong\nDem", "Weak\nDem", 
+                                "Lean\nDem", "Independent", "Lean\nRep", 
+                                "Weak\nRep", "Strong\nRep"))
 ```
 
-The `\n` character inserts a line break.
 
 
-## Aesthetics, scales, and labels
+## Labeling aesthetics
 
-Related to aesthetics and scales is the labels we give these aesthetics. Notice that when we map variables to `x` and `y`, axis titles are created, and as we map variables to color, fill, and so on, a legend title was created. These can be modified with the `labs()` function.
+Related to aesthetics and scales is the labels we give these aesthetics. Notice that when we map variables to `x` and `y`, axis titles are created, and as we map variables to color, fill, and so on, a legend title was created. The variable names that get printed can be modified with the `labs()` function.
 
-```{r}
-# add aesthetic labels using labs()
+```{r, warning = FALSE}
+# Specify aesthetic labels using labs()
+# good for axes, legend titles, also plot title (title = ), etc.
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -328,9 +372,9 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
        color = "Gender")
 ```
 
-Notice how if I don't specify every aesthetic name, the legend only changes the names that I specified. I should specify the name for color, fill, and linetype.
+The `labs()` function only changes the names that you specify. To fix this dirty legend, I should specify the name for color, fill, and linetype all as `"Gender"`.
 
-```{r}
+```{r, warning = FALSE}
 # specify all labels
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
@@ -347,9 +391,9 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
        color = "Gender", fill = "Gender", linetype = "Gender")
 ```
 
-I could also remove labels by feeding them a `NULL` value. In this case, we're pretty sure what men and women signify, so maybe including the "Gender" label is redundant. So we can suppress the legend title.
+I could also remove labels by specifying them as `NULL`. In this case, we're pretty sure what men and women signify, so maybe including the "Gender" label is redundant. So we can suppress the legend title.
 
-```{r}
+```{r, warning = FALSE}
 # removing labels using NULL
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
@@ -366,17 +410,22 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
        color = NULL, fill = NULL, linetype = NULL)
 ```
 
+`NULL` isn't the same as `NA`. We use `NA` for missing data---there should be data here, but we don't know what it is. We use `NULL` to mean "nothing." 
 
 
-# Coordinate systems
+# Coordinates
 
 Coordinates are not very complicated. Most of the time you will use a Cartesian grid, so you'll probably do one of two things. 
 
+- Set the axis limits
+- Flip the $x$ and $y$ dimensions.
+
 First, set the axis limits. This is an unrealistic application just to demonstrate the functionality.
 
-```{r}
+```{r, warning = FALSE}
 # set axis limits using the coordinate system
-# coord_cartesian(xlim, ylim)
+# coord_cartesian(xlim = , ylim =)
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -395,11 +444,12 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
 
 Remember, because the underlying values in the `x` aesthetic are 1 to 7, setting the `xlim` to 0 through 8 will pad each side by one unit. We use the `c()` function to pass a two-element vector of limits (minimum and maximum).
 
-Second is flipping `x` and `y`, which is handy for dot plots and coefficient plots (which we'll see later). This is going to look strange in this example, of course, but again we're just demonstrating the functionality.
+Second is flipping `x` and `y`, which is handy for dot plots and coefficient plots (which we'll see next week). This is going to look strange in this example, of course, but again we're just demonstrating the functionality.
 
-```{r}
+```{r, warning = FALSE}
 # invert the coordinate system with coord_flip()
-# can specify changes to the coordinates when you do this as well
+# can specify changes to the coordinate limits when you do this as well
+
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
               shape = 1, alpha = 0.3, size = 0.25, 
@@ -416,18 +466,206 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   coord_flip(xlim = c(0.5, 7.5))
 ```
 
-What's important to remember here is that the `x` and `y` aesthetics have not changed, only the way they are *displayed* in the graphic. The `scale_x_continuous()` function, therefore, still modifies the party ID variable scale even though it's now the vertical axis. That's because `scale_x_continuous()` modifies the *x aesthetic*, not the *horizontal axis* per se. This same intuition works when we specify `xlim` inside the `coord_flip()` function.
+As above with jittering and smoothing, the `x` and `y` aesthetics themselves have not changed, only the way they are *displayed* in the graphic. The `scale_x_continuous()` function, therefore, still modifies the party ID variable scale even though it's now the vertical axis. That's because `scale_x_continuous()` modifies the *x aesthetic*, not the *horizontal axis* per se. This same intuition works when we specify `xlim` inside the `coord_flip()` function.
+
+
+# Faceting
+
+Faceting is relatively simple. We use it to plot subsets of the data in different panels. There are two ways to do this.
+
+- `facet_wrap()` creates horizontal panels that will "wrap" to the next line if we run out of space.
+- `facet_grid()` creates a grid according to variables that you specify as the rows and columns.
+
+Both of these functions require us to use tildes `~`, so pay attention. 
+
+First: `facet_wrap` using the election cycle variable (on a subset of presidential year data)
+
+```{r, warning = FALSE}
+# save only recent presidential years
+prez <- anes %>%
+  filter(cycle %% 4 == 0) %>%
+  filter(cycle >= 1992) 
+
+# wrap panels using facet_wrap( ~ cycle)
+# the tilde is necessary
+
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_wrap(~ cycle)
+```
 
 
 
-# Switching to another example
+Next: `facet_grid()`, which requires us to specify row and column variables. We'll use election cycle and gender. This will make the legend redundant, but just ignore that for now.
 
-Here we will start to get serious about pretty graphics by switching to another example: party ID among men and women over time, with confidence intervals.
 
-First, we have to create the data. I'll do this with my own confidence interval function that can handle survey weights. Don't sweat too much how these data are created, but do note the structure of the data that we are working with. We have a proportion estimate of each party ID group, plus upper and lower bounds on that proportion estimate. We'll aggregate this into a dataset called `pid_gendergap`.
+```{r, warning = FALSE}
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_grid(cycle ~ gender)
+```
+
+
+Use a period in the `facet_grid` function to suppress rows or columns. Observe:
+
+```{r, warning = FALSE}
+# suppress rows
+
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_grid(. ~ gender)
+
+# suppress columns
+
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_grid(gender ~ .)
+```
+
+
+
+# Themes
+
+Themes control ancillary aesthetic components of the plot. There are several preloaded themes that you can learn about [here](http://ggplot2.tidyverse.org/reference/ggtheme.html), and you can learn about [other ggplot theme packages online](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html).
+
+We'll use `theme_bw()`, in case you (like me) think this gray background is kinda nasty.
+
+```{r, warning = FALSE}
+# theme_bw()
+
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_wrap(~ cycle) +
+  theme_bw()
+```
+
+There is also a `theme()` function, which allows you to change individual details of the theme without changing the entire theme. Here we will suppress the "minor" grid lines.
+
+```{r, warning = FALSE}
+ggplot(prez, aes(x = pid7, y = reltherm_cand)) +
+  geom_jitter(width = 0.2, 
+              shape = 1, alpha = 0.3, size = 0.25, 
+              color = "slategray") +
+  geom_smooth(method = "lm",
+              aes(color = gender, linetype = gender, fill = gender)) +
+  scale_color_manual(values = c("dodgerblue", "maroon")) + 
+  scale_fill_manual(values = c("dodgerblue", "maroon")) +
+  scale_linetype_manual(values = c("dotted", "solid")) +
+  scale_x_continuous(breaks = 1:7) +
+  labs(x = "Party ID Index", 
+       y = "Relative Candidate Thermometer Score",
+       color = NULL, fill = NULL, linetype = NULL) +
+  facet_wrap(~ cycle) +
+  theme_bw() +
+  theme(panel.grid.minor = element_blank())
+```
+
+
+
+# Finishing touches and saving a graphic
+
+
+This looks like an okay graphic now, and it didn't take much code at all!
+
+Saving this graphic is easy with the `ggsave` function. You generally want to save graphic as a "vector" image type in order to scale (that is, increase the size of) a graphic without any pixelation. PDF is usually good for papers and presentations.
+
+```{r, eval = FALSE}
+# generally want to save it into your paper's dedicated folder
+#   then inside the graphics subfolder
+
+# set height and width (usually requires some trial and error)
+ggsave("paper/graphics/my-plot.PDF", width = 7, height = 3)
+```
+
+
+# Another example: party ID of men and women over time
+
+
+Let's take these tools for a spin. Let's re-create this graphic from an old paper from a former professor of mine.
+
+<center>
+  <br>
+  <img src="img/kp-fig-1.png"  alt="kaufmann-petrocik-figure-1" style="width: 100%">
+</center>
+<br>
+
+We will need to set up a dataset that has all of the required components. Let's think of what we need to have in place. 
+
+- `x` is election cycle, `y` is the percentage of men and women identifying as Democrat and Republican (aesthetics). We will need to calculate the `y` variable.
+- We have separate point styles based on party (aesthetic)
+- We have separate panels for men and women (faceting)
+- the `x` axis scale has been modified, and `y` axis scale probably needs to be coerced to go from 0 to 100 (scales)
+
+Let's add some extra flair: 
+
+- calculate confidence intervals for each trend and plot as a "ribbon," which is a shaded region.
+- Unlike before, let's make this as pretty as we can.
+
+## Data cleaning
+
+First, we have to create the data. 
+
+To get the confidence intervals, we'll use a user-defined confidence interval function that can handle survey weights. We'll discuss custom functions in the final lesson; for now, just know that this function calculates confidence intervals for proportions based on the number of "successes" and the number of observations. (Side note: you don't need to calculate your own confidence intervals most of the time---this is a special case because survey weights create non-whole-numbers of successes and observations.)
 
 ```{r}
-# CI function
+# Confidence intervals for proportions
+# based on the normal approximation to the binomial
+
 prop_ci <- function(successes, n, level = 0.05) {
 
   # get pt estimates and standard error
@@ -443,313 +681,240 @@ prop_ci <- function(successes, n, level = 0.05) {
   return(data.frame(estimate = p, lower, upper))
 
 }
+```
 
-# rename weight variable and
-# collapse the party variable into 3 categories
+To get the DV, we'll need the weight variable and to collapse the party ID variable. (We want to keep Independents to calculate proportions, but we'll drop them before plotting.)
+
+```{r}
+# copy weight variable and
+# collapse the party variable into Dems and Reps
+#   code "leaners" as partisans
 anes <- anes %>% 
-  rename(wt = VCF0009z) %>%
-  mutate(party = case_when(pid7 %in% 1:3 ~ "Dem", 
+  mutate(wt = VCF0009z,
+         party = case_when(pid7 %in% 1:3 ~ "Dem", 
                            pid7 == 4 ~ "Ind", 
                            pid7 %in% 5:7 ~ "Rep"))
+```
 
-# proportion in each PID in each year
+
+We will need to find the proportion of men and women in each party ID category, in each cycle. We'll do this with a pipe chain:
+
+- find the number of men and women in each party ID category in each cycle
+- get proportions by dividing by the total number of men and women in each cycle
+- use the number of successes and the "denominator" from above to find upper and lower bounds on the confidence interval
+- trim extraneous stuff from the data
+
+
+```{r}
+# You may want to run this chain line by line 
+# to see what each step does
+# we want to plot Women left of Men, so we'll reorder the gender variable
+
 pid_gendergap <- anes %>%
-  select(cycle, gender, party, wt) %>%
-  # weighted count in each cycle x gender x party category
-  group_by(gender, cycle, party) %>%
+  select(cycle, gender, party, wt) %>%  # trim unnecessary stuff
+  group_by(gender, cycle, party) %>%    # calc weighted n in each PID
   count(wt = wt) %>%
-  rename(x = n) %>% 
-  # get the denominator by summing within gender x cycle
-  group_by(gender, cycle) %>%
+  rename(x = n) %>%                     # less ambiguous name
+  group_by(gender, cycle) %>%           # "denominator" for gender x cycle
   mutate(n = sum(x)) %>% 
   ungroup() %>%
-  # proportion in each party ID, with CIs
+  # proportions and CIs
   mutate(prop = prop_ci(successes = x, n = n)$estimate,
          lower = prop_ci(successes = x, n = n)$lower,
          upper = prop_ci(successes = x, n = n)$upper) %>%
-  # drop NAs
-  filter(cycle > 1948 & !is.na(party)) %>%
-  select(cycle, gender, party, prop:upper) %>%
+  # keep only Ds and Rs (drop NA and Ind) 
+  # keep only presidential years since 1952 reorder variables
+  filter(party %in% c("Dem", "Rep")) %>%     
+  filter( (cycle >= 1952) & ((cycle %% 4) == 0) ) %>% 
+  select(cycle, gender, party, prop:upper) %>% 
+  # reorder gender as a factor
+  mutate(gender = fct_relevel(as.factor(gender), "Women", "Men")) %>% 
   print()
 ```
 
-Now we'll use this dataset to demonstrate some more concepts.
+Now we'll use this dataset to build the plot.
 
-# Facets
+We know we need separate panels for men and women, separate trends and linetypes for party. 
 
-Faceting creates subsets for plotting. Here we create separate panels for men and women.
 
-Note the rest of the graphic. We plot cycle as the `x`, the proportion in each party ID as the `y`, and color according to party ID. This is possible because we created a nice tidy dataset that has columns dedicated to each variable we want to incorporate when plotting.
+```{r, warning = FALSE}
+# use `group =` to plot separate line trends
+# try removing `group =` from the plot to see why we include it
 
-Note we also use the `geom_line()` geom, which obviously plots a line.
-
-There are two faceting functions. `facet_wrap()` wraps categories. If we had a lot of categories, the panels would wrap across rows.
-
-```{r}
-# separate panels for each gender
-# wrapping: if there are lots of panels, the grid is wrapped from one end to the next
-# use the ~ symbol (necessary for technical reasons)
-ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
-  facet_wrap(~ gender) +
-  geom_line()
-```
-
-We use the `~` notation so that ggplot knows that `gender` is in the `pid_gendergap` data frame.
-
-The `facet_grid()` function, rather than wrapping, lets you specify a grid of variables to be divided into rows and columns (using `facet_grid(rowvar ~ colvar)`. Let's do an example where gender is in rows and partisanship is in columns. 
-
-```{r}
-# grid panels, set row and column variables
-# ~ symbol still necessary
-ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
-  facet_grid(gender ~ party) +
-  geom_line()
-```
-
-You can suppress a row or column variable using `.`
-
-```{r}
-# use a period . to say "don't do rows" or "don't do columns"
-ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line()
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party))
 ```
 
+Let's modify some scales. We'll want to specify the point styles and change the axis scales.
 
+- by default, fill any empty point with while fill (in `grom_point()`)
+- set the coordinates a little wider (`coord_cartesian()`)
+- manually specify point shapes (`scale_shape_manual()`)
+- modify the ticks on x and y (`scale_x_continuous()`)
 
-
-# Confidence intervals as ribbons
-
-Here's a cool geom: `geom_ribbon()`. It lets you color in regions of the plot, which is especially useful for confidence intervals. We will use the `lower` and `upper` variables in our dataset for the upper and lower bounds of the ribbon. Let's also add points.
-
-```{r}
-# geom_ribbon draws a polygon using x aesthetic and ymin and ymax
-# geom_polygon also exists but requires more specificity
-ggplot(pid_gendergap, aes(x = cycle, y = prop, color = party)) +
+```{r, warning = FALSE}
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point() +
-  geom_ribbon(aes(ymin = lower, ymax = upper))
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white") +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2014),
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12))
 ```
 
-So the "color" of the ribbon is mapped to party. For a ribbon, "color" is the outline color, while "fill" is the interior. We should map party to fill, therefore.
+The X axis looks funky now. Let's do some theme modifications to make the text diagonal and suppress busy grid lines. 
 
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
+```{r, warning = FALSE}
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point() +
-  geom_ribbon(aes(ymin = lower, ymax = upper))
-```
-
-We'll turn down the opacity (alpha) of the ribbon so we can see what's going on inside it. We'll also make the points smaller.
-
-```{r}
-# fill opacity using alpha = 
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
-  facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3)
-```
-
-Let's just remove the ribbon color. It's getting in the way.
-
-```{r}
-# drop ribbon color with color = NA
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
-  facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3, 
-              color = NA)
-```
-
-
-We'll continue making this plot prettier by modifying the coordinates, aesthetics, scales, and labels. Note: we have to change the color and fill separately, since they're separate aesthetics.
-
-We'll also change the `y` labels using the `percent()` function in the `scales` package, which should be automatically installed and loaded with `ggplot2` (install it if not!). Note that this only changes the printing of the labels, not the underlying data. This is convenient because if we ever want to change from proportions to percentages, we don't have to change the underlying data.
-
-```{r}
-# more changes to make it prettier
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
-  facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship")
-```
-
-The scales package also lets us easily do log transformations, print large numbers with commas for the thousands places, and so on. I encourage you to do your own research those needs arise.
-
-# Themes
-
-Themes control ancillary aesthetic components of the plot. There are several preloaded themes that you can learn about [here](http://ggplot2.tidyverse.org/reference/ggtheme.html), and you can learn about [other ggplot theme packages online](https://cran.r-project.org/web/packages/ggthemes/vignettes/ggthemes.html).
-
-We'll use `theme_bw()`.
-
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
-  facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship") +
-  theme_bw()
-```
-
-There is also a `theme()` function, which allows you to change individual details of the theme without changing the entire theme. Here we will suppress the "minor" grid lines for the y axis only.
-
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
-  facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship") +
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white") +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2016),
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12)) +
   theme_bw() +
-  theme(panel.grid.minor.y = element_blank())
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
+        panel.grid.minor = element_blank())
 ```
 
-If we wanted to modify the x axis scale, it might get cluttered.
+Let's suppress the legend created by `geom_point()` and add text labels.
 
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
+```{r, warning = FALSE}
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship") +
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white",
+             show.legend = FALSE) +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2016), 
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12)) +
   theme_bw() +
-  theme(panel.grid.minor.y = element_blank())
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
+        panel.grid.minor = element_blank()) +
+  annotate("text", x = 1984, y = 0.65, label = "Democrats") +
+  annotate("text", x = 1984, y = 0.25, label = "Republicans")
 ```
 
-We could use the theme function to print the x axis diagonally and shift it down.
 
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
+
+If we want to add confidence intervals as ribbons, we'll use `geom_ribbon()`. It inherits the `x` aesthetic from the plot, but we need to specify extra `ymin` and `ymax` aesthetics to draw the upper and lower bounds of the "polygon" that gets drawn. Again, suppress the legend, and for good measure, let's modify the fill color.
+
+```{r, warning = FALSE}
+# I always prefer to add ribbons below points and lines
+# we want to reduce the ribbon opacity
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship") +
+  geom_ribbon(aes(ymin = lower, ymax = upper,
+                  fill = party), 
+              alpha = 0.4, show.legend = FALSE) +
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white", 
+             show.legend = FALSE) +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2016), 
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1)) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12)) +
+  scale_fill_manual(values = c("dodgerblue", "orangered")) +
   theme_bw() +
-  theme(panel.grid.minor.y = element_blank(),
-        axis.text.x = element_text(angle = 45, vjust=0.75))
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
+        panel.grid.minor = element_blank()) +
+  annotate("text", x = 1984, y = 0.65, label = "Democrats") +
+  annotate("text", x = 1984, y = 0.25, label = "Republicans")
 ```
 
 
-# Finishing touches and saving a graphic
+We'll want to convert the axis to percentages. We can do this in the plot using the `scale_y_continuous()` function and applying a function to the labels. 
 
-Let's use the `labs()` function to add some titles and captions. We'll also tweak the caption color.
 
-```{r}
-ggplot(pid_gendergap, 
-       aes(x = cycle, y = prop, color = party, fill = party)) +
+```{r, warning = FALSE}
+# check the labels = argument in scale_y_continuous
+# it uses the percent() function from the 'scales' package
+#   scales is automatically installed with ggplot2
+
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
-  geom_line() +
-  geom_point(size = 1) +
-  geom_ribbon(aes(ymin = lower, ymax = upper),
-              alpha = 0.3,
-              color = NA) +
-  coord_cartesian(ylim = c(0, 0.65)) +
-  scale_y_continuous(breaks = seq(0, .6, .1), labels = scales::percent) +
-  scale_x_continuous(breaks = seq(1952, 2012, 8)) +
-  scale_color_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  scale_fill_manual(values = c("dodgerblue", "gray50", "maroon")) +
-  labs(x = "Election Year",
-       y = "Proportion Identifiers",
-       color = "Partisanship",
-       fill = "Partisanship",
+  geom_ribbon(aes(ymin = lower, ymax = upper,
+                  fill = party), 
+              alpha = 0.4, show.legend = FALSE) +
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white", 
+             show.legend = FALSE) +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2016), 
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1), 
+                     labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12)) +
+  scale_fill_manual(values = c("dodgerblue", "orangered")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
+        panel.grid.minor = element_blank()) +
+  annotate("text", x = 1984, y = 0.65, label = "Democrats") +
+  annotate("text", x = 1984, y = 0.25, label = "Republicans")
+```
+
+
+Now we'll need to change the labels so they fit the scale transformation.
+
+```{r, warning = FALSE}
+ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
+  facet_grid(. ~ gender) +
+  geom_ribbon(aes(ymin = lower, ymax = upper,
+                  fill = party), 
+              alpha = 0.4, show.legend = FALSE) +
+  geom_line(aes(group = party)) +
+  geom_point(aes(shape = party), fill = "white", 
+             show.legend = FALSE) +
+  coord_cartesian(ylim = c(0, 1), xlim = c(1948, 2016), 
+                  expand = FALSE) +
+  scale_shape_manual(values = c(17, 22)) +
+  scale_y_continuous(breaks = seq(0, 1, .1), 
+                     labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1952, 2012, 12)) +
+  scale_fill_manual(values = c("dodgerblue", "orangered")) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
+        panel.grid.minor = element_blank()) +
+  annotate("text", x = 1984, y = 0.65, label = "Democrats") +
+  annotate("text", x = 1984, y = 0.25, label = "Republicans") +
+  labs(x = NULL, y = "Percent (including leaners)",
        title = "Party Identification of Men and Women",
-       subtitle = "Leaning independents coded as partisans",
-       caption = "Data source: ANES Cumulative File") +
-  theme_bw() +
-  theme(panel.grid.minor.y = element_blank(),
-        axis.text.x = element_text(angle = 45, vjust=0.75),
-        plot.caption = element_text(color = "gray", size = rel(0.75)))
+       caption = "Source: NES Surveys of the indicated years")
 ```
 
 
-This looks like a darn good graphic now, and it didn't take much code at all!
 
-Saving this graphic is easy with the `ggsave` function. You generally want to save graphic as vector images in order to scale (that is, increase the size of) a graphic without any pixelation. PDF is usually good for papers and presentations.
 
-```{r, eval = FALSE}
-# generally want to save it into your paper's dedicated folder, inside the graphics folder
-# set height and width (usually requires some trial and error)
-ggsave("paper/graphics/party-gender-gap.PDF", width = 5, height = 3)
-```
 
 # Other graphics
 
 There are plenty of other geoms that use slightly different aesthetics. Let's just breeze through some now.
 
+As we do this, let's use `theme_bw()` as the default. Here's a trick to set the default ggplot theme.
 
-## Histrograms and density plots
+```{r}
+theme_set(theme_bw())
+```
 
-Histrograms and density plots, because they only show the distribution of one variable, only need one axis aesthetic (`x`).
+
+## Histograms and density plots
+
+Histograms and density plots, because they only show the distribution of one variable, only need one axis aesthetic (`x`).
 
 ```{r}
 # subset the anes data
-# pipe into the ggplot function (can do that!)
+# pipe into the ggplot function 
+#   (can do that! but not usually recommended)
+
 anes %>%
   filter(!is.na(party)) %>% 
   ggplot(aes(x = reltherm_cand)) +
@@ -762,7 +927,8 @@ anes %>%
 Histogram bars are stacked by default, which is weird. Let's make them dodge each other.
 
 ```{r}
-# make histogram bars non-stacked
+# make histogram bars non-stacked ("dodge")
+
 anes %>%
   filter(!is.na(party)) %>% 
   ggplot(aes(x = reltherm_cand)) +
@@ -782,6 +948,7 @@ You can also do kernel density estimates (which allow you set the kernel bandwid
 
 ```{r}
 # density plot instead of histogram
+
 anes %>%
   filter(!is.na(party)) %>% 
   ggplot(aes(x = reltherm_cand)) +
@@ -800,7 +967,9 @@ anes %>%
 
 ## Bar graphs
 
-It's a personal preference of mine that I think just about anything that you can show with a bar graph would be better with a dot plot. I tend to think that bar graphs are awkward and misused (e.g. for treatment effects). In my head, bars should be for counts or other things where zero is a hard lower bound (such as proportions). Bah! Anyway, here's how you do them.
+It's a personal preference of mine that I think just about anything that you can show with a bar graph would be better with a dot plot. I tend to think that bar graphs are awkward and misused (e.g. for experimental treatment effects). In my head, bars should be for counts or other things where zero is a hard lower bound (such as proportions). 
+
+Bah! Anyway, here's how you do them.
 
 Let's make some data of the Democratic share of the two-party vote choice for each partisanship category.
 
@@ -811,18 +980,16 @@ anes <- anes %>%
          vote = case_when(vote == 1 ~ "Democratic Candidate",
                           vote == 2 ~ "Republican Candidate"))
 
-# calculate averages for each party
+# calculate averages for each party ID
 # presidential years since 2000
 mean_votes <- anes %>%
   filter(cycle >= 2000 & (cycle %% 4) == 0) %>%
   filter(!is.na(pid7)) %>% 
-  group_by(cycle, pid7, vote) %>%
-  # weighted count of vote choice for each party ID
+  group_by(cycle, pid7, vote) %>%  # Numerator
   count(wt = wt) %>%
   filter(!is.na(vote)) %>%
   rename(x = n) %>%
-  # denominator for proportion
-  group_by(pid7, cycle) %>% 
+  group_by(pid7, cycle) %>%     # Denominator
   mutate(n = sum(x, na.rm = TRUE),
          prop = x / n) %>%
   filter(vote == "Democratic Candidate") %>% 
@@ -925,8 +1092,8 @@ d <- data_frame(x = rnorm(100, 0, 1),
 
 # plot y as a function of s (jittering the points)
 ggplot(d, aes(x = s, y = y)) +
-  geom_jitter(shape = 1, width = 0.15) +
-  labs(x = "String", y = "Continuous") 
+  geom_jitter(width = 0.15) +
+  labs(x = "String", y = "Continuous Y") 
 ```
 
 ...and if we plot from a factor that already has ordered levels...
@@ -935,8 +1102,8 @@ ggplot(d, aes(x = s, y = y)) +
 # plot y as f(f), jittered points
 # notice weird order. This comes from the underlying data
 ggplot(d, aes(x = f, y = y)) +
-  geom_jitter(shape = 1, width = 0.15) +
-  labs(x = "Ordered Factor", y = "Continuous") 
+  geom_jitter(width = 0.15) +
+  labs(x = "Ordered Factor", y = "Continuous Y") 
 ```
 
 
@@ -945,18 +1112,17 @@ ggplot(d, aes(x = f, y = y)) +
 ```{r}
 # same situation here
 ggplot(d, aes(x = x, y = y)) +
-  geom_point(shape = 1,
-             aes(color = f)) +
-  labs(x = "Continuous", 
-       y = "Continuous",
+  geom_point(aes(color = f)) +
+  labs(x = "Continuous X", 
+       y = "Continuous Y",
        color = "Ordered Factor") 
 ```
 
 To reorder these categories, I recommend using tools in the `forcats` package, which, conveniently, is part of `tidyverse`.
 
-- `fct_relevel()`: declare a factor variable, and then declare the order of levels. Any level not listed during reordering is given the same precedence as the original variable
+- `fct_relevel()`: take a factor variable and reorder the levels. Any level not listed during reordering is given the same precedence as the original variable
 - `fct_rev()`: reverse the order of a factor's levels
-- `fct_recode()`: change the levels of a factor
+- `fct_recode()`: change the levels (text labels) of a factor
 
 Here is an example where we take the `f` variable, a factor with ordered levels, and rearrange the order of the levels so that they appear in the legend with the proper order. This is called "releveling" (changing the order of levels), as opposed to "recoding" (changing the labels themselves).
 
@@ -976,14 +1142,14 @@ You'll note that the variables `f` and `fixed_f` now have the same values, but t
 ggplot(fixed_d, aes(x = x, y = y)) +
   geom_point(shape = 1,
              aes(color = fixed_f)) +
-  labs(x = "Continuous", 
-       y = "Continuous",
+  labs(x = "Continuous X", 
+       y = "Continuous Y",
        color = "Ordered Factor") 
 
 # f as x axis
 ggplot(fixed_d, aes(x = f, y = y)) +
   geom_point(shape = 1) +
-  labs(x = "Ordered Factor", y = "Continuous") 
+  labs(x = "Ordered Factor", y = "Continuous Y") 
 ```
 
 
@@ -997,9 +1163,9 @@ Let's take the `state.name` vector that comes with R.
 state.name
 ```
 
-Here are some useful functions.
+Here are some useful functions. Play with these on your own.
 
-```{r}
+```{r, eval = FALSE}
 # look for pattern, return a logical vector
 str_detect(state.name, " ") #  spaces
 
@@ -1051,11 +1217,11 @@ Say that you have raw data that has an ugly text label, and every time you plot 
 
 ## Graphics approaches, base vs `ggplot`
 
-Base graphics, on the other hand, do not rely on an underlying data model in order to work. You can plot points, lines, labels, and so on, with no conceptual connection between the data used for any of these geoms. Furthermore, legends and labels are entirely detached from the data. This makes base graphics inefficient and prone to human error in a number of ways, mainly because updates to the elements of your graphics need to made separately from updates to legends, labels, axes and so on. These elements are all conceptually independent in base graphics. so they have know knowledge about how you change the data or the appearance of the graphics. That said, it isn't impossible to create a `ggplot`-esque graphic using base tools; it will just take more work and more time to do it.
+Base graphics, on the other hand, do not rely on an underlying data model in order to work. You can plot points, lines, labels, and so on, with no conceptual connection between the data used for any of these geoms. Furthermore, legends and labels are entirely detached from the data. This makes base graphics inefficient and prone to human error in a number of ways, mainly because updates to the elements of your graphics need to made separately from updates to legends, labels, axes and so on. These elements are all conceptually independent in base graphics, so they have no knowledge about how you change the data or the appearance of the graphics. That said, it is definitely possible to create beautiful graphics using base tools; it will just take more work and more time.
 
-All this being said, base graphics do have some advantage on `ggplot` graphics if you have to create a plot that contains many unrelated elements that don't share a common data frame. (It isn't impossible to plot from multiple data frames in `ggplot`, but it isn't easy.) 
+All this being said, base graphics do have some advantage on `ggplot` graphics if you have to create a plot that contains many unrelated elements that don't share a common data frame. (It is possible to plot from multiple data frames in `ggplot`, but it isn't easy.) 
 
-You can find plenty of disagreements online about how and when base or `ggplot` tools are better. I have an opinionated stance on it, but I'm making the bet that this lesson will lead you to agree with me.
+You can find plenty of disagreements online about how and when base or `ggplot` tools are better. I know no human being who has learned ggplot and opted for base graphics, so I'm making the bet that this lesson will lead you to the same conclusion.
 
 
 ## Other graphical Dos and Don'ts
@@ -1063,9 +1229,9 @@ You can find plenty of disagreements online about how and when base or `ggplot` 
 Some general advice for plotting:
 
 - Don't use multiple Y axes. It's easy to use multiple Y axis scales to make variables look more or less related ([see here](https://kieranhealy.org/blog/archives/2016/01/16/two-y-axes/)), so you shouldn't do it. In fact, for the longest time, `ggplot` would not allow you to create a second y-axis (because it's opinionated like that).
-- Try to make your graphics as minimal as possible. Add elements where it improves the graphic. Otherwise, you don't want to create clutter.
 - If you can label points or trends *in the plot* rather than in a legend, do so. You can do this with `geom_text` or the `annotate()` function.
-- If you can use aesthetic features *besides* color to distinguish groups, that would be ideal. Some forms of color-blindness are remarkably common, and at any rate, journals may not allow your article to print in color. 
+- Try to make your graphics as minimal as possible. Add elements where it improves the graphic. Otherwise, you don't want to create clutter.
+- If you can use aesthetic features *besides* color to distinguish groups, that would be ideal. Some forms of color-blindness are remarkably common, and at any rate, journals may not allow your article to print in color. It's best to get mentally prepared to use more line types, point styles, and so on, to distinguish groups of data.
 - If you must use colors, you should check out some colorblindness-friendly color palettes and packages. You could check out the `dichromat` package to investigate how your color selections look to individuals with various forms of colorblindness. The `viridis` package also provides a variety of scales for colorblind-friendly graphics. 
 
 
