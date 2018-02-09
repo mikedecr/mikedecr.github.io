@@ -12,6 +12,12 @@ tags: []
 
 Read this before our first R lecture.
 
+
+# How to follow along
+
+A script file walking through some of these commands is available [here](https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t).
+
+
 # Objective
 
 The goal of this lesson is to simulate some data manipulation for a research project. This requires...
@@ -578,7 +584,9 @@ For instance, let's say we want to do find the number of observations within eac
 s <- group_by(anes, cycle)
 
 # summarize the grouped data
-summarize(s, n = n())
+summarize(s, 
+          n = n(),
+          mean_party_distance = mean(party_distance, na.rm = TRUE))
 ```
 
 A data frame can later be ungrouped with (wait for it...) `ungroup()`.
@@ -895,6 +903,7 @@ l <- anes %>%
   summarize(n = n(),
             Democratic = mean(dem_distance, na.rm = TRUE),
             Republican = mean(rep_distance, na.rm = TRUE)) %>%
+  ungroup() %>%
   gather(key = party, value = distance, Democratic, Republican) %>%
   print() 
 ```

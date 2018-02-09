@@ -75,6 +75,10 @@
 <h1>Schedule:</h1>
 <p>Read this before our first R lecture.</p>
 </div>
+<div id="how-to-follow-along" class="section level1">
+<h1>How to follow along</h1>
+<p>A script file walking through some of these commands is available <a href="https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t">here</a>.</p>
+</div>
 <div id="objective" class="section level1">
 <h1>Objective</h1>
 <p>The goal of this lesson is to simulate some data manipulation for a research project. This requires…</p>
@@ -546,20 +550,22 @@ summarize(anes,
 s &lt;- group_by(anes, cycle)
 
 # summarize the grouped data
-summarize(s, n = n())</code></pre>
-<pre><code>## # A tibble: 30 x 2
-##    cycle     n
-##    &lt;dbl&gt; &lt;int&gt;
-##  1  1948   662
-##  2  1952  1899
-##  3  1954  1139
-##  4  1956  1762
-##  5  1958  1450
-##  6  1960  1181
-##  7  1962  1297
-##  8  1964  1571
-##  9  1966  1291
-## 10  1968  1557
+summarize(s, 
+          n = n(),
+          mean_party_distance = mean(party_distance, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 30 x 3
+##    cycle     n mean_party_distance
+##    &lt;dbl&gt; &lt;int&gt;               &lt;dbl&gt;
+##  1  1948   662                 NaN
+##  2  1952  1899                 NaN
+##  3  1954  1139                 NaN
+##  4  1956  1762                 NaN
+##  5  1958  1450                 NaN
+##  6  1960  1181                 NaN
+##  7  1962  1297                 NaN
+##  8  1964  1571                 NaN
+##  9  1966  1291                 NaN
+## 10  1968  1557                 NaN
 ## # ... with 20 more rows</code></pre>
 <p>A data frame can later be ungrouped with (wait for it…) <code>ungroup()</code>.</p>
 </div>
@@ -953,6 +959,7 @@ l &lt;- anes %&gt;%
   summarize(n = n(),
             Democratic = mean(dem_distance, na.rm = TRUE),
             Republican = mean(rep_distance, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
   gather(key = party, value = distance, Democratic, Republican) %&gt;%
   print() </code></pre>
 <pre><code>## # A tibble: 6 x 4

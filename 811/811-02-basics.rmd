@@ -13,6 +13,11 @@ tags: []
 Read this before our first R lecture.
 
 
+# How to follow along
+
+Follow the instructions in this lesson in *your own* `.R` script.
+
+
 # Objectives
 
 This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata. 

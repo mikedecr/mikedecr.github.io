@@ -40,6 +40,7 @@
       
       <guid>/811/811-data/</guid>
       <description>Schedule: Read this before our first R lecture.
+ How to follow along A script file walking through some of these commands is available here.
  Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
  setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
     </item>
@@ -51,8 +52,8 @@
       
       <guid>/811/811-basics/</guid>
       <description>Schedule: Read this before our first R lecture.
- Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
-Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others.</description>
+ How to follow along Follow the instructions in this lesson in your own .R script.
+ Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.</description>
     </item>
     
     <item>
