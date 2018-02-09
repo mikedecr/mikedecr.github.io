@@ -242,7 +242,7 @@ This is why the console prints a little `[1]` next to all results. The `[1]` ind
 rep("hello", 30)
 ```
 
-Indexing works with higher-dimensional data as well. Here are some two-dimensional arrays of numbers. 
+Indexing works with higher-dimensional data as well. Here is a two-dimensional array of numbers. 
 
 ```{r}
 # row-bind separate vectors
@@ -272,7 +272,7 @@ If we specify a column but don't specify a row, R returns every row from the spe
 m[ , 2]
 ```
 
-Even though `m[ , 2]` is the second *column* of `m`, the results don't print as a vertical column. Why? Because once R evaluates `m[ , 2]`, it simply returns an object. R no longer remembers that it comes from `m`. The result is nothing more than a vector floating there. As far as R is concerned, `m[ , 2]` is exactly equivalent to a vector `c(2, 4, 6)`. *This is the kind of flexibility that is valuable in R.* 
+Even though `m[ , 2]` is the second *column* of `m`, the results don't print as a vertical column. Why? Because once R evaluates `m[ , 2]`, it simply returns an object. R no longer remembers that it comes from `m`. The result is nothing more than a vector floating there. As far as R is concerned, `m[ , 2]` is exactly equivalent to a vector `c(2, 4, 6)`. *This is actually good*; it's exactly the kind of flexibility that will be valuable in the future. 
 
 ## R is one-indexed
 
@@ -288,7 +288,7 @@ The code we use in this course (heavily derived from the `tidyverse` suite of pa
 
 # Logic
 
-Logic as a concept in programming is less daunting than it sounds. At it's core, what we're doing is dealing with is statements that evaluate to either `TRUE` or `FALSE`. 
+Logic as a concept in programming is less daunting than it sounds. At it's core, we're working with statements that evaluate to either `TRUE` or `FALSE`. 
 
 Example: is 1 greater than 0?
 
@@ -308,13 +308,13 @@ Now that we have this vector, we can derive logical statements about it. Which e
 g > 5
 ```
 
-The statement `g > 5` is a "logical" vector, meaning that its values are either `TRUE` or `FALSE`, which are keywords in R (and must be capital). R asks if `g` is greater than 5, and since `g` is a vector, R returns a vector of logicals with each element corresponding to the original elements in `g`. 
+The statement `g > 5` is a "logical vector," meaning that its a vector whose values are either `TRUE` or `FALSE`. `TRUE` and `FALSE` are keywords in R (and must be capital). R asks if `g` is greater than 5, and since `g` is a vector, R returns a vector of logicals with each element corresponding to the original elements in `g`. 
 
 There are many logical operators. Here are some: 
 
 
 ```{r}
-# g "is equal to" 5
+# g "is equal to" 5 (DOUBLE EQUALS)
 g == 5
 
 # g "is greater than" 5

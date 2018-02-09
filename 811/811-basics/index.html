@@ -221,7 +221,7 @@ rep(&quot;hello&quot;, 30)</code></pre>
 ##  [9] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
 ## [17] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
 ## [25] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
-<p>Indexing works with higher-dimensional data as well. Here are some two-dimensional arrays of numbers.</p>
+<p>Indexing works with higher-dimensional data as well. Here is a two-dimensional array of numbers.</p>
 <pre class="r"><code># row-bind separate vectors
 m &lt;- rbind(c(1, 2), 
            c(3, 4), 
@@ -241,7 +241,7 @@ m</code></pre>
 <p>If we specify a column but don’t specify a row, R returns every row from the specified column.</p>
 <pre class="r"><code>m[ , 2]</code></pre>
 <pre><code>## [1] 2 4 6</code></pre>
-<p>Even though <code>m[ , 2]</code> is the second <em>column</em> of <code>m</code>, the results don’t print as a vertical column. Why? Because once R evaluates <code>m[ , 2]</code>, it simply returns an object. R no longer remembers that it comes from <code>m</code>. The result is nothing more than a vector floating there. As far as R is concerned, <code>m[ , 2]</code> is exactly equivalent to a vector <code>c(2, 4, 6)</code>. <em>This is the kind of flexibility that is valuable in R.</em></p>
+<p>Even though <code>m[ , 2]</code> is the second <em>column</em> of <code>m</code>, the results don’t print as a vertical column. Why? Because once R evaluates <code>m[ , 2]</code>, it simply returns an object. R no longer remembers that it comes from <code>m</code>. The result is nothing more than a vector floating there. As far as R is concerned, <code>m[ , 2]</code> is exactly equivalent to a vector <code>c(2, 4, 6)</code>. <em>This is actually good</em>; it’s exactly the kind of flexibility that will be valuable in the future.</p>
 <div id="r-is-one-indexed" class="section level2">
 <h2>R is one-indexed</h2>
 <p>R is one-indexed, meaning the first element of a vector is element <code>1</code>. Some languages (like <code>C</code>) are zero-indexed. Even though R is one-indexed, calling the 0’th element of a variable does not throw an error, so be careful.</p>
@@ -257,7 +257,7 @@ m</code></pre>
 </div>
 <div id="logic" class="section level1">
 <h1>Logic</h1>
-<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, what we’re doing is dealing with is statements that evaluate to either <code>TRUE</code> or <code>FALSE</code>.</p>
+<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, we’re working with statements that evaluate to either <code>TRUE</code> or <code>FALSE</code>.</p>
 <p>Example: is 1 greater than 0?</p>
 <pre class="r"><code>1 &gt; 0</code></pre>
 <pre><code>## [1] TRUE</code></pre>
@@ -267,9 +267,9 @@ m</code></pre>
 <p>Now that we have this vector, we can derive logical statements about it. Which elements are greater than 5?</p>
 <pre class="r"><code>g &gt; 5</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
-<p>The statement <code>g &gt; 5</code> is a “logical” vector, meaning that its values are either <code>TRUE</code> or <code>FALSE</code>, which are keywords in R (and must be capital). R asks if <code>g</code> is greater than 5, and since <code>g</code> is a vector, R returns a vector of logicals with each element corresponding to the original elements in <code>g</code>.</p>
+<p>The statement <code>g &gt; 5</code> is a “logical vector,” meaning that its a vector whose values are either <code>TRUE</code> or <code>FALSE</code>. <code>TRUE</code> and <code>FALSE</code> are keywords in R (and must be capital). R asks if <code>g</code> is greater than 5, and since <code>g</code> is a vector, R returns a vector of logicals with each element corresponding to the original elements in <code>g</code>.</p>
 <p>There are many logical operators. Here are some:</p>
-<pre class="r"><code># g &quot;is equal to&quot; 5
+<pre class="r"><code># g &quot;is equal to&quot; 5 (DOUBLE EQUALS)
 g == 5</code></pre>
 <pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
 <pre class="r"><code># g &quot;is greater than&quot; 5
@@ -334,19 +334,19 @@ x &lt;- rnorm(n = 10000, mean = 0, sd = 1)
 
 # sum
 sum(x) </code></pre>
-<pre><code>## [1] 55.96746</code></pre>
+<pre><code>## [1] 59.43912</code></pre>
 <pre class="r"><code># number of elements in an object
 length(x) </code></pre>
 <pre><code>## [1] 10000</code></pre>
 <pre class="r"><code># mean
 mean(x) </code></pre>
-<pre><code>## [1] 0.005596746</code></pre>
+<pre><code>## [1] 0.005943912</code></pre>
 <pre class="r"><code># variance
 var(x) </code></pre>
-<pre><code>## [1] 1.007617</code></pre>
+<pre><code>## [1] 0.994337</code></pre>
 <pre class="r"><code># standard deviation
 sd(x) </code></pre>
-<pre><code>## [1] 1.003801</code></pre>
+<pre><code>## [1] 0.9971645</code></pre>
 <p>It is easy to write your own functions in R. We will cover this in the final lesson.</p>
 </div>
 <div id="help-files" class="section level1">
@@ -488,6 +488,23 @@ hljs.initHighlightingOnLoad();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+
+
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics"></a></div></noscript>
+
+
 </body>
 </html>
 
