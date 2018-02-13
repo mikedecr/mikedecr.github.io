@@ -71,13 +71,23 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
-    <div id="objective" class="section level1">
-<h1>Objective</h1>
+    <div id="schedule" class="section level1">
+<h1>Schedule</h1>
+<p>Read this before our final lecture, after the <a href="811/811-graphics">graphics lesson</a>.</p>
+</div>
+<div id="how-to-follow-along" class="section level1">
+<h1>How to follow along</h1>
+<p>A script file walking through some of these commands is available <a href="https://uwmadison.box.com/s/r224nk4rjll638dhndigeksvhwjuaq3q">here</a>.</p>
+</div>
+<div id="objectives" class="section level1">
+<h1>Objectives</h1>
 <p>In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…</p>
 <ul>
-<li>Confidence intervals and tests of population means and proportions</li>
-<li>regression models and formatting model output</li>
-<li>post-estimation diagnosis and visualization</li>
+<li>Means, confidence intervals, and simple significance tests</li>
+<li>Estimating regression models</li>
+<li>Generating model output</li>
+<li>Model diagnostics and fit statistics</li>
+<li>Post-estimation graphics (model predictions)</li>
 </ul>
 <p>This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise. These include…</p>
 <ul>
@@ -98,18 +108,17 @@
 </div>
 <div id="data-and-packages" class="section level1">
 <h1>Data and packages</h1>
-<p>Set your directory and read data from that we saved at the end of the previous lesson.</p>
-<pre class="r"><code>setwd(&quot;~/path/to/wherever&quot;)
-anes &lt;- readRDS(&quot;data/anes-modified-2.RDS&quot;)</code></pre>
 <p>Load packages.</p>
-<pre class="r"><code>if (!require(&quot;Rmisc&quot;))
-  install.packages(&quot;Rmisc&quot;)
-
-library(&quot;Rmisc&quot;)
+<pre class="r"><code>library(&quot;Rmisc&quot;)
 library(&quot;magrittr&quot;)
 library(&quot;tidyverse&quot;)
 library(&quot;ggplot2&quot;)
 library(&quot;broom&quot;)</code></pre>
+<p>Set the default <code>ggplot</code> theme.</p>
+<pre class="r"><code>theme_set(theme_bw())</code></pre>
+<p>Set your directory and read data from that we saved at the end of the previous lesson.</p>
+<pre class="r"><code>setwd(&quot;~/path/to/wherever&quot;)
+anes &lt;- readRDS(&quot;data/anes-modified-2.RDS&quot;) %&gt;% print()</code></pre>
 </div>
 <div id="non-statistical-analysis" class="section level1">
 <h1>Non-statistical analysis</h1>
@@ -118,13 +127,15 @@ library(&quot;broom&quot;)</code></pre>
 <div id="estimates-and-confidence-intervals" class="section level1">
 <h1>Estimates and confidence intervals</h1>
 <p>When we generate estimates from data, we are usually interested in the point estimate and the uncertainty in that estimate.</p>
-<p>The <code>Rmisc</code> package has <code>CI</code> and <code>group.CI</code> functions for estimating means and simple confidence intervals. For some reason, the <code>group.CI()</code> function, which estimates confidence intervals for some variable within groups of another variable, is a bit better behaved, so I recommend using it over <code>CI()</code> even when you have no subgroups. You can do that with the following syntax. We will estimate the mean liberal-conservative self-placement (for the whole dataset).</p>
-<pre class="r"><code>group.CI(libcon_self ~ 1, data = anes)</code></pre>
+<p>The <code>Rmisc</code> package has <code>CI</code> and <code>group.CI</code> functions for estimating means with confidence intervals. The <code>group.CI()</code> function is better than <code>CI()</code> for several reasons, so we’ll use for subgroup estimates and ungrouped estimates.</p>
+<p>For ungrouped estimates, we use the following syntax.</p>
+<pre class="r"><code># CIs for no groups
+#   place a `1` where you&#39;d otherwise put a group variable
+group.CI(libcon_self ~ 1, data = anes)</code></pre>
 <pre><code>##   libcon_self.upper libcon_self.mean libcon_self.lower
 ## 1          4.254325         4.238207          4.222089</code></pre>
-<p>The <code>y ~ 1</code> syntax comes from regression modeling in R, which we’ll return to. Just know that for right now, this is how you estimate a mean and confidence interval using no grouping variables.</p>
-<p>Remember that every confidence interval has associated assumptions. This interval assumes that the sampling distribution of the mean is normally distributed. This is often a fine assumption, but the fact that we have only seven valid values makes this variable slightly problematic. (You would probably not get pushback for doing this though).</p>
-<p>You can add a grouping variable like so. We’ll estimate the mean ideological self-placement within each grouping on the 7-point partisanship index.</p>
+<p>Remember that every confidence interval has associated assumptions. This interval assumes that the sampling distribution of the mean is normally distributed. This is often a fine assumption, but the fact that we have only seven valid values makes this variable slightly problematic. (You would probably not get pushback for doing this though, because most people don’t think about these assumptions).</p>
+<p>You can add a grouping variable like so. We’ll estimate the mean ideological self-placement within each party ID on the 7-point partisanship index.</p>
 <pre class="r"><code>group.CI(libcon_self ~ pid7, data = anes)</code></pre>
 <pre><code>##   pid7 libcon_self.upper libcon_self.mean libcon_self.lower
 ## 1    1          3.475202         3.435936          3.396670
@@ -135,33 +146,28 @@ library(&quot;broom&quot;)</code></pre>
 ## 6    6          4.804295         4.771926          4.739557
 ## 7    7          5.502972         5.468599          5.434226</code></pre>
 <p>The <code>group.CI()</code> function returns a data frame, so you could plot this pretty easily. We’ll add a dividing line at “moderate.”</p>
-<pre class="r"><code>mean_ideo &lt;- anes %&gt;%
+<pre class="r"><code># calculate mean self-placement, by party ID
+# since 2000 only
+
+mean_ideo &lt;- anes %&gt;%
+  filter(cycle &gt;= 2000) %&gt;% 
   group.CI(libcon_self ~ pid7, data = .) %&gt;%
-  rename(party = pid7, 
-         upper = libcon_self.upper,
-         mean = libcon_self.mean,
-         lower = libcon_self.lower) %&gt;% 
   print()</code></pre>
-<pre><code>##   party    upper     mean    lower
-## 1     1 3.475202 3.435936 3.396670
-## 2     2 3.887528 3.854468 3.821408
-## 3     3 3.669637 3.630272 3.590906
-## 4     4 4.231836 4.190113 4.148389
-## 5     5 4.779278 4.740784 4.702289
-## 6     6 4.804295 4.771926 4.739557
-## 7     7 5.502972 5.468599 5.434226</code></pre>
-<pre class="r"><code>ggplot(mean_ideo, aes(x = as.factor(party), y = mean)) + 
+<pre><code>##   pid7 libcon_self.upper libcon_self.mean libcon_self.lower
+## 1    1          3.289021         3.227399          3.165776
+## 2    2          3.703974         3.641940          3.579906
+## 3    3          3.625136         3.561119          3.497103
+## 4    4          4.247556         4.181102          4.114649
+## 5    5          4.963396         4.895777          4.828159
+## 6    6          5.002320         4.943096          4.883872
+## 7    7          5.759156         5.706492          5.653827</code></pre>
+<pre class="r"><code># plot self-placement over party ID
+# modifying axis scales
+# confidence intervals are there, just small
+
+ggplot(mean_ideo, aes(x = as.factor(pid7), y = libcon_self.mean)) + 
   geom_hline(yintercept = 4, color = &quot;gray50&quot;) +
-  geom_pointrange(aes(ymin = lower, ymax = upper)) +
-  labs(y = &quot;Ideological Self-Placement&quot;,
-       x = &quot;Party ID&quot;) +
-  theme_bw()</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>It turns out, the confidence intervals are so small that you can’t really see them.</p>
-<p>We could make this prettier using tools from last week. We will mainly modify the axis scales.</p>
-<pre class="r"><code>ggplot(mean_ideo, aes(x = as.factor(party), y = mean)) + 
-  geom_hline(yintercept = 4, color = &quot;gray50&quot;) +
-  geom_pointrange(aes(ymin = lower, ymax = upper)) +
+  geom_pointrange(aes(ymin = libcon_self.lower, ymax = libcon_self.upper)) +
   labs(y = &quot;Ideological Self-Placement&quot;,
        x = &quot;Party ID&quot;) +
   scale_x_discrete(labels = c(&quot;Strong\nDem&quot;, &quot;Weak\nDem&quot;, &quot;Lean\nDem&quot;, &quot;Independent&quot;, &quot;Lean\nRep&quot;, &quot;Weak\nRep&quot;, &quot;Strong\nRep&quot;)) +
@@ -170,39 +176,42 @@ library(&quot;broom&quot;)</code></pre>
                                 &quot;Moderate&quot;, 
                                 &quot;Slight Con&quot;, &quot;Con&quot;, &quot;Very Con&quot;)) +
   coord_cartesian(ylim = c(1, 7)) +
-  theme_bw() +
   theme(panel.grid.minor = element_blank())</code></pre>
 <p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Be warned. Because the <code>group.CI()</code> function returns a data frame and not just a single value, it will make <code>dplyr::summarize()</code> upset if you try to group a data frame and estimate that way. We can show an advanced way of dealing with this later (nesting and mapping).</p>
 <p>Let’s do one more example where we try to detect some evidence of ideological polarization/sorting over time. We’ll track how the mean ideology among Democrats and Republicans changes over time. We use the <code>as_data_frame()</code> function to convert the table to a tibble (for nicer printing).</p>
-<pre class="r"><code># collapse PID into Rs and Ds, else NA
+<pre class="r"><code># collapse party into Ds and Rs, else NA
+# Find mean self-placement in each party, in each cycle
+# convert to data_frame for prettier printing
+
 sorting &lt;- anes %&gt;%
   mutate(party = case_when(pid7 %in% 1:3 ~ &quot;Democrat&quot;,
                            pid7 %in% 5:7 ~ &quot;Republicans&quot;)) %&gt;%
   group.CI(libcon_self ~ party + cycle, data = .) %&gt;%
   as_data_frame() %&gt;%
-  rename(upper = libcon_self.upper,
-         mean = libcon_self.mean,
-         lower = libcon_self.lower) %&gt;% 
   print()</code></pre>
 <pre><code>## # A tibble: 38 x 5
-##    party       cycle upper  mean lower
-##    &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 Democrat     1972  3.86  3.77  3.68
-##  2 Republicans  1972  4.73  4.64  4.55
-##  3 Democrat     1974  3.84  3.73  3.63
-##  4 Republicans  1974  4.85  4.74  4.62
-##  5 Democrat     1976  3.89  3.79  3.70
-##  6 Republicans  1976  4.98  4.88  4.79
-##  7 Democrat     1978  3.85  3.76  3.67
-##  8 Republicans  1978  4.96  4.86  4.76
-##  9 Democrat     1980  3.95  3.83  3.70
-## 10 Republicans  1980  5.09  4.98  4.86
+##    party       cycle libcon_self.upper libcon_self.mean libcon_self.lower
+##    &lt;chr&gt;       &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;             &lt;dbl&gt;
+##  1 Democrat     1972              3.86             3.77              3.68
+##  2 Republicans  1972              4.73             4.64              4.55
+##  3 Democrat     1974              3.84             3.73              3.63
+##  4 Republicans  1974              4.85             4.74              4.62
+##  5 Democrat     1976              3.89             3.79              3.70
+##  6 Republicans  1976              4.98             4.88              4.79
+##  7 Democrat     1978              3.85             3.76              3.67
+##  8 Republicans  1978              4.96             4.86              4.76
+##  9 Democrat     1980              3.95             3.83              3.70
+## 10 Republicans  1980              5.09             4.98              4.86
 ## # ... with 28 more rows</code></pre>
-<pre class="r"><code>ggplot(sorting, aes(x = cycle, y = mean, color = party)) +
+<pre class="r"><code># plot ideological self-placement
+# Democrats and Republicans across time
+
+ggplot(sorting, aes(x = cycle, y = libcon_self.mean, color = party)) +
   geom_line(show.legend = FALSE) +
   geom_point(show.legend = FALSE) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = party),
+  geom_ribbon(aes(ymin = libcon_self.lower, ymax = libcon_self.upper, 
+                  fill = party),
               alpha = 0.3,
               color = NA,
               show.legend = FALSE) +
@@ -214,9 +223,8 @@ sorting &lt;- anes %&gt;%
                                 &quot;Moderate&quot;, 
                                 &quot;Slightly\nConservative&quot;, &quot;Conservative&quot;, &quot;Very\nConservative&quot;)) +
   scale_x_continuous(breaks = seq(1972, 2012, 8)) +
-  scale_color_manual(values = c(&quot;maroon&quot;, &quot;dodgerblue&quot;)) +
-  scale_fill_manual(values = c(&quot;maroon&quot;, &quot;dodgerblue&quot;)) +
-  theme_bw() +
+  scale_color_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
+  scale_fill_manual(values = c(&quot;dodgerblue&quot;, &quot;maroon&quot;)) +
   labs(x = &quot;Election Cycle&quot;,
        y = &quot;Mean Ideological Self-Placement&quot;,
        color = NULL, fill = NULL) +
@@ -239,7 +247,11 @@ twoparty_voters &lt;- anes %&gt;%
   print()</code></pre>
 <pre><code>## [1] 4188</code></pre>
 <pre class="r"><code># estimate demvoters / majorparty voters, with CI
-(results &lt;- anes %$% prop.test(dem_voters, twoparty_voters))</code></pre>
+results &lt;- anes %$% 
+  prop.test(dem_voters, twoparty_voters)
+
+# view results
+results</code></pre>
 <pre><code>## 
 ##  1-sample proportions test with continuity correction
 ## 
@@ -270,15 +282,27 @@ results$conf.int</code></pre>
 <pre><code>## [1] 0.5809257 0.6108740
 ## attr(,&quot;conf.level&quot;)
 ## [1] 0.95</code></pre>
-<p>As you can see, these old hypothesis testing functions produce weird objects as output, making them feel ancient and complex. It gets slightly tougher to organize mentally if you need to estimate proportions for multiple groups</p>
-<pre class="r"><code># raw data, groups = party ID
-# find number of dem voters and major party voters per PID
+<p>As you can see, these old hypothesis testing functions produce weird objects as output, making them feel ancient and complex. It gets tougher to organize mentally if you need to estimate proportions for multiple groups. I’ll show you how, but it’s a little complicated.</p>
+<pre class="r"><code># Objective
+# a numerator and a denominator in every row
+# group the data and apply the test function to each row
+
+# groups = party ID
+# find num of dem voters (numerator) and major party voters (denominator)
+
+# In this chain, we take the sum of a logical variable
+#   in arithmetic, logical variables are like dummy variables
+#   (TRUE is treated as a 1, FALSE as a 0)
+
 grp_raw &lt;- anes %&gt;%
   filter(cycle == 2012) %&gt;%
   filter(!is.na(pid7)) %&gt;% 
   group_by(pid7) %&gt;%
-  summarize(dem_voters = sum(vote == &quot;Democratic Candidate&quot;, na.rm = TRUE),
-            twoparty_voters = sum(vote %in% c(&quot;Democratic Candidate&quot;, &quot;Republican Candidate&quot;), na.rm = TRUE)) %&gt;%
+  summarize(dem_voters = 
+              sum(vote == &quot;Democratic Candidate&quot;, na.rm = TRUE),
+            twoparty_voters = 
+              sum(vote %in% c(&quot;Democratic Candidate&quot;, &quot;Republican Candidate&quot;),
+                  na.rm = TRUE)) %&gt;%
   print()</code></pre>
 <pre><code>## # A tibble: 7 x 3
 ##    pid7 dem_voters twoparty_voters
@@ -292,6 +316,7 @@ grp_raw &lt;- anes %&gt;%
 ## 7  7.00         18             645</code></pre>
 <pre class="r"><code># think of binom.test() as being run separately for each row (group)
 # since each row is a group in this case
+# separately save mean, lower and upper bounds
 grp_prop &lt;- grp_raw %&gt;%
   group_by(pid7) %&gt;%  
   mutate(prop = binom.test(dem_voters, twoparty_voters)$estimate,
@@ -309,12 +334,13 @@ grp_prop &lt;- grp_raw %&gt;%
 ## 5  5.00         47             428 0.110  0.0818 0.143 
 ## 6  6.00         61             448 0.136  0.106  0.171 
 ## 7  7.00         18             645 0.0279 0.0166 0.0437</code></pre>
-<pre class="r"><code>ggplot(grp_prop, aes(x = as.factor(pid7), y = prop)) +
-  geom_pointrange(shape = 1,
-                  aes(ymin = lower, ymax = upper)) +
+<pre class="r"><code># plot estimates with CIs as pointranges (points plus error bars)
+
+ggplot(grp_prop, aes(x = as.factor(pid7), y = prop)) +
+  geom_pointrange(aes(ymin = lower, ymax = upper)) +
   labs(x = &quot;Party ID&quot;,
-       y = &quot;Democratic share of two-party vote&quot;) +
-  theme_bw()</code></pre>
+       y = &quot;Democratic share of two-party vote&quot;,
+       caption = &quot;ANES 2012 data&quot;)</code></pre>
 <p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Some people have developed tools to make it easier to work with these old functions. The <code>broom</code> package is amazing one. Let’s use the <code>broom::tidy</code> function to clean up the output from the <code>prop.test()</code> function from above.</p>
 <pre class="r"><code># results object from before
@@ -336,26 +362,32 @@ tidy(results)</code></pre>
 ## 1 0.5959885  153.9659 2.356085e-35         1 0.5809257  0.610874
 ##                                                 method alternative
 ## 1 1-sample proportions test with continuity correction   two.sided</code></pre>
-<p>The <code>tidy()</code> function returns a tidy frame with columns for estimates, test statistics, <span class="math inline">\(p\)</span>-values, confidence interval bounds, and so on. You could run <code>tidy()</code> on lots of different proportions tests, stack them into one data frame, and then plot the results in cool ways. We’ll do something like that later when we cover nesting and mapping.</p>
+<p>The <code>tidy()</code> function returns a tidy frame with columns for estimates, test statistics, <span class="math inline">\(p\)</span>-values, confidence interval bounds, and so on. You could run <code>tidy()</code> on lots of different proportions tests, stack them into one data frame, and then plot the results in cool ways. We’ll do something like that later when we cover regression models.</p>
 <p>For formal hypothesis testing of means, the <code>t.test()</code> function works a lot like <code>prop.test()</code> and <code>binom.test()</code>. I won’t beat this lesson to death though.</p>
 </div>
 </div>
 <div id="regression" class="section level1">
 <h1>Regression</h1>
 <p>And now, the good stuff.</p>
-<p>R has functions for linear and generalized linear models. They work pretty similarly, with some important exceptions. First, we’ll review what the deal is.</p>
-<p>A linear model estimates a “predicted value of <span class="math inline">\(y\)</span>,” assuming that the observed data are a predicted value plus a (normally distributed) residual. We could write that a few ways, but let’s start with a familiar way from PS-813.</p>
-<p><span class="math inline">\(\begin{align} y_{i} &amp;= \hat{y}_{i} + \varepsilon_{i} \\[6pt] \hat{y}_{i} &amp;= X_{i}\beta \\[6pt] \varepsilon_{i} &amp;\sim \mathrm{Normal}\left( 0, \, \sigma \right)\end{align}\)</span></p>
-<p>…which is to say, each predicted <span class="math inline">\(\hat{y}_{i}\)</span> is a regression on a set of <span class="math inline">\(X\)</span> variables and coefficients <span class="math inline">\(\beta\)</span> (or, the expected value of <span class="math inline">\(y\)</span> conditional on <span class="math inline">\(X\)</span>), and residuals are normally distributed with mean of <span class="math inline">\(0\)</span> and some estimated standard deviation <span class="math inline">\(\sigma\)</span>.</p>
-<p>Here’s how we do the estimation in R, generically, using the <code>lm()</code> function.</p>
-<pre class="r"><code>model_results &lt;- lm(y ~ x1 + x2 + x3, data = dataset_name)</code></pre>
-<p>The syntax can read that <code>y</code> is a function of <code>x1</code>, <code>x2</code>, and so on. We also must specify the data set where these data come from.</p>
-<p>We could, if we want, estimate an intercept-only model (<span class="math inline">\(\hat{y}_{i} = \alpha\)</span>) by writing the formula as <code>y ~ 1</code>. This is also how we used the <code>group.CI()</code> to estimate means without any groups.</p>
+<p>R has functions for linear and generalized linear models. They work pretty similarly, with some important exceptions. First, we’ll review regression in general.</p>
+<p>A linear model estimates a “predicted value of <span class="math inline">\(y\)</span>” (that is, the <em>mean of <span class="math inline">\(y\)</span>, conditional on <span class="math inline">\(x\)</span></em>) assuming that the observed data are the conditional mean plus a (normally distributed) residual. We could write that a few ways, but let’s start with a familiar way from PS-813.</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;= \alpha + \beta x_{i} + \varepsilon_{i} \\[6pt] \varepsilon_{i} &amp;\sim \mathrm{Normal} \left( 0, \, \sigma \right) \end{align}\)</span></p>
+<p>Each predicted value of the dependent variable (<span class="math inline">\(\hat{y}_{i}\)</span>) is a regression on a set of <span class="math inline">\(x\)</span> variables and coefficients <span class="math inline">\(\beta\)</span> and a constant <span class="math inline">\(\alpha\)</span>, and residuals are normally distributed with mean of <span class="math inline">\(0\)</span> and some estimated standard deviation <span class="math inline">\(\sigma\)</span>.</p>
+<p>Here’s how we estimate regression equations in R, generically, using the <code>lm()</code> function.</p>
+<pre class="r"><code># this is an example with multiple x variables
+# to show that you use the `+` to specify the additive equation form
+model_results &lt;- lm(y ~ x1 + x2 + x3, data = dataset_name)</code></pre>
+<p>The syntax can read that <code>y</code> is a function of <code>x1</code>, <code>x2</code>, and so on. We also must specify the data set where these data come from with <code>data =</code>.</p>
 <p>After estimating, we usually look at detailed results using the <code>summary()</code> function.</p>
 <pre class="r"><code>summary(model_results)</code></pre>
-<p>Here’s a real example, predicting relative thermometer ratings (<span class="math inline">\(y\)</span>) using ideological self-placement (<span class="math inline">\(x\)</span>), with data from the 2000 election only (note the use of <code>filter()</code> in the <code>data =</code> argument).</p>
-<pre class="r"><code>therm_mod &lt;- lm(reltherm_cand ~ libcon_self, 
+<p>Here’s a real example, predicting relative thermometer ratings (<span class="math inline">\(y\)</span>) using ideological self-placement (<span class="math inline">\(x\)</span>), with data from the 2000 election only (note the use of <code>filter()</code> in the <code>data =</code> argument). It seems reasonable that individuals who are more conservative are more likely to feel warmer toward the Republican candidate than they are toward the Democratic candidate.</p>
+<pre class="r"><code># relative feeling thermometer as a function of ideology
+
+therm_mod &lt;- lm(reltherm_cand ~ libcon_self, 
                 data = filter(anes, cycle == 2000))
+
+# regression summary
+
 summary(therm_mod)</code></pre>
 <pre><code>## 
 ## Call:
@@ -378,9 +410,16 @@ summary(therm_mod)</code></pre>
 ## Multiple R-squared:  0.2416, Adjusted R-squared:  0.2403 
 ## F-statistic: 190.5 on 1 and 598 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>The <code>summary</code> function shows us the estimated coefficients (for the intercept and predictor), standard errors, test statistics, p-values, and significance levels. We also get some information about the F test and explained variance.</p>
-<p>Let’s do a multiple regression example. How about we just do this ideological scale as a series of dummy variables instead of as a continuous predictor.</p>
-<pre class="r"><code>dummy_mod &lt;- lm(reltherm_cand ~ as.factor(libcon_self), 
+<div id="regression-tricks" class="section level2">
+<h2>Regression tricks</h2>
+<p>Let’s do a multiple regression example. How about we just do this ideological scale as a series of dummy variables instead of as a continuous predictor. We can coerce any variable to series of dummy variables by inputting the variable as a factor in the regression equation.</p>
+<pre class="r"><code># &quot;dummy mod&quot;: ideology as a set of dummies using as.factor()
+
+dummy_mod &lt;- lm(reltherm_cand ~ as.factor(libcon_self), 
                 data = filter(anes, cycle == 2000))
+
+# each effect is an offset relative to the constant
+
 summary(dummy_mod)</code></pre>
 <pre><code>## 
 ## Call:
@@ -407,10 +446,15 @@ summary(dummy_mod)</code></pre>
 ##   (1207 observations deleted due to missingness)
 ## Multiple R-squared:  0.2504, Adjusted R-squared:  0.2428 
 ## F-statistic: 33.01 on 6 and 593 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The <code>as.factor()</code> coerced the <code>libcon_self</code> variable, which is originally numeric (integers) to be treated as a factor variable. This is useful because whenever <code>lm()</code> encounters a factor as an independent variable, R interprets the factor as a set of dummy variables automatically (treating the “first” level as the omitted category)! It’s important to remember that when we have dummy variables, each coefficient should be interpret as an <em>offset</em> relative to the intercept. Normally you want to take great care to specify which category should be omitted, because hypothesis testing on the other variables will be relatively to that baseline category.</p>
+<p>The <code>as.factor()</code> coerced the <code>libcon_self</code> variable, which is originally numeric (integers), to be treated as a factor variable. Whenever <code>lm()</code> encounters a factor as an independent variable, R interprets the factor as a set of dummy variables automatically, treating the “first” level as the omitted category. It’s important to remember that when we have dummy variables, each coefficient should be interpret as an <em>offset</em> relative to the intercept. Ordinarily you want to take great care to specify which category should be omitted, because significance testing for the dummy variables will be relative to that baseline category.</p>
 <p>If we want, we could rewrite this model by suppressing the intercept entirely with <code>-1</code>. In that case, we would have no omitted category, so each estimated coefficient would essentially represent the mean for each group.</p>
-<pre class="r"><code>int_mod &lt;- lm(reltherm_cand ~ -1 + as.factor(libcon_self), 
+<pre class="r"><code># all-intercepts model (no omitted category =&gt; no constant)
+
+int_mod &lt;- lm(reltherm_cand ~ -1 + as.factor(libcon_self), 
                 data = filter(anes, cycle == 2000))
+
+# each estimate is a group mean
+
 summary(int_mod)</code></pre>
 <pre><code>## 
 ## Call:
@@ -437,11 +481,46 @@ summary(int_mod)</code></pre>
 ##   (1207 observations deleted due to missingness)
 ## Multiple R-squared:  0.2508, Adjusted R-squared:  0.2419 
 ## F-statistic: 28.35 on 7 and 593 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>This model makes a great deal of sense just looking at it. As respondents are more liberal, they like the Democratic candidate more than the Republican candidate, and vice versa for more conservative respondents.</p>
+<p>This model makes a great deal of sense just looking at it. Each intercept is the estimated mean response for each level of party ID. When respondents are more liberal, they like the Democratic candidate more than the Republican candidate, and vice versa for more conservative respondents. Watch out for significance testing though: right now, p-values are only testing against the null hypothesis that each coefficient is different from zero. You’d have to do some extra work to determine whether one intercept is statistically different from another.</p>
+<p>We could, if we want, estimate an intercept-only model (no predictors) of the following form:</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;= \alpha + \varepsilon_{i} \end{align}\)</span></p>
+<p>by writing the formula as <code>y ~ 1</code>. This is also how we used the <code>group.CI()</code> to estimate means without any groups.</p>
+<pre class="r"><code># intercept-only model
+
+alpha_mod &lt;- lm(reltherm_cand ~ 1, 
+                data = filter(anes, cycle == 2000))
+
+# this makes sense in the math, if you think about it
+# the right hand data is a &quot;1&quot;
+# y = alpha*1 is equivalent to y = alpha
+
+# (if you&#39;ve seen regression in matrix before, 
+#  this is why the first column in the X matrix is a set of 1s)
+
+summary(alpha_mod)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = reltherm_cand ~ 1, data = filter(anes, cycle == 
+##     2000))
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -94.366 -28.366   1.634  26.634  97.634 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)  
+## (Intercept)  -1.6339     0.9131  -1.789   0.0738 .
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 36.47 on 1594 degrees of freedom
+##   (212 observations deleted due to missingness)</code></pre>
+</div>
 </div>
 <div id="model-output-tables" class="section level1">
 <h1>Model output: tables</h1>
-<p>My advice is that you should never, never, <strong><em>NEVER</em></strong> write up a regression table by hand. Not in <span class="math inline">\(\mathrm{\LaTeX}\)</span>, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as <span class="math inline">\(\mathrm{\LaTeX}\)</span> code, as HTML code, as plain text, and so on. We’ll play with some table packages using the models we just estimated.</p>
+<p>Like Stata, R can produce regression tables for you to insert into your writing. You should use these functions.</p>
+<p>In fact, my advice is that you should never, never, <strong><em>NEVER</em></strong> write up a regression table by hand. Not in <span class="math inline">\(\mathrm{\LaTeX}\)</span>, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as <span class="math inline">\(\mathrm{\LaTeX}\)</span> code, as HTML code, as plain text, and so on. We’ll play with some table packages using the models we just estimated.</p>
 <p>The <code>stargazer</code> package is solid and highly customizable. I find that it requires a lot of customization to look <em>great</em> though.</p>
 <pre class="r"><code>library(&quot;stargazer&quot;)
 # latex by default
@@ -455,17 +534,21 @@ texreg(list(therm_mod, dummy_mod, int_mod))</code></pre>
 <pre class="r"><code>library(&quot;xtable&quot;)
 print(xtable(therm_mod))</code></pre>
 <p>These aren’t the only tools for making tables in R. Check <a href="https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r">here</a> for more info.</p>
-<p>My general practice is to rely <em>only</em> on code to make tables. This ensures that you don’t make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using <span class="math inline">\(\mathrm{\LaTeX}\)</span>). I’d encourage you to figure out what table package and modifications suite you best, and save that code somewhere you can come back to it.</p>
+<p>My general practice is to rely <em>only</em> on code to make tables. This ensures that you don’t make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using <span class="math inline">\(\mathrm{\LaTeX}\)</span>). I’d encourage you to figure out what table package (and modifications to the default function behaviors) suit you best, and save that code some place where you can come back to it.</p>
 </div>
 <div id="exporting-regression-tables" class="section level1">
 <h1>Exporting regression tables</h1>
 <p>This is not that difficult, but it requires some thinking about your project directory.</p>
-<p>We should have a directory set up with separate folders for <code>R/</code>, <code>data/</code>, and your writing (which I call <code>tex/</code> or <code>paper/</code>). Let’s assume that we’re writing a <span class="math inline">\(\mathrm{\LaTeX}\)</span> document inside a folder called <code>tex/</code>, and we want to save a regression table. We should also assume that our directory in R is set to the <em>project root</em>, i.e. the top of the project folder.</p>
+<p>Whenever you have some project, your directory should contain separate folders for <code>R/</code>, <code>data/</code>, and your writing (which I call <code>tex/</code> or <code>paper/</code>). Let’s assume that we’re writing a <span class="math inline">\(\mathrm{\LaTeX}\)</span> document inside a folder called <code>tex/</code>, and we want to save a regression table from R. We should also assume that our directory in R is set to the <em>project root</em>, i.e. the top of the project folder.</p>
 <p>We can use R to create a subfolder inside of the <code>tex/</code> folder dedicated to tables, if we don’t already have one.</p>
 <pre class="r"><code># make a tables/ folder inside of tex/
+# requires a tex/ folder to exist already
+
 dir.create(&quot;tex/tables&quot;)</code></pre>
 <p>We can then save model output as a <code>.tex</code> file. These functions allow to you specify where you want the table to save. Specify the name of the <code>.tex</code> file you want to save.</p>
-<pre class="r"><code>texreg(list(therm_mod, dummy_mod, int_mod),
+<pre class="r"><code># save texreg table (with caption) as a .tex file, in specified location
+
+texreg(list(therm_mod, dummy_mod, int_mod),
        caption = &quot;Estimated regression results, various specifications&quot;,
        file = &quot;tex/tables/reg-table.tex&quot;)</code></pre>
 <p>And then in your <code>research-paper.tex</code> file, you can include a code to insert code from another <code>.tex</code> file somewhere else.</p>
@@ -473,13 +556,16 @@ dir.create(&quot;tex/tables&quot;)</code></pre>
 
 \input{tables/reg-table}
 
-The results show ...</code></pre>
+The results show that...</code></pre>
 </div>
 <div id="model-output-graphics" class="section level1">
 <h1>Model output: graphics</h1>
 <p>New tools in R make it very easy to produce graphical model output.</p>
 <p>We’ll talk about the <code>broom</code> package, which we’ve already introduced somewhat. We can turn model output into a tidy data frame using <code>tidy()</code>.</p>
-<pre class="r"><code>tidy(int_mod)</code></pre>
+<pre class="r"><code># Tidy the all-intercepts model
+# separate columns for variable names, coefficients, std err, p-val...
+
+tidy(int_mod)</code></pre>
 <pre><code>##                      term  estimate std.error statistic      p.value
 ## 1 as.factor(libcon_self)1 -33.58333  9.291709 -3.614333 3.267050e-04
 ## 2 as.factor(libcon_self)2 -26.69565  3.874911 -6.889360 1.434794e-11
@@ -488,7 +574,7 @@ The results show ...</code></pre>
 ## 5 as.factor(libcon_self)5  11.69231  3.156237  3.704509 2.316008e-04
 ## 6 as.factor(libcon_self)6  24.99167  2.938296  8.505495 1.475278e-16
 ## 7 as.factor(libcon_self)7  26.70588  7.806597  3.420938 6.669782e-04</code></pre>
-<p>You can combine models like so. This creates tidy data frames form the models, adds a column for the model name using <code>mutate()</code>, and then binds all tables into one table using <code>bind_rows()</code>.</p>
+<p>Combine tidy model data frames using <code>bind_rows()</code>, which binds data frame rows together. We do this while also adding a variable for the model name (using <code>mutate()</code>).</p>
 <pre class="r"><code>mods &lt;- bind_rows(mutate(tidy(therm_mod, conf.int = TRUE), 
                            model = &quot;Continuous&quot;), 
                   mutate(tidy(dummy_mod, conf.int = TRUE), 
@@ -516,23 +602,26 @@ The results show ...</code></pre>
 ## 14 as.fa…    11.7      3.16      3.70    2.32e⁻ ⁴     5.49     17.9  Inte…
 ## 15 as.fa…    25.0      2.94      8.51    1.48e⁻¹⁶    19.2      30.8  Inte…
 ## 16 as.fa…    26.7      7.81      3.42    6.67e⁻ ⁴    11.4      42.0  Inte…</code></pre>
-<p>We can then plot coefficients straight away.</p>
-<pre class="r"><code>ggplot(mods, aes(x = term, y = estimate)) +
+<p>We can then plot coefficients straight away. Use the variable name as the <code>x</code> and the coefficient as the <code>y</code></p>
+<pre class="r"><code># we flip the x and y coordinates 
+#   to imitate the typical look of a coefficient plot
+# Notice how not every model has the same variable names...
+
+ggplot(mods, aes(x = term, y = estimate)) +
   geom_hline(yintercept = 0, color = &quot;gray50&quot;) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
                       color = model),
                   position = position_dodge(width = -1)) +
   scale_color_brewer(palette = &quot;Set2&quot;) +
   coord_flip() +
-  theme_bw() +
   labs(x = NULL, y = &quot;Estimated Coefficient&quot;, color = &quot;Specification&quot;)</code></pre>
 <pre><code>## Warning: position_dodge requires non-overlapping x intervals</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>So easy! You could then save this plot…</p>
 <pre class="r"><code>dir.create(&quot;tex/graphics&quot;)
 ggsave(&quot;tex/graphics/coefplot.PDF&quot;, height = 5, width = 5)
 # or whatever dimensions you want</code></pre>
-<p>Some other tools create these sorts of plots for you. Some folks like <a href="http://www.strengejacke.de/sjPlot/sjp.lm/"><code>sjPlot</code></a>, but I have never bothered to use it. I normally don’t like packages to make plots for me. I like packages to create things that I can plot how I want. Speaking for myself, though.</p>
+<p>Some other tools create these sorts of plots for you. Some folks enjoy using <a href="http://www.strengejacke.de/sjPlot/sjp.lm/"><code>sjPlot</code></a>, but I have never bothered to use it. I normally don’t like packages to make plots for me. I like packages to create things that I can plot how I want. Speaking for myself, though.</p>
 </div>
 <div id="related-saving-other-quantities-from-r-to-mathrmlatex" class="section level1">
 <h1>Related: saving other quantities (from R to <span class="math inline">\(\mathrm{\LaTeX}\)</span>)</h1>
@@ -553,409 +642,148 @@ anes %&gt;%
 </div>
 <div id="predicted-values" class="section level1">
 <h1>Predicted values</h1>
-<p>We’ll construct a slightly more complicated model here. We saw from the all-intercepts model above that the ideological index behaves fairly linearly. So let’s treat it as a continuous predictor and interact it with a dummy variable for gender. Let’s have women be 1 and men be 0 (these are the only gender categories in the ANES).</p>
-<pre class="r"><code>anes &lt;- anes %&gt;%
-  mutate(woman = as.numeric(gender == &quot;Women&quot;))</code></pre>
-<p>It maybe isn’t the best practice to create a dummy variable in this way, but I’m doing it to show you something about R. <code>gender == &quot;Women&quot;</code> is a logical. It returns <code>TRUE</code> for women, <code>FALSE</code> for men, and crucially <code>NA</code> where gender was originally <code>NA</code>. If you don’t believe me…</p>
-<pre class="r"><code>anes %$% table(gender, woman, exclude = NULL)</code></pre>
-<pre><code>##        woman
-## gender      0     1  &lt;NA&gt;
-##   Men   24862     0     0
-##   Women     0 30709     0
-##   &lt;NA&gt;      0     0   103</code></pre>
-<p>We’ll not fit a model where we predict relative candidate thermometers using an interaction of <code>woman</code> and <code>libcon_self</code>. We’ll again use 2000 data.</p>
-<pre class="r"><code>newmod &lt;- lm(reltherm_cand ~ libcon_self + woman + libcon_self*woman,
-             data = filter(anes, cycle == 2000))
+<p>You can generate predicted values from the data used to model using <code>predict()</code>.</p>
+<pre class="r"><code># try it out
+predict(therm_mod)</code></pre>
+<p>We can also use <code>predict()</code> to generate predictions for new datasets. This is good for visualizing the effect of one variable, holding others constant. You can do this by creating a “counterfactual dataset” and generating model predicts for the observations in the counterfactual data.</p>
+<pre class="r"><code># we only need one variable
+# be sure it has the same name as the regression variable
 
-summary(newmod)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = reltherm_cand ~ libcon_self + woman + libcon_self * 
-##     woman, data = filter(anes, cycle == 2000))
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -100.031  -21.309    1.292   19.695   75.691 
-## 
-## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)       -54.8566     6.5255  -8.406 3.12e-16 ***
-## libcon_self        13.3912     1.4054   9.528  &lt; 2e-16 ***
-## woman              -0.5558     8.5660  -0.065    0.948    
-## libcon_self:woman  -1.1507     1.9097  -0.603    0.547    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 32.17 on 596 degrees of freedom
-##   (1207 observations deleted due to missingness)
-## Multiple R-squared:  0.2474, Adjusted R-squared:  0.2436 
-## F-statistic:  65.3 on 3 and 596 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>Note that we could just write the formula as <code>reltherm_cand ~ (libcon_self*woman)</code> and R would figure it out.</p>
-<pre class="r"><code>newmod &lt;- lm(reltherm_cand ~ libcon_self*woman,
-             data = filter(anes, cycle == 2000))
+id_frame &lt;- data_frame(libcon_self = 1:7)
 
-summary(newmod)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = reltherm_cand ~ libcon_self * woman, data = filter(anes, 
-##     cycle == 2000))
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -100.031  -21.309    1.292   19.695   75.691 
-## 
-## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)       -54.8566     6.5255  -8.406 3.12e-16 ***
-## libcon_self        13.3912     1.4054   9.528  &lt; 2e-16 ***
-## woman              -0.5558     8.5660  -0.065    0.948    
-## libcon_self:woman  -1.1507     1.9097  -0.603    0.547    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 32.17 on 596 degrees of freedom
-##   (1207 observations deleted due to missingness)
-## Multiple R-squared:  0.2474, Adjusted R-squared:  0.2436 
-## F-statistic:  65.3 on 3 and 596 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>The <code>lm</code> function creates offers some handy objects for you to dig through for post-estimation things.</p>
-<pre class="r"><code>attributes(newmod)</code></pre>
-<pre><code>## $names
-##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
-##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
-##  [9] &quot;na.action&quot;     &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;        
-## [13] &quot;model&quot;        
-## 
-## $class
-## [1] &quot;lm&quot;</code></pre>
-<p>The <code>$fitted.values</code> object contains predicted values for all of the observations used for estimation.</p>
-<p>You can create predictions for different observations, but you need to create a new data frame that had the data you want. Since this example is fairly simple, we’ll create a data frame that has every value of ideology for both men and women.</p>
-<pre class="r"><code>new_x &lt;- 
-  data_frame(libcon_self = c(1:7, 1:7), 
-             woman = c(rep(1, 7), rep(0, 7)), 
-             `libcon_self:woman` = libcon_self*woman) %&gt;%
-  print()</code></pre>
-<pre><code>## # A tibble: 14 x 3
-##    libcon_self woman `libcon_self:woman`
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;
-##  1           1  1.00                1.00
-##  2           2  1.00                2.00
-##  3           3  1.00                3.00
-##  4           4  1.00                4.00
-##  5           5  1.00                5.00
-##  6           6  1.00                6.00
-##  7           7  1.00                7.00
-##  8           1  0                   0   
-##  9           2  0                   0   
-## 10           3  0                   0   
-## 11           4  0                   0   
-## 12           5  0                   0   
-## 13           6  0                   0   
-## 14           7  0                   0</code></pre>
-<p>The <code>:</code> character is usually not allowed in variable names, but if we wrap the variable name in backticks, we can make it work. The reason we need to the variable names to match exactly is because we can use a handy function called <code>predict()</code>.</p>
-<pre class="r"><code>predict(newmod, newdata = new_x)</code></pre>
+# use the estimated model to predict for the new data
+
+predict(therm_mod, newdata = id_frame)</code></pre>
 <pre><code>##          1          2          3          4          5          6 
-## -43.171895 -30.931399 -18.690904  -6.450408   5.790088  18.030583 
-##          7          8          9         10         11         12 
-##  30.271079 -41.465389 -28.074222 -14.683054  -1.291887  12.099280 
-##         13         14 
-##  25.490448  38.881615</code></pre>
-<p>We could even use it to add stuff to our original data frame pretty sensibly.</p>
-<pre class="r"><code>predictions &lt;- new_x %&gt;%
-  mutate(pred = predict(newmod, newdata = .)) %&gt;%
-  print()</code></pre>
-<pre><code>## # A tibble: 14 x 4
-##    libcon_self woman `libcon_self:woman`   pred
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;
-##  1           1  1.00                1.00 -43.2 
-##  2           2  1.00                2.00 -30.9 
-##  3           3  1.00                3.00 -18.7 
-##  4           4  1.00                4.00 - 6.45
-##  5           5  1.00                5.00   5.79
-##  6           6  1.00                6.00  18.0 
-##  7           7  1.00                7.00  30.3 
-##  8           1  0                   0    -41.5 
-##  9           2  0                   0    -28.1 
-## 10           3  0                   0    -14.7 
-## 11           4  0                   0    - 1.29
-## 12           5  0                   0     12.1 
-## 13           6  0                   0     25.5 
-## 14           7  0                   0     38.9</code></pre>
-<p>And plotting these predictions would then be pretty straightforward.</p>
-<pre class="r"><code>ggplot(predictions, aes(x = libcon_self, y = pred)) +
-  geom_line(aes(color = as.factor(woman)))</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
-<p>You can see that the slopes are different but only slightly, consistent with the model results.</p>
-<p>If you want confidence intervals on these predictions? The <code>predict()</code> function has an <code>interval</code> argument, which makes the function return an array (not a data-frame! Though see <a href="https://github.com/leeper/prediction">here</a> for some tidy-friendly predict tools).</p>
-<pre class="r"><code>predict(newmod, newdata = new_x, interval = &quot;confidence&quot;)</code></pre>
-<pre><code>##           fit        lwr        upr
-## 1  -43.171895 -51.709954 -34.633837
-## 2  -30.931399 -37.249519 -24.613280
-## 3  -18.690904 -23.144763 -14.237044
-## 4   -6.450408 -10.007534  -2.893282
-## 5    5.790088   1.504359  10.075816
-## 6   18.030583  11.949478  24.111688
-## 7   30.271079  21.995195  38.546963
-## 8  -41.465389 -51.673876 -31.256902
-## 9  -28.074222 -35.782417 -20.366026
-## 10 -14.683054 -20.147089  -9.219020
-## 11  -1.291887  -5.232875   2.649101
-## 12  12.099280   8.044231  16.154329
-## 13  25.490448  19.781527  31.199368
-## 14  38.881615  30.883087  46.880143</code></pre>
-<p>You could add this to the original data frame column-by-column, but it looks a little hacky with the base index notation to grab named columns.</p>
-<pre class="r"><code>predictions &lt;- new_x %&gt;%
-  mutate(pred = predict(newmod, newdata = .),
-         lower = predict(newmod, newdata = ., interval = &quot;confidence&quot;)[, &quot;lwr&quot;],
-         upper = predict(newmod, newdata = ., interval = &quot;confidence&quot;)[, &quot;upr&quot;]) %&gt;%
-  print()</code></pre>
-<pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`   pred  lower  upper
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1           1  1.00                1.00 -43.2  -51.7  -34.6 
-##  2           2  1.00                2.00 -30.9  -37.2  -24.6 
-##  3           3  1.00                3.00 -18.7  -23.1  -14.2 
-##  4           4  1.00                4.00 - 6.45 -10.0  - 2.89
-##  5           5  1.00                5.00   5.79   1.50  10.1 
-##  6           6  1.00                6.00  18.0   11.9   24.1 
-##  7           7  1.00                7.00  30.3   22.0   38.5 
-##  8           1  0                   0    -41.5  -51.7  -31.3 
-##  9           2  0                   0    -28.1  -35.8  -20.4 
-## 10           3  0                   0    -14.7  -20.1  - 9.22
-## 11           4  0                   0    - 1.29 - 5.23   2.65
-## 12           5  0                   0     12.1    8.04  16.2 
-## 13           6  0                   0     25.5   19.8   31.2 
-## 14           7  0                   0     38.9   30.9   46.9</code></pre>
-<p>It might be easier to save the output from <code>predict()</code> as a separate object, and then add its columns to a new data frame. You will want to save the <code>predict</code> object as a data frame.</p>
-<pre class="r"><code>fits &lt;- newmod %&gt;%
-  predict(newdata = new_x, interval = &quot;confidence&quot;) %&gt;%
-  as_data_frame() 
+## -43.069118 -30.032334 -16.995550  -3.958767   9.078017  22.114801 
+##          7 
+##  35.151584</code></pre>
+<p>We can also add intervals of various kinds (confidence intervals for means, prediction intervals, and so on). Let’s generate predictions for the linear model and the “all intercepts” model, and then plot them side by side for comparison.</p>
+<pre class="r"><code># predictions from linear model, using the new id_frame data
 
-predictions &lt;- new_x %&gt;%
-  mutate(pred = fits$fit,
-         lower = fits$lwr,
-         upper = fits$upr) %&gt;%
-  print()</code></pre>
-<pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`   pred  lower  upper
-##          &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1           1  1.00                1.00 -43.2  -51.7  -34.6 
-##  2           2  1.00                2.00 -30.9  -37.2  -24.6 
-##  3           3  1.00                3.00 -18.7  -23.1  -14.2 
-##  4           4  1.00                4.00 - 6.45 -10.0  - 2.89
-##  5           5  1.00                5.00   5.79   1.50  10.1 
-##  6           6  1.00                6.00  18.0   11.9   24.1 
-##  7           7  1.00                7.00  30.3   22.0   38.5 
-##  8           1  0                   0    -41.5  -51.7  -31.3 
-##  9           2  0                   0    -28.1  -35.8  -20.4 
-## 10           3  0                   0    -14.7  -20.1  - 9.22
-## 11           4  0                   0    - 1.29 - 5.23   2.65
-## 12           5  0                   0     12.1    8.04  16.2 
-## 13           6  0                   0     25.5   19.8   31.2 
-## 14           7  0                   0     38.9   30.9   46.9</code></pre>
-<p>You could then plot.</p>
-<pre class="r"><code>ggplot(predictions, aes(x = libcon_self, y = pred)) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = as.factor(woman)),
-              color = NA, alpha = 0.5) +
-  geom_line(aes(color = as.factor(woman))) +
-  scale_color_brewer(palette = &quot;Accent&quot;) +
-  scale_fill_brewer(palette = &quot;Accent&quot;) +
-  theme_bw()</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
-<p>The <code>broom</code> package (where <code>tidy()</code> comes from) provides the <code>augment</code> function, for augmenting a data frame with predictions from an accompanying model. Rather than providing a confidence interval, however, it provides a standard error of the fit, rather than a confidence interval of a pre-specified level. Although seemingly less convenient, this lets you set however wide a confidence interval you like by setting the critical value.</p>
-<pre class="r"><code>aug_predict &lt;- 
-  augment(newmod, newdata = new_x) %&gt;%
-  mutate(lower = .fitted - (1.96 * .se.fit),
-         upper = .fitted + (1.96 * .se.fit)) %&gt;%
-  print()</code></pre>
-<pre><code>##    libcon_self woman libcon_self.woman    .fitted  .se.fit      lower
-## 1            1     1                 1 -43.171895 4.347386 -51.692772
-## 2            2     1                 2 -30.931399 3.217043 -37.236804
-## 3            3     1                 3 -18.690904 2.267804 -23.135801
-## 4            4     1                 4  -6.450408 1.811208 -10.000376
-## 5            5     1                 5   5.790088 2.182196   1.512984
-## 6            6     1                 6  18.030583 3.096361  11.961716
-## 7            7     1                 7  30.271079 4.213893  22.011850
-## 8            1     0                 0 -41.465389 5.197930 -51.653333
-## 9            2     0                 0 -28.074222 3.924839 -35.766905
-## 10           3     0                 0 -14.683054 2.782163 -20.136093
-## 11           4     0                 0  -1.291887 2.006662  -5.224945
-## 12           5     0                 0  12.099280 2.064739   8.052392
-## 13           6     0                 0  25.490448 2.906853  19.793016
-## 14           7     0                 0  38.881615 4.072669  30.899183
-##         upper
-## 1  -34.651019
-## 2  -24.625995
-## 3  -14.246007
-## 4   -2.900440
-## 5   10.067192
-## 6   24.099451
-## 7   38.530309
-## 8  -31.277445
-## 9  -20.381538
-## 10  -9.230015
-## 11   2.641171
-## 12  16.146169
-## 13  31.187880
-## 14  46.864047</code></pre>
-<p>Using a critical value of 1.96 assumes asymptotic normality. For linear models with smaller samples, you may want to use a <span class="math inline">\(t\)</span>-statistic to create your critical value instead, but you need to know the residual degrees of freedom to get the critical value from the appropriate distribution. There are a few ways to get that.</p>
-<pre class="r"><code>newmod$df.residual</code></pre>
-<pre><code>## [1] 596</code></pre>
-<p><code>broom::glance()</code> creates one-row summaries of a model, where you can get the residual <span class="math inline">\(df\)</span>s and other things.</p>
-<pre class="r"><code>glance(newmod)</code></pre>
-<pre><code>##   r.squared adj.r.squared   sigma statistic      p.value df    logLik
-## 1 0.2473817     0.2435933 32.1701  65.30069 1.615362e-36  4 -2931.979
-##        AIC      BIC deviance df.residual
-## 1 5873.958 5895.943 616809.7         596</code></pre>
-<p>You can use this to find the t-value like so. This function returns the 97.5th quantile of the <code>t</code> distribution, which is the critical value of a two-tailed <span class="math inline">\(t\)</span>-test.</p>
-<pre class="r"><code>(critical &lt;- qt(p = 0.975, df = newmod$df.residual))</code></pre>
-<pre><code>## [1] 1.963952</code></pre>
-<p>You could use this critical value to create intervals with the results from <code>augment()</code>.</p>
-<pre class="r"><code>aug_predict &lt;- 
-  augment(newmod, newdata = new_x) %&gt;%
-  mutate(lower = .fitted - (critical * .se.fit),
-         upper = .fitted + (critical * .se.fit)) %&gt;%
-  print()</code></pre>
-<pre><code>##    libcon_self woman libcon_self.woman    .fitted  .se.fit      lower
-## 1            1     1                 1 -43.171895 4.347386 -51.709954
-## 2            2     1                 2 -30.931399 3.217043 -37.249519
-## 3            3     1                 3 -18.690904 2.267804 -23.144763
-## 4            4     1                 4  -6.450408 1.811208 -10.007534
-## 5            5     1                 5   5.790088 2.182196   1.504359
-## 6            6     1                 6  18.030583 3.096361  11.949478
-## 7            7     1                 7  30.271079 4.213893  21.995195
-## 8            1     0                 0 -41.465389 5.197930 -51.673876
-## 9            2     0                 0 -28.074222 3.924839 -35.782417
-## 10           3     0                 0 -14.683054 2.782163 -20.147089
-## 11           4     0                 0  -1.291887 2.006662  -5.232875
-## 12           5     0                 0  12.099280 2.064739   8.044231
-## 13           6     0                 0  25.490448 2.906853  19.781527
-## 14           7     0                 0  38.881615 4.072669  30.883087
-##         upper
-## 1  -34.633837
-## 2  -24.613280
-## 3  -14.237044
-## 4   -2.893282
-## 5   10.075816
-## 6   24.111688
-## 7   38.546963
-## 8  -31.256902
-## 9  -20.366026
-## 10  -9.219020
-## 11   2.649101
-## 12  16.154329
-## 13  31.199368
-## 14  46.880143</code></pre>
-<p>In short, you can get confidence intervals for a model prediction using this workflow:</p>
-<ul>
-<li>estimate model</li>
-<li>create a data frame for predictions</li>
-<li>generate predictions with confidence intervals</li>
-<li>plot</li>
-</ul>
-<p>It is similar to the <code>reg, margins, marginsplot</code> workflow in Stata, but you are allowed more flexibility with how you set up your new data for prediction purposes.</p>
-<p>When you need to create more complicated predictions, contrasts that show the <em>difference</em> between men and women, or the <em>marginal effect</em> of <code>woman</code> at different values of <code>libcon_self</code>, you’ll want a more powerful tool. You should packages such as the <code>margins</code> package (which is meant to approximate the interface of Stata’s <code>margins</code> workflow), <code>sjPlot</code>, <code>Zelig</code>, or <code>effects</code> (which is older but people still regularly advocated). I haven’t messed much with these packages, so I don’t have specific recommendations. That is because I tend to do uncertainty slightly differently…</p>
-<div id="uncertainty-by-simulation" class="section level2">
-<h2>Uncertainty by simulation</h2>
-<p>When <em>I</em> need to calculate complicated quantities of interest where the uncertainty intervals are weird to derive analytically, I often use simulations. This method is a bit more complicated, and I would not recommend it unless you are comfortable with matrix-form regression math. It is done by simulating coefficients from the model’s uncertainty estimates and using those to generate a distribution of predicted values. The workflow looks like this:</p>
-<ul>
-<li>Estimate a model.</li>
-<li>The model coefficients and variance-covariance matrix can be used to build a multivariate normal distribution of coefficients.</li>
-<li>Simulate lots of random coefficient vectors from this multivariate normal distribution</li>
-<li>Set up a dataset of predictor data and generate a predicted value for each draw of simulated coefficients. This gives you a distribution of predictions that follows the distribution of simulated coefficients.</li>
-<li>Perform your calculation-of-interest on each simulated set of predictions as needed. The uncertainty in your coefficients proliferates into your uncertainty about the eventual quantity-of-interest.</li>
-</ul>
-<p>This is essentially what the ye olde <code>Clarify</code> tool for Stata does. Here is what it might look like in R, using the same interval we’ve been constructing so far.</p>
-<pre class="r"><code># dataset
-library(mvtnorm)
-
-# predictor matrix (with column of 1s for the intercept)
-# You&#39;ll get familiar with this in 813
-design &lt;- as.matrix(cbind(int = 1, new_x))
-
-# (k x r) matrix of simulated coefficients
-# r = simulation itereations
-# transpose to make a matrix of column vectors
-matrix_of_draws &lt;- t(rmvnorm(n = 10000, 
-                             mean = coef(newmod), 
-                             sigma = vcov(newmod)))
-
-# predicted value
-preds &lt;- design %*% coef(newmod)
-
-# interval bounds: 
-# grab the 2.5th, 97.5th quantiles of the prediction distribution
-sim_preds &lt;- design %*% matrix_of_draws
-intervals &lt;- apply(sim_preds, 1, quantile, c(.025, .975)) %&gt;%
-  t() %&gt;% # transpose
+lin_preds &lt;- 
+  predict(therm_mod, newdata = id_frame, interval = &quot;confidence&quot;) %&gt;%
   as_data_frame() %&gt;%
-  setNames(c(&quot;lower&quot;, &quot;upper&quot;)) 
+  print() </code></pre>
+<pre><code>## # A tibble: 7 x 3
+##      fit    lwr    upr
+##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 -43.1  -49.6  -36.5 
+## 2 -30.0  -34.9  -25.1 
+## 3 -17.0  -20.5  -13.5 
+## 4 - 3.96 - 6.58 - 1.34
+## 5   9.08   6.13  12.0 
+## 6  22.1   17.9   26.3 
+## 7  35.2   29.4   40.9</code></pre>
+<pre class="r"><code># predictions from intercepts model
+# predict() is smart enough to factorize your predictor variable
+#   if you factorized it in the model
 
-# join into original prediction data
-sim_predictions &lt;- new_x %&gt;%
-  mutate(pred = preds,
-         lower = intervals$lower,
-         upper = intervals$upper) %&gt;%
-  mutate_if(is.numeric, round, 3) %&gt;% 
-  print()  </code></pre>
-<pre><code>## # A tibble: 14 x 6
-##    libcon_self woman `libcon_self:woman`   pred  lower  upper
-##          &lt;dbl&gt; &lt;dbl&gt;               &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1        1.00  1.00                1.00 -43.2  -51.7  -34.7 
-##  2        2.00  1.00                2.00 -30.9  -37.2  -24.6 
-##  3        3.00  1.00                3.00 -18.7  -23.1  -14.2 
-##  4        4.00  1.00                4.00 - 6.45 -10.0  - 2.87
-##  5        5.00  1.00                5.00   5.79   1.37  10.1 
-##  6        6.00  1.00                6.00  18.0   11.7   24.1 
-##  7        7.00  1.00                7.00  30.3   21.6   38.6 
-##  8        1.00  0                   0    -41.5  -51.8  -31.2 
-##  9        2.00  0                   0    -28.1  -35.8  -20.3 
-## 10        3.00  0                   0    -14.7  -20.1  - 9.22
-## 11        4.00  0                   0    - 1.29 - 5.19   2.67
-## 12        5.00  0                   0     12.1    8.12  16.1 
-## 13        6.00  0                   0     25.5   19.8   31.2 
-## 14        7.00  0                   0     38.9   30.8   46.8</code></pre>
-<pre class="r"><code># compare to analytic intervals
-compare_ints &lt;- bind_rows(mutate(predictions, method = &quot;predict()&quot;), 
-                          mutate(sim_predictions, method = &quot;Simulation&quot;))
+int_preds &lt;- 
+  predict(int_mod, newdata = id_frame, interval = &quot;confidence&quot;) %&gt;%
+  as_data_frame() %&gt;%
+  print()</code></pre>
+<pre><code>## # A tibble: 7 x 3
+##      fit    lwr    upr
+##    &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 -33.6  -51.8  -15.3 
+## 2 -26.7  -34.3  -19.1 
+## 3 -20.5  -27.6  -13.3 
+## 4 - 6.69 -11.2  - 2.23
+## 5  11.7    5.49  17.9 
+## 6  25.0   19.2   30.8 
+## 7  26.7   11.4   42.0</code></pre>
+<pre class="r"><code># combine!
+compare_mods &lt;- 
+  bind_rows(mutate(lin_preds, libcon_self = id_frame$libcon_self, 
+                              mod = &quot;linear&quot;), 
+            mutate(int_preds, libcon_self = id_frame$libcon_self, 
+                              mod = &quot;intercepts&quot;)) %&gt;%
+  print()</code></pre>
+<pre><code>## # A tibble: 14 x 5
+##       fit    lwr    upr libcon_self mod       
+##     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;       &lt;int&gt; &lt;chr&gt;     
+##  1 -43.1  -49.6  -36.5            1 linear    
+##  2 -30.0  -34.9  -25.1            2 linear    
+##  3 -17.0  -20.5  -13.5            3 linear    
+##  4 - 3.96 - 6.58 - 1.34           4 linear    
+##  5   9.08   6.13  12.0            5 linear    
+##  6  22.1   17.9   26.3            6 linear    
+##  7  35.2   29.4   40.9            7 linear    
+##  8 -33.6  -51.8  -15.3            1 intercepts
+##  9 -26.7  -34.3  -19.1            2 intercepts
+## 10 -20.5  -27.6  -13.3            3 intercepts
+## 11 - 6.69 -11.2  - 2.23           4 intercepts
+## 12  11.7    5.49  17.9            5 intercepts
+## 13  25.0   19.2   30.8            6 intercepts
+## 14  26.7   11.4   42.0            7 intercepts</code></pre>
+<p>When you have these predictions as a data frame, you could plot!</p>
+<pre class="r"><code># plot points with dodging
+# suppress minor grid
 
-ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
-  facet_wrap(~ method) +
-  geom_ribbon(aes(ymin = lower, ymax = upper, fill = as.factor(woman)),
-              color = NA, alpha = 0.5) +
-  geom_line(aes(color = as.factor(woman))) +
-  scale_color_brewer(palette = &quot;Accent&quot;) +
-  scale_fill_brewer(palette = &quot;Accent&quot;) +
-  theme_bw() +
-  labs(title = &quot;Comparison of analytic and simulated CIs&quot;,
-       x = &quot;Ideological Self-Placement&quot;,
-       y = &quot;Relative Candidate Thermometer&quot;,
-       color = &quot;Woman&quot;,
-       fill = &quot;Woman&quot;)</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
-<p>And <em>violà</em>, these intervals look just about the same as the others.</p>
-<p>Technical disclaimer: You should be careful not to give the multivariate distribution of coefficients a Bayesian interpretation. This distribution is handy only insofar as you can use it to create a set of predictions whose inner 95% approximate the analytic CIs from model predictions. That is not the same as saying that the coefficient distribution represents “a distribution of plausible coefficient values”—that would be a posterior distribution, which you only obtain if you had prior distributions on your parameter values. My affinity for this method of uncertainty probably primed me for becoming interested in Bayesian analysis:</p>
+ggplot(data = compare_mods, aes(x = libcon_self, y = fit)) +
+  geom_hline(yintercept = 0) +
+  geom_pointrange(aes(ymin = lwr, ymax = upr, shape = mod),
+                  position = position_dodge(width = 0.25),
+                  fill = &quot;white&quot;) +
+  scale_x_continuous(breaks = 1:7) +
+  scale_shape_manual(values = c(16, 21)) +
+  coord_cartesian(ylim = c(-50, 50)) +
+  labs(x = &quot;Ideological Self-Placement&quot;,
+       y = &quot;Relative Candidate Thermometer\n(Republican minus Democrat)&quot;,
+       shape = &quot;Model&quot;) +
+  theme(panel.grid.minor = element_blank())</code></pre>
+<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p>I’ll leave it to you to interpret these models and assess the pros and cons of each.</p>
+<div id="packages-for-model-predictions" class="section level2">
+<h2>Packages for model predictions</h2>
+<p>For more complex post-estimation graphics (e.g. first differences, marginal effects), there are some packages that make your job a little easier. I won’t cover them all (because not everyone engages in these types of predictions), but I’ll lay some out:</p>
 <ul>
-<li>I thought that it was intuitive to think about a distribution of plausible coefficient values (which Bayes can give you)</li>
-<li>I liked that you could use a set of parameter samples to generate complicated quantities of interest that necessarily accounted for parameter uncertainty. This is how most Bayesian estimation works: generating a set of posterior parameter samples using cool algorithms.</li>
+<li>The <code>broom</code> package (where <code>tidy()</code> comes from) provides the <code>augment</code> function, for augmenting a data frame with predictions from an accompanying model. This works a bit like <code>predict()</code>, but it returns tidy data frames. <code>augment</code> gives you a “standard error of the fit” variable rather than separate variables for upper and lower boundaries, but you can use the standard error to calculate however wide a confidence interval you desire.</li>
+<li>The <code>margins</code> package by Thomas Leeper is meant to imitate the workflow of Stata’s <code>margins</code> and <code>marginsplot</code> workflow.</li>
+<li><code>sjPlot</code></li>
+<li><code>Zelig</code>, a Gary King project, tries to standardize model evaluation and visualization across model types</li>
+<li><code>effects</code>, which is a little older but still commonly advocated</li>
 </ul>
+<p>I prefer using <code>broom</code> because it is meant to work in a “tidy” workflow, but you have to do the work to generate your own critical value for generating a confidence interval. I don’t find this to be an onerous task, since I believe you should be actively thinking about your critical values anyway. I don’t use this kind of stuff much, however, because I tend to do uncertainty by simulation or with a Bayesian model. Needless to say, however, there are plenty of documents and examples on the web for these packages.</p>
 </div>
 </div>
 <div id="generalized-linear-models" class="section level1">
 <h1>Generalized linear models</h1>
-<p>Generalized linear models (such as logit, poisson regression, negative binomial regression, and so on) are similar to linear models in R. The main difference is the need to use inverse-link functions.</p>
-<p>Some background. We’ll rewrite the linear model slightly. Rather than normally distributed residuals that are mean zero, let’s talk about linear regression as a “normal model,” where each <span class="math inline">\(y\)</span> observation is a normal draw from a mean <span class="math inline">\(\mu_{i}\)</span>, where <span class="math inline">\(\mu_{i}\)</span> is the expected value of <span class="math inline">\(y_{i}\)</span> conditional on its corresponding <span class="math inline">\(X_{i}\)</span>.</p>
-<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Normal}\left( \mu_{i}, \, \sigma \right) \\[6pt] \mu_{i} &amp;= X_{i}\beta \end{align}\)</span></p>
-<p>A generalized linear model is similar, but we suspect that <span class="math inline">\(y_{i}\)</span> is distributed according to some non-normal distribution. We are still interested in predicting the expected value of <span class="math inline">\(y\)</span>, which is still <span class="math inline">\(\mu_{i}\)</span>.</p>
-<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Some \, Distribution}\left( \mu_{i} \right) \end{align}\)</span></p>
-<p>Because we use GLMs for situations where covariates are <em>non-linearly</em> related to <span class="math inline">\(y\)</span>, the linear component of the regression (<span class="math inline">\(\alpha + \beta_{1}x_{1} + \beta_{2}x_{2}\ldots\)</span>), must be transformed in order to estimate <span class="math inline">\(\mu_{i}\)</span>.</p>
-<p><span class="math inline">\(\begin{align} \mu_{i} &amp;= f\left(X_{i}\beta\right) \end{align}\)</span></p>
-<p>This transformation happens by way of a “link function.” The link function transforms the expected value of <span class="math inline">\(y\)</span> to the linear scale, and the inverse link function transforms the linear scale to the <span class="math inline">\(y\)</span> scale.</p>
-<p><span class="math inline">\(\begin{align} \mathrm{link}(\mu_{i}) &amp;= X_{i}\beta \\[6pt] \mu_{i} &amp;= \mathrm{link}^{-1}\left( X_{i}\beta \right) \end{align}\)</span></p>
-<p>To summarize, in linear regression, the prediction formula is directly related to <span class="math inline">\(\hat{y}\)</span>. Constant changes in predictors are related to constant changes in the response variable. In a GLM, the prediction formula may be on some unintuitive scale, so we convert it to an intuitive scale using an inverse link function. We can analyze and visualize GLMs in R with one additional step: transforming predictions from the linear equation using the inverse link function.</p>
+<p>Generalized linear models (GLMs, such as logit, poisson regression, negative binomial regression, and so on) are similar to linear models, but they are designed for nonlinear relationships. GLMs and LMs are similar, but the following key differences distinguish the two.</p>
+<div id="distribution-of-the-dependent-variable" class="section level2">
+<h2>Distribution of the dependent variable</h2>
+<p>In a linear model, residuals are assumed to be normally distributed. Another way to write this is that <span class="math inline">\(y_{i}\)</span> itself is normally distributed around the expected value of <span class="math inline">\(y\)</span>, conditional on <span class="math inline">\(x\)</span>. Call this conditional mean <span class="math inline">\(\mu_{i}\)</span>.</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Normal}\left( \mu_{i}, \sigma \right) \\[6pt] \mu_{i} &amp;= \alpha + \beta x_{i} \end{align}\)</span></p>
+<p>This is how you write a linear model as a normally distributed <span class="math inline">\(y\)</span>. For generalized linear models, it’s the same basic idea, except the outcome distribution is non-normal (we’ll use <span class="math inline">\(\tau\)</span> to indicate a dispersion parameter).</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Some \, Distribution}\left( \mu_{i}, \tau \right) \end{align}\)</span></p>
+</div>
+<div id="linearity" class="section level2">
+<h2>Linearity</h2>
+<p>The other component that sets GLMS apart is the linearity of the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</p>
+<ul>
+<li>In a linear model: <span class="math inline">\(x\)</span> is assumed to have a linear effect on <span class="math inline">\(y\)</span>. Coefficients describe how <span class="math inline">\(x\)</span> impacts <span class="math inline">\(y\)</span>.</li>
+<li>In a GLM: <span class="math inline">\(x\)</span> has a linear impact on a <em>transformation</em> of <span class="math inline">\(y\)</span>, which makes <span class="math inline">\(x\)</span> non-linearly related to <span class="math inline">\(y\)</span>. Coefficients describe how <span class="math inline">\(x\)</span> impacts the transformed <span class="math inline">\(y\)</span>.</li>
+</ul>
+<p>So the full GLM is like the Normal model, but we use a different distribution, and <span class="math inline">\(\mu_{i}\)</span> isn’t linearly related to <span class="math inline">\(x\)</span>.</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Some \, Distribution}\left( \mu_{i}, \tau \right) \\[6pt] \mathcal{f}\left( \mu_{i} \right) &amp;= \alpha + \beta x_{i} \\[6pt] \mu_{i} &amp;= f^{-1}\left( \alpha + \beta x_{i} \right) \end{align}\)</span></p>
+<p>The transformation of <span class="math inline">\(y\)</span> is called a <em>link function</em>. We call these “generalized linear models” because there <em>is</em> a linear component, but it’s a linear relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(\mathrm{link}(y)\)</span>. And it’s <em>generalized</em> because a linear model fits into this framework as well, but the link function is simply <span class="math inline">\(1 \times y\)</span>.</p>
+</div>
 <div id="an-example-using-logit" class="section level2">
 <h2>An example using logit</h2>
-<p>We’ll use logistic regression to predict a vote for the Republican presidential candidate using ideological self-placement and gender as covariates. Here are the data from 1996 only.</p>
-<pre class="r"><code>logit_data &lt;- anes %&gt;%
+<p>We’ll use logistic regression to predict a vote for the Republican presidential candidate using ideological self-placement and gender as covariates.</p>
+<p>Fitting this into the GLM framework…</p>
+<ul>
+<li>The outcome distribution is Bernoulli. The dependent variable <span class="math inline">\(y\)</span> is a 1 or a 0, “success” or “failure”.</li>
+<li>the link function is the logit function.</li>
+</ul>
+<p>Here’s the math. We’ll use <span class="math inline">\(y_{i}\)</span> to indicate the observed vote for voter <span class="math inline">\(i\)</span>, <span class="math inline">\(\pi_{i}\)</span> is the probability that <span class="math inline">\(i\)</span> votes for the Republican.</p>
+<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Bernoulli}(\pi_{i}) \\[6pt] \ln \left( \frac{\pi_{i}}{1 - \pi_{i}} \right) &amp;= \alpha + \beta_{1} x_{1i} + \beta_{2} x_{2i} + \ldots \end{align}\)</span></p>
+<p>Let’s do this in R.</p>
+<p>Here are the data from 1996 only.</p>
+<pre class="r"><code># vote, ideology, and gender data from 1996
+
+logit_data &lt;- anes %&gt;%
   filter(cycle == 1996) %&gt;%
   select(vote, libcon_self, gender) %&gt;%
   print()</code></pre>
@@ -974,7 +802,11 @@ ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
 ## 10 &lt;NA&gt;                        7.00 Men   
 ## # ... with 1,704 more rows</code></pre>
 <p>Let’s transform this data to make it play nicely with modeling math.</p>
-<pre class="r"><code>logit_data &lt;- logit_data %&gt;%
+<pre class="r"><code># convert rvote to a dummy (treat a logical as a number, 0 or 1)
+# same with gender
+# center the ideology scale on 4, so the constant (x = 0) represents moderates
+
+logit_data &lt;- logit_data %&gt;%
   mutate(rvote = as.numeric(vote == &quot;Republican Candidate&quot;),
          woman = as.numeric(gender == &quot;Women&quot;),
          ideo = libcon_self - 4) %&gt;%
@@ -994,92 +826,106 @@ ggplot(compare_ints, aes(x = libcon_self, y = pred)) +
 ## 10 &lt;NA&gt;                        7.00 Men    NA     0     3.00
 ## # ... with 1,704 more rows</code></pre>
 <p>You’ll see <code>NA</code>s in the data. Cases with missing values are automatically dropped during estimation. You may cover missing data imputation in your maximum likelihood course.</p>
-<p>The estimation formula in R looks like <code>lm()</code>, but we specify a family of probability distributions. Here we’ll use the binomial family, which automatically uses the logit link function to transform the probability of a success (nonlinear) into the log odds of a success (linear). Technically speaking, <span class="math inline">\(y\)</span> observations are successes or failures (1s or 0s) based on an underlying probability <span class="math inline">\(\pi\)</span>, which is related to the prediction formula via the link function (the logit function):</p>
-<p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Bernoulli}(\pi_{i}) \\[6pt] \mathrm{logit}\left( \pi_{i} \right) &amp;= X_i \beta, \text{ or}\ldots \\[6pt] \pi_{i} &amp;= \mathrm{logit}^{-1}\left( X_{i}\beta \right) \end{align}\)</span></p>
-<p>Here we predict Republican voting using liberal-conservative ideology and gender in a logit model in R. We’ve centered the liberalism scale on 4 (moderate) so the constant represents the expected value for moderates who are also men.</p>
-<pre class="r"><code>vote_logit &lt;- glm(rvote ~ ideo + woman,
-                  family = &quot;binomial&quot;,
+<p>The estimation formula in R looks like <code>lm()</code>, but we specify a family of probability distributions. We use “binomial,” which is how you do logit. (Binomial is a Bernoulli for multiple observations).</p>
+<pre class="r"><code># estimate the model with glm() and binomial distribution
+
+vote_logit &lt;- glm(rvote ~ ideo + woman + ideo*woman,
+                  family = binomial(link = &quot;logit&quot;),
                   data = logit_data)
+
 summary(vote_logit)</code></pre>
 <pre><code>## 
 ## Call:
-## glm(formula = rvote ~ ideo + woman, family = &quot;binomial&quot;, data = logit_data)
+## glm(formula = rvote ~ ideo + woman + ideo * woman, family = binomial(link = &quot;logit&quot;), 
+##     data = logit_data)
 ## 
 ## Deviance Residuals: 
 ##     Min       1Q   Median       3Q      Max  
-## -2.3773  -0.8691  -0.2913   0.6119   2.5207  
+## -2.3949  -0.8651  -0.2842   0.6189   2.5415  
 ## 
 ## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -0.774682   0.135647  -5.711 1.12e-08 ***
-## ideo         1.179816   0.081087  14.550  &lt; 2e-16 ***
-## woman       -0.004324   0.172454  -0.025     0.98    
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -0.78991    0.15241  -5.183 2.18e-07 ***
+## ideo         1.19970    0.12051   9.955  &lt; 2e-16 ***
+## woman        0.01939    0.20222   0.096    0.924    
+## ideo:woman  -0.03668    0.16285  -0.225    0.822    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## (Dispersion parameter for binomial family taken to be 1)
 ## 
 ##     Null deviance: 1185.24  on 857  degrees of freedom
-## Residual deviance:  833.34  on 855  degrees of freedom
+## Residual deviance:  833.29  on 854  degrees of freedom
 ##   (856 observations deleted due to missingness)
-## AIC: 839.34
+## AIC: 841.29
 ## 
 ## Number of Fisher Scoring iterations: 5</code></pre>
-<p>We can create coefficient plots and tables as before, so I won’t demonstrate those. I will say that when you want to compare GLMs to one another, it is usually smarter to compare predictions or model fit statistics than it is to compare coefficients themselves. Because coefficients are on unintuitive scales and sometimes involve ancillary parameters that help adjust the fit (such as cutoff parameters in ordinal logit), small changes to the model may change coefficients in ways that <em>look</em> large, but the effects on the actual predicted value may be negligible.</p>
+<p>We can create coefficient plots and tables as before, so I won’t demonstrate those. I will say that when you want to compare GLMs to one another, it is usually smarter to compare predictions or model fit statistics than it is to compare coefficients themselves. Because coefficients are on unintuitive scales (the “link scale”) and sometimes involve ancillary parameters that help adjust the fit (such as cutoff parameters in ordinal logit), small changes to the model may change coefficients in ways that <em>look</em> large, but the effects on the actual predicted value may be negligible.</p>
 <p>Visualizing the predictions from a GLM is similar to linear modeling, but we add one step.</p>
 <ul>
-<li>Create data for simulated predictions</li>
+<li>Create counterfactual data for simulated predictions</li>
 <li>Generate linear predictions using model coefficients</li>
-<li><em>Transform predictions with inverse link function</em></li>
+<li><em>Transform linear predictions with inverse link function</em></li>
 <li>Plot as desired</li>
 </ul>
+<p>Here we only use coefficients to generate the linear predictions from the model. The predictions and bounds are on the link scale (log odds ratios).</p>
 <pre class="r"><code># new data frame of values -3 through 3, 
 #   which is the rescaled ideology scale
+
 # for GLMs, the critical value is always 1.96 
-# (assumes normal coefficients on the link scale)
+#   (assumes normal coefficients on the link scale)
+
+# here are predictions on the link scale (for logit: the log-odds scale)
+# using the augment() function from the broom package
+
 logit_preds &lt;- data_frame(ideo = rep(-3:3, 2),
-                          woman = c(rep(1, 7), rep(0, 7))) %&gt;%
+                          woman = c(rep(1, 7), rep(0, 7)),
+                          `ideo:woman` = ideo * woman) %&gt;%
   augment(vote_logit, newdata = .) %&gt;%
   mutate(lower = .fitted - (1.96 * .se.fit),
          upper = .fitted + (1.96 * .se.fit)) %&gt;% 
   print()</code></pre>
-<pre><code>##    ideo woman    .fitted   .se.fit      lower      upper
-## 1    -3     1 -4.3184547 0.3090909 -4.9242728 -3.7126366
-## 2    -2     1 -3.1386383 0.2366783 -3.6025278 -2.6747488
-## 3    -1     1 -1.9588219 0.1721805 -2.2962957 -1.6213481
-## 4     0     1 -0.7790055 0.1281627 -1.0302044 -0.5278066
-## 5     1     1  0.4008109 0.1278878  0.1501509  0.6514709
-## 6     2     1  1.5806273 0.1715661  1.2443578  1.9168969
-## 7     3     1  2.7604437 0.2359335  2.2980141  3.2228734
-## 8    -3     0 -4.3141310 0.3282736 -4.9575472 -3.6707147
-## 9    -2     0 -3.1343146 0.2546088 -3.6333479 -2.6352812
-## 10   -1     0 -1.9544981 0.1871839 -2.3213787 -1.5876176
-## 11    0     0 -0.7746817 0.1356468 -1.0405494 -0.5088141
-## 12    1     0  0.4051347 0.1221159  0.1657875  0.6444819
-## 13    2     0  1.5849511 0.1567629  1.2776959  1.8922063
-## 14    3     0  2.7647675 0.2176854  2.3381041  3.1914310</code></pre>
-<p>If we don’t transform logit predictions, then we get predictions on the log odds scale. That’s how we can have negative predicted values, for example. We could plot them, and they’d look like straight lines (just like OLS), but log odds are hard to interpret. Instead, we will transform the log odds predictions using the <code>plogis()</code> function, which is the inverse of the logit link function (a.k.a. the cumulative distribution function of the logistic distribution).</p>
-<pre class="r"><code>logit_preds &lt;- logit_preds %&gt;%
+<pre><code>##    ideo woman ideo.woman    .fitted   .se.fit      lower      upper
+## 1    -3     1         -3 -4.2595782 0.4024584 -5.0483967 -3.4707596
+## 2    -2     1         -2 -3.0965603 0.2997848 -3.6841384 -2.5089821
+## 3    -1     1         -1 -1.9335424 0.2043722 -2.3341119 -1.5329728
+## 4     0     1          0 -0.7705245 0.1329063 -1.0310208 -0.5100281
+## 5     1     1          1  0.3924935 0.1325109  0.1327721  0.6522149
+## 6     2     1          2  1.5555114 0.2036006  1.1564543  1.9545685
+## 7     3     1          3  2.7185293 0.2989084  2.1326689  3.3043897
+## 8    -3     0          0 -4.3890098 0.4698294 -5.3098755 -3.4681441
+## 9    -2     0          0 -3.1893107 0.3547655 -3.8846511 -2.4939703
+## 10   -1     0          0 -1.9896116 0.2449925 -2.4697968 -1.5094264
+## 11    0     0          0 -0.7899125 0.1524070 -1.0886302 -0.4911947
+## 12    1     0          0  0.4097866 0.1244120  0.1659392  0.6536340
+## 13    2     0          0  1.6094857 0.1917619  1.2336324  1.9853390
+## 14    3     0          0  2.8091848 0.2951453  2.2307000  3.3876696</code></pre>
+<p>If we don’t transform the linear predictions, then we get predictions on the link scale (the log odds scale in a logit model). That’s how we can have negative predicted values, for example. We could plot them, and they’d look like straight lines (just like OLS), but log odd ratios are hard to interpret. Instead, we will transform the log odds to <em>predicted probabilities</em> using the <code>plogis()</code> function, which is the inverse of the logit link function (a.k.a. the “logistic function,” which happens to be the cumulative distribution function of the logistic distribution).</p>
+<pre class="r"><code># transform log odds to probabilities
+
+logit_preds &lt;- logit_preds %&gt;%
   select(-.se.fit) %&gt;%
   # mutate only the selected variables
-  mutate_at(vars(.fitted:upper), plogis) %&gt;%
+  mutate_at(vars(.fitted, upper, lower), plogis) %&gt;%
   print()</code></pre>
-<pre><code>##    ideo woman    .fitted       lower      upper
-## 1    -3     1 0.01314535 0.007215567 0.02383128
-## 2    -2     1 0.04154130 0.026531627 0.06447992
-## 3    -1     1 0.12359460 0.091430211 0.16501903
-## 4     0     1 0.31453426 0.263044471 0.37102862
-## 5     1     1 0.59888247 0.537467355 0.65734186
-## 6     2     1 0.82929334 0.776321638 0.87179199
-## 7     3     1 0.94050047 0.908712433 0.96168603
-## 8    -3     0 0.01320156 0.006981072 0.02482623
-## 9    -2     0 0.04171380 0.025747126 0.06690201
-## 10   -1     0 0.12406371 0.089367797 0.16971935
-## 11    0     0 0.31546722 0.261044007 0.37547157
-## 12    1     0 0.59992069 0.541352198 0.65576589
-## 13    2     0 0.82990457 0.782057305 0.86900689
-## 14    3     0 0.94074197 0.911984019 0.96051053</code></pre>
-<pre class="r"><code>logit_preds %&gt;%
+<pre><code>##    ideo woman ideo.woman    .fitted       lower      upper
+## 1    -3     1         -3 0.01393143 0.006378669 0.03015576
+## 2    -2     1         -2 0.04324936 0.024503313 0.07523089
+## 3    -1     1         -1 0.12635901 0.088336955 0.17755914
+## 4     0     1          0 0.31636567 0.262886251 0.37518693
+## 5     1     1          1 0.59688280 0.533144341 0.65750940
+## 6     2     1          2 0.82570832 0.760687844 0.87594393
+## 7     3     1          3 0.93811120 0.894038109 0.96457910
+## 8    -3     0          0 0.01226082 0.004918234 0.03023234
+## 9    -2     0          0 0.03956997 0.020141001 0.07628197
+## 10   -1     0          0 0.12029796 0.078002845 0.18102382
+## 11    0     0          0 0.31218746 0.251876301 0.37961216
+## 12    1     0          0 0.60103671 0.541389862 0.65782892
+## 13    2     0          0 0.83333997 0.774453699 0.87924916
+## 14    3     0          0 0.94317014 0.902972705 0.96731695</code></pre>
+<pre class="r"><code># modify data and plot
+
+logit_preds %&gt;%
   mutate(woman = case_when(woman == 1 ~ &quot;Women&quot;,
                            woman == 0 ~ &quot;Men&quot;)) %&gt;%
   ggplot(aes(x = ideo, y = .fitted)) +
@@ -1100,10 +946,10 @@ logit_preds &lt;- data_frame(ideo = rep(-3:3, 2),
   labs(color = NULL,
        x = &quot;Ideological Self-Placement&quot;,
        y = &quot;Probability of Republican Vote&quot;) +
-  theme_bw() +
   theme(panel.grid.minor = element_blank())</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
-<p>Note how the predictions are non-linear. The predictions approach 0% and 100% but never exceed them. These models are useful because they accurately capture these sorts of ceiling and floor effects.</p>
+<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>Note how the predictions are non-linear. The predictions approach 0% and 100% but never exceed them. GLMs are useful because they accurately capture these sorts of ceiling and floor effects.</p>
+<p>There are <em>loads</em> of GLMs out there, because there are loads of ways your data aren’t perfectly normal and linearly related. But they all fit the same basic framework: <span class="math inline">\(y\)</span> follows some distribution, and you need some link function to describe how <span class="math inline">\(y\)</span> is related to <span class="math inline">\(x\)</span>.</p>
 </div>
 </div>
 <div id="model-diagnostics" class="section level1">
@@ -1111,26 +957,23 @@ logit_preds &lt;- data_frame(ideo = rep(-3:3, 2),
 <p>The model objects created by <code>lm()</code> and <code>glm()</code> do include some model diagnosis tools, such as F-statistics, <span class="math inline">\(R^{2}\)</span> values, deviance, AIC, so on. We’ll walk through some here.</p>
 <p>Some diagnostics for linear models can be easily visualized using <code>plot()</code>, including quantile plots, and analyses of residuals.</p>
 <pre class="r"><code>plot(therm_mod)</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-52-1.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-52-2.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-52-3.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-52-4.png" width="672" /></p>
+<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-38-1.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-38-2.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-38-3.png" width="672" /><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-38-4.png" width="672" /></p>
 <p>There are certain functions and packages that can be used to generate model fit statistics. I think the easiest tool for comparing models is <code>broom::glance()</code>. Just like <code>broom::tidy()</code>, you can stack the data frames created by <code>glance()</code> to compare models easily or plot the statistics.</p>
 <pre class="r"><code>bind_rows(mutate(glance(therm_mod), mod = &quot;LibCon&quot;), 
           mutate(glance(dummy_mod), mod = &quot;Dummies&quot;),
-          mutate(glance(int_mod), mod = &quot;Intercepts&quot;),
-          mutate(glance(newmod), mod = &quot;Interactions&quot;))</code></pre>
+          mutate(glance(int_mod), mod = &quot;Intercepts&quot;))</code></pre>
 <pre><code>##   r.squared adj.r.squared    sigma statistic      p.value df    logLik
 ## 1 0.2415795     0.2403112 32.23982 190.48075 8.179967e-38  2 -2934.283
 ## 2 0.2503635     0.2427786 32.18742  33.00834 2.220915e-34  7 -2930.788
 ## 3 0.2507613     0.2419170 32.18742  28.35287 9.973339e-34  7 -2930.788
-## 4 0.2473817     0.2435933 32.17010  65.30069 1.615362e-36  4 -2931.979
-##        AIC      BIC deviance df.residual          mod
-## 1 5874.566 5887.757 621564.9         598       LibCon
-## 2 5877.576 5912.752 614366.0         593      Dummies
-## 3 5877.576 5912.752 614366.0         593   Intercepts
-## 4 5873.958 5895.943 616809.7         596 Interactions</code></pre>
+##        AIC      BIC deviance df.residual        mod
+## 1 5874.566 5887.757 621564.9         598     LibCon
+## 2 5877.576 5912.752 614366.0         593    Dummies
+## 3 5877.576 5912.752 614366.0         593 Intercepts</code></pre>
 <p>This works for GLMs as well, but maximum likelihood models have some different fit statistics than least-squares models. If you want to compare linear and nonlinear models, you could estimate the linear model as a GLM model of Gaussian family with an “identity” link.</p>
 <pre class="r"><code>glance(vote_logit)</code></pre>
 <pre><code>##   null.deviance df.null    logLik      AIC      BIC deviance df.residual
-## 1      1185.241     857 -416.6693 839.3385 853.6023 833.3385         855</code></pre>
+## 1      1185.241     857 -416.6439 841.2877 860.3061 833.2877         854</code></pre>
 <p>Some additional tips and tools.</p>
 <ul>
 <li>Some of these diagnostics will show an improvement in model fit even if the improvement comes from fitting noise (such as <span class="math inline">\(R^{2}\)</span>). These diagnostics are statistics that take a distribution, so you want to compare models using a statistical comparison—i.e. is the fit improvement <em>enough</em> given that you’ve added an extra variable to the model. Examples include F-tests and likelihood-ratio tests. If you go down this route, you might check out tools such as <code>epicalc::lrtest()</code> or the <code>lmtest</code> package. Other packages for model assistance (such as <code>arm</code> or <code>rms</code>) may have similar tools as well. Other diagnostic measures will penalize you for adding variables on the front-end, such as BIC, so they don’t require formal statistical tests.</li>
@@ -1141,7 +984,7 @@ logit_preds &lt;- data_frame(ideo = rep(-3:3, 2),
 </div>
 <div id="intermediate-r-tricks" class="section level1">
 <h1>Intermediate R tricks</h1>
-<p>Now we will quickly introduce some more nitty-gritty R tricks. These are not essential for the tasks you are likely to do for this class. But over the long run, you will be a much more efficient R user if you take these concepts seriously.</p>
+<p>Now we will quickly introduce some more nitty-gritty R tricks. These may not be essential for the problem set, but over the long run, you will be a much more efficient R user if you take these concepts seriously.</p>
 <div id="type-coercion" class="section level2">
 <h2>Type coercion</h2>
 <p>As we covered early in the course, there are a few different data types in R: logical, numeric, factor, and character. Data can be <em>coerced</em> from one type to another with <code>as.type()</code> functions, where <code>type</code> refers to the resulting data type.</p>
@@ -1153,10 +996,8 @@ as.character(TRUE)</code></pre>
 as.character(c(1, 2, 3))</code></pre>
 <pre><code>## [1] &quot;1&quot; &quot;2&quot; &quot;3&quot;</code></pre>
 <pre class="r"><code># factor to character
-(F &lt;- factor(c(&quot;hello&quot;, &quot;world&quot;)))</code></pre>
-<pre><code>## [1] hello world
-## Levels: hello world</code></pre>
-<pre class="r"><code>as.character(F)</code></pre>
+F &lt;- factor(c(&quot;hello&quot;, &quot;world&quot;))
+as.character(F)</code></pre>
 <pre><code>## [1] &quot;hello&quot; &quot;world&quot;</code></pre>
 <p>Converting to factor is similar. Each unique value is given its own factor level, and the order of levels is assigned alphabetically unless specified with <code>factor(..., levels = c(...))</code>.</p>
 <pre class="r"><code>as.factor(c(TRUE, FALSE))</code></pre>
@@ -1278,11 +1119,14 @@ anes_list &lt;- split(anes, anes$cycle)</code></pre>
 ## 5     5     5     5</code></pre>
 <p>An <code>apply()</code> function takes an object, and applies a function across its dimension(s). This is easier to explain using an example: here, we will apply the <code>mean</code> function to the rows and columns of this <code>df</code> object.</p>
 <pre class="r"><code># 1 = row
+# get the mean of every row
 apply(df, 1, mean)</code></pre>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>It returns an object the same length as the number of rows in the object, containing the result of the <code>mean()</code> function for each row.</p>
 <p>Here it is for each column.</p>
-<pre class="r"><code>apply(df, 2, mean)</code></pre>
+<pre class="r"><code># 2 = columns
+# get the mean of every column
+apply(df, 2, mean)</code></pre>
 <pre><code>## a b c 
 ## 3 3 3</code></pre>
 <p>You could pass a user-defined function to <code>apply()</code>, or you could define a function within <code>apply()</code> using “anonymous functions.” Example:</p>
@@ -1295,14 +1139,15 @@ apply(df, 1, mean)</code></pre>
 ## 3     3     3     3
 ## 4     4     4     4
 ## 5     5     5     5</code></pre>
-<pre class="r"><code>apply(df, 2, function(x) {x * x})</code></pre>
+<pre class="r"><code># apply x * x to every column
+apply(df, 2, function(x) {x * x})</code></pre>
 <pre><code>##       a  b  c
 ## [1,]  1  1  1
 ## [2,]  4  4  4
 ## [3,]  9  9  9
 ## [4,] 16 16 16
 ## [5,] 25 25 25</code></pre>
-<p>This anonymous basically applies the function <code>x^2</code> to each column in <code>df</code>.</p>
+<p>This anonymous function applies the function <code>x^2</code> to each column in <code>df</code>.</p>
 <p>There are a few types of apply functions, but you’re only likely to use a few of them.</p>
 <ul>
 <li><code>apply</code>: apply a function over the margins of an object</li>
@@ -1310,7 +1155,11 @@ apply(df, 1, mean)</code></pre>
 <li><code>lapply</code>: apply for each element in a list</li>
 </ul>
 <p>Here is an <code>lapply</code> example, using the <code>anes_list</code> object we created above. We’ll use an anonymous function to find the mean <code>party_distance</code> in each election cycle.</p>
-<pre class="r"><code>lapply(anes_list, function(x) mean(x$party_distance, na.rm = TRUE))</code></pre>
+<pre class="r"><code># &#39;x&#39; refers to each element of the list
+# each element being a data frame
+# so x$var finds &#39;var&#39; in the x data frame
+
+lapply(anes_list, function(x) mean(x$party_distance, na.rm = TRUE))</code></pre>
 <p>From there, you can do cool things like “melt” the list into a data frame using <code>reshape2::melt()</code>.</p>
 <pre class="r"><code>lapply(anes_list, function(x) mean(x$party_distance, na.rm = TRUE)) %&gt;%
   reshape2::melt()</code></pre>
@@ -1342,27 +1191,36 @@ apply(df, 1, mean)</code></pre>
   nest() %&gt;%
   # unnest the `data` column
   unnest(data)</code></pre>
+<p>Why is this useful? Well…</p>
 </div>
 <div id="mapping-a-function-over-a-list-column" class="section level2">
 <h2>Mapping a function over a list column</h2>
 <p>This is another functional programming trick, like apply, but applied to a list column in a nested data frame.</p>
-<p>Let’s say we had the above nested frame (a data frame for each survey wave), but we wanted to estimate a regression for separate data frame.</p>
-<p>Here, well estimate the effect of gender on Republican voting using <code>map()</code>, which is like <code>apply()</code> but it works across a list column in nested data frame.</p>
+<p>Let’s say we had the above nested frame (a data frame for each survey wave), but we wanted to estimate a regression for separate data frames.</p>
+<p>Here, we estimate the effect of gender on Republican voting using <code>purrr::map()</code>, which is like <code>apply()</code> but it works across a list column in nested data frame.</p>
 <pre class="r"><code># nesting the data
+#   get indicator for R vote
 #   removing NAs
-#   map glm() into each data frame in the list column
-#   using an intercepts model for easier comparisons (no constant)
+#   group by cycle and nest
+# Apply function over the list column
+#   use every data frame in the list column
+#   run glm() using an intercepts model for comparisons (no constant)
+#   tidy the model output
+# Unnest the data
+#   unnest the results of map()
+#   create a gender label
+
 gender_gaps &lt;- anes %&gt;%
   mutate(rvote = as.numeric(vote == &quot;Republican Candidate&quot;)) %&gt;% 
-  filter(!is.na(rvote) &amp; !is.na(woman)) %&gt;%
+  filter(!is.na(rvote) &amp; !is.na(gender)) %&gt;%
   group_by(cycle) %&gt;%
   nest() %&gt;% 
   mutate(model = map(data, 
-                     ~ glm(rvote ~ -1 + as.factor(woman), 
+                     ~ glm(rvote ~ -1 + as.factor(gender), 
                            data = ., family = &quot;binomial&quot;) %&gt;%
                        tidy(conf.int = TRUE))) %&gt;%
   unnest(model) %&gt;%
-  mutate(term = case_when(str_detect(term, &quot;0&quot;) ~ &quot;Man&quot;,
+  mutate(term = case_when(str_detect(term, &quot;Men&quot;) ~ &quot;Man&quot;,
                           TRUE ~ &quot;Woman&quot;)) %&gt;% 
   print()</code></pre>
 <pre><code>## # A tibble: 34 x 8
@@ -1379,8 +1237,8 @@ gender_gaps &lt;- anes %&gt;%
 ##  9  1964 Man     -0.640    0.0934    -6.85     7.14e⁻¹²  -0.825    -0.459 
 ## 10  1964 Woman   -0.810    0.0881    -9.19     4.04e⁻²⁰  -0.985    -0.639 
 ## # ... with 24 more rows</code></pre>
-<pre class="r"><code># plot coefficients over time
-# map pt shape, solid and empty points, generic white fill
+<pre class="r"><code># # plot coefficients over time
+# # map pt shape, solid and empty points, generic white fill
 ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
   geom_hline(yintercept = 0) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
@@ -1389,11 +1247,10 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
                   position = position_dodge(width = 0.5)) +
   scale_shape_manual(values = c(16, 21)) +
   scale_x_continuous(breaks = seq(1948, 2012, 8)) +
-  theme_bw() +
   labs(y = &quot;Effect on Republican Voting (Log Odds Scale)&quot;,
        x = &quot;Election Cycle&quot;,
        color = NULL, shape = NULL)</code></pre>
-<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-71-1.png" width="672" /></p>
+<p><img src="/811/811-05-analysis_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
 <p>Mapping is a tool that takes some getting used to at first. In particular, you have to get a feel for the formula syntax where a function follows a <code>~</code> symbol, and you use <code>.</code> to represent element names in the <code>data</code> column. Once you get this down, however, mapping is an extremely powerful tool for scaling up analysis because not only can you do a lot of repetitive work with very little code, the code is executed using parallel processing when possible. This makes it much faster because it distributes tasks across processing cores on your computer (nice!).</p>
 </div>
 </div>
@@ -1425,7 +1282,7 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
 </div>
 <div id="panel-data" class="section level2">
 <h2>Panel data</h2>
-<p>Panel data tends to be the realm of “fixed-effects” modeling, meaning that when you measure features over time, time-invariant predictors are absorbed into fixed unit-level averages. I don’t typically do this kind of analysis, but those who do often use the <code>plm</code> dataset for these types of models.</p>
+<p>Panel data tends to be the realm of “fixed-effects” modeling, meaning that when you measure features over time, time-invariant predictors are absorbed into fixed unit-level averages, and time-varying features have coefficients that are constant across time. I don’t typically do this kind of analysis, but those who do often use the <code>plm</code> package for these types of models.</p>
 <p>Alternatives to <code>plm</code> include hierarchical modeling approaches, which we’ll cover in a separate subsection.</p>
 </div>
 <div id="hierarchicalmultilevel-models" class="section level2">
@@ -1434,14 +1291,14 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
 <p><span class="math inline">\(\begin{align} y_{i} &amp;\sim \mathrm{Bernoulli}\left( \pi_{i} \right) \\[6pt] \mathrm{logit} \left( \pi_{i} \right) &amp;= \alpha + \gamma^{\mathtt{demographics}}_{j[i]} + \delta^{\mathtt{state}}_{s[i]} \end{align}\)</span></p>
 <p>The state effect applies to every individual in that state and could itself be a regression on state-level features such as the presidential vote in the state, state-level economics, and so on.</p>
 <p><span class="math inline">\(\begin{align} \delta^{\mathtt{state}}_{s} &amp;\sim \mathrm{Normal}\left( \beta_{1} \mathrm{pvote}_{s} + \beta_{2} \mathrm{GDP}_{s} + \ldots , \, \sigma^{\mathtt{state}} \right)\end{align}\)</span></p>
-<p>This kind of modeling is useful because it elegantly captures the way we think theoretically about the effects of nested data and partial pooling. “Partial pooling” is the idea that we can build reasonable estimates for small groups by taking information from other groups. In other words, for small-<span class="math inline">\(n\)</span> groups, we assume that the group-level effect looks like the other group-level effects <em>unless</em> the data give us a strong signal to the contrary. This is a key example of the bias-variance trade-off you heard about in stats courses.</p>
-<p>Although hierarchical models are “essentially Bayesian” because of the partial pooling setup, there are packages for fitting approximate maximum-likelihood versions. The most common would be <code>lme4</code>, which provides <a href="https://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4">syntax</a> similar to <code>nlme</code> for varying (“random”) effects, but it is more updated than <code>nlme</code>. The <code>arm</code> package provides additional tools for interacting with <code>lme4</code> hierarchical models, including the <code>bayesglm</code> function with just says “screw-it” and fits the Bayesian version of the model. On that subject…</p>
+<p>This kind of modeling is useful because it allows estimates for small groups to “borrow strength” from larger groups. If we don’t have a lot of data for Alabama, for example, we can say that Alabama is probably like other states that have similar state-level characteristics, and it shrinks Alabama’s estimate toward the state regression trend. In other words, for small-<span class="math inline">\(n\)</span> groups, we assume that the group-level effect looks like the other group-level effects <em>unless</em> the data give us a strong signal to the contrary. This is a key example of the bias-variance trade-off you heard about in stats courses.</p>
+<p>Although hierarchical models are “essentially Bayesian” because of the partial pooling setup, there are packages for fitting approximate maximum-likelihood versions. The most common would be <code>lme4</code>, which provides <a href="https://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4">syntax</a> similar to <code>nlme</code> for varying (“random”) effects, but it is more updated than <code>nlme</code>. What I’m saying is, don’t use <code>nlme</code>. The <code>arm</code> package provides additional tools for interacting with <code>lme4</code> hierarchical models, including the <code>bayesglm</code> function that just says “screw-it” and fits the fully Bayesian version of the model. On that subject…</p>
 </div>
 <div id="bayesian-analysis" class="section level2">
 <h2>Bayesian analysis</h2>
-<p>Bayesian analysis varies from “frequentist” statistics in a few fundamental ways. The main source of difference is philosophical, where uncertainty estimates are understood as your uncertainty about the actual value of the parameter, and not uncertainty about the <em>data</em>. Stated differently, frequentism measures the <em>probability of the data</em> given an assumed model of null parameter values and infinitely repeated sampling. Bayes statistics rejects the null model and instead measures the <em>probability of the parameters</em> after having observed the data, which requires prior information over the parameter values. When it comes to the actual parameter estimates, you can think about maximum likelihood models as being <em>special cases of Bayesian models</em> where the researcher inserts no prior information about the parameter values.</p>
+<p>Bayesian analysis varies from “frequentist” statistics in a few fundamental ways. The main source of difference is philosophical, where uncertainty estimates are understood as your uncertainty about the actual value of the parameter, and not uncertainty about the <em>data</em>. Stated differently, frequentism measures the <em>probability of the data</em> given an assumed model of null parameter values and infinitely repeated sampling. Bayesian statistics rejects the idea of the null model entirely and instead measures the <em>probability parameter values</em> after having observed the data, which requires prior information over the parameter values. When it comes to the actual parameter estimates, you can think about maximum likelihood models as being <em>special cases of Bayesian models</em> where the researcher inserts no prior information about the parameter values.</p>
 <p>There are a few ways to fit Bayesian models. For reduced-form regression models (like <code>lm</code> and <code>glm</code> functional forms), you can use packages such as <code>arm</code>, <code>brms</code>, and <code>rethinking</code> to write Bayesian models using a <a href="https://stats.stackexchange.com/questions/18428/formula-symbols-for-mixed-model-using-lme4">syntax</a> similar to <code>glm</code> and <code>lme4</code> models.</p>
-<p>For complicated structural models that are not easily expressed in a single regression equation (e.g. when you have a complex multi-level structure), you should set up a fully Bayesian model using external Bayesian modeling software that can be accessed by R. For simpler models, one could use <code>JAGS</code>, which samples a posterior distribution using a Gibbs sampling algorithm. You would use the <code>rjags</code> package to talk to JAGS using R. For more complex hierarhical models, randomly-walking algorithms for Gibbs sampling do a poor job, so I recommend using <code>Stan</code> (and talking to it with R using the <code>rstan</code> package). Stan fits the model using a pre-compiled <code>C++</code> model definition file and a version of Hamiltonian Monte Carlo, both of which drastically increase the speed and quality of posterior sampling. The <code>Stan</code> syntax is more complicated than <code>JAGS</code>, but the payoff of using <code>Stan</code> is worth it.</p>
+<p>For complicated structural models that are not easily expressed in a single regression equation (e.g. when you have a complex multi-level structure), you can may want to set up a fully Bayesian model using external Bayesian modeling software that can be accessed by R. For simpler models, one could use <code>JAGS</code>, which samples a posterior distribution using a Gibbs sampling algorithm. You would use the <code>rjags</code> package to talk to JAGS using R. For more complex hierarhical models, randomly-walking algorithms for Gibbs sampling (like <code>JAGS</code>) do a poor job, so I recommend using <code>Stan</code> (and talking to it with R using the <code>rstan</code> package). Stan fits the model using a version of Hamiltonian Monte Carlo, both of which drastically increase the speed and quality of posterior sampling. The <code>Stan</code> syntax is more complicated than <code>JAGS</code>, but the payoff of using <code>Stan</code> is worth it.</p>
 <p>For diagnosing and visualizing Bayesian model results, <code>rstan</code> has some tools baked in. The <code>ggmcmc</code> package turns posterior samples into a tidy data frame (good for ggplot!), and <code>bayesplot</code> provides other tools for easy Bayes graphics.</p>
 </div>
 <div id="r-as-front-end" class="section level2">
@@ -1579,6 +1436,23 @@ hljs.initHighlightingOnLoad();
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/main.js"></script>
+
+
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics"></a></div></noscript>
+
+
 </body>
 </html>
 

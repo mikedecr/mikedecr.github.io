@@ -19,7 +19,7 @@
       <guid>https://mikedecr.github.io/811/811-data/</guid>
       <description>Schedule: Read this before our first R lecture.
  How to follow along A script file walking through some of these commands is available here.
- Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
+ Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
  setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
     </item>
     
@@ -44,17 +44,6 @@
 This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.
 Schedule: Read this before our first R lecture.
  A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>https://mikedecr.github.io/post/2015/07/23/hello-r-markdown/</guid>
-      <description>R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
   </channel>

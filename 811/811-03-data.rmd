@@ -18,7 +18,7 @@ Read this before our first R lecture.
 A script file walking through some of these commands is available [here](https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t).
 
 
-# Objective
+# Objectives
 
 The goal of this lesson is to simulate some data manipulation for a research project. This requires...
 

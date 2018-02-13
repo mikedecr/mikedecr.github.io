@@ -19,7 +19,7 @@
       <guid>https://mikedecr.github.io/811/811-data/</guid>
       <description>Schedule: Read this before our first R lecture.
  How to follow along A script file walking through some of these commands is available here.
- Objective The goal of this lesson is to simulate some data manipulation for a research project. This requires…
+ Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
  setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
     </item>
     

@@ -15,16 +15,21 @@ draft: true
 Read this before our second R lecture, after the [data lesson](811/811-data).
 
 
-# Objective 
+
+# How to follow along
+
+A script file walking through some of these commands is available [here](https://uwmadison.box.com/s/mbb25zbc7r7h5plpesgk71kzjqcv7hw1).
+
+
+# Objectives
 
 The goal of this lesson is to provide an introduction to graphics in R, by way of `ggplot2` in particular. We will cover:
 
 - The "grammar of graphics"---the "gg" in `ggplot`
 - How `ggplot2` works
-- Common geoms for social science data
+- Common graphics in social science
 - Customizing the appearance of ggplot graphic
 - Saving graphics
-- Some (not too much) discussion of the ways base graphics and `ggplot2` are different
 
 ## Some notes to get us started:
 
