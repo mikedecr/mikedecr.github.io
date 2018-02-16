@@ -761,7 +761,7 @@ count(anes, cycle, pid7)</code></pre>
 ##  9  1952 &lt;NA&gt;        210
 ## 10  1954 1           248
 ## # ... with 223 more rows</code></pre>
-<p>This contains the same information as <code>table(anes$cycle, anes$pid7)</code>, but the result is a “tidy” data frame.</p>
+<p>This contains the same information as <code>table(anes\$cycle, anes\$pid7)</code>, but the result is a “tidy” data frame.</p>
 <p>To get proportions, mutate the resulting table as desired. Here we get the proportion of each partisan identity within each election cycle. Group on the cycle and then dividing each count by the number of individuals in each cycle.</p>
 <pre class="r"><code># tabulate these variables, party by cycle
 (tab &lt;- count(anes, cycle, pid7))</code></pre>

@@ -735,7 +735,7 @@ If you want your table to be organized as a data frame (which you often do want)
 count(anes, cycle, pid7)
 ```
 
-This contains the same information as `table(anes$cycle, anes$pid7)`, but the result is a "tidy" data frame. 
+This contains the same information as `table(anes\$cycle, anes\$pid7)`, but the result is a "tidy" data frame. 
 
 To get proportions, mutate the resulting table as desired. Here we get the proportion of each partisan identity within each election cycle. Group on the cycle and then dividing each count by the number of individuals in each cycle.
 
