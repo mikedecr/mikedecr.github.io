@@ -6,10 +6,22 @@
     <description>Recent content in R on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 09 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 2: Graphics</title>
+      <link>https://mikedecr.github.io/811/811-graphics/</link>
+      <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-graphics/</guid>
+      <description>Schedule: Read this before our second R lecture, after the data lesson.
+ How to follow along A script file walking through some of these commands is available here.
+ Objectives The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
+ The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common graphics in social science Customizing the appearance of ggplot graphic Saving graphics  Some notes to get us started:  This lesson makes liberal use of pipe chains, which bundle many operations together in one block of code.</description>
+    </item>
     
     <item>
       <title>Lecture 1: Data Manipulation</title>

@@ -6,7 +6,6 @@ date: '2018-02-16'
 slug: "811-graphics"
 categories: ["R", "ps811", "Teaching"]
 tags: []
-draft: true
 ---
 
 
