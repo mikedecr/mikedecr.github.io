@@ -397,9 +397,15 @@ summary(alpha_mod)
 
 Like Stata, R can produce regression tables for you to insert into your writing. You should use these functions.
 
-In fact, my advice is that you should never, never, ***NEVER*** write up a regression table by hand. Not in $\mathrm{\LaTeX}$, not in Word, not ever. R provides several packages for formatting the output of an analysis into tables. This output could be formatted as $\mathrm{\LaTeX}$ code, as HTML code, as plain text, and so on. We'll play with some table packages using the models we just estimated.
+In fact, my advice is that you should never, never, ***NEVER*** write up a regression table by hand. Not in $\mathrm{\LaTeX}$, not in Word, not ever. 
 
-The `stargazer` package is solid and highly customizable. I find that it requires a lot of customization to look *great* though.
+- You are likely to make some kind of transcription error by hand-typing numbers into the table
+- If your analysis ever changes, even slightly, you need to modify your table or create a brand-new one
+- Spend your time researching and doing stats, not punching tables into the computer
+
+R provides several packages for formatting the output of an analysis into tables. This output could be formatted as $\mathrm{\LaTeX}$ code, as HTML code, as plain text, and so on. We'll play with some table packages using the models we just estimated.
+
+The `stargazer` package is solid and highly customizable. Its tables look good, but I find that it requires a lot of customization to make the tables look *great*.
 
 ```{r, eval = FALSE}
 library("stargazer")
@@ -409,15 +415,14 @@ stargazer(therm_mod, dummy_mod, int_mod)
 stargazer(therm_mod, dummy_mod, int_mod, type = "text")
 ```
 
-I *think* I like `texreg` better. I'm pretty sure it supports more model types than `stargazer`, and its defaults are a bit more sensible than `stargazer`'s are, in my experience.
+I think I like `texreg` a little better. I'm fairly sure it supports more model types than `stargazer`, and its defaults are a bit more sensible than `stargazer`'s are, at least for my uses (your uses may be different).
 
 ```{r, eval = FALSE}
 library("texreg")
 texreg(list(therm_mod, dummy_mod, int_mod))
 ```
 
-
-I *love* `xtable` for non-regression tables such as marginals and summary statistics. The tables are clean, slick, and you can get them to do what you want. (See the tables at the end of [this document](https://elections.wisc.edu/news/Voter-ID-Study/Voter-ID-Study-Supporting-Info.pdf), for example.) However, `xtable` is weird when combining multiple models together. It's strange in general because it often requires you to place more arguments into the `print()` function, which is counter-intuitive. But they definitely look good when you can make it work.
+I love `xtable` for *non-regression tables* such as marginals and summary statistics. The tables are clean, slick, and you can get them to do what you want. (See the tables at the end of [this document](https://elections.wisc.edu/news/Voter-ID-Study/Voter-ID-Study-Supporting-Info.pdf), for example.) However, `xtable` is weirder for regression, and it's strange in general because it often requires you to place more arguments into the `print()` function, which is counter-intuitive. But these tables look great when you can make it work.
 
 ```{r, eval = FALSE}
 library("xtable")
@@ -427,7 +432,13 @@ print(xtable(therm_mod))
 
 These aren't the only tools for making tables in R. Check [here](https://stackoverflow.com/questions/5465314/tools-for-making-latex-tables-in-r) for more info.
 
-My general practice is to rely *only* on code to make tables. This ensures that you don't make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using $\mathrm{\LaTeX}$). I'd encourage you to figure out what table package (and modifications to the default function behaviors) suit you best, and save that code some place where you can come back to it.
+My general practice is to rely *only* on code to make tables. This ensures that you don't make any transcription errors. It also ensures that when you export these tables to an external file (next section), any update to the model in R is automatically updated in your paper (if using $\mathrm{\LaTeX}$). 
+
+Here's how I advise you learn about tables:
+
+- Experiment with the packages to figure out which package you like best
+- Figure out which modifications to the default tables you tend to use the most
+- Save these modifications somewhere (in a file, or as a keyboard shortcut), to save yourself some time whenever you write regression tables into a paper
 
 
 
@@ -436,18 +447,22 @@ My general practice is to rely *only* on code to make tables. This ensures that 
 
 This is not that difficult, but it requires some thinking about your project directory.
 
-Whenever you have some project, your directory should contain separate folders for `R/`, `data/`, and your writing (which I call `tex/` or `paper/`). Let's assume that we're writing a $\mathrm{\LaTeX}$ document inside a folder called `tex/`, and we want to save a regression table from R. We should also assume that our directory in R is set to the *project root*, i.e. the top of the project folder.
+Whenever you have some project, your directory should contain separate folders for `R/`, `data/`, and your writing (which I call `tex/` or `paper/`). Let's assume that we're writing a $\mathrm{\LaTeX}$ document inside a folder called `tex/`, and we want to save a regression table from R. We should also assume that our directory in R is set to the *project root*, i.e. the top of the project folder (for example, `"users/michaeldecrescenzo/box sync/research/thesis"`).
 
 We can use R to create a subfolder inside of the `tex/` folder dedicated to tables, if we don't already have one.
 
 ```{r, eval = FALSE}
+# makes a "tex" folder
+dir.create("tex")
+
+
 # make a tables/ folder inside of tex/
 # requires a tex/ folder to exist already
 
 dir.create("tex/tables")
 ```
 
-We can then save model output as a `.tex` file. These functions allow to you specify where you want the table to save. Specify the name of the `.tex` file you want to save.
+We can then save model output as a `.tex` file in this folder location. Table-creating functions allow to you specify where you want the table to save. Specify the name of the `.tex` file you want to save. (You can also save tables as plain text and HTML files, depending on the package, but you get the most direct utility by learning to use $\mathrm{\LaTeX}$ and saving tables as $\mathrm{\TeX}$ files).
 
 ```{r, eval = FALSE}
 # save texreg table (with caption) as a .tex file, in specified location
@@ -460,11 +475,11 @@ texreg(list(therm_mod, dummy_mod, int_mod),
 And then in your `research-paper.tex` file, you can include a code to insert code from another `.tex` file somewhere else.
 
 ```
-... blah blah blah. See the table for results.
+... blah blah blah. See the regression table for results.
 
 \input{tables/reg-table}
 
-The results show that...
+The regression table shows that...
 ```
 
 
@@ -486,11 +501,11 @@ Combine tidy model data frames using `bind_rows()`, which binds data frame rows 
 
 ```{r}
 mods <- bind_rows(mutate(tidy(therm_mod, conf.int = TRUE), 
-                           model = "Continuous"), 
+                           model = "Continuous Predictor"), 
                   mutate(tidy(dummy_mod, conf.int = TRUE), 
-                           model = "Dummies"), 
+                           model = "Constant and Dummies"), 
                   mutate(tidy(int_mod, conf.int = TRUE), 
-                           model = "Intercepts")) %>%
+                           model = "All Intercepts")) %>%
   as_data_frame() %>%
   print() 
 ```
@@ -515,37 +530,46 @@ ggplot(mods, aes(x = term, y = estimate)) +
 So easy! You could then save this plot...
 
 ```{r, eval = FALSE}
+# creates a graphics folder, if one doesn't already exist
 dir.create("tex/graphics")
-ggsave("tex/graphics/coefplot.PDF", height = 5, width = 5)
-# or whatever dimensions you want
+
+# save the plot in the graphics folder, setting height and width
+# saves as PDF
+ggsave("tex/graphics/coefplot.pdf", height = 5, width = 5)
 ```
 
-Some other tools create these sorts of plots for you. Some folks enjoy using [`sjPlot`](http://www.strengejacke.de/sjPlot/sjp.lm/), but I have never bothered to use it. I normally don't like packages to make plots for me. I like packages to create things that I can plot how I want. Speaking for myself, though.
+Some other tools create these sorts of plots for you. Some folks enjoy using [`sjPlot`](http://www.strengejacke.de/sjPlot/sjp.lm/), but I have never bothered to use it. (I ordinarily don't like packages to make plots for me. I prefer to create *data* and decide for myself how they should be plotted. This is my personal preference, though---you do you.)
 
 
 
 
+## Related: saving other quantities (from R to $\mathrm{\LaTeX}$)
 
-# Related: saving other quantities (from R to $\mathrm{\LaTeX}$)
-
-Just like with tables, you can save many other quantities to `tex` files. This way, the quantities in your paper reflect quantities in the analysis *perfectly* (except rounding error).
+Just like with tables, you can save many other quantities to `tex` files. This way, the quantities in your paper reflect quantities in the analysis *perfectly*.
 
 For example, let's calculate the mean GOP candidate thermometer in (say) 2012, and save it.
 
 ```{r, eval = FALSE}
 # create a subdirectory for referenced values from R
+# I call this folder location "refs" but you can call it whatever you want
 dir.create("tex/refs")
+
+# in the 2012 cycle, 
+# what is the mean thermometer rating of GOP candidate?
+# round it to the nearest whole number
+# print the value to see what it looks like
+# save the value in a .tex file for later use
 
 anes %>% 
   filter(cycle == 2012) %$% # <--- note the pipe!
   mean(therm_gopcand, na.rm = TRUE) %>%
   round() %>%
-  print() %>% # check it out, see what it is
-  write("tex/refs/mean-gop-therm-2012.tex") # save it
+  print() %>% 
+  write("tex/refs/mean-gop-therm-2012.tex") 
 ```
 
 
-Then, in your `.tex` file, you're writing your stuff and can grab import this quantity...
+Then, in your `.tex` file, import this quantity directly from file...
 
 ```
 ...the mean rating for Mitt Romney was $\input{refs/mean-gop-therm}$
@@ -665,17 +689,17 @@ $\begin{align} y_{i} &\sim \mathrm{Some \, Distribution}\left( \mu_{i}, \tau \ri
 
 ## Linearity
 
-The other component that sets GLMS apart is the linearity of the relationship between $x$ and $y$.
+The other component that sets GLMS apart is the linearity of the relationship between $x$ and $y.$
 
-- In a linear model: $x$ is assumed to have a linear effect on $y$. Coefficients describe how $x$ impacts $y$.
-- In a GLM: $x$ has a linear impact on a *transformation* of $y$, which makes $x$ non-linearly related to $y$. Coefficients describe how $x$ impacts the transformed $y$.
+- In a linear model: $x$ is assumed to have a linear effect on $\mu_{i}$. Coefficients describe how $x$ impacts $\mu_{i}$.
+- In a GLM: $x$ has a linear impact on a *transformation* of $\mu_{i}$, which implies that $x$ is non-linearly related to $y$. Coefficients describe how $x$ impacts the transformed $\mu_{i}$.
 
 So the full GLM is like the Normal model, but we use a different distribution, and $\mu_{i}$ isn't linearly related to $x$.
 
 $\begin{align} y_{i} &\sim \mathrm{Some \, Distribution}\left( \mu_{i}, \tau \right) \\[6pt]  \mathcal{f}\left( \mu_{i} \right) &= \alpha + \beta x_{i} \\[6pt] \mu_{i} &= f^{-1}\left( \alpha + \beta x_{i} \right) \end{align}$
 
 
-The transformation of $y$ is called a *link function*. We call these "generalized linear models" because there *is* a linear component, but it's a linear relationship between $x$ and $\mathrm{link}(y)$. And it's *generalized* because a linear model fits into this framework as well, but the link function is simply $1 \times y$.
+The transformation of $\mu_{i}$ is called a *link function*. We call these "generalized linear models" because there *is* a linear component, but it's a linear relationship between $x$ and $\mathrm{link}(\mu_{i})$. And it's *generalized* because a linear model fits into this framework as well, but the link function is simply $1 \times \mu_{i}$.
 
 
 
@@ -686,13 +710,16 @@ We'll use logistic regression to predict a vote for the Republican presidential 
 Fitting this into the GLM framework...
 
 - The outcome distribution is Bernoulli. The dependent variable $y$ is a 1 or a 0, "success" or "failure". 
-- the link function is the logit function.
+- We don't model $y$ directly. Instead, we want to model $\pi_{i}$, which is the *expected value* of $y_{i}$. 
+- The link function connecting $\pi_{i}$ to the regression equation is called the *logit* function, a.k.a. the "log odds" of $\y_{i}$. 
 
 Here's the math. We'll use $y_{i}$ to indicate the observed vote for voter $i$, $\pi_{i}$ is the probability that $i$ votes for the Republican.
 
 $\begin{align} y_{i} &\sim \mathrm{Bernoulli}(\pi_{i}) \\[6pt] \ln \left( \frac{\pi_{i}}{1 - \pi_{i}} \right) &=  \alpha + \beta_{1} x_{1i} + \beta_{2} x_{2i} + \ldots \end{align}$
 
-Let's do this in R.
+As we can see, neither our data $y_{i}$ nor the expected value $\pi_{i}$ are linearly related to our predictors. Instead, the transformation of $\pi_{i}$ (the log odds) is linearly related to the predictors.
+
+## Let's do this in R.
 
 Here are the data from 1996 only.
 
@@ -776,27 +803,25 @@ logit_preds <- logit_preds %>%
 
 # modify data and plot
 
-logit_preds %>%
-  mutate(woman = case_when(woman == 1 ~ "Women",
-                           woman == 0 ~ "Men")) %>%
-  ggplot(aes(x = ideo, y = .fitted)) +
+ 
+ggplot(logit_preds, aes(x = ideo, y = .fitted)) +
   geom_pointrange(aes(ymin = lower, ymax = upper, 
-                      color = as.factor(woman)),
-                  position = position_dodge(width = 0.5),
-                  show.legend = FALSE) +
+                    color = as.factor(woman)),
+                position = position_dodge(width = 0.5),
+                show.legend = FALSE) +
   annotate("text", x = 0.5, y = .59, label = "Men") +
   annotate("text", x = 1.7, y = .59, label = "Women") +
   scale_x_continuous(breaks = -3:3,
-                    labels = c("Very\nLiberal", 
-                               "Liberal", 
-                               "Slightly\nLiberal", 
-                               "Moderate", 
-                               "Slightly\nConservative", 
-                               "Conservative", 
-                               "Very\nConservative")) +
+                  labels = c("Very\nLiberal", 
+                             "Liberal", 
+                             "Slightly\nLiberal", 
+                             "Moderate", 
+                             "Slightly\nConservative", 
+                             "Conservative", 
+                             "Very\nConservative")) +
   labs(color = NULL,
-       x = "Ideological Self-Placement",
-       y = "Probability of Republican Vote") +
+     x = "Ideological Self-Placement",
+     y = "Probability of Republican Vote") +
   theme(panel.grid.minor = element_blank())
 ```
 
