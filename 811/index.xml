@@ -6,10 +6,22 @@
     <description>Recent content in 811s on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 16 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/811/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Lecture 3: Analysis</title>
+      <link>https://mikedecr.github.io/811/811-analysis/</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/811/811-analysis/</guid>
+      <description>Schedule Read this before our final lecture, after the graphics lesson.
+ How to follow along A script file walking through some of these commands is available here.
+ Objectives In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
+ Means, confidence intervals, and simple significance tests Estimating regression models Generating model output Model diagnostics and fit statistics Post-estimation graphics (model predictions)  This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise.</description>
+    </item>
     
     <item>
       <title>Lecture 2: Graphics</title>

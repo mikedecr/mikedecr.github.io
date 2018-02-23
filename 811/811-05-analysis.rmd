@@ -6,7 +6,6 @@ date: '2018-02-23'
 slug: "811-analysis"
 categories: ["R", "ps811", "Teaching"]
 tags: []
-draft: true
 ---
 
 
