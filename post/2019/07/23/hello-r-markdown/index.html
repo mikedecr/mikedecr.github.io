@@ -10,7 +10,7 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="https://mikedecr.github.io/">
+<base href="/">
 
 <title>Michael DeCrescenzo</title>
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
@@ -44,13 +44,22 @@
 
 
 <header class="row text-left title">
-  <h1 class="title">Research</h1>
+  <h1 class="title">Hello R Markdown</h1>
 </header>
 <section id="category-pane" class="row meta">
   
   <div class="col-md-12">
     <h6 class="text-left meta">
-        UPDATED DEC 4, 2017 
+        UPDATED JUL 23, 2019 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>
+      
+      
       
     </h6>
   </div>
@@ -58,69 +67,45 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
-    
-
-<!-- # Interests
-
-American Politics: 
-
-- Elections, representation, ideology
-- Political behavior, voting, public opinion
-- Election administration, voter ID
-
-Political Methodology:
-
-- Bayesian data analysis
-- Multilevel modeling
-- Ideal point estimation -->
-
-<h1 id="dissertation">Dissertation</h1>
-
-<h2 id="do-primaries-work-nomination-politics-and-the-representation-of-local-partisan-preferences">Do Primaries Work? Nomination Politics and the Representation of Local Partisan Preferences.</h2>
-
-<p>Partisan voters are historically unlikely to cast their votes for the opposing party, so the primary nomination process is perhaps more consequential than ever. Theoretical and empirical scholarship on candidate positioning argues that the primary process is the predominant reason for divergent candidate positions across parties. I argue that the core predictions from the prevailing theory of primaries lacks direct empirical support. Are primary candidate positions are meaningfully related to the preferences of district co-partisans? Do extreme primary constituencies elect extreme primary candidates? I develop Bayesian methods for estimating local partisan preferences and primary candidate positions, and I explore whether the leading view of primaries&mdash;and in turn, about the nature of candidate positioning in the US&mdash;enjoys empirical support.</p>
-
-<p>More info coming soon.</p>
-
-<p><img src="img/cces-self-id.png" alt="The non-relationship between district voting and self-reported partisan ideology" style="width: 100%;"/></p>
-
-<h1 id="other-research">Other Research</h1>
-
-<h2 id="published">Published</h2>
-
-<p>The Unexceptional Gender Gap of 2016 (with Barry C. Burden and Evan Crawford). <em>The Forum</em> 14(4):425&ndash;432 (2016). <a href="https://www.degruyter.com/downloadpdf/j/for.2016.14.issue-4/for-2016-0039/for-2016-0039.pdf">(PDF)</a></p>
-
-<h2 id="under-review">Under review</h2>
-
-<p>Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden).</p>
-
-<!-- 
-# Conference Presentations
-
-Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden).
-
-- *Midwest Political Science Association*, 2017. [(PDF)](https://www.dropbox.com/s/vsex983jrtlj9xi/Burden%20DeCrescenzo%20MPSA%202017.pdf?dl=0)
-- *Toronto Political Behavior Workshop*, 2016. -->
-
-<h2 id="in-progress">In Progress</h2>
-
-<p>How Should We Employ MRP Estimates as Predictors? Issues with Uncertainty and Pooling</p>
-
-<p>Voter ID, Information, and Nonvoting: Evidence from Wisconsin 2016 (with Kenneth R. Mayer)</p>
-
-<!-- Images and Words: How Citizens Understand Uncertain Election Polls (with Benjamin Toff and Zachary Warner) -->
-
-<p>Identity and Ideology in the Parties&rsquo; Campaign Finance Networks (with Jordan Hsu)</p>
-
-<!-- Bureaucratic 'Competence' or Bureaucratic Access? Voter ID and Turnout in Alabama -->
-
-<!-- 'One of the Good Ones': Economic Racism and Black Conservative Candidates (with Micah C.R. Dillard) -->
-
-<!-- - Uncertainty and Causality in Multilevel Regression and Poststratification -->
-
-<!-- Do Primaries Work? Constituency Preferences and Candidate Positioning in Legislative Primary Elections -->
-
-<!-- Nomination Systems and Ideology in Legislative Elections -->
+    <div id="r-markdown" class="section level1">
+<h1>R Markdown</h1>
+<p>This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <a href="http://rmarkdown.rstudio.com" class="uri">http://rmarkdown.rstudio.com</a>.</p>
+<p>You can embed an R code chunk like this:</p>
+<pre class="r"><code>summary(cars)
+##      speed           dist       
+##  Min.   : 4.0   Min.   :  2.00  
+##  1st Qu.:12.0   1st Qu.: 26.00  
+##  Median :15.0   Median : 36.00  
+##  Mean   :15.4   Mean   : 42.98  
+##  3rd Qu.:19.0   3rd Qu.: 56.00  
+##  Max.   :25.0   Max.   :120.00
+fit &lt;- lm(dist ~ speed, data = cars)
+fit
+## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Coefficients:
+## (Intercept)        speed  
+##     -17.579        3.932</code></pre>
+</div>
+<div id="including-plots" class="section level1">
+<h1>Including Plots</h1>
+<p>You can also embed plots. See Figure <a href="#fig:pie">1</a> for example:</p>
+<pre class="r"><code>par(mar = c(0, 1, 0, 1))
+pie(
+  c(280, 60, 20),
+  c(&#39;Sky&#39;, &#39;Sunny side of pyramid&#39;, &#39;Shady side of pyramid&#39;),
+  col = c(&#39;#0292D8&#39;, &#39;#F7EA39&#39;, &#39;#C4B632&#39;),
+  init.angle = -50, border = NA
+)</code></pre>
+<div class="figure"><span id="fig:pie"></span>
+<img src="/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png" alt="A fancy pie chart." width="672" />
+<p class="caption">
+Figure 1: A fancy pie chart.
+</p>
+</div>
+</div>
 
   </div>
 </section>
@@ -128,6 +113,19 @@ Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Vot
   
   <div class="col-md-12">
     <h6 class="text-right meta">
+      
+      
+      
+      TAGS:
+      
+      
+      <a class="meta" href="/tags/r-markdown">R MARKDOWN</a>, 
+      
+      <a class="meta" href="/tags/plot">PLOT</a>, 
+      
+      <a class="meta" href="/tags/regression">REGRESSION</a>
+      
+      
       
     </h6>
   </div>
@@ -144,12 +142,18 @@ Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Vot
 <section id="menu-pane" class="row menu text-center">
   
   
+  <span><a class="menu-item" href="/post/2019/01/01/lorem-ipsum/">&lt; prev | </a></span>
   
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  <span><a class="menu-item" href="/post/2019/12/30/a-plain-markdown-post/"> | next &gt;</a></span>
   
   
 
   <section id="main-menu-pane" class="row text-center main-menu">
-  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
    
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   

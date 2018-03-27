@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 @import url('https://fonts.googleapis.com/css?family=Source+Code+Pro');
 
-/*@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif');
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans');
 @import url('https://fonts.googleapis.com/css?family=Lora');
 @import url('https://fonts.googleapis.com/css?family=Vollkorn');
 @import url('https://fonts.googleapis.com/css?family=Vollkorn+SC');
-@import url('https://fonts.googleapis.com/css?family=Inconsolata');*/
+@import url('https://fonts.googleapis.com/css?family=Inconsolata');
 
 
 @-ms-viewport
@@ -34,7 +34,7 @@ a:link
 }
 body
 {
-    font-family: 'Source Serif Pro', 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', 'Source Sans Pro', sans-serif;
     font-size: 20px;
     font-weight: 400;
 
@@ -65,22 +65,22 @@ pre {
 
 
 h1 {
- font-size: 3.5rem;
+ font-size: 3rem;
  padding-top: 25px;
  padding-bottom: 10px;
- font-family: 'Source Sans Pro', serif;
+ font-family: 'Vollkorn', serif;
  font-weight: 600;
 
 
 }
 
 h2 {
- font-size: 2.5rem;
- font-family: 'Source Sans Pro', serif;
+ font-size: 2rem;
+ font-family: 'Vollkorn', serif;
  font-weight: 600;
  padding-top: 15px;
  padding-bottom: 5px;
- font-style: italic;
+ /*font-style: italic;*/
 }
 
 html
@@ -103,7 +103,7 @@ html
 .author h6,
 .author p
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
 }
 .category
 {
@@ -125,26 +125,26 @@ html
 /*body text*/
 div.content
 {
-    font-family: 'Source Serif Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     font-weight: 300;
     color: #555;
 }
 .copyright
 {
-    font-family: 'Source Serif Pro', sans-serif;
+    font-family: 'Vollkorn', sans-serif;
     font-size: 12px;
     font-weight: 200;
 }
 .description
 {
-    font-family: 'Source Serif Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 200;
     color: #555;
 }
 .error
 {
-    font-family: 'Source Serif Pro', sans-serif;
+    font-family: 'Vollkorn', sans-serif;
 
     margin-top: 100px;
 }
@@ -162,7 +162,7 @@ div.content
 }
 .excerpt
 {
-    font-family: 'Source Serif Pro', sans-serif;
+    font-family: 'Vollkorn', sans-serif;
     font-size: 18px;
     font-weight: 200;
 
@@ -192,7 +192,7 @@ div.content
 }
 .intro
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
     font-weight: 200;
     line-height: 30px;
     font-size: 2.25rem;
@@ -204,7 +204,7 @@ h3.intro
 }
 .list
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
 
     margin-top: 50px;
 }
@@ -247,7 +247,7 @@ h3.intro
 }
 .meta
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
     text-transform: lowercase;
     font-size: 12px;
     font-weight: 200;
@@ -260,7 +260,7 @@ a.meta
 }
 h6.meta
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
     font-size: 12px;
     font-weight: 200;
 
@@ -271,7 +271,7 @@ section.meta {
 }
 .powered
 {
-    font-family: 'Source Serif Pro', serif;
+    font-family: 'Vollkorn', serif;
     font-size: 12px;
     font-weight: 300;
 }
@@ -286,7 +286,7 @@ section.meta {
 }
 .title
 {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Vollkorn', sans-serif;
     font-weight: bold;
     /*font-weight: 400;*/
     font-size: 3.5rem;
@@ -306,7 +306,7 @@ header.title
     }
     .list
     {
-        font-family: 'Source Serif Pro', sans-serif;
+        font-family: 'Vollkorn', sans-serif;
 
         margin-top: 30px;
     }

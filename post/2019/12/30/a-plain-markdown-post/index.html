@@ -10,7 +10,7 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="https://mikedecr.github.io/">
+<base href="/">
 
 <title>Michael DeCrescenzo</title>
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
@@ -44,13 +44,13 @@
 
 
 <header class="row text-left title">
-  <h1 class="title">Research</h1>
+  <h1 class="title">A Plain Markdown Post</h1>
 </header>
 <section id="category-pane" class="row meta">
   
   <div class="col-md-12">
     <h6 class="text-left meta">
-        UPDATED DEC 4, 2017 
+        UPDATED DEC 30, 2019 
       
     </h6>
   </div>
@@ -58,69 +58,36 @@
 </section>
 <section id="content-pane" class="row">
   <div class="col-md-12 text-justify content">
-    
+    <p>This is a post written in plain Markdown (<code>*.md</code>) instead of R Markdown (<code>*.Rmd</code>). The major differences are:</p>
 
-<!-- # Interests
+<ol>
+<li>You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (<code>```{r}</code>);</li>
+<li>A plain Markdown post is rendered through <a href="https://gohugo.io/overview/configuration/">Blackfriday</a>, and an R Markdown document is compiled by <a href="http://rmarkdown.rstudio.com"><strong>rmarkdown</strong></a> and <a href="http://pandoc.org">Pandoc</a>.</li>
+</ol>
 
-American Politics: 
+<p>There are many differences in syntax between Blackfriday&rsquo;s Markdown and Pandoc&rsquo;s Markdown. For example, you can write a task list with Blackfriday but not with Pandoc:</p>
 
-- Elections, representation, ideology
-- Political behavior, voting, public opinion
-- Election administration, voter ID
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Write an R package.</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Write a book.</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> &hellip;</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Profit!</label></li>
+</ul>
 
-Political Methodology:
+<p>Similarly, Blackfriday does not support LaTeX math and Pandoc does. I have added the MathJax support to this theme (<a href="https://github.com/yihui/hugo-lithium-theme">hugo-lithium-theme</a>) but there is a caveat for plain Markdown posts: you have to include math expressions in a pair of backticks (inline: <code>`$ $`</code>; display style: <code>`$$ $$`</code>), e.g., <code>$S_n = \sum_{i=1}^n X_i$</code>.<sup class="footnote-ref" id="fnref:This-is-because"><a rel="footnote" href="#fn:This-is-because">1</a></sup> For R Markdown posts, you do not need the backticks, because Pandoc can identify and process math expressions.</p>
 
-- Bayesian data analysis
-- Multilevel modeling
-- Ideal point estimation -->
+<p>When creating a new post, you have to decide whether the post format is Markdown or R Markdown, and this can be done via the <code>ext</code> argument of the function <code>blogdown::new_post()</code>, e.g.</p>
 
-<h1 id="dissertation">Dissertation</h1>
+<pre><code class="language-r">blogdown::new_post(&quot;Post Title&quot;, ext = '.Rmd')
+</code></pre>
+<div class="footnotes">
 
-<h2 id="do-primaries-work-nomination-politics-and-the-representation-of-local-partisan-preferences">Do Primaries Work? Nomination Politics and the Representation of Local Partisan Preferences.</h2>
+<hr />
 
-<p>Partisan voters are historically unlikely to cast their votes for the opposing party, so the primary nomination process is perhaps more consequential than ever. Theoretical and empirical scholarship on candidate positioning argues that the primary process is the predominant reason for divergent candidate positions across parties. I argue that the core predictions from the prevailing theory of primaries lacks direct empirical support. Are primary candidate positions are meaningfully related to the preferences of district co-partisans? Do extreme primary constituencies elect extreme primary candidates? I develop Bayesian methods for estimating local partisan preferences and primary candidate positions, and I explore whether the leading view of primaries&mdash;and in turn, about the nature of candidate positioning in the US&mdash;enjoys empirical support.</p>
-
-<p>More info coming soon.</p>
-
-<p><img src="img/cces-self-id.png" alt="The non-relationship between district voting and self-reported partisan ideology" style="width: 100%;"/></p>
-
-<h1 id="other-research">Other Research</h1>
-
-<h2 id="published">Published</h2>
-
-<p>The Unexceptional Gender Gap of 2016 (with Barry C. Burden and Evan Crawford). <em>The Forum</em> 14(4):425&ndash;432 (2016). <a href="https://www.degruyter.com/downloadpdf/j/for.2016.14.issue-4/for-2016-0039/for-2016-0039.pdf">(PDF)</a></p>
-
-<h2 id="under-review">Under review</h2>
-
-<p>Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden).</p>
-
-<!-- 
-# Conference Presentations
-
-Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden).
-
-- *Midwest Political Science Association*, 2017. [(PDF)](https://www.dropbox.com/s/vsex983jrtlj9xi/Burden%20DeCrescenzo%20MPSA%202017.pdf?dl=0)
-- *Toronto Political Behavior Workshop*, 2016. -->
-
-<h2 id="in-progress">In Progress</h2>
-
-<p>How Should We Employ MRP Estimates as Predictors? Issues with Uncertainty and Pooling</p>
-
-<p>Voter ID, Information, and Nonvoting: Evidence from Wisconsin 2016 (with Kenneth R. Mayer)</p>
-
-<!-- Images and Words: How Citizens Understand Uncertain Election Polls (with Benjamin Toff and Zachary Warner) -->
-
-<p>Identity and Ideology in the Parties&rsquo; Campaign Finance Networks (with Jordan Hsu)</p>
-
-<!-- Bureaucratic 'Competence' or Bureaucratic Access? Voter ID and Turnout in Alabama -->
-
-<!-- 'One of the Good Ones': Economic Racism and Black Conservative Candidates (with Micah C.R. Dillard) -->
-
-<!-- - Uncertainty and Causality in Multilevel Regression and Poststratification -->
-
-<!-- Do Primaries Work? Constituency Preferences and Candidate Positioning in Legislative Primary Elections -->
-
-<!-- Nomination Systems and Ideology in Legislative Elections -->
+<ol>
+<li id="fn:This-is-because">This is because we have to protect the math expressions from being interpreted as Markdown. You may not need the backticks if your math expression does not contain any special Markdown syntax such as underscores or asterisks, but it is always a safer choice to use backticks. When you happen to have a pair of literal dollar signs inside the same element, you can escape one dollar sign, e.g., <code>\$50 and $100</code> renders &ldquo;\$50 and $100&rdquo;. <a class="footnote-return" href="#fnref:This-is-because"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
   </div>
 </section>
@@ -144,12 +111,16 @@ Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Vot
 <section id="menu-pane" class="row menu text-center">
   
   
+  <span><a class="menu-item" href="/post/2019/07/23/hello-r-markdown/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
   
   
   
 
   <section id="main-menu-pane" class="row text-center main-menu">
-  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
    
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   
