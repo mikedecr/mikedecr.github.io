@@ -6,10 +6,20 @@
     <description>Recent content on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://mikedecr.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Code</title>
+      <link>https://mikedecr.github.io/code/</link>
+      <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://mikedecr.github.io/code/</guid>
+      <description>Github This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my Github repositories.
+ Sublime Text User Settings Sublime Text is a powerful and customizable text editor that is great for social scientists. It has much of the extensibility as Vim and Emacs but with a friendlier interface. However, it does have text-based settings, which can be daunting for the uninitialized and a rabbit hole for the detail-obsessed.</description>
+    </item>
     
     <item>
       <title>Lecture 3: Analysis</title>
@@ -99,17 +109,6 @@ I am an affiliate of the Elections Research Center, where I also serve as the gr
       <description> As Instructor Courses
  Political Science 811: Introduction to Statistical Computing in Political Science (UW&amp;ndash;Madison, Spring 2018). (2018 Materials)  Workshops
  Political Science Grad Student Math Camp (UW&amp;ndash;Madison, 2017). (2017 Materials) Political Science $\mathrm{\LaTeX}$ Workshop (UW&amp;ndash;Madison, 2015&amp;ndash;2017). (2017 Materials)  As Teaching Assistant  Political Science 544: Introduction to Survey Research Methods (UW&amp;ndash;Madison, Spring 2017) Political Science 218: Understanding Political Numbers (UW&amp;ndash;Madison, Fall 2015 and Fall 2016)  </description>
-    </item>
-    
-    <item>
-      <title>Code</title>
-      <link>https://mikedecr.github.io/code/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://mikedecr.github.io/code/</guid>
-      <description>Github This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my Github repositories.
- Sublime Text User Settings Available on Github. Highlights include:
- Keybindings for R and \(\mathrm{\LaTeX}\) (primarily) and associated macro files. Code snippets for R and \(\mathrm{\LaTeX}\), plus some for Stan, Stata, HTML, and Markdown. A modified Solarized color scheme based on the guts of the Cobalt2 scheme for Sublime, light and dark versions.</description>
     </item>
     
     <item>

@@ -1,5 +1,6 @@
 ---
 title: Code
+date: 2018-04-23
 ---
 
 
@@ -11,11 +12,15 @@ This website is continuously undergoing revisions. For code currently that has n
 
 # Sublime Text User Settings
 
-Available on [Github](https://github.com/mikedecr/sublime-user-folder/blob/master/Default%20(OSX).sublime-keymap). Highlights include:
+[Sublime Text](https://www.sublimetext.com/) is a powerful and customizable text editor that is great for social scientists. It has much of the [extensibility](https://packagecontrol.io/) as Vim and Emacs but with a friendlier interface. However, it does have [text-based settings](http://docs.sublimetext.info/en/latest/customization/settings.html), which can be daunting for the uninitialized and a rabbit hole for the detail-obsessed.
 
-- Keybindings for R and $\mathrm{\LaTeX}$ (primarily) and associated macro files.
+I have some of my own custom settings available for pilfering on [Github](https://github.com/mikedecr/sublime-user-folder/blob/master/Default%20(OSX).sublime-keymap). Highlights include:
+
+- Keybindings (primarily for R and $\mathrm{\LaTeX}$) and associated macro files.
 - Code snippets for R and $\mathrm{\LaTeX}$, plus some for Stan, Stata, HTML, and Markdown.
-- A modified Solarized color scheme based on the guts of the [Cobalt2](https://packagecontrol.io/packages/Theme%20-%20Cobalt2) scheme for Sublime, [light](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-light.tmTheme) and [dark](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-dark.tmTheme) versions.
+- A modified Solarized color scheme based on the guts of the [Cobalt2](https://packagecontrol.io/packages/Theme%20-%20Cobalt2) scheme for Sublime, available in both [light](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-light.tmTheme) and [dark](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-dark.tmTheme) versions.
+
+
 
 
 
