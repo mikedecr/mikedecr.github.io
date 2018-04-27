@@ -94,7 +94,7 @@ anes <- readRDS(here::here("static/data/anes-modified-2.RDS")) %>% print()
 
 
 
-# Non-statistical analysis
+# Non-regression analysis
 
 Previous lessons covered two major types of non-statistical analysis. We saw how to create some simple tables of variables in your data (using either the `table()` function or the `count()` function). We also saw how to create graphics, which are a major arena of non-statistical analysis. 
 

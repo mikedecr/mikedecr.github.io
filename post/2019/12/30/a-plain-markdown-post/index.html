@@ -10,15 +10,12 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="https://mikedecr.github.io/">
+<base href="/">
 
 <title>Michael DeCrescenzo</title>
 
 <meta name="generator" content="Hugo 0.40" />
 
-
-  <link href="Page%28%22Michael%20DeCrescenzo%22%29" rel="alternate" type="application/rss+xml" title="Michael DeCrescenzo" />
-  <link href="Page%28%22Michael%20DeCrescenzo%22%29" rel="feed" type="application/rss+xml" title="Michael DeCrescenzo" />
 
 
 
@@ -29,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
@@ -46,44 +43,85 @@
 <div class="container">
 
 
-<header class="row text-center header">
-   <img src="/img/ac-logo.png" alt="Author Image" class="img-circle text-center headshot"> 
-  <h1 class="author">Michael DeCrescenzo</h1>
+<header class="row text-left title">
+  <h1 class="title">A Plain Markdown Post</h1>
 </header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED DEC 30, 2019 
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>This is a post written in plain Markdown (<code>*.md</code>) instead of R Markdown (<code>*.Rmd</code>). The major differences are:</p>
 
+<ol>
+<li>You cannot run any R code in a plain Markdown document, whereas in an R Markdown document, you can embed R code chunks (<code>```{r}</code>);</li>
+<li>A plain Markdown post is rendered through <a href="https://gohugo.io/overview/configuration/">Blackfriday</a>, and an R Markdown document is compiled by <a href="http://rmarkdown.rstudio.com"><strong>rmarkdown</strong></a> and <a href="http://pandoc.org">Pandoc</a>.</li>
+</ol>
 
-<section id="info-pane" class="row text-center info">
+<p>There are many differences in syntax between Blackfriday&rsquo;s Markdown and Pandoc&rsquo;s Markdown. For example, you can write a task list with Blackfriday but not with Pandoc:</p>
+
+<ul class="task-list">
+<li><label><input type="checkbox" checked disabled class="task-list-item"> Write an R package.</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Write a book.</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> &hellip;</label></li>
+<li><label><input type="checkbox" disabled class="task-list-item"> Profit!</label></li>
+</ul>
+
+<p>Similarly, Blackfriday does not support LaTeX math and Pandoc does. I have added the MathJax support to this theme (<a href="https://github.com/yihui/hugo-lithium-theme">hugo-lithium-theme</a>) but there is a caveat for plain Markdown posts: you have to include math expressions in a pair of backticks (inline: <code>`$ $`</code>; display style: <code>`$$ $$`</code>), e.g., <code>$S_n = \sum_{i=1}^n X_i$</code>.<sup class="footnote-ref" id="fnref:This-is-because"><a href="#fn:This-is-because">1</a></sup> For R Markdown posts, you do not need the backticks, because Pandoc can identify and process math expressions.</p>
+
+<p>When creating a new post, you have to decide whether the post format is Markdown or R Markdown, and this can be done via the <code>ext</code> argument of the function <code>blogdown::new_post()</code>, e.g.</p>
+
+<pre><code class="language-r">blogdown::new_post(&quot;Post Title&quot;, ext = '.Rmd')
+</code></pre>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:This-is-because">This is because we have to protect the math expressions from being interpreted as Markdown. You may not need the backticks if your math expression does not contain any special Markdown syntax such as underscores or asterisks, but it is always a safer choice to use backticks. When you happen to have a pair of literal dollar signs inside the same element, you can escape one dollar sign, e.g., <code>\$50 and $100</code> renders &ldquo;\$50 and $100&rdquo;. <a class="footnote-return" href="#fnref:This-is-because"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
   
-  <h3 class="intro">Ph.D. Candidate, Political Science <br> University of Wisconsin&ndash;Madison</h3>
-  
-  
-  <h4 class="description">American politics, political methodology, Bayesian statistics</h4>
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
   
 </section>
 
 
-<section id="social-pane" class="row text-center social">
-   
-   
-  <a href="https://github.com/mikedecr"><i class="fa fa-github" aria-hidden="true"></i></a>
-  
-  
-  
-  
-  <a href="https://twitter.com/mikedecr"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-  
-  
-  
-  
-  
-  
-  
-  
-</section>
 
 
-<section id="main-menu-pane" class="row text-center main-menu">
-  <h4>
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/post/2019/07/23/hello-r-markdown/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   
   <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
@@ -95,6 +133,8 @@
   <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
   </h4>
 </section>
+</section>
+
 
 
 
@@ -181,4 +221,5 @@ Analytics"></a></div></noscript>
 
 </body>
 </html>
+
 
