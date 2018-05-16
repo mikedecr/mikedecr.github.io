@@ -10,7 +10,7 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="/">
+<base href="https://mikedecr.github.io/">
 
 <title>Michael DeCrescenzo</title>
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
 
 
 
@@ -233,9 +233,9 @@ count(anes, VCF0104)</code></pre>
 <pre><code>## # A tibble: 3 x 2
 ##   VCF0104     n
 ##     &lt;dbl&gt; &lt;int&gt;
-## 1    0      103
-## 2    1.00 24862
-## 3    2.00 30709</code></pre>
+## 1       0   103
+## 2       1 24862
+## 3       2 30709</code></pre>
 <pre class="r"><code># 0 means NA/missing
 # use case_when() to implicitly recode 0 as NA
 
@@ -888,16 +888,16 @@ mean_votes &lt;- anes %&gt;%
 ## # Groups:   pid7, cycle [28]
 ##    cycle  pid7 vote                      x     n   prop
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;                 &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
-##  1  2000  1.00 Democratic Candidate 226    233   0.970 
-##  2  2000  2.00 Democratic Candidate 139    163   0.855 
-##  3  2000  3.00 Democratic Candidate 105    135   0.777 
-##  4  2000  4.00 Democratic Candidate  32.8   73.5 0.446 
-##  5  2000  5.00 Democratic Candidate  19.5  136   0.144 
-##  6  2000  6.00 Democratic Candidate  20.8  128   0.163 
-##  7  2000  7.00 Democratic Candidate   3.20 181   0.0177
-##  8  2004  1.00 Democratic Candidate 137    140   0.975 
-##  9  2004  2.00 Democratic Candidate  94.1  111   0.851 
-## 10  2004  3.00 Democratic Candidate 104    119   0.878 
+##  1  2000     1 Democratic Candidate 226.   233.  0.970 
+##  2  2000     2 Democratic Candidate 139.   163.  0.855 
+##  3  2000     3 Democratic Candidate 105.   135.  0.777 
+##  4  2000     4 Democratic Candidate  32.8   73.5 0.446 
+##  5  2000     5 Democratic Candidate  19.5  136.  0.144 
+##  6  2000     6 Democratic Candidate  20.8  128.  0.163 
+##  7  2000     7 Democratic Candidate   3.20 181.  0.0177
+##  8  2004     1 Democratic Candidate 137.   140.  0.975 
+##  9  2004     2 Democratic Candidate  94.1  111.  0.851 
+## 10  2004     3 Democratic Candidate 104.   119.  0.878 
 ## # ... with 18 more rows</code></pre>
 <p>And then plot these averages.</p>
 <pre class="r"><code># geom_col to create a column as tall as the (x, y) point
@@ -1154,18 +1154,18 @@ str_replace_all(state.name, pattern = &quot; &quot;, replacement = &quot;-&quot;
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="/811/811-data/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-data/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/811">811</a></span>
   
   
-  <span><a class="menu-item" href="/811/811-analysis/"> | next &gt;</a></span>
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-analysis/"> | next &gt;</a></span>
   
   
 
   <section id="main-menu-pane" class="row text-center main-menu">
-  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
    
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   

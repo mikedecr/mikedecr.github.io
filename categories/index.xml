@@ -2,38 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Michael DeCrescenzo</title>
-    <link>/categories/</link>
+    <link>https://mikedecr.github.io/categories/</link>
     <description>Recent content in Categories on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mikedecr.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Ps811</title>
-      <link>/categories/ps811/</link>
+      <link>https://mikedecr.github.io/categories/ps811/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/ps811/</guid>
+      <guid>https://mikedecr.github.io/categories/ps811/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Tue, 23 Jul 2019 21:13:14 -0500</pubDate>
+      <link>https://mikedecr.github.io/categories/r/</link>
+      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/r/</guid>
+      <guid>https://mikedecr.github.io/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Teaching</title>
-      <link>/categories/teaching/</link>
+      <link>https://mikedecr.github.io/categories/teaching/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/teaching/</guid>
+      <guid>https://mikedecr.github.io/categories/teaching/</guid>
       <description></description>
     </item>
     

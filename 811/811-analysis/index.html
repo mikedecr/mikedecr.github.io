@@ -10,7 +10,7 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="/">
+<base href="https://mikedecr.github.io/">
 
 <title>Michael DeCrescenzo</title>
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/main.css">
+<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
 
 
 
@@ -307,13 +307,13 @@ grp_raw &lt;- anes %&gt;%
 <pre><code>## # A tibble: 7 x 3
 ##    pid7 dem_voters twoparty_voters
 ##   &lt;dbl&gt;      &lt;int&gt;           &lt;int&gt;
-## 1  1.00       1219            1234
-## 2  2.00        519             605
-## 3  3.00        451             486
-## 4  4.00        174             331
-## 5  5.00         47             428
-## 6  6.00         61             448
-## 7  7.00         18             645</code></pre>
+## 1     1       1219            1234
+## 2     2        519             605
+## 3     3        451             486
+## 4     4        174             331
+## 5     5         47             428
+## 6     6         61             448
+## 7     7         18             645</code></pre>
 <pre class="r"><code># think of binom.test() as being run separately for each row (group)
 # since each row is a group in this case
 # separately save mean, lower and upper bounds
@@ -327,13 +327,13 @@ grp_prop &lt;- grp_raw %&gt;%
 ## # Groups:   pid7 [7]
 ##    pid7 dem_voters twoparty_voters   prop  lower  upper
 ##   &lt;dbl&gt;      &lt;int&gt;           &lt;int&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-## 1  1.00       1219            1234 0.988  0.980  0.993 
-## 2  2.00        519             605 0.858  0.827  0.885 
-## 3  3.00        451             486 0.928  0.901  0.949 
-## 4  4.00        174             331 0.526  0.470  0.581 
-## 5  5.00         47             428 0.110  0.0818 0.143 
-## 6  6.00         61             448 0.136  0.106  0.171 
-## 7  7.00         18             645 0.0279 0.0166 0.0437</code></pre>
+## 1     1       1219            1234 0.988  0.980  0.993 
+## 2     2        519             605 0.858  0.827  0.885 
+## 3     3        451             486 0.928  0.901  0.949 
+## 4     4        174             331 0.526  0.470  0.581 
+## 5     5         47             428 0.110  0.0818 0.143 
+## 6     6         61             448 0.136  0.106  0.171 
+## 7     7         18             645 0.0279 0.0166 0.0437</code></pre>
 <pre class="r"><code># plot estimates with CIs as pointranges (points plus error bars)
 
 ggplot(grp_prop, aes(x = as.factor(pid7), y = prop)) +
@@ -600,24 +600,24 @@ tidy(int_mod)</code></pre>
   as_data_frame() %&gt;%
   print() </code></pre>
 <pre><code>## # A tibble: 16 x 8
-##    term   estimate std.error statistic    p.value conf.low conf.high model
-##    &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;
-##  1 (Inte…   -56.1      4.21    -13.3     1.33e⁻³⁵   -64.4     -47.8  Cont…
-##  2 libco…    13.0      0.945    13.8     8.18e⁻³⁸    11.2      14.9  Cont…
-##  3 (Inte…   -33.6      9.29    - 3.61    3.27e⁻ ⁴   -51.8     -15.3  Cons…
-##  4 as.fa…     6.89    10.1       0.684   4.94e⁻ ¹   -12.9      26.7  Cons…
-##  5 as.fa…    13.1      9.98      1.31    1.89e⁻ ¹   - 6.48     32.7  Cons…
-##  6 as.fa…    26.9      9.57      2.81    5.11e⁻ ³     8.10     45.7  Cons…
-##  7 as.fa…    45.3      9.81      4.61    4.85e⁻ ⁶    26.0      64.5  Cons…
-##  8 as.fa…    58.6      9.75      6.01    3.23e⁻ ⁹    39.4      77.7  Cons…
-##  9 as.fa…    60.3     12.1       4.97    8.87e⁻ ⁷    36.5      84.1  Cons…
-## 10 as.fa…   -33.6      9.29    - 3.61    3.27e⁻ ⁴   -51.8     -15.3  All …
-## 11 as.fa…   -26.7      3.87    - 6.89    1.43e⁻¹¹   -34.3     -19.1  All …
-## 12 as.fa…   -20.5      3.64    - 5.61    3.03e⁻ ⁸   -27.6     -13.3  All …
-## 13 as.fa…   - 6.69     2.28    - 2.94    3.39e⁻ ³   -11.2     - 2.23 All …
-## 14 as.fa…    11.7      3.16      3.70    2.32e⁻ ⁴     5.49     17.9  All …
-## 15 as.fa…    25.0      2.94      8.51    1.48e⁻¹⁶    19.2      30.8  All …
-## 16 as.fa…    26.7      7.81      3.42    6.67e⁻ ⁴    11.4      42.0  All …</code></pre>
+##    term    estimate std.error statistic  p.value conf.low conf.high model 
+##    &lt;chr&gt;      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt; 
+##  1 (Inter…   -56.1      4.21    -13.3   1.33e-35   -64.4     -47.8  Conti…
+##  2 libcon…    13.0      0.945    13.8   8.18e-38    11.2      14.9  Conti…
+##  3 (Inter…   -33.6      9.29     -3.61  3.27e- 4   -51.8     -15.3  Const…
+##  4 as.fac…     6.89    10.1       0.684 4.94e- 1   -12.9      26.7  Const…
+##  5 as.fac…    13.1      9.98      1.31  1.89e- 1    -6.48     32.7  Const…
+##  6 as.fac…    26.9      9.57      2.81  5.11e- 3     8.10     45.7  Const…
+##  7 as.fac…    45.3      9.81      4.61  4.85e- 6    26.0      64.5  Const…
+##  8 as.fac…    58.6      9.75      6.01  3.23e- 9    39.4      77.7  Const…
+##  9 as.fac…    60.3     12.1       4.97  8.87e- 7    36.5      84.1  Const…
+## 10 as.fac…   -33.6      9.29     -3.61  3.27e- 4   -51.8     -15.3  All I…
+## 11 as.fac…   -26.7      3.87     -6.89  1.43e-11   -34.3     -19.1  All I…
+## 12 as.fac…   -20.5      3.64     -5.61  3.03e- 8   -27.6     -13.3  All I…
+## 13 as.fac…    -6.69     2.28     -2.94  3.39e- 3   -11.2      -2.23 All I…
+## 14 as.fac…    11.7      3.16      3.70  2.32e- 4     5.49     17.9  All I…
+## 15 as.fac…    25.0      2.94      8.51  1.48e-16    19.2      30.8  All I…
+## 16 as.fac…    26.7      7.81      3.42  6.67e- 4    11.4      42.0  All I…</code></pre>
 <p>We can then plot coefficients straight away. Use the variable name as the <code>x</code> and the coefficient as the <code>y</code></p>
 <pre class="r"><code># we flip the x and y coordinates 
 #   to imitate the typical look of a coefficient plot
@@ -697,7 +697,7 @@ lin_preds &lt;-
 ## 1 -43.1  -49.6  -36.5 
 ## 2 -30.0  -34.9  -25.1 
 ## 3 -17.0  -20.5  -13.5 
-## 4 - 3.96 - 6.58 - 1.34
+## 4  -3.96  -6.58  -1.34
 ## 5   9.08   6.13  12.0 
 ## 6  22.1   17.9   26.3 
 ## 7  35.2   29.4   40.9</code></pre>
@@ -715,7 +715,7 @@ int_preds &lt;-
 ## 1 -33.6  -51.8  -15.3 
 ## 2 -26.7  -34.3  -19.1 
 ## 3 -20.5  -27.6  -13.3 
-## 4 - 6.69 -11.2  - 2.23
+## 4  -6.69 -11.2   -2.23
 ## 5  11.7    5.49  17.9 
 ## 6  25.0   19.2   30.8 
 ## 7  26.7   11.4   42.0</code></pre>
@@ -732,14 +732,14 @@ compare_mods &lt;-
 ##  1 -43.1  -49.6  -36.5            1 linear    
 ##  2 -30.0  -34.9  -25.1            2 linear    
 ##  3 -17.0  -20.5  -13.5            3 linear    
-##  4 - 3.96 - 6.58 - 1.34           4 linear    
+##  4  -3.96  -6.58  -1.34           4 linear    
 ##  5   9.08   6.13  12.0            5 linear    
 ##  6  22.1   17.9   26.3            6 linear    
 ##  7  35.2   29.4   40.9            7 linear    
 ##  8 -33.6  -51.8  -15.3            1 intercepts
 ##  9 -26.7  -34.3  -19.1            2 intercepts
 ## 10 -20.5  -27.6  -13.3            3 intercepts
-## 11 - 6.69 -11.2  - 2.23           4 intercepts
+## 11  -6.69 -11.2   -2.23           4 intercepts
 ## 12  11.7    5.49  17.9            5 intercepts
 ## 13  25.0   19.2   30.8            6 intercepts
 ## 14  26.7   11.4   42.0            7 intercepts</code></pre>
@@ -820,16 +820,16 @@ logit_data &lt;- anes %&gt;%
 <pre><code>## # A tibble: 1,714 x 3
 ##    vote                 libcon_self gender
 ##    &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt; 
-##  1 &lt;NA&gt;                        4.00 Women 
-##  2 Democratic Candidate        4.00 Women 
-##  3 &lt;NA&gt;                       NA    Men   
-##  4 Democratic Candidate        4.00 Men   
-##  5 Republican Candidate        4.00 Women 
-##  6 &lt;NA&gt;                       NA    Men   
-##  7 Republican Candidate        7.00 Men   
-##  8 Democratic Candidate       NA    Men   
-##  9 Democratic Candidate        4.00 Women 
-## 10 &lt;NA&gt;                        7.00 Men   
+##  1 &lt;NA&gt;                           4 Women 
+##  2 Democratic Candidate           4 Women 
+##  3 &lt;NA&gt;                          NA Men   
+##  4 Democratic Candidate           4 Men   
+##  5 Republican Candidate           4 Women 
+##  6 &lt;NA&gt;                          NA Men   
+##  7 Republican Candidate           7 Men   
+##  8 Democratic Candidate          NA Men   
+##  9 Democratic Candidate           4 Women 
+## 10 &lt;NA&gt;                           7 Men   
 ## # ... with 1,704 more rows</code></pre>
 <p>Let’s transform this data to make it play nicely with modeling math.</p>
 <pre class="r"><code># convert rvote to a dummy (treat a logical as a number, 0 or 1)
@@ -844,16 +844,16 @@ logit_data &lt;- logit_data %&gt;%
 <pre><code>## # A tibble: 1,714 x 6
 ##    vote                 libcon_self gender rvote woman  ideo
 ##    &lt;chr&gt;                      &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 &lt;NA&gt;                        4.00 Women  NA     1.00  0   
-##  2 Democratic Candidate        4.00 Women   0     1.00  0   
-##  3 &lt;NA&gt;                       NA    Men    NA     0    NA   
-##  4 Democratic Candidate        4.00 Men     0     0     0   
-##  5 Republican Candidate        4.00 Women   1.00  1.00  0   
-##  6 &lt;NA&gt;                       NA    Men    NA     0    NA   
-##  7 Republican Candidate        7.00 Men     1.00  0     3.00
-##  8 Democratic Candidate       NA    Men     0     0    NA   
-##  9 Democratic Candidate        4.00 Women   0     1.00  0   
-## 10 &lt;NA&gt;                        7.00 Men    NA     0     3.00
+##  1 &lt;NA&gt;                           4 Women     NA     1     0
+##  2 Democratic Candidate           4 Women      0     1     0
+##  3 &lt;NA&gt;                          NA Men       NA     0    NA
+##  4 Democratic Candidate           4 Men        0     0     0
+##  5 Republican Candidate           4 Women      1     1     0
+##  6 &lt;NA&gt;                          NA Men       NA     0    NA
+##  7 Republican Candidate           7 Men        1     0     3
+##  8 Democratic Candidate          NA Men        0     0    NA
+##  9 Democratic Candidate           4 Women      0     1     0
+## 10 &lt;NA&gt;                           7 Men       NA     0     3
 ## # ... with 1,704 more rows</code></pre>
 <p>You’ll see <code>NA</code>s in the data. Cases with missing values are automatically dropped during estimation. You may cover missing data imputation in your maximum likelihood course.</p>
 <p>The estimation formula in R looks like <code>lm()</code>, but we specify a family of probability distributions. We use “binomial,” which is how you do logit. (Binomial is a Bernoulli for multiple observations).</p>
@@ -1053,8 +1053,8 @@ data_frame(factor = F,
 <pre><code>## # A tibble: 2 x 2
 ##   factor numeric
 ##   &lt;fct&gt;    &lt;dbl&gt;
-## 1 hello     2.00
-## 2 world     1.00</code></pre>
+## 1 hello        2
+## 2 world        1</code></pre>
 <p>Character vectors cannot be directly mapped to numeric. They need to be converted to factor first.</p>
 <pre class="r"><code>char &lt;- c(&quot;a&quot;, &quot;b&quot;, &quot;z&quot;)
 # direct coercion leads to NAs
@@ -1252,18 +1252,18 @@ gender_gaps &lt;- anes %&gt;%
                           TRUE ~ &quot;Woman&quot;)) %&gt;% 
   print()</code></pre>
 <pre><code>## # A tibble: 34 x 8
-##    cycle term  estimate std.error statistic     p.value conf.low conf.high
-##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
-##  1  1948 Man     -0.228    0.145     -1.58     1.15e⁻ ¹  -0.513     0.0544
-##  2  1948 Woman   -0.113    0.143     -0.787    4.31e⁻ ¹  -0.395     0.168 
-##  3  1952 Man      0.286    0.0840     3.40     6.76e⁻ ⁴   0.121     0.451 
-##  4  1952 Woman    0.372    0.0829     4.49     6.98e⁻ ⁶   0.211     0.536 
-##  5  1956 Man      0.259    0.0815     3.18     1.46e⁻ ³   0.1000    0.419 
-##  6  1956 Woman    0.517    0.0809     6.39     1.71e⁻¹⁰   0.359     0.676 
-##  7  1960 Man     -0.107    0.0967    -1.11     2.67e⁻ ¹  -0.297     0.0820
-##  8  1960 Woman    0.124    0.0925     1.34     1.81e⁻ ¹  -0.0573    0.306 
-##  9  1964 Man     -0.640    0.0934    -6.85     7.14e⁻¹²  -0.825    -0.459 
-## 10  1964 Woman   -0.810    0.0881    -9.19     4.04e⁻²⁰  -0.985    -0.639 
+##    cycle term  estimate std.error statistic  p.value conf.low conf.high
+##    &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1  1948 Man     -0.228    0.145     -1.58  1.15e- 1  -0.513     0.0544
+##  2  1948 Woman   -0.113    0.143     -0.787 4.31e- 1  -0.395     0.168 
+##  3  1952 Man      0.286    0.0840     3.40  6.76e- 4   0.121     0.451 
+##  4  1952 Woman    0.372    0.0829     4.49  6.98e- 6   0.211     0.536 
+##  5  1956 Man      0.259    0.0815     3.18  1.46e- 3   0.1000    0.419 
+##  6  1956 Woman    0.517    0.0809     6.39  1.71e-10   0.359     0.676 
+##  7  1960 Man     -0.107    0.0967    -1.11  2.67e- 1  -0.297     0.0820
+##  8  1960 Woman    0.124    0.0925     1.34  1.81e- 1  -0.0573    0.306 
+##  9  1964 Man     -0.640    0.0934    -6.85  7.14e-12  -0.825    -0.459 
+## 10  1964 Woman   -0.810    0.0881    -9.19  4.04e-20  -0.985    -0.639 
 ## # ... with 24 more rows</code></pre>
 <pre class="r"><code># # plot coefficients over time
 # # map pt shape, solid and empty points, generic white fill
@@ -1371,7 +1371,7 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="/811/811-graphics/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-graphics/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/811">811</a></span>
@@ -1380,7 +1380,7 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
   
 
   <section id="main-menu-pane" class="row text-center main-menu">
-  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
    
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   

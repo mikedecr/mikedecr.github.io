@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Teaching on Michael DeCrescenzo</title>
-    <link>/categories/teaching/</link>
+    <link>https://mikedecr.github.io/categories/teaching/</link>
     <description>Recent content in Teaching on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 23 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/teaching/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mikedecr.github.io/categories/teaching/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Lecture 3: Analysis</title>
-      <link>/811/811-analysis/</link>
+      <link>https://mikedecr.github.io/811/811-analysis/</link>
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/811/811-analysis/</guid>
+      <guid>https://mikedecr.github.io/811/811-analysis/</guid>
       <description>Schedule Read this before our final lecture, after the graphics lesson.
  How to follow along A script file walking through some of these commands is available here.
  Objectives In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
@@ -25,10 +25,10 @@
     
     <item>
       <title>Lecture 2: Graphics</title>
-      <link>/811/811-graphics/</link>
+      <link>https://mikedecr.github.io/811/811-graphics/</link>
       <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/811/811-graphics/</guid>
+      <guid>https://mikedecr.github.io/811/811-graphics/</guid>
       <description>Schedule: Read this before our second R lecture, after the data lesson.
  How to follow along A script file walking through some of these commands is available here.
  Objectives The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
@@ -37,10 +37,10 @@
     
     <item>
       <title>Lecture 1: Data Manipulation</title>
-      <link>/811/811-data/</link>
+      <link>https://mikedecr.github.io/811/811-data/</link>
       <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/811/811-data/</guid>
+      <guid>https://mikedecr.github.io/811/811-data/</guid>
       <description>Schedule: Read this before our first R lecture.
  How to follow along A script file walking through some of these commands is available here.
  Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
@@ -49,10 +49,10 @@
     
     <item>
       <title>Getting Started with R</title>
-      <link>/811/811-basics/</link>
+      <link>https://mikedecr.github.io/811/811-basics/</link>
       <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/811/811-basics/</guid>
+      <guid>https://mikedecr.github.io/811/811-basics/</guid>
       <description>Schedule: Read this before our first R lecture.
  How to follow along Follow the instructions in this lesson in your own .R script.
  Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.</description>
@@ -60,10 +60,10 @@
     
     <item>
       <title>PoliSci 811: R Introduction</title>
-      <link>/811/811-intro/</link>
+      <link>https://mikedecr.github.io/811/811-intro/</link>
       <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/811/811-intro/</guid>
+      <guid>https://mikedecr.github.io/811/811-intro/</guid>
       <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
 This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.
 Schedule: Read this before our first R lecture.
