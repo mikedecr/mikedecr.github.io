@@ -1,0 +1,17 @@
+---
+title: "Notes on the Atom text editor"
+description: "Pros and cons, but probably more cons"
+author: "Michael DeCrescenzo"
+date: '2018-05-03'
+slug: "atom-notes"
+categories: ["software", "code"]
+tags: []
+draft: true
+---
+
+# Why Look at Atom
+
+The short story is that
+
+
+I normally use Sublime Text as my editor of choice

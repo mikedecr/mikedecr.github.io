@@ -10,7 +10,7 @@
 <meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
 <meta name="keywords" content="[political science wisconsin]">
 
-<base href="https://mikedecr.github.io/">
+<base href="/">
 
 <title>Michael DeCrescenzo</title>
 
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://mikedecr.github.io/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
@@ -148,8 +148,8 @@ library(&quot;tidyverse&quot;)</code></pre>
 <pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
 ## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
-## ✔ tidyr   0.7.2     ✔ stringr 1.3.0
-## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+## ✔ tidyr   0.8.0     ✔ stringr 1.3.1
+## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
 <pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ tidyr::extract()   masks magrittr::extract()
 ## ✖ dplyr::filter()    masks stats::filter()
@@ -485,16 +485,16 @@ filter(anes, cycle == 2012)</code></pre>
 <pre><code>## # A tibble: 5,914 x 955
 ##    Version      cycle VCF0006 VCF0006a VCF0009x VCF0010x VCF0011x VCF0009y
 ##    &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-##  1 ANES_cdf_VE…  2012    1.00 20120001    0.380    0.380    0.380        0
-##  2 ANES_cdf_VE…  2012    2.00 20120002    0.547    0.547    0.547        0
-##  3 ANES_cdf_VE…  2012    3.00 20120003    0.498    0.498    0.498        0
-##  4 ANES_cdf_VE…  2012    4.00 20120004    0.255    0.255    0.255        0
-##  5 ANES_cdf_VE…  2012    5.00 20120005    0.603    0.603    0.603        0
-##  6 ANES_cdf_VE…  2012    6.00 20120006    0.286    0.286    0.286        0
-##  7 ANES_cdf_VE…  2012    7.00 20120007    0.195    0.195    0.195        0
-##  8 ANES_cdf_VE…  2012    8.00 20120008    0.394    0.394    0.394        0
-##  9 ANES_cdf_VE…  2012    9.00 20120009    0.506    0.506    0.506        0
-## 10 ANES_cdf_VE…  2012   10.0  20120010    2.51     2.51     2.51         0
+##  1 ANES_cdf_VE…  2012       1 20120001    0.380    0.380    0.380        0
+##  2 ANES_cdf_VE…  2012       2 20120002    0.547    0.547    0.547        0
+##  3 ANES_cdf_VE…  2012       3 20120003    0.498    0.498    0.498        0
+##  4 ANES_cdf_VE…  2012       4 20120004    0.255    0.255    0.255        0
+##  5 ANES_cdf_VE…  2012       5 20120005    0.603    0.603    0.603        0
+##  6 ANES_cdf_VE…  2012       6 20120006    0.286    0.286    0.286        0
+##  7 ANES_cdf_VE…  2012       7 20120007    0.195    0.195    0.195        0
+##  8 ANES_cdf_VE…  2012       8 20120008    0.394    0.394    0.394        0
+##  9 ANES_cdf_VE…  2012       9 20120009    0.506    0.506    0.506        0
+## 10 ANES_cdf_VE…  2012      10 20120010    2.51     2.51     2.51         0
 ## # ... with 5,904 more rows, and 947 more variables: VCF0010y &lt;dbl&gt;,
 ## #   VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;, VCF0010z &lt;dbl&gt;, VCF0011z &lt;dbl&gt;,
 ## #   VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;, VCF0012b &lt;dbl&gt;, VCF0013 &lt;dbl+lbl&gt;,
@@ -598,19 +598,19 @@ d</code></pre>
 <pre><code>## # A tibble: 4 x 2
 ##       x     y
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.00  1.00
-## 2  1.00  2.00
-## 3  2.00  1.00
-## 4  2.00  2.00</code></pre>
+## 1     1     1
+## 2     1     2
+## 3     2     1
+## 4     2     2</code></pre>
 <pre class="r"><code># sort by y and then by x (meaning, x within y)
 arrange(d, y, x)</code></pre>
 <pre><code>## # A tibble: 4 x 2
 ##       x     y
 ##   &lt;dbl&gt; &lt;dbl&gt;
-## 1  1.00  1.00
-## 2  2.00  1.00
-## 3  1.00  2.00
-## 4  2.00  2.00</code></pre>
+## 1     1     1
+## 2     2     1
+## 3     1     2
+## 4     2     2</code></pre>
 </div>
 <div id="joining-merging" class="section level1">
 <h1>Joining (merging)</h1>
@@ -789,18 +789,18 @@ mutate(group_by(tab, cycle),
        p = round(p, 3))</code></pre>
 <pre><code>## # A tibble: 233 x 5
 ## # Groups:   cycle [30]
-##    cycle pid7          n n_in_cycle      p
-##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;      &lt;int&gt;  &lt;dbl&gt;
-##  1  1948 &lt;NA&gt;        662        662 1.00  
-##  2  1952 1           392       1899 0.206 
-##  3  1952 2           435       1899 0.229 
-##  4  1952 3           173       1899 0.0910
-##  5  1952 4            83       1899 0.0440
-##  6  1952 5           128       1899 0.0670
-##  7  1952 6           237       1899 0.125 
-##  8  1952 7           241       1899 0.127 
-##  9  1952 &lt;NA&gt;        210       1899 0.111 
-## 10  1954 1           248       1139 0.218 
+##    cycle pid7          n n_in_cycle     p
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;
+##  1  1948 &lt;NA&gt;        662        662 1    
+##  2  1952 1           392       1899 0.206
+##  3  1952 2           435       1899 0.229
+##  4  1952 3           173       1899 0.091
+##  5  1952 4            83       1899 0.044
+##  6  1952 5           128       1899 0.067
+##  7  1952 6           237       1899 0.125
+##  8  1952 7           241       1899 0.127
+##  9  1952 &lt;NA&gt;        210       1899 0.111
+## 10  1954 1           248       1139 0.218
 ## # ... with 223 more rows</code></pre>
 <p>The <code>count()</code> function also handles sample weights.</p>
 <pre class="r"><code># keep only elections since 2000
@@ -812,16 +812,16 @@ count(filter(anes, cycle &gt;= 2000),
 <pre><code>## # A tibble: 40 x 3
 ##    cycle pid7          n
 ##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl&gt;
-##  1  2000 1         345  
-##  2  2000 2         274  
-##  3  2000 3         275  
-##  4  2000 4         237  
-##  5  2000 5         231  
-##  6  2000 6         207  
-##  7  2000 7         221  
+##  1  2000 1         345. 
+##  2  2000 2         274. 
+##  3  2000 3         275. 
+##  4  2000 4         237. 
+##  5  2000 5         231. 
+##  6  2000 6         207. 
+##  7  2000 7         221. 
 ##  8  2000 &lt;NA&gt;       16.5
-##  9  2002 1         246  
-## 10  2002 2         250  
+##  9  2002 1         246. 
+## 10  2002 2         250. 
 ## # ... with 30 more rows</code></pre>
 <p>The “counts” are no longer whole numbers, thanks to the survey weights (some people count as “partial observations” due to sample design).</p>
 </div>
@@ -903,7 +903,7 @@ gather(d, key = party, value = distance, contains(&quot;distance&quot;))</code><
 spread(l, key = party, value = distance) </code></pre>
 <pre><code>## # A tibble: 3 x 3
 ##   cycle dem_distance rep_distance
-## * &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+##   &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
 ## 1  2004         1.41        -1.05
 ## 2  2008         1.09        -1.01
 ## 3  2012         1.54        -1.23</code></pre>
@@ -1090,18 +1090,18 @@ anes %$%
 <section id="menu-pane" class="row menu text-center">
   
   
-  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-basics/">&lt; prev | </a></span>
+  <span><a class="menu-item" href="/811/811-basics/">&lt; prev | </a></span>
   
   
   <span><a class="menu-item" href="/811">811</a></span>
   
   
-  <span><a class="menu-item" href="https://mikedecr.github.io/811/811-graphics/"> | next &gt;</a></span>
+  <span><a class="menu-item" href="/811/811-graphics/"> | next &gt;</a></span>
   
   
 
   <section id="main-menu-pane" class="row text-center main-menu">
-  <h4 class="text-center"><a class="menu-item" href="https://mikedecr.github.io/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
    
   <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
   
@@ -1110,6 +1110,8 @@ anes %$%
   <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
   
   <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
   
   <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
   </h4>
