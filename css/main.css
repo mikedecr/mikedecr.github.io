@@ -50,7 +50,7 @@ code{
   font-family: 'Source Code Pro', 'Menlo', monospace;
   /*font-size: 1.5rem;*/
   color: #00193a;
-  background-color: #eaeef3;
+  background-color: #F0F0F0;
  }    
 
 pre {
@@ -68,7 +68,7 @@ h1 {
  font-size: 3rem;
  padding-top: 25px;
  padding-bottom: 10px;
- font-family: 'Vollkorn', serif;
+ font-family:  'Vollkorn', serif;
  font-weight: 600;
 
 
@@ -76,7 +76,7 @@ h1 {
 
 h2 {
  font-size: 2rem;
- font-family: 'Vollkorn', serif;
+ font-family:  'Vollkorn', serif;
  font-weight: 600;
  padding-top: 15px;
  padding-bottom: 5px;
@@ -103,7 +103,7 @@ html
 .author h6,
 .author p
 {
-    font-family: 'Vollkorn', serif;
+    font-family:  'Vollkorn', serif;
 }
 .category
 {
@@ -132,7 +132,7 @@ div.content
 }
 .copyright
 {
-    font-family: 'Vollkorn', sans-serif;
+    font-family:  'Vollkorn', sans-serif;
     font-size: 12px;
     font-weight: 200;
 }
@@ -144,7 +144,7 @@ div.content
 }
 .error
 {
-    font-family: 'Vollkorn', sans-serif;
+    font-family:  'Vollkorn', sans-serif;
 
     margin-top: 100px;
 }
@@ -162,7 +162,8 @@ div.content
 }
 .excerpt
 {
-    font-family: 'Vollkorn', sans-serif;
+    /*font-family:  'Vollkorn', sans-serif;*/
+    font-family: 'Source Sans Pro', sans-serif;
     font-size: 18px;
     font-weight: 200;
 
@@ -192,7 +193,8 @@ div.content
 }
 .intro
 {
-    font-family: 'Vollkorn', serif;
+    /*font-family:  'Vollkorn', serif;*/
+    font-family: 'Source Sans Pro', sans-serif;
     font-weight: 200;
     line-height: 30px;
     font-size: 2.25rem;
@@ -204,7 +206,7 @@ h3.intro
 }
 .list
 {
-    font-family: 'Vollkorn', serif;
+    font-family:  'Vollkorn', serif;
 
     margin-top: 50px;
 }
@@ -214,7 +216,9 @@ h3.intro
 }
 .list-entry
 {
+    /*font-family:  'Vollkorn', sans-serif;*/
     font-family: 'Source Sans Pro', sans-serif;
+
     font-size: 25px;
     font-weight: 400;
 
@@ -247,7 +251,7 @@ h3.intro
 }
 .meta
 {
-    font-family: 'Vollkorn', serif;
+    font-family:  'Vollkorn', serif;
     text-transform: lowercase;
     font-size: 12px;
     font-weight: 200;
@@ -260,7 +264,7 @@ a.meta
 }
 h6.meta
 {
-    font-family: 'Vollkorn', serif;
+    font-family:  'Vollkorn', serif;
     font-size: 12px;
     font-weight: 200;
 
@@ -271,7 +275,7 @@ section.meta {
 }
 .powered
 {
-    font-family: 'Vollkorn', serif;
+    font-family:  'Vollkorn', serif;
     font-size: 12px;
     font-weight: 300;
 }
@@ -286,7 +290,7 @@ section.meta {
 }
 .title
 {
-    font-family: 'Vollkorn', sans-serif;
+    font-family:  'Vollkorn', sans-serif;
     font-weight: bold;
     /*font-weight: 400;*/
     font-size: 3.5rem;
@@ -306,7 +310,7 @@ header.title
     }
     .list
     {
-        font-family: 'Vollkorn', sans-serif;
+        font-family:  'Vollkorn', sans-serif;
 
         margin-top: 30px;
     }

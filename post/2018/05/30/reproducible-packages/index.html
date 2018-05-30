@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.40" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="/favicon-32x32.ico" sizes="32x32">
+<link rel="icon" type="image/ico" href="/favicon-16x16.ico" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Packages &amp; Reproducibility: Install what you need, load what you want</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED MAY 30, 2018 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/r">R</a>, 
+      
+      <a class="meta" href="/categories/reproducibility">REPRODUCIBILITY</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed. To this end, many users conditionally install packages using <code>require()</code>; if a package fails to load, it is installed. Supposing that we want to load a package called <code>pkg</code>…</p>
+<pre class="r"><code># if require() succeeds, package is loaded
+# if require() fails, package is installed
+if (require(&quot;pkg&quot;) == FALSE) {
+  install.packages(&quot;pkg&quot;)
+}</code></pre>
+<p>We see often see this in (for example) package ReadMe files on Github. But for distributing bigger projects, the approach has two shortcomings.</p>
+<ol style="list-style-type: decimal">
+<li>Sometimes we require a package, but we don’t want to load it. We may only need it for a function or two, or we want to prevent <a href="https://github.com/r-lib/conflicted">clashing function names</a> in projects where many packages are loaded, and so we prefer to use the <code>pkg::function()</code> grammar instead of loading the package with <code>require()</code>.</li>
+<li>If we want to require several packages for a large project (like a replication archive for a published journal article), including code to install all packages ends up unsightly and repetitive (but functional, to be fair).</li>
+</ol>
+<p>Here’s a straightforward way around this.</p>
+<div id="check-for-installed-packages-without-loading-them" class="section level2">
+<h2>Check for installed packages without loading them</h2>
+<p>Rather than use <code>require()</code>, which has the side-effect of loading an installed package, we can look for installed packages using the output from <code>installed.packages()</code>. In particular, the function should return an array whose rownames contain the names of our installed packages.</p>
+<pre class="r"><code>head(rownames(installed.packages()))
+## [1] &quot;abind&quot;        &quot;acepack&quot;      &quot;AER&quot;          &quot;animation&quot;   
+## [5] &quot;arm&quot;          &quot;arrayhelpers&quot;</code></pre>
+<p>Using these rownames, we can check for installed packages without loading those packages incidentally. Just create a character vector of required packages and cross-reference those names with the list of installed packages.</p>
+<pre class="r"><code>c(&quot;ggplot2&quot;, &quot;beepr&quot;, &quot;some_other_package&quot;) %in% rownames(installed.packages())
+## [1]  TRUE  TRUE FALSE</code></pre>
+</div>
+<div id="install-what-we-need-load-what-we-want" class="section level2">
+<h2>Install what we need, load what we want</h2>
+<p>The structure laid out above can be augmented to install missing packages. Just use a little bit of indexing:</p>
+<pre class="r"><code># vector of requirements 
+requires &lt;- c(&quot;pkg_1&quot;, &quot;pkg_2&quot;)
+
+# evaluates to TRUE if not already installed
+to_install &lt;- (requires %in% rownames(installed.packages()) == FALSE)
+
+# install missing packages
+cloud_url &lt;- &quot;https://cloud.r-project.org/&quot;
+install.packages(requires[to_install], repos = cloud_url)</code></pre>
+<p>Because we never call <code>require()</code>, we can load (or not load) whichever packages we want with subsequent <code>library()</code> commands.</p>
+</div>
+<div id="optional-one-function-to-do-it-all" class="section level1">
+<h1>Optional: one function to do it all</h1>
+<p>We could implement this entire system (installing and loading select packages) with one function that takes two main arguments:</p>
+<ul>
+<li>a vector of required package names</li>
+<li>a vector of package names for which packages to load (or not load)</li>
+</ul>
+<p>Before going on, it’s fair to note that there are two valid reasons why we might <em>not</em> want to do this:</p>
+<ol style="list-style-type: decimal">
+<li>We may find it valuable to include separate calls to <code>library()</code> for each loaded package. This could be to keep the project layout simple and/or for our own mental organization. I think it’s okay to embrace redundancy if we value the explicitness.</li>
+<li>We may not want to manage yet another custom function to paste around from project to project. Fair.</li>
+</ol>
+<p>But supposing that we <em>did</em> want one function that could do it all, it might look something like this.</p>
+<pre class="r"><code>pkg_check &lt;- 
+  function(packages = character(), load = packages, verbose = FALSE) {
+  
+    # 1. check which packages are installed
+    installed &lt;- packages %in% rownames(installed.packages())
+    to_install &lt;- packages[installed == FALSE]
+
+    # 2. install only those not installed
+    if (length(to_install) &gt; 0) {
+      install.packages(to_install, repos = &quot;https://cloud.r-project.org/&quot;)
+    }
+
+    # 3. load only specified packages (defaults to all required)
+    lapply(packages, function(x) { 
+      if (x %in% load) library(x, character.only = TRUE) } 
+      )      
+    
+    # 4. optional verbose output
+    if (verbose == TRUE) {
+      return(list(`Packages` = data.frame(Names = packages, 
+                                          `Already Installed` = installed),
+                  `Newly Installed` = to_install,
+                  `Loaded` = load,
+                  `Not Loaded` = packages[!(packages %in% load)]))  
+    }
+}</code></pre>
+<p>We can test this function using some packages that I needed for a recent project.</p>
+<pre class="r"><code>pkg_check(c(&quot;here&quot;, &quot;magrittr&quot;, &quot;tidyverse&quot;, &quot;ggplot2&quot;, 
+            &quot;readxl&quot;, &quot;R.utils&quot;, &quot;haven&quot;, &quot;labelled&quot;, 
+            &quot;gtools&quot;, &quot;beepr&quot;, &quot;readr&quot;, &quot;gghighlight&quot;), 
+          load = c(&quot;here&quot;, &quot;magrittr&quot;, &quot;tidyverse&quot;, &quot;ggplot2&quot;), 
+          verbose = TRUE)
+## $Packages
+##          Names Already.Installed
+## 1         here              TRUE
+## 2     magrittr              TRUE
+## 3    tidyverse              TRUE
+## 4      ggplot2              TRUE
+## 5       readxl              TRUE
+## 6      R.utils              TRUE
+## 7        haven              TRUE
+## 8     labelled              TRUE
+## 9       gtools              TRUE
+## 10       beepr              TRUE
+## 11       readr              TRUE
+## 12 gghighlight              TRUE
+## 
+## $`Newly Installed`
+## character(0)
+## 
+## $Loaded
+## [1] &quot;here&quot;      &quot;magrittr&quot;  &quot;tidyverse&quot; &quot;ggplot2&quot;  
+## 
+## $`Not Loaded`
+## [1] &quot;readxl&quot;      &quot;R.utils&quot;     &quot;haven&quot;       &quot;labelled&quot;    &quot;gtools&quot;     
+## [6] &quot;beepr&quot;       &quot;readr&quot;       &quot;gghighlight&quot;</code></pre>
+</div>
+<div id="coda-on-the-use-of-library-vs-require" class="section level1">
+<h1>Coda: on the use of <code>library()</code> vs <code>require()</code></h1>
+<p>Thinking back to this <a href="https://yihui.name/en/2014/07/library-vs-require/">oft-cited post by Yihui Xi</a>, the takeaway was that we should only be using <code>require()</code> to…</p>
+<ol style="list-style-type: decimal">
+<li>conditionally install packages, or</li>
+<li>implement “bonus-features” that may enhance a package or function but that aren’t strictly necessary</li>
+</ol>
+<p>In reference to [1], I think this post demonstrates that we can (and should) flatly avoid <code>require()</code> in any situation where we need a package but don’t want to load it. For me, this is basically all of my research projects, and I think many other users will find themselves in a similar boat. As long as <code>require</code> loads a package in the process of checking for it, <code>require</code> gives unintended and unnecessary side-effects.</p>
+<p>In reference to [2], it’s a little funny that we got to a point where we would only use a function called <code>require</code> for features that are <em>necessarily</em> not required. It’s quite the contradiction (and maybe the function ought to be called something squishier like <code>supposing()</code> in a parallel universe). At any rate, the <em>functional benefit</em> of using <code>require</code> in this case—it returns logical output—isn’t necessary either, since <code>library()</code> has a <code>logical.return</code> argument that achieves the same objective (sidestep an error by returning <code>FALSE</code> if a package fails to load).</p>
+</div>
+<div id="thanks-for-reading" class="section level1">
+<h1>Thanks for reading</h1>
+<p>Feel free to <a href="https://www.twitter.com/mikedecr">get in touch</a> with comments, links to similar or related posts by others, packages that implement similar features, and so on.</p>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/post/2018/05/15/bayes-r-workflow/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  <span><a class="menu-item" href="/post/2019/01/01/lorem-ipsum/"> | next &gt;</a></span>
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+
+
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics"></a></div></noscript>
+
+
+</body>
+</html>
+
+

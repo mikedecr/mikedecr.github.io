@@ -42,6 +42,24 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
     </item>
     
     <item>
+      <title>Packages &amp; Reproducibility: Install what you need, load what you want</title>
+      <link>/post/2018/05/30/reproducible-packages/</link>
+      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/30/reproducible-packages/</guid>
+      <description>When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed. To this end, many users conditionally install packages using require(); if a package fails to load, it is installed.</description>
+    </item>
+    
+    <item>
+      <title>Notes on Bayesian Workflow in R</title>
+      <link>/post/2018/05/15/bayes-r-workflow/</link>
+      <pubDate>Tue, 15 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/15/bayes-r-workflow/</guid>
+      <description>With my dissertation research ramping up over the past few weeks, I found myself struck by how underdeveloped my workflow was for dealing with Bayesian model output. This is despite being an enthusiast of Bayesian methods and having used at least some Bayesian technology in my other research projects (see [1], [2]). I guess I happened to develop my initial Bayes chops on projects that didn’t hinge on “typical” regression-based research designs.</description>
+    </item>
+    
+    <item>
       <title>Testing 1, 2, ...</title>
       <link>/post/2018/04/23/test-post/</link>
       <pubDate>Mon, 23 Apr 2018 00:00:00 +0000</pubDate>

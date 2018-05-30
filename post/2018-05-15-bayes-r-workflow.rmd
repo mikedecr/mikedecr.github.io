@@ -1,0 +1,176 @@
+---
+title: Notes on Bayesian Workflow in R
+author: Michael DeCrescenzo
+date: '2018-05-15'
+slug: bayes-r-workflow
+categories: ["R", "Bayes"]
+showpagemeta: yes
+draft: true
+---
+
+
+```{r, include = FALSE}
+library("knitr")
+opts_knit$set(collapse = TRUE)
+```
+
+With my dissertation research ramping up over the past few weeks, I found myself struck by how underdeveloped my workflow was for dealing with Bayesian model output. This is despite being an enthusiast of Bayesian methods and having used at least some Bayesian technology in my other research projects (see [[1]](https://www.dropbox.com/s/hmu7dcm7gx5wbhn/gender-gap-updated-20180515.pdf?dl=0), [[2]](https://uwmadison.app.box.com/s/i5tqmenqxtjt0hhx39rfu59340gb0fcj)). I guess I happened to develop my initial Bayes chops on projects that didn't hinge on "typical" regression-based research designs.
+
+But because my thesis requires some complicated Bayesian modeling, I need I need to build a workflow for dealing with Bayesian model output, especially from [`rstan`](http://mc-stan.org/users/interfaces/rstan.html). So we'll give some packages a look. 
+
+
+# First, we'll need some data
+
+Let's simulate a linear outcome variable as a function of $k = 2$ predictors. We'll set up the model in the form:
+
+$\begin{align} y_i &= \alpha + X\beta + \varepsilon_{i},\end{align}$
+
+where $\alpha$ is a constant, $X$ is an $n \times k$ matrix containing data on $k$ predictors, $\beta$ is a vector of $k$ coefficients, and $\varepsilon_{i}$ is a normally distributed error term.
+
+```{r, packages, message = FALSE}
+library("magrittr")
+library("tidyverse")
+
+# number of obs
+n <- 1000
+
+# constant
+alpha <- 3
+
+# two coefficients
+k <- 2
+beta <- rlnorm(n = k, mean = 0, sd = 1)
+```
+
+We will use the `mvtnorm` package to simulate an arbitrary number of predictors for convenience. We will then use the predictors and the simulated parameters to generate $y_{i}$.
+
+```{r, collapse = TRUE}
+library("mvtnorm")
+
+# mean vector == beta
+# convert to data frame to make pipeable, 
+# but convert to matrix for dot product
+d <- rmvnorm(n = n, mean = rnorm(n = k)) %>% 
+  as_data_frame() %>%  
+  mutate(mu = alpha + (as.matrix(.) %*% beta),
+         error = rnorm(n = n, mean = 0, sd = 1),
+         y = mu + error) %>% 
+  print()
+
+#  custom ggtheme, import from Github
+library("ggplot2")
+source("https://raw.githubusercontent.com/mikedecr/theme-mgd/master/theme_mgd.R")
+theme_set(theme_mgd()) # set default theme
+
+# plot data
+d %>% 
+  gather(key = predictor, value = xval, contains("V")) %>% 
+  ggplot(aes(x = xval, y = y)) +
+  facet_wrap(~ predictor) +
+  geom_point()
+```
+
+
+# A frequentist workflow
+
+We would ideally like to make a Bayesian workflow as closely compatible with frequentist workflows as possible, where possible. While I don't do much frequentist work, I do prefer to use the `broom` tools when I can. Let's see how we can get simple model output using `tidy()`, `augment()`, and `glance()`.
+
+```{r}
+# estimate models
+lm1 <- lm(y ~ V1, data = d)
+lm2 <- lm(y ~ V2, data = d)
+lmfull <- lm(y ~ V1 + V2, data = d)
+```
+
+## Coefficient estimates
+
+I use a combination of `tidy()` and `mutate()` to combine model coefficients.
+
+```{r, collapse = TRUE}
+library("broom")
+
+freq_coefs <- 
+  bind_rows(mutate(tidy(lm1, conf.int = TRUE), mod = "lm1"),
+            mutate(tidy(lm2, conf.int = TRUE), mod = "lm2"),
+            mutate(tidy(lmfull, conf.int = TRUE), mod = "lmfull")) %>% 
+  print()
+
+# a quick plot
+# object `mgray` exported by 
+ggplot(data = freq_coefs, aes(x = term,  y = estimate)) +
+  geom_hline(yintercept = 0, color = mgray) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
+                      color = mod),
+                  position = position_dodge(width = -0.5)) +
+  coord_flip() +
+  scale_color_brewer(palette = "Set2")
+```
+
+
+
+## Predicted values
+
+For predicted values, I create `newdata` objects where we vary some predictor of interest, leaving others held at mean, median, or modal values.
+
+```{r, collapse = TRUE}
+# vary V1, holding V2 constant
+vary_v1 <- d %$% 
+  data_frame(V1 = seq(min(V1), max(V1), .1),
+             V2 = mean(V2)) %>% 
+  print()
+
+# hold V1 constant, vary V2
+vary_v2 <- d %$% 
+  data_frame(V1 = mean(V1),
+             V2 = seq(min(V2), max(V2), .1)) %>% 
+  print()
+```
+
+
+A quick trick: we don't have to generate predictions for these data frames separately. We could just combine the data and then generate predictions. While we could do this with `mutate()` and `bind_rows()` as above, we can be a little more efficient with `list()`.
+
+```{r, collapse = TRUE}
+designs <- 
+  list(V1 = vary_v1, V2 = vary_v2) %>% 
+  bind_rows(.id = "varied") %>% 
+  print()
+```
+
+When the data are in place, generating predictions using `augment()` is simple.
+
+```{r, collapse = TRUE}
+# use the t statistic to create confidence intervals
+critical_t <- 
+  glance(lmfull) %$% 
+  qt(p = .975, df = df.residual)
+
+# predicted values with 95% CIs for means
+preds <- augment(lmfull, newdata = designs) %>%
+  mutate(lower = .fitted - (critical_t * .se.fit),
+         upper = .fitted + (critical_t * .se.fit)) %>% 
+  as_data_frame() %>%  
+  print()
+```
+
+And then plotting is done with `geom_ribbon`. We'll elongate this data to plot the predictions in separate panels.
+
+```{r}
+preds %>% 
+  gather(key = predictor, value = xval, V1, V2) %>% 
+  ggplot(aes(x = xval,  y = .fitted, 
+               fill = predictor, color = predictor)) +
+    geom_ribbon(aes(ymin = lower, ymax = upper,
+                    fill = predictor),
+                color = NA) +
+    geom_line() +
+    facet_wrap( ~ predictor)
+    
+  
+```
+
+# To-do
+
+- Hierarchical models
+- "Fully Bayesian" MRP
+- Models estimated using `brms`
+
