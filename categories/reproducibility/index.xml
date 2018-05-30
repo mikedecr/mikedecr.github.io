@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reproducibility on Michael DeCrescenzo</title>
-    <link>/categories/reproducibility/</link>
+    <link>https://mikedecr.github.io/categories/reproducibility/</link>
     <description>Recent content in Reproducibility on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 30 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/reproducibility/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mikedecr.github.io/categories/reproducibility/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Packages &amp; Reproducibility: Install what you need, load what you want</title>
-      <link>/post/2018/05/30/reproducible-packages/</link>
+      <link>https://mikedecr.github.io/post/2018/05/30/reproducible-packages/</link>
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/2018/05/30/reproducible-packages/</guid>
+      <guid>https://mikedecr.github.io/post/2018/05/30/reproducible-packages/</guid>
       <description>When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed. To this end, many users conditionally install packages using require(); if a package fails to load, it is installed.</description>
     </item>
     

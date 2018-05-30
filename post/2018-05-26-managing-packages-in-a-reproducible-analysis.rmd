@@ -9,7 +9,7 @@ tags: []
 comments: no
 showcomments: yes
 showpagemeta: yes
-draft: true
+draft: false
 ---
 
 When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else's machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed. To this end, many users conditionally install packages using `require()`; if a package fails to load, it is installed. Supposing that we want to load a package called `pkg`...
