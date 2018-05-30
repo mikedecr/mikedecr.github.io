@@ -127,7 +127,7 @@ pkg_check(c("here", "magrittr", "tidyverse", "ggplot2",
 
 # Coda: on the use of `library()` vs `require()`
 
-Thinking back to this [oft-cited post by Yihui Xi](https://yihui.name/en/2014/07/library-vs-require/), the takeaway was that we should only be using `require()` to...
+Thinking back to this [oft-cited post by Yihui Xie](https://yihui.name/en/2014/07/library-vs-require/), the takeaway was that we should only be using `require()` to...
 
 1. conditionally install packages, or 
 2. implement "bonus-features" that may enhance a package or function but that aren't strictly necessary
