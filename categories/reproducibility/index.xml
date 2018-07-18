@@ -12,12 +12,13 @@
     
     
     <item>
-      <title>Packages &amp; Reproducibility: Install what you need, load what you want</title>
+      <title>Packages &amp; Reproducibility: Install what you need, attach what you want</title>
       <link>https://mikedecr.github.io/post/2018/05/30/reproducible-packages/</link>
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>https://mikedecr.github.io/post/2018/05/30/reproducible-packages/</guid>
-      <description>When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed. To this end, many users conditionally install packages using require(); if a package fails to load, it is installed.</description>
+      <description>(Note: An earlier version of this post referred to “loading” packages when I really meant “attaching.” Thanks to Thomas Leeper for the clarification.)
+When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed.</description>
     </item>
     
   </channel>

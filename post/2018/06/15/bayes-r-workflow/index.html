@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<meta name="description" content="PhD Candidate, Political Science, University of Wisconsin–Madison">
+<meta name="keywords" content="[political science wisconsin]">
+
+<base href="/">
+
+<title>Michael DeCrescenzo</title>
+
+<meta name="generator" content="Hugo 0.40" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400|Roboto+Slab:400,700|Roboto:300,300i,400,400i,500,500i,700,700i">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/ico" href="/favicon-32x32.ico" sizes="32x32">
+<link rel="icon" type="image/ico" href="/favicon-16x16.ico" sizes="16x16">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+
+</head>
+<body lang="en-us">
+<div class="container">
+
+
+<header class="row text-left title">
+  <h1 class="title">Notes on Bayesian Workflow in R</h1>
+</header>
+<section id="category-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-left meta">
+        UPDATED JUN 15, 2018 
+      
+      
+      
+      —
+      
+      
+      <a class="meta" href="/categories/bayes">BAYES</a>, 
+      
+      <a class="meta" href="/categories/r">R</a>
+      
+      
+      
+    </h6>
+  </div>
+  
+</section>
+<section id="content-pane" class="row">
+  <div class="col-md-12 text-justify content">
+    <p>With my dissertation research ramping up over the past few weeks, I found myself struck by how underdeveloped my workflow was for dealing with Bayesian model output. This is despite being an enthusiast of Bayesian methods and having used at least some Bayesian technology in my other research projects (see <a href="https://www.dropbox.com/s/hmu7dcm7gx5wbhn/gender-gap-updated-20180515.pdf?dl=0">[1]</a>, <a href="https://uwmadison.app.box.com/s/i5tqmenqxtjt0hhx39rfu59340gb0fcj">[2]</a>). I guess I happened to develop my initial Bayes chops on projects that didn’t hinge on “typical” regression-based research designs.</p>
+<p>But because my thesis requires some complicated Bayesian modeling, I need I need to build a workflow for dealing with Bayesian model output, especially from <a href="http://mc-stan.org/users/interfaces/rstan.html"><code>rstan</code></a>. So we’ll give some packages a look.</p>
+<div id="first-well-need-some-data" class="section level1">
+<h1>First, we’ll need some data</h1>
+<p>Let’s simulate a linear outcome variable as a function of <span class="math inline">\(k = 2\)</span> predictors. We’ll set up the model in the form:</p>
+<p><span class="math inline">\(\begin{align} y_i &amp;= \alpha + X\beta + \varepsilon_{i},\end{align}\)</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is a constant, <span class="math inline">\(X\)</span> is an <span class="math inline">\(n \times k\)</span> matrix containing data on <span class="math inline">\(k\)</span> predictors, <span class="math inline">\(\beta\)</span> is a vector of <span class="math inline">\(k\)</span> coefficients, and <span class="math inline">\(\varepsilon_{i}\)</span> is a normally distributed error term.</p>
+<pre class="r"><code>library(&quot;magrittr&quot;)
+library(&quot;tidyverse&quot;)
+
+# number of obs
+n &lt;- 1000
+
+# constant
+alpha &lt;- 3
+
+# two coefficients
+k &lt;- 2
+beta &lt;- rlnorm(n = k, mean = 0, sd = 1)</code></pre>
+<p>We will use the <code>mvtnorm</code> package to simulate an arbitrary number of predictors for convenience. We will then use the predictors and the simulated parameters to generate <span class="math inline">\(y_{i}\)</span>.</p>
+<pre class="r"><code>library(&quot;mvtnorm&quot;)
+
+# mean vector == beta
+# convert to data frame to make pipeable, 
+# but convert to matrix for dot product
+d &lt;- rmvnorm(n = n, mean = rnorm(n = k)) %&gt;% 
+  as_data_frame() %&gt;%  
+  mutate(mu = alpha + (as.matrix(.) %*% beta),
+         error = rnorm(n = n, mean = 0, sd = 1),
+         y = mu + error) %&gt;% 
+  print()
+## # A tibble: 1,000 x 5
+##        V1     V2    mu  error     y
+##     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1  1.27  -0.580  3.76 -1.94   1.83
+##  2  1.80  -0.603  4.54  1.15   5.69
+##  3  1.68   1.09   7.90  0.304  8.20
+##  4 -0.739  0.636  3.18  0.227  3.41
+##  5  1.46   1.10   7.56 -0.573  6.98
+##  6  1.01   1.55   7.81 -0.161  7.64
+##  7  2.44   0.664  8.16  0.131  8.29
+##  8  1.90  -1.32   3.20 -0.328  2.87
+##  9  1.03   0.799  6.26 -0.453  5.81
+## 10  1.32   2.54  10.4  -0.998  9.36
+## # ... with 990 more rows
+
+#  custom ggtheme, import from Github
+library(&quot;ggplot2&quot;)
+source(&quot;https://raw.githubusercontent.com/mikedecr/theme-mgd/master/theme_mgd.R&quot;)
+theme_set(theme_mgd()) # set default theme
+
+# plot data
+d %&gt;% 
+  gather(key = predictor, value = xval, contains(&quot;V&quot;)) %&gt;% 
+  ggplot(aes(x = xval, y = y)) +
+  facet_wrap(~ predictor) +
+  geom_point()</code></pre>
+<p><img src="/post/2018-05-15-bayes-r-workflow_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="a-frequentist-workflow" class="section level1">
+<h1>A frequentist workflow</h1>
+<p>We would ideally like to make a Bayesian workflow as closely compatible with frequentist workflows as possible, where possible. While I don’t do much frequentist work, I do prefer to use the <code>broom</code> tools when I can. Let’s see how we can get simple model output using <code>tidy()</code>, <code>augment()</code>, and <code>glance()</code>.</p>
+<pre class="r"><code># estimate models
+lm1 &lt;- lm(y ~ V1, data = d)
+lm2 &lt;- lm(y ~ V2, data = d)
+lmfull &lt;- lm(y ~ V1 + V2, data = d)</code></pre>
+<div id="coefficient-estimates" class="section level2">
+<h2>Coefficient estimates</h2>
+<p>I use a combination of <code>tidy()</code> and <code>mutate()</code> to combine model coefficients.</p>
+<pre class="r"><code>library(&quot;broom&quot;)
+
+freq_coefs &lt;- 
+  bind_rows(mutate(tidy(lm1, conf.int = TRUE), mod = &quot;lm1&quot;),
+            mutate(tidy(lm2, conf.int = TRUE), mod = &quot;lm2&quot;),
+            mutate(tidy(lmfull, conf.int = TRUE), mod = &quot;lmfull&quot;)) %&gt;% 
+  print()
+##          term estimate  std.error statistic       p.value conf.low
+## 1 (Intercept) 4.680039 0.11936184  39.20884 2.906014e-204 4.445810
+## 2          V1 1.502689 0.07176697  20.93845  5.519350e-81 1.361858
+## 3 (Intercept) 5.139186 0.07528010  68.26752  0.000000e+00 4.991461
+## 4          V2 1.960283 0.05911084  33.16284 3.553488e-163 1.844287
+## 5 (Intercept) 2.973564 0.05906361  50.34511 4.552356e-276 2.857661
+## 6          V1 1.588007 0.03173513  50.03940 3.535564e-274 1.525732
+## 7          V2 2.026521 0.03158796  64.15485  0.000000e+00 1.964534
+##   conf.high    mod
+## 1  4.914268    lm1
+## 2  1.643521    lm1
+## 3  5.286911    lm2
+## 4  2.076279    lm2
+## 5  3.089467 lmfull
+## 6  1.650282 lmfull
+## 7  2.088507 lmfull
+
+# a quick plot
+# object `mgray` exported by 
+ggplot(data = freq_coefs, aes(x = term,  y = estimate)) +
+  geom_hline(yintercept = 0, color = mgray) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high,
+                      color = mod),
+                  position = position_dodge(width = -0.5)) +
+  coord_flip() +
+  scale_color_brewer(palette = &quot;Set2&quot;)
+## Warning: position_dodge requires non-overlapping x intervals</code></pre>
+<p><img src="/post/2018-05-15-bayes-r-workflow_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="predicted-values" class="section level2">
+<h2>Predicted values</h2>
+<p>For predicted values, I create <code>newdata</code> objects where we vary some predictor of interest, leaving others held at mean, median, or modal values.</p>
+<pre class="r"><code># vary V1, holding V2 constant
+vary_v1 &lt;- d %$% 
+  data_frame(V1 = seq(min(V1), max(V1), .1),
+             V2 = mean(V2)) %&gt;% 
+  print()
+## # A tibble: 60 x 2
+##        V1    V2
+##     &lt;dbl&gt; &lt;dbl&gt;
+##  1 -1.65  0.786
+##  2 -1.55  0.786
+##  3 -1.45  0.786
+##  4 -1.35  0.786
+##  5 -1.25  0.786
+##  6 -1.15  0.786
+##  7 -1.05  0.786
+##  8 -0.952 0.786
+##  9 -0.852 0.786
+## 10 -0.752 0.786
+## # ... with 50 more rows
+
+# hold V1 constant, vary V2
+vary_v2 &lt;- d %$% 
+  data_frame(V1 = mean(V1),
+             V2 = seq(min(V2), max(V2), .1)) %&gt;% 
+  print()
+## # A tibble: 67 x 2
+##       V1    V2
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1  1.33 -2.60
+##  2  1.33 -2.50
+##  3  1.33 -2.40
+##  4  1.33 -2.30
+##  5  1.33 -2.20
+##  6  1.33 -2.10
+##  7  1.33 -2.00
+##  8  1.33 -1.90
+##  9  1.33 -1.80
+## 10  1.33 -1.70
+## # ... with 57 more rows</code></pre>
+<p>A quick trick: we don’t have to generate predictions for these data frames separately. We could just combine the data and then generate predictions. While we could do this with <code>mutate()</code> and <code>bind_rows()</code> as above, we can be a little more efficient with <code>list()</code>.</p>
+<pre class="r"><code>designs &lt;- 
+  list(V1 = vary_v1, V2 = vary_v2) %&gt;% 
+  bind_rows(.id = &quot;varied&quot;) %&gt;% 
+  print()
+## # A tibble: 127 x 3
+##    varied     V1    V2
+##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
+##  1 V1     -1.65  0.786
+##  2 V1     -1.55  0.786
+##  3 V1     -1.45  0.786
+##  4 V1     -1.35  0.786
+##  5 V1     -1.25  0.786
+##  6 V1     -1.15  0.786
+##  7 V1     -1.05  0.786
+##  8 V1     -0.952 0.786
+##  9 V1     -0.852 0.786
+## 10 V1     -0.752 0.786
+## # ... with 117 more rows</code></pre>
+<p>When the data are in place, generating predictions using <code>augment()</code> is simple.</p>
+<pre class="r"><code># use the t statistic to create confidence intervals
+critical_t &lt;- 
+  glance(lmfull) %$% 
+  qt(p = .975, df = df.residual)
+
+# predicted values with 95% CIs for means
+preds &lt;- augment(lmfull, newdata = designs) %&gt;%
+  mutate(lower = .fitted - (critical_t * .se.fit),
+         upper = .fitted + (critical_t * .se.fit)) %&gt;% 
+  as_data_frame() %&gt;%  
+  print()
+## # A tibble: 127 x 7
+##    varied     V1    V2 .fitted .se.fit lower upper
+##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 V1     -1.65  0.786    1.94  0.0998  1.75  2.14
+##  2 V1     -1.55  0.786    2.10  0.0968  1.91  2.29
+##  3 V1     -1.45  0.786    2.26  0.0938  2.08  2.44
+##  4 V1     -1.35  0.786    2.42  0.0908  2.24  2.60
+##  5 V1     -1.25  0.786    2.58  0.0879  2.41  2.75
+##  6 V1     -1.15  0.786    2.74  0.0849  2.57  2.90
+##  7 V1     -1.05  0.786    2.90  0.0820  2.73  3.06
+##  8 V1     -0.952 0.786    3.05  0.0791  2.90  3.21
+##  9 V1     -0.852 0.786    3.21  0.0762  3.06  3.36
+## 10 V1     -0.752 0.786    3.37  0.0733  3.23  3.52
+## # ... with 117 more rows</code></pre>
+<p>And then plotting is done with <code>geom_ribbon</code>. We’ll elongate this data to plot the predictions in separate panels.</p>
+<pre class="r"><code>preds %&gt;% 
+  gather(key = predictor, value = xval, V1, V2) %&gt;% 
+  ggplot(aes(x = xval,  y = .fitted, 
+               fill = predictor, color = predictor)) +
+    geom_ribbon(aes(ymin = lower, ymax = upper,
+                    fill = predictor),
+                color = NA) +
+    geom_line() +
+    facet_wrap( ~ predictor)</code></pre>
+<p><img src="/post/2018-05-15-bayes-r-workflow_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+</div>
+<div id="to-do" class="section level1">
+<h1>To-do</h1>
+<ul>
+<li>Hierarchical models</li>
+<li>“Fully Bayesian” MRP</li>
+<li>Models estimated using <code>brms</code></li>
+</ul>
+</div>
+
+  </div>
+</section>
+<section id="tag-pane" class="row meta">
+  
+  <div class="col-md-12">
+    <h6 class="text-right meta">
+      
+    </h6>
+  </div>
+  
+</section>
+
+
+
+
+
+
+
+
+<section id="menu-pane" class="row menu text-center">
+  
+  
+  <span><a class="menu-item" href="/post/2018/05/30/reproducible-packages/">&lt; prev | </a></span>
+  
+  
+  <span><a class="menu-item" href="/post">post</a></span>
+  
+  
+  
+
+  <section id="main-menu-pane" class="row text-center main-menu">
+  <h4 class="text-center"><a class="menu-item" href="/">&nbsp;&nbsp;Home&nbsp;&nbsp;</a>
+   
+  <a class="menu-item" href="/about/">&nbsp;&nbsp;About&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/research/">&nbsp;&nbsp;Research&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/teaching/">&nbsp;&nbsp;Teaching&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/code/">&nbsp;&nbsp;Code&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/post/">&nbsp;&nbsp;Blog&nbsp;&nbsp;</a>
+  
+  <a class="menu-item" href="/contact/">&nbsp;&nbsp;Contact&nbsp;&nbsp;</a>
+  </h4>
+</section>
+</section>
+
+
+
+
+<footer class="row text-center footer">
+  <hr />
+  
+  <h6 class="text-center copyright">© 2017 Michael DeCrescenzo. <a href="http://creativecommons.org/licenses/by/3.0/">Some rights reserved</a>.</h6>
+  
+  <h6 class="text-center powered">Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/shenoybr/hugo-goa">Goa</a>.</h6>
+  
+  
+</footer>
+
+</div>
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+
+<script type="text/javascript">
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+
+
+<script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/main.js"></script>
+
+
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="http://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics"></a></div></noscript>
+
+
+</body>
+</html>
+
+
