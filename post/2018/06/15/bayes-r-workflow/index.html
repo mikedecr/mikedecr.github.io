@@ -101,18 +101,18 @@ d &lt;- rmvnorm(n = n, mean = rnorm(n = k)) %&gt;%
          y = mu + error) %&gt;% 
   print()
 ## # A tibble: 1,000 x 5
-##        V1     V2    mu  error     y
-##     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-##  1  1.27  -0.580  3.76 -1.94   1.83
-##  2  1.80  -0.603  4.54  1.15   5.69
-##  3  1.68   1.09   7.90  0.304  8.20
-##  4 -0.739  0.636  3.18  0.227  3.41
-##  5  1.46   1.10   7.56 -0.573  6.98
-##  6  1.01   1.55   7.81 -0.161  7.64
-##  7  2.44   0.664  8.16  0.131  8.29
-##  8  1.90  -1.32   3.20 -0.328  2.87
-##  9  1.03   0.799  6.26 -0.453  5.81
-## 10  1.32   2.54  10.4  -0.998  9.36
+##        V1      V2     mu   error      y
+##     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1 -0.186  0.0619 2.61    0.277   2.89 
+##  2 -0.914 -0.406  0.548  -0.792  -0.244
+##  3 -1.34   0.611  0.326  -1.19   -0.865
+##  4 -0.859  0.507  1.37   -1.19    0.183
+##  5  0.161  0.872  4.04   -1.42    2.62 
+##  6 -0.503 -1.02   1.04    1.25    2.30 
+##  7  0.101 -0.239  3.06   -1.95    1.11 
+##  8 -0.898 -1.09   0.0670 -1.75   -1.68 
+##  9  0.116  0.613  3.74    2.18    5.91 
+## 10  1.02   1.09   6.21    0.0489  6.26 
 ## # ... with 990 more rows
 
 #  custom ggtheme, import from Github
@@ -145,22 +145,22 @@ freq_coefs &lt;-
             mutate(tidy(lm2, conf.int = TRUE), mod = &quot;lm2&quot;),
             mutate(tidy(lmfull, conf.int = TRUE), mod = &quot;lmfull&quot;)) %&gt;% 
   print()
-##          term estimate  std.error statistic       p.value conf.low
-## 1 (Intercept) 4.680039 0.11936184  39.20884 2.906014e-204 4.445810
-## 2          V1 1.502689 0.07176697  20.93845  5.519350e-81 1.361858
-## 3 (Intercept) 5.139186 0.07528010  68.26752  0.000000e+00 4.991461
-## 4          V2 1.960283 0.05911084  33.16284 3.553488e-163 1.844287
-## 5 (Intercept) 2.973564 0.05906361  50.34511 4.552356e-276 2.857661
-## 6          V1 1.588007 0.03173513  50.03940 3.535564e-274 1.525732
-## 7          V2 2.026521 0.03158796  64.15485  0.000000e+00 1.964534
+##          term  estimate  std.error statistic       p.value  conf.low
+## 1 (Intercept) 3.0932245 0.04766541 64.894536  0.000000e+00 2.9996886
+## 2          V1 2.2585801 0.04006598 56.371515 1.910671e-312 2.1799569
+## 3 (Intercept) 1.5538298 0.08160418 19.041058  3.380290e-69 1.3936944
+## 4          V2 0.6444303 0.08303319  7.761116  2.076774e-14 0.4814906
+## 5 (Intercept) 2.9820143 0.03863958 77.175122  0.000000e+00 2.9061901
+## 6          V1 2.3031494 0.03228793 71.331593  0.000000e+00 2.2397893
+## 7          V2 0.7864880 0.03368527 23.348129  1.577645e-96 0.7203859
 ##   conf.high    mod
-## 1  4.914268    lm1
-## 2  1.643521    lm1
-## 3  5.286911    lm2
-## 4  2.076279    lm2
-## 5  3.089467 lmfull
-## 6  1.650282 lmfull
-## 7  2.088507 lmfull
+## 1 3.1867604    lm1
+## 2 2.3372034    lm1
+## 3 1.7139653    lm2
+## 4 0.8073700    lm2
+## 5 3.0578385 lmfull
+## 6 2.3665095 lmfull
+## 7 0.8525902 lmfull
 
 # a quick plot
 # object `mgray` exported by 
@@ -182,59 +182,59 @@ vary_v1 &lt;- d %$%
   data_frame(V1 = seq(min(V1), max(V1), .1),
              V2 = mean(V2)) %&gt;% 
   print()
-## # A tibble: 60 x 2
-##        V1    V2
-##     &lt;dbl&gt; &lt;dbl&gt;
-##  1 -1.65  0.786
-##  2 -1.55  0.786
-##  3 -1.45  0.786
-##  4 -1.35  0.786
-##  5 -1.25  0.786
-##  6 -1.15  0.786
-##  7 -1.05  0.786
-##  8 -0.952 0.786
-##  9 -0.852 0.786
-## 10 -0.752 0.786
-## # ... with 50 more rows
+## # A tibble: 72 x 2
+##       V1    V2
+##    &lt;dbl&gt; &lt;dbl&gt;
+##  1 -4.45 0.177
+##  2 -4.35 0.177
+##  3 -4.25 0.177
+##  4 -4.15 0.177
+##  5 -4.05 0.177
+##  6 -3.95 0.177
+##  7 -3.85 0.177
+##  8 -3.75 0.177
+##  9 -3.65 0.177
+## 10 -3.55 0.177
+## # ... with 62 more rows
 
 # hold V1 constant, vary V2
 vary_v2 &lt;- d %$% 
   data_frame(V1 = mean(V1),
              V2 = seq(min(V2), max(V2), .1)) %&gt;% 
   print()
-## # A tibble: 67 x 2
-##       V1    V2
-##    &lt;dbl&gt; &lt;dbl&gt;
-##  1  1.33 -2.60
-##  2  1.33 -2.50
-##  3  1.33 -2.40
-##  4  1.33 -2.30
-##  5  1.33 -2.20
-##  6  1.33 -2.10
-##  7  1.33 -2.00
-##  8  1.33 -1.90
-##  9  1.33 -1.80
-## 10  1.33 -1.70
-## # ... with 57 more rows</code></pre>
+## # A tibble: 73 x 2
+##        V1    V2
+##     &lt;dbl&gt; &lt;dbl&gt;
+##  1 -0.631 -3.31
+##  2 -0.631 -3.21
+##  3 -0.631 -3.11
+##  4 -0.631 -3.01
+##  5 -0.631 -2.91
+##  6 -0.631 -2.81
+##  7 -0.631 -2.71
+##  8 -0.631 -2.61
+##  9 -0.631 -2.51
+## 10 -0.631 -2.41
+## # ... with 63 more rows</code></pre>
 <p>A quick trick: we don’t have to generate predictions for these data frames separately. We could just combine the data and then generate predictions. While we could do this with <code>mutate()</code> and <code>bind_rows()</code> as above, we can be a little more efficient with <code>list()</code>.</p>
 <pre class="r"><code>designs &lt;- 
   list(V1 = vary_v1, V2 = vary_v2) %&gt;% 
   bind_rows(.id = &quot;varied&quot;) %&gt;% 
   print()
-## # A tibble: 127 x 3
-##    varied     V1    V2
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;
-##  1 V1     -1.65  0.786
-##  2 V1     -1.55  0.786
-##  3 V1     -1.45  0.786
-##  4 V1     -1.35  0.786
-##  5 V1     -1.25  0.786
-##  6 V1     -1.15  0.786
-##  7 V1     -1.05  0.786
-##  8 V1     -0.952 0.786
-##  9 V1     -0.852 0.786
-## 10 V1     -0.752 0.786
-## # ... with 117 more rows</code></pre>
+## # A tibble: 145 x 3
+##    varied    V1    V2
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+##  1 V1     -4.45 0.177
+##  2 V1     -4.35 0.177
+##  3 V1     -4.25 0.177
+##  4 V1     -4.15 0.177
+##  5 V1     -4.05 0.177
+##  6 V1     -3.95 0.177
+##  7 V1     -3.85 0.177
+##  8 V1     -3.75 0.177
+##  9 V1     -3.65 0.177
+## 10 V1     -3.55 0.177
+## # ... with 135 more rows</code></pre>
 <p>When the data are in place, generating predictions using <code>augment()</code> is simple.</p>
 <pre class="r"><code># use the t statistic to create confidence intervals
 critical_t &lt;- 
@@ -247,20 +247,20 @@ preds &lt;- augment(lmfull, newdata = designs) %&gt;%
          upper = .fitted + (critical_t * .se.fit)) %&gt;% 
   as_data_frame() %&gt;%  
   print()
-## # A tibble: 127 x 7
-##    varied     V1    V2 .fitted .se.fit lower upper
-##    &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-##  1 V1     -1.65  0.786    1.94  0.0998  1.75  2.14
-##  2 V1     -1.55  0.786    2.10  0.0968  1.91  2.29
-##  3 V1     -1.45  0.786    2.26  0.0938  2.08  2.44
-##  4 V1     -1.35  0.786    2.42  0.0908  2.24  2.60
-##  5 V1     -1.25  0.786    2.58  0.0879  2.41  2.75
-##  6 V1     -1.15  0.786    2.74  0.0849  2.57  2.90
-##  7 V1     -1.05  0.786    2.90  0.0820  2.73  3.06
-##  8 V1     -0.952 0.786    3.05  0.0791  2.90  3.21
-##  9 V1     -0.852 0.786    3.21  0.0762  3.06  3.36
-## 10 V1     -0.752 0.786    3.37  0.0733  3.23  3.52
-## # ... with 117 more rows</code></pre>
+## # A tibble: 145 x 7
+##    varied    V1    V2 .fitted .se.fit lower upper
+##    &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 V1     -4.45 0.177   -7.12  0.127  -7.37 -6.87
+##  2 V1     -4.35 0.177   -6.89  0.124  -7.13 -6.64
+##  3 V1     -4.25 0.177   -6.66  0.121  -6.89 -6.42
+##  4 V1     -4.15 0.177   -6.43  0.118  -6.66 -6.19
+##  5 V1     -4.05 0.177   -6.20  0.115  -6.42 -5.97
+##  6 V1     -3.95 0.177   -5.97  0.112  -6.19 -5.75
+##  7 V1     -3.85 0.177   -5.74  0.109  -5.95 -5.52
+##  8 V1     -3.75 0.177   -5.51  0.106  -5.71 -5.30
+##  9 V1     -3.65 0.177   -5.27  0.103  -5.48 -5.07
+## 10 V1     -3.55 0.177   -5.04  0.0996 -5.24 -4.85
+## # ... with 135 more rows</code></pre>
 <p>And then plotting is done with <code>geom_ribbon</code>. We’ll elongate this data to plot the predictions in separate panels.</p>
 <pre class="r"><code>preds %&gt;% 
   gather(key = predictor, value = xval, V1, V2) %&gt;% 
