@@ -32,7 +32,7 @@ One of two themes by [Vicky Lai](https://vickylai.com/) that I will promote. [In
 
 ## Call Me Sam
 
-The other Vicky Lai theme. If "Introduction" was bold, I would say that [Call Me Sam](https://themes.gohugo.io/hugo-theme-sam/) is *brave*. I don't trust that my description will do it justice; better to [see for yourself](http://vickylai.com/call-me-sam/posts/). 
+The other Vicky Lai theme. If "Introduction" was bold, I would say that [Call Me Sam](https://themes.gohugo.io/hugo-theme-sam/) is *brave*. I don't trust that my description will do it justice; better to [see for yourself](http://vickylai.com/call-me-sam). 
 
 
 ## Cocoa Enhanced
