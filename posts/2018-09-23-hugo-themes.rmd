@@ -22,7 +22,7 @@ But this is mainly my fault. I am a bad combination of *picky* and *unskilled* w
 
 ## Goa
 
-I previously used [Goa](https://themes.gohugo.io/hugo-goa) for my site. It is simple, sensible, and easily to modify. 
+I previously used [Goa](https://themes.gohugo.io/hugo-goa) for my site. It is simple, sensible, and easy to modify. 
 
 
 ## Introduction
