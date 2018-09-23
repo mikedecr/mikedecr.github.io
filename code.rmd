@@ -5,7 +5,7 @@ date: 2018-04-23
 
 ## Templates for $\mathrm{\LaTeX}$ and R Markdown
 
-Document styles with a personal touch, [available on Github](https://github.com/mikedecr/document-templates). Beware for Minion/Myriad font packages that may not be set up for $\mathrm{pdf\LaTeX}$ (or use $\mathrm{Xe\LaTeX}$).
+Document styles with a personal touch, [available on Github](https://github.com/mikedecr/document-templates). Beware of Minion/Myriad font packages that may not be set up for $\mathrm{pdf\LaTeX}$ (or use $\mathrm{Xe\LaTeX}$).
 
 Currently, the only template available is the [$\mathrm{pdf\LaTeX}$ article](https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf).
 

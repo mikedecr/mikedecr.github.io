@@ -120,7 +120,7 @@ install.packages(requires[to_install], repos = cloud_url)&lt;/code&gt;&lt;/pre&g
       <guid>/code/</guid>
       <description>&lt;div id=&#34;templates-for-mathrmlatex-and-r-markdown&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Templates for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; and R Markdown&lt;/h2&gt;
-&lt;p&gt;Document styles with a personal touch, &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;. Beware for Minion/Myriad font packages that may not be set up for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{pdf\LaTeX}\)&lt;/span&gt; (or use &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Xe\LaTeX}\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Document styles with a personal touch, &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;. Beware of Minion/Myriad font packages that may not be set up for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{pdf\LaTeX}\)&lt;/span&gt; (or use &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Xe\LaTeX}\)&lt;/span&gt;).&lt;/p&gt;
 &lt;p&gt;Currently, the only template available is the &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{pdf\LaTeX}\)&lt;/span&gt; article&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;workshop-materials&#34; class=&#34;section level2&#34;&gt;
