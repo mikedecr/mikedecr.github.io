@@ -6,8 +6,50 @@
     <description>Recent content in Michael DeCrescenzo on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 23 Sep 2018 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Great Hugo themes (that I did not pick)</title>
+      <link>/2018/2018-09-23-hugo-themes/</link>
+      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/2018-09-23-hugo-themes/</guid>
+      <description>&lt;p&gt;I just finished a major website overhaul. While it took only about one day of work, I’ve had my eyes open for a new &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;theme&lt;/a&gt; for &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; for a while.&lt;/p&gt;
+&lt;p&gt;I mean, a &lt;em&gt;while&lt;/em&gt;. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;But this is mainly my fault. I am a bad combination of &lt;em&gt;picky&lt;/em&gt; and &lt;em&gt;unskilled&lt;/em&gt; with websites and web design, which made me a fickle chooser throughout the process. So to make up for that fickleness, I wanted to acknowledge and promote some of the Hugo themes that I really liked, but ultimately did not choose for my site.&lt;/p&gt;
+&lt;div id=&#34;goa&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Goa&lt;/h2&gt;
+&lt;p&gt;I previously used &lt;a href=&#34;https://themes.gohugo.io/hugo-goa&#34;&gt;Goa&lt;/a&gt; for my site. It is simple, sensible, and easily to modify.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;One of two themes by &lt;a href=&#34;https://vickylai.com/&#34;&gt;Vicky Lai&lt;/a&gt; that I will promote. &lt;a href=&#34;https://themes.gohugo.io/hugo-theme-introduction/&#34;&gt;Indroduction&lt;/a&gt; has a bold design and a layout that is focused on the landing page, which I enjoyed. I especially loved the “About” section.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;call-me-sam&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Call Me Sam&lt;/h2&gt;
+&lt;p&gt;The other Vicky Lai theme. If “Introduction” was bold, I would say that &lt;a href=&#34;https://themes.gohugo.io/hugo-theme-sam/&#34;&gt;Call Me Sam&lt;/a&gt; is &lt;em&gt;brave&lt;/em&gt;. I don’t trust that my description will do it justice; better to &lt;a href=&#34;http://vickylai.com/call-me-sam/posts/&#34;&gt;see for yourself&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cocoa-enhanced&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Cocoa Enhanced&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://themes.gohugo.io/cocoa-eh-hugo-theme/&#34;&gt;Cocoa Enhanced&lt;/a&gt; is crisp and clean. Its type design is opinionated but flexible. I was most tempted to use this theme.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;coder&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Coder&lt;/h2&gt;
+&lt;p&gt;I must include &lt;a href=&#34;https://themes.gohugo.io/hugo-coder/&#34;&gt;Coder&lt;/a&gt; because it is the inspiration for the theme I ultimately chose. Why do I like it? The simple landing page. The navigation bar is out of the way but present. The backend tension between “section” pages and “post” archives (one of the more difficult aspects for a newbie working with Hugo) is easily to navigate.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;let-me-know-about-your-theme-that-you-really-like&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Let me know about your theme that you really like&lt;/h1&gt;
+&lt;p&gt;Perhaps on &lt;a href=&#34;https://twitter.com/mikedecr&#34;&gt;Twitter&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The only way I was able to test themes so efficiently was thanks to the amazing &lt;a href=&#34;https://bookdown.org/yihui/blogdown/&#34;&gt;blogdown&lt;/a&gt; package for R.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Packages &amp; Reproducibility: Install what you need, attach what you want</title>
