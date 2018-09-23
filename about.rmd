@@ -1,0 +1,37 @@
+---
+title: "About Mike"
+date: "2016-05-05T21:48:51-07:00"
+---
+
+
+
+
+
+## I'm Michael DeCrescenzo,
+
+<center>
+  a political science Ph.D. candidate at the University of Wisconsin--Madison. 
+
+  I study American politics and statistical methodology.
+</center>
+
+
+```{r, out.width = "40%", out.extra = 'style = "display: inline-block; float:left; padding-right:15px; padding-bottom:10px; border-radius: 50%;"', echo = FALSE}
+knitr::include_graphics("/images/me/nelson.png")
+```
+
+**[My research](/research/) focuses on electoral politics in the United States,** broadly construed. I study issues surrounding ideological representation, public opinion, vote choice and turnout, and election administration. My dissertation explores primary elections and the representation of local partisan preferences. 
+
+**[My teaching experience](/teaching/) focuses on research methods, computing, and American elections.** The bulk of my teaching focuses on the mathematical, statistical, and software foundations for social science research. I teach these subjects for undergraduate and graduate students.
+
+I am an affiliate of the [Elections Research Center](https://elections.wisc.edu/), where I also serve as the graduate student assistant.
+
+You can find my cv [here](https://uwmadison.box.com/s/sdl1gj7jsmg3qqc841gv641pfj8c449n).
+
+
+<!-- Mathjax test -->
+
+<!-- \begin{align}
+  p(y_{ij} = 1) &= \Phi\left( \frac{\theta_{i} - \alpha_{j}}{\sigma_{j}} \right)
+\end{align}
+ -->

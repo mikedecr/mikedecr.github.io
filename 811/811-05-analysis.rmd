@@ -4,8 +4,8 @@ description: "Statistical analysis, model output, and workflow integration"
 author: "Michael DeCrescenzo"
 date: '2018-02-23'
 slug: "811-analysis"
-categories: ["R", "ps811", "Teaching"]
-tags: []
+categories: ["Teaching"]
+tags: ["ps811", "R"]
 ---
 
 
@@ -99,7 +99,7 @@ anes <- readRDS(here::here("static/data/anes-modified-2.RDS")) %>% print()
 Previous lessons covered two major types of non-statistical analysis. We saw how to create some simple tables of variables in your data (using either the `table()` function or the `count()` function). We also saw how to create graphics, which are a major arena of non-statistical analysis. 
 
 
-# Estimates and confidence intervals
+## Estimates and confidence intervals
 
 When we generate estimates from data, we are usually interested in the point estimate and the uncertainty in that estimate. 
 

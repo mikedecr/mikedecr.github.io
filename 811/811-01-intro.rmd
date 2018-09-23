@@ -4,8 +4,8 @@ description: "Some words to open this semester's R lessons"
 author: "Michael DeCrescenzo"
 date: '2018-02-07'
 slug: "811-intro"
-categories: ["R", "ps811", "Teaching"]
-tags: []
+categories: ["Teaching"]
+tags: ["ps811", "R"]
 
 # draft: true
 ---
@@ -18,7 +18,9 @@ This current post contains a few introductory remarks about R, how I intend to t
 
 # Schedule:
 
-Read this before our first R lecture.
+Read this before our first in-class R lesson!
+
+
 
 # A little about R
 

@@ -4,8 +4,8 @@ description: "Creating, modifying, shaping, and piping data"
 author: "Michael DeCrescenzo"
 date: '2018-02-09'
 slug: "811-data"
-categories: ["R", "ps811", "Teaching"]
-tags: []
+categories: ["Teaching"]
+tags: ["ps811", "R"]
 ---
 
 # Schedule:
@@ -140,7 +140,7 @@ library("haven")
 anes <- read_dta("data/anes_timeseries_cdf.dta")
 ```
 
-This should take a few moments to load because the ANES cumulative file is a big file. Don't worry.
+This should take a few moments to load because the ANES cumulative file is a large file. Don't worry.
 
 ```{r, include = FALSE, cache = TRUE}
 anes <- haven::read_dta(here::here("static/data/anes_timeseries_cdf.dta"))

@@ -3,29 +3,34 @@ title: Code
 date: 2018-04-23
 ---
 
+## Templates for $\mathrm{\LaTeX}$ and R Markdown
 
-# Github
+Document styles with a personal touch, [available on Github](https://github.com/mikedecr/document-templates). Beware for Minion/Myriad font packages that may not be set up for $\mathrm{pdf\LaTeX}$ (or use $\mathrm{Xe\LaTeX}$).
 
-This website is continuously undergoing revisions. For code currently that has no home on this page, feel free to dig through my [Github repositories](https://github.com/mikedecr).
+Currently, the only template available is the [$\mathrm{pdf\LaTeX}$ article](https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf).
 
 
 
-# Sublime Text User Settings
+## Workshop materials
 
-[Sublime Text](https://www.sublimetext.com/) is a powerful and customizable text editor that is great for social scientists. It has much of the [extensibility](https://packagecontrol.io/) as Vim and Emacs but with a friendlier interface. However, it does have [text-based settings](http://docs.sublimetext.info/en/latest/customization/settings.html), which can be daunting for the uninitialized and a rabbit hole for the detail-obsessed.
+My materials for [$\mathrm{\LaTeX}$](https://github.com/mikedecr/latex-workshop-2018) and [math camp](https://github.com/mikedecr/math-camp-2018) workshops are all open source and online.
 
-I have some of my own custom settings available for pilfering on [Github](https://github.com/mikedecr/sublime-user-folder/blob/master/Default%20(OSX).sublime-keymap). Highlights include:
+
+
+## Sublime Text User Settings
+
+The [Sublime Text](https://www.sublimetext.com/) editor is a great mix of [extensibility](https://packagecontrol.io/) and usability for social science, but its [text-based settings](http://docs.sublimetext.info/en/latest/customization/settings.html) can be daunting for the uninitialized and a rabbit hole for the detail-obsessed.
+
+My settings can be viewed and pilfered at will from [Github](https://github.com/mikedecr/sublime-user-settings). Highlights include:
 
 - Keybindings (primarily for R and $\mathrm{\LaTeX}$) and associated macro files.
-- Code snippets for R and $\mathrm{\LaTeX}$, plus some for Stan, Stata, HTML, and Markdown.
-- A modified Solarized color scheme based on the guts of the [Cobalt2](https://packagecontrol.io/packages/Theme%20-%20Cobalt2) scheme for Sublime, available in both [light](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-light.tmTheme) and [dark](https://github.com/mikedecr/sublime-user-folder/blob/master/solarized-smart-dark.tmTheme) versions.
+- Code snippets for various languages---mainly R and $\mathrm{\LaTeX}$, but some for Stan, Stata, HTML, and Markdown.
+- Modified `solarized` color schemes, available in light, dark, and lastly "gray," which is a weird hybrid of a few color schemes.
 
 
 
+## Github
 
-
-# $\mathrm{\LaTeX}$ files
-
-Coming soon: preambles for `article` and `memoir` classes
+This website is continuously undergoing revisions, and some useful code may have no home on this page. Feel free to dig around in my [Github repositories](https://github.com/mikedecr).
 
 

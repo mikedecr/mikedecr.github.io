@@ -4,8 +4,8 @@ description: "Graphics in R using ggplot2"
 author: "Michael DeCrescenzo"
 date: '2018-02-16'
 slug: "811-graphics"
-categories: ["R", "ps811", "Teaching"]
-tags: []
+categories: ["Teaching"]
+tags: ["ps811", "R"]
 ---
 
 

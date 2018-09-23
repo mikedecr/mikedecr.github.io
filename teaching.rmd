@@ -1,0 +1,31 @@
+---
+title: "Teaching"
+date: "2017-12-04"
+---
+
+
+## As Instructor
+
+Courses at UW--Madison
+
+- Political Science 811: Introduction to Statistical Computing in Political Science, Spring 2018. [(2018 Materials)](/811/)
+
+
+Graduate Workshops at UW--Madison
+
+- Political Science Ph.D. Math Camp, 2017 and 2018. [(2018 Materials)](https://github.com/mikedecr/math-camp-2018)
+- Political Science $\mathrm{\LaTeX}$ Workshop, 2015--2018. [(2018 Materials)](https://github.com/mikedecr/latex-workshop-2018)
+
+
+
+## As Teaching Assistant
+
+- Political Science 305: Elections and Voting Behavior (UW--Madison, Fall 2018)
+- Political Science 544: Introduction to Survey Research Methods (UW--Madison, Spring 2017)
+- Political Science 218: Understanding Political Numbers (UW--Madison, Fall 2015 and Fall 2016)
+
+
+
+
+
+

@@ -1,0 +1,45 @@
+---
+title: "Great Hugo themes (that I did not pick)"
+author: Mike DeCrescenzo
+date: '2018-09-23'
+slug: hugo-themes
+categories: ["Misc"]
+tags: ["R", "blogdown", "Hugo"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+---
+
+I just finished a major website overhaul. While it took only about one day of work, I've had my eyes open for a new [theme](https://themes.gohugo.io/) for [Hugo](https://gohugo.io/) for a while.
+
+I mean, a *while*. I would download a theme, give it a 15-minute test run offline, and decide that it wasn't for me. I did that maybe a dozen times.[^bdown]
+
+[^bdown]: The only way I was able to test themes so efficiently was thanks to the amazing [blogdown](https://bookdown.org/yihui/blogdown/) package for R.
+
+But this is mainly my fault. I am a bad combination of *picky* and *unskilled* with websites and web design, which made me a fickle chooser throughout the process. So to make up for that fickleness, I wanted to acknowledge and promote some of the Hugo themes that I really liked, but ultimately did not choose for my site. 
+
+
+## Goa
+
+I previously used [Goa](https://themes.gohugo.io/hugo-goa) for my site. It is simple, sensible, and easily to modify. 
+
+
+## Introduction
+
+One of two themes by [Vicky Lai](https://vickylai.com/) that I will promote. [Indroduction](https://themes.gohugo.io/hugo-theme-introduction/) has a bold design and a layout that is focused on the landing page, which I enjoyed. I especially loved the "About" section. 
+
+
+## Call Me Sam
+
+The other Vicky Lai theme. If "Introduction" was bold, I would say that [Call Me Sam](https://themes.gohugo.io/hugo-theme-sam/) is *brave*. I don't trust that my description will do it justice; better to [see for yourself](http://vickylai.com/call-me-sam/posts/). 
+
+
+## Cocoa Enhanced
+
+[Cocoa Enhanced](https://themes.gohugo.io/cocoa-eh-hugo-theme/) is crisp and clean. Its type design is opinionated but flexible. I was most tempted to use this theme. 
+
+
+## Coder
+
+I must include [Coder](https://themes.gohugo.io/hugo-coder/) because it is the inspiration for the theme I ultimately chose. Why do I like it? The simple landing page. The navigation bar is out of the way but present. The backend tension between "section" pages and "post" archives (one of the more difficult aspects for a newbie working with Hugo) is easily to navigate.
