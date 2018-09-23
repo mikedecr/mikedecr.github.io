@@ -108,7 +108,8 @@ install.packages(requires[to_install], repos = cloud_url)&lt;/code&gt;&lt;/pre&g
       <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/811/811-analysis/</guid>
-      <description>&lt;div id=&#34;schedule&#34; class=&#34;section level1&#34;&gt;
+      <description>&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;knitr::opts_chunk$set(cache = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;schedule&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Schedule&lt;/h1&gt;
 &lt;p&gt;Read this before our final lecture, after the &lt;a href=&#34;811/811-graphics&#34;&gt;graphics lesson&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
@@ -1894,10 +1895,7 @@ ggsave(&amp;quot;paper/graphics/my-plot.PDF&amp;quot;, width = 7, height = 3)&lt
 &lt;div id=&#34;another-example-party-id-of-men-and-women-over-time&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Another example: party ID of men and women over time&lt;/h1&gt;
 &lt;p&gt;Let’s take these tools for a spin. Let’s re-create this graphic from an old paper from a former professor of mine.&lt;/p&gt;
-&lt;center&gt;
-&lt;br&gt; &lt;img src=&#34;img/kp-fig-1.png&#34;  alt=&#34;kaufmann-petrocik-figure-1&#34; style=&#34;width: 100%&#34;&gt;
-&lt;/center&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/811/kp-fig-1.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We will need to set up a dataset that has all of the required components. Let’s think of what we need to have in place.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;x&lt;/code&gt; is election cycle, &lt;code&gt;y&lt;/code&gt; is the percentage of men and women identifying as Democrat and Republican (aesthetics). We will need to calculate the &lt;code&gt;y&lt;/code&gt; variable.&lt;/li&gt;
@@ -1995,7 +1993,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
   geom_line(aes(group = party)) +
   geom_point(aes(shape = party))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-33-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-34-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Let’s modify some scales. We’ll want to specify the point styles and change the axis scales.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;by default, fill any empty point with while fill (in &lt;code&gt;grom_point()&lt;/code&gt;)&lt;/li&gt;
@@ -2012,7 +2010,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   scale_shape_manual(values = c(17, 22)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) +
   scale_x_continuous(breaks = seq(1952, 2012, 12))&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-34-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-35-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The X axis looks funky now. Let’s do some theme modifications to make the text diagonal and suppress busy grid lines.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -2026,7 +2024,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
         panel.grid.minor = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-35-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-36-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Let’s suppress the legend created by &lt;code&gt;geom_point()&lt;/code&gt; and add text labels.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -2043,7 +2041,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.65, label = &amp;quot;Democrats&amp;quot;) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.25, label = &amp;quot;Republicans&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-36-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-37-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;If we want to add confidence intervals as ribbons, we’ll use &lt;code&gt;geom_ribbon()&lt;/code&gt;. It inherits the &lt;code&gt;x&lt;/code&gt; aesthetic from the plot, but we need to specify extra &lt;code&gt;ymin&lt;/code&gt; and &lt;code&gt;ymax&lt;/code&gt; aesthetics to draw the upper and lower bounds of the “polygon” that gets drawn. Again, suppress the legend, and for good measure, let’s modify the fill color.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# I always prefer to add ribbons below points and lines
 # we want to reduce the ribbon opacity
@@ -2066,7 +2064,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.65, label = &amp;quot;Democrats&amp;quot;) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.25, label = &amp;quot;Republicans&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-37-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We’ll want to convert the axis to percentages. We can do this in the plot using the &lt;code&gt;scale_y_continuous()&lt;/code&gt; function and applying a function to the labels.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# check the labels = argument in scale_y_continuous
 # it uses the percent() function from the &amp;#39;scales&amp;#39; package
@@ -2092,7 +2090,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.65, label = &amp;quot;Democrats&amp;quot;) +
   annotate(&amp;quot;text&amp;quot;, x = 1984, y = 0.25, label = &amp;quot;Republicans&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-38-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now we’ll need to change the labels so they fit the scale transformation.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -2117,7 +2115,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   labs(x = NULL, y = &amp;quot;Percent (including leaners)&amp;quot;,
        title = &amp;quot;Party Identification of Men and Women&amp;quot;,
        caption = &amp;quot;Source: NES Surveys of the indicated years&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-39-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-40-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;other-graphics&#34; class=&#34;section level1&#34;&gt;
@@ -2141,7 +2139,7 @@ anes %&amp;gt;%
          color = &amp;quot;Partisanship&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Removed 31866 rows containing non-finite values (stat_bin).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-41-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-42-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Histogram bars are stacked by default, which is weird. Let’s make them dodge each other.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# make histogram bars non-stacked (&amp;quot;dodge&amp;quot;)
 
@@ -2160,7 +2158,7 @@ anes %&amp;gt;%
          fill = &amp;quot;Partisanship&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Removed 31866 rows containing non-finite values (stat_bin).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-42-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-43-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;You can also do kernel density estimates (which allow you set the kernel bandwidth):&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# density plot instead of histogram
 
@@ -2177,7 +2175,7 @@ anes %&amp;gt;%
          color = &amp;quot;Partisanship&amp;quot;,
          fill = &amp;quot;Partisanship&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## Warning: Removed 31866 rows containing non-finite values (stat_density).&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-43-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-44-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;bar-graphs&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Bar graphs&lt;/h2&gt;
@@ -2230,7 +2228,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
        y = &amp;quot;Democratic Share of Two-Party Vote&amp;quot;) +
   theme_bw() +
   theme(panel.grid.minor = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-45-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-46-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here is the same plot as a dot plot, also changing the scales.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dots instead of bars
 ggplot(mean_votes, aes(x = pid7, y = prop)) +
@@ -2243,7 +2241,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
        y = &amp;quot;Democratic Share of Two-Party Vote&amp;quot;) +
   theme_bw() +
   theme(panel.grid.minor = element_blank())&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-46-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And you can often rotate dot plots so that their labels have more space to print out.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# rotate the dot plot for axis readability
 # this should be used carefully...
@@ -2260,7 +2258,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
   theme_bw() +
   theme(panel.grid.minor = element_blank()) +
   coord_flip()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-47-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-48-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;There are some other things you can do with geoms. One thing you can do for dot plots is use &lt;code&gt;geom_pointrange&lt;/code&gt;, which adds a point and an error bar. Like &lt;code&gt;geom_ribbon&lt;/code&gt;, it takes a &lt;code&gt;ymin&lt;/code&gt; and &lt;code&gt;ymax&lt;/code&gt; aesthetic. This makes it good for point estimates and confidence intervals. In this case though, we’ll use it in a slightly hacky way to help us trace which point goes with which category, making it a little easier to read the plot. Notice how I set the min and max aesthetics.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# set ymin = 0, ymax = prop. 
 # the error bar goes from 0 to the point
@@ -2277,7 +2275,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
   theme_bw() +
   theme(panel.grid.minor = element_blank()) +
   coord_flip()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-48-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-49-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2298,14 +2296,14 @@ d &amp;lt;- data_frame(x = rnorm(100, 0, 1),
 ggplot(d, aes(x = s, y = y)) +
   geom_jitter(width = 0.15) +
   labs(x = &amp;quot;String&amp;quot;, y = &amp;quot;Continuous Y&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-49-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-50-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;…and if we plot from a factor that already has ordered levels…&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# plot y as f(f), jittered points
 # notice weird order. This comes from the underlying data
 ggplot(d, aes(x = f, y = y)) +
   geom_jitter(width = 0.15) +
   labs(x = &amp;quot;Ordered Factor&amp;quot;, y = &amp;quot;Continuous Y&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-50-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-51-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;…or we wanted to assign colors using an ordered factor.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# same situation here
 ggplot(d, aes(x = x, y = y)) +
@@ -2313,7 +2311,7 @@ ggplot(d, aes(x = x, y = y)) +
   labs(x = &amp;quot;Continuous X&amp;quot;, 
        y = &amp;quot;Continuous Y&amp;quot;,
        color = &amp;quot;Ordered Factor&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-51-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-52-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;To reorder these categories, I recommend using tools in the &lt;code&gt;forcats&lt;/code&gt; package, which, conveniently, is part of &lt;code&gt;tidyverse&lt;/code&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;fct_relevel()&lt;/code&gt;: take a factor variable and reorder the levels. Any level not listed during reordering is given the same precedence as the original variable&lt;/li&gt;
@@ -2349,12 +2347,12 @@ ggplot(fixed_d, aes(x = x, y = y)) +
   labs(x = &amp;quot;Continuous X&amp;quot;, 
        y = &amp;quot;Continuous Y&amp;quot;,
        color = &amp;quot;Ordered Factor&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-53-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-54-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# f as x axis
 ggplot(fixed_d, aes(x = f, y = y)) +
   geom_point(shape = 1) +
   labs(x = &amp;quot;Ordered Factor&amp;quot;, y = &amp;quot;Continuous Y&amp;quot;) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-53-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/811/811-04-graphics_files/figure-html/unnamed-chunk-54-2.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;an-aside-on-stringr&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;An aside on &lt;code&gt;stringr&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;The &lt;code&gt;stringr&lt;/code&gt; package contains a few useful functions for modifying character vectors.&lt;/p&gt;
@@ -2483,10 +2481,7 @@ str_replace_all(state.name, pattern = &amp;quot; &amp;quot;, replacement = &amp;
 &lt;h1&gt;Setting up a project&lt;/h1&gt;
 &lt;p&gt;Each projects should have a dedicated folder on your computer. These folders should be internally organized: separate folders for data, R scripts, writing, other documentation, and so on.&lt;/p&gt;
 &lt;p&gt;Here is an example of one of my project folders.&lt;/p&gt;
-&lt;center&gt;
-&lt;br&gt; &lt;img src=&#34;img/dir.png&#34; alt=&#34;project-directory&#34; style=&#34;width: 90%;&#34;/&gt;
-&lt;/center&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/811/dir.png&#34; width=&#34;80%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;For this class, set up your class folder like this:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;You should already have a dedicated &lt;code&gt;ps811&lt;/code&gt; folder&lt;/li&gt;
@@ -2531,16 +2526,6 @@ getwd()&lt;/code&gt;&lt;/pre&gt;
 
 library(&amp;quot;magrittr&amp;quot;)
 library(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
-## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
-## ✔ tidyr   0.8.0     ✔ stringr 1.3.1
-## ✔ readr   1.1.1     ✔ forcats 0.3.0&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()   masks magrittr::extract()
-## ✖ dplyr::filter()    masks stats::filter()
-## ✖ dplyr::lag()       masks stats::lag()
-## ✖ purrr::set_names() masks magrittr::set_names()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;When you load &lt;code&gt;tidyverse&lt;/code&gt;, you should see a warning that it “masks” some names in the &lt;code&gt;magrittr&lt;/code&gt; and other packages. This means some of the function names in the packages are the same. This is &lt;em&gt;generally&lt;/em&gt; something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;read-external-data&#34; class=&#34;section level1&#34;&gt;
@@ -3490,10 +3475,7 @@ anes %$%
 &lt;div id=&#34;using-r&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Using R&lt;/h1&gt;
 &lt;p&gt;The most essential part of using R is the &lt;em&gt;console&lt;/em&gt;. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won’t be the same colors as mine, but it looks sort of like this:&lt;/p&gt;
-&lt;center&gt;
-&lt;br&gt; &lt;img src=&#34;img/r-console.png&#34;  alt=&#34;R console&#34; style=&#34;width: 80%&#34;&gt;
-&lt;/center&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/811/r-console.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Although you can type commands directly into the console, most commands should be written in a &lt;em&gt;script file&lt;/em&gt;. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;editing-an-r-script-file&#34; class=&#34;section level1&#34;&gt;
@@ -3722,19 +3704,19 @@ x &amp;lt;- rnorm(n = 10000, mean = 0, sd = 1)
 
 # sum
 sum(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -157.8188&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] -13.81984&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number of elements in an object
 length(x) &lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 10000&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# mean
 mean(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -0.01578188&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] -0.001381984&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# variance
 var(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1.001382&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9781618&lt;/code&gt;&lt;/pre&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# standard deviation
 sd(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1.000691&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] 0.9890206&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;It is easy to write your own functions in R. We will cover this in the final lesson.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;help-files&#34; class=&#34;section level1&#34;&gt;

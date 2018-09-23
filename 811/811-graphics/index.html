@@ -695,10 +695,7 @@ ggsave(&quot;paper/graphics/my-plot.PDF&quot;, width = 7, height = 3)</code></pr
 <div id="another-example-party-id-of-men-and-women-over-time" class="section level1">
 <h1>Another example: party ID of men and women over time</h1>
 <p>Let’s take these tools for a spin. Let’s re-create this graphic from an old paper from a former professor of mine.</p>
-<center>
-<br> <img src="img/kp-fig-1.png"  alt="kaufmann-petrocik-figure-1" style="width: 100%">
-</center>
-<p><br></p>
+<p><img src="/images/811/kp-fig-1.png" width="90%" /></p>
 <p>We will need to set up a dataset that has all of the required components. Let’s think of what we need to have in place.</p>
 <ul>
 <li><code>x</code> is election cycle, <code>y</code> is the percentage of men and women identifying as Democrat and Republican (aesthetics). We will need to calculate the <code>y</code> variable.</li>
@@ -796,7 +793,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
   geom_line(aes(group = party)) +
   geom_point(aes(shape = party))</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Let’s modify some scales. We’ll want to specify the point styles and change the axis scales.</p>
 <ul>
 <li>by default, fill any empty point with while fill (in <code>grom_point()</code>)</li>
@@ -813,7 +810,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   scale_shape_manual(values = c(17, 22)) +
   scale_y_continuous(breaks = seq(0, 1, .1)) +
   scale_x_continuous(breaks = seq(1952, 2012, 12))</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>The X axis looks funky now. Let’s do some theme modifications to make the text diagonal and suppress busy grid lines.</p>
 <pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -827,7 +824,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   theme_bw() +
   theme(axis.text.x = element_text(angle = 45, vjust = 0.8),
         panel.grid.minor = element_blank())</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Let’s suppress the legend created by <code>geom_point()</code> and add text labels.</p>
 <pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -844,7 +841,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&quot;text&quot;, x = 1984, y = 0.65, label = &quot;Democrats&quot;) +
   annotate(&quot;text&quot;, x = 1984, y = 0.25, label = &quot;Republicans&quot;)</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>If we want to add confidence intervals as ribbons, we’ll use <code>geom_ribbon()</code>. It inherits the <code>x</code> aesthetic from the plot, but we need to specify extra <code>ymin</code> and <code>ymax</code> aesthetics to draw the upper and lower bounds of the “polygon” that gets drawn. Again, suppress the legend, and for good measure, let’s modify the fill color.</p>
 <pre class="r"><code># I always prefer to add ribbons below points and lines
 # we want to reduce the ribbon opacity
@@ -867,7 +864,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&quot;text&quot;, x = 1984, y = 0.65, label = &quot;Democrats&quot;) +
   annotate(&quot;text&quot;, x = 1984, y = 0.25, label = &quot;Republicans&quot;)</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>We’ll want to convert the axis to percentages. We can do this in the plot using the <code>scale_y_continuous()</code> function and applying a function to the labels.</p>
 <pre class="r"><code># check the labels = argument in scale_y_continuous
 # it uses the percent() function from the &#39;scales&#39; package
@@ -893,7 +890,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
         panel.grid.minor = element_blank()) +
   annotate(&quot;text&quot;, x = 1984, y = 0.65, label = &quot;Democrats&quot;) +
   annotate(&quot;text&quot;, x = 1984, y = 0.25, label = &quot;Republicans&quot;)</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>Now we’ll need to change the labels so they fit the scale transformation.</p>
 <pre class="r"><code>ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   facet_grid(. ~ gender) +
@@ -918,7 +915,7 @@ ggplot(pid_gendergap, aes(x = cycle, y = prop)) +
   labs(x = NULL, y = &quot;Percent (including leaners)&quot;,
        title = &quot;Party Identification of Men and Women&quot;,
        caption = &quot;Source: NES Surveys of the indicated years&quot;)</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 </div>
 </div>
 <div id="other-graphics" class="section level1">
@@ -942,7 +939,7 @@ anes %&gt;%
          color = &quot;Partisanship&quot;)</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p>Histogram bars are stacked by default, which is weird. Let’s make them dodge each other.</p>
 <pre class="r"><code># make histogram bars non-stacked (&quot;dodge&quot;)
 
@@ -961,7 +958,7 @@ anes %&gt;%
          fill = &quot;Partisanship&quot;)</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_bin).</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>You can also do kernel density estimates (which allow you set the kernel bandwidth):</p>
 <pre class="r"><code># density plot instead of histogram
 
@@ -978,7 +975,7 @@ anes %&gt;%
          color = &quot;Partisanship&quot;,
          fill = &quot;Partisanship&quot;)</code></pre>
 <pre><code>## Warning: Removed 31866 rows containing non-finite values (stat_density).</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 <div id="bar-graphs" class="section level2">
 <h2>Bar graphs</h2>
@@ -1031,7 +1028,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
        y = &quot;Democratic Share of Two-Party Vote&quot;) +
   theme_bw() +
   theme(panel.grid.minor = element_blank())</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>Here is the same plot as a dot plot, also changing the scales.</p>
 <pre class="r"><code># dots instead of bars
 ggplot(mean_votes, aes(x = pid7, y = prop)) +
@@ -1044,7 +1041,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
        y = &quot;Democratic Share of Two-Party Vote&quot;) +
   theme_bw() +
   theme(panel.grid.minor = element_blank())</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>And you can often rotate dot plots so that their labels have more space to print out.</p>
 <pre class="r"><code># rotate the dot plot for axis readability
 # this should be used carefully...
@@ -1061,7 +1058,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
   theme_bw() +
   theme(panel.grid.minor = element_blank()) +
   coord_flip()</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>There are some other things you can do with geoms. One thing you can do for dot plots is use <code>geom_pointrange</code>, which adds a point and an error bar. Like <code>geom_ribbon</code>, it takes a <code>ymin</code> and <code>ymax</code> aesthetic. This makes it good for point estimates and confidence intervals. In this case though, we’ll use it in a slightly hacky way to help us trace which point goes with which category, making it a little easier to read the plot. Notice how I set the min and max aesthetics.</p>
 <pre class="r"><code># set ymin = 0, ymax = prop. 
 # the error bar goes from 0 to the point
@@ -1078,7 +1075,7 @@ ggplot(mean_votes, aes(x = pid7, y = prop)) +
   theme_bw() +
   theme(panel.grid.minor = element_blank()) +
   coord_flip()</code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <hr />
 </div>
 </div>
@@ -1099,14 +1096,14 @@ d &lt;- data_frame(x = rnorm(100, 0, 1),
 ggplot(d, aes(x = s, y = y)) +
   geom_jitter(width = 0.15) +
   labs(x = &quot;String&quot;, y = &quot;Continuous Y&quot;) </code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 <p>…and if we plot from a factor that already has ordered levels…</p>
 <pre class="r"><code># plot y as f(f), jittered points
 # notice weird order. This comes from the underlying data
 ggplot(d, aes(x = f, y = y)) +
   geom_jitter(width = 0.15) +
   labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous Y&quot;) </code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>…or we wanted to assign colors using an ordered factor.</p>
 <pre class="r"><code># same situation here
 ggplot(d, aes(x = x, y = y)) +
@@ -1114,7 +1111,7 @@ ggplot(d, aes(x = x, y = y)) +
   labs(x = &quot;Continuous X&quot;, 
        y = &quot;Continuous Y&quot;,
        color = &quot;Ordered Factor&quot;) </code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>To reorder these categories, I recommend using tools in the <code>forcats</code> package, which, conveniently, is part of <code>tidyverse</code>.</p>
 <ul>
 <li><code>fct_relevel()</code>: take a factor variable and reorder the levels. Any level not listed during reordering is given the same precedence as the original variable</li>
@@ -1150,12 +1147,12 @@ ggplot(fixed_d, aes(x = x, y = y)) +
   labs(x = &quot;Continuous X&quot;, 
        y = &quot;Continuous Y&quot;,
        color = &quot;Ordered Factor&quot;) </code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <pre class="r"><code># f as x axis
 ggplot(fixed_d, aes(x = f, y = y)) +
   geom_point(shape = 1) +
   labs(x = &quot;Ordered Factor&quot;, y = &quot;Continuous Y&quot;) </code></pre>
-<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-53-2.png" width="672" /></p>
+<p><img src="/811/811-04-graphics_files/figure-html/unnamed-chunk-54-2.png" width="672" /></p>
 <div id="an-aside-on-stringr" class="section level2">
 <h2>An aside on <code>stringr</code></h2>
 <p>The <code>stringr</code> package contains a few useful functions for modifying character vectors.</p>

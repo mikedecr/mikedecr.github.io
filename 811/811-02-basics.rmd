@@ -8,6 +8,12 @@ categories: ["Teaching"]
 tags: ["ps811", "R"]
 ---
 
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+
 # Schedule:
 
 Read this before our first R lecture.
@@ -58,11 +64,11 @@ If you have a Chromebook or some other computing machine that makes it impossibl
 
 The most essential part of using R is the *console*. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won't be the same colors as mine, but it looks sort of like this:
 
-<center>
-  <br>
-  <img src="img/r-console.png"  alt="R console" style="width: 80%">
-</center>
-<br>
+
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("/images/811/r-console.png")
+```
+
 
 Although you can type commands directly into the console, most commands should be written in a *script file*. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).
 

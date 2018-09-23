@@ -60,7 +60,7 @@
     "datePublished": "2018-02-09 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-02-09 00:00:00 &#43;0000 UTC",
     "url" : "/811/811-data/",
-    "wordCount" : "8455",
+    "wordCount" : "8393",
     "keywords" : [ "ps811","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -218,10 +218,7 @@
 <h1>Setting up a project</h1>
 <p>Each projects should have a dedicated folder on your computer. These folders should be internally organized: separate folders for data, R scripts, writing, other documentation, and so on.</p>
 <p>Here is an example of one of my project folders.</p>
-<center>
-<br> <img src="img/dir.png" alt="project-directory" style="width: 90%;"/>
-</center>
-<p><br></p>
+<p><img src="/images/811/dir.png" width="80%" /></p>
 <p>For this class, set up your class folder like this:</p>
 <ul>
 <li>You should already have a dedicated <code>ps811</code> folder</li>
@@ -266,16 +263,6 @@ getwd()</code></pre>
 
 library(&quot;magrittr&quot;)
 library(&quot;tidyverse&quot;)</code></pre>
-<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
-## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
-## ✔ tidyr   0.8.0     ✔ stringr 1.3.1
-## ✔ readr   1.1.1     ✔ forcats 0.3.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
-## ✖ tidyr::extract()   masks magrittr::extract()
-## ✖ dplyr::filter()    masks stats::filter()
-## ✖ dplyr::lag()       masks stats::lag()
-## ✖ purrr::set_names() masks magrittr::set_names()</code></pre>
 <p>When you load <code>tidyverse</code>, you should see a warning that it “masks” some names in the <code>magrittr</code> and other packages. This means some of the function names in the packages are the same. This is <em>generally</em> something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.</p>
 </div>
 <div id="read-external-data" class="section level1">

@@ -8,6 +8,11 @@ categories: ["Teaching"]
 tags: ["ps811", "R"]
 ---
 
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
+
 # Schedule:
 
 Read this before our first R lecture.
@@ -44,11 +49,9 @@ Each projects should have a dedicated folder on your computer. These folders sho
 
 Here is an example of one of my project folders.
 
-<center>
-  <br>
-  <img src="img/dir.png" alt="project-directory" style="width: 90%;"/>
-</center>
-<br>
+```{r, echo = FALSE, out.width = "80%"}
+knitr::include_graphics("/images/811/dir.png")
+```
 
 
 For this class, set up your class folder like this:

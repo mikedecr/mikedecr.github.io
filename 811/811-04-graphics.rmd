@@ -8,6 +8,10 @@ categories: ["Teaching"]
 tags: ["ps811", "R"]
 ---
 
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(cache = TRUE)
+```
+
 
 # Schedule:
 
@@ -643,11 +647,9 @@ ggsave("paper/graphics/my-plot.PDF", width = 7, height = 3)
 
 Let's take these tools for a spin. Let's re-create this graphic from an old paper from a former professor of mine.
 
-<center>
-  <br>
-  <img src="img/kp-fig-1.png"  alt="kaufmann-petrocik-figure-1" style="width: 100%">
-</center>
-<br>
+```{r, echo = FALSE, out.width = "90%"}
+knitr::include_graphics("/images/811/kp-fig-1.png")
+```
 
 We will need to set up a dataset that has all of the required components. Let's think of what we need to have in place. 
 
