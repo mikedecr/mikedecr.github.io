@@ -120,12 +120,22 @@ install.packages(requires[to_install], repos = cloud_url)&lt;/code&gt;&lt;/pre&g
       <guid>/code/</guid>
       <description>&lt;div id=&#34;templates-for-mathrmlatex-and-r-markdown&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Templates for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; and R Markdown&lt;/h2&gt;
-&lt;p&gt;Document styles with a personal touch, &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;. Beware of Minion/Myriad font packages that may not be set up for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{pdf\LaTeX}\)&lt;/span&gt; (or use &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Xe\LaTeX}\)&lt;/span&gt;).&lt;/p&gt;
-&lt;p&gt;Currently, the only template available is the &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{pdf\LaTeX}\)&lt;/span&gt; article&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Document styles, not too complicated, but with a personal touch. Now &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; article (&lt;code&gt;pdflatex&lt;/code&gt;). &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf&#34;&gt;View example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;R Markdown article (&lt;code&gt;pdflatex&lt;/code&gt;). &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/rmd/pdflatex/rmd-pdflatex-article.pdf&#34;&gt;View example&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;TBD: &lt;code&gt;memoir&lt;/code&gt;-class documents (e.g. for dissertations).&lt;/li&gt;
+&lt;li&gt;TBD: &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; and R Markdown documents built with &lt;code&gt;xelatex&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Templates use Minion and Myriad typeface packages, which won’t be set up for &lt;code&gt;pdflatex&lt;/code&gt; unless you have &lt;a href=&#34;https://github.com/sebschub/FontPro&#34;&gt;done the work&lt;/a&gt; for that. If you want the quick route to enabling those typefaces, build your document with &lt;code&gt;xelatex&lt;/code&gt; instead of &lt;code&gt;pdflatex&lt;/code&gt; (but N.B. &lt;code&gt;xelatex&lt;/code&gt;’s typography isn’t as strong). If you don’t want either, change the typeface package.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;workshop-materials&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Workshop materials&lt;/h2&gt;
-&lt;p&gt;My materials for &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt;&lt;/a&gt; and &lt;a href=&#34;https://github.com/mikedecr/math-camp-2018&#34;&gt;math camp&lt;/a&gt; workshops are all open source and online.&lt;/p&gt;
+&lt;div id=&#34;workshops-math-camp-and-mathrmlatex&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Workshops: Math Camp and &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt;&lt;/h2&gt;
+&lt;p&gt;Materials for these workshops are all open source and available on Github:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/mikedecr/math-camp-2018&#34;&gt;Math camp&lt;/a&gt; for political science graduate students.&lt;/strong&gt; Introduces important concepts in algebra/pre-calculus, basic linear algebra, set notation and theory, derivative and integral calculus, and probability.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt;&lt;/a&gt; workshop.&lt;/strong&gt; What is &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt;, example documents, bibliographies, beamer, workflow integration with statistical software, R Markdown, and Xaringan&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;sublime-text-user-settings&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Sublime Text User Settings&lt;/h2&gt;
