@@ -120,7 +120,7 @@ install.packages(requires[to_install], repos = cloud_url)&lt;/code&gt;&lt;/pre&g
       <guid>/code/</guid>
       <description>&lt;div id=&#34;templates-for-mathrmlatex-and-r-markdown&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Templates for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; and R Markdown&lt;/h2&gt;
-&lt;p&gt;Document styles, not too complicated, but with a personal touch. Now &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Document styles, not too complicated, with a personal touch. Now &lt;a href=&#34;https://github.com/mikedecr/document-templates&#34;&gt;available on Github&lt;/a&gt;.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; article (&lt;code&gt;pdflatex&lt;/code&gt;). &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf&#34;&gt;View example&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;R Markdown article (&lt;code&gt;pdflatex&lt;/code&gt;). &lt;a href=&#34;https://github.com/mikedecr/document-templates/blob/master/rmd/pdflatex/rmd-pdflatex-article.pdf&#34;&gt;View example&lt;/a&gt;&lt;/li&gt;
@@ -2507,16 +2507,18 @@ str_replace_all(state.name, pattern = &amp;quot; &amp;quot;, replacement = &amp;
       <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/811/811-data/</guid>
-      <description>&lt;div id=&#34;schedule&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Schedule:&lt;/h1&gt;
+      <description>&lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Overview&lt;/h1&gt;
+&lt;div id=&#34;schedule&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Schedule:&lt;/h2&gt;
 &lt;p&gt;Read this before our first R lecture.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;how-to-follow-along&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;How to follow along&lt;/h1&gt;
+&lt;div id=&#34;how-to-follow-along&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to follow along&lt;/h2&gt;
 &lt;p&gt;A script file walking through some of these commands is available &lt;a href=&#34;https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;objectives&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Objectives&lt;/h1&gt;
+&lt;div id=&#34;objectives&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Objectives&lt;/h2&gt;
 &lt;p&gt;The goal of this lesson is to simulate some data manipulation for a research project. This requires…&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;setting up the project on your computer&lt;/li&gt;
@@ -2528,6 +2530,7 @@ str_replace_all(state.name, pattern = &amp;quot; &amp;quot;, replacement = &amp;
 &lt;p&gt;Future lessons pick up where this one leaves off, so you must complete this lesson!. We will be &lt;a href=&#34;811/811-graphics&#34;&gt;making graphics&lt;/a&gt; and doing &lt;a href=&#34;811/811-analysis&#34;&gt;statistical analysis&lt;/a&gt; that depend on the changes we make in this document.&lt;/p&gt;
 &lt;!-- # How to read this document --&gt;
 &lt;!-- I have also uploaded an R file containing the commands from this document. You can use this other file to follow along with the code on this webpage. You may also benefit from transcribing the code from this page into your own script file, as a way to practice writing the code yourself. --&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;setting-up-a-project&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Setting up a project&lt;/h1&gt;
@@ -2579,9 +2582,8 @@ getwd()&lt;/code&gt;&lt;/pre&gt;
 library(&amp;quot;magrittr&amp;quot;)
 library(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;When you load &lt;code&gt;tidyverse&lt;/code&gt;, you should see a warning that it “masks” some names in the &lt;code&gt;magrittr&lt;/code&gt; and other packages. This means some of the function names in the packages are the same. This is &lt;em&gt;generally&lt;/em&gt; something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;read-external-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Read external data&lt;/h1&gt;
+&lt;div id=&#34;read-external-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Read external data&lt;/h2&gt;
 &lt;p&gt;With your directory set at &lt;code&gt;ps811/R/lessons&lt;/code&gt;, confirm that the ANES data file are where they should be using &lt;code&gt;list.files()&lt;/code&gt;. You can look inside folders by adding the folder path as an argument. The ANES data should be in the &lt;code&gt;data/&lt;/code&gt; folder.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# this is similar to typing `ls` in your computer&amp;#39;s shell / command line
 list.files()
@@ -2598,6 +2600,7 @@ library(&amp;quot;haven&amp;quot;)
 anes &amp;lt;- read_dta(&amp;quot;data/anes_timeseries_cdf.dta&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This should take a few moments to load because the ANES cumulative file is a large file. Don’t worry.&lt;/p&gt;
 &lt;p&gt;You may want to check out the &lt;code&gt;rio&lt;/code&gt; package for more generic file-reading functions.&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;data-frames&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Data frames&lt;/h1&gt;

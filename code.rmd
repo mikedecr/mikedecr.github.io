@@ -5,7 +5,7 @@ date: 2018-04-23
 
 ## Templates for $\mathrm{\LaTeX}$ and R Markdown
 
-Document styles, not too complicated, but with a personal touch. Now [available on Github](https://github.com/mikedecr/document-templates). 
+Document styles, not too complicated, with a personal touch. Now [available on Github](https://github.com/mikedecr/document-templates). 
 
 - $\mathrm{\LaTeX}$ article (`pdflatex`). [View example](https://github.com/mikedecr/document-templates/blob/master/tex/pdflatex/article/pdflatex-article.pdf)
 - R Markdown article (`pdflatex`). [View example](https://github.com/mikedecr/document-templates/blob/master/rmd/pdflatex/rmd-pdflatex-article.pdf)

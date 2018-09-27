@@ -60,7 +60,7 @@
     "datePublished": "2018-02-09 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-02-09 00:00:00 &#43;0000 UTC",
     "url" : "/811/811-data/",
-    "wordCount" : "8393",
+    "wordCount" : "8394",
     "keywords" : [ "ps811","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -207,16 +207,18 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
           
           
 
-          <div id="schedule" class="section level1">
-<h1>Schedule:</h1>
+          <div id="overview" class="section level1">
+<h1>Overview</h1>
+<div id="schedule" class="section level2">
+<h2>Schedule:</h2>
 <p>Read this before our first R lecture.</p>
 </div>
-<div id="how-to-follow-along" class="section level1">
-<h1>How to follow along</h1>
+<div id="how-to-follow-along" class="section level2">
+<h2>How to follow along</h2>
 <p>A script file walking through some of these commands is available <a href="https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t">here</a>.</p>
 </div>
-<div id="objectives" class="section level1">
-<h1>Objectives</h1>
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
 <p>The goal of this lesson is to simulate some data manipulation for a research project. This requires…</p>
 <ul>
 <li>setting up the project on your computer</li>
@@ -228,6 +230,7 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
 <p>Future lessons pick up where this one leaves off, so you must complete this lesson!. We will be <a href="811/811-graphics">making graphics</a> and doing <a href="811/811-analysis">statistical analysis</a> that depend on the changes we make in this document.</p>
 <!-- # How to read this document -->
 <!-- I have also uploaded an R file containing the commands from this document. You can use this other file to follow along with the code on this webpage. You may also benefit from transcribing the code from this page into your own script file, as a way to practice writing the code yourself. -->
+</div>
 </div>
 <div id="setting-up-a-project" class="section level1">
 <h1>Setting up a project</h1>
@@ -279,9 +282,8 @@ getwd()</code></pre>
 library(&quot;magrittr&quot;)
 library(&quot;tidyverse&quot;)</code></pre>
 <p>When you load <code>tidyverse</code>, you should see a warning that it “masks” some names in the <code>magrittr</code> and other packages. This means some of the function names in the packages are the same. This is <em>generally</em> something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.</p>
-</div>
-<div id="read-external-data" class="section level1">
-<h1>Read external data</h1>
+<div id="read-external-data" class="section level2">
+<h2>Read external data</h2>
 <p>With your directory set at <code>ps811/R/lessons</code>, confirm that the ANES data file are where they should be using <code>list.files()</code>. You can look inside folders by adding the folder path as an argument. The ANES data should be in the <code>data/</code> folder.</p>
 <pre class="r"><code># this is similar to typing `ls` in your computer&#39;s shell / command line
 list.files()
@@ -298,6 +300,7 @@ library(&quot;haven&quot;)
 anes &lt;- read_dta(&quot;data/anes_timeseries_cdf.dta&quot;)</code></pre>
 <p>This should take a few moments to load because the ANES cumulative file is a large file. Don’t worry.</p>
 <p>You may want to check out the <code>rio</code> package for more generic file-reading functions.</p>
+</div>
 </div>
 <div id="data-frames" class="section level1">
 <h1>Data frames</h1>

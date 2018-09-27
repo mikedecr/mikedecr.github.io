@@ -13,17 +13,19 @@ knitr::opts_chunk$set(cache = TRUE)
 ```
 
 
-# Schedule:
+# Overview
+
+## Schedule:
 
 Read this before our first R lecture.
 
 
-# How to follow along
+## How to follow along
 
 A script file walking through some of these commands is available [here](https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t).
 
 
-# Objectives
+## Objectives
 
 The goal of this lesson is to simulate some data manipulation for a research project. This requires...
 
@@ -117,7 +119,7 @@ library("tidyverse")
 When you load `tidyverse`, you should see a warning that it "masks" some names in the `magrittr` and other packages. This means some of the function names in the packages are the same. This is *generally* something you should be watching out for, since your code may not work as intended. It won't be a problem right now, though.
 
 
-# Read external data
+## Read external data
 
 With your directory set at `ps811/R/lessons`, confirm that the ANES data file
 are where they should be using `list.files()`. You can look inside folders by adding the folder path as an argument. The ANES data should be in the `data/` folder.
