@@ -16,7 +16,7 @@
       
       <guid>/2018/2018-09-23-hugo-themes/</guid>
       <description>&lt;p&gt;I just finished a major website overhaul. While it took only about one day of work, I’ve had my eyes open for a new &lt;a href=&#34;https://themes.gohugo.io/&#34;&gt;theme&lt;/a&gt; for &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; for a while.&lt;/p&gt;
-&lt;p&gt;I mean, a &lt;em&gt;while&lt;/em&gt;. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I mean, a &lt;em&gt;while&lt;/em&gt;. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;But this is mainly my fault. I am a bad combination of &lt;em&gt;picky&lt;/em&gt; and &lt;em&gt;unskilled&lt;/em&gt; with websites and web design, which made me a fickle chooser throughout the process. So to make up for that fickleness, I wanted to acknowledge and promote some of the Hugo themes that I really liked, but ultimately did not choose for my site.&lt;/p&gt;
 &lt;div id=&#34;goa&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Goa&lt;/h2&gt;
@@ -45,7 +45,7 @@
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The only way I was able to test themes so efficiently was thanks to the amazing &lt;a href=&#34;https://bookdown.org/yihui/blogdown/&#34;&gt;blogdown&lt;/a&gt; package for R.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;The only way I was able to test themes so efficiently was thanks to the amazing &lt;a href=&#34;https://bookdown.org/yihui/blogdown/&#34;&gt;blogdown&lt;/a&gt; package for R.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -181,18 +181,22 @@ install.packages(requires[to_install], repos = cloud_url)&lt;/code&gt;&lt;/pre&g
 &lt;/ul&gt;
 &lt;p&gt;This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise. These include…&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;intermediate R tools and routines&lt;/li&gt;
+&lt;li&gt;intermediate R tools and routines
+&lt;ul&gt;
 &lt;li&gt;lists&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;apply()&lt;/code&gt; functions&lt;/li&gt;
 &lt;li&gt;mapping functions to nested data frames&lt;/li&gt;
 &lt;li&gt;custom functions&lt;/li&gt;
 &lt;li&gt;type coercion&lt;/li&gt;
-&lt;li&gt;a reference list of tools for advanced analysis&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;a reference list of tools for advanced analysis
+&lt;ul&gt;
 &lt;li&gt;time series&lt;/li&gt;
 &lt;li&gt;panel models&lt;/li&gt;
 &lt;li&gt;multilevel models&lt;/li&gt;
 &lt;li&gt;Bayesian models&lt;/li&gt;
 &lt;li&gt;etc.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Since we should be getting used to R, I will sprinkle some more interesting data manipulation tricks into the analysis. Pay careful attention, as some of these tricks may come in handy in the future! As always, I recommend you run pipe chains chunk by chunk so you can see how each function in the chain contributes to the final result.&lt;/p&gt;
 &lt;/div&gt;
@@ -2584,7 +2588,8 @@ library(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;When you load &lt;code&gt;tidyverse&lt;/code&gt;, you should see a warning that it “masks” some names in the &lt;code&gt;magrittr&lt;/code&gt; and other packages. This means some of the function names in the packages are the same. This is &lt;em&gt;generally&lt;/em&gt; something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.&lt;/p&gt;
 &lt;div id=&#34;read-external-data&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Read external data&lt;/h2&gt;
-&lt;p&gt;With your directory set at &lt;code&gt;ps811/R/lessons&lt;/code&gt;, confirm that the ANES data file are where they should be using &lt;code&gt;list.files()&lt;/code&gt;. You can look inside folders by adding the folder path as an argument. The ANES data should be in the &lt;code&gt;data/&lt;/code&gt; folder.&lt;/p&gt;
+&lt;p&gt;With your directory set at &lt;code&gt;ps811/R/lessons&lt;/code&gt;, confirm that the ANES data file
+are where they should be using &lt;code&gt;list.files()&lt;/code&gt;. You can look inside folders by adding the folder path as an argument. The ANES data should be in the &lt;code&gt;data/&lt;/code&gt; folder.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# this is similar to typing `ls` in your computer&amp;#39;s shell / command line
 list.files()
 
@@ -3986,11 +3991,9 @@ I study American politics and statistical methodology.
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/contact/</guid>
-      <description>&lt;!-- ## How to reach me --&gt;
+      <description>&lt;p&gt;&lt;strong&gt;By email:&lt;/strong&gt; decrescenzo [asperand] wisc [period] edu&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;By email:&lt;/strong&gt; decrescenzo [asperand] wisc [period] edu&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;During office hours:&lt;/strong&gt; North Hall 101A (appointment only during Spring 2018)&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;During office hours:&lt;/strong&gt; Tuesday 2:30&amp;ndash;4:30, North Hall 101A&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Twitter:&lt;/strong&gt; &lt;a href=&#34;https://twitter.com/mikedecr&#34; target = &#34;_blank&#34;&gt;@mikedecr&lt;/a&gt;&lt;/p&gt;
 
