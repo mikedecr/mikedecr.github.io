@@ -166,7 +166,7 @@ ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
              aes(x = 35, y = -70, label = paste0(&amp;quot;beta: &amp;quot;, round(humidity_beta, 3)), group = formula),
              parse = TRUE,
              family = &amp;quot;PT Sans&amp;quot;, size = 4) +
-  labs(x = &amp;quot;Humidity&amp;quot;, y = &amp;quot;Partial Predicted High Temperature (°F)&amp;quot;,
+  labs(x = &amp;quot;Humidity&amp;quot;, y = &amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;,
        subtitle = &amp;quot;{closest_state}&amp;quot;) +
   transition_states(formula, transition_length = 0.25, state_length = 0.5) +
   enter_fade() +
