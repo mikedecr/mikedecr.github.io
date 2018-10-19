@@ -60,7 +60,7 @@
     "datePublished": "2018-10-19 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-10-19 00:00:00 &#43;0000 UTC",
     "url" : "/2018/2018-10-19-partialling-out/",
-    "wordCount" : "1411",
+    "wordCount" : "1410",
     "keywords" : [ "Visualization","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -358,7 +358,7 @@ ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
              aes(x = 35, y = -70, label = paste0(&quot;beta: &quot;, round(humidity_beta, 3)), group = formula),
              parse = TRUE,
              family = &quot;PT Sans&quot;, size = 4) +
-  labs(x = &quot;Humidity&quot;, y = &quot;Effect on Daily High Temperature (°F)&quot;,
+  labs(x = &quot;Humidity&quot;, y = &quot;Partial Predicted High Temperature (°F)&quot;,
        subtitle = &quot;{closest_state}&quot;) +
   transition_states(formula, transition_length = 0.25, state_length = 0.5) +
   enter_fade() +
