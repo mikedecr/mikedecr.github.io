@@ -6,10 +6,20 @@
     <description>Recent content in Methods on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 30 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/methods/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Visualization of Partial Effects in Multiple Regression</title>
+      <link>/2018/2018-10-19-partialling-out/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/2018-10-19-partialling-out/</guid>
+      <description>Background A few days ago, Andrew Heiss was looking for a way to visualize multiple regression with an emphasis on one predictor, without 3(+)-dimensional plots. He works through a method and posts this cool animation, which shows the changing relationship between \(x\) and \(y\) when adding controls, superimposed over the scatterplot of the raw data. (He credits Pete Mohanty with the shifting abline idea.)
+ Helpful animated #dataviz showing what happens to the slope of one coefficient in a model when controlling for other variables in multiple regression</description>
+    </item>
     
     <item>
       <title>Packages &amp; Reproducibility: Install what you need, attach what you want</title>

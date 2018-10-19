@@ -3,6 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>/2018/2018-10-19-partialling-out/</loc>
+      
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>/2018/2018-09-23-hugo-themes/</loc>
       
       <lastmod>2018-09-23T00:00:00+00:00</lastmod>
@@ -167,7 +177,7 @@
     <url>
       <loc>/categories/methods/</loc>
       
-      <lastmod>2018-05-30T00:00:00+00:00</lastmod>
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
       
       
       
@@ -179,7 +189,7 @@
     <url>
       <loc>/</loc>
       
-      <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
       
       
       
@@ -203,7 +213,7 @@
     <url>
       <loc>/posts/</loc>
       
-      <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
       
       
       
@@ -227,7 +237,7 @@
     <url>
       <loc>/tags/r/</loc>
       
-      <lastmod>2018-09-23T00:00:00+00:00</lastmod>
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
       
       
       
@@ -264,6 +274,18 @@
       <loc>/categories/teaching/</loc>
       
       <lastmod>2018-02-23T00:00:00+00:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>/tags/visualization/</loc>
+      
+      <lastmod>2018-10-19T00:00:00+00:00</lastmod>
       
       
       

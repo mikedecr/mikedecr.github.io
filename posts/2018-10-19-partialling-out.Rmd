@@ -1,0 +1,321 @@
+---
+title: "A Visualization of Partial Effects in Multiple Regression"
+author: Mike DeCrescenzo
+description: "Partial effects without high dimensions"
+date: '2018-10-19'
+slug: viz-partials
+categories: ["Methods"]
+tags: ["Visualization", "R"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+output: blogdown::html_page
+draft: false
+# nature:
+#       beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+
+
+```{r, include = FALSE}
+# cache, collapse
+knitr::opts_chunk$set(cache = TRUE, collapse = TRUE)
+```
+
+
+# Background
+
+A few days ago, [Andrew Heiss](https://www.andrewheiss.com/) was [looking](https://twitter.com/andrewheiss/status/1052232993723494400?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1052232993723494400&ref_url=http%3A%2F%2F127.0.0.1%3A4321%2F2018%2F2018-10-19-partialling-out%2F) for a way to visualize multiple regression with an emphasis on one predictor, without 3(+)-dimensional plots. He works through a method and posts this cool animation, which shows the changing relationship between $x$ and $y$ when adding controls, superimposed over the scatterplot of the raw data. (He credits [Pete Mohanty](https://twitter.com/petemohanty) with the shifting abline idea.)
+
+<center>
+  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Helpful animated <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> showing what happens to the slope of one coefficient in a model when controlling for other variables in multiple regression<br><br>(<a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> code: <a href="https://t.co/yhVLj325Oh">https://t.co/yhVLj325Oh</a>) <a href="https://t.co/2foYfXDo28">pic.twitter.com/2foYfXDo28</a></p>&mdash; 🎃 Andrew Heiss, scary PhD 🦇 (@andrewheiss) <a href="https://twitter.com/andrewheiss/status/1052978108255498240?ref_src=twsrc%5Etfw">October 18, 2018</a></blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+This is cool, but based on Andrew's initial question, I had something a little different come to mind. I thought we'd be seeing the impact of the regression in both the regression line *and* in the data. So I tried to make that (starting with [his code](https://t.co/yhVLj325Oh))...
+
+<center>
+  <blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+    <p lang="en" dir="ltr"> Ok fixed. <br><br>In this fig, y is (beta * humidity), plus the regression residual. This is equivalent to starting with the fully estimated regression and subtracting out terms for every other covariate <a href="https://t.co/fLs4WxHTaK">pic.twitter.com/fLs4WxHTaK</a></p>&mdash; Michael DeCrescenzo (@mikedecr) <a href="https://twitter.com/mikedecr/status/1053028075170975744?ref_src=twsrc%5Etfw">October 18, 2018</a>
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+
+which he [liked](https://twitter.com/andrewheiss/status/1053031575770718208) and asked to see the code for.
+
+So I will deliver, with some additional explanation of what's going on.
+
+
+# Intuition
+
+Some math will help explain what's going on, so let's start by writing the regression equation to suit the task at hand: although we include multiple predictors, we only want to highlight one of them, putting the other predictors into a black box "vector of controls." Andrew's example uses Dark Sky data on weather in Provo, UT, highlighting the relationship between humidity and a daily temperature high for each day $i$...
+\begin{align}
+  \mathit{HighTemp}_{i} &= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \mathbf{x}^{T}\gamma + \varepsilon_{i}
+\end{align}
+where $\alpha$ is the constant, $\mathbf{x}$ is the vector of controls (everything but humidity), and $\gamma$ is a vector of coefficients for all non-humidity predictors.
+
+Operationally, what we want to do is show how $\beta$ changes with the inclusion of additional controls. Andrew's example shows this by plotting different regressions overtop the raw data. If we run the code[^degree] from his [Gist](https://gist.github.com/andrewheiss/5e162c836575721d1dd53ec2af38753c):
+
+[^degree]: Maybe it's a dev version thing, but `scales::degree_format()` doesn't work for me, so I removed it.
+
+```{r andrew-data, echo = FALSE, warning = FALSE, message = FALSE}
+# ----------------------------------------------------
+# From: https://gist.github.com/andrewheiss/5e162c836575721d1dd53ec2af38753c
+#   by Andrew Heiss
+# ----------------------------------------------------
+
+library(tidyverse)
+library(lubridate)
+library(broom)
+library(scales)
+library(gganimate)
+
+# Load and clean data
+# This data comes from Dark Sky's API
+weather_provo_raw <- read_csv("https://andhs.co/provoweather")
+
+weather_provo_2017 <- weather_provo_raw %>% 
+  mutate(month = month(date, label = TRUE, abbr = FALSE),
+         month_number = month(date, label = FALSE),
+         weekday = wday(date, label = TRUE, abbr = FALSE),
+         weekday_number = wday(date, label = FALSE)) %>% 
+  mutate(precipType = ifelse(is.na(precipType), "none", precipType)) %>% 
+  select(date, month, month_number, weekday, weekday_number,
+         sunriseTime, sunsetTime, moonPhase, precipProbability, precipType,
+         temperatureHigh, temperatureLow, dewPoint, humidity, pressure, 
+         windSpeed, cloudCover, visibility, uvIndex)
+
+winter_spring <- weather_provo_2017 %>% 
+  filter(month_number <= 5) %>% 
+  mutate(month = factor(month, ordered = FALSE)) %>% 
+  mutate(humidity = humidity * 100,
+         cloudCover = cloudCover * 100,
+         precipProbability = precipProbability * 100)
+
+# Run all these models in one data frame
+models <- tribble(
+  ~formula,
+  "temperatureHigh ~ humidity",
+  "temperatureHigh ~ humidity + windSpeed",
+  "temperatureHigh ~ humidity + windSpeed + cloudCover",
+  "temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability",
+  "temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility"
+) %>% 
+  # Run a model in each row
+  mutate(model = formula %>% map(~ lm(.x, data = winter_spring))) %>% 
+  # Extract model elements
+  mutate(model_tidy = model %>% map(tidy),
+         model_glance = model %>% map(glance))
+
+# Only look at the intercept and the slope for humidity
+humidity_only <- models %>% 
+  unnest(model_tidy) %>% 
+  filter(term %in% c("(Intercept)", "humidity")) %>% 
+  select(formula, term, estimate) %>% 
+  spread(term, estimate) %>% 
+  mutate(humidity_nice = paste0("beta[humidity]: ", round(humidity, 3))) %>% 
+  mutate(group_thing = 1:n())
+
+
+
+```
+
+```{r andrew-animate, echo = FALSE, warning = FALSE, message = FALSE, fig.height = 4, fig.width = 6}
+# Plot the lines with facets
+ggplot(humidity_only) +
+  geom_point(data = winter_spring, aes(x = humidity, y = temperatureHigh),
+             color = "#410660") + 
+  geom_abline(aes(intercept = `(Intercept)`, slope = humidity, group = formula),
+              size = 1, color = "grey40") +
+  geom_label(aes(x = 25, y = 20, label = humidity_nice, group = formula),
+             parse = TRUE, color = "white", fill = "#d19b12",
+             family = "Roboto Condensed", size = 4, hjust = 0, vjust = 0) +
+  scale_x_continuous(labels = comma) +
+  labs(x = "Humidity", y = "High temperature",
+       subtitle = "{closest_state}") +
+  theme_minimal(base_family = "Roboto Condensed") +
+  transition_states(formula, transition_length = 0.25, state_length = 0.5) +
+  enter_fade() +
+  ease_aes('sine-in-out')
+```
+
+The line that being plotted is $\hat{\mathit{High}}_{i} = {\alpha} + {\beta}(\mathit{Humidity}_{i})$, which is to say, we've subtracted $\mathbf{x}^{T}\gamma$ from the right-hand side of the regression line. The data remain intact.
+
+
+# Variation
+
+But let's say that we wanted to see the effect of controls in the data as well. This is, I think, where the real umph from this kind of visualization would be; after all, we have already told students that including other predictors will affect the line. 
+
+Thinking about the math, this is as easy as doing to the raw data what we've already done to the regression line: subtract out the effect of the covariates.
+\begin{align}
+  \mathit{High}_{i} &= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \mathbf{x}^{T}\gamma + \varepsilon_{i} \\
+  \label{eq:sub} \mathit{High}_{i} - \mathbf{x}^{T}\gamma &= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \varepsilon_{i}
+\end{align}
+
+We still have to decide what to do with the constant. We could...
+
+- Leave the constant there, which is probably undesirable because the value of the constant reflects the scaling of other covariates.
+- Start by setting all covariates equal to their means, which is equivalent to include a constant equal to $\hat{\alpha} + \bar{\mathbf{x}}^{T}\hat{\gamma}$, if $\bar{\mathbf{x}}$ were a vector of covariate means. This would give us a prediction that is no longer subject to the *scaling* of the covariates but the covariates still affect the mean of $y$ overall. This works but I think we can make it simpler.
+- Subtract the constant along with the covariates. This leaves us with only the predicted partial effect of humidity (plus error). This is what we'll do, because it zooms in only on the predictor that we care about.
+
+
+
+# Implementation
+
+Now we will create the revised gif. 
+
+First we start with the original Heiss data and code.
+
+```{r mgd-data, warning = FALSE, message = FALSE}
+# ---- Heiss code -----------------------
+
+library("magrittr")
+library("tidyverse")
+library("lubridate")
+library("broom")
+library("scales")
+library("gganimate")
+
+# Load and clean data
+# This data comes from Dark Sky's API
+weather_provo_raw <- read_csv("https://andhs.co/provoweather")
+
+# clean dates and precip
+weather_provo_2017 <- weather_provo_raw %>% 
+  mutate(month = month(date, label = TRUE, abbr = FALSE),
+         month_number = month(date, label = FALSE),
+         weekday = wday(date, label = TRUE, abbr = FALSE),
+         weekday_number = wday(date, label = FALSE)) %>% 
+  mutate(precipType = ifelse(is.na(precipType), "none", precipType)) %>% 
+  select(date, month, month_number, weekday, weekday_number,
+         sunriseTime, sunsetTime, moonPhase, precipProbability, precipType,
+         temperatureHigh, temperatureLow, dewPoint, humidity, pressure, 
+         windSpeed, cloudCover, visibility, uvIndex)
+
+# keep winter and spring, scale vars
+winter_spring <- weather_provo_2017 %>% 
+  filter(month_number <= 5) %>% 
+  mutate(month = factor(month, ordered = FALSE)) %>% 
+  mutate(humidity = humidity * 100,
+         cloudCover = cloudCover * 100,
+         precipProbability = precipProbability * 100)
+```
+
+
+We combine several model formulas into a data frame and estimate each regression using `purrr::map()`. We've added the results from `broom::augment()` because we want the residuals from each model to create the "noise" in the data for the graphic. 
+
+```{r mgd-mods, warning = FALSE, message = FALSE}
+# ---- mike decrescenzo modifications begin -----------------------
+
+# Run all these models in one data frame (purrr::map)
+# add the data as a list column because we'll want it later
+models <- 
+  tribble(
+    ~formula,
+    "temperatureHigh ~ humidity",
+    "temperatureHigh ~ humidity + windSpeed",
+    "temperatureHigh ~ humidity + windSpeed + cloudCover",
+    "temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability",
+    "temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility") %>%
+  # data in a list column
+  mutate(spring_data = list(winter_spring)) %>%
+  # Run a model in each row
+  mutate(model = map2(formula, spring_data, ~ lm(.x, data = .y))) %>%
+  # mutate(model = map(formula, ~ lm(.x, data = winter_spring))) %>%
+  # Extract model elements
+  mutate(model_tidy = map(model, tidy, conf.int = TRUE), 
+         model_glance = map(model, glance),
+         model_fits = map(model, augment))  
+```
+
+We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the `augment` results). We will lazily refer to this as the humidity's "partial effect" on temperature. As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.
+
+```{r mgd-partials, warning = FALSE, message = FALSE}
+# compute the partial effect of humidity: beta * humidity
+model_partials <- models %>%
+  # get the humidity beta and bounds
+  mutate(humidity_beta = map(model_tidy, 
+                             ~ filter(.x, term == "humidity")$estimate) %>%
+                               as.numeric(),
+         beta_low = map(model_tidy, 
+                             ~ filter(.x, term == "humidity")$conf.low) %>%
+                               as.numeric(),
+         beta_high = map(model_tidy, 
+                             ~ filter(.x, term == "humidity")$conf.high) %>%
+                               as.numeric()) %>%
+  # calculate partial effect of humidity and keep the residual
+  unnest(model_fits) %>%
+  mutate(partial = humidity * humidity_beta) %>%
+  select(formula, humidity, contains("beta"), partial, .resid) 
+
+# get the beta for label plotting
+model_beta <- model_partials %>%
+  select(formula, contains("beta")) %>%
+  distinct() 
+```
+
+Now we create the figure. The horizontal axis is the raw humidity data. The vertical axis is the humidity effect ($\beta \times \mathit{Humidity}_{i}$) plus the regression residual $\varepsilon_{i}$. The regression line is simply $\hat{\mathit{High}}_{i} = \hat{\beta}\mathit{Humidity}_{i}$ with a constant of zero. That is, on a given day, a humidity level of $z$ exerts a negative impact on temperature amounting to $\beta z$, setting other factors aside. Conveniently, we don't have to manually subtract the other covariates because we already know how to calculate the vertical axis using the partial effect and the residual (thanks to the math above).
+
+```{r mgd-facet, include = FALSE, warning = FALSE, message = FALSE, fig.height = 4, fig.width = 6}
+ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
+  geom_point(color = "gray") +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = humidity_beta, group = formula)) +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = beta_low, 
+                  group = formula),
+              linetype = 3) +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = beta_high, 
+                  group = formula),
+              linetype = 3) +
+  facet_wrap(~ formula) +
+  theme_minimal(base_family = "PT Sans") +
+  geom_label(data = model_beta,
+             aes(x = 35, y = -70, label = str_glue("beta: {round(humidity_beta, 3)}"), group = formula),
+             parse = TRUE,
+             family = "PT Sans", size = 4) +
+  labs(x = "Humidity", y = "Effect on Daily High Temperature (°F)") 
+
+```
+
+```{r animated, eval = TRUE, message = FALSE, warning = FALSE, fig.height = 4, fig.width = 7}
+# animate 
+ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
+  geom_point(color = "gray") +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = humidity_beta, 
+                  group = formula)) +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = beta_low, 
+                  group = formula),
+              linetype = 3) +
+  geom_abline(data = model_beta,
+              aes(intercept = 0, slope = beta_high, 
+                  group = formula),
+              linetype = 3) +
+  theme_minimal(base_family = "PT Sans") +
+  geom_label(data = model_beta,
+             aes(x = 35, y = -70, label = paste0("beta: ", round(humidity_beta, 3)), group = formula),
+             parse = TRUE,
+             family = "PT Sans", size = 4) +
+  labs(x = "Humidity", y = "Effect on Daily High Temperature (°F)",
+       subtitle = "{closest_state}") +
+  transition_states(formula, transition_length = 0.25, state_length = 0.5) +
+  enter_fade() +
+  ease_aes('sine-in-out')
+```
+
+
+Two notes about the confidence interval
+
+1. The confidence intervals here don't look like the ordinary hourglass-shaped intervals in linear regression. This is because the hourglass shape comes from uncertainty in both the constant and coefficients. However, the constant has been subtracted out of these predictions, so uncertainty in this visualization only reflects uncertainty in the humidity effect.
+2. I can't get ribbons to animate because of some weird stuff that's interfering with [transformr](https://github.com/thomasp85/transformr).
+
+# That's it
+
+I don't have comments enabled on the website but get at me on [Twitter](https://twitter.com/mikedecr).
+
+
+
+

@@ -12,9 +12,9 @@
   <meta name="description" content="Ph.D. Candidate, Political Science, University of Wisconsin–Madison">
   <meta name="keywords" content="political science, university of wisconsin madison, uw madison">
   
-  <link rel="prev" href="/2018/2018-05-26-reproducible-packages/" />
+  <link rel="prev" href="/2018/2018-10-19-partialling-out.utf8/" />
   <link rel="next" href="/2018/2018-10-19-partialling-out/" />
-  <link rel="canonical" href="/2018/2018-09-23-hugo-themes/" />
+  <link rel="canonical" href="/2018/2018-10-19-partialling-out.knit/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
   <link rel="icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon" />
   <link rel="shortcut icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon">
@@ -25,10 +25,10 @@
   <title>
        
        
-           Great Hugo themes (that I did not pick) | Michael DeCrescenzo
+           A Visualization of Partial Effects in Multiple Regression | Michael DeCrescenzo
        
   </title>
-  <meta name="title" content="Great Hugo themes (that I did not pick) | Michael DeCrescenzo">
+  <meta name="title" content="A Visualization of Partial Effects in Multiple Regression | Michael DeCrescenzo">
     
 
   <link rel="stylesheet" href="/font/iconfont.css">
@@ -47,11 +47,9 @@
          "@id": "/"
     },
     "articleSection" : "posts",
-    "name" : "Great Hugo themes (that I did not pick)",
-    "headline" : "Great Hugo themes (that I did not pick)",
-    "description" : "I just finished a major website overhaul. While it took only about one day of work, I’ve had my eyes open for a new theme for Hugo for a while.
-I mean, a while. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.1
-But this is mainly my fault. I am a bad combination of picky and unskilled with websites and web design, which made me a fickle chooser throughout the process.",
+    "name" : "A Visualization of Partial Effects in Multiple Regression",
+    "headline" : "A Visualization of Partial Effects in Multiple Regression",
+    "description" : "Partial effects without high dimensions",
     "inLanguage" : "en-us",
     "author" : "Mike DeCrescenzo",
     "creator" : "Mike DeCrescenzo",
@@ -59,11 +57,11 @@ But this is mainly my fault. I am a bad combination of picky and unskilled with 
     "accountablePerson" : "Mike DeCrescenzo",
     "copyrightHolder" : "Mike DeCrescenzo",
     "copyrightYear" : "2018",
-    "datePublished": "2018-09-23 00:00:00 &#43;0000 UTC",
-    "dateModified" : "2018-09-23 00:00:00 &#43;0000 UTC",
-    "url" : "/2018/2018-09-23-hugo-themes/",
-    "wordCount" : "323",
-    "keywords" : [ "R","blogdown","Hugo", "Michael DeCrescenzo"]
+    "datePublished": "2018-10-19 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2018-10-19 00:00:00 &#43;0000 UTC",
+    "url" : "/2018/2018-10-19-partialling-out.knit/",
+    "wordCount" : "286",
+    "keywords" : [ "Visualization","R", "Michael DeCrescenzo"]
 }
 </script>
 
@@ -177,16 +175,16 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
       		
 <article class="post-warp" itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Great Hugo themes (that I did not pick)</h1>
+        <h1 class="post-title" itemprop="name headline">A Visualization of Partial Effects in Multiple Regression</h1>
         <div class="post-meta">
                 Written by <a itemprop="name" href="/" rel="author">Mike DeCrescenzo</a>
                 <span class="post-time">
-                on <time datetime=2018-09-23 itemprop="datePublished">September 23, 2018</time>
+                on <time datetime=2018-10-19 itemprop="datePublished">October 19, 2018</time>
                 </span>
                 in
                 <i class="iconfont icon-folder"></i>
                 <span class="post-category">
-                        <a href="/categories/misc/"> Misc </a>
+                        <a href="/categories/methods/"> Methods </a>
                         
                 </span>
         </div>
@@ -207,39 +205,49 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
           
           
 
-          <p>I just finished a major website overhaul. While it took only about one day of work, I’ve had my eyes open for a new <a href="https://themes.gohugo.io/">theme</a> for <a href="https://gohugo.io/">Hugo</a> for a while.</p>
-<p>I mean, a <em>while</em>. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
-<p>But this is mainly my fault. I am a bad combination of <em>picky</em> and <em>unskilled</em> with websites and web design, which made me a fickle chooser throughout the process. So to make up for that fickleness, I wanted to acknowledge and promote some of the Hugo themes that I really liked, but ultimately did not choose for my site.</p>
-<div id="goa" class="section level2">
-<h2>Goa</h2>
-<p>I previously used <a href="https://themes.gohugo.io/hugo-goa">Goa</a> for my site. It is simple, sensible, and easy to modify.</p>
-</div>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p>One of two themes by <a href="https://vickylai.com/">Vicky Lai</a> that I will promote. <a href="https://themes.gohugo.io/hugo-theme-introduction/">Indroduction</a> has a bold design and a layout that is focused on the landing page, which I enjoyed. I especially loved the “About” section.</p>
-</div>
-<div id="call-me-sam" class="section level2">
-<h2>Call Me Sam</h2>
-<p>The other Vicky Lai theme. If “Introduction” was bold, I would say that <a href="https://themes.gohugo.io/hugo-theme-sam/">Call Me Sam</a> is <em>brave</em>. I don’t trust that my description will do it justice; better to <a href="http://vickylai.com/call-me-sam">see for yourself</a>.</p>
-</div>
-<div id="cocoa-enhanced" class="section level2">
-<h2>Cocoa Enhanced</h2>
-<p><a href="https://themes.gohugo.io/cocoa-eh-hugo-theme/">Cocoa Enhanced</a> is crisp and clean. Its type design is opinionated but flexible. I was most tempted to use this theme.</p>
-</div>
-<div id="coder" class="section level2">
-<h2>Coder</h2>
-<p>I must include <a href="https://themes.gohugo.io/hugo-coder/">Coder</a> because it is the inspiration for the theme I ultimately chose. Why do I like it? The simple landing page. The navigation bar is out of the way but present. The backend tension between “section” pages and “post” archives (one of the more difficult aspects for a newbie working with Hugo) is easily to navigate.</p>
-</div>
-<div id="let-me-know-about-your-theme-that-you-really-like" class="section level1">
-<h1>Let me know about your theme that you really like</h1>
-<p>Perhaps on <a href="https://twitter.com/mikedecr">Twitter</a></p>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>The only way I was able to test themes so efficiently was thanks to the amazing <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> package for R.<a href="#fnref1" class="footnote-back">↩</a></p></li>
-</ol>
-</div>
+          
+
+<h1 id="background">Background</h1>
+
+<p>A few days ago, <a href="https://www.andrewheiss.com/" rel="nofollow noreferrer" target="_blank">Andrew Heiss</a> was looking for a way to visualize multiple regression with an emphasis on one predictor, without 3(+)-dimensional plots.</p>
+
+<p><center>
+  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I&#39;m not a fan of 3D scatterplots to show effect of multiple independent variables on y (especially when adding more x variables). What&#39;s the best way to visually show students the idea of &quot;controlling for&quot; other variables?</p>&mdash; 🎃 Andrew Heiss, scary PhD 🦇 (@andrewheiss) <a href="https://twitter.com/andrewheiss/status/1052232993723494400?ref_src=twsrc%5Etfw">October 16, 2018</a></blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center></p>
+
+<p>He posts this animation, which shows the changing relationship between $x$ and $y$ when adding controls, superimposed over the scatterplot of the raw data.</p>
+
+<p><center>
+  <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Helpful animated <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> showing what happens to the slope of one coefficient in a model when controlling for other variables in multiple regression<br><br>(<a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> code: <a href="https://t.co/yhVLj325Oh">https://t.co/yhVLj325Oh</a>) <a href="https://t.co/2foYfXDo28">pic.twitter.com/2foYfXDo28</a></p>&mdash; 🎃 Andrew Heiss, scary PhD 🦇 (@andrewheiss) <a href="https://twitter.com/andrewheiss/status/1052978108255498240?ref_src=twsrc%5Etfw">October 18, 2018</a></blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center></p>
+
+<p>But I had something a little different in mind when he posted his first question. I thought we&rsquo;d be seeing something more like the &ldquo;partial effect&rdquo; of $x$ on $y$. Moreover we know some things about regression that we&rsquo;d like to preserve in the animation, such as the fact that $\hat{y}$ must pass through the point $(\hat{x}, \hat{y})$.</p>
+
+<p><center>
+  <blockquote class="twitter-tweet" data-conversation="none" data-lang="en">
+    <p lang="en" dir="ltr"> Ok fixed. <br><br>In this fig, y is (beta * humidity), plus the regression residual. This is equivalent to starting with the fully estimated regression and subtracting out terms for every other covariate <a href="https://t.co/fLs4WxHTaK">pic.twitter.com/fLs4WxHTaK</a></p>&mdash; Michael DeCrescenzo (@mikedecr) <a href="https://twitter.com/mikedecr/status/1053028075170975744?ref_src=twsrc%5Etfw">October 18, 2018</a>
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center></p>
+
+<p>He wants to see:</p>
+
+<p><center>
+  <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">
+    omg this is astounding! Do you have the code for it?</p>&mdash; 🎃 Andrew Heiss, scary PhD 🦇 (@andrewheiss) <a href="https://twitter.com/andrewheiss/status/1053031575770718208?ref_src=twsrc%5Etfw">October 18, 2018</a>
+  </blockquote>
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center></p>
+
+<h1 id="intuition">Intuition</h1>
+
+<p>\begin{align}
+  y<em>{i} &amp;= \alpha + \beta\left(\mathrm{Humidity}</em>{i}\right) + \sum<em>{j}\gamma</em>{j}x<em>{ji} + \varepsilon</em>{i}
+\end{align}</p>
+
+<p>A function of humidity, plus other covariates $j \in {1&hellip;J}$ and their associated coefficients $\gamma_{j}$</p>
 
     </div>
 
@@ -254,7 +262,7 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
              
             <p class="copyright-item">
                     <span>Link:</span>
-                    <a href=/2018/2018-09-23-hugo-themes/>/2018/2018-09-23-hugo-themes/</span>
+                    <a href=/2018/2018-10-19-partialling-out.knit/>/2018/2018-10-19-partialling-out.knit/</span>
             </p>
             
             
@@ -266,14 +274,11 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
             <section>
             <i class="iconfont icon-tag"></i>Tag(s): 
             
+            <span class="tag"><a href="/tags/visualization/">
+                    #Visualization</a></span>
+            
             <span class="tag"><a href="/tags/r/">
                     #R</a></span>
-            
-            <span class="tag"><a href="/tags/blogdown/">
-                    #blogdown</a></span>
-            
-            <span class="tag"><a href="/tags/hugo/">
-                    #Hugo</a></span>
             
             </section>
         
@@ -285,7 +290,7 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
 
     <div class="post-nav">
         
-        <a href="/2018/2018-05-26-reproducible-packages/" class="prev" rel="prev" title="Packages &amp; Reproducibility: Install what you need, attach what you want"><i class="iconfont icon-left"></i>&nbsp;Packages &amp; Reproducibility: Install what you need, attach what you want</a>
+        <a href="/2018/2018-10-19-partialling-out.utf8/" class="prev" rel="prev" title="A Visualization of Partial Effects in Multiple Regression"><i class="iconfont icon-left"></i>&nbsp;A Visualization of Partial Effects in Multiple Regression</a>
          
         
         <a href="/2018/2018-10-19-partialling-out/" class="next" rel="next" title="A Visualization of Partial Effects in Multiple Regression">A Visualization of Partial Effects in Multiple Regression&nbsp;<i class="iconfont icon-right"></i></a>
