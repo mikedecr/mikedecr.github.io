@@ -38,11 +38,11 @@ Ok fixed. &lt;br&gt;&lt;br&gt;In this fig, y is (beta * humidity), plus the regr
 &lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
 &lt;/center&gt;
 &lt;p&gt;which he &lt;a href=&#34;https://twitter.com/andrewheiss/status/1053031575770718208&#34;&gt;liked&lt;/a&gt; and asked to see the code for.&lt;/p&gt;
-&lt;p&gt;So I will deliver, with some additional explanation of what’s going on.&lt;/p&gt;
+&lt;p&gt;So I will deliver. &lt;a href=&#34;https://gist.github.com/mikedecr/f6ffdb716d62af32e701f95231f00bee&#34;&gt;Here&lt;/a&gt; is a gist containing an example, and below is some explanation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;intuition&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Intuition&lt;/h1&gt;
-&lt;p&gt;Some math will help explain what’s going on, so let’s start by writing the regression equation to suit the task at hand: although we include multiple predictors, we only want to highlight one of them, putting the other predictors into a black box “vector of controls.” Andrew’s example uses Dark Sky data on weather in Provo, UT, highlighting the relationship between humidity and a daily temperature high for each day &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;…
+&lt;p&gt;Some math will help. Let’s start by writing the regression equation to suit the task at hand: although we include multiple predictors, we only want to highlight one of them, putting the other predictors into a black box “vector of controls.” Andrew’s example uses Dark Sky data on weather in Provo, UT, highlighting the relationship between humidity and a daily temperature high for each day &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;…
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
   \mathit{HighTemp}_{i} &amp;amp;= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \mathbf{x}^{T}\gamma + \varepsilon_{i}
 \end{align}\]&lt;/span&gt;
