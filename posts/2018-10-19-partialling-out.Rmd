@@ -228,7 +228,7 @@ models <-
          model_fits = map(model, augment))  
 ```
 
-We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the `augment` results). We will lazily refer to this as the humidity's "partial effect" on temperature. As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.
+We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the `augment` results). We will lazily refer to this as the humidity's "partial prediction" of temperature (thanks to [Gina Reynolds](https://twitter.com/EvaMaeRey) for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.
 
 ```{r mgd-partials, warning = FALSE, message = FALSE}
 # compute the partial effect of humidity: beta * humidity

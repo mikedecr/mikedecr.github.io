@@ -60,7 +60,7 @@
     "datePublished": "2018-10-19 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-10-19 00:00:00 &#43;0000 UTC",
     "url" : "/2018/2018-10-19-partialling-out/",
-    "wordCount" : "1411",
+    "wordCount" : "1423",
     "keywords" : [ "Visualization","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -316,7 +316,7 @@ models &lt;-
   mutate(model_tidy = map(model, tidy, conf.int = TRUE), 
          model_glance = map(model, glance),
          model_fits = map(model, augment))  </code></pre>
-<p>We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the <code>augment</code> results). We will lazily refer to this as the humidity’s “partial effect” on temperature. As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.</p>
+<p>We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the <code>augment</code> results). We will lazily refer to this as the humidity’s “partial prediction” of temperature (thanks to <a href="https://twitter.com/EvaMaeRey">Gina Reynolds</a> for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.</p>
 <pre class="r"><code># compute the partial effect of humidity: beta * humidity
 model_partials &lt;- models %&gt;%
   # get the humidity beta and bounds
