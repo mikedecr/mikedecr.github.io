@@ -1,0 +1,40 @@
+---
+title: "Political Science 270: Understanding Political Numbers"
+date: "2016-05-05T21:48:51-07:00"
+---
+
+# Schedule
+
+```{r setup, include = FALSE}
+library("knitr")
+library("here")
+library("tidyverse")
+
+opts_chunk$set(eval = TRUE, echo = FALSE, 
+               warning = FALSE, message = FALSE, 
+               cache = FALSE, cache.path = here::here("lectures", "cache", "01-"), 
+               fig.align = "center", # eval.after = 'fig.cap', 
+               fig.retina = 2, dpi = 100)
+```
+
+
+```{r build-table}
+science <- 
+  bind_rows(
+    data_frame(date = "January 23", topic = "Introduction",
+               reading = "[Syllabus](../reading/readings-270-s19#jan-23)",
+               # reading = "",
+               assignment = "",
+               slides = "")
+  ) %>%
+  print()
+
+
+full_table <- bind_rows(science) %>%
+  rename_all(str_to_title) 
+```
+
+
+```{r print-table}
+knitr::kable(full_table)
+```

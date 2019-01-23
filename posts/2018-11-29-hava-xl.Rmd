@@ -1,0 +1,268 @@
+---
+title: "Using the Tidyverse with Voter Registration Linkage Data"
+author: Mike DeCrescenzo
+description: "Working with SSA data the tidy way"
+date: '2018-11-29'
+slug: hava-data
+categories: ["Methods"]
+tags: ["data", "tidyverse", R"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+# nature:
+#       beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+This blog post demonstrates how you can use R and the Tidyverse tools to make quick work of some voter registration data. The post highlights:
+
+- How to read many an Excel file with multiple sheets using `{readxl}`.
+- Organizing data efficiently with list columns using tibbles
+- Cleaning many data tables simultaneously using `{purrr}`
+
+
+```{r setup-rmd, include = FALSE}
+# cache, collapse
+knitr::opts_chunk$set(cache = TRUE, collapse = TRUE)
+```
+
+
+# The data
+
+The Help America Vote Act, passed in the wake of the 2000 presidential elections, requires states to verify information from voter registration applications. Voters may include their driver's license numbers on their applications---which states are responsible for verifying---or they may include the last four digits of their Social Security number. Social Security information is validated against the Social Security Administration's databases. 
+
+But the data are messy, as are the data for any record-linkage endeavor. We have names, birth dates, and only 4 digits of a social security number (which aren't uniquely always identifying). Voters may mistype these fields into a web page, or state workers may mistype them. There may be last-name changes that create issues. Computers may do a bad job parsing the punctuation and spacing in someone's last name.[^dl] As a result, voter registration applications may not match any SSA records, or they do not match to one unique SSA record. There are indeed enough people in the U.S., and enough noise in the way SSA numbers are assigned, that there can be multiple cases with the same last name, birthday, and last 4 digits of one's SS number.
+
+  [^dl]: Not long ago, a state DMV worker mistyped my birth date when issuing me a Wisconsin driver's license. This led to a misprint on my license, an inability to update my voter registration online when I moved addresses, and even led to the "new Michael" getting a fresh letter to register with the Selective Service System.
+
+The data we'll use is the SSA's [summary tables](https://www.ssa.gov/open/havv/) for these match attempts, which can be [browsed online or downloaded as a multi-sheet `.xlsx` file](https://www.ssa.gov/open/havv/havv-jan2011-todate.html). The file contains separate sheets for various dates at which new summaries were generated. We would like to shape the data into one single table, organized along a `date` variable.
+
+
+# Get the data into R
+
+First, we will load some packages: `here` manages relative directories, `tidyverse` contains a suite of helpful data manipulation tools, and `magrittr` contains some additional "pipes" that we will use. We will use functions from `readxl` and `lubridate` packages, but we will leave those unattached so they are easier to spot as we go. 
+
+```{r packs, message = FALSE}
+library("here")
+library("tidyverse")
+library("magrittr")
+# don't attach: readxl, lubridate
+```
+
+The primary issue with reading the data is that there are multiple sheets in the same Excel file. We want to determine the names of each sheet and then use those names to read the sheets separately. We can get the sheet names with `readxl::excel_sheets()`. 
+
+```{r get_sheet_names}
+# path to data
+data_dir <- "static/data"
+
+# sheets are named. Let's get them.
+# pass the file name to readxl::excel_sheets()
+sheet_names <- readxl::excel_sheets(here(data_dir, "HAVV-running-list.xlsx"))
+
+# look at some names
+head(sheet_names, n = 10)
+```
+
+Right away, we noticed that some of the sheets are dated using a `mmddyy` format, while others are summaries of the data. We will want to clean those summaries out---we can re-calculate them ourselves more reliably (read: without Excel formulas).
+
+## Sheets as list elements
+
+One thing we could do is read the data as a list of data frames, one list element for each sheet. We can do this with `lapply()` and an anonymous function.
+
+```{r read_lapply}
+# lapply() approach
+# I never know the best way to indent with an anonymous function
+havv_list <- 
+  lapply(sheet_names, function(x)
+    readxl::read_excel(here(data_dir, "HAVV-running-list.xlsx"), sheet = x)
+  )
+
+# name the list elements
+names(havv_list) <- sheet_names
+```
+
+There are over 400 data frames inside of `havv-list`. Let's look at some.
+
+```{r learn_about_list}
+head(havv_list, n = 2)
+```
+
+Great, so the variable names in the original spread sheet are an absolute mess. Not only are they spread across multiple rows, they've converted all of the data to character strings instead of numbers. 
+
+To fix the variable names, we will want to know what these names _should_ be. Let's get a look by printing the first three rows of each column. 
+
+```{r learn_names}
+# take first data frame %>%
+#   for each column, show the first 3 elements
+havv_list[[1]] %>%
+  lapply(function(x) x[1:3])
+```
+
+So we have state, total transactions, unprocessed transactions, and so on. We store these in a vector for later.
+
+```{r store_varnames}
+# store a revised names as a vector
+varnames <- c("state", 
+              "total_transactions", "unprocessed_transactions", 
+              "total_nonmatches", "total_matches", 
+              "single_match_alive", "single_match_deceased",
+              "multi_match_alive", "multi_match_deceased", "multi_match_mixed")
+```
+
+We want to double check that these are the same variables we have in every table. One way to start looking at that is by viewing the number of columns in each table.
+
+```{r check_ncols}
+# How many columns per table? Express as a vector
+# then tabulate the number of columns
+sapply(havv_list, ncol) %>%
+  table()
+```
+
+Okay...so most tables have 10 columns, but some inexplicably have 16,138 columns. At this point, I'm thinking I want to do things to the data such as, "Give me only the tables that have more than 10 columns" so I can manipulate those as a separate object. However, the list-of-data-frames isn't the most amenable to these types of manipulations. Instead, we will use `purrr` tools to hold the data frames as a list-column within another data frame. I know, wild. 
+
+
+## Purrr approach: sheets as list-column
+
+Imagine you had a data frame, but one of the variables didn't contain just one value per cell, but instead contained a dataset per cell. That's what we will do.
+
+We start by creating a data frame that has the sheet names as a variable. We will then use `purrr::map` to loop over those sheet names and place each data table into its corresponding cell. Like so: 
+
+```{r purrr_read}
+# start with sheet names in a data frame
+havv_df <- data_frame(sheet_name = sheet_names) %>%
+  print()
+
+# purrr::map(): for each name, read sheet from file
+havv_df <- havv_df %>%
+  mutate(
+    data = map(sheet_name, 
+               ~ readxl::read_excel(here(data_dir, "HAVV-running-list.xlsx"),
+                                    sheet = .x))) %>%
+  print()
+```
+
+
+
+# Cleaning the data with `purrr`
+
+## Rows and columns
+
+Let's grab one of those tables that had 16 thousand columns. Start by creating a column in the data that stores the number of columns for each table, and then we'll examine one of the abnormal tables. Do this by applying `ncol()` to every table using `map_int()`.
+
+```{r weird_ncol}
+# grab a table with more than 10 variables and look at it
+bad_table <- havv_df %>%
+  mutate(ncol = map_int(data, ncol)) %>%
+  filter(ncol != 10) %>%
+  sample_n(1) %>%
+  unnest() %>% 
+  print()
+```
+
+Luckily, these extra columns appear to be empty:
+
+```{r empty-cols}
+bad_table %>% 
+  select(X__4:X__10)
+```
+
+If these columns are blank, we can apply a function over all of the datasets to keep only the rows and columns we want: we want to delete the first few rows (which contain ugly variable names) and only the first ten columns. We will use this chance to rename those variables according to the vector of names we saved above.
+
+```{r fix_dims}
+# map: for each dataset, 
+#   drop the first 4 rows, keep only cols 1:10
+#   rename variables
+havv_df <- havv_df %>%
+  mutate(data = map(data, 
+                    ~ .x[-(1:4) , 1:10] %>%
+                      set_names(varnames))) %>%
+  print()
+
+# confirm that every table is 10 columns and 52 rows
+havv_df %>%
+  mutate(cols = map_int(data, ncol),
+         rows = map_int(data, nrow)) %>%
+  count(cols, rows)
+
+# do things look good
+havv_df %>%
+  sample_n(1) %>%
+  unnest()
+```
+
+
+## Dating each sheet
+
+At this point, we want to consider unnesting the data frames. We want to do this by "dating" each data frame with information contained in the sheet name. First, what are the sheet names? 
+
+```{r explore_sheet_names}
+names(havv_list)
+```
+
+Many of these dates are in a `mmddyy` format, but some are inconsistently formatted. There is one sheet that has a 4-digit year (`2017` instead of `17`), and a few sheets that contain summaries. Let's go ahead and drop the summary tables and fix the 4-digit year table.
+
+```{r parse_dates}
+# filter: drop "2011 Totals" and "January 2011-to date"
+# clean "09092017" to "090917"
+# convert clean date to a date format
+havv_df <- havv_df %>%
+  filter(!(sheet_name %in% c("2011 Totals", "January 2011-to date"))) %>%
+  mutate(clean_name = case_when(sheet_name == "09092017" ~ "090917", 
+                                TRUE ~ sheet_name),
+         date = lubridate::mdy(clean_name)) %>%
+  print()
+```
+
+
+## Reshaping the data
+
+At this point, we're ready to unnest the data. A few things that happen along the way:
+
+- we don't need the `clean_name` variable, so we drop it.
+- There are some inconsistencies in the spelling and capitalization of state values, which get fixed along the way.
+- There are some "total" state rows, which we could re-create ourselves and thus don't need to be in the raw data.
+
+```{r elongate}
+# unnest into "long" data
+# we don't really need "clean_name" so drop it
+# convert characters back to numbers
+# states are sometimes titlecase, sometimes uppercase
+# states are sometimes "total" and we don't want that
+havv <- havv_df %>%
+  unnest() %>%
+  select(-clean_name) %>%
+  mutate_at(vars(total_transactions:multi_match_mixed), as.numeric) %>%
+  mutate(state = toupper(state),
+         state = case_when(state == "NEBRASKS" ~ "NEBRASKA",
+                           TRUE ~ state)) %>%
+  filter(!(state %in% c("TOTAL", "TOTALS"))) %>%
+  print()
+```
+
+
+# Learn about the data
+
+From here, we could ask questions such as, how many attempted matches (transactions) lead to nonmatches? 
+
+```{r}
+havv %>%
+  group_by(date) %>% 
+  summarize_if(is.numeric, sum, na.rm = TRUE) %>%
+  mutate(p_nonmatch = total_nonmatches / (total_matches + total_nonmatches)) %>% 
+  ggplot(aes(x = date, y = p_nonmatch)) +
+  geom_line() +
+  labs(y = "Percent Nonmatched", x = "Date") +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1),
+                     expand = c(0, 0)) +
+  ggthemes::theme_base(base_family = "Source Sans Pro") +
+  theme(plot.background = element_blank(),
+        panel.background = 
+          element_rect(color = "black", fill = NA, size = 1),
+        axis.ticks = element_line(lineend = "square"), 
+        axis.ticks.length = unit(0.25, "lines"))
+```
+
+Okay weird! We see a *lot* of attempted voter registrations fail to match. Does this mean these voters don't get registered? I don't know, but this is definitely something that deserves more scrutiny.
+
+
+

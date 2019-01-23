@@ -60,7 +60,7 @@
     "datePublished": "2018-05-30 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-05-30 00:00:00 &#43;0000 UTC",
     "url" : "/2018/2018-05-26-reproducible-packages/",
-    "wordCount" : "659",
+    "wordCount" : "1092",
     "keywords" : [ "Reproducibility","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -205,14 +205,82 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
           
           
 
-          <p><em>(Note: An earlier version of this post referred to “loading” packages when I really meant “attaching.” Thanks to <a href="https://twitter.com/thosjleeper/status/1001859564113924096">Thomas Leeper</a> for the clarification.)</em></p>
+          <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<p><em>(Note: An earlier version of this post referred to “loading” packages when I really meant “attaching.” Thanks to <a href="https://twitter.com/thosjleeper/status/1001859564113924096">Thomas Leeper</a> for the clarification.)</em></p>
 <hr />
 <p>When we distribute R code (for publication/replication archives, on Github, through blog posts, etc), we like the code to run smoothly on someone else’s machine. Packages present a nominal problem because different users have different packages installed on their computer. Ideally the script we are distributing should install dependencies without the redundancy of re-installing packages that a user already has installed.</p>
 <p>To solve this, many users conditionally install packages using <code>require()</code>; if a package fails to attach, it is installed. Supposing that we want to use a package called <code>pkg</code>…</p>
-<pre class="r"><code># if require() succeeds, package is attached
-# if require() fails, package is installed
-if (require(&quot;pkg&quot;) == FALSE) {
-  install.packages(&quot;pkg&quot;)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># if require() succeeds, package is attached</span>
+<span class="co"># if require() fails, package is installed</span>
+<span class="cf">if</span> (<span class="kw">require</span>(<span class="st">&quot;pkg&quot;</span>) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) {
+  <span class="kw">install.packages</span>(<span class="st">&quot;pkg&quot;</span>)
 }</code></pre>
 <p>We see often see this in (for example) package ReadMe files on Github. But for distributing bigger projects, the approach has two shortcomings.</p>
 <ol style="list-style-type: decimal">
@@ -223,24 +291,24 @@ if (require(&quot;pkg&quot;) == FALSE) {
 <div id="check-for-installed-packages-without-attaching-them" class="section level2">
 <h2>Check for installed packages without attaching them</h2>
 <p>Rather than use <code>require()</code>, which has the side-effect of attaching an installed package, we can look for installed packages using the output from <code>installed.packages()</code>. In particular, the function should return an array whose rownames contain the names of our installed packages.</p>
-<pre class="r"><code>head(rownames(installed.packages()))
-## [1] &quot;abind&quot;     &quot;acepack&quot;   &quot;AER&quot;       &quot;Amelia&quot;    &quot;animation&quot; &quot;arm&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="kw">rownames</span>(<span class="kw">installed.packages</span>()))
+<span class="co">## [1] &quot;abind&quot;     &quot;acepack&quot;   &quot;AER&quot;       &quot;Amelia&quot;    &quot;animation&quot; &quot;arm&quot;</span></code></pre>
 <p>Using these rownames, we can check for installed packages without attaching those packages incidentally. Just create a character vector of required packages and cross-reference those names with the list of installed packages.</p>
-<pre class="r"><code>c(&quot;ggplot2&quot;, &quot;beepr&quot;, &quot;some_other_package&quot;) %in% rownames(installed.packages())
-## [1]  TRUE  TRUE FALSE</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;beepr&quot;</span>, <span class="st">&quot;some_other_package&quot;</span>) <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(<span class="kw">installed.packages</span>())
+<span class="co">## [1]  TRUE  TRUE FALSE</span></code></pre>
 </div>
 <div id="install-what-we-need-attach-what-we-want" class="section level2">
 <h2>Install what we need, attach what we want</h2>
 <p>The structure laid out above can be augmented to install missing packages. Just use a little bit of indexing:</p>
-<pre class="r"><code># vector of requirements 
-requires &lt;- c(&quot;pkg_1&quot;, &quot;pkg_2&quot;)
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># vector of requirements </span>
+requires &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;pkg_1&quot;</span>, <span class="st">&quot;pkg_2&quot;</span>)
 
-# evaluates to TRUE if not already installed
-to_install &lt;- (requires %in% rownames(installed.packages()) == FALSE)
+<span class="co"># evaluates to TRUE if not already installed</span>
+to_install &lt;-<span class="st"> </span>(requires <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(<span class="kw">installed.packages</span>()) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>)
 
-# install missing packages
-cloud_url &lt;- &quot;https://cloud.r-project.org/&quot;
-install.packages(requires[to_install], repos = cloud_url)</code></pre>
+<span class="co"># install missing packages</span>
+cloud_url &lt;-<span class="st"> &quot;https://cloud.r-project.org/&quot;</span>
+<span class="kw">install.packages</span>(requires[to_install], <span class="dt">repos =</span> cloud_url)</code></pre>
 <p>Because we never call <code>require()</code>, we can attach (or not attach) whichever packages we want with subsequent <code>library()</code> commands. (We could have also used <code>requireNamespace()</code> to check for packages.)</p>
 </div>
 <div id="coda-on-the-use-of-library-vs-require" class="section level1">
@@ -316,7 +384,7 @@ install.packages(requires[to_install], repos = cloud_url)</code></pre>
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2016–2018</span>
+        <span itemprop="copyrightYear">2016–2019</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="/">Michael DeCrescenzo</a> | </span> 

@@ -133,6 +133,26 @@
     </url>
   
     <url>
+      <loc>/courses/reading/readings-270-s19/</loc>
+      
+      <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
+      <loc>/courses/ps-270-schedule/</loc>
+      
+      <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+      
+      
+      
+      
+    </url>
+  
+    <url>
       <loc>/ps-270/</loc>
       
       <lastmod>2016-05-05T21:48:51-07:00</lastmod>
@@ -168,6 +188,18 @@
       <loc>/contact/</loc>
       
       
+      
+      
+    </url>
+  
+    <url>
+      <loc>/courses/</loc>
+      
+      <lastmod>2016-05-05T21:48:51-07:00</lastmod>
+      
+      
+      
+      <priority>0</priority>
       
       
     </url>

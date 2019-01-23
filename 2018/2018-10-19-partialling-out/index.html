@@ -60,7 +60,7 @@
     "datePublished": "2018-10-19 00:00:00 &#43;0000 UTC",
     "dateModified" : "2018-10-19 00:00:00 &#43;0000 UTC",
     "url" : "/2018/2018-10-19-partialling-out/",
-    "wordCount" : "1423",
+    "wordCount" : "1845",
     "keywords" : [ "Visualization","R", "Michael DeCrescenzo"]
 }
 </script>
@@ -207,7 +207,75 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
           
           
 
-          <div id="background" class="section level1">
+          <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<div id="background" class="section level1">
 <h1>Background</h1>
 <p>A few days ago, <a href="https://www.andrewheiss.com/">Andrew Heiss</a> was <a href="https://twitter.com/andrewheiss/status/1052232993723494400?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1052232993723494400&amp;ref_url=http%3A%2F%2F127.0.0.1%3A4321%2F2018%2F2018-10-19-partialling-out%2F">looking</a> for a way to visualize multiple regression with an emphasis on one predictor, without 3(+)-dimensional plots. He works through a method and posts this cool animation, which shows the changing relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> when adding controls, superimposed over the scatterplot of the raw data. (He credits <a href="https://twitter.com/petemohanty">Pete Mohanty</a> with the shifting abline idea.)</p>
 <center>
@@ -262,107 +330,107 @@ where <span class="math inline">\(\alpha\)</span> is the constant, <span class="
 <h1>Implementation</h1>
 <p>Now we will create the revised gif.</p>
 <p>First we start with the original Heiss data and code.</p>
-<pre class="r"><code># ---- Heiss code -----------------------
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- Heiss code -----------------------</span>
 
-library(&quot;magrittr&quot;)
-library(&quot;tidyverse&quot;)
-library(&quot;lubridate&quot;)
-library(&quot;broom&quot;)
-library(&quot;scales&quot;)
-library(&quot;gganimate&quot;)
+<span class="kw">library</span>(<span class="st">&quot;magrittr&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;lubridate&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;broom&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;scales&quot;</span>)
+<span class="kw">library</span>(<span class="st">&quot;gganimate&quot;</span>)
 
-# Load and clean data
-# This data comes from Dark Sky&#39;s API
-weather_provo_raw &lt;- read_csv(&quot;https://andhs.co/provoweather&quot;)
+<span class="co"># Load and clean data</span>
+<span class="co"># This data comes from Dark Sky&#39;s API</span>
+weather_provo_raw &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://andhs.co/provoweather&quot;</span>)
 
-# clean dates and precip
-weather_provo_2017 &lt;- weather_provo_raw %&gt;% 
-  mutate(month = month(date, label = TRUE, abbr = FALSE),
-         month_number = month(date, label = FALSE),
-         weekday = wday(date, label = TRUE, abbr = FALSE),
-         weekday_number = wday(date, label = FALSE)) %&gt;% 
-  mutate(precipType = ifelse(is.na(precipType), &quot;none&quot;, precipType)) %&gt;% 
-  select(date, month, month_number, weekday, weekday_number,
+<span class="co"># clean dates and precip</span>
+weather_provo_<span class="dv">2017</span> &lt;-<span class="st"> </span>weather_provo_raw <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>),
+         <span class="dt">month_number =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">FALSE</span>),
+         <span class="dt">weekday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>, <span class="dt">abbr =</span> <span class="ot">FALSE</span>),
+         <span class="dt">weekday_number =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">precipType =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(precipType), <span class="st">&quot;none&quot;</span>, precipType)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(date, month, month_number, weekday, weekday_number,
          sunriseTime, sunsetTime, moonPhase, precipProbability, precipType,
          temperatureHigh, temperatureLow, dewPoint, humidity, pressure, 
          windSpeed, cloudCover, visibility, uvIndex)
 
-# keep winter and spring, scale vars
-winter_spring &lt;- weather_provo_2017 %&gt;% 
-  filter(month_number &lt;= 5) %&gt;% 
-  mutate(month = factor(month, ordered = FALSE)) %&gt;% 
-  mutate(humidity = humidity * 100,
-         cloudCover = cloudCover * 100,
-         precipProbability = precipProbability * 100)</code></pre>
+<span class="co"># keep winter and spring, scale vars</span>
+winter_spring &lt;-<span class="st"> </span>weather_provo_<span class="dv">2017</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(month_number <span class="op">&lt;=</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">factor</span>(month, <span class="dt">ordered =</span> <span class="ot">FALSE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">humidity =</span> humidity <span class="op">*</span><span class="st"> </span><span class="dv">100</span>,
+         <span class="dt">cloudCover =</span> cloudCover <span class="op">*</span><span class="st"> </span><span class="dv">100</span>,
+         <span class="dt">precipProbability =</span> precipProbability <span class="op">*</span><span class="st"> </span><span class="dv">100</span>)</code></pre>
 <p>We combine several model formulas into a data frame and estimate each regression using <code>purrr::map()</code>. We’ve added the results from <code>broom::augment()</code> because we want the residuals from each model to create the “noise” in the data for the graphic.</p>
-<pre class="r"><code># ---- mike decrescenzo modifications begin -----------------------
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ---- mike decrescenzo modifications begin -----------------------</span>
 
-# Run all these models in one data frame (purrr::map)
-# add the data as a list column because we&#39;ll want it later
-models &lt;- 
-  tribble(
-    ~formula,
-    &quot;temperatureHigh ~ humidity&quot;,
-    &quot;temperatureHigh ~ humidity + windSpeed&quot;,
-    &quot;temperatureHigh ~ humidity + windSpeed + cloudCover&quot;,
-    &quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&quot;,
-    &quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&quot;) %&gt;%
-  # data in a list column
-  mutate(spring_data = list(winter_spring)) %&gt;%
-  # Run a model in each row
-  mutate(model = map2(formula, spring_data, ~ lm(.x, data = .y))) %&gt;%
-  # mutate(model = map(formula, ~ lm(.x, data = winter_spring))) %&gt;%
-  # Extract model elements
-  mutate(model_tidy = map(model, tidy, conf.int = TRUE), 
-         model_glance = map(model, glance),
-         model_fits = map(model, augment))  </code></pre>
+<span class="co"># Run all these models in one data frame (purrr::map)</span>
+<span class="co"># add the data as a list column because we&#39;ll want it later</span>
+models &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">tribble</span>(
+    <span class="op">~</span>formula,
+    <span class="st">&quot;temperatureHigh ~ humidity&quot;</span>,
+    <span class="st">&quot;temperatureHigh ~ humidity + windSpeed&quot;</span>,
+    <span class="st">&quot;temperatureHigh ~ humidity + windSpeed + cloudCover&quot;</span>,
+    <span class="st">&quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&quot;</span>,
+    <span class="st">&quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># data in a list column</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">spring_data =</span> <span class="kw">list</span>(winter_spring)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># Run a model in each row</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map2</span>(formula, spring_data, <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(.x, <span class="dt">data =</span> .y))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># mutate(model = map(formula, ~ lm(.x, data = winter_spring))) %&gt;%</span>
+<span class="st">  </span><span class="co"># Extract model elements</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model_tidy =</span> <span class="kw">map</span>(model, tidy, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>), 
+         <span class="dt">model_glance =</span> <span class="kw">map</span>(model, glance),
+         <span class="dt">model_fits =</span> <span class="kw">map</span>(model, augment))  </code></pre>
 <p>We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the <code>augment</code> results). We will lazily refer to this as the humidity’s “partial prediction” of temperature (thanks to <a href="https://twitter.com/EvaMaeRey">Gina Reynolds</a> for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.</p>
-<pre class="r"><code># compute the partial effect of humidity: beta * humidity
-model_partials &lt;- models %&gt;%
-  # get the humidity beta and bounds
-  mutate(humidity_beta = map(model_tidy, 
-                             ~ filter(.x, term == &quot;humidity&quot;)$estimate) %&gt;%
-                               as.numeric(),
-         beta_low = map(model_tidy, 
-                             ~ filter(.x, term == &quot;humidity&quot;)$conf.low) %&gt;%
-                               as.numeric(),
-         beta_high = map(model_tidy, 
-                             ~ filter(.x, term == &quot;humidity&quot;)$conf.high) %&gt;%
-                               as.numeric()) %&gt;%
-  # calculate partial effect of humidity and keep the residual
-  unnest(model_fits) %&gt;%
-  mutate(partial = humidity * humidity_beta) %&gt;%
-  select(formula, humidity, contains(&quot;beta&quot;), partial, .resid) 
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># compute the partial effect of humidity: beta * humidity</span>
+model_partials &lt;-<span class="st"> </span>models <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># get the humidity beta and bounds</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">humidity_beta =</span> <span class="kw">map</span>(model_tidy, 
+                             <span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(.x, term <span class="op">==</span><span class="st"> &quot;humidity&quot;</span>)<span class="op">$</span>estimate) <span class="op">%&gt;%</span>
+<span class="st">                               </span><span class="kw">as.numeric</span>(),
+         <span class="dt">beta_low =</span> <span class="kw">map</span>(model_tidy, 
+                             <span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(.x, term <span class="op">==</span><span class="st"> &quot;humidity&quot;</span>)<span class="op">$</span>conf.low) <span class="op">%&gt;%</span>
+<span class="st">                               </span><span class="kw">as.numeric</span>(),
+         <span class="dt">beta_high =</span> <span class="kw">map</span>(model_tidy, 
+                             <span class="op">~</span><span class="st"> </span><span class="kw">filter</span>(.x, term <span class="op">==</span><span class="st"> &quot;humidity&quot;</span>)<span class="op">$</span>conf.high) <span class="op">%&gt;%</span>
+<span class="st">                               </span><span class="kw">as.numeric</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="co"># calculate partial effect of humidity and keep the residual</span>
+<span class="st">  </span><span class="kw">unnest</span>(model_fits) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partial =</span> humidity <span class="op">*</span><span class="st"> </span>humidity_beta) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(formula, humidity, <span class="kw">contains</span>(<span class="st">&quot;beta&quot;</span>), partial, .resid) 
 
-# get the beta for label plotting
-model_beta &lt;- model_partials %&gt;%
-  select(formula, contains(&quot;beta&quot;)) %&gt;%
-  distinct() </code></pre>
+<span class="co"># get the beta for label plotting</span>
+model_beta &lt;-<span class="st"> </span>model_partials <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(formula, <span class="kw">contains</span>(<span class="st">&quot;beta&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">distinct</span>() </code></pre>
 <p>Now we create the figure. The horizontal axis is the raw humidity data. The vertical axis is the humidity effect (<span class="math inline">\(\beta \times \mathit{Humidity}_{i}\)</span>) plus the regression residual <span class="math inline">\(\varepsilon_{i}\)</span>. The regression line is simply <span class="math inline">\(\hat{\mathit{High}}_{i} = \hat{\beta}\mathit{Humidity}_{i}\)</span> with a constant of zero. That is, on a given day, a humidity level of <span class="math inline">\(z\)</span> exerts a negative impact on temperature amounting to <span class="math inline">\(\beta z\)</span>, setting other factors aside. Conveniently, we don’t have to manually subtract the other covariates because we already know how to calculate the vertical axis using the partial effect and the residual (thanks to the math above).</p>
-<pre class="r"><code># animate 
-ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
-  geom_point(color = &quot;gray&quot;) +
-  geom_abline(data = model_beta,
-              aes(intercept = 0, slope = humidity_beta, 
-                  group = formula)) +
-  geom_abline(data = model_beta,
-              aes(intercept = 0, slope = beta_low, 
-                  group = formula),
-              linetype = 3) +
-  geom_abline(data = model_beta,
-              aes(intercept = 0, slope = beta_high, 
-                  group = formula),
-              linetype = 3) +
-  theme_minimal(base_family = &quot;PT Sans&quot;) +
-  geom_label(data = model_beta,
-             aes(x = 35, y = -70, label = paste0(&quot;beta: &quot;, round(humidity_beta, 3)), group = formula),
-             parse = TRUE,
-             family = &quot;PT Sans&quot;, size = 4) +
-  labs(x = &quot;Humidity&quot;, y = &quot;Partial Predicted High Temperature (plus residual, °F)&quot;,
-       subtitle = &quot;{closest_state}&quot;) +
-  transition_states(formula, transition_length = 0.25, state_length = 0.5) +
-  enter_fade() +
-  ease_aes(&#39;sine-in-out&#39;)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># animate </span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> model_partials, <span class="kw">aes</span>(<span class="dt">x =</span> humidity, <span class="dt">y =</span> partial <span class="op">+</span><span class="st"> </span>.resid)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">color =</span> <span class="st">&quot;gray&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> model_beta,
+              <span class="kw">aes</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> humidity_beta, 
+                  <span class="dt">group =</span> formula)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> model_beta,
+              <span class="kw">aes</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> beta_low, 
+                  <span class="dt">group =</span> formula),
+              <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">data =</span> model_beta,
+              <span class="kw">aes</span>(<span class="dt">intercept =</span> <span class="dv">0</span>, <span class="dt">slope =</span> beta_high, 
+                  <span class="dt">group =</span> formula),
+              <span class="dt">linetype =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme_minimal</span>(<span class="dt">base_family =</span> <span class="st">&quot;PT Sans&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_label</span>(<span class="dt">data =</span> model_beta,
+             <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">35</span>, <span class="dt">y =</span> <span class="dv">-70</span>, <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;beta: &quot;</span>, <span class="kw">round</span>(humidity_beta, <span class="dv">3</span>)), <span class="dt">group =</span> formula),
+             <span class="dt">parse =</span> <span class="ot">TRUE</span>,
+             <span class="dt">family =</span> <span class="st">&quot;PT Sans&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Humidity&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Partial Predicted High Temperature (plus residual, °F)&quot;</span>,
+       <span class="dt">subtitle =</span> <span class="st">&quot;{closest_state}&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">transition_states</span>(formula, <span class="dt">transition_length =</span> <span class="fl">0.25</span>, <span class="dt">state_length =</span> <span class="fl">0.5</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">enter_fade</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">ease_aes</span>(<span class="st">&#39;sine-in-out&#39;</span>)</code></pre>
 <p><img src="/posts/2018-10-19-partialling-out_files/figure-html/animated-1.gif" /><!-- --></p>
 <p>Two notes about the confidence interval</p>
 <ol style="list-style-type: decimal">
@@ -439,7 +507,7 @@ ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2016–2018</span>
+        <span itemprop="copyrightYear">2016–2019</span>
         
          
             <span class="author" itemprop="copyrightHolder"><a href="/">Michael DeCrescenzo</a> | </span> 

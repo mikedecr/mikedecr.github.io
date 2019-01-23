@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Courses on Michael DeCrescenzo</title>
+    <link>/courses/</link>
+    <description>Recent content in Courses on Michael DeCrescenzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 05 May 2016 21:48:51 -0700</lastBuildDate>
+    
+	<atom:link href="/courses/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PS 270 Readings</title>
+      <link>/courses/reading/readings-270-s19/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/courses/reading/readings-270-s19/</guid>
+      <description>j  j  j  j  j  j  j  Jan 23 Try this out. wee
+ </description>
+    </item>
+    
+    <item>
+      <title>Political Science 270: Understanding Political Numbers</title>
+      <link>/courses/ps-270-schedule/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/courses/ps-270-schedule/</guid>
+      <description>Schedule ## # A tibble: 1 x 5 ## date topic reading assignment slides ## &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; ## 1 January … Introduct… [Syllabus](../reading/readings-27… &amp;quot;&amp;quot; &amp;quot;&amp;quot;   Date Topic Reading Assignment Slides    January 23 Introduction Syllabus       </description>
+    </item>
+    
+  </channel>
+</rss>
