@@ -4214,8 +4214,8 @@ sd(x) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/images/research/forum-teaser.png&#34; width=&#34;80%&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;in-progress&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;In Progress&lt;/h1&gt;
+&lt;div id=&#34;in-the-pipeline&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;In the Pipeline&lt;/h1&gt;
 &lt;div id=&#34;mobilization-persuasion-and-the-partisan-fallout-of-the-gender-gap-in-u.s.-voting-with-barry-c.-burden&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden)&lt;/h2&gt;
 &lt;p&gt;[View &lt;a href=&#34;https://www.dropbox.com/s/y69t6x89gj8fvkt/gender-gap-public.pdf?dl=0&#34;&gt;PDF&lt;/a&gt; and &lt;a href=&#34;https://www.dropbox.com/s/0piklipw954t8zg/gap-appendix-public.pdf?dl=0&#34;&gt;supplemental info&lt;/a&gt;]&lt;/p&gt;
@@ -4233,6 +4233,13 @@ sd(x) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/images/research/nonvoters-teaser.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;We argue that voter ID requirements affect a larger share of the public than those who lack a qualifying ID. Voter ID requirements contain technical details surrounding outdated addresses, expiration dates, and name changes that are likely to confuse and deter citizens who possess qualifying forms of ID as well. We find evidence of this confusion effect: many respondents mistakenly believe that they did not have the necessary ID to vote when they actually did, and individuals who were less knowledgeable about qualifying forms of ID were more likely to report being affected by the law. These “indirect effects” of voter ID reveal that record-linkage approaches to studying ID possession may underestimate the population affected by voter ID laws.&lt;/p&gt;
 &lt;p&gt;While we do not estimate the causal effect of voter ID on turnout, we do perform a simulation to demonstrate a range of plausible turnout effects under various assumptions.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;works-in-progress&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Works in Progress&lt;/h1&gt;
+&lt;div id=&#34;the-value-of-bayesian-inference-for-causal-modeling-in-political-science&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The Value of Bayesian Inference for Causal Modeling in Political Science&lt;/h2&gt;
+&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but almost never in political science does a single study employ both approaches. This stands in contrast to other fields—such as psychology, epidemiology, and biostatistics—where Bayesian analysis and causal inference methods interact regularly. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating trustworthy parameter estimates. Rather, the partition owes itself to informal norms surrounding both methodological schools in political science applications. I discuss these sources of normative tension, articulate practical strategies for doing Bayesian inference for a “causal inference audience,” and demonstrate these practices using real examples from recent political science work. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show how Bayesian analysis provides an appealing framework for evaluating causal evidence, improves causal estimates, and deserves a space in the study of causal effects in political science.&lt;/p&gt;
 &lt;!-- ## How Should We Employ MRP Estimates as Predictors? Issues with Uncertainty and Pooling
 
 More info coming soon. --&gt;
@@ -4350,26 +4357,90 @@ I study American politics and statistical methodology.
 ##   date      topic      reading                            assignment slides
 ##   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;                              &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt; 
 ## 1 January … Introduct… [Syllabus](../reading/readings-27… &amp;quot;&amp;quot;         &amp;quot;&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Topic&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Reading&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Assignment&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Slides&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;January 23&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Introduction&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;a href=&#34;../reading/readings-270-s19#jan-23&#34;&gt;Syllabus&lt;/a&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## 
+## Date         Topic          Reading                                          Assignment   Slides 
+## -----------  -------------  -----------------------------------------------  -----------  -------
+## January 23   Introduction   [Syllabus](../reading/readings-270-s19#jan-23)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;January 23&amp;quot;  &amp;quot;January 28&amp;quot;  &amp;quot;January 30&amp;quot;  &amp;quot;February 04&amp;quot; &amp;quot;February 06&amp;quot;
+##  [6] &amp;quot;February 11&amp;quot; &amp;quot;February 13&amp;quot; &amp;quot;February 18&amp;quot; &amp;quot;February 20&amp;quot; &amp;quot;February 25&amp;quot;
+## [11] &amp;quot;February 27&amp;quot; &amp;quot;March 04&amp;quot;    &amp;quot;March 06&amp;quot;    &amp;quot;March 11&amp;quot;    &amp;quot;March 13&amp;quot;   
+## [16] &amp;quot;March 25&amp;quot;    &amp;quot;March 27&amp;quot;    &amp;quot;April 01&amp;quot;    &amp;quot;April 03&amp;quot;    &amp;quot;April 08&amp;quot;   
+## [21] &amp;quot;April 10&amp;quot;    &amp;quot;April 15&amp;quot;    &amp;quot;April 17&amp;quot;    &amp;quot;April 22&amp;quot;    &amp;quot;April 24&amp;quot;   
+## [26] &amp;quot;April 29&amp;quot;    &amp;quot;May 01&amp;quot;      &amp;quot;May 06&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;(Wed) January 23&amp;quot;  &amp;quot;(Mon) January 28&amp;quot;  &amp;quot;(Wed) January 30&amp;quot; 
+##  [4] &amp;quot;(Mon) February 04&amp;quot; &amp;quot;(Wed) February 06&amp;quot; &amp;quot;(Mon) February 11&amp;quot;
+##  [7] &amp;quot;(Wed) February 13&amp;quot; &amp;quot;(Mon) February 18&amp;quot; &amp;quot;(Wed) February 20&amp;quot;
+## [10] &amp;quot;(Mon) February 25&amp;quot; &amp;quot;(Wed) February 27&amp;quot; &amp;quot;(Mon) March 04&amp;quot;   
+## [13] &amp;quot;(Wed) March 06&amp;quot;    &amp;quot;(Mon) March 11&amp;quot;    &amp;quot;(Wed) March 13&amp;quot;   
+## [16] &amp;quot;(Mon) March 25&amp;quot;    &amp;quot;(Wed) March 27&amp;quot;    &amp;quot;(Mon) April 01&amp;quot;   
+## [19] &amp;quot;(Wed) April 03&amp;quot;    &amp;quot;(Mon) April 08&amp;quot;    &amp;quot;(Wed) April 10&amp;quot;   
+## [22] &amp;quot;(Mon) April 15&amp;quot;    &amp;quot;(Wed) April 17&amp;quot;    &amp;quot;(Mon) April 22&amp;quot;   
+## [25] &amp;quot;(Wed) April 24&amp;quot;    &amp;quot;(Mon) April 29&amp;quot;    &amp;quot;(Wed) May 01&amp;quot;     
+## [28] &amp;quot;(Mon) May 06&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 28 x 6
+##     week date_column    lecture_topics            reading slides assignment
+##    &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;                     &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt;     
+##  1     1 (Wed) January… Intro                     &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  2     2 (Mon) January… Evidence                  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  3     2 (Wed) January… Theories and hypotheses   &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  4     3 (Mon) Februar… Measurement and causality &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  5     3 (Wed) Februar… Data                      &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  6     4 (Mon) Februar… Graphics                  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  7     4 (Wed) Februar… Graphics in R             &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  8     5 (Mon) Februar… Averages, expectations, … &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+##  9     5 (Wed) Februar… Variation and randomness  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 10     6 (Mon) Februar… &amp;quot;Relationships as \&amp;quot;cond… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 11     6 (Wed) Februar… Linear regression         &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 12     7 (Mon) March 04 Statistical significance  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 13     7 (Wed) March 06 Unpacking regression      &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 14     8 (Mon) March 11 Multiple regression       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 15     8 (Wed) March 13 Finding and cleaning data &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 16     9 (Mon) March 25 &amp;quot;\&amp;quot;Dummies\&amp;quot;: Indicators… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 17     9 (Wed) March 27 Nonlinear relationships   &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 18    10 (Mon) April 01 Evaluating public policy  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 19    10 (Wed) April 03 Experiments and interven… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 20    11 (Mon) April 08 &amp;quot;\&amp;quot;Big Data\&amp;quot;&amp;quot;            &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 21    11 (Wed) April 10 Elections and campaigns   &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 22    12 (Mon) April 15 Writing a paper           &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 23    12 (Wed) April 17 Data and the judiciary    &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 24    13 (Mon) April 22 Election forecasting      &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 25    13 (Wed) April 24 Big problems in social s… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 26    14 (Mon) April 29 Fixing(?) those problems  &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 27    14 (Wed) May 01   Final presentations       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      
+## 28    15 (Mon) May 06   Final paper due           &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## 
+##  week  date_column         lecture_topics                                reading   slides   assignment 
+## -----  ------------------  --------------------------------------------  --------  -------  -----------
+##     1  (Wed) January 23    Intro                                         NA        NA       NA         
+##     2  (Mon) January 28    Evidence                                      NA        NA       NA         
+##     2  (Wed) January 30    Theories and hypotheses                       NA        NA       NA         
+##     3  (Mon) February 04   Measurement and causality                     NA        NA       NA         
+##     3  (Wed) February 06   Data                                          NA        NA       NA         
+##     4  (Mon) February 11   Graphics                                      NA        NA       NA         
+##     4  (Wed) February 13   Graphics in R                                 NA        NA       NA         
+##     5  (Mon) February 18   Averages, expectations, aggregation           NA        NA       NA         
+##     5  (Wed) February 20   Variation and randomness                      NA        NA       NA         
+##     6  (Mon) February 25   Relationships as &amp;quot;conditional expectations&amp;quot;   NA        NA       NA         
+##     6  (Wed) February 27   Linear regression                             NA        NA       NA         
+##     7  (Mon) March 04      Statistical significance                      NA        NA       NA         
+##     7  (Wed) March 06      Unpacking regression                          NA        NA       NA         
+##     8  (Mon) March 11      Multiple regression                           NA        NA       NA         
+##     8  (Wed) March 13      Finding and cleaning data                     NA        NA       NA         
+##     9  (Mon) March 25      &amp;quot;Dummies&amp;quot;: Indicators and interactions        NA        NA       NA         
+##     9  (Wed) March 27      Nonlinear relationships                       NA        NA       NA         
+##    10  (Mon) April 01      Evaluating public policy                      NA        NA       NA         
+##    10  (Wed) April 03      Experiments and interventions                 NA        NA       NA         
+##    11  (Mon) April 08      &amp;quot;Big Data&amp;quot;                                    NA        NA       NA         
+##    11  (Wed) April 10      Elections and campaigns                       NA        NA       NA         
+##    12  (Mon) April 15      Writing a paper                               NA        NA       NA         
+##    12  (Wed) April 17      Data and the judiciary                        NA        NA       NA         
+##    13  (Mon) April 22      Election forecasting                          NA        NA       NA         
+##    13  (Wed) April 24      Big problems in social science                NA        NA       NA         
+##    14  (Mon) April 29      Fixing(?) those problems                      NA        NA       NA         
+##    14  (Wed) May 01        Final presentations                           NA        NA       NA         
+##    15  (Mon) May 06        Final paper due                               NA        NA       NA&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 </description>
     </item>
@@ -4380,7 +4451,215 @@ I study American politics and statistical methodology.
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/ps-270/</guid>
-      <description>&lt;p&gt;Online schedule coming soon!&lt;/p&gt;
+      <description>&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Lecture&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Reading&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Slides&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;Due&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Jan 23&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Intro&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) Jan 28&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Evidence&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Jan 30&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Theories and hypotheses&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) Feb 04&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Measurement and causality&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Feb 06&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) Feb 11&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Graphics&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Feb 13&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Graphics in R&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Essay 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) Feb 18&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Averages, expectations, aggregation&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Feb 20&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Variation and randomness&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) Feb 25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Piping&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) Feb 27&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Relationships&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;R Exercise 1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) March 04&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Linear regression&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) March 06&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Statistical significance&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) March 11&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Multiple regression&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Research Question&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) March 13&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Finding and cleaning data&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;R Exercise 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) March 25&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Dummies, Indicators, Interactions&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) March 27&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Nonlinear relationships&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Dataset&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) April 01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Evaluating public policy&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) April 03&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Experiments and interventions&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) April 08&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;“Big Data”&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) April 10&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Elections and campaigns&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Essay 2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) April 15&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Writing a paper&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) April 17&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Data and the judiciary&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) April 22&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Election forecasting&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Presentations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) April 24&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Big problems in social science&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Presentations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) April 29&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Fixing(?) those problems&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(W) May 01&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Final presentations&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Finalists present&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;(M) May 06&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Final paper due&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;Final paper&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 </description>
     </item>
     
