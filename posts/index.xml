@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Experimentalists Agree! When Flat Priors Lead to Worse Learning</title>
+      <link>/2019/2019-02-23_gerber-green-kaplan/</link>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-02-23_gerber-green-kaplan/</guid>
+      <description>I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by Gerber, Green, and Kaplan about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs observational research.
+The intuition of the model is to suppose that we want to learn about some causal effect \(M\).</description>
+    </item>
     
     <item>
       <title>A Visualization of Partial Effects in Multiple Regression</title>

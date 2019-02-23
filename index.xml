@@ -6,8 +6,51 @@
     <description>Recent content in Michael DeCrescenzo on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Experimentalists Agree! When Flat Priors Lead to Worse Learning</title>
+      <link>/2019/2019-02-23_gerber-green-kaplan/</link>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-02-23_gerber-green-kaplan/</guid>
+      <description>&lt;p&gt;I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by &lt;a href=&#34;https://books.google.com/books?hl=en&amp;amp;lr=&amp;amp;id=RDueAgAAQBAJ&amp;amp;oi=fnd&amp;amp;pg=PA9&amp;amp;dq=gerber+green+kaplan&amp;amp;ots=0I3f6Jfn33&amp;amp;sig=wVKOfRF39mkiT4vnMe8YecMMpeY#v=onepage&amp;amp;q=gerber%20green%20kaplan&amp;amp;f=false&#34;&gt;Gerber, Green, and Kaplan&lt;/a&gt; about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs observational research.&lt;/p&gt;
+&lt;p&gt;The intuition of the model is to suppose that we want to learn about some causal effect &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;. When we conduct a study, our estimate &lt;span class=&#34;math inline&#34;&gt;\(\hat{M}\)&lt;/span&gt; reflects the true effect &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;, plus bias &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt;, plus error &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt;:
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \hat{M} &amp;amp;= M + b + u,
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The authors show that if we want to update our priors about &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;, the amount of updating we do from the study depends on our priors about the degree of bias. If our study is experimental, where we can assume &lt;em&gt;a priori&lt;/em&gt; that the bias &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; is either zero or very small, our posterior uncertainty about the causal effect is greatly reduced, and we learn a lot about &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;. When we are in an observational study and have more diffuse priors about the size of the uncorrected bias &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; (and the data don’t allow us any way to update our prior about &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt;) then we don’t know exactly what we’ve learned about &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt; having looked at the data.&lt;/p&gt;
+&lt;p&gt;I think the intuition of this model is very good. It makes perfect sense that when you are less certain about the biases in a study, you are less certain about its findings. Fair!&lt;/p&gt;
+&lt;div id=&#34;but&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;But&lt;/h1&gt;
+&lt;p&gt;The namesake of the theoretical endeavor, the &lt;strong&gt;Illusion of Learning from Observational Research&lt;/strong&gt;, comes from a result where we have &lt;em&gt;flat priors&lt;/em&gt; about the bias &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; and thus we learn &lt;em&gt;nothing&lt;/em&gt; from having conducted an observational study.&lt;/p&gt;
+&lt;p&gt;What I want to assert is that this is a degenerate case that does not accurately characterize observational research and never really occurs in real life.&lt;/p&gt;
+&lt;p&gt;Suppose we conduct an observational study and detect an effect of size &lt;span class=&#34;math inline&#34;&gt;\(1.0\)&lt;/span&gt;. If we are concerned about uncorrected bias in the study design, practically speaking we are mainly concerned with the possibility that the effect is over-estimated.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
+Chances are we think that the true effect is between 0 and the uncorrected observational effect, so we actually have pretty specific priors about the bias! Do we put much probability on the possibility that the true effect is &lt;em&gt;double&lt;/em&gt; the estimated effect, or greater? Probably not, since we tend to worry that observational findings are primarily inflated by unobserved confounders and biased self-selection into treatment (though it is not impossible that the bias attenuates the estimate). Do we think the true effect is just as big as the estimated effect but in the exact opposite direction? Again, probably not, if careful theorizing and hypothesizing are underlying our expectations for the study in the first place.&lt;/p&gt;
+&lt;p&gt;Rearranging terms, your prior about the size of &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; is the distribution of differences between your priors for the true and estimated effects. Setting &lt;span class=&#34;math inline&#34;&gt;\(u\)&lt;/span&gt; to &lt;span class=&#34;math inline&#34;&gt;\(0\)&lt;/span&gt; for a moment…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  b &amp;amp;= \hat{M} - M
+\end{align*}\]&lt;/span&gt;
+If you have some expectation about the true and estimated effects, you actually have reasonably clear priors about the size of the bias in observational studies. So the &lt;strong&gt;Illusion&lt;/strong&gt; of learning from observational studies is a bit of an overstatement.&lt;/p&gt;
+&lt;p&gt;Confronting the fact that our priors are never flat, I low-key worry how many people have read the original piece and come away with the impression that flat priors about &lt;span class=&#34;math inline&#34;&gt;\(b\)&lt;/span&gt; is a fair or accurate representation of observational research. I don’t mean this as a defense of biased research, so much as a criticism of flat priors. I don’t know if Gerber et al. intended for the flat priors case to be interpreted as “realistic”—on the one hand, the flat-priors result is the namesake of the piece, but their numerical example uses a non-flat prior for the bias term—but if a reader isn’t already thinking hard about their priors, then it’s easy to see how they might not catch this.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;zooming-out&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Zooming out&lt;/h1&gt;
+&lt;p&gt;There are a few mid-level lessons we could reinforce by thinking about our priors about bias in observational studies.&lt;/p&gt;
+&lt;p&gt;First, there’s never a bad time to remember that (improper) flat priors are unrealistic. If data are strong enough, obviously, inferences given flat priors can look like inferences given informed priors, but we should worry about any exercise where some theoretical result &lt;em&gt;necessarily depends&lt;/em&gt; on an assumption of flat priors. In thought experiments and in real data analysis, you can always do better than a flat prior.&lt;/p&gt;
+&lt;p&gt;Relatedly, Bayesians are keen to highlight areas where informed priors provide important stability to some result that would have looked like nonsense under flat priors. This is one of those cases. Flat priors lead you in an unstable direction assessing the information conveyed by research. It’s only in a case where you have more informed priors about the terms in the Gerber et al. model where the results conform to how we actually think about research findings.&lt;/p&gt;
+&lt;p&gt;Lastly, I am increasingly preoccupied by the way Bayes’ theorem is routinely used in theoretical models to convey important intuitions about causal inference and yet there is nearly zero formal incorporation of Bayesian priors in applied data analysis of causal inference designs (in political science at least; other fields mix these things much more). I’m trying to write a paper about doing applied Bayesian analysis in causal inference, and I hope the causal inference crowd can be convinced to legalize it!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
+Critics may be concerned that an effect is under-estimated but the prevailing emphasis on null-hypothesis testing strongly redirects critical attention away from this possibility.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>A Visualization of Partial Effects in Multiple Regression</title>
@@ -4442,224 +4485,6 @@ I study American politics and statistical methodology.
 ##    14  (Wed) May 01        Final presentations                           NA        NA       NA         
 ##    15  (Mon) May 06        Final paper due                               NA        NA       NA&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Political Science 270: Understanding Political Numbers</title>
-      <link>/ps-270/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/ps-270/</guid>
-      <description>&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;Date&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Lecture&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Reading&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Slides&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;Due&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Jan 23&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Intro&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) Jan 28&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Evidence&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Jan 30&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Theories and hypotheses&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) Feb 04&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Measurement and causality&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Feb 06&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Data&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) Feb 11&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Graphics&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Feb 13&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Graphics in R&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Essay 1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) Feb 18&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Averages, expectations, aggregation&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Feb 20&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Variation and randomness&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) Feb 25&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Piping&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) Feb 27&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Relationships&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;R Exercise 1&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) March 04&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Linear regression&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) March 06&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Statistical significance&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) March 11&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Multiple regression&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Research Question&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) March 13&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Finding and cleaning data&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;R Exercise 2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) March 25&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Dummies, Indicators, Interactions&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) March 27&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Nonlinear relationships&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Dataset&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) April 01&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Evaluating public policy&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) April 03&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Experiments and interventions&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) April 08&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;“Big Data”&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) April 10&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Elections and campaigns&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Essay 2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) April 15&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Writing a paper&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) April 17&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Data and the judiciary&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Presentations&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) April 22&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Election forecasting&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) April 24&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Big problems in social science&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Presentations&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) April 29&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Fixing(?) those problems&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(W) May 01&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Final presentations&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Finalists present&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;(M) May 06&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Final paper due&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;Final paper&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 </description>
     </item>
     

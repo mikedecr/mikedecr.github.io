@@ -9,7 +9,7 @@ tags: ["Experiments", "Bayesian statistics"]
 comments: no
 showcomments: yes
 showpagemeta: yes
-draft: true
+draft: false
 # nature:
 #       beforeInit: "https://platform.twitter.com/widgets.js"
 ---
