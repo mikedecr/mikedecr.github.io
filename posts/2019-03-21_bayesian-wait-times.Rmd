@@ -1,0 +1,82 @@
+---
+title: "Bayesian Estimates of Wait Times at the Polls"
+author: Mike DeCrescenzo
+description: "A Different Approach to a Familiar Topic"
+date: '2019-03-21'
+slug: bayes-wait-times
+categories: ["Methods", "American Politics"]
+tags: ["Election Administration", "Bayesian statistics"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+# nature:
+#       beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+Charles Stewart [tweeted](https://twitter.com/cstewartiii/status/1108130166381912064) some figures on the estimated average wait time to vote in 2018 (compared to 2014 and 2016). These data come from the CCES and the SPAE. Interestingly, neither of these surveys are able to get a direct measure of wait time. This makes sense; a voter will not remember if they were in line for 6 minutes versus 7. Instead, the surveys ask for a binned response. 
+
+<!-- Figure or example -->
+
+Having calculated wait time data for the MIT Election Data and Sciences Lab before (the 2016 data might be my own work? I can't be sure), I know a little bit about how this is usually done. 
+
+<!-- Method. -->
+
+I think we can do better. 
+
+Think about it this way. There is a true wait time, but we don't observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are count distributed, ordinarily modeled with a Poisson distribution), this symmetric assumption could be better.
+
+<!-- Graphic. -->
+
+There's a likelihood-based way to get at this. Rather than trust the censored data as it is, we could model the unobserved data using the censored data as a noisy indicator. In other words, what is the likely distribution of wait times, given the pattern in censored wait times that we see?
+
+# Setting up the latent variable model
+
+Suppose there is a true wait time $\omega$ for voter $i$ in state $s$. We assume $\omega_{i}$ as a Poisson draw from the distribution of wait times in state $s$,
+\begin{align}
+  \omega_{i} &\sim \mathrm{Poisson}(\lambda_{s[i]}),
+\end{align}
+where $\lambda_{s}$ is the mean wait time in state $s$.
+
+Wait times are measured in surveys using discrete categories to represent a range of wait times. Let $y_{i}$ be the discrete measure of wait time for voter $i$. If there are $K$ total categories, then the probability that $y_{i} = k$ is given by a difference in cumulative Poisson functions.
+\begin{align}
+  \mathrm{Pr}(y_{i} = k) &= \displaystyle e^{-\lambda_{s} }\sum _{r=k^{-}}^{k^{+}}{\frac {\lambda_{s}^{r}}{r!}}
+\end{align}
+which is the sum of the probability mass between the lower bound $(k^{-})$ and upper bound $(k^{+})$ of category $k$. This is equivalent of taking the CDF at $k^{+}$ minus the CDF at $k^{-}$. 
+<!-- but gotta get the boundary minus one situation sorted out. Use graphics for the intuition. -->
+The foundation for this setup is a lot like logistic regression.
+
+The observed wait time is measured in ordinal bins. As long as $\omega_i$ is a random variable from the Poisson process, then its falling into a particular bin can be represented as a categorical outcome.
+<!-- or is it an ordered thing? -->
+\begin{align}
+  y_{i} &\sim \mathrm{Categorical}\left( \pi_{k} \right)
+\end{align}
+The probability of being in category $k$ is given by the difference in CDFs. 
+\begin{align}
+  \pi_{k} &= \displaystyle e^{-\lambda_{s} }\sum_{r=k^{-}}^{k^{+}}{\frac {\lambda_{s}^{r}}{r!}}
+\end{align}
+
+
+# Or can we do it directly
+
+$y_{i}$ is a piecewise categorical function of the true wait time.
+<!-- except this isn't piecewise -->
+\begin{align}
+  y_{i} = I\left( k^{-} < \omega_{i} < k^{*} \right), \text{ for } k \in \left\{1, 2, \ldots, K \right\}
+\end{align}
+
+And $\omega_{i}$ is a Poisson draw from the state mean wait.
+\begin{align}
+  \omega_{i} &\sim \mathrm{Poisson}(\lambda_{s[i]}),
+\end{align}
+
+From here all we have to do is give $\lambda_{s}$ its own prior. We can do independent priors to start with,
+\begin{align}
+  \lambda_{s} &\sim \mathrm{Gamma}\left(\alpha, \beta \right)
+\end{align}
+
+The model of $\lambda_{s}$ could easily be improved by including a regression on state-level covariates. This would have the effect of pooling observations from data-poor states toward the trend suggested by data-rich states.
+
+
+# Prediction: waits aren't as long
+

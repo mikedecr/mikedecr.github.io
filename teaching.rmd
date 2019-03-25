@@ -8,7 +8,7 @@ date: "2017-12-04"
 
 Courses at UW--Madison
 
-- Political Science 270: Understanding Political Numbers, Spring 2019
+- Political Science 270: Understanding Political Numbers, Spring 2019. [(Online Schedule)](/ps-270/)
 - Political Science 811: Introduction to Statistical Computing in Political Science, Spring 2018. [(Online Materials)](/811/)
 
 
