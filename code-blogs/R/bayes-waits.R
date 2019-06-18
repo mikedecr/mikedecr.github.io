@@ -25,7 +25,7 @@ fips <- read_csv(here("static", "data", "census-state-fips.csv")) %>%
   select(-state) %>%
   print()
 
-names(cces_raw)
+names(cces_raw) 
 
 cces_raw
 

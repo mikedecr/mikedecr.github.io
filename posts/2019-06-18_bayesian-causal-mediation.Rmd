@@ -1,0 +1,99 @@
+---
+title: "Causal Mediation, Bayesianly"
+author: Michael DeCrescenzo
+description: "This is what we were already doing"
+date: '2019-06-08'
+slug: bayes-mediation
+categories: ["Methods"]
+tags: ["computational-methods", "bayesian-statistics", "causal-inference", "experiments"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+nature:
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+# Motivation for this post
+
+Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of "Bayesian causal inference." I'm hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.
+
+We covered causal mediation this week ([Imai et al. 2011 *APSR*](https://imai.fas.harvard.edu/research/files/mediationP.pdf)), which I thought would be a good opportunity to explain where my thoughts are going about this. So this post will briefly describe a Bayesian vantage point on causal inference and show how to use Bayesian tools to implement it. 
+
+# Posterior Predictive Draws. I mean, "Unobserved Potential Outcomes"
+
+It should be noted up front that Bayesian approaches to causal inference are not at all new ([Rubin 1978](https://projecteuclid.org/download/pdf_1/euclid.aos/1176344064)), but it is pretty unfamiliar to the political science/econ folks I roll with.^[
+  There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.
+]
+People often ask me, "How can you even have a Bayesian experiment; don't you already have randomization?" You have a Bayesian experiment (or other credible research design) specifying priors on the parameters. On its face, it's pretty unremarkable. Remember that the causal model (the definition of the potential outcomes) is distinct from the methods used to *estimate* causal parameters. Bayesian analysis is located closer to the estimation end of things, whereas causal modeling is a series of assumptions about identifying variation in the data. In short, you fix confounding with research design. Priors aren't going to do that for you.
+
+A Bayesian model may not change the research design or the causal assumptions, but it can provide a different interpretation of potential outcomes. Ordinarily we write potential outcomes as $Y_{i}(T_{i} = t)$, the outcome value for unit $i$ if it received treatment value $t$. Only one potential outcome per unit is ever observed, so can't observe the individual causal effect $\tau_{i}$, but we can use a causal identification analysis to lay out the assumptions required to estimate an average effect $\bar{\tau}$ for at least some subset of units. If we knew this average effect, we would be able to state, for each observed outcome $y_{i}$, what the *expected value* of that unit's unobserved potential outcome would be if we could set $T_{i}$ to some value $t'$ other than what was observed. In this way, the unobserved potential outcome is missing data that we can predict with an estimated the model that generates (potential) outcomes.
+
+In a Bayesian framework, there is a joint model $p\left(y, \theta \right)$ for outcome data $y$ and model parameters $\theta$. This is equivalently expressed as $p(y \mid \theta)p(\theta)$, which is to say that the distribution of $y$ depends on the value of $\theta$ and that $\theta$ has its own distribution. We fit the model by conditioning on the observed $y$ to obtain the posterior distribution $p\left(\theta \mid y \right)$. It is this updated model that represents our state of information about the process that generates outcomes $y_{i}(t)$. If we wanted to make posterior inferences about what $y_{i}(t)$ *would have been* (in expectation) if we could arbitrarily change $t$, we would simulate the unobserved potential outcomes $\tilde{y}$ from the model. 
+\begin{align}
+  p(\tilde{y} \mid y) &= \int p(\tilde{y} \mid \theta) p(\theta \mid y)d\theta
+\end{align}
+New data are expressed as a probability distribution because we don't know exactly what the data will be. This distribution depends on $\theta$, which itself is conditioned on $y$, and we integrate to average over our uncertainty about $\theta$. This gives us a marginal distribution for the unobserved potential outcomes.
+
+The Bayesian view of potential outcomes is appealing because our state of ignorance about the exact potential outcomes is an explicit feature of the model, rather than a point estimate and a standard error. Which is to say, *we don't know* what the treatment effect and thus the unobserved potential outcomes are, but we have a distribution of guesses that is weighted by their plausibility. By conditioning on data, we improve our information about these values, but we never get pinpoint estimates of anything. The philosophical resonance of this approach is present even without incorporating external information in the form of priors. To whatever extent researchers already view point estimates and frequentist confidence intervals on treatment effects as "ranges of plausible values" with associated posterior probabilities, they are already doing Bayesian causal inference---just without the benefit of having formally set up the whole model.
+
+
+# Causal Mediation
+
+Causal mediation analysis is concerned with a causal graph where a treatment $T$ affects an outcome $Y$, and the effect flows at least partially through a mediator $M$. Potential outcomes are expressed as $Y_{i}(T_{i}, M_{i}(T_{i}))$, where the value of $Y$ depends both on the treatment assignment $T_{i} = t$ and the resulting value of the mediator $M_{i}(t)$. The causal effects are a decomposition of the average treatment effect.
+
+- The *average treatment effect*: how much total change in $Y$ is owed to setting the value of $T$? Written as $Y(1, M(1)) - Y(0, M(0))$.
+- The *causal mediation effect*: how much of the total change in $Y$ is attributed to $T$'s effect on $M$, which also affects $Y$? Or, how much change in $Y$ is owed to the fact that $M$ changed, as opposed to not changing, holding constant all other ways that $T$ can affect $Y$? Written as $Y(t, M(1)) - Y(t, M(0))$.
+- The *direct effect*: how much of the change in $Y$ is not flowing through $M$? In other words, how would $Y$ be different even if $T$ had no effect on $M$? Written as $Y(1, M(t)) - Y(0, M(t))$.
+
+In order to estimate these quantities, we need some models that describe how $M(T)$ and $Y(T, M(T))$ are generated. How is $M$ affected by the treatment, and then how is $Y$ affected by the treatment and the treatment's effect on $M$? 
+
+<!-- moving on -->
+
+- can be any form, but we use linear
+- BVS example from the Imai et al. paper
+
+
+# Potential outcomes
+
+CME: for a treated unit, how would the outcome differ if the mediated were untreated (holding the treatment fixed)
+
+ADE: how much of the treatment effect is not attributable to the mediator (holding the mediator value fixed)
+
+
+## The algorithm
+
+Fit the following two models.
+
+\begin{align}
+  M_{i}(t) &= f\left(T_{i} = t, X_{i}, \beta_{1}, \delta_{1}\right) \\[12pt]
+  Y_{i}\left( t, M_{i}(t) \right) &= g\left(T_{i} = t, M_{i}(t), X_{i}, \beta_{2}, \delta_{2}, \gamma \right)
+\end{align}
+
+Walk through these individually.
+
+Generate predicted values $\tilde{M}_{i}(t)$.
+
+\begin{align}
+  \tilde{M}_{i}(1) &= f\left(T_{i} = 1, X_{i}, \hat{\beta}_{1}, \hat{\delta}_{1}\right) \\[12pt]
+  \tilde{M}_{i}(0) &= f\left(T_{i} = 0, X_{i}, \hat{\beta}_{1}, \hat{\delta}_{1} \right) \\[12pt]
+\end{align}
+
+Now has tildes (simulated) and hats (estimated).
+
+Generate predicted values of the potential outcomes, given the simulated mediator values.
+
+\begin{align}
+  Y_{i}\left(T_{1} = t, \tilde{M}_{i}(1)\right) &= g\left(T_{i} = t, \tilde{M}_{i}(1), X_{i}, \hat{\beta}_{2}, \hat{\delta}_{2}, \hat{\gamma} \right) \\[12pt]
+  Y_{i}\left(T_{1} = t, \tilde{M}_{i}(0)\right) &= g\left(T_{i} = t, \tilde{M}_{i}(0), X_{i}, \hat{\beta}_{2}, \hat{\delta}_{2}, \hat{\gamma} \right)
+\end{align}
+
+The ACME is the difference between these potential outcomes, taking the expectation across $i$.
+\begin{align}
+  \mathit{ACME}(t) &= \mathbb{E}\left[Y_{i}\left(t, \tilde{M}_{i}(1)\right) - Y_{i}\left(t, \tilde{M}_{i}(0)\right)\right]
+\end{align}
+
+
+Some closing note.
+
+

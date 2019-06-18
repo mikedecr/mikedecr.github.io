@@ -24,29 +24,41 @@ Having calculated wait time data for the MIT Election Data and Sciences Lab befo
 
 I think we can do better. 
 
-Think about it this way. There is a true wait time, but we don't observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are count distributed, ordinarily modeled with a Poisson distribution), this symmetric assumption could be better.
+Think about it this way. There is a true wait time, but we don't observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are the wait times between Poisson processes, ordinarily modeled with an always-decreasing exponential distribution), this symmetric assumption could be better.
 
 <!-- Graphic. -->
 
 There's a likelihood-based way to get at this. Rather than trust the censored data as it is, we could model the unobserved data using the censored data as a noisy indicator. In other words, what is the likely distribution of wait times, given the pattern in censored wait times that we see?
 
+
+
+
+# (New thoughts) notes to self
+
+The time you wait is f(arrivals, drops, departures): 
+
+(arrival - dropout) / (departure)
+
+
+
+
 # Setting up the latent variable model
 
-Suppose there is a true wait time $\omega$ for voter $i$ in state $s$. We assume $\omega_{i}$ as a Poisson draw from the distribution of wait times in state $s$,
+Suppose there is a true wait time $\omega$ for voter $i$ in state $s$. We assume $\omega_{i}$ is an Exponential draw from the distribution of wait times in state $s$,
 \begin{align}
-  \omega_{i} &\sim \mathrm{Poisson}(\lambda_{s[i]}),
+  \omega_{i} &\sim \mathrm{Exponential}(\lambda_{s[i]}),
 \end{align}
-where $\lambda_{s}$ is the mean wait time in state $s$.
+where $\lambda_{s}$ is the rate parameter and $\beta = \dfrac{1}{\lambda_{s}}$ is the mean wait time in state $s$.
 
-Wait times are measured in surveys using discrete categories to represent a range of wait times. Let $y_{i}$ be the discrete measure of wait time for voter $i$. If there are $K$ total categories, then the probability that $y_{i} = k$ is given by a difference in cumulative Poisson functions.
+Wait times are measured in surveys using discrete categories to represent a range of wait times. Let $y_{i}$ be the discrete measure of wait time for voter $i$. If there are $K$ total categories, then the probability that $y_{i} = k$ is given by a difference in cumulative Exponential functions.
 \begin{align}
-  \mathrm{Pr}(y_{i} = k) &= \displaystyle e^{-\lambda_{s} }\sum _{r=k^{-}}^{k^{+}}{\frac {\lambda_{s}^{r}}{r!}}
+  \mathrm{Pr}(y_{i} = k) &= 1 - e^{}
 \end{align}
 which is the sum of the probability mass between the lower bound $(k^{-})$ and upper bound $(k^{+})$ of category $k$. This is equivalent of taking the CDF at $k^{+}$ minus the CDF at $k^{-}$. 
 <!-- but gotta get the boundary minus one situation sorted out. Use graphics for the intuition. -->
 The foundation for this setup is a lot like logistic regression.
 
-The observed wait time is measured in ordinal bins. As long as $\omega_i$ is a random variable from the Poisson process, then its falling into a particular bin can be represented as a categorical outcome.
+The observed wait time is measured in ordinal bins. As long as $\omega_i$ is a random variable from the Exponential process, then its falling into a particular bin can be represented as a categorical outcome.
 <!-- or is it an ordered thing? -->
 \begin{align}
   y_{i} &\sim \mathrm{Categorical}\left( \pi_{k} \right)
@@ -65,9 +77,9 @@ $y_{i}$ is a piecewise categorical function of the true wait time.
   y_{i} = I\left( k^{-} < \omega_{i} < k^{*} \right), \text{ for } k \in \left\{1, 2, \ldots, K \right\}
 \end{align}
 
-And $\omega_{i}$ is a Poisson draw from the state mean wait.
+And $\omega_{i}$ is a Exponential draw from the state mean wait.
 \begin{align}
-  \omega_{i} &\sim \mathrm{Poisson}(\lambda_{s[i]}),
+  \omega_{i} &\sim \mathrm{Exponential}(\lambda_{s[i]}),
 \end{align}
 
 From here all we have to do is give $\lambda_{s}$ its own prior. We can do independent priors to start with,

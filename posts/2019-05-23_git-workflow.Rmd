@@ -1,0 +1,16 @@
+---
+title: "Plain Text Research: None of us know what we're doing"
+author: Michael DeCrescenzo
+description: "It's worse than you think"
+date: '2019-05-23'
+slug: gitting-help
+categories: ["Methods"]
+tags: ["computational-methods"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+nature:
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+

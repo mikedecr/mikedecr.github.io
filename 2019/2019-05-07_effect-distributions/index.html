@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+  
+
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Michael DeCrescenzo">
+  <meta name="description" content="Ph.D. Candidate, Political Science, University of Wisconsin–Madison">
+  <meta name="keywords" content="political science, university of wisconsin madison, uw madison">
+  
+  <link rel="prev" href="/2019/2019-03-21_bayesian-wait-times/" />
+  <link rel="next" href="/2019/2019-05-07_operationalizations/" />
+  <link rel="canonical" href="/2019/2019-05-07_effect-distributions/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+  <link rel="icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           The Model is Itself a Hierarchical Variable | Michael DeCrescenzo
+       
+  </title>
+  <meta name="title" content="The Model is Itself a Hierarchical Variable | Michael DeCrescenzo">
+    
+
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "/"
+    },
+    "articleSection" : "posts",
+    "name" : "The Model is Itself a Hierarchical Variable",
+    "headline" : "The Model is Itself a Hierarchical Variable",
+    "description" : "A Reaction to Some Tweets",
+    "inLanguage" : "en-us",
+    "author" : "Michael DeCrescenzo",
+    "creator" : "Michael DeCrescenzo",
+    "publisher": "Michael DeCrescenzo",
+    "accountablePerson" : "Michael DeCrescenzo",
+    "copyrightHolder" : "Michael DeCrescenzo",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-05-07 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2019-05-07 00:00:00 &#43;0000 UTC",
+    "url" : "/2019/2019-05-07_effect-distributions/",
+    "wordCount" : "416",
+    "keywords" : [ "Causal inference","Bayesian statistics", "Michael DeCrescenzo"]
+}
+</script>
+
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="http://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics Made Easy - StatCounter"></a></div></noscript>
+
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+         <a href="/">Home</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/research/" title="">Research</a>
+                
+                <a class="menu-item" href="/teaching/" title="">Teaching</a>
+                
+                <a class="menu-item" href="/code/" title="">Code</a>
+                
+                <a class="menu-item" href="/contact/" title="">Contact</a>
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="/">Michael DeCrescenzo</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/research/" title="">Research</a>
+                
+                <a class="menu-item" href="/teaching/" title="">Teaching</a>
+                
+                <a class="menu-item" href="/code/" title="">Code</a>
+                
+                <a class="menu-item" href="/contact/" title="">Contact</a>
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">The Model is Itself a Hierarchical Variable</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="/" rel="author">Michael DeCrescenzo</a>
+                <span class="post-time">
+                on <time datetime=2019-05-07 itemprop="datePublished">May 7, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="/categories/methods/"> Methods </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <div id="tweets" class="section level1">
+<h1>Tweets</h1>
+<ul>
+<li>I should do more than vague-tweet abt this.
+🔸 Treatment fx are unknown! I think techniques that tell us about the distribution of plausible fx are improvements over “robustness tests” if the latter focus on the robustness of the num. of stars vs substantive inferences about fx</li>
+<li>🔸 Engaging directly w/ the parameter val as the actual qty of interest, not its sign. Maybe it’s just me but I can’t grok a “purely directional” hypotheses. How common are cases where an estimate of 1 gives us the same info as an effect of 1mil, or 1/1mil. They’re all &gt; 0</li>
+<li>🔸 The model can be a variable in the analysis. Bayes can do this w/ prior prob of the model, &amp; models don’t need equal priors. Concepts like “goodness of fit” via marginal likelihood can be weird for causal inference though because GOF isn’t a measure of causal identification</li>
+</ul>
+</div>
+<div id="outline" class="section level1">
+<h1>Outline</h1>
+<ul>
+<li>Intro</li>
+<li>If posterior distributions did not exist, we would have to invent them</li>
+<li>Can think of no examples where we only have a directional hypothesis</li>
+</ul>
+</div>
+<div id="notes" class="section level1">
+<h1>Notes</h1>
+<p><a href="https://t.co/L4AMcbbS2g?amp=1">Original paper</a></p>
+<p><a href="https://twitter.com/JohnHolbein1/status/1125726900331130880">Holbein sub-thread</a></p>
+<p><a href="https://twitter.com/JohnHolbein1/status/1125727699639701505">Holbein: direction vs. size</a></p>
+<ul>
+<li>This is why I care about Bayesian causal inference</li>
+<li>The direction is often not what we care about
+<ul>
+<li>what if it were positive but 10 million?</li>
+<li>what about situations where we know that the effect has to be in some direction?
+<ul>
+<li>List experiments and the TRUE parameter</li>
+<li>Voter ID and KNOWING that it isn’t zero</li>
+</ul></li>
+</ul></li>
+<li><p>The “Bayesian <span class="math inline">\(p\)</span>-value” is a function of the underlying thing that we care about: the causal parameter</p></li>
+<li>compliment the approach, it’s reinforcing the idea that we are uncertain about the system</li>
+<li>The model is also variable (an uncertain parameter); so vary it</li>
+<li>This fits in a Bayesian framework</li>
+<li><p>The prior is flat</p></li>
+</ul>
+<div id="the-model-is-a-itself-a-variable-in-the-system" class="section level2">
+<h2>The model is a itself a variable in the system</h2>
+<p>Bayes w/out Frequentist language</p>
+<ul>
+<li>data and parameters are variables (known vs unknown)</li>
+<li>parameters are unknown so given some prior</li>
+<li>the data update the prior</li>
+</ul>
+<p>The model is a variable</p>
+<ul>
+<li>really, a parameter</li>
+<li>we don’t know which is “right”</li>
+<li>we approximate our information with a probability distribution</li>
+</ul>
+<p>Bayes factors</p>
+<ul>
+<li>Calculate the probability of the data, given the model
+<ul>
+<li>the marginal likelihood</li>
+</ul></li>
+<li>Weight by the prior</li>
+</ul>
+<p>The marginal likelihood</p>
+<ul>
+<li><p>The probability of the data, integrating over parameters</p></li>
+<li>The treatment effect is uncertain
+<ul>
+<li>Frequentism is a <em>point estimate</em>. The confidence interval is an asymptotic result from <em>repeated sampling</em></li>
+<li>Even in a one-off sample with no repetition, we the treatment effect <em>could be bigger</em> and <em>could be smaller</em></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Michael DeCrescenzo </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=/2019/2019-05-07_effect-distributions/>/2019/2019-05-07_effect-distributions/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="/tags/causal-inference/">
+                    #Causal inference</a></span>
+            
+            <span class="tag"><a href="/tags/bayesian-statistics/">
+                    #Bayesian statistics</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/2019-03-21_bayesian-wait-times/" class="prev" rel="prev" title="Bayesian Estimates of Wait Times at the Polls"><i class="iconfont icon-left"></i>&nbsp;Bayesian Estimates of Wait Times at the Polls</a>
+         
+        
+        <a href="/2019/2019-05-07_operationalizations/" class="next" rel="next" title="Operationalizations Make Random Variables">Operationalizations Make Random Variables&nbsp;<i class="iconfont icon-right"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016–2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Michael DeCrescenzo</a> | </span> 
+         
+
+         
+    <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

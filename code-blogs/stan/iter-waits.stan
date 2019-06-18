@@ -17,23 +17,26 @@ data {
 
 parameters {
 
-  // true mean wait
+  // true rate
   real<lower = 0> lambda;
 
 }
 
 transformed parameters {
   
-
+  real<lower = 0> beta;
   vector[n_bin] log_prob;
   vector[n_bin] cut_lps;
   vector[n_bin] cut_cdfs;
   
-  // find the Poisson LCDF at each cutpoint | lambda
+  // mean wait is inverse rate
+  beta = inv(lambda);
+
+  // find the exponential LCDF at each cutpoint | lambda
   // Then log_prob is the cumulative link
   for (b in 1:n_bin) {
     if (b < n_bin) {
-      cut_lps[b] = poisson_lcdf(cuts[b] | lambda);
+      cut_lps[b] = exponential_lcdf(cuts[b] | lambda);
     } else if (b == n_bin) {
       cut_lps[b] = log(1);
     }

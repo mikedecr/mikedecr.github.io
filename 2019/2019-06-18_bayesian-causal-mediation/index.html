@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+  
+
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  <meta name="author" content="Michael DeCrescenzo">
+  <meta name="description" content="Ph.D. Candidate, Political Science, University of Wisconsin–Madison">
+  <meta name="keywords" content="political science, university of wisconsin madison, uw madison">
+  
+  <link rel="prev" href="/2019/2019-05-23_git-workflow/" />
+  
+  <link rel="canonical" href="/2019/2019-06-18_bayesian-causal-mediation/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
+  <link rel="icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Causal Mediation, Bayesianly | Michael DeCrescenzo
+       
+  </title>
+  <meta name="title" content="Causal Mediation, Bayesianly | Michael DeCrescenzo">
+    
+
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  
+  
+ 
+
+<script type="application/ld+json">
+ "@context" : "http://schema.org",
+    "@type" : "BlogPosting",
+    "mainEntityOfPage": {
+         "@type": "WebPage",
+         "@id": "/"
+    },
+    "articleSection" : "posts",
+    "name" : "Causal Mediation, Bayesianly",
+    "headline" : "Causal Mediation, Bayesianly",
+    "description" : "This is what we were already doing",
+    "inLanguage" : "en-us",
+    "author" : "Michael DeCrescenzo",
+    "creator" : "Michael DeCrescenzo",
+    "publisher": "Michael DeCrescenzo",
+    "accountablePerson" : "Michael DeCrescenzo",
+    "copyrightHolder" : "Michael DeCrescenzo",
+    "copyrightYear" : "2019",
+    "datePublished": "2019-06-08 00:00:00 &#43;0000 UTC",
+    "dateModified" : "2019-06-08 00:00:00 &#43;0000 UTC",
+    "url" : "/2019/2019-06-18_bayesian-causal-mediation/",
+    "wordCount" : "1206",
+    "keywords" : [ "computational-methods","bayesian-statistics","causal-inference","experiments", "Michael DeCrescenzo"]
+}
+</script>
+
+  <script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\\[','\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics
+Made Easy - StatCounter" href="http://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="//c.statcounter.com/11382424/0/647b3843/1/" alt="Web
+Analytics Made Easy - StatCounter"></a></div></noscript>
+
+
+</head>
+
+  
+
+
+  <body class="">
+    <div class="wrapper">
+        
+
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+         <a href="/">Home</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/research/" title="">Research</a>
+                
+                <a class="menu-item" href="/teaching/" title="">Teaching</a>
+                
+                <a class="menu-item" href="/code/" title="">Code</a>
+                
+                <a class="menu-item" href="/contact/" title="">Contact</a>
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="/">Michael DeCrescenzo</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/about/" title="">About</a>
+                
+                <a class="menu-item" href="/research/" title="">Research</a>
+                
+                <a class="menu-item" href="/teaching/" title="">Teaching</a>
+                
+                <a class="menu-item" href="/code/" title="">Code</a>
+                
+                <a class="menu-item" href="/contact/" title="">Contact</a>
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+        </div>
+    </div>
+</nav>
+
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Causal Mediation, Bayesianly</h1>
+        <div class="post-meta">
+                Written by <a itemprop="name" href="/" rel="author">Michael DeCrescenzo</a>
+                <span class="post-time">
+                on <time datetime=2019-06-08 itemprop="datePublished">June 8, 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="/categories/methods/"> Methods </a>
+                        
+                </span>
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <div id="motivation-for-this-post" class="section level1">
+<h1>Motivation for this post</h1>
+<p>Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.</p>
+<p>We covered causal mediation this week (<a href="https://imai.fas.harvard.edu/research/files/mediationP.pdf">Imai et al. 2011 <em>APSR</em></a>), which I thought would be a good opportunity to explain where my thoughts are going about this. So this post will briefly describe a Bayesian vantage point on causal inference and show how to use Bayesian tools to implement it.</p>
+</div>
+<div id="posterior-predictive-draws.-i-mean-unobserved-potential-outcomes" class="section level1">
+<h1>Posterior Predictive Draws. I mean, “Unobserved Potential Outcomes”</h1>
+<p>It should be noted up front that Bayesian approaches to causal inference are not at all new (<a href="https://projecteuclid.org/download/pdf_1/euclid.aos/1176344064">Rubin 1978</a>), but it is pretty unfamiliar to the political science/econ folks I roll with.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+People often ask me, “How can you even have a Bayesian experiment; don’t you already have randomization?” You have a Bayesian experiment (or other credible research design) specifying priors on the parameters. On its face, it’s pretty unremarkable. Remember that the causal model (the definition of the potential outcomes) is distinct from the methods used to <em>estimate</em> causal parameters. Bayesian analysis is located closer to the estimation end of things, whereas causal modeling is a series of assumptions about identifying variation in the data. In short, you fix confounding with research design. Priors aren’t going to do that for you.</p>
+<p>A Bayesian model may not change the research design or the causal assumptions, but it can provide a different interpretation of potential outcomes. Ordinarily we write potential outcomes as <span class="math inline">\(Y_{i}(T_{i} = t)\)</span>, the outcome value for unit <span class="math inline">\(i\)</span> if it received treatment value <span class="math inline">\(t\)</span>. Only one potential outcome per unit is ever observed, so can’t observe the individual causal effect <span class="math inline">\(\tau_{i}\)</span>, but we can use a causal identification analysis to lay out the assumptions required to estimate an average effect <span class="math inline">\(\bar{\tau}\)</span> for at least some subset of units. If we knew this average effect, we would be able to state, for each observed outcome <span class="math inline">\(y_{i}\)</span>, what the <em>expected value</em> of that unit’s unobserved potential outcome would be if we could set <span class="math inline">\(T_{i}\)</span> to some value <span class="math inline">\(t&#39;\)</span> other than what was observed. In this way, the unobserved potential outcome is missing data that we can predict with an estimated the model that generates (potential) outcomes.</p>
+<p>In a Bayesian framework, there is a joint model <span class="math inline">\(p\left(y, \theta \right)\)</span> for outcome data <span class="math inline">\(y\)</span> and model parameters <span class="math inline">\(\theta\)</span>. This is equivalently expressed as <span class="math inline">\(p(y \mid \theta)p(\theta)\)</span>, which is to say that the distribution of <span class="math inline">\(y\)</span> depends on the value of <span class="math inline">\(\theta\)</span> and that <span class="math inline">\(\theta\)</span> has its own distribution. We fit the model by conditioning on the observed <span class="math inline">\(y\)</span> to obtain the posterior distribution <span class="math inline">\(p\left(\theta \mid y \right)\)</span>. It is this updated model that represents our state of information about the process that generates outcomes <span class="math inline">\(y_{i}(t)\)</span>. If we wanted to make posterior inferences about what <span class="math inline">\(y_{i}(t)\)</span> <em>would have been</em> (in expectation) if we could arbitrarily change <span class="math inline">\(t\)</span>, we would simulate the unobserved potential outcomes <span class="math inline">\(\tilde{y}\)</span> from the model.
+<span class="math display">\[\begin{align}
+  p(\tilde{y} \mid y) &amp;= \int p(\tilde{y} \mid \theta) p(\theta \mid y)d\theta
+\end{align}\]</span>
+New data are expressed as a probability distribution because we don’t know exactly what the data will be. This distribution depends on <span class="math inline">\(\theta\)</span>, which itself is conditioned on <span class="math inline">\(y\)</span>, and we integrate to average over our uncertainty about <span class="math inline">\(\theta\)</span>. This gives us a marginal distribution for the unobserved potential outcomes.</p>
+<p>The Bayesian view of potential outcomes is appealing because our state of ignorance about the exact potential outcomes is an explicit feature of the model, rather than a point estimate and a standard error. Which is to say, <em>we don’t know</em> what the treatment effect and thus the unobserved potential outcomes are, but we have a distribution of guesses that is weighted by their plausibility. By conditioning on data, we improve our information about these values, but we never get pinpoint estimates of anything. The philosophical resonance of this approach is present even without incorporating external information in the form of priors. To whatever extent researchers already view point estimates and frequentist confidence intervals on treatment effects as “ranges of plausible values” with associated posterior probabilities, they are already doing Bayesian causal inference—just without the benefit of having formally set up the whole model.</p>
+</div>
+<div id="causal-mediation" class="section level1">
+<h1>Causal Mediation</h1>
+<p>Causal mediation analysis is concerned with a causal graph where a treatment <span class="math inline">\(T\)</span> affects an outcome <span class="math inline">\(Y\)</span>, and the effect flows at least partially through a mediator <span class="math inline">\(M\)</span>. Potential outcomes are expressed as <span class="math inline">\(Y_{i}(T_{i}, M_{i}(T_{i}))\)</span>, where the value of <span class="math inline">\(Y\)</span> depends both on the treatment assignment <span class="math inline">\(T_{i} = t\)</span> and the resulting value of the mediator <span class="math inline">\(M_{i}(t)\)</span>. The causal effects are a decomposition of the average treatment effect.</p>
+<ul>
+<li>The <em>average treatment effect</em>: how much total change in <span class="math inline">\(Y\)</span> is owed to setting the value of <span class="math inline">\(T\)</span>? Written as <span class="math inline">\(Y(1, M(1)) - Y(0, M(0))\)</span>.</li>
+<li>The <em>causal mediation effect</em>: how much of the total change in <span class="math inline">\(Y\)</span> is attributed to <span class="math inline">\(T\)</span>’s effect on <span class="math inline">\(M\)</span>, which also affects <span class="math inline">\(Y\)</span>? Or, how much change in <span class="math inline">\(Y\)</span> is owed to the fact that <span class="math inline">\(M\)</span> changed, as opposed to not changing, holding constant all other ways that <span class="math inline">\(T\)</span> can affect <span class="math inline">\(Y\)</span>? Written as <span class="math inline">\(Y(t, M(1)) - Y(t, M(0))\)</span>.</li>
+<li>The <em>direct effect</em>: how much of the change in <span class="math inline">\(Y\)</span> is not flowing through <span class="math inline">\(M\)</span>? In other words, how would <span class="math inline">\(Y\)</span> be different even if <span class="math inline">\(T\)</span> had no effect on <span class="math inline">\(M\)</span>? Written as <span class="math inline">\(Y(1, M(t)) - Y(0, M(t))\)</span>.</li>
+</ul>
+<p>In order to estimate these quantities, we need some models that describe how <span class="math inline">\(M(T)\)</span> and <span class="math inline">\(Y(T, M(T))\)</span> are generated. How is <span class="math inline">\(M\)</span> affected by the treatment, and then how is <span class="math inline">\(Y\)</span> affected by the treatment and the treatment’s effect on <span class="math inline">\(M\)</span>?</p>
+<!-- moving on -->
+<ul>
+<li>can be any form, but we use linear</li>
+<li>BVS example from the Imai et al. paper</li>
+</ul>
+</div>
+<div id="potential-outcomes" class="section level1">
+<h1>Potential outcomes</h1>
+<p>CME: for a treated unit, how would the outcome differ if the mediated were untreated (holding the treatment fixed)</p>
+<p>ADE: how much of the treatment effect is not attributable to the mediator (holding the mediator value fixed)</p>
+<div id="the-algorithm" class="section level2">
+<h2>The algorithm</h2>
+<p>Fit the following two models.</p>
+<p><span class="math display">\[\begin{align}
+  M_{i}(t) &amp;= f\left(T_{i} = t, X_{i}, \beta_{1}, \delta_{1}\right) \\[12pt]
+  Y_{i}\left( t, M_{i}(t) \right) &amp;= g\left(T_{i} = t, M_{i}(t), X_{i}, \beta_{2}, \delta_{2}, \gamma \right)
+\end{align}\]</span></p>
+<p>Walk through these individually.</p>
+<p>Generate predicted values <span class="math inline">\(\tilde{M}_{i}(t)\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+  \tilde{M}_{i}(1) &amp;= f\left(T_{i} = 1, X_{i}, \hat{\beta}_{1}, \hat{\delta}_{1}\right) \\[12pt]
+  \tilde{M}_{i}(0) &amp;= f\left(T_{i} = 0, X_{i}, \hat{\beta}_{1}, \hat{\delta}_{1} \right) \\[12pt]
+\end{align}\]</span></p>
+<p>Now has tildes (simulated) and hats (estimated).</p>
+<p>Generate predicted values of the potential outcomes, given the simulated mediator values.</p>
+<p><span class="math display">\[\begin{align}
+  Y_{i}\left(T_{1} = t, \tilde{M}_{i}(1)\right) &amp;= g\left(T_{i} = t, \tilde{M}_{i}(1), X_{i}, \hat{\beta}_{2}, \hat{\delta}_{2}, \hat{\gamma} \right) \\[12pt]
+  Y_{i}\left(T_{1} = t, \tilde{M}_{i}(0)\right) &amp;= g\left(T_{i} = t, \tilde{M}_{i}(0), X_{i}, \hat{\beta}_{2}, \hat{\delta}_{2}, \hat{\gamma} \right)
+\end{align}\]</span></p>
+<p>The ACME is the difference between these potential outcomes, taking the expectation across <span class="math inline">\(i\)</span>.
+<span class="math display">\[\begin{align}
+  \mathit{ACME}(t) &amp;= \mathbb{E}\left[Y_{i}\left(t, \tilde{M}_{i}(1)\right) - Y_{i}\left(t, \tilde{M}_{i}(0)\right)\right]
+\end{align}\]</span></p>
+<p>Some closing note.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>Michael DeCrescenzo </span>
+                </p>
+            
+           
+             
+            <p class="copyright-item">
+                    <span>Link:</span>
+                    <a href=/2019/2019-06-18_bayesian-causal-mediation/>/2019/2019-06-18_bayesian-causal-mediation/</span>
+            </p>
+            
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-tag"></i>Tag(s): 
+            
+            <span class="tag"><a href="/tags/computational-methods/">
+                    #computational-methods</a></span>
+            
+            <span class="tag"><a href="/tags/bayesian-statistics/">
+                    #bayesian-statistics</a></span>
+            
+            <span class="tag"><a href="/tags/causal-inference/">
+                    #causal-inference</a></span>
+            
+            <span class="tag"><a href="/tags/experiments/">
+                    #experiments</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">back</a></span> · 
+                <span><a href="/">home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="/2019/2019-05-23_git-workflow/" class="prev" rel="prev" title="Plain Text Research: None of us know what we&#39;re doing"><i class="iconfont icon-left"></i>&nbsp;Plain Text Research: None of us know what we&#39;re doing</a>
+         
+        
+    </div>
+
+    <div class="post-comment">
+          
+                 
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2016–2019</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="/">Michael DeCrescenzo</a> | </span> 
+         
+
+         
+    <span>Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow">Hugo</a> & <a href="https://github.com/liuzc/leaveit" target="_blank" rel="external nofollow">LeaveIt</a></span> 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+     </div>
+  </body>
+</html>

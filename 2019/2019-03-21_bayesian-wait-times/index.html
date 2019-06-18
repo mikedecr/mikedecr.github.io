@@ -13,7 +13,7 @@
   <meta name="keywords" content="political science, university of wisconsin madison, uw madison">
   
   <link rel="prev" href="/2019/2019-02-23_gerber-green-kaplan/" />
-  
+  <link rel="next" href="/2019/2019-05-07_effect-distributions/" />
   <link rel="canonical" href="/2019/2019-03-21_bayesian-wait-times/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/images/site/apple-touch-icon.png">
   <link rel="icon" href="/images/site/favicon-area-chart.ico" type="image/x-icon" />
@@ -60,7 +60,7 @@
     "datePublished": "2019-03-21 00:00:00 &#43;0000 UTC",
     "dateModified" : "2019-03-21 00:00:00 &#43;0000 UTC",
     "url" : "/2019/2019-03-21_bayesian-wait-times/",
-    "wordCount" : "596",
+    "wordCount" : "625",
     "keywords" : [ "Election Administration","Bayesian statistics", "Michael DeCrescenzo"]
 }
 </script>
@@ -211,24 +211,29 @@ Analytics Made Easy - StatCounter"></a></div></noscript>
 <p>Having calculated wait time data for the MIT Election Data and Sciences Lab before (the 2016 data might be my own work? I can’t be sure), I know a little bit about how this is usually done.</p>
 <!-- Method. -->
 <p>I think we can do better.</p>
-<p>Think about it this way. There is a true wait time, but we don’t observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are count distributed, ordinarily modeled with a Poisson distribution), this symmetric assumption could be better.</p>
+<p>Think about it this way. There is a true wait time, but we don’t observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are the wait times between Poisson processes, ordinarily modeled with an always-decreasing exponential distribution), this symmetric assumption could be better.</p>
 <!-- Graphic. -->
 <p>There’s a likelihood-based way to get at this. Rather than trust the censored data as it is, we could model the unobserved data using the censored data as a noisy indicator. In other words, what is the likely distribution of wait times, given the pattern in censored wait times that we see?</p>
+<div id="new-thoughts-notes-to-self" class="section level1">
+<h1>(New thoughts) notes to self</h1>
+<p>The time you wait is f(arrivals, drops, departures):</p>
+<p>(arrival - dropout) / (departure)</p>
+</div>
 <div id="setting-up-the-latent-variable-model" class="section level1">
 <h1>Setting up the latent variable model</h1>
-<p>Suppose there is a true wait time <span class="math inline">\(\omega\)</span> for voter <span class="math inline">\(i\)</span> in state <span class="math inline">\(s\)</span>. We assume <span class="math inline">\(\omega_{i}\)</span> as a Poisson draw from the distribution of wait times in state <span class="math inline">\(s\)</span>,
+<p>Suppose there is a true wait time <span class="math inline">\(\omega\)</span> for voter <span class="math inline">\(i\)</span> in state <span class="math inline">\(s\)</span>. We assume <span class="math inline">\(\omega_{i}\)</span> is an Exponential draw from the distribution of wait times in state <span class="math inline">\(s\)</span>,
 <span class="math display">\[\begin{align}
-  \omega_{i} &amp;\sim \mathrm{Poisson}(\lambda_{s[i]}),
+  \omega_{i} &amp;\sim \mathrm{Exponential}(\lambda_{s[i]}),
 \end{align}\]</span>
-where <span class="math inline">\(\lambda_{s}\)</span> is the mean wait time in state <span class="math inline">\(s\)</span>.</p>
-<p>Wait times are measured in surveys using discrete categories to represent a range of wait times. Let <span class="math inline">\(y_{i}\)</span> be the discrete measure of wait time for voter <span class="math inline">\(i\)</span>. If there are <span class="math inline">\(K\)</span> total categories, then the probability that <span class="math inline">\(y_{i} = k\)</span> is given by a difference in cumulative Poisson functions.
+where <span class="math inline">\(\lambda_{s}\)</span> is the rate parameter and <span class="math inline">\(\beta = \dfrac{1}{\lambda_{s}}\)</span> is the mean wait time in state <span class="math inline">\(s\)</span>.</p>
+<p>Wait times are measured in surveys using discrete categories to represent a range of wait times. Let <span class="math inline">\(y_{i}\)</span> be the discrete measure of wait time for voter <span class="math inline">\(i\)</span>. If there are <span class="math inline">\(K\)</span> total categories, then the probability that <span class="math inline">\(y_{i} = k\)</span> is given by a difference in cumulative Exponential functions.
 <span class="math display">\[\begin{align}
-  \mathrm{Pr}(y_{i} = k) &amp;= \displaystyle e^{-\lambda_{s} }\sum _{r=k^{-}}^{k^{+}}{\frac {\lambda_{s}^{r}}{r!}}
+  \mathrm{Pr}(y_{i} = k) &amp;= 1 - e^{}
 \end{align}\]</span>
 which is the sum of the probability mass between the lower bound <span class="math inline">\((k^{-})\)</span> and upper bound <span class="math inline">\((k^{+})\)</span> of category <span class="math inline">\(k\)</span>. This is equivalent of taking the CDF at <span class="math inline">\(k^{+}\)</span> minus the CDF at <span class="math inline">\(k^{-}\)</span>.
 <!-- but gotta get the boundary minus one situation sorted out. Use graphics for the intuition. -->
 The foundation for this setup is a lot like logistic regression.</p>
-<p>The observed wait time is measured in ordinal bins. As long as <span class="math inline">\(\omega_i\)</span> is a random variable from the Poisson process, then its falling into a particular bin can be represented as a categorical outcome.
+<p>The observed wait time is measured in ordinal bins. As long as <span class="math inline">\(\omega_i\)</span> is a random variable from the Exponential process, then its falling into a particular bin can be represented as a categorical outcome.
 <!-- or is it an ordered thing? -->
 <span class="math display">\[\begin{align}
   y_{i} &amp;\sim \mathrm{Categorical}\left( \pi_{k} \right)
@@ -245,9 +250,9 @@ The probability of being in category <span class="math inline">\(k\)</span> is g
 <span class="math display">\[\begin{align}
   y_{i} = I\left( k^{-} &lt; \omega_{i} &lt; k^{*} \right), \text{ for } k \in \left\{1, 2, \ldots, K \right\}
 \end{align}\]</span></p>
-<p>And <span class="math inline">\(\omega_{i}\)</span> is a Poisson draw from the state mean wait.
+<p>And <span class="math inline">\(\omega_{i}\)</span> is a Exponential draw from the state mean wait.
 <span class="math display">\[\begin{align}
-  \omega_{i} &amp;\sim \mathrm{Poisson}(\lambda_{s[i]}),
+  \omega_{i} &amp;\sim \mathrm{Exponential}(\lambda_{s[i]}),
 \end{align}\]</span></p>
 <p>From here all we have to do is give <span class="math inline">\(\lambda_{s}\)</span> its own prior. We can do independent priors to start with,
 <span class="math display">\[\begin{align}
@@ -302,6 +307,8 @@ The probability of being in category <span class="math inline">\(k\)</span> is g
         
         <a href="/2019/2019-02-23_gerber-green-kaplan/" class="prev" rel="prev" title="Experimentalists Agree! When Flat Priors Lead to Worse Learning"><i class="iconfont icon-left"></i>&nbsp;Experimentalists Agree! When Flat Priors Lead to Worse Learning</a>
          
+        
+        <a href="/2019/2019-05-07_effect-distributions/" class="next" rel="next" title="The Model is Itself a Hierarchical Variable">The Model is Itself a Hierarchical Variable&nbsp;<i class="iconfont icon-right"></i></a>
         
     </div>
 

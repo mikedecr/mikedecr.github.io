@@ -1,0 +1,27 @@
+---
+title: 'What if "validity trade-offs" are actually just priors'
+description: ""
+author: Mike DeCrescenzo
+date: '2019-05-23'
+slug: gitting-help
+categories: ["Methods"]
+tags: ["computational-methods"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+nature:
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+# Outline
+
+- The conventional wisdom
+- The Samii view, there is no trade-off
+- My view: there is a trade-off, but we haven't modeled it well
+  - GGK vibes: we learn because there are priors
+  - Partial pooling analogy: the value of hyperpriors matters less than the structure
+  - This is what so-called "externally valid" larger scale research is. It's not identified, so it's not "general" but what it's doing is providing a structure for organizing information
+  - Large scale research is an informal prior for pooling information from lower-level studies. It is a little bit biased, but we know that. The parameters in the large-scale study matter less than the structure of the problem that is posed. Importantly, we do most of our learning about the hierarchical distribution from the lower-level studies anyway, so we should be thinking about the way that the small-scale studies "update" the biased picture from large-scale analyses.
+
+# Everything is a nail

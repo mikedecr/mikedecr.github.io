@@ -1,0 +1,141 @@
+---
+title: "Operationalizations Make Random Variables"
+author: Michael DeCrescenzo
+description: "It's worse than you think"
+date: '2019-05-07'
+slug: bayes-wait-times
+categories: ["Methods"]
+tags: ["Bayesian statistics"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: true
+nature:
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+Paul Musgrave [tweeted](https://twitter.com/profmusgrave/status/1125494153205493760) recently that operationalizations aren't definitions. In his own words:
+<center>
+  <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Operationalizations aren’t definitions</p>&mdash; Paul Musgrave (@profmusgrave) <a href="https://twitter.com/profmusgrave/status/1125494153205493760?ref_src=twsrc%5Etfw">May 6, 2019</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</center>
+When we do social science, our theories involve "forces at work" in the world. Definitions of those forces are *conceptual* discussions, while operationalizations are *measurement strategies* for turning the concept into a data point. 
+
+<!-- For instance, some of my work deals with "ideology," which can be defined by appealing to "systems" of beliefs that could be described as "connected" or "constrained," where individual beliefs may be "high dimensional" but summarized in fewer dimensions. Operationalizing ideology, meanwhile, is a decision about how to measure ideology. Do we ask people how "conservative" they think they are? Do we average their beliefs on discrete policy questions into some scale? Do we build a more complicated model to recover an underlying structure from an assortment of beliefs? -->
+
+I saw this tweet and, after agreeing with its argument, wanted to take it further. An implicit feature of "operationalization" is the idea that measures are imperfect indicators of the targeted construct. 
+
+> - What does a measure tell us about the underlying construct? Does it give us perfect, error-free information? Or is there some imperfection?
+> - Does the process translating construct into data have components of bias and error that can be confronted in the measurement strategy? 
+
+...
+
+> Operationalizations result in *random variables*. 
+
+\begin{align*}
+  \text{Observation}_{i} &= \text{Truth}_{i} + \text{Bias}_{i} + \text{Error}_{i}
+\end{align*}
+
+
+Which implies :
+
+\begin{align*}
+  \text{Observation}_{i} &\sim \mathcal{D}\left(\text{Truth}_{i} + \text{Bias}_{i}, \text{Error}_{i}\right)
+\end{align*}
+
+
+> We have a dualistic view of data analysis where data are "known" while parameters are "unknown." Often (most of the time?) we are overconfident about the amount of information conveyed 
+
+Definitions are conceptual.
+
+Operationalizations are data.
+
+Data are noisy, biased, error prone.
+
+Operationalizations should reflect noise, bias, error.
+
+Broader: "the DGP" where the data are some transformation of the underlying construct but also any additional artifacts of sampling, instrumentation, compliance, record-keeping... Most of the time we assume these influences are zero or are netting out in some way or another, but we still talk about them as "selection biases" or "response bias" and so on.
+
+
+
+
+# The IRT model
+
+Ideology: not directly observed but imperfectly indicated by voting.
+
+IRT approach: not every vote is equally "difficult" nor "discriminatory" between liberals and conservatives.
+
+I can only get "so close" to knowing your precise ideology given a finite set of questions. I can only trust these estimates by making a series of assumptions about the representativeness of the items and the representativeness of the voters in the data.
+
+\begin{align}
+  y_{ij} &= \Phi\left( \beta_{j}\left[\theta - \kappa_{j}\right]\right) \\[12pt]
+  y_{ij} &= \Phi\left( \beta_{j}\theta + \alpha_{j}\right), \text{ where } \alpha_{j} = -\beta_j\kappa_j
+\end{align}
+
+
+# Racial resentment
+
+Argument: scales are special cases of overconfident measurement models
+
+Derive solutions
+
+\begin{align}
+  \theta_{i} &= \frac{1}{J} \sum\limits_{j=1}^{J} y_{ij} (\#eq:rr)
+\end{align}
+
+What assumptions get us to this...
+
+\begin{align}
+  \theta_{i} + \epsilon_{ij} &= y_{ij}  (\#eq:ordinary)
+\end{align}
+
+Where we can assume that 
+\begin{align*}
+  \sum_{j = 1}^{J} \epsilon_{ij} &= 0 \text{ for all } i
+\end{align*}
+
+We get back to the original by summing responses over $j$
+\begin{align*}
+  \theta_{i} + \epsilon_{ij} &= y_{ij} \\[12pt]
+  \sum\limits_{j=1}^{J} \left(\theta_{i} + \epsilon_{ij}\right) &= \sum\limits_{j=1}^{J} y_{ij} \\[12pt]
+  \left(J \times \theta_{i}\right) + 0 &= \sum\limits_{j=1}^{J} y_{ij} \\[12pt]
+  \theta_{i} &= \frac{1}{J} \sum\limits_{j=1}^{J} y_{ij}
+\end{align*}
+
+
+IRT reverse-engineering
+
+\begin{align*}
+  y_{ij} &= \beta_{j}\left(\theta_{i} - \kappa_{j}\right) + \epsilon_{ij} \\
+  y_{ij} &= \beta_{j}\theta_{i} + \alpha_{j} + \epsilon_{ij}
+\end{align*}
+
+we only get Equation \@ref(eq:ordinary) when $\alpha_{j} = 0$ and $\beta_{j} = 1$
+\begin{align*}
+  y_{ij} &= (1)\theta_{i} + (0) + \epsilon_{ij}
+\end{align*}
+
+
+## Relaxing constraints
+
+$\sum_{j = 1}^{J} \epsilon_{ij} = 0$ in expectation only, so $\theta_{i}$ is a random variable (but $\alpha_{j}$ and $\beta_{j}$ are still known for all $j$).
+
+Allow $\alpha_{j} \neq 0$.
+
+Allow $\beta_{j} \neq 1$.
+
+The same latent variable intuition also applies to RR.
+
+RR as conventionally defined has pinpoint-precise priors about items and residual error, which is nonsense.
+
+
+# Bayesian Measurement Model of Racial Resentment
+
+Flat priors then normalize: are we actually very uncertain about RR?
+
+NO! 
+
+- Alpha: we expect RCs to answer on one side, RLs to answer on the other side. So the prior that alpha is in the middle makes sense.
+- Beta: We are already assuming that we know the orientation of the item when we give it a polarity. We could just do that here. Relaxed assumption: N(1, .05) or something. Or Half-Normal. Or exponential.
+
+
+
