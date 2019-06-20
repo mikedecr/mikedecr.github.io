@@ -80,7 +80,7 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;/div&gt;
 &lt;div id=&#34;other-things-to-think-about&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Other things to think about&lt;/h1&gt;
-&lt;p&gt;Imai et al. propose a sensitivity analysis to measure “how much” post-treatment confounding among mediators would be enough to change your inference about causal mediation effects. While I won’t do this now, it would be possible to specify a prior on the sensitivity parameter. Such a move would let the researcher evaluate the mediation effect &lt;em&gt;marginal&lt;/em&gt; of a distribution of potential confounding, rather than merely conditional on one fixed level of confounding.&lt;/p&gt;
+&lt;p&gt;Imai et al. propose a sensitivity analysis to measure “how much” post-treatment confounding among mediators would be enough to change your inference about causal mediation effects. While I won’t do this now, it would be possible to specify a prior on the sensitivity parameter. Such a move would let the researcher evaluate the mediation effect &lt;em&gt;marginal&lt;/em&gt; of a distribution of potential confounding, rather than merely conditional on one fixed level of confounding. This would let us make a probabilistic statement about the threat of confounding rather than a hypothetical statement. It’s of course subject to the prior, but most researchers substantively interpret their results assuming that confounding is zero, so we can think about the prior as actually relaxing an assumption of zero confounding rather than “adding a new assumption.”&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
