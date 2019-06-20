@@ -259,7 +259,7 @@ You should be able to code to implement this routine in R <a href="https://githu
 m1 = alpha_m + (1 * beta_m) + (X * zeta_m);</code></pre>
 <p>Because <code>alpha_m</code>, <code>beta_m</code>, and <code>zeta_m</code> are all uncertain parameters, what we are actually doing is generating <code>m0</code> and <code>m1</code> in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution <span class="math inline">\(p\left(M(t)\right)\)</span> by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 <span class="math display">\[\begin{align}
-  p\left(\tilde{M}(t)\right) &amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}\]</span>
 Hopefully I haven’t messed up the integral.</p>
 <p>Posterior predictions for new potential outcome observation <span class="math inline">\(\tilde{Y}(t, M(t&#39;))\)</span> would be…

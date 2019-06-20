@@ -90,7 +90,7 @@ m1 = alpha_m + (1 * beta_m) + (X * zeta_m);
 ```
 Because `alpha_m`, `beta_m`, and `zeta_m` are all uncertain parameters, what we are actually doing is generating `m0` and `m1` in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we're actually doing is generating a distribution $p\left(M(t)\right)$ by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 \begin{align}
-  p\left(\tilde{M}(t)\right) &= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}
 Hopefully I haven't messed up the integral. 
 

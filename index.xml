@@ -67,7 +67,7 @@ You should be able to code to implement this routine in R &lt;a href=&#34;https:
 m1 = alpha_m + (1 * beta_m) + (X * zeta_m);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Because &lt;code&gt;alpha_m&lt;/code&gt;, &lt;code&gt;beta_m&lt;/code&gt;, and &lt;code&gt;zeta_m&lt;/code&gt; are all uncertain parameters, what we are actually doing is generating &lt;code&gt;m0&lt;/code&gt; and &lt;code&gt;m1&lt;/code&gt; in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(M(t)\right)\)&lt;/span&gt; by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
-  p\left(\tilde{M}(t)\right) &amp;amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &amp;amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}\]&lt;/span&gt;
 Hopefully I haven’t messed up the integral.&lt;/p&gt;
 &lt;p&gt;Posterior predictions for new potential outcome observation &lt;span class=&#34;math inline&#34;&gt;\(\tilde{Y}(t, M(t&amp;#39;))\)&lt;/span&gt; would be…
