@@ -73,7 +73,7 @@ library("broom")
 source(here::here("static", "code-blogs", "R", "bayes-mediation.R"))
 ```
 
-First, Imai et al. use an OLS model to predict respondent's anxiety in response to treatment, with pre-treatment covariates $X_{i}$ and coefficients $\theta_{1}$. Parameters are subscripted $1$ for the "first stage" of the estimation.
+First, Imai et al. use an OLS model to predict respondent's anxiety in response to treatment, with pre-treatment covariates $X_{i}$ and coefficients $\zeta_{1}$. Parameters are subscripted $1$ for the "first stage" of the estimation.
 \begin{align}
   M_{i} &= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
 \end{align}
@@ -90,15 +90,44 @@ m1 = alpha_m + (1 * beta_m) + (X * zeta_m);
 ```
 Because `alpha_m`, `beta_m`, and `zeta_m` are all uncertain parameters, what we are actually doing is generating `m0` and `m1` in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we're actually doing is generating a distribution $p\left(M(t)\right)$ by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 \begin{align}
-  p\left(\tilde{M}(t)\right) &= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \theta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}
-I mean...I hope this interval makes sense. Posterior predictions for new potential outcome observation $\tilde{Y}(t, M(t'))$ would be...
+Hopefully I haven't messed up the integral. 
+
+Posterior predictions for new potential outcome observation $\tilde{Y}(t, M(t'))$ would be...
 \begin{align}
   p\left(\tilde{Y}(t, m(t'))\right) &= \int p\left(\tilde{Y}(t, M(t')) \mid \alpha_2, \beta_2, \tilde{M}(t'), \gamma, \zeta_2 \right) \times \\[6pt]&\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t'), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
 \end{align}
 This expression is also marginalizing over the simulated mediator value $M(t')$. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.
 
-Let's see how we did.
+In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.
+
+```{r post-hist, include = TRUE, echo = FALSE, fig.width = 6, fig.height = 4, out.width = "100%"}
+mcmc %>%
+  ggmcmc::ggs() %>%
+  filter(Parameter == "TE" | str_detect(Parameter, "E_")) %>%
+  mutate(
+    Parameter = case_when(
+      str_detect(Parameter, "ACME") ~ str_replace(Parameter, "ACME", "Avg. Causal Mediation\nEffect"),
+      str_detect(Parameter, "ADE") ~ str_replace(Parameter, "ADE", "Avg. Direct\nEffect"),
+      str_detect(Parameter, "TE") ~ str_replace(Parameter, "TE", "Avg. Total\nEffect")
+    ),
+    Parameter = str_replace(Parameter, "_0", " (Control)"),
+    Parameter = str_replace(Parameter, "_1", " (Treatment)"),
+  ) %>%
+  ggplot(aes(x = value, y = Parameter)) +
+    geom_vline(xintercept = 0, color = "gray") + 
+    ggridges::geom_density_ridges(
+      aes(height = ..density..),
+      stat = "binline", draw_baseline = FALSE,
+      binwidth = .01, scale = 0.9,
+      fill = "darkcyan", alpha = 0.7
+    ) +
+    theme_minimal(base_family = "Myriad Pro Bold") +
+    labs(y = NULL, x = "Effect Estimate")
+```
+
+And here is a comparison to the `{mediation}` package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the `{mediation}` estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.
 
 ```{r graph, eval = TRUE, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.width = 6, fig.height = 4, out.width = "100%"}
 # plots treatment effects
@@ -118,7 +147,7 @@ alltidy %>%
     geom_pointrange(
       aes(ymin = conf.low, ymax = conf.high),
       position = position_dodge(width = -0.5),
-      fill = "white"
+      fill = "darkcyan"
     ) +
     coord_flip() +
     labs(y = "Estimate", x = NULL, shape = NULL) +

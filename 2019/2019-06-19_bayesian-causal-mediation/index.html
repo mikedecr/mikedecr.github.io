@@ -60,7 +60,7 @@
     "datePublished": "2019-06-19 00:00:00 &#43;0000 UTC",
     "dateModified" : "2019-06-19 00:00:00 &#43;0000 UTC",
     "url" : "/2019/2019-06-19_bayesian-causal-mediation/",
-    "wordCount" : "1790",
+    "wordCount" : "1878",
     "keywords" : [ "computational-methods","bayesian-statistics","causal-inference","experiments", "Michael DeCrescenzo"]
 }
 </script>
@@ -245,7 +245,7 @@ The unobserved potential outcome is expressed as a probability distribution beca
 <div id="doing-it" class="section level1">
 <h1>Doing it</h1>
 <p>Imai et al. demonstrate their method using (in part) an experimental study by <a href="https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents">Brader, Valentino, and Suhay 2008</a> on the way news stories affect immigration attitudes through specific emotional mechanisms. Let’s do the outcome where <span class="math inline">\(Y\)</span> represents a participant’s decision to send an anti-immigrant message to their Congressperson (<span class="math inline">\(Y\)</span>), which is affected by a cue in the story about a hypothetical immigrant’s ethnicity (<span class="math inline">\(T\)</span>), and moderated by the emotion of anxiety (<span class="math inline">\(M\)</span>).</p>
-<p>First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates <span class="math inline">\(X_{i}\)</span> and coefficients <span class="math inline">\(\theta_{1}\)</span>. Parameters are subscripted <span class="math inline">\(1\)</span> for the “first stage” of the estimation.
+<p>First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates <span class="math inline">\(X_{i}\)</span> and coefficients <span class="math inline">\(\zeta_{1}\)</span>. Parameters are subscripted <span class="math inline">\(1\)</span> for the “first stage” of the estimation.
 <span class="math display">\[\begin{align}
   M_{i} &amp;= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
 \end{align}\]</span>
@@ -259,14 +259,17 @@ You should be able to code to implement this routine in R <a href="https://githu
 m1 = alpha_m + (1 * beta_m) + (X * zeta_m);</code></pre>
 <p>Because <code>alpha_m</code>, <code>beta_m</code>, and <code>zeta_m</code> are all uncertain parameters, what we are actually doing is generating <code>m0</code> and <code>m1</code> in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution <span class="math inline">\(p\left(M(t)\right)\)</span> by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 <span class="math display">\[\begin{align}
-  p\left(\tilde{M}(t)\right) &amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \theta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}\]</span>
-I mean…I hope this interval makes sense. Posterior predictions for new potential outcome observation <span class="math inline">\(\tilde{Y}(t, M(t&#39;))\)</span> would be…
+Hopefully I haven’t messed up the integral.</p>
+<p>Posterior predictions for new potential outcome observation <span class="math inline">\(\tilde{Y}(t, M(t&#39;))\)</span> would be…
 <span class="math display">\[\begin{align}
   p\left(\tilde{Y}(t, m(t&#39;))\right) &amp;= \int p\left(\tilde{Y}(t, M(t&#39;)) \mid \alpha_2, \beta_2, \tilde{M}(t&#39;), \gamma, \zeta_2 \right) \times \\[6pt]&amp;\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t&#39;), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
 \end{align}\]</span>
 This expression is also marginalizing over the simulated mediator value <span class="math inline">\(M(t&#39;)\)</span>. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.</p>
-<p>Let’s see how we did.</p>
+<p>In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.</p>
+<p><img src="/posts/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png" width="100%" /></p>
+<p>And here is a comparison to the <code>{mediation}</code> package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the <code>{mediation}</code> estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.</p>
 <p><img src="/posts/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png" width="100%" /></p>
 </div>
 <div id="other-things-to-think-about" class="section level1">

@@ -53,7 +53,7 @@ The unobserved potential outcome is expressed as a probability distribution beca
 &lt;div id=&#34;doing-it&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Doing it&lt;/h1&gt;
 &lt;p&gt;Imai et al. demonstrate their method using (in part) an experimental study by &lt;a href=&#34;https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents&#34;&gt;Brader, Valentino, and Suhay 2008&lt;/a&gt; on the way news stories affect immigration attitudes through specific emotional mechanisms. Let’s do the outcome where &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; represents a participant’s decision to send an anti-immigrant message to their Congressperson (&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;), which is affected by a cue in the story about a hypothetical immigrant’s ethnicity (&lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt;), and moderated by the emotion of anxiety (&lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;).&lt;/p&gt;
-&lt;p&gt;First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates &lt;span class=&#34;math inline&#34;&gt;\(X_{i}\)&lt;/span&gt; and coefficients &lt;span class=&#34;math inline&#34;&gt;\(\theta_{1}\)&lt;/span&gt;. Parameters are subscripted &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt; for the “first stage” of the estimation.
+&lt;p&gt;First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates &lt;span class=&#34;math inline&#34;&gt;\(X_{i}\)&lt;/span&gt; and coefficients &lt;span class=&#34;math inline&#34;&gt;\(\zeta_{1}\)&lt;/span&gt;. Parameters are subscripted &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt; for the “first stage” of the estimation.
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
   M_{i} &amp;amp;= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
 \end{align}\]&lt;/span&gt;
@@ -67,14 +67,17 @@ You should be able to code to implement this routine in R &lt;a href=&#34;https:
 m1 = alpha_m + (1 * beta_m) + (X * zeta_m);&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Because &lt;code&gt;alpha_m&lt;/code&gt;, &lt;code&gt;beta_m&lt;/code&gt;, and &lt;code&gt;zeta_m&lt;/code&gt; are all uncertain parameters, what we are actually doing is generating &lt;code&gt;m0&lt;/code&gt; and &lt;code&gt;m1&lt;/code&gt; in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(M(t)\right)\)&lt;/span&gt; by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
-  p\left(\tilde{M}(t)\right) &amp;amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \theta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+  p\left(\tilde{M}(t)\right) &amp;amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
 \end{align}\]&lt;/span&gt;
-I mean…I hope this interval makes sense. Posterior predictions for new potential outcome observation &lt;span class=&#34;math inline&#34;&gt;\(\tilde{Y}(t, M(t&amp;#39;))\)&lt;/span&gt; would be…
+Hopefully I haven’t messed up the integral.&lt;/p&gt;
+&lt;p&gt;Posterior predictions for new potential outcome observation &lt;span class=&#34;math inline&#34;&gt;\(\tilde{Y}(t, M(t&amp;#39;))\)&lt;/span&gt; would be…
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
   p\left(\tilde{Y}(t, m(t&amp;#39;))\right) &amp;amp;= \int p\left(\tilde{Y}(t, M(t&amp;#39;)) \mid \alpha_2, \beta_2, \tilde{M}(t&amp;#39;), \gamma, \zeta_2 \right) \times \\[6pt]&amp;amp;\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t&amp;#39;), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
 \end{align}\]&lt;/span&gt;
 This expression is also marginalizing over the simulated mediator value &lt;span class=&#34;math inline&#34;&gt;\(M(t&amp;#39;)\)&lt;/span&gt;. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.&lt;/p&gt;
-&lt;p&gt;Let’s see how we did.&lt;/p&gt;
+&lt;p&gt;In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And here is a comparison to the &lt;code&gt;{mediation}&lt;/code&gt; package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the &lt;code&gt;{mediation}&lt;/code&gt; estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/posts/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;other-things-to-think-about&#34; class=&#34;section level1&#34;&gt;
