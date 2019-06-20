@@ -6,8 +6,93 @@
     <description>Recent content in Michael DeCrescenzo on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
     <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Causal Mediation, Bayesianly (with Stan)</title>
+      <link>/2019/2019-06-19_bayesian-causal-mediation/</link>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-06-19_bayesian-causal-mediation/</guid>
+      <description>&lt;div id=&#34;motivation-for-this-post&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation for this post&lt;/h1&gt;
+&lt;p&gt;Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.&lt;/p&gt;
+&lt;p&gt;We covered causal mediation this week (&lt;a href=&#34;https://imai.fas.harvard.edu/research/files/mediationP.pdf&#34;&gt;Imai et al. 2011 &lt;em&gt;APSR&lt;/em&gt;&lt;/a&gt;), which I thought would be a good opportunity to explain where my thoughts are going about this. So this post will briefly describe a Bayesian vantage point on causal inference and show how to use Bayesian tools to implement it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;posterior-predictive-draws.-i-mean-unobserved-potential-outcomes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Posterior Predictive Draws. I mean, “Unobserved Potential Outcomes”&lt;/h1&gt;
+&lt;p&gt;It should be noted up front that a Bayesian take on causal inference is not at all new (I will borrow plenty of intuition from, for example, &lt;a href=&#34;https://projecteuclid.org/download/pdf_1/euclid.aos/1176344064&#34;&gt;Rubin 1978&lt;/a&gt;), but it is pretty unfamiliar to the political science/econ folks I roll with.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
+People often ask me, “How can you even have a Bayesian experiment; don’t you already have randomization?” as if the purpose of priors is to fix confounding somehow. In fairness to non-Bayesians, if this is Bayesian analysis used priors, I would also be mistrusting of Bayes. Luckily, priors are less presumptuous than that. You get a Bayesian experiment (or any other credible research design) by specifying priors on the parameters and obtaining a posterior distribution. It is pretty unremarkable—no different than a Bayesian analysis of a non-causal design. Remember that the causal model (by which I mean, the definition of the potential outcomes) is distinct from the methods used to &lt;em&gt;estimate&lt;/em&gt; causal parameters. Bayesian analysis is positioned closer to the estimation end of things, whereas causal modeling is a series of assumptions about identifying variation in the data. In short, you fix confounding with the design, and priors are for improving the estimation.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;While the Bayesian approach may not change the research design or the causal assumptions, it does provide a different—and intuitive, I assert—interpretation of potential outcomes. Ordinarily we write potential outcomes as &lt;span class=&#34;math inline&#34;&gt;\(Y_{i}(T_{i} = t)\)&lt;/span&gt;, the outcome value for unit &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; if it received treatment value &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;. Only one potential outcome per unit is ever observed, so can’t observe the &lt;em&gt;unit-level&lt;/em&gt; causal effect &lt;span class=&#34;math inline&#34;&gt;\(\tau_{i}\)&lt;/span&gt;, but we can use a causal identification analysis to lay out the assumptions required to estimate an average effect &lt;span class=&#34;math inline&#34;&gt;\(\bar{\tau}\)&lt;/span&gt; for at least some subset of units. If we knew this average effect, we would be able to state, for each observed outcome &lt;span class=&#34;math inline&#34;&gt;\(y_{i}\)&lt;/span&gt;, what the &lt;em&gt;expected value&lt;/em&gt; of that unit’s unobserved potential outcome would be if we could set &lt;span class=&#34;math inline&#34;&gt;\(T_{i}\)&lt;/span&gt; to some value &lt;span class=&#34;math inline&#34;&gt;\(t&amp;#39;\)&lt;/span&gt; other than what was observed. In this way, the unobserved potential outcome is missing data that we can predict with an estimated the model that generates (potential) outcomes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Maybe you can see where I’m going with this.&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Bayesian analysis begins with joint model &lt;span class=&#34;math inline&#34;&gt;\(p\left(y, \theta \right)\)&lt;/span&gt; for outcome data &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; and model parameters &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;. This is equivalently expressed as &lt;span class=&#34;math inline&#34;&gt;\(p(y \mid \theta)p(\theta)\)&lt;/span&gt;, which is to say that the distribution of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; depends on the value of &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; and that &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; has its own distribution. We fit the model by conditioning on the observed &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; to obtain the posterior distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(\theta \mid y \right)\)&lt;/span&gt;. It is this updated model that represents our state of information about the process that generates potential outcomes &lt;span class=&#34;math inline&#34;&gt;\(y_{i}(t)\)&lt;/span&gt;. If we wanted to make posterior inferences about what &lt;span class=&#34;math inline&#34;&gt;\(y_{i}(t)\)&lt;/span&gt; &lt;em&gt;would have been&lt;/em&gt; (in expectation) if we could arbitrarily change &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;, we would simulate the unobserved potential outcomes &lt;span class=&#34;math inline&#34;&gt;\(\tilde{y}\)&lt;/span&gt; from the model.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  p(\tilde{y} \mid y) &amp;amp;= \int p(\tilde{y} \mid \theta) p(\theta \mid y)d\theta
+\end{align}\]&lt;/span&gt;
+The unobserved potential outcome is expressed as a probability distribution because we don’t know exactly what the unobserved data would be. Its distribution depends on &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, which itself is conditioned on &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, and we average over our uncertainty about &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; by integrating. This gives us a distribution for the unobserved potential outcomes that is marginal of our imperfectly estimated parameters.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Okay, so?&lt;/em&gt;&lt;/strong&gt; The Bayesian view of potential outcomes is appealing because our state of ignorance about the exact potential outcomes is an explicit feature of the model, rather than a point estimate with a post-hoc standard error. Which is to say, &lt;em&gt;we don’t know&lt;/em&gt; what the treatment effect is, and so we don’t know what the potential outcomes are, but we have a range of guesses that that we can directly evaluate using their probability distribution. This approach has a certain philosophical resonance before we get anywhere near the notion of prior information. And to whatever extent researchers already view point estimates and frequentist confidence intervals on treatment effects as “ranges of plausible values” with associated posterior probabilities, they are already doing Bayesian causal inference—just without the benefit of having formally set up the whole model. With the Bayesian approach we are actually allowed to say things like “the data suggest that this treatment effect is most likely positive” or what have you.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;causal-mediation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Causal Mediation&lt;/h1&gt;
+&lt;p&gt;Causal mediation analysis is concerned with a causal graph where a treatment &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt; affects an outcome &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;, and the effect flows at least partially through a mediator &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;. Potential outcomes are expressed as &lt;span class=&#34;math inline&#34;&gt;\(Y_{i}(T_{i}, M_{i}(T_{i}))\)&lt;/span&gt;, where the value of &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; depends both on the treatment assignment &lt;span class=&#34;math inline&#34;&gt;\(T_{i} = t\)&lt;/span&gt; and the resulting value of the mediator &lt;span class=&#34;math inline&#34;&gt;\(M_{i}(t)\)&lt;/span&gt;, which is itself affected by the treatment. The causal effects are a decomposition of the total (average) treatment effect.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;total treatment effect&lt;/em&gt;: how much total change in &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; is owed to setting the value of &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt;? Written as &lt;span class=&#34;math inline&#34;&gt;\(Y(1, M(1)) - Y(0, M(0))\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;causal mediation effect&lt;/em&gt;: how much of the total change in &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; is attributed to &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt;’s effect on &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;, which also affects &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;? Or, how much change in &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; is owed to the fact that &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt; changed, as opposed to not changing? Written as &lt;span class=&#34;math inline&#34;&gt;\(Y(t, M(1)) - Y(t, M(0))\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;em&gt;direct effect&lt;/em&gt;: how much of the change in &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; is not flowing through &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;? In other words, how would &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; be different even if &lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt; had no effect on &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;? Written as &lt;span class=&#34;math inline&#34;&gt;\(Y(1, M(t)) - Y(0, M(t))\)&lt;/span&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Imai et al. present an algorithm to estimate these quantities. We need models to describe how &lt;span class=&#34;math inline&#34;&gt;\(M(T)\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(Y(T, M(T))\)&lt;/span&gt; are generated, but the form of these models does not affect the intuition of the algorithm. It’s like this:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Estimate mediator as a function of treatment and pre-treatment covariates: &lt;span class=&#34;math inline&#34;&gt;\(M_{i} = f(T_{i}, X_{i})\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Estimate the outcome as a function of the treatment, the observed mediator, and pre-treatment covariates. &lt;span class=&#34;math inline&#34;&gt;\(Y_{i} = g(T_{i}, M_{i}, X_{i})\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Using &lt;span class=&#34;math inline&#34;&gt;\(f()\)&lt;/span&gt;, generate predicted values &lt;span class=&#34;math inline&#34;&gt;\(\hat{M}\)&lt;/span&gt; for all &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Using &lt;span class=&#34;math inline&#34;&gt;\(g()\)&lt;/span&gt;, predicted values &lt;span class=&#34;math inline&#34;&gt;\(\hat{Y}\)&lt;/span&gt; for all potential outcomes &lt;span class=&#34;math inline&#34;&gt;\(y(t, M(t&amp;#39;))\)&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;Use the appropriate &lt;span class=&#34;math inline&#34;&gt;\(\hat{Y}\)&lt;/span&gt; values to calculate average total, direct, and mediation effects.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;How is &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt; affected by the treatment, and then how is &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; affected by both the treatment and the treatment’s effect on &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;doing-it&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Doing it&lt;/h1&gt;
+&lt;p&gt;Imai et al. demonstrate their method using (in part) an experimental study by &lt;a href=&#34;https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents&#34;&gt;Brader, Valentino, and Suhay 2008&lt;/a&gt; on the way news stories affect immigration attitudes through specific emotional mechanisms. Let’s do the outcome where &lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt; represents a participant’s decision to send an anti-immigrant message to their Congressperson (&lt;span class=&#34;math inline&#34;&gt;\(Y\)&lt;/span&gt;), which is affected by a cue in the story about a hypothetical immigrant’s ethnicity (&lt;span class=&#34;math inline&#34;&gt;\(T\)&lt;/span&gt;), and moderated by the emotion of anxiety (&lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates &lt;span class=&#34;math inline&#34;&gt;\(X_{i}\)&lt;/span&gt; and coefficients &lt;span class=&#34;math inline&#34;&gt;\(\theta_{1}\)&lt;/span&gt;. Parameters are subscripted &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt; for the “first stage” of the estimation.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  M_{i} &amp;amp;= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
+\end{align}\]&lt;/span&gt;
+They then use a probit model to estimate the outcome variable, the “second stage” (subscripted 2). This model includes the mediator with coefficient &lt;span class=&#34;math inline&#34;&gt;\(\gamma\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  p(Y_{i} = 1) &amp;amp;= \Phi\left(\alpha_{2} + T_{i}\beta_{2} + M_{i}\gamma + X_{i}\zeta_{2}\right)
+\end{align}\]&lt;/span&gt;
+You should be able to code to implement this routine in R &lt;a href=&#34;https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/R/bayes-mediation.R&#34;&gt;here&lt;/a&gt;, which calls &lt;a href=&#34;https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/stan/mediation-bvs.stan&#34;&gt;this Stan file&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In Stan, it is easy to generate posterior quantities of interest in the &lt;code&gt;generated quantities&lt;/code&gt; block of a Stan file. For example, generating posterior predictions for mediator values at &lt;span class=&#34;math inline&#34;&gt;\(T \in \{0, 1\}\)&lt;/span&gt; is as easy as…&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;m0 = alpha_m + (0 * beta_m) + (X * zeta_m);
+m1 = alpha_m + (1 * beta_m) + (X * zeta_m);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Because &lt;code&gt;alpha_m&lt;/code&gt;, &lt;code&gt;beta_m&lt;/code&gt;, and &lt;code&gt;zeta_m&lt;/code&gt; are all uncertain parameters, what we are actually doing is generating &lt;code&gt;m0&lt;/code&gt; and &lt;code&gt;m1&lt;/code&gt; in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(M(t)\right)\)&lt;/span&gt; by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  p\left(\tilde{M}(t)\right) &amp;amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \theta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+\end{align}\]&lt;/span&gt;
+I mean…I hope this interval makes sense. Posterior predictions for new potential outcome observation &lt;span class=&#34;math inline&#34;&gt;\(\tilde{Y}(t, M(t&amp;#39;))\)&lt;/span&gt; would be…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  p\left(\tilde{Y}(t, m(t&amp;#39;))\right) &amp;amp;= \int p\left(\tilde{Y}(t, M(t&amp;#39;)) \mid \alpha_2, \beta_2, \tilde{M}(t&amp;#39;), \gamma, \zeta_2 \right) \times \\[6pt]&amp;amp;\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t&amp;#39;), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
+\end{align}\]&lt;/span&gt;
+This expression is also marginalizing over the simulated mediator value &lt;span class=&#34;math inline&#34;&gt;\(M(t&amp;#39;)\)&lt;/span&gt;. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.&lt;/p&gt;
+&lt;p&gt;Let’s see how we did.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;other-things-to-think-about&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Other things to think about&lt;/h1&gt;
+&lt;p&gt;Imai et al. propose a sensitivity analysis to measure “how much” post-treatment confounding among mediators would be enough to change your inference about causal mediation effects. While I won’t do this now, it would be possible to specify a prior on the sensitivity parameter. Such a move would let the researcher evaluate the mediation effect &lt;em&gt;marginal&lt;/em&gt; of a distribution of potential confounding, rather than merely conditional on one fixed level of confounding.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Causal Mediation, Bayesianly (with Stan)</title>
@@ -4435,40 +4520,6 @@ I study American politics and statistical methodology.
   p(y_{ij} = 1) &amp;= \Phi\left( \frac{\theta_{i} - \alpha_{j}}{\sigma_{j}} \right)
 \end{align}
  --&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PS 270 Readings</title>
-      <link>/courses/reading/readings-270-s19/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/courses/reading/readings-270-s19/</guid>
-      <description>&lt;div id=&#34;j&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-1&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-2&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-3&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-4&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-5&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-6&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;jan-23&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Jan 23&lt;/h2&gt;
-&lt;p&gt;Try this out. wee&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

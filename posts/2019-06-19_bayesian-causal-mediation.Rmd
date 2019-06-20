@@ -1,0 +1,135 @@
+---
+title: "Causal Mediation, Bayesianly (with Stan)"
+author: Michael DeCrescenzo
+description: "This is what we were already doing"
+date: '2019-06-19'
+slug: bayes-mediation
+categories: ["Methods"]
+tags: ["computational-methods", "bayesian-statistics", "causal-inference", "experiments"]
+comments: no
+showcomments: yes
+showpagemeta: yes
+draft: false
+nature:
+      beforeInit: "https://platform.twitter.com/widgets.js"
+---
+
+# Motivation for this post
+
+Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of "Bayesian causal inference." I'm hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.
+
+We covered causal mediation this week ([Imai et al. 2011 *APSR*](https://imai.fas.harvard.edu/research/files/mediationP.pdf)), which I thought would be a good opportunity to explain where my thoughts are going about this. So this post will briefly describe a Bayesian vantage point on causal inference and show how to use Bayesian tools to implement it. 
+
+# Posterior Predictive Draws. I mean, "Unobserved Potential Outcomes"
+
+It should be noted up front that a Bayesian take on causal inference is not at all new (I will borrow plenty of intuition from, for example, [Rubin 1978](https://projecteuclid.org/download/pdf_1/euclid.aos/1176344064)), but it is pretty unfamiliar to the political science/econ folks I roll with.^[
+  There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.
+]
+People often ask me, "How can you even have a Bayesian experiment; don't you already have randomization?" as if the purpose of priors is to fix confounding somehow. In fairness to non-Bayesians, if this is Bayesian analysis used priors, I would also be mistrusting of Bayes. Luckily, priors are less presumptuous than that. You get a Bayesian experiment (or any other credible research design) by specifying priors on the parameters and obtaining a posterior distribution. It is pretty unremarkable---no different than a Bayesian analysis of a non-causal design. Remember that the causal model (by which I mean, the definition of the potential outcomes) is distinct from the methods used to *estimate* causal parameters. Bayesian analysis is positioned closer to the estimation end of things, whereas causal modeling is a series of assumptions about identifying variation in the data. In short, you fix confounding with the design, and priors are for improving the estimation.^[
+  Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to "relax" the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the "sensitivity parameter" in the Imai et al. mediation analysis routine.
+]
+
+While the Bayesian approach may not change the research design or the causal assumptions, it does provide a different---and intuitive, I assert---interpretation of potential outcomes. Ordinarily we write potential outcomes as $Y_{i}(T_{i} = t)$, the outcome value for unit $i$ if it received treatment value $t$. Only one potential outcome per unit is ever observed, so can't observe the *unit-level* causal effect $\tau_{i}$, but we can use a causal identification analysis to lay out the assumptions required to estimate an average effect $\bar{\tau}$ for at least some subset of units. If we knew this average effect, we would be able to state, for each observed outcome $y_{i}$, what the *expected value* of that unit's unobserved potential outcome would be if we could set $T_{i}$ to some value $t'$ other than what was observed. In this way, the unobserved potential outcome is missing data that we can predict with an estimated the model that generates (potential) outcomes. 
+
+***Maybe you can see where I'm going with this.***
+
+Bayesian analysis begins with joint model $p\left(y, \theta \right)$ for outcome data $y$ and model parameters $\theta$. This is equivalently expressed as $p(y \mid \theta)p(\theta)$, which is to say that the distribution of $y$ depends on the value of $\theta$ and that $\theta$ has its own distribution. We fit the model by conditioning on the observed $y$ to obtain the posterior distribution $p\left(\theta \mid y \right)$. It is this updated model that represents our state of information about the process that generates potential outcomes $y_{i}(t)$. If we wanted to make posterior inferences about what $y_{i}(t)$ *would have been* (in expectation) if we could arbitrarily change $t$, we would simulate the unobserved potential outcomes $\tilde{y}$ from the model. 
+\begin{align}
+  p(\tilde{y} \mid y) &= \int p(\tilde{y} \mid \theta) p(\theta \mid y)d\theta
+\end{align}
+The unobserved potential outcome is expressed as a probability distribution because we don't know exactly what the unobserved data would be. Its distribution depends on $\theta$, which itself is conditioned on $y$, and we average over our uncertainty about $\theta$ by integrating. This gives us a distribution for the unobserved potential outcomes that is marginal of our imperfectly estimated parameters.
+
+***Okay, so?*** The Bayesian view of potential outcomes is appealing because our state of ignorance about the exact potential outcomes is an explicit feature of the model, rather than a point estimate with a post-hoc standard error. Which is to say, *we don't know* what the treatment effect is, and so we don't know what the potential outcomes are, but we have a range of guesses that that we can directly evaluate using their probability distribution. This approach has a certain philosophical resonance before we get anywhere near the notion of prior information. And to whatever extent researchers already view point estimates and frequentist confidence intervals on treatment effects as "ranges of plausible values" with associated posterior probabilities, they are already doing Bayesian causal inference---just without the benefit of having formally set up the whole model. With the Bayesian approach we are actually allowed to say things like "the data suggest that this treatment effect is most likely positive" or what have you.
+
+
+# Causal Mediation
+
+Causal mediation analysis is concerned with a causal graph where a treatment $T$ affects an outcome $Y$, and the effect flows at least partially through a mediator $M$. Potential outcomes are expressed as $Y_{i}(T_{i}, M_{i}(T_{i}))$, where the value of $Y$ depends both on the treatment assignment $T_{i} = t$ and the resulting value of the mediator $M_{i}(t)$, which is itself affected by the treatment. The causal effects are a decomposition of the total (average) treatment effect.
+
+- The *total treatment effect*: how much total change in $Y$ is owed to setting the value of $T$? Written as $Y(1, M(1)) - Y(0, M(0))$.
+- The *causal mediation effect*: how much of the total change in $Y$ is attributed to $T$'s effect on $M$, which also affects $Y$? Or, how much change in $Y$ is owed to the fact that $M$ changed, as opposed to not changing? Written as $Y(t, M(1)) - Y(t, M(0))$.
+- The *direct effect*: how much of the change in $Y$ is not flowing through $M$? In other words, how would $Y$ be different even if $T$ had no effect on $M$? Written as $Y(1, M(t)) - Y(0, M(t))$.
+
+Imai et al. present an algorithm to estimate these quantities. We need models to describe how $M(T)$ and $Y(T, M(T))$ are generated, but the form of these models does not affect the intuition of the algorithm. It's like this:
+
+1. Estimate mediator as a function of treatment and pre-treatment covariates: $M_{i} = f(T_{i}, X_{i})$
+2. Estimate the outcome as a function of the treatment, the observed mediator, and pre-treatment covariates. $Y_{i} = g(T_{i}, M_{i}, X_{i})$.
+3. Using $f()$, generate predicted values $\hat{M}$ for all $t$.
+4. Using $g()$, predicted values $\hat{Y}$ for all potential outcomes $y(t, M(t'))$
+5. Use the appropriate $\hat{Y}$ values to calculate average total, direct, and mediation effects.
+
+How is $M$ affected by the treatment, and then how is $Y$ affected by both the treatment and the treatment's effect on $M$?
+
+# Doing it
+
+Imai et al. demonstrate their method using (in part) an experimental study by [Brader, Valentino, and Suhay 2008](https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents) on the way news stories affect immigration attitudes through specific emotional mechanisms. Let's do the outcome where $Y$ represents a participant's decision to send an anti-immigrant message to their Congressperson ($Y$), which is affected by a cue in the story about a hypothetical immigrant's ethnicity ($T$), and moderated by the emotion of anxiety ($M$).
+
+```{r packgs, cache = FALSE, echo = FALSE, include = FALSE}
+library("here")
+library("magrittr")
+library("tidyverse")
+library("broom")
+```
+
+```{r source-mediation, cache = TRUE, eval = TRUE, results = FALSE, include = FALSE}
+source(here::here("static", "code-blogs", "R", "bayes-mediation.R"))
+```
+
+First, Imai et al. use an OLS model to predict respondent's anxiety in response to treatment, with pre-treatment covariates $X_{i}$ and coefficients $\theta_{1}$. Parameters are subscripted $1$ for the "first stage" of the estimation.
+\begin{align}
+  M_{i} &= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
+\end{align}
+They then use a probit model to estimate the outcome variable, the "second stage" (subscripted 2). This model includes the mediator with coefficient $\gamma$.
+\begin{align}
+  p(Y_{i} = 1) &= \Phi\left(\alpha_{2} + T_{i}\beta_{2} + M_{i}\gamma + X_{i}\zeta_{2}\right)
+\end{align}
+You should be able to code to implement this routine in R [here](https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/R/bayes-mediation.R), which calls [this Stan file](https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/stan/mediation-bvs.stan). 
+
+In Stan, it is easy to generate posterior quantities of interest in the `generated quantities` block of a Stan file. For example, generating posterior predictions for mediator values at $T \in \{0, 1\}$ is as easy as...
+```
+m0 = alpha_m + (0 * beta_m) + (X * zeta_m);
+m1 = alpha_m + (1 * beta_m) + (X * zeta_m);
+```
+Because `alpha_m`, `beta_m`, and `zeta_m` are all uncertain parameters, what we are actually doing is generating `m0` and `m1` in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we're actually doing is generating a distribution $p\left(M(t)\right)$ by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
+\begin{align}
+  p\left(\tilde{M}(t)\right) &= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \theta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+\end{align}
+I mean...I hope this interval makes sense. Posterior predictions for new potential outcome observation $\tilde{Y}(t, M(t'))$ would be...
+\begin{align}
+  p\left(\tilde{Y}(t, m(t'))\right) &= \int p\left(\tilde{Y}(t, M(t')) \mid \alpha_2, \beta_2, \tilde{M}(t'), \gamma, \zeta_2 \right) \times \\[6pt]&\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t'), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
+\end{align}
+This expression is also marginalizing over the simulated mediator value $M(t')$. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.
+
+Let's see how we did.
+
+```{r graph, eval = TRUE, include = TRUE, echo = FALSE, warning = FALSE, message = FALSE, fig.width = 6, fig.height = 4, out.width = "100%"}
+# plots treatment effects
+alltidy %>%
+  filter(str_detect(term, "E_") | term == "TE") %>%
+  mutate(
+    term = case_when(
+      str_detect(term, "ACME") ~ str_replace(term, "ACME", "Avg. Causal Mediation\nEffect"),
+      str_detect(term, "ADE") ~ str_replace(term, "ADE", "Avg. Direct\nEffect"),
+      str_detect(term, "TE") ~ str_replace(term, "TE", "Avg. Total\nEffect")
+    ),
+    term = str_replace(term, "_0", " (Control)"),
+    term = str_replace(term, "_1", " (Treatment)"),
+  ) %>%
+  ggplot(aes(x = term, y = estimate, shape = sub)) +
+    geom_hline(yintercept = 0, color = "gray") +
+    geom_pointrange(
+      aes(ymin = conf.low, ymax = conf.high),
+      position = position_dodge(width = -0.5),
+      fill = "white"
+    ) +
+    coord_flip() +
+    labs(y = "Estimate", x = NULL, shape = NULL) +
+    scale_shape_manual(values = c("Bayes" = 21, "Mediation Pkg." = 15)) +
+    theme_minimal(base_family = "Myriad Pro Bold")
+```
+
+# Other things to think about
+
+Imai et al. propose a sensitivity analysis to measure "how much" post-treatment confounding among mediators would be enough to change your inference about causal mediation effects. While I won't do this now, it would be possible to specify a prior on the sensitivity parameter. Such a move would let the researcher evaluate the mediation effect *marginal* of a distribution of potential confounding, rather than merely conditional on one fixed level of confounding. 
+
+

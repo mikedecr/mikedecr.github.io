@@ -6,10 +6,19 @@
     <description>Recent content in Causal-inference on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/causal-inference/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Causal Mediation, Bayesianly (with Stan)</title>
+      <link>/2019/2019-06-19_bayesian-causal-mediation/</link>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-06-19_bayesian-causal-mediation/</guid>
+      <description>Motivation for this post Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.</description>
+    </item>
     
     <item>
       <title>Causal Mediation, Bayesianly (with Stan)</title>
