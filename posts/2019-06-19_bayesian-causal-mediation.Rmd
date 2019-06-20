@@ -58,8 +58,6 @@ Imai et al. present an algorithm to estimate these quantities. We need models to
 4. Using $g()$, predicted values $\hat{Y}$ for all potential outcomes $y(t, M(t'))$
 5. Use the appropriate $\hat{Y}$ values to calculate average total, direct, and mediation effects.
 
-How is $M$ affected by the treatment, and then how is $Y$ affected by both the treatment and the treatment's effect on $M$?
-
 # Doing it
 
 Imai et al. demonstrate their method using (in part) an experimental study by [Brader, Valentino, and Suhay 2008](https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents) on the way news stories affect immigration attitudes through specific emotional mechanisms. Let's do the outcome where $Y$ represents a participant's decision to send an anti-immigrant message to their Congressperson ($Y$), which is affected by a cue in the story about a hypothetical immigrant's ethnicity ($T$), and moderated by the emotion of anxiety ($M$).
