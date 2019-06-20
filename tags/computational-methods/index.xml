@@ -12,30 +12,12 @@
     
     
     <item>
-      <title>Causal Mediation, Bayesianly</title>
+      <title>Causal Mediation, Bayesianly (with Stan)</title>
       <link>/2019/2019-06-18_bayesian-causal-mediation/</link>
       <pubDate>Sat, 08 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/2019/2019-06-18_bayesian-causal-mediation/</guid>
       <description>Motivation for this post Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.</description>
-    </item>
-    
-    <item>
-      <title>Plain Text Research: None of us know what we&#39;re doing</title>
-      <link>/2019/2019-05-23_git-workflow/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-23_git-workflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>What if &#34;validity trade-offs&#34; are actually just priors</title>
-      <link>/2019/2019-05-31_validity-trade-offs/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-31_validity-trade-offs/</guid>
-      <description>Outline  The conventional wisdom The Samii view, there is no trade-off My view: there is a trade-off, but we haven’t modeled it well  GGK vibes: we learn because there are priors Partial pooling analogy: the value of hyperpriors matters less than the structure This is what so-called “externally valid” larger scale research is. It’s not identified, so it’s not “general” but what it’s doing is providing a structure for organizing information Large scale research is an informal prior for pooling information from lower-level studies.</description>
     </item>
     
   </channel>
