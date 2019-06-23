@@ -1,102 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Michael DeCrescenzo</title>
+    <title>R&#34; on Michael DeCrescenzo</title>
     <link>/tags/r/</link>
-    <description>Recent content in R on Michael DeCrescenzo</description>
+    <description>Recent content in R&#34; on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 29 Nov 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Visualization of Partial Effects in Multiple Regression</title>
-      <link>/2018/2018-10-19-partialling-out/</link>
-      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Using the Tidyverse with Voter Registration Linkage Data</title>
+      <link>/2018/2018-11-29-hava-xl/</link>
+      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/2018-10-19-partialling-out/</guid>
+      <guid>/2018/2018-11-29-hava-xl/</guid>
       <description>a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { code.sourceCode { white-space: pre-wrap; } a.sourceLine { text-indent: -1em; padding-left: 1em; } } pre.numberSource a.</description>
-    </item>
-    
-    <item>
-      <title>Great Hugo themes (that I did not pick)</title>
-      <link>/2018/2018-09-23-hugo-themes/</link>
-      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/2018-09-23-hugo-themes/</guid>
-      <description>I just finished a major website overhaul. While it took only about one day of work, I’ve had my eyes open for a new theme for Hugo for a while.
-I mean, a while. I would download a theme, give it a 15-minute test run offline, and decide that it wasn’t for me. I did that maybe a dozen times.1
-But this is mainly my fault. I am a bad combination of picky and unskilled with websites and web design, which made me a fickle chooser throughout the process.</description>
-    </item>
-    
-    <item>
-      <title>Packages &amp; Reproducibility: Install what you need, attach what you want</title>
-      <link>/2018/2018-05-26-reproducible-packages/</link>
-      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/2018-05-26-reproducible-packages/</guid>
-      <description>a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { code.sourceCode { white-space: pre-wrap; } a.sourceLine { text-indent: -1em; padding-left: 1em; } } pre.numberSource a.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 3: Analysis</title>
-      <link>/811/811-analysis/</link>
-      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-analysis/</guid>
-      <description>knitr::opts_chunk$set(cache = TRUE) Schedule Read this before our final lecture, after the graphics lesson.
- How to follow along A script file walking through some of these commands is available here.
- Objectives In this lesson, we will introduce how to do statistical analysis using R. Topics that you should cover to prepare for the take-home exercise include…
- Means, confidence intervals, and simple significance tests Estimating regression models Generating model output Model diagnostics and fit statistics Post-estimation graphics (model predictions)  This page also contains some content on more advanced topics, but these won’t be necessary for the take-home exercise.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 2: Graphics</title>
-      <link>/811/811-graphics/</link>
-      <pubDate>Fri, 16 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-graphics/</guid>
-      <description>Schedule: Read this before our second R lecture, after the data lesson.
- How to follow along A script file walking through some of these commands is available here.
- Objectives The goal of this lesson is to provide an introduction to graphics in R, by way of ggplot2 in particular. We will cover:
- The “grammar of graphics”—the “gg” in ggplot How ggplot2 works Common graphics in social science Customizing the appearance of ggplot graphic Saving graphics  Some notes to get us started:  This lesson makes liberal use of pipe chains, which bundle many operations together in one block of code.</description>
-    </item>
-    
-    <item>
-      <title>Lecture 1: Data Manipulation</title>
-      <link>/811/811-data/</link>
-      <pubDate>Fri, 09 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-data/</guid>
-      <description>Overview Schedule: Read this before our first R lecture.
- How to follow along A script file walking through some of these commands is available here.
- Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
- setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with R</title>
-      <link>/811/811-basics/</link>
-      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-basics/</guid>
-      <description>Schedule: Read this before our first R lecture.
- How to follow along Follow the instructions in this lesson in your own .R script.
- Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.</description>
-    </item>
-    
-    <item>
-      <title>PoliSci 811: R Introduction</title>
-      <link>/811/811-intro/</link>
-      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-intro/</guid>
-      <description>Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.
-This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.
-Schedule: Read this before our first in-class R lesson!
- A little about R R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.</description>
     </item>
     
   </channel>
