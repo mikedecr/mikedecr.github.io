@@ -97,6 +97,294 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
     </item>
     
     <item>
+      <title>Plain Text Research: None of us know what we&#39;re doing</title>
+      <link>/2019/2019-05-23_git-workflow/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-05-23_git-workflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What if &#34;validity trade-offs&#34; are actually just priors</title>
+      <link>/2019/2019-05-31_validity-trade-offs/</link>
+      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-05-31_validity-trade-offs/</guid>
+      <description>&lt;div id=&#34;outline&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Outline&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;The conventional wisdom&lt;/li&gt;
+&lt;li&gt;The Samii view, there is no trade-off&lt;/li&gt;
+&lt;li&gt;My view: there is a trade-off, but we haven’t modeled it well
+&lt;ul&gt;
+&lt;li&gt;GGK vibes: we learn because there are priors&lt;/li&gt;
+&lt;li&gt;Partial pooling analogy: the value of hyperpriors matters less than the structure&lt;/li&gt;
+&lt;li&gt;This is what so-called “externally valid” larger scale research is. It’s not identified, so it’s not “general” but what it’s doing is providing a structure for organizing information&lt;/li&gt;
+&lt;li&gt;Large scale research is an informal prior for pooling information from lower-level studies. It is a little bit biased, but we know that. The parameters in the large-scale study matter less than the structure of the problem that is posed. Importantly, we do most of our learning about the hierarchical distribution from the lower-level studies anyway, so we should be thinking about the way that the small-scale studies “update” the biased picture from large-scale analyses.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;everything-is-a-nail&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Everything is a nail&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Operationalizations Make Random Variables</title>
+      <link>/2019/2019-05-07_operationalizations/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-05-07_operationalizations/</guid>
+      <description>Paul Musgrave &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760&#34;&gt;tweeted&lt;/a&gt; recently that operationalizations aren’t definitions. In his own words:
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Operationalizations aren’t definitions
+&lt;/p&gt;
+— Paul Musgrave (&lt;span class=&#34;citation&#34;&gt;@profmusgrave&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760?ref_src=twsrc%5Etfw&#34;&gt;May 6, 2019&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;When we do social science, our theories involve “forces at work” in the world. Definitions of those forces are &lt;em&gt;conceptual&lt;/em&gt; discussions, while operationalizations are &lt;em&gt;measurement strategies&lt;/em&gt; for turning the concept into a data point.&lt;/p&gt;
+&lt;!-- For instance, some of my work deals with &#34;ideology,&#34; which can be defined by appealing to &#34;systems&#34; of beliefs that could be described as &#34;connected&#34; or &#34;constrained,&#34; where individual beliefs may be &#34;high dimensional&#34; but summarized in fewer dimensions. Operationalizing ideology, meanwhile, is a decision about how to measure ideology. Do we ask people how &#34;conservative&#34; they think they are? Do we average their beliefs on discrete policy questions into some scale? Do we build a more complicated model to recover an underlying structure from an assortment of beliefs? --&gt;
+&lt;p&gt;I saw this tweet and, after agreeing with its argument, wanted to take it further. An implicit feature of “operationalization” is the idea that measures are imperfect indicators of the targeted construct.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;What does a measure tell us about the underlying construct? Does it give us perfect, error-free information? Or is there some imperfection?&lt;/li&gt;
+&lt;li&gt;Does the process translating construct into data have components of bias and error that can be confronted in the measurement strategy?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;…&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Operationalizations result in &lt;em&gt;random variables&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \text{Observation}_{i} &amp;amp;= \text{Truth}_{i} + \text{Bias}_{i} + \text{Error}_{i}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Which implies :&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \text{Observation}_{i} &amp;amp;\sim \mathcal{D}\left(\text{Truth}_{i} + \text{Bias}_{i}, \text{Error}_{i}\right)
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We have a dualistic view of data analysis where data are “known” while parameters are “unknown.” Often (most of the time?) we are overconfident about the amount of information conveyed&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Definitions are conceptual.&lt;/p&gt;
+&lt;p&gt;Operationalizations are data.&lt;/p&gt;
+&lt;p&gt;Data are noisy, biased, error prone.&lt;/p&gt;
+&lt;p&gt;Operationalizations should reflect noise, bias, error.&lt;/p&gt;
+&lt;p&gt;Broader: “the DGP” where the data are some transformation of the underlying construct but also any additional artifacts of sampling, instrumentation, compliance, record-keeping… Most of the time we assume these influences are zero or are netting out in some way or another, but we still talk about them as “selection biases” or “response bias” and so on.&lt;/p&gt;
+&lt;div id=&#34;the-irt-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The IRT model&lt;/h1&gt;
+&lt;p&gt;Ideology: not directly observed but imperfectly indicated by voting.&lt;/p&gt;
+&lt;p&gt;IRT approach: not every vote is equally “difficult” nor “discriminatory” between liberals and conservatives.&lt;/p&gt;
+&lt;p&gt;I can only get “so close” to knowing your precise ideology given a finite set of questions. I can only trust these estimates by making a series of assumptions about the representativeness of the items and the representativeness of the voters in the data.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{ij} &amp;amp;= \Phi\left( \beta_{j}\left[\theta - \kappa_{j}\right]\right) \\[12pt]
+  y_{ij} &amp;amp;= \Phi\left( \beta_{j}\theta + \alpha_{j}\right), \text{ where } \alpha_{j} = -\beta_j\kappa_j
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;racial-resentment&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Racial resentment&lt;/h1&gt;
+&lt;p&gt;Argument: scales are special cases of overconfident measurement models&lt;/p&gt;
+&lt;p&gt;Derive solutions&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:rr&#34;&gt;\[\begin{align}
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} y_{ij} \tag{1}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;What assumptions get us to this…&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:ordinary&#34;&gt;\[\begin{align}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= y_{ij}  \tag{2}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where we can assume that
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \sum_{j = 1}^{J} \epsilon_{ij} &amp;amp;= 0 \text{ for all } i
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We get back to the original by summing responses over &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= y_{ij} \\[12pt]
+  \sum\limits_{j=1}^{J} \left(\theta_{i} + \epsilon_{ij}\right) &amp;amp;= \sum\limits_{j=1}^{J} y_{ij} \\[12pt]
+  \left(J \times \theta_{i}\right) + 0 &amp;amp;= \sum\limits_{j=1}^{J} y_{ij} \\[12pt]
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} y_{ij}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;IRT reverse-engineering&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  y_{ij} &amp;amp;= \beta_{j}\left(\theta_{i} - \kappa_{j}\right) + \epsilon_{ij} \\
+  y_{ij} &amp;amp;= \beta_{j}\theta_{i} + \alpha_{j} + \epsilon_{ij}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;we only get Equation &lt;a href=&#34;#eq:ordinary&#34;&gt;(2)&lt;/a&gt; when &lt;span class=&#34;math inline&#34;&gt;\(\alpha_{j} = 0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_{j} = 1\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  y_{ij} &amp;amp;= (1)\theta_{i} + (0) + \epsilon_{ij}
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;div id=&#34;relaxing-constraints&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Relaxing constraints&lt;/h2&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\sum_{j = 1}^{J} \epsilon_{ij} = 0\)&lt;/span&gt; in expectation only, so &lt;span class=&#34;math inline&#34;&gt;\(\theta_{i}\)&lt;/span&gt; is a random variable (but &lt;span class=&#34;math inline&#34;&gt;\(\alpha_{j}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_{j}\)&lt;/span&gt; are still known for all &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;).&lt;/p&gt;
+&lt;p&gt;Allow &lt;span class=&#34;math inline&#34;&gt;\(\alpha_{j} \neq 0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Allow &lt;span class=&#34;math inline&#34;&gt;\(\beta_{j} \neq 1\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;The same latent variable intuition also applies to RR.&lt;/p&gt;
+&lt;p&gt;RR as conventionally defined has pinpoint-precise priors about items and residual error, which is nonsense.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;bayesian-measurement-model-of-racial-resentment&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Bayesian Measurement Model of Racial Resentment&lt;/h1&gt;
+&lt;p&gt;Flat priors then normalize: are we actually very uncertain about RR?&lt;/p&gt;
+&lt;p&gt;NO!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Alpha: we expect RCs to answer on one side, RLs to answer on the other side. So the prior that alpha is in the middle makes sense.&lt;/li&gt;
+&lt;li&gt;Beta: We are already assuming that we know the orientation of the item when we give it a polarity. We could just do that here. Relaxed assumption: N(1, .05) or something. Or Half-Normal. Or exponential.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Model is Itself a Hierarchical Variable</title>
+      <link>/2019/2019-05-07_effect-distributions/</link>
+      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-05-07_effect-distributions/</guid>
+      <description>&lt;div id=&#34;tweets&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Tweets&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;I should do more than vague-tweet abt this.
+🔸 Treatment fx are unknown! I think techniques that tell us about the distribution of plausible fx are improvements over “robustness tests” if the latter focus on the robustness of the num. of stars vs substantive inferences about fx&lt;/li&gt;
+&lt;li&gt;🔸 Engaging directly w/ the parameter val as the actual qty of interest, not its sign. Maybe it’s just me but I can’t grok a “purely directional” hypotheses. How common are cases where an estimate of 1 gives us the same info as an effect of 1mil, or 1/1mil. They’re all &amp;gt; 0&lt;/li&gt;
+&lt;li&gt;🔸 The model can be a variable in the analysis. Bayes can do this w/ prior prob of the model, &amp;amp; models don’t need equal priors. Concepts like “goodness of fit” via marginal likelihood can be weird for causal inference though because GOF isn’t a measure of causal identification&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Outline&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Intro&lt;/li&gt;
+&lt;li&gt;If posterior distributions did not exist, we would have to invent them&lt;/li&gt;
+&lt;li&gt;Can think of no examples where we only have a directional hypothesis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;notes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Notes&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://t.co/L4AMcbbS2g?amp=1&#34;&gt;Original paper&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/JohnHolbein1/status/1125726900331130880&#34;&gt;Holbein sub-thread&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/JohnHolbein1/status/1125727699639701505&#34;&gt;Holbein: direction vs. size&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This is why I care about Bayesian causal inference&lt;/li&gt;
+&lt;li&gt;The direction is often not what we care about
+&lt;ul&gt;
+&lt;li&gt;what if it were positive but 10 million?&lt;/li&gt;
+&lt;li&gt;what about situations where we know that the effect has to be in some direction?
+&lt;ul&gt;
+&lt;li&gt;List experiments and the TRUE parameter&lt;/li&gt;
+&lt;li&gt;Voter ID and KNOWING that it isn’t zero&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The “Bayesian &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value” is a function of the underlying thing that we care about: the causal parameter&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;compliment the approach, it’s reinforcing the idea that we are uncertain about the system&lt;/li&gt;
+&lt;li&gt;The model is also variable (an uncertain parameter); so vary it&lt;/li&gt;
+&lt;li&gt;This fits in a Bayesian framework&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The prior is flat&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;the-model-is-a-itself-a-variable-in-the-system&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The model is a itself a variable in the system&lt;/h2&gt;
+&lt;p&gt;Bayes w/out Frequentist language&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;data and parameters are variables (known vs unknown)&lt;/li&gt;
+&lt;li&gt;parameters are unknown so given some prior&lt;/li&gt;
+&lt;li&gt;the data update the prior&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The model is a variable&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;really, a parameter&lt;/li&gt;
+&lt;li&gt;we don’t know which is “right”&lt;/li&gt;
+&lt;li&gt;we approximate our information with a probability distribution&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Bayes factors&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Calculate the probability of the data, given the model
+&lt;ul&gt;
+&lt;li&gt;the marginal likelihood&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Weight by the prior&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The marginal likelihood&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The probability of the data, integrating over parameters&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;The treatment effect is uncertain
+&lt;ul&gt;
+&lt;li&gt;Frequentism is a &lt;em&gt;point estimate&lt;/em&gt;. The confidence interval is an asymptotic result from &lt;em&gt;repeated sampling&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Even in a one-off sample with no repetition, we the treatment effect &lt;em&gt;could be bigger&lt;/em&gt; and &lt;em&gt;could be smaller&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bayesian Estimates of Wait Times at the Polls</title>
+      <link>/2019/2019-03-21_bayesian-wait-times/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/2019-03-21_bayesian-wait-times/</guid>
+      <description>&lt;p&gt;Charles Stewart &lt;a href=&#34;https://twitter.com/cstewartiii/status/1108130166381912064&#34;&gt;tweeted&lt;/a&gt; some figures on the estimated average wait time to vote in 2018 (compared to 2014 and 2016). These data come from the CCES and the SPAE. Interestingly, neither of these surveys are able to get a direct measure of wait time. This makes sense; a voter will not remember if they were in line for 6 minutes versus 7. Instead, the surveys ask for a binned response.&lt;/p&gt;
+&lt;!-- Figure or example --&gt;
+&lt;p&gt;Having calculated wait time data for the MIT Election Data and Sciences Lab before (the 2016 data might be my own work? I can’t be sure), I know a little bit about how this is usually done.&lt;/p&gt;
+&lt;!-- Method. --&gt;
+&lt;p&gt;I think we can do better.&lt;/p&gt;
+&lt;p&gt;Think about it this way. There is a true wait time, but we don’t observe it. Instead we observe an interval-censored version of the wait time. The true wait time is estimated by imputing the midpoint of a bin, but that will only be a good estimate of the mean within the bit if the true wait times (again, unobserved) are symmetrically distributed within the bin. Given what we ordinarily assume about wait times (they are the wait times between Poisson processes, ordinarily modeled with an always-decreasing exponential distribution), this symmetric assumption could be better.&lt;/p&gt;
+&lt;!-- Graphic. --&gt;
+&lt;p&gt;There’s a likelihood-based way to get at this. Rather than trust the censored data as it is, we could model the unobserved data using the censored data as a noisy indicator. In other words, what is the likely distribution of wait times, given the pattern in censored wait times that we see?&lt;/p&gt;
+&lt;div id=&#34;new-thoughts-notes-to-self&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;(New thoughts) notes to self&lt;/h1&gt;
+&lt;p&gt;The time you wait is f(arrivals, drops, departures):&lt;/p&gt;
+&lt;p&gt;(arrival - dropout) / (departure)&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;setting-up-the-latent-variable-model&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Setting up the latent variable model&lt;/h1&gt;
+&lt;p&gt;Suppose there is a true wait time &lt;span class=&#34;math inline&#34;&gt;\(\omega\)&lt;/span&gt; for voter &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; in state &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt;. We assume &lt;span class=&#34;math inline&#34;&gt;\(\omega_{i}\)&lt;/span&gt; is an Exponential draw from the distribution of wait times in state &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt;,
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \omega_{i} &amp;amp;\sim \mathrm{Exponential}(\lambda_{s[i]}),
+\end{align}\]&lt;/span&gt;
+where &lt;span class=&#34;math inline&#34;&gt;\(\lambda_{s}\)&lt;/span&gt; is the rate parameter and &lt;span class=&#34;math inline&#34;&gt;\(\beta = \dfrac{1}{\lambda_{s}}\)&lt;/span&gt; is the mean wait time in state &lt;span class=&#34;math inline&#34;&gt;\(s\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;Wait times are measured in surveys using discrete categories to represent a range of wait times. Let &lt;span class=&#34;math inline&#34;&gt;\(y_{i}\)&lt;/span&gt; be the discrete measure of wait time for voter &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;. If there are &lt;span class=&#34;math inline&#34;&gt;\(K\)&lt;/span&gt; total categories, then the probability that &lt;span class=&#34;math inline&#34;&gt;\(y_{i} = k\)&lt;/span&gt; is given by a difference in cumulative Exponential functions.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mathrm{Pr}(y_{i} = k) &amp;amp;= 1 - e^{}
+\end{align}\]&lt;/span&gt;
+which is the sum of the probability mass between the lower bound &lt;span class=&#34;math inline&#34;&gt;\((k^{-})\)&lt;/span&gt; and upper bound &lt;span class=&#34;math inline&#34;&gt;\((k^{+})\)&lt;/span&gt; of category &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt;. This is equivalent of taking the CDF at &lt;span class=&#34;math inline&#34;&gt;\(k^{+}\)&lt;/span&gt; minus the CDF at &lt;span class=&#34;math inline&#34;&gt;\(k^{-}\)&lt;/span&gt;.
+&lt;!-- but gotta get the boundary minus one situation sorted out. Use graphics for the intuition. --&gt;
+The foundation for this setup is a lot like logistic regression.&lt;/p&gt;
+&lt;p&gt;The observed wait time is measured in ordinal bins. As long as &lt;span class=&#34;math inline&#34;&gt;\(\omega_i\)&lt;/span&gt; is a random variable from the Exponential process, then its falling into a particular bin can be represented as a categorical outcome.
+&lt;!-- or is it an ordered thing? --&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{i} &amp;amp;\sim \mathrm{Categorical}\left( \pi_{k} \right)
+\end{align}\]&lt;/span&gt;
+The probability of being in category &lt;span class=&#34;math inline&#34;&gt;\(k\)&lt;/span&gt; is given by the difference in CDFs.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \pi_{k} &amp;amp;= \displaystyle e^{-\lambda_{s} }\sum_{r=k^{-}}^{k^{+}}{\frac {\lambda_{s}^{r}}{r!}}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;or-can-we-do-it-directly&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Or can we do it directly&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(y_{i}\)&lt;/span&gt; is a piecewise categorical function of the true wait time.
+&lt;!-- except this isn&#39;t piecewise --&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{i} = I\left( k^{-} &amp;lt; \omega_{i} &amp;lt; k^{*} \right), \text{ for } k \in \left\{1, 2, \ldots, K \right\}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;And &lt;span class=&#34;math inline&#34;&gt;\(\omega_{i}\)&lt;/span&gt; is a Exponential draw from the state mean wait.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \omega_{i} &amp;amp;\sim \mathrm{Exponential}(\lambda_{s[i]}),
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;From here all we have to do is give &lt;span class=&#34;math inline&#34;&gt;\(\lambda_{s}\)&lt;/span&gt; its own prior. We can do independent priors to start with,
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \lambda_{s} &amp;amp;\sim \mathrm{Gamma}\left(\alpha, \beta \right)
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;The model of &lt;span class=&#34;math inline&#34;&gt;\(\lambda_{s}\)&lt;/span&gt; could easily be improved by including a regression on state-level covariates. This would have the effect of pooling observations from data-poor states toward the trend suggested by data-rich states.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;prediction-waits-arent-as-long&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Prediction: waits aren’t as long&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Experimentalists Agree! When Flat Priors Lead to Worse Learning</title>
       <link>/2019/2019-02-23_gerber-green-kaplan/</link>
       <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
@@ -134,6 +422,614 @@ If you have some expectation about the true and estimated effects, you actually 
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
 Critics may be concerned that an effect is under-estimated but the prevailing emphasis on null-hypothesis testing strongly redirects critical attention away from this possibility.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using the Tidyverse with Voter Registration Linkage Data</title>
+      <link>/2018/2018-11-29-hava-xl/</link>
+      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/2018-11-29-hava-xl/</guid>
+      <description>&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;This blog post demonstrates how you can use R and the Tidyverse tools to make quick work of some voter registration data. The post highlights:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;How to read many an Excel file with multiple sheets using &lt;code&gt;{readxl}&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Organizing data efficiently with list columns using tibbles&lt;/li&gt;
+&lt;li&gt;Cleaning many data tables simultaneously using &lt;code&gt;{purrr}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The data&lt;/h1&gt;
+&lt;p&gt;The Help America Vote Act, passed in the wake of the 2000 presidential elections, requires states to verify information from voter registration applications. Voters may include their driver’s license numbers on their applications—which states are responsible for verifying—or they may include the last four digits of their Social Security number. Social Security information is validated against the Social Security Administration’s databases.&lt;/p&gt;
+&lt;p&gt;But the data are messy, as are the data for any record-linkage endeavor. We have names, birth dates, and only 4 digits of a social security number (which aren’t uniquely always identifying). Voters may mistype these fields into a web page, or state workers may mistype them. There may be last-name changes that create issues. Computers may do a bad job parsing the punctuation and spacing in someone’s last name.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; As a result, voter registration applications may not match any SSA records, or they do not match to one unique SSA record. There are indeed enough people in the U.S., and enough noise in the way SSA numbers are assigned, that there can be multiple cases with the same last name, birthday, and last 4 digits of one’s SS number.&lt;/p&gt;
+&lt;p&gt;The data we’ll use is the SSA’s &lt;a href=&#34;https://www.ssa.gov/open/havv/&#34;&gt;summary tables&lt;/a&gt; for these match attempts, which can be &lt;a href=&#34;https://www.ssa.gov/open/havv/havv-jan2011-todate.html&#34;&gt;browsed online or downloaded as a multi-sheet &lt;code&gt;.xlsx&lt;/code&gt; file&lt;/a&gt;. The file contains separate sheets for various dates at which new summaries were generated. We would like to shape the data into one single table, organized along a &lt;code&gt;date&lt;/code&gt; variable.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;get-the-data-into-r&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Get the data into R&lt;/h1&gt;
+&lt;p&gt;First, we will load some packages: &lt;code&gt;here&lt;/code&gt; manages relative directories, &lt;code&gt;tidyverse&lt;/code&gt; contains a suite of helpful data manipulation tools, and &lt;code&gt;magrittr&lt;/code&gt; contains some additional “pipes” that we will use. We will use functions from &lt;code&gt;readxl&lt;/code&gt; and &lt;code&gt;lubridate&lt;/code&gt; packages, but we will leave those unattached so they are easier to spot as we go.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;here&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;magrittr&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;co&#34;&gt;# don&amp;#39;t attach: readxl, lubridate&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The primary issue with reading the data is that there are multiple sheets in the same Excel file. We want to determine the names of each sheet and then use those names to read the sheets separately. We can get the sheet names with &lt;code&gt;readxl::excel_sheets()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# path to data&lt;/span&gt;
+data_dir &amp;lt;-&lt;span class=&#34;st&#34;&gt; &amp;quot;static/data&amp;quot;&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# sheets are named. Let&amp;#39;s get them.&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# pass the file name to readxl::excel_sheets()&lt;/span&gt;
+sheet_names &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;readxl&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;excel_sheets&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(data_dir, &lt;span class=&#34;st&#34;&gt;&amp;quot;HAVV-running-list.xlsx&amp;quot;&lt;/span&gt;))
+
+&lt;span class=&#34;co&#34;&gt;# look at some names&lt;/span&gt;
+&lt;span class=&#34;kw&#34;&gt;head&lt;/span&gt;(sheet_names, &lt;span class=&#34;dt&#34;&gt;n =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)
+&lt;span class=&#34;co&#34;&gt;##  [1] &amp;quot;January 2011-to date&amp;quot; &amp;quot;111018&amp;quot;               &amp;quot;110318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [4] &amp;quot;102718&amp;quot;               &amp;quot;102018&amp;quot;               &amp;quot;101318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [7] &amp;quot;100618&amp;quot;               &amp;quot;092918&amp;quot;               &amp;quot;092218&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [10] &amp;quot;091518&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Right away, we noticed that some of the sheets are dated using a &lt;code&gt;mmddyy&lt;/code&gt; format, while others are summaries of the data. We will want to clean those summaries out—we can re-calculate them ourselves more reliably (read: without Excel formulas).&lt;/p&gt;
+&lt;div id=&#34;sheets-as-list-elements&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Sheets as list elements&lt;/h2&gt;
+&lt;p&gt;One thing we could do is read the data as a list of data frames, one list element for each sheet. We can do this with &lt;code&gt;lapply()&lt;/code&gt; and an anonymous function.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# lapply() approach&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# I never know the best way to indent with an anonymous function&lt;/span&gt;
+havv_list &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(sheet_names, &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x)
+    readxl&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_excel&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(data_dir, &lt;span class=&#34;st&#34;&gt;&amp;quot;HAVV-running-list.xlsx&amp;quot;&lt;/span&gt;), &lt;span class=&#34;dt&#34;&gt;sheet =&lt;/span&gt; x)
+  )
+&lt;span class=&#34;co&#34;&gt;## The `validate` argument to `as_tibble()` is deprecated. Please use `.name_repair` to control column names.&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# name the list elements&lt;/span&gt;
+&lt;span class=&#34;kw&#34;&gt;names&lt;/span&gt;(havv_list) &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;sheet_names&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are over 400 data frames inside of &lt;code&gt;havv-list&lt;/code&gt;. Let’s look at some.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;head&lt;/span&gt;(havv_list, &lt;span class=&#34;dt&#34;&gt;n =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)
+&lt;span class=&#34;co&#34;&gt;## $`January 2011-to date`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 56 x 10&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    `STATE/TERRITORY` X__1   X__2  `(Z)` X__3  `(X)` `(Y)` `(V)` `(T)` `(W)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;             &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 &amp;lt;NA&amp;gt;              &amp;lt;NA&amp;gt;   UN    TOTAL &amp;lt;NA&amp;gt;  SING… SING… MULT… MULT… MULT…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 &amp;lt;NA&amp;gt;              TOTAL  PROC… NON   TOTAL MATCH MATCH MATCH MATCH MATCH&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 &amp;lt;NA&amp;gt;              TRANS… TRAN… MATC… MATC… ALIVE DECE… ALIVE DECE… MIXED&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 ----------------… -----… ----… ----… ----… ----… ----… ----… ----… ----…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 Alabama           11858… 40    1569… 1028… 9717… 56916 209   1     38   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 Alaska            26424  0     8725  17699 16171 1526  1     0     1    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 Arizona           24236… 133   9605… 1462… 1452… 9829  253   0     5    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 Arkansas          94537  0     32859 61678 61553 103   19    0     3    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 California        65935… 36    5654… 9388… 9325… 6129  133   0     16   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 Colorado          458296 0     1840… 2742… 2731… 1072  34    0     4    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 46 more rows&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`111018`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 56 x 10&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    `STATE/TERRITORY` X__1   X__2  `(Z)` X__3  `(X)` `(Y)` `(V)` `(T)` `(W)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;             &amp;lt;chr&amp;gt;  &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 &amp;lt;NA&amp;gt;              &amp;lt;NA&amp;gt;   UN    TOTAL &amp;lt;NA&amp;gt;  SING… SING… MULT… MULT… MULT…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 &amp;lt;NA&amp;gt;              TOTAL  PROC… NON   TOTAL MATCH MATCH MATCH MATCH MATCH&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 &amp;lt;NA&amp;gt;              TRANS… TRAN… MATC… MATC… ALIVE DECE… ALIVE DECE… MIXED&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 ----------------… -----… ----… ----… ----… ----… ----… ----… ----… ----…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 ALABAMA           1069   0     147   922   885   37    0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 ALASKA            34     0     11    23    21    2     0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 ARIZONA           753    0     202   551   551   0     0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 ARKANSAS          0      0     0     0     0     0     0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 CALIFORNIA        47923  0     25583 22340 22310 28    2     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 COLORADO          0      0     0     0     0     0     0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 46 more rows&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Great, so the variable names in the original spread sheet are an absolute mess. Not only are they spread across multiple rows, they’ve converted all of the data to character strings instead of numbers.&lt;/p&gt;
+&lt;p&gt;To fix the variable names, we will want to know what these names &lt;em&gt;should&lt;/em&gt; be. Let’s get a look by printing the first three rows of each column.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# take first data frame %&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;#   for each column, show the first 3 elements&lt;/span&gt;
+havv_list[[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) x[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;])
+&lt;span class=&#34;co&#34;&gt;## $`STATE/TERRITORY`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] NA NA NA&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $X__1&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] NA             &amp;quot;TOTAL&amp;quot;        &amp;quot;TRANSACTIONS&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $X__2&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;UN&amp;quot;           &amp;quot;PROCESSED&amp;quot;    &amp;quot;TRANSACTIONS&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(Z)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;TOTAL&amp;quot;   &amp;quot;NON&amp;quot;     &amp;quot;MATCHES&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $X__3&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] NA        &amp;quot;TOTAL&amp;quot;   &amp;quot;MATCHES&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(X)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;SINGLE&amp;quot; &amp;quot;MATCH&amp;quot;  &amp;quot;ALIVE&amp;quot; &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(Y)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;SINGLE&amp;quot;   &amp;quot;MATCH&amp;quot;    &amp;quot;DECEASED&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(V)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;MULTIPLE&amp;quot; &amp;quot;MATCH&amp;quot;    &amp;quot;ALIVE&amp;quot;   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(T)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;MULTIPLE&amp;quot; &amp;quot;MATCH&amp;quot;    &amp;quot;DECEASED&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## $`(W)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [1] &amp;quot;MULTIPLE&amp;quot; &amp;quot;MATCH&amp;quot;    &amp;quot;MIXED&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;So we have state, total transactions, unprocessed transactions, and so on. We store these in a vector for later.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# store a revised names as a vector&lt;/span&gt;
+varnames &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;state&amp;quot;&lt;/span&gt;, 
+              &lt;span class=&#34;st&#34;&gt;&amp;quot;total_transactions&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;unprocessed_transactions&amp;quot;&lt;/span&gt;, 
+              &lt;span class=&#34;st&#34;&gt;&amp;quot;total_nonmatches&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;total_matches&amp;quot;&lt;/span&gt;, 
+              &lt;span class=&#34;st&#34;&gt;&amp;quot;single_match_alive&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;single_match_deceased&amp;quot;&lt;/span&gt;,
+              &lt;span class=&#34;st&#34;&gt;&amp;quot;multi_match_alive&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;multi_match_deceased&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;multi_match_mixed&amp;quot;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We want to double check that these are the same variables we have in every table. One way to start looking at that is by viewing the number of columns in each table.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# How many columns per table? Express as a vector&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# then tabulate the number of columns&lt;/span&gt;
+&lt;span class=&#34;kw&#34;&gt;sapply&lt;/span&gt;(havv_list, ncol) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;table&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## .&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    10 16138 &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##   406     6&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Okay…so most tables have 10 columns, but some inexplicably have 16,138 columns. At this point, I’m thinking I want to do things to the data such as, “Give me only the tables that have more than 10 columns” so I can manipulate those as a separate object. However, the list-of-data-frames isn’t the most amenable to these types of manipulations. Instead, we will use &lt;code&gt;purrr&lt;/code&gt; tools to hold the data frames as a list-column within another data frame. I know, wild.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;purrr-approach-sheets-as-list-column&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Purrr approach: sheets as list-column&lt;/h2&gt;
+&lt;p&gt;Imagine you had a data frame, but one of the variables didn’t contain just one value per cell, but instead contained a dataset per cell. That’s what we will do.&lt;/p&gt;
+&lt;p&gt;We start by creating a data frame that has the sheet names as a variable. We will then use &lt;code&gt;purrr::map&lt;/code&gt; to loop over those sheet names and place each data table into its corresponding cell. Like so:&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# start with sheet names in a data frame&lt;/span&gt;
+havv_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data_frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;sheet_name =&lt;/span&gt; sheet_names) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 412 x 1&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name          &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;               &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 January 2011-to date&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 111018              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 110318              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 102718              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 102018              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 101318              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 100618              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 092918              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 092218              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 091518              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 402 more rows&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# purrr::map(): for each name, read sheet from file&lt;/span&gt;
+havv_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(sheet_name, 
+               &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;readxl&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_excel&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(data_dir, &lt;span class=&#34;st&#34;&gt;&amp;quot;HAVV-running-list.xlsx&amp;quot;&lt;/span&gt;),
+                                    &lt;span class=&#34;dt&#34;&gt;sheet =&lt;/span&gt; .x))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 412 x 2&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name           data              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;                &amp;lt;list&amp;gt;            &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 January 2011-to date &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 111018               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 110318               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 102718               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 102018               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 101318               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 100618               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 092918               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 092218               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 091518               &amp;lt;tibble [56 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 402 more rows&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cleaning-the-data-with-purrr&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Cleaning the data with &lt;code&gt;purrr&lt;/code&gt;&lt;/h1&gt;
+&lt;div id=&#34;rows-and-columns&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Rows and columns&lt;/h2&gt;
+&lt;p&gt;Let’s grab one of those tables that had 16 thousand columns. Start by creating a column in the data that stores the number of columns for each table, and then we’ll examine one of the abnormal tables. Do this by applying &lt;code&gt;ncol()&lt;/code&gt; to every table using &lt;code&gt;map_int()&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# grab a table with more than 10 variables and look at it&lt;/span&gt;
+bad_table &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ncol =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map_int&lt;/span&gt;(data, ncol)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(ncol &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sample_n&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 56 x 16,140&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name  ncol `STATE/TERRITOR… X__1  X__2  `(Z)` X__3  `(X)` `(Y)`&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;      &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 083113     16138 &amp;lt;NA&amp;gt;             &amp;lt;NA&amp;gt;  UN    TOTAL &amp;lt;NA&amp;gt;  SING… SING…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 083113     16138 &amp;lt;NA&amp;gt;             TOTAL PROC… NON   TOTAL MATCH MATCH&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 083113     16138 &amp;lt;NA&amp;gt;             TRAN… TRAN… MATC… MATC… ALIVE DECE…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 083113     16138 ---------------… ----… ----… ----… ----… ----… ----…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 083113     16138 Alabama          4010  0     463   3547  3436  110  &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 083113     16138 Alaska           29    0     10    19    19    0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 083113     16138 Arizona          304   0     140   164   160   4    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 083113     16138 Arkansas         394   0     113   281   279   2    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 083113     16138 California       22781 0     22001 780   769   11   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 083113     16138 Colorado         0     0     0     0     0     0    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 46 more rows, and 16,131 more variables: `(V)` &amp;lt;chr&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   `(T)` &amp;lt;chr&amp;gt;, `(W)` &amp;lt;chr&amp;gt;, X__4 &amp;lt;lgl&amp;gt;, X__5 &amp;lt;lgl&amp;gt;, X__6 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__7 &amp;lt;lgl&amp;gt;, X__8 &amp;lt;lgl&amp;gt;, X__9 &amp;lt;lgl&amp;gt;, X__10 &amp;lt;lgl&amp;gt;, X__11 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__12 &amp;lt;lgl&amp;gt;, X__13 &amp;lt;lgl&amp;gt;, X__14 &amp;lt;lgl&amp;gt;, X__15 &amp;lt;lgl&amp;gt;, X__16 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__17 &amp;lt;lgl&amp;gt;, X__18 &amp;lt;lgl&amp;gt;, X__19 &amp;lt;lgl&amp;gt;, X__20 &amp;lt;lgl&amp;gt;, X__21 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__22 &amp;lt;lgl&amp;gt;, X__23 &amp;lt;lgl&amp;gt;, X__24 &amp;lt;lgl&amp;gt;, X__25 &amp;lt;lgl&amp;gt;, X__26 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__27 &amp;lt;lgl&amp;gt;, X__28 &amp;lt;lgl&amp;gt;, X__29 &amp;lt;lgl&amp;gt;, X__30 &amp;lt;lgl&amp;gt;, X__31 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__32 &amp;lt;lgl&amp;gt;, X__33 &amp;lt;lgl&amp;gt;, X__34 &amp;lt;lgl&amp;gt;, X__35 &amp;lt;lgl&amp;gt;, X__36 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__37 &amp;lt;lgl&amp;gt;, X__38 &amp;lt;lgl&amp;gt;, X__39 &amp;lt;lgl&amp;gt;, X__40 &amp;lt;lgl&amp;gt;, X__41 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__42 &amp;lt;lgl&amp;gt;, X__43 &amp;lt;lgl&amp;gt;, X__44 &amp;lt;lgl&amp;gt;, X__45 &amp;lt;lgl&amp;gt;, X__46 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__47 &amp;lt;lgl&amp;gt;, X__48 &amp;lt;lgl&amp;gt;, X__49 &amp;lt;lgl&amp;gt;, X__50 &amp;lt;lgl&amp;gt;, X__51 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__52 &amp;lt;lgl&amp;gt;, X__53 &amp;lt;lgl&amp;gt;, X__54 &amp;lt;lgl&amp;gt;, X__55 &amp;lt;lgl&amp;gt;, X__56 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__57 &amp;lt;lgl&amp;gt;, X__58 &amp;lt;lgl&amp;gt;, X__59 &amp;lt;lgl&amp;gt;, X__60 &amp;lt;lgl&amp;gt;, X__61 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__62 &amp;lt;lgl&amp;gt;, X__63 &amp;lt;lgl&amp;gt;, X__64 &amp;lt;lgl&amp;gt;, X__65 &amp;lt;lgl&amp;gt;, X__66 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__67 &amp;lt;lgl&amp;gt;, X__68 &amp;lt;lgl&amp;gt;, X__69 &amp;lt;lgl&amp;gt;, X__70 &amp;lt;lgl&amp;gt;, X__71 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__72 &amp;lt;lgl&amp;gt;, X__73 &amp;lt;lgl&amp;gt;, X__74 &amp;lt;lgl&amp;gt;, X__75 &amp;lt;lgl&amp;gt;, X__76 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__77 &amp;lt;lgl&amp;gt;, X__78 &amp;lt;lgl&amp;gt;, X__79 &amp;lt;lgl&amp;gt;, X__80 &amp;lt;lgl&amp;gt;, X__81 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__82 &amp;lt;lgl&amp;gt;, X__83 &amp;lt;lgl&amp;gt;, X__84 &amp;lt;lgl&amp;gt;, X__85 &amp;lt;lgl&amp;gt;, X__86 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__87 &amp;lt;lgl&amp;gt;, X__88 &amp;lt;lgl&amp;gt;, X__89 &amp;lt;lgl&amp;gt;, X__90 &amp;lt;lgl&amp;gt;, X__91 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__92 &amp;lt;lgl&amp;gt;, X__93 &amp;lt;lgl&amp;gt;, X__94 &amp;lt;lgl&amp;gt;, X__95 &amp;lt;lgl&amp;gt;, X__96 &amp;lt;lgl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   X__97 &amp;lt;lgl&amp;gt;, X__98 &amp;lt;lgl&amp;gt;, X__99 &amp;lt;lgl&amp;gt;, X__100 &amp;lt;lgl&amp;gt;, …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Luckily, these extra columns appear to be empty:&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;bad_table &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(X__&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;X__&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 56 x 7&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    X__4  X__5  X__6  X__7  X__8  X__9  X__10&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt; &amp;lt;lgl&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 NA    NA    NA    NA    NA    NA    NA   &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 46 more rows&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If these columns are blank, we can apply a function over all of the datasets to keep only the rows and columns we want: we want to delete the first few rows (which contain ugly variable names) and only the first ten columns. We will use this chance to rename those variables according to the vector of names we saved above.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# map: for each dataset, &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;#   drop the first 4 rows, keep only cols 1:10&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;#   rename variables&lt;/span&gt;
+havv_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(data, 
+                    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.x[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;) , &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                      &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;set_names&lt;/span&gt;(varnames))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 412 x 2&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name           data              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;                &amp;lt;list&amp;gt;            &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 January 2011-to date &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 111018               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 110318               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 102718               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 102018               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 101318               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 100618               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 092918               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 092218               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 091518               &amp;lt;tibble [52 × 10]&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 402 more rows&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# confirm that every table is 10 columns and 52 rows&lt;/span&gt;
+havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;cols =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map_int&lt;/span&gt;(data, ncol),
+         &lt;span class=&#34;dt&#34;&gt;rows =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map_int&lt;/span&gt;(data, nrow)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;count&lt;/span&gt;(cols, rows)
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 1 x 3&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    cols  rows     n&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##   &amp;lt;int&amp;gt; &amp;lt;int&amp;gt; &amp;lt;int&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 1    10    52   412&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# do things look good&lt;/span&gt;
+havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sample_n&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 52 x 11&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name state total_transacti… unprocessed_tra… total_nonmatches&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;            &amp;lt;chr&amp;gt;           &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 052116     Alab… 837              0                116             &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 052116     Alas… 35               0                3               &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 052116     Ariz… 3210             0                914             &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 052116     Arka… 183              0                53              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 052116     Cali… 14072            0                5921            &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 052116     Colo… 0                0                0               &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 052116     Conn… 275              0                53              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 052116     Dela… 0                0                0               &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 052116     Dist… 0                0                0               &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 052116     Flor… 1318             0                544             &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 42 more rows, and 6 more variables: total_matches &amp;lt;chr&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   single_match_alive &amp;lt;chr&amp;gt;, single_match_deceased &amp;lt;chr&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   multi_match_alive &amp;lt;chr&amp;gt;, multi_match_deceased &amp;lt;chr&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   multi_match_mixed &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dating-each-sheet&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Dating each sheet&lt;/h2&gt;
+&lt;p&gt;At this point, we want to consider unnesting the data frames. We want to do this by “dating” each data frame with information contained in the sheet name. First, what are the sheet names?&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;names&lt;/span&gt;(havv_list)
+&lt;span class=&#34;co&#34;&gt;##   [1] &amp;quot;January 2011-to date&amp;quot; &amp;quot;111018&amp;quot;               &amp;quot;110318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##   [4] &amp;quot;102718&amp;quot;               &amp;quot;102018&amp;quot;               &amp;quot;101318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##   [7] &amp;quot;100618&amp;quot;               &amp;quot;092918&amp;quot;               &amp;quot;092218&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [10] &amp;quot;091518&amp;quot;               &amp;quot;090818&amp;quot;               &amp;quot;090118&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [13] &amp;quot;082518&amp;quot;               &amp;quot;081818&amp;quot;               &amp;quot;081118&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [16] &amp;quot;080418&amp;quot;               &amp;quot;072818&amp;quot;               &amp;quot;072118&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [19] &amp;quot;071418&amp;quot;               &amp;quot;070718&amp;quot;               &amp;quot;063018&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [22] &amp;quot;062318&amp;quot;               &amp;quot;061618&amp;quot;               &amp;quot;060918&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [25] &amp;quot;060218&amp;quot;               &amp;quot;052618&amp;quot;               &amp;quot;051918&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [28] &amp;quot;051218&amp;quot;               &amp;quot;050518&amp;quot;               &amp;quot;042818&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [31] &amp;quot;042118&amp;quot;               &amp;quot;041418&amp;quot;               &amp;quot;040718&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [34] &amp;quot;033118&amp;quot;               &amp;quot;032418&amp;quot;               &amp;quot;031718&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [37] &amp;quot;031018&amp;quot;               &amp;quot;030318&amp;quot;               &amp;quot;022418&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [40] &amp;quot;021718&amp;quot;               &amp;quot;021018&amp;quot;               &amp;quot;020318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [43] &amp;quot;012718&amp;quot;               &amp;quot;012018&amp;quot;               &amp;quot;011318&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [46] &amp;quot;010618&amp;quot;               &amp;quot;123017&amp;quot;               &amp;quot;122317&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [49] &amp;quot;121617&amp;quot;               &amp;quot;120917&amp;quot;               &amp;quot;120217&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [52] &amp;quot;112517&amp;quot;               &amp;quot;111817&amp;quot;               &amp;quot;111117&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [55] &amp;quot;110417&amp;quot;               &amp;quot;102817&amp;quot;               &amp;quot;102117&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [58] &amp;quot;101417&amp;quot;               &amp;quot;100717&amp;quot;               &amp;quot;093017&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [61] &amp;quot;092317&amp;quot;               &amp;quot;091617&amp;quot;               &amp;quot;09092017&amp;quot;            &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [64] &amp;quot;090217&amp;quot;               &amp;quot;082617&amp;quot;               &amp;quot;081917&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [67] &amp;quot;081217&amp;quot;               &amp;quot;080517&amp;quot;               &amp;quot;072917&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [70] &amp;quot;072217&amp;quot;               &amp;quot;071517&amp;quot;               &amp;quot;070817&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [73] &amp;quot;070117&amp;quot;               &amp;quot;062417&amp;quot;               &amp;quot;061717&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [76] &amp;quot;061017&amp;quot;               &amp;quot;060317&amp;quot;               &amp;quot;052717&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [79] &amp;quot;052017&amp;quot;               &amp;quot;051317&amp;quot;               &amp;quot;050617&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [82] &amp;quot;042917&amp;quot;               &amp;quot;042217&amp;quot;               &amp;quot;041517&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [85] &amp;quot;040817&amp;quot;               &amp;quot;040117&amp;quot;               &amp;quot;032517&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [88] &amp;quot;031817&amp;quot;               &amp;quot;031117&amp;quot;               &amp;quot;030417&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [91] &amp;quot;022517&amp;quot;               &amp;quot;021817&amp;quot;               &amp;quot;021117&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [94] &amp;quot;020417&amp;quot;               &amp;quot;012817&amp;quot;               &amp;quot;012117&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  [97] &amp;quot;011417&amp;quot;               &amp;quot;010717&amp;quot;               &amp;quot;123116&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [100] &amp;quot;122416&amp;quot;               &amp;quot;121716&amp;quot;               &amp;quot;121016&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [103] &amp;quot;120316&amp;quot;               &amp;quot;112616&amp;quot;               &amp;quot;111916&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [106] &amp;quot;111216&amp;quot;               &amp;quot;110516&amp;quot;               &amp;quot;102916&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [109] &amp;quot;102216&amp;quot;               &amp;quot;101516&amp;quot;               &amp;quot;100816&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [112] &amp;quot;100116&amp;quot;               &amp;quot;092416&amp;quot;               &amp;quot;091716&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [115] &amp;quot;091016&amp;quot;               &amp;quot;090316&amp;quot;               &amp;quot;082716&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [118] &amp;quot;082016&amp;quot;               &amp;quot;081316&amp;quot;               &amp;quot;080616&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [121] &amp;quot;073016&amp;quot;               &amp;quot;072316&amp;quot;               &amp;quot;071616&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [124] &amp;quot;070916&amp;quot;               &amp;quot;070216&amp;quot;               &amp;quot;062516&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [127] &amp;quot;061816&amp;quot;               &amp;quot;061116&amp;quot;               &amp;quot;060416&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [130] &amp;quot;052816&amp;quot;               &amp;quot;052116&amp;quot;               &amp;quot;051416&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [133] &amp;quot;050716&amp;quot;               &amp;quot;043016&amp;quot;               &amp;quot;042316&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [136] &amp;quot;041616&amp;quot;               &amp;quot;040916&amp;quot;               &amp;quot;040216&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [139] &amp;quot;032616&amp;quot;               &amp;quot;031916&amp;quot;               &amp;quot;031216&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [142] &amp;quot;030516&amp;quot;               &amp;quot;022716&amp;quot;               &amp;quot;022016&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [145] &amp;quot;021316&amp;quot;               &amp;quot;020616&amp;quot;               &amp;quot;013016&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [148] &amp;quot;012316&amp;quot;               &amp;quot;011616&amp;quot;               &amp;quot;010916&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [151] &amp;quot;010216&amp;quot;               &amp;quot;122615&amp;quot;               &amp;quot;121915&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [154] &amp;quot;121215&amp;quot;               &amp;quot;120515&amp;quot;               &amp;quot;112815&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [157] &amp;quot;112115&amp;quot;               &amp;quot;111415&amp;quot;               &amp;quot;110715&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [160] &amp;quot;103115&amp;quot;               &amp;quot;102415&amp;quot;               &amp;quot;101715&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [163] &amp;quot;101015&amp;quot;               &amp;quot;100315&amp;quot;               &amp;quot;092615&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [166] &amp;quot;091915&amp;quot;               &amp;quot;091215&amp;quot;               &amp;quot;090515&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [169] &amp;quot;082915&amp;quot;               &amp;quot;082215&amp;quot;               &amp;quot;081515&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [172] &amp;quot;080815&amp;quot;               &amp;quot;080115&amp;quot;               &amp;quot;072515&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [175] &amp;quot;071815&amp;quot;               &amp;quot;071115&amp;quot;               &amp;quot;070415&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [178] &amp;quot;062715&amp;quot;               &amp;quot;062015&amp;quot;               &amp;quot;061315&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [181] &amp;quot;060615&amp;quot;               &amp;quot;053015&amp;quot;               &amp;quot;052315&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [184] &amp;quot;051615&amp;quot;               &amp;quot;050915&amp;quot;               &amp;quot;050215&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [187] &amp;quot;042515&amp;quot;               &amp;quot;041815&amp;quot;               &amp;quot;041115&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [190] &amp;quot;040415&amp;quot;               &amp;quot;032815&amp;quot;               &amp;quot;032115&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [193] &amp;quot;031415&amp;quot;               &amp;quot;030715&amp;quot;               &amp;quot;022815&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [196] &amp;quot;022115&amp;quot;               &amp;quot;021415&amp;quot;               &amp;quot;020715&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [199] &amp;quot;013115&amp;quot;               &amp;quot;012415&amp;quot;               &amp;quot;011715&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [202] &amp;quot;011015&amp;quot;               &amp;quot;010315&amp;quot;               &amp;quot;122714&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [205] &amp;quot;122014&amp;quot;               &amp;quot;121314&amp;quot;               &amp;quot;120614&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [208] &amp;quot;112914&amp;quot;               &amp;quot;112214&amp;quot;               &amp;quot;111514&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [211] &amp;quot;110814&amp;quot;               &amp;quot;110114&amp;quot;               &amp;quot;102514&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [214] &amp;quot;101814&amp;quot;               &amp;quot;101114&amp;quot;               &amp;quot;100414&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [217] &amp;quot;092714&amp;quot;               &amp;quot;092014&amp;quot;               &amp;quot;091314&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [220] &amp;quot;090614&amp;quot;               &amp;quot;083014&amp;quot;               &amp;quot;082314&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [223] &amp;quot;081614&amp;quot;               &amp;quot;080914&amp;quot;               &amp;quot;080214&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [226] &amp;quot;072614&amp;quot;               &amp;quot;071914&amp;quot;               &amp;quot;071214&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [229] &amp;quot;070514&amp;quot;               &amp;quot;062814&amp;quot;               &amp;quot;062114&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [232] &amp;quot;061414&amp;quot;               &amp;quot;060714&amp;quot;               &amp;quot;053114&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [235] &amp;quot;052414&amp;quot;               &amp;quot;051714&amp;quot;               &amp;quot;051014&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [238] &amp;quot;050314&amp;quot;               &amp;quot;042614&amp;quot;               &amp;quot;041914&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [241] &amp;quot;041214&amp;quot;               &amp;quot;040514&amp;quot;               &amp;quot;032914&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [244] &amp;quot;032214&amp;quot;               &amp;quot;031514&amp;quot;               &amp;quot;030814&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [247] &amp;quot;030114&amp;quot;               &amp;quot;022214&amp;quot;               &amp;quot;021514&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [250] &amp;quot;020814&amp;quot;               &amp;quot;020114&amp;quot;               &amp;quot;012514&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [253] &amp;quot;011814&amp;quot;               &amp;quot;011114&amp;quot;               &amp;quot;010414&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [256] &amp;quot;122813&amp;quot;               &amp;quot;122113&amp;quot;               &amp;quot;121413&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [259] &amp;quot;120713&amp;quot;               &amp;quot;113013&amp;quot;               &amp;quot;112313&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [262] &amp;quot;111613&amp;quot;               &amp;quot;110913&amp;quot;               &amp;quot;110213&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [265] &amp;quot;102613&amp;quot;               &amp;quot;101913&amp;quot;               &amp;quot;101213&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [268] &amp;quot;100513&amp;quot;               &amp;quot;092813&amp;quot;               &amp;quot;092113&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [271] &amp;quot;091413&amp;quot;               &amp;quot;090713&amp;quot;               &amp;quot;083113&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [274] &amp;quot;082413&amp;quot;               &amp;quot;081713&amp;quot;               &amp;quot;081013&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [277] &amp;quot;080313&amp;quot;               &amp;quot;072713&amp;quot;               &amp;quot;072013&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [280] &amp;quot;071313&amp;quot;               &amp;quot;070613&amp;quot;               &amp;quot;062913&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [283] &amp;quot;062213&amp;quot;               &amp;quot;061513&amp;quot;               &amp;quot;060813&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [286] &amp;quot;060113&amp;quot;               &amp;quot;052513&amp;quot;               &amp;quot;051813&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [289] &amp;quot;051113&amp;quot;               &amp;quot;050413&amp;quot;               &amp;quot;042713&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [292] &amp;quot;042013&amp;quot;               &amp;quot;041313&amp;quot;               &amp;quot;040613&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [295] &amp;quot;033013&amp;quot;               &amp;quot;032313&amp;quot;               &amp;quot;031613&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [298] &amp;quot;030913&amp;quot;               &amp;quot;030213&amp;quot;               &amp;quot;022313&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [301] &amp;quot;021613&amp;quot;               &amp;quot;020913&amp;quot;               &amp;quot;020213&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [304] &amp;quot;012613&amp;quot;               &amp;quot;011913&amp;quot;               &amp;quot;011213&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [307] &amp;quot;010513&amp;quot;               &amp;quot;122912&amp;quot;               &amp;quot;122212&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [310] &amp;quot;121512&amp;quot;               &amp;quot;120812&amp;quot;               &amp;quot;120112&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [313] &amp;quot;112412&amp;quot;               &amp;quot;111712&amp;quot;               &amp;quot;111012&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [316] &amp;quot;110312&amp;quot;               &amp;quot;102712&amp;quot;               &amp;quot;102012&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [319] &amp;quot;101312&amp;quot;               &amp;quot;100612&amp;quot;               &amp;quot;092912&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [322] &amp;quot;092212&amp;quot;               &amp;quot;091512&amp;quot;               &amp;quot;090812&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [325] &amp;quot;090112&amp;quot;               &amp;quot;082512&amp;quot;               &amp;quot;081812&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [328] &amp;quot;081112&amp;quot;               &amp;quot;080412&amp;quot;               &amp;quot;072812&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [331] &amp;quot;072112&amp;quot;               &amp;quot;071412&amp;quot;               &amp;quot;070712&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [334] &amp;quot;063012&amp;quot;               &amp;quot;062312&amp;quot;               &amp;quot;061612&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [337] &amp;quot;060912&amp;quot;               &amp;quot;060212&amp;quot;               &amp;quot;052612&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [340] &amp;quot;051912&amp;quot;               &amp;quot;051212&amp;quot;               &amp;quot;050512&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [343] &amp;quot;042812&amp;quot;               &amp;quot;042112&amp;quot;               &amp;quot;041412&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [346] &amp;quot;040712&amp;quot;               &amp;quot;033112&amp;quot;               &amp;quot;032412&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [349] &amp;quot;031712&amp;quot;               &amp;quot;031012&amp;quot;               &amp;quot;030312&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [352] &amp;quot;022512&amp;quot;               &amp;quot;021812&amp;quot;               &amp;quot;021112&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [355] &amp;quot;020412&amp;quot;               &amp;quot;012812&amp;quot;               &amp;quot;012112&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [358] &amp;quot;011412&amp;quot;               &amp;quot;010712&amp;quot;               &amp;quot;2011 Totals&amp;quot;         &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [361] &amp;quot;123111&amp;quot;               &amp;quot;122411&amp;quot;               &amp;quot;121711&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [364] &amp;quot;121011&amp;quot;               &amp;quot;120311&amp;quot;               &amp;quot;112611&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [367] &amp;quot;111911&amp;quot;               &amp;quot;111211&amp;quot;               &amp;quot;110511&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [370] &amp;quot;102911&amp;quot;               &amp;quot;102211&amp;quot;               &amp;quot;101511&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [373] &amp;quot;100811&amp;quot;               &amp;quot;100111&amp;quot;               &amp;quot;092411&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [376] &amp;quot;091711&amp;quot;               &amp;quot;091011&amp;quot;               &amp;quot;090311&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [379] &amp;quot;082711&amp;quot;               &amp;quot;082011&amp;quot;               &amp;quot;081311&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [382] &amp;quot;080611&amp;quot;               &amp;quot;073011&amp;quot;               &amp;quot;072311&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [385] &amp;quot;071611&amp;quot;               &amp;quot;070911&amp;quot;               &amp;quot;070211&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [388] &amp;quot;062511&amp;quot;               &amp;quot;061811&amp;quot;               &amp;quot;061111&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [391] &amp;quot;060411&amp;quot;               &amp;quot;052811&amp;quot;               &amp;quot;052111&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [394] &amp;quot;051411&amp;quot;               &amp;quot;050711&amp;quot;               &amp;quot;043011&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [397] &amp;quot;042311&amp;quot;               &amp;quot;041611&amp;quot;               &amp;quot;040911&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [400] &amp;quot;040211&amp;quot;               &amp;quot;032611&amp;quot;               &amp;quot;031911&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [403] &amp;quot;031211&amp;quot;               &amp;quot;030511&amp;quot;               &amp;quot;022611&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [406] &amp;quot;021911&amp;quot;               &amp;quot;021211&amp;quot;               &amp;quot;020511&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [409] &amp;quot;012911&amp;quot;               &amp;quot;012211&amp;quot;               &amp;quot;011511&amp;quot;              &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## [412] &amp;quot;010811&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Many of these dates are in a &lt;code&gt;mmddyy&lt;/code&gt; format, but some are inconsistently formatted. There is one sheet that has a 4-digit year (&lt;code&gt;2017&lt;/code&gt; instead of &lt;code&gt;17&lt;/code&gt;), and a few sheets that contain summaries. Let’s go ahead and drop the summary tables and fix the 4-digit year table.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# filter: drop &amp;quot;2011 Totals&amp;quot; and &amp;quot;January 2011-to date&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# clean &amp;quot;09092017&amp;quot; to &amp;quot;090917&amp;quot;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# convert clean date to a date format&lt;/span&gt;
+havv_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;(sheet_name &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;2011 Totals&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;January 2011-to date&amp;quot;&lt;/span&gt;))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;clean_name =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(sheet_name &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;09092017&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;090917&amp;quot;&lt;/span&gt;, 
+                                &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;sheet_name),
+         &lt;span class=&#34;dt&#34;&gt;date =&lt;/span&gt; lubridate&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mdy&lt;/span&gt;(clean_name)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 410 x 4&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name data               clean_name date      &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;      &amp;lt;list&amp;gt;             &amp;lt;chr&amp;gt;      &amp;lt;date&amp;gt;    &lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 111018     &amp;lt;tibble [52 × 10]&amp;gt; 111018     2018-11-10&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 110318     &amp;lt;tibble [52 × 10]&amp;gt; 110318     2018-11-03&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 102718     &amp;lt;tibble [52 × 10]&amp;gt; 102718     2018-10-27&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 102018     &amp;lt;tibble [52 × 10]&amp;gt; 102018     2018-10-20&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 101318     &amp;lt;tibble [52 × 10]&amp;gt; 101318     2018-10-13&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 100618     &amp;lt;tibble [52 × 10]&amp;gt; 100618     2018-10-06&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 092918     &amp;lt;tibble [52 × 10]&amp;gt; 092918     2018-09-29&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 092218     &amp;lt;tibble [52 × 10]&amp;gt; 092218     2018-09-22&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 091518     &amp;lt;tibble [52 × 10]&amp;gt; 091518     2018-09-15&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 090818     &amp;lt;tibble [52 × 10]&amp;gt; 090818     2018-09-08&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 400 more rows&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reshaping-the-data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reshaping the data&lt;/h2&gt;
+&lt;p&gt;At this point, we’re ready to unnest the data. A few things that happen along the way:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;we don’t need the &lt;code&gt;clean_name&lt;/code&gt; variable, so we drop it.&lt;/li&gt;
+&lt;li&gt;There are some inconsistencies in the spelling and capitalization of state values, which get fixed along the way.&lt;/li&gt;
+&lt;li&gt;There are some “total” state rows, which we could re-create ourselves and thus don’t need to be in the raw data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# unnest into &amp;quot;long&amp;quot; data&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# we don&amp;#39;t really need &amp;quot;clean_name&amp;quot; so drop it&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# convert characters back to numbers&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# states are sometimes titlecase, sometimes uppercase&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# states are sometimes &amp;quot;total&amp;quot; and we don&amp;#39;t want that&lt;/span&gt;
+havv &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;havv_df &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;clean_name) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(total_transactions&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;multi_match_mixed), as.numeric) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;state =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;toupper&lt;/span&gt;(state),
+         &lt;span class=&#34;dt&#34;&gt;state =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(state &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NEBRASKS&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NEBRASKA&amp;quot;&lt;/span&gt;,
+                           &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;state)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;(state &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;TOTAL&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;TOTALS&amp;quot;&lt;/span&gt;))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()
+&lt;span class=&#34;co&#34;&gt;## # A tibble: 20,910 x 12&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    sheet_name date       state total_transacti… unprocessed_tra…&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;      &amp;lt;date&amp;gt;     &amp;lt;chr&amp;gt;            &amp;lt;dbl&amp;gt;            &amp;lt;dbl&amp;gt;&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  1 111018     2018-11-10 ALAB…             1069                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  2 111018     2018-11-10 ALAS…               34                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  3 111018     2018-11-10 ARIZ…              753                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  4 111018     2018-11-10 ARKA…                0                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  5 111018     2018-11-10 CALI…            47923                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  6 111018     2018-11-10 COLO…                0                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  7 111018     2018-11-10 CONN…             2797                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  8 111018     2018-11-10 DELA…                0                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;##  9 111018     2018-11-10 DIST…                0                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## 10 111018     2018-11-10 FLOR…              570                0&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## # … with 20,900 more rows, and 7 more variables: total_nonmatches &amp;lt;dbl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   total_matches &amp;lt;dbl&amp;gt;, single_match_alive &amp;lt;dbl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   single_match_deceased &amp;lt;dbl&amp;gt;, multi_match_alive &amp;lt;dbl&amp;gt;,&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;## #   multi_match_deceased &amp;lt;dbl&amp;gt;, multi_match_mixed &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;learn-about-the-data&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Learn about the data&lt;/h1&gt;
+&lt;p&gt;From here, we could ask questions such as, how many attempted matches (transactions) lead to nonmatches?&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;havv &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(date) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize_if&lt;/span&gt;(is.numeric, sum, &lt;span class=&#34;dt&#34;&gt;na.rm =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;p_nonmatch =&lt;/span&gt; total_nonmatches &lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;(total_matches &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;total_nonmatches)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; date, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; p_nonmatch)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Percent Nonmatched&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Date&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels =&lt;/span&gt; scales&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;percent, &lt;span class=&#34;dt&#34;&gt;limits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;),
+                     &lt;span class=&#34;dt&#34;&gt;expand =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;ggthemes&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_base&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;base_family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Source Sans Pro&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;plot.background =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),
+        &lt;span class=&#34;dt&#34;&gt;panel.background =&lt;/span&gt; 
+          &lt;span class=&#34;kw&#34;&gt;element_rect&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;),
+        &lt;span class=&#34;dt&#34;&gt;axis.ticks =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;lineend =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;square&amp;quot;&lt;/span&gt;), 
+        &lt;span class=&#34;dt&#34;&gt;axis.ticks.length =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;fl&#34;&gt;0.25&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;lines&amp;quot;&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/posts/2018-11-29-hava-xl_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Okay weird! We see a &lt;em&gt;lot&lt;/em&gt; of attempted voter registrations fail to match. Does this mean these voters don’t get registered? I don’t know, but this is definitely something that deserves more scrutiny.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Not long ago, a state DMV worker mistyped my birth date when issuing me a Wisconsin driver’s license. This led to a misprint on my license, an inability to update my voter registration online when I moved addresses, and even led to the “new Michael” getting a fresh letter to register with the Selective Service System.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -3942,535 +4838,6 @@ anes %$%
 &lt;li&gt;a &lt;a href=&#34;http://adv-r.had.co.nz/Style.html&#34;&gt;short style guide&lt;/a&gt; by Hadley Wickham that will put you on the right track&lt;/li&gt;
 &lt;li&gt;a &lt;a href=&#34;http://style.tidyverse.org/&#34;&gt;longer style guide&lt;/a&gt; (again by Wickham) that has general style guidance but also guidance specifically for working with the &lt;code&gt;tidyverse&lt;/code&gt;, for those who want to be a little more obsessive about their programming style&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Getting Started with R</title>
-      <link>/811/811-basics/</link>
-      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-basics/</guid>
-      <description>&lt;div id=&#34;schedule&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Schedule:&lt;/h1&gt;
-&lt;p&gt;Read this before our first R lecture.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;how-to-follow-along&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;How to follow along&lt;/h1&gt;
-&lt;p&gt;Follow the instructions in this lesson in &lt;em&gt;your own&lt;/em&gt; &lt;code&gt;.R&lt;/code&gt; script.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;objectives&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Objectives&lt;/h1&gt;
-&lt;p&gt;This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others. This is because we exploring R’s &lt;em&gt;general&lt;/em&gt; behavior rather than a concrete application of R workflow. Luckily, this will be short, and we get much more concrete in future lessons.&lt;/p&gt;
-&lt;p&gt;You should take this lesson slowly at first if you have not played with R before. Mess around with some of the code if it helps you understand what it’s doing. Type it yourself bit by bit, so you can see what each component does. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;how-to-read-these-lessons&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;How to read these lessons&lt;/h1&gt;
-&lt;p&gt;Pages in this series contain code blocks that you can paste into R. Some of the code blocks are included with their results.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;&amp;quot;Code appears in blocks like this.&amp;quot;
-&amp;quot;You can paste this code directly into R.&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;Results appear on this page with two &amp;#39;##&amp;#39; signs on the left&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;installing-r&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Installing R&lt;/h1&gt;
-&lt;p&gt;If you have not set up R already, click &lt;a href=&#34;https://mirror.las.iastate.edu/CRAN/&#34;&gt;here&lt;/a&gt; to download R for your operating system (if you haven’t already).&lt;/p&gt;
-&lt;p&gt;A little bit about what’s going on here: R is open source and is distributed from various &lt;a href=&#34;https://en.wikipedia.org/wiki/Mirror_website&#34;&gt;“mirrors,”&lt;/a&gt; which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors &lt;a href=&#34;https://cran.r-project.org/mirrors.html&#34;&gt;all over the world&lt;/a&gt;. It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.&lt;/p&gt;
-&lt;p&gt;Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (&lt;code&gt;R.app&lt;/code&gt; on OSX or &lt;code&gt;Rgui.exe&lt;/code&gt; on Windows), using the Rstudio application (which we discuss below), or as a program in your computer’s command-line shell (which I do, for technical reasons).&lt;/p&gt;
-&lt;p&gt;If you have a Chromebook or some other computing machine that makes it impossible to install R, try the &lt;a href=&#34;https://rstudio.cloud/&#34;&gt;Rstudio Cloud&lt;/a&gt; platform.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;using-r&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Using R&lt;/h1&gt;
-&lt;p&gt;The most essential part of using R is the &lt;em&gt;console&lt;/em&gt;. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won’t be the same colors as mine, but it looks sort of like this:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/811/r-console.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Although you can type commands directly into the console, most commands should be written in a &lt;em&gt;script file&lt;/em&gt;. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;editing-an-r-script-file&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Editing an R script file&lt;/h1&gt;
-&lt;p&gt;Script files in R are similar to Stata. They are a place where your code should live, and you should execute code by sending it to the console to be evaluated.&lt;/p&gt;
-&lt;p&gt;Use whatever program you desire to open a script file.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The basic R application has a script editor (accessed using the &lt;code&gt;File&lt;/code&gt; menu or a keyboard shortcut).&lt;/li&gt;
-&lt;li&gt;Many newcomers enjoy &lt;a href=&#34;https://www.rstudio.com/products/rstudio/&#34;&gt;Rstudio&lt;/a&gt; an application that provides tons of tools for R. Rstudio has many advanced features as well, so it isn’t only for newcomers.&lt;/li&gt;
-&lt;li&gt;You can also use third-party editors, but you will need to figure out how to send commands to the R console. I use &lt;a href=&#34;https://www.sublimetext.com/&#34;&gt;Sublime Text&lt;/a&gt; with the &lt;a href=&#34;https://packagecontrol.io/packages/R-Box&#34;&gt;R-Box package&lt;/a&gt; to send commands to R.&lt;/li&gt;
-&lt;li&gt;Windows users may find Notepad++ or TextMate to be useful text editors.&lt;/li&gt;
-&lt;li&gt;Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to an R console.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for writing code quickly. Rstudio, it so happens, comes standard with many such shortcuts.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;what-goes-in-an-r-file-code-and-comments&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;What goes in an R file (code and comments)&lt;/h1&gt;
-&lt;p&gt;Script files should begin with some description of the script’s purpose. You can include comments (text that will not be executed as R commands) after the &lt;code&gt;#&lt;/code&gt; symbol. For example, your script file for this lesson might contain some comments at the top like…&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# ------------------------------------------------------------
-#  PS 811: statistical computing for political science
-#  Lesson 1: Basics of R
-# ------------------------------------------------------------&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Comments are great for describing what code is doing, planning an analysis, writing notes to yourself, and so on. Comments are also great for &lt;em&gt;pseudocode&lt;/em&gt;, which are notes to yourself that “translate” what code is doing into English. We will see some examples of this as the course progresses.&lt;/p&gt;
-&lt;p&gt;An R script file may begin with some common operations:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Setting a working directory (see the next lesson)&lt;/li&gt;
-&lt;li&gt;setting up a log file (if desired… I don’t do this though!)&lt;/li&gt;
-&lt;li&gt;Loading packages for extra functionality&lt;/li&gt;
-&lt;li&gt;Setting other project-wide options (e.g. graphics options)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Although a script file can be imperfect while a project is being developed, a well-written script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that you can retrace the steps of your analysis.&lt;/p&gt;
-&lt;p&gt;We should save this file in a designated location for this course. Navigate to your &lt;code&gt;ps811&lt;/code&gt; folder on your computer (which you should already have…), create a subfolder called &lt;code&gt;R&lt;/code&gt;, and then within the R folder, create another &lt;code&gt;lessons&lt;/code&gt; folder. Save this document in the &lt;code&gt;ps811/R/lessons/&lt;/code&gt; folder. (This syntax represents folder pathways in your computer’s file system. We’ll be seeing more of this later.)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;executing-commands&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Executing commands&lt;/h1&gt;
-&lt;p&gt;Just like Stata, R processes commands one at a time. Commands are compiled while they are executed, so if something is wrong with your code, you may not realize it until you try to run it.&lt;/p&gt;
-&lt;p&gt;Just to demonstrate some basic R behavior, let’s run a few commands.&lt;/p&gt;
-&lt;p&gt;First, R works as a calculator. It can handle mathematical expressions. Paste or type the following lines of code DIRECTLY into the console.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;1 + 1
-2 + 2
-100 * 2
-500 / 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Ignore the &lt;code&gt;[1]&lt;/code&gt; that prints in the results for now. We will explain it later.&lt;/p&gt;
-&lt;p&gt;Now take the above block of code and paste the commands into your script file. Try to run the commands from the script file using the appropriate keyboard shortcut. Most computers and interfaces use &lt;code&gt;super + enter&lt;/code&gt;, where &lt;code&gt;super&lt;/code&gt; refers to &lt;code&gt;Ctrl&lt;/code&gt; on PCs or &lt;code&gt;Cmd&lt;/code&gt; on Macs. Windows machines may use a different shortcut, such as &lt;code&gt;Ctrl + R&lt;/code&gt;. Take this opportunity to look up the appropriate keyboard shortcut on your own, &lt;em&gt;before coming to lecture!&lt;/em&gt; :-)&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;variables-and-assignment&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Variables and assignment&lt;/h1&gt;
-&lt;p&gt;Most of your R code will work with variables rather than raw numbers. Variables generally work the same way they do with math. The expression &lt;span class=&#34;math inline&#34;&gt;\(x + 4\)&lt;/span&gt; can take different values, depending on the value of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt;.&lt;/p&gt;
-&lt;p&gt;Data must be “assigned” to a variable using the assignment operator &lt;code&gt;&amp;lt;-&lt;/code&gt;. The &lt;code&gt;&amp;lt;-&lt;/code&gt; is a combination of a less-than sign &lt;code&gt;&amp;lt;&lt;/code&gt; and a hyphen &lt;code&gt;-&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;For example, assign the value of &lt;code&gt;5&lt;/code&gt; to a variable called &lt;code&gt;x&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x &amp;lt;- 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After this variable has been created, &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;5&lt;/code&gt; mean the same thing as far as R is concerned.&lt;/p&gt;
-&lt;p&gt;You can read the &lt;code&gt;&amp;lt;-&lt;/code&gt; operator as “gets.” A left-hand side object name “gets” the results of whatever operation is on the right-hand side. So in the above example, &lt;code&gt;x&lt;/code&gt; “gets” the value of 5.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;printing-the-contents-of-an-object&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Printing the contents of an object&lt;/h1&gt;
-&lt;p&gt;We can display the contents of any object in R by simply typing the object name.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 5&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;That is to say, R “evaluated” the statement &lt;code&gt;x&lt;/code&gt;, and the result is 5. We could have written some more complex statement for R to evaluate, like a mathematical expression using &lt;code&gt;x&lt;/code&gt;…&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;x + 4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 9&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;vectors-multi-element-variables&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Vectors: multi-element variables&lt;/h1&gt;
-&lt;p&gt;Most of the variables you will work with in R (such as the variables in a data set) have multiple values. That is, they are &lt;em&gt;vectors&lt;/em&gt;.&lt;/p&gt;
-&lt;p&gt;We can create our own vectors with &lt;code&gt;c()&lt;/code&gt;, which assigns a series of values to one variable. It can be helpful to think of &lt;code&gt;c()&lt;/code&gt; as “combine.”&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;y &amp;lt;- c(2, 4, 6)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;y&lt;/code&gt; object now contains 2, 4, and 6.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2 4 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If you wrap an assignment statement inside of parentheses, R will assign the values &lt;em&gt;and&lt;/em&gt; print the result.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(y &amp;lt;- c(2, 4, 6))&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2 4 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Vectors are useful for performing operations on every element in the vector. Just as we could do math with a vector…&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}\)&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;we can also do similar things in R.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;2 * y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  4  8 12&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;A note about multiplying vectors: by default, R does element-wise multiplication (the “Hadamard product”). To do matrix-style multiplication (dot product/inner product) with vectors, we have a different operator.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# element-wise product:
-y * y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1]  4 16 36&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# dot product
-y %*% y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1]
-## [1,]   56&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;everything-is-an-object&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Everything is an Object&lt;/h1&gt;
-&lt;p&gt;In R, everything is an object. I can store any value as a variable, which is an object. A text string is an object. A dataset. A variable within a dataset is an object within an object. It’s objects all the way down. This makes R very flexible.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;indexing&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Indexing&lt;/h1&gt;
-&lt;p&gt;You can access individual elements in a vector using &lt;em&gt;indexing&lt;/em&gt; notation with square brackets. Using the variable &lt;code&gt;y&lt;/code&gt; from above, what are the first, second, and third elements?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# entire y vector
-y&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2 4 6&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# first element of y
-y[1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# second element of y
-y[2]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# third element of y
-y[3]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This is akin to indexing in math, where we could write &lt;span class=&#34;math inline&#34;&gt;\(y_{1} = 2\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(y_{2} = 4\)&lt;/span&gt;, and so on.&lt;/p&gt;
-&lt;p&gt;This is why the console prints a little &lt;code&gt;[1]&lt;/code&gt; next to all results. The &lt;code&gt;[1]&lt;/code&gt; indicates that the adjacent element is the first element of the results. If we print a longer object, this becomes clearer. For example, 30 repetitions of the word &lt;code&gt;&amp;quot;hello&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# repeat &amp;quot;hello&amp;quot; 30 times
-rep(&amp;quot;hello&amp;quot;, 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot;
-##  [9] &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot;
-## [17] &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot;
-## [25] &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Indexing works with higher-dimensional data as well. Here is a two-dimensional array of numbers.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# row-bind separate vectors
-m &amp;lt;- rbind(c(1, 2), 
-           c(3, 4), 
-           c(5, 6))
-m&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##      [,1] [,2]
-## [1,]    1    2
-## [2,]    3    4
-## [3,]    5    6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;(Notice how &lt;code&gt;rbind()&lt;/code&gt; binds vectors together as rows. The &lt;code&gt;cbind()&lt;/code&gt; function would bind vectors as columns.)&lt;/p&gt;
-&lt;p&gt;To index a multi-dimensional object, use commas to separate the dimensions. The notation &lt;code&gt;object[a, b]&lt;/code&gt; would reference the value in row &lt;code&gt;a&lt;/code&gt; and column &lt;code&gt;b&lt;/code&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m[2, 2]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If we specify a row but don’t specify a column, R returns every column from the specified row.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m[1, ]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 1 2&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If we specify a column but don’t specify a row, R returns every row from the specified column.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;m[ , 2]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2 4 6&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Even though &lt;code&gt;m[ , 2]&lt;/code&gt; is the second &lt;em&gt;column&lt;/em&gt; of &lt;code&gt;m&lt;/code&gt;, the results don’t print as a vertical column. Why? Because once R evaluates &lt;code&gt;m[ , 2]&lt;/code&gt;, it simply returns an object. R no longer remembers that it comes from &lt;code&gt;m&lt;/code&gt;. The result is nothing more than a vector floating there. As far as R is concerned, &lt;code&gt;m[ , 2]&lt;/code&gt; is exactly equivalent to a vector &lt;code&gt;c(2, 4, 6)&lt;/code&gt;. &lt;em&gt;This is actually good&lt;/em&gt;; it’s exactly the kind of flexibility that will be valuable in the future.&lt;/p&gt;
-&lt;div id=&#34;r-is-one-indexed&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;R is one-indexed&lt;/h2&gt;
-&lt;p&gt;R is one-indexed, meaning the first element of a vector is element &lt;code&gt;1&lt;/code&gt;. Some languages (like &lt;code&gt;C&lt;/code&gt;) are zero-indexed. Even though R is one-indexed, calling the 0’th element of a variable does not throw an error, so be careful.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;indexing-in-practice&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Indexing in practice&lt;/h2&gt;
-&lt;p&gt;The code we use in this course (heavily derived from the &lt;code&gt;tidyverse&lt;/code&gt; suite of packages) does not require much explicit indexing. However, you should understand the intuition of indexing for a few reasons.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;It has useful mathematical parallels, where &lt;span class=&#34;math inline&#34;&gt;\(y_{i}\)&lt;/span&gt; is analogous to &lt;code&gt;y[i]&lt;/code&gt;. This sometimes comes in handy for dealing with the results from statistical models.&lt;/li&gt;
-&lt;li&gt;You will encounter it when searching through message boards for R help.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;logic&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Logic&lt;/h1&gt;
-&lt;p&gt;Logic as a concept in programming is less daunting than it sounds. At it’s core, we’re working with statements that evaluate to either &lt;code&gt;TRUE&lt;/code&gt; or &lt;code&gt;FALSE&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;Example: is 1 greater than 0?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;1 &amp;gt; 0&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Let’s make a new vector, a sequence of values from 1 to 10.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;(g &amp;lt;- 1:10)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  1  2  3  4  5  6  7  8  9 10&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Now that we have this vector, we can derive logical statements about it. Which elements are greater than 5?&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;g &amp;gt; 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The statement &lt;code&gt;g &amp;gt; 5&lt;/code&gt; is a “logical vector,” meaning that its a vector whose values are either &lt;code&gt;TRUE&lt;/code&gt; or &lt;code&gt;FALSE&lt;/code&gt;. &lt;code&gt;TRUE&lt;/code&gt; and &lt;code&gt;FALSE&lt;/code&gt; are keywords in R (and must be capital). R asks if &lt;code&gt;g&lt;/code&gt; is greater than 5, and since &lt;code&gt;g&lt;/code&gt; is a vector, R returns a vector of logicals with each element corresponding to the original elements in &lt;code&gt;g&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;There are many logical operators. Here are some:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# g &amp;quot;is equal to&amp;quot; 5 (DOUBLE EQUALS)
-g == 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# g &amp;quot;is greater than&amp;quot; 5
-g &amp;gt; 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# g &amp;quot;is less than&amp;quot; 5
-g &amp;lt; 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# g &amp;quot;is greater than or equal to&amp;quot; 5
-g &amp;gt;= 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# g &amp;quot;is less than or equal to&amp;quot; 5
-g &amp;lt;= 5&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This seems a little abstract right now, but here’s how you may see others use logic for indexing. Let’s say that I have some data from countries around the world, and I want to look only at the European data. You might see someone online limit the data like so.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_data[region == &amp;quot;Europe&amp;quot;, ]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Translated: retrieve the &lt;code&gt;world_data&lt;/code&gt; object, but only the rows (notice the comma in the indexing) where &lt;code&gt;region&lt;/code&gt; is equal to &lt;code&gt;&amp;quot;Europe&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;More literally, the statement &lt;code&gt;region == &amp;quot;Europe&amp;quot;&lt;/code&gt; is either &lt;code&gt;TRUE&lt;/code&gt; or &lt;code&gt;FALSE&lt;/code&gt; for every observation in the data. The above statement returns the rows from &lt;code&gt;world_data&lt;/code&gt; where &lt;code&gt;region == &amp;quot;Europe&amp;quot;&lt;/code&gt; evaluates to &lt;code&gt;TRUE&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;As mentioned above, we will perform this kind of case selection with a more intuitive syntax that is easier to wrap your brain around.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;data-types&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Data types&lt;/h1&gt;
-&lt;p&gt;There are a few different types of data in R.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Logical: &lt;code&gt;TRUE&lt;/code&gt;s and &lt;code&gt;FALSE&lt;/code&gt;s.&lt;/li&gt;
-&lt;li&gt;Numeric: including integers and doubles&lt;/li&gt;
-&lt;li&gt;Strings: text strings that are contained in &lt;code&gt;&amp;quot;quotes&amp;quot;&lt;/code&gt;. R calls these “character” type variables.&lt;/li&gt;
-&lt;li&gt;Factors: ordered categories with text labels&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Factors are akin to labelled variables in Stata. They are somewhat like numbers, somewhat like text strings. They are like strings because they havea text label, and you can’t do math with them. They are like numbers because you can put them in order. Put another way, factors are &lt;em&gt;ordered categories&lt;/em&gt; that have textual metadata.&lt;/p&gt;
-&lt;p&gt;It is possible to coerce data from type to another. We cover this in our final lesson.&lt;/p&gt;
-&lt;p&gt;Note: data types are different from &lt;em&gt;object classes&lt;/em&gt;. Data type describes the values, but object classes describes the organization of values. Classes include vectors, matrices, data frames, tables, lists, and so on.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;missing-data&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Missing data&lt;/h1&gt;
-&lt;p&gt;Vectors might contain missing data. The missing data code in R is capital &lt;code&gt;NA&lt;/code&gt;, without quotes.&lt;/p&gt;
-&lt;p&gt;Missing data take the same data type as the vector in which they are located. For example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;h &amp;lt;- c(1, 2, NA, 4)
-# what data type is h?
-str(h)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  num [1:4] 1 2 NA 4&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;By placing &lt;code&gt;NA&lt;/code&gt; inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. If some function requires that we know every value, it will probably fail. Try the following.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(h)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] NA&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This doesn’t cause an &lt;em&gt;error&lt;/em&gt;. Instead, the result is a missing value. What this means is, we know that there &lt;em&gt;should&lt;/em&gt; be a numeric mean (which is why there is no error), we just don’t know what the mean is because we don’t know what all of &lt;code&gt;h&lt;/code&gt; is. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;mean(h, na.rm = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 2.333333&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Many functions have &lt;code&gt;na.rm&lt;/code&gt; (“remove &lt;code&gt;NA&lt;/code&gt;”) arguments that can be flipped on, such as &lt;code&gt;sum()&lt;/code&gt;, &lt;code&gt;sd()&lt;/code&gt;, and so on.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;functions&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Functions&lt;/h1&gt;
-&lt;p&gt;In math, you can manipulate a variable with a function, &lt;span class=&#34;math inline&#34;&gt;\(f(x)\)&lt;/span&gt;. There are tons of functions that you can use in R.&lt;/p&gt;
-&lt;p&gt;There are three things you need to use a function.&lt;/p&gt;
-&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;The function name itself. Self-explanatory.&lt;/li&gt;
-&lt;li&gt;Parentheses. This tells R that the object name is meant to be a function.&lt;/li&gt;
-&lt;li&gt;Arguments inside the parentheses. These may be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Some easy, common functions.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# 10 thousand random samples from a normal distribution
-x &amp;lt;- rnorm(n = 10000, mean = 0, sd = 1)
-
-# sum
-sum(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -13.81984&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# number of elements in an object
-length(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 10000&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# mean
-mean(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] -0.001381984&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# variance
-var(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.9781618&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# standard deviation
-sd(x) &lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] 0.9890206&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It is easy to write your own functions in R. We will cover this in the final lesson.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;help-files&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Help files&lt;/h1&gt;
-&lt;p&gt;Get help on any function using &lt;code&gt;?function_name&lt;/code&gt; or &lt;code&gt;help(function_name)&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;external-packages-for-non-base-functions&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;External Packages (for non-base functions)&lt;/h1&gt;
-&lt;p&gt;Base R only contains a small number of functions. Most analyses require more complicated tools that are not standard with R. For these tasks, there are hundreds of packages available for download.&lt;/p&gt;
-&lt;p&gt;Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the &lt;code&gt;tidyverse&lt;/code&gt; package. Because the package depends on other packages, all required packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it…we will use this package in class).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(&amp;quot;tidyverse&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Install multiple packages using &lt;code&gt;c()&lt;/code&gt; to combine package names. Run this command as well. We will use all of these packages throughout our lessons.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;install.packages(c(&amp;quot;magrittr&amp;quot;, &amp;quot;haven&amp;quot;, &amp;quot;labelled&amp;quot;, &amp;quot;broom&amp;quot;, &amp;quot;ggplot2&amp;quot;, &amp;quot;stargazer&amp;quot;, &amp;quot;texreg&amp;quot;, &amp;quot;xtable&amp;quot;, &amp;quot;Rmisc&amp;quot;, &amp;quot;mvtnorm&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;moving-on&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Moving on&lt;/h1&gt;
-&lt;p&gt;If you have made it this far, take a break!&lt;/p&gt;
-&lt;p&gt;I want to remind you that future lessons will be far less abstract than this one. Many concepts in this lesson are &lt;em&gt;important&lt;/em&gt; in the sense that you will see them again during your R career, but they are not all &lt;em&gt;essential&lt;/em&gt; for surviving this course. Future lessons will be far more concrete and dataset-driven.&lt;/p&gt;
-&lt;p&gt;Continue with the next lesson: &lt;a href=&#34;811/811-data&#34;&gt;Data Manipulation&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PoliSci 811: R Introduction</title>
-      <link>/811/811-intro/</link>
-      <pubDate>Wed, 07 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/811/811-intro/</guid>
-      <description>&lt;p&gt;Welcome to the online lessons for PS 811: Introduction to Statistical Computing for Political Science. This series of blog posts contain instructional notes for using R for political science research.&lt;/p&gt;
-&lt;p&gt;This current post contains a few introductory remarks about R, how I intend to teach R, and the structure of our coming lessons.&lt;/p&gt;
-&lt;div id=&#34;schedule&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Schedule:&lt;/h1&gt;
-&lt;p&gt;Read this before our first in-class R lesson!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;a-little-about-r&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;A little about R&lt;/h1&gt;
-&lt;p&gt;R is not the only program out there for doing statistical programming, so let’s begin by talking about what makes it unique.&lt;/p&gt;
-&lt;p&gt;Compared to other popular statistical software for the social scientists (such as Stata), R stands out as a more general programming language. It isn’t just a set of off-the-shelf &lt;em&gt;commands&lt;/em&gt; that are punched into a program. It is a collection of functions and routines that can be used to build more complex and powerful tools for a broader set of computational uses. This has some trade-offs; it’s more complicated and tougher to learn, but you can do a lot more with it.&lt;/p&gt;
-&lt;p&gt;R is an “object-oriented” language, which essentially means that everything you interact with—datasets, variables, variable &lt;em&gt;names&lt;/em&gt;, functions, etc.—is an “object” that contains either data or code to manipulate data. This makes R extremely flexible for use in statistics, as we will see throughout these lessons.&lt;/p&gt;
-&lt;p&gt;Where other statistical software constraints you to work out of one data table, R allows you to manipulate multiple data tables. This will allow more flexibility in your work flow, but it requires you to manage more data tables.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;r-and-stata&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R and Stata&lt;/h1&gt;
-&lt;p&gt;All softwares are better suited to certain tasks than others. For example, Stata has historically been a stronger program than R for time series analysis (though time series analysis in R has seen dramatic improvement in recent years). However, R has much more flexibility than Stata to modify what your analysis is doing, allowing more explicit control over data manipulation, modeling, graphics, and workflow integration across programs.&lt;/p&gt;
-&lt;p&gt;More specifically, Stata will make stricter assumptions about what your analysis will look like than R will. This makes it easier to perform &lt;em&gt;typical routines&lt;/em&gt; using Stata than using R. On the other hand, should you ever want to extend your analysis beyond typical routines, R provides more infrastructure for making that possible, but the user has to know what they want R to do. Said slightly differently: anything you can do in Stata, you can also do in R, but things that seem simple in Stata may seem complicated in R because R will make fewer assumptions for you.&lt;/p&gt;
-&lt;p&gt;Here is a common example that many users encounter. &lt;a href=&#34;https://en.wikipedia.org/wiki/Heteroscedasticity&#34;&gt;Robust standard errors&lt;/a&gt;. In Stata, they are easy: &lt;code&gt;reg y x, robust&lt;/code&gt;. In R, they are hard, because R will make you confront the fact that there are &lt;a href=&#34;https://www.rdocumentation.org/packages/sandwich/versions/2.4-0/topics/vcovHC&#34;&gt;many types of robust standard errors&lt;/a&gt;. Stata picks an estimator by default and hides this decision from you. R forces you to make the decision for yourself. As a result, political science is full of robust standard errors that reflect Stata’s automatic choice.&lt;/p&gt;
-&lt;p&gt;The difference between Stata and R is kind of like the corny quote that you recognize from Spiderman: with great power comes great responsibility. R lets you &lt;em&gt;go farther&lt;/em&gt;, but you need to know how not to break everything. This &lt;em&gt;can be a good thing&lt;/em&gt;, depending on your style of analysis. I like it, personally, but not every body does, and loads of brilliant social scientists use Stata to enormous success. As you learn more about statistics, about the research you intend to do, and about the tools available to you, (and perhaps about yourself), you will have to make these software decisions for yourself—or &lt;a href=&#34;https://twitter.com/drob/status/954056331979259904&#34;&gt;someone else will make the choice for you&lt;/a&gt;!&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;bottom-up-theory&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Bottom-up theory&lt;/h1&gt;
-&lt;p&gt;Using R sometimes requires some familiarity with general programming concepts. This course will touch on some of these concepts as we go, but rather than hammering them to death, I will instead aim to provide resources for further learning along the way.&lt;/p&gt;
-&lt;p&gt;Some of these concepts may seem tedious at first, e.g. variables and functions. We discuss these not because you cannot be trusted to understand these concepts &lt;em&gt;in general&lt;/em&gt;, but because these concepts relate to programming in not-always-obvious ways. (For example, what is the difference between a “global” and “local” variable? Or, how can a function return “random” results even if you keep the inputs the same?) The mathematical world and the programming world exhibit many similarities, and understanding how these realms relate will help you become a more skilled programmer, a stronger mathematical thinker, and a better statistical analyst.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;pedagogical-note&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Pedagogical note&lt;/h1&gt;
-&lt;p&gt;Because R is open-source and very flexible, there are often many different ways to accomplish the same task. Instructors, being experienced R users, see the diversity of options as an inherit benefit of R and its open-source origins, so they are often tempted to teach about the diversity. But for new R users, the diversity of R tools can be daunting and confusing. When you’re learning a new language, sometimes you just want to be told what works.&lt;/p&gt;
-&lt;p&gt;We have a short time to cover as much quality R as we can, so we have to make some choices about what material to emphasize. Here is the approach we will take. (I confess that my thinking is heaviliy influenced by some blog posts by David Robinson about teaching R, including but not limited to &lt;a href=&#34;http://varianceexplained.org/r/teach-tidyverse/&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Rather than give you abstract exercises to demonstrate concepts in a vacuum, we’ll create realistic scenarios using real data as much as we can.&lt;/li&gt;
-&lt;li&gt;I won’t force you to slog through difficult problems using underpowered tools for the gratuitous purpose of “getting you to appreciate the finer points of the language” or whatever. Nor will we contrast old and new tools or painstakingly catalog how multiple approaches lead to the same end result. Instead, we will jump quickly into tools that I believe you will actually use in the future.&lt;/li&gt;
-&lt;li&gt;Relatedly, this means we’ll be following a philosophy of &lt;em&gt;doing as much as we can with as few powerful tools as possible&lt;/em&gt;. Let’s define a “powerful” tool as one that performs a complicated task with a simple interface. That’s the sweet spot.&lt;/li&gt;
-&lt;li&gt;Hopefully this &lt;em&gt;makes R exciting to learn&lt;/em&gt; because we can do real heavy lifting with it &lt;em&gt;soon&lt;/em&gt;, rather than “graduating” to fun stuff after boring you with annoying stuff.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;To help us achieve these goals together, I have made the strategic decision to focus this course on the &lt;code&gt;tidyverse&lt;/code&gt; suite of data manipulation packages, including &lt;code&gt;ggplot2&lt;/code&gt; for graphics. There are several other “families” of data manipulation and graphics approaches, including “base R,” which is where most R courses begin. Those courses then shift to other approaches after students have been beaten into submission by the inefficiency of base R. My attitude is that you are highly unlikely to use weak tools once you discover powerful tools, so I don’t want to exhaust you with exercises for weak tools. Put simply, the Tidyverse is the fastest route to accomplish my goals for this course—to teach you R that is useful, realistic, simple, powerful, and fun.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;course-structure&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Course structure&lt;/h1&gt;
-&lt;p&gt;We will work through this course using three tools: online notes, in-class lectures, and take-home exercises.&lt;/p&gt;
-&lt;p&gt;Online notes will be the “most complete” accounting of useful R concepts, functions, and lessons. I hope that these will be a permanent resource that you can always come back to. Online notes will be easiest to read on this website, but source code for all lessons will also be available on my &lt;a href=&#34;https://www.github.com/mikedecr&#34;&gt;Github page&lt;/a&gt; as &lt;code&gt;.Rmd&lt;/code&gt; files. I would recommend you download the source files should they ever disappear from the web in the future. We’ll divide the material for this course across three lessons but using four documents (&lt;em&gt;not including&lt;/em&gt; this page). You should review each lesson &lt;strong&gt;&lt;em&gt;before&lt;/em&gt;&lt;/strong&gt; its corresponding lecture day.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;For the first week of R lecture, read this &lt;a href=&#34;811/811-basics&#34;&gt;overview of some basic R material&lt;/a&gt; and &lt;a href=&#34;811/811-data&#34;&gt;this lesson on data manipulation&lt;/a&gt;. The first document covers the absolute basics—installing R, simple commands—and the second document covers data manipulation using &lt;code&gt;tidyverse&lt;/code&gt; routines.&lt;/li&gt;
-&lt;li&gt;For the second week, we will cover &lt;a href=&#34;811/811-graphics&#34;&gt;graphics&lt;/a&gt;, with a particular focus on &lt;code&gt;ggplot2&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;Week 3 covers &lt;a href=&#34;811/811-analysis&#34;&gt;statistical analysis&lt;/a&gt;, including model estimation, generating model summaries and post-estimation analysis, and discussing how to incorporate your results into your written work using workflow tools. This lesson will also contain some material on advanced R tools and routines.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Lecture will be a guided walk-through of each week’s material. They will cover &lt;em&gt;incomplete selections&lt;/em&gt; from the online notes, so it is important to preview the notes before class. We will try to leave as much in-class time to work on take-home exercises as possible.&lt;/p&gt;
-&lt;p&gt;The take-home exercises will reinforce each week’s material using an extended analysis of one dataset. These exercises are required and should be submitted on the &lt;em&gt;Thursday&lt;/em&gt; following each lesson. Solutions will be made available the following day, so your work should be completed on time.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;datasets&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Datasets&lt;/h1&gt;
-&lt;p&gt;The dataset we will use for online notes and in-class lectures is the American National Election Study, which is a long-running academic survey of U.S. voting and public opinion. Specifically, we will work with the “&lt;a href=&#34;http://electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf.htm&#34;&gt;cumulative data file&lt;/a&gt;,” which contains interviews from survey respondents for presidential and midterm campaign seasons since 1948. To obtain the data, make an account on &lt;a href=&#34;http://electionstudies.org/&#34;&gt;electionstudies.org&lt;/a&gt; and download the cumulative data file before the first in-class lesson. Make sure your download includes the codebook. You should take care of this &lt;em&gt;well in advance&lt;/em&gt; of our first R lecture. If you encounter difficulties, get in touch with me &lt;em&gt;after&lt;/em&gt; trying to troubleshoot your problem using the website’s instructions ;-) .&lt;/p&gt;
-&lt;p&gt;Take-home exercises will use the &lt;a href=&#34;https://data.stanford.edu/dime#download-data&#34;&gt;Database on Ideology, Money in Politics, and Elections&lt;/a&gt;, which contains information on campaign contributions for U.S. elections organized at by candidate-cycles. There are many data files in the DIME, but you should only download the “recipients” data file (and the codebook, of course).&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;seeking-help-or-my-role-as-instructor&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Seeking help, or, My role as instructor&lt;/h1&gt;
-&lt;p&gt;My goal is to get you started with R, but I cannot make you an expert. You learn R mostly by doing it, and over the long run, you will learn far more from the internet than you will from me. This is as it should be—the internet is your friend. Being “good at R” means (to a certain extent) knowing what to do when you mess up, learning how to Google the error message, and learning to avoid past mistakes. To that end, when you encounter problems with R, I encourage you to start by seeking your own help online. Training yourself to find online solutions is an invaluable skill for R (and any software), so you should practice while you can. Of course, you can contact me if you find online resources to be confusing.&lt;/p&gt;
-&lt;p&gt;Sources like Stack Overflow are great for working through R problems. So is Twitter. The most prominent R developers are active on both.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Research</title>
-      <link>/research/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/research/</guid>
-      <description>&lt;div id=&#34;dissertation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Dissertation&lt;/h1&gt;
-&lt;div id=&#34;do-primaries-work-nomination-politics-and-the-representation-of-local-partisan-preferences.&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Do Primaries Work? Nomination Politics and the Representation of Local Partisan Preferences.&lt;/h2&gt;
-&lt;p&gt;For decades, primary elections have been widely believed to polarize candidates for office away from median-converging policy platforms. The fear of primary challenges may bolster the ideological consistency of incumbent officeholders, but does this function of primaries improve the representation of local constituencies? Do candidates take polarized positions because that is what their nominating constituencies prefer? Or is it simply the case that safe majorities in the general election allow candidates to take polarized positions.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/research/cces-self-id.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;I argue that key predictions from the prevailing theory of primaries lack direct empirical support. Are primary candidate positions meaningfully related to the preferences of district co-partisans? Are polarized primary constituencies more likely to nominate polarized primary candidates? I develop Bayesian measurement methods for estimating local partisan preferences, allowing us to assess these claims more directly than ever before. I explore whether the dominant theory about primaries—and it turn, about the nature of divergent candidate positioning in the U.S.—is empirically supported.&lt;/p&gt;
-&lt;p&gt;More info coming soon.&lt;/p&gt;
-&lt;!-- &lt;center&gt;
-  &lt;img src=&#34;/images/research/cces-self-id.png&#34; alt=&#34;The non-relationship between district voting and self-reported partisan ideology&#34; style=&#34;width: 90%;&#34;/&gt;
-&lt;/center&gt; --&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;published&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Published&lt;/h1&gt;
-&lt;div id=&#34;the-unexceptional-gender-gap-of-2016-with-barry-c.-burden-and-evan-crawford.-the-forum-144425432-2016.&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The Unexceptional Gender Gap of 2016 (with Barry C. Burden and Evan Crawford). &lt;em&gt;The Forum&lt;/em&gt; 14(4):425–432 (2016).&lt;/h2&gt;
-&lt;p&gt;[View &lt;a href=&#34;https://www.degruyter.com/downloadpdf/j/for.2016.14.issue-4/for-2016-0039/for-2016-0039.pdf&#34;&gt;PDF&lt;/a&gt;]&lt;/p&gt;
-&lt;p&gt;The 2016 presidential campaign was defined by gender to a remarkable degree, which led many observers to expect a historically large gender gap in voting. In reality, the difference between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to make a difference on the margins. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/research/forum-teaser.png&#34; width=&#34;80%&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;in-the-pipeline&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;In the Pipeline&lt;/h1&gt;
-&lt;div id=&#34;mobilization-persuasion-and-the-partisan-fallout-of-the-gender-gap-in-u.s.-voting-with-barry-c.-burden&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden)&lt;/h2&gt;
-&lt;p&gt;[View &lt;a href=&#34;https://www.dropbox.com/s/y69t6x89gj8fvkt/gender-gap-public.pdf?dl=0&#34;&gt;PDF&lt;/a&gt; and &lt;a href=&#34;https://www.dropbox.com/s/0piklipw954t8zg/gap-appendix-public.pdf?dl=0&#34;&gt;supplemental info&lt;/a&gt;]&lt;/p&gt;
-&lt;p&gt;Does the gender gap help the Democrats? Do Republicans win more votes when the gender gap is smaller? To answer this question, we develop a generalizable theoretical framework to understand the link between group differences in voting and party vote shares, with an application to the gender gap.&lt;/p&gt;
-&lt;p&gt;Theoretically, our approach views both the gender gap and partisan election outcomes as underlying partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We argue that the size of the gender gap has no &lt;em&gt;necessary&lt;/em&gt; bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, mobilization, and persuasion over time.&lt;/p&gt;
-&lt;p&gt;Empirically, both the gender gap and the Democratic vote in presidential elections have increased over time, but this relationship is almost entirely spurious. The primary cause of the gender gap (partisan change among men) was harmful to the Democrats. Meanwhile, the forces that increased the Democratic vote (greater mobilization and less defection among Democratic partisans) were relatively gender neutral.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/research/gap-teaser.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
-&lt;p&gt;Our framework can be extended to understand how other group cleavages such as race, formal education, and urban/rural divides affect election outcomes.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;voter-identification-and-nonvoting-in-wisconsinevidence-from-the-2016-election-with-kenneth-r.-mayer&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election (with Kenneth R. Mayer)&lt;/h2&gt;
-&lt;p&gt;[View &lt;a href=&#34;https://www.dropbox.com/s/w44vf1lp90dd9uf/voter-id-public.pdf?dl=0&#34;&gt;PDF&lt;/a&gt;]&lt;/p&gt;
-&lt;p&gt;How much did Wisconsin’s voter identification requirement matter in 2016? Who is affected by voter ID requirements?&lt;/p&gt;
-&lt;p&gt;We conducted a survey of registered Wisconsin nonvoters in the counties surrounding Milwaukee and Madison to estimate the number of registered voters who were affected by the voter ID requirement in 2016. Using a conservative Bayesian estimate, we find that roughly 10 percent of nonvoters in these counties lacked a qualifying voter ID or reported that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/images/research/nonvoters-teaser.png&#34; width=&#34;90%&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;We argue that voter ID requirements affect a larger share of the public than those who lack a qualifying ID. Voter ID requirements contain technical details surrounding outdated addresses, expiration dates, and name changes that are likely to confuse and deter citizens who possess qualifying forms of ID as well. We find evidence of this confusion effect: many respondents mistakenly believe that they did not have the necessary ID to vote when they actually did, and individuals who were less knowledgeable about qualifying forms of ID were more likely to report being affected by the law. These “indirect effects” of voter ID reveal that record-linkage approaches to studying ID possession may underestimate the population affected by voter ID laws.&lt;/p&gt;
-&lt;p&gt;While we do not estimate the causal effect of voter ID on turnout, we do perform a simulation to demonstrate a range of plausible turnout effects under various assumptions.&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;works-in-progress&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Works in Progress&lt;/h1&gt;
-&lt;div id=&#34;the-value-of-bayesian-inference-for-causal-modeling-in-political-science&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;The Value of Bayesian Inference for Causal Modeling in Political Science&lt;/h2&gt;
-&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but almost never in political science does a single study employ both approaches. This stands in contrast to other fields—such as psychology, epidemiology, and biostatistics—where Bayesian analysis and causal inference methods interact regularly. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating trustworthy parameter estimates. Rather, the partition owes itself to informal norms surrounding both methodological schools in political science applications. I discuss these sources of normative tension, articulate practical strategies for doing Bayesian inference for a “causal inference audience,” and demonstrate these practices using real examples from recent political science work. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show how Bayesian analysis provides an appealing framework for evaluating causal evidence, improves causal estimates, and deserves a space in the study of causal effects in political science.&lt;/p&gt;
-&lt;!-- ## How Should We Employ MRP Estimates as Predictors? Issues with Uncertainty and Pooling
-
-More info coming soon. --&gt;
-&lt;!-- Images and Words: How Citizens Understand Uncertain Election Polls (with Benjamin Toff and Zachary Warner) --&gt;
-&lt;!-- Identity and Ideology in the Parties&#39; Campaign Finance Networks (with Jordan Hsu) --&gt;
-&lt;!-- Bureaucratic &#39;Competence&#39; or Bureaucratic Access? Voter ID and Turnout in Alabama --&gt;
-&lt;!-- &#39;One of the Good Ones&#39;: Economic Racism and Black Conservative Candidates (with Micah C.R. Dillard) --&gt;
-&lt;!-- - Uncertainty and Causality in Multilevel Regression and Poststratification --&gt;
-&lt;!-- Do Primaries Work? Constituency Preferences and Candidate Positioning in Legislative Primary Elections --&gt;
-&lt;!-- Nomination Systems and Ideology in Legislative Elections --&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Teaching</title>
-      <link>/teaching/</link>
-      <pubDate>Mon, 04 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/teaching/</guid>
-      <description>&lt;div id=&#34;as-instructor&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;As Instructor&lt;/h2&gt;
-&lt;p&gt;Courses at UW–Madison&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Political Science 270: Understanding Political Numbers, Spring 2019. &lt;a href=&#34;/ps-270/&#34;&gt;(Online Schedule)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Political Science 811: Introduction to Statistical Computing in Political Science, Spring 2018. &lt;a href=&#34;/811/&#34;&gt;(Online Materials)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Graduate Workshops at UW–Madison&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Political Science Ph.D. Math Camp, 2017 and 2018. &lt;a href=&#34;https://github.com/mikedecr/math-camp-2018&#34;&gt;(Github)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Political Science &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; Workshop, 2015–2018. &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34;&gt;(Github)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id=&#34;as-teaching-assistant&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;As Teaching Assistant&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;Political Science 305: Elections and Voting Behavior (UW–Madison, Fall 2018)&lt;/li&gt;
-&lt;li&gt;Political Science 544: Introduction to Survey Research Methods (UW–Madison, Spring 2017)&lt;/li&gt;
-&lt;li&gt;Political Science 218: Understanding Political Numbers (UW–Madison, Fall 2015 and Fall 2016)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>About Mike</title>
-      <link>/about/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/about/</guid>
-      <description>&lt;div id=&#34;im-michael-decrescenzo&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;I’m Michael DeCrescenzo,&lt;/h2&gt;
-&lt;center&gt;
-&lt;p&gt;a political science Ph.D. candidate at the University of Wisconsin–Madison.&lt;/p&gt;
-I study American politics and statistical methodology.
-&lt;/center&gt;
-&lt;p&gt;&lt;img src=&#34;/images/me/nelson.png&#34; width=&#34;40%&#34; style = &#34;display: inline-block; float:left; padding-right:15px; padding-bottom:10px; border-radius: 50%;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;/research/&#34;&gt;My research&lt;/a&gt; focuses on electoral politics in the United States,&lt;/strong&gt; broadly construed. I study issues surrounding ideological representation, public opinion, vote choice and turnout, and election administration. My dissertation explores primary elections and the representation of local partisan preferences.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;&lt;a href=&#34;/teaching/&#34;&gt;My teaching experience&lt;/a&gt; focuses on research methods, computing, and American elections.&lt;/strong&gt; The bulk of my teaching focuses on the mathematical, statistical, and software foundations for social science research. I teach these subjects for undergraduate and graduate students.&lt;/p&gt;
-&lt;p&gt;I am an affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;&gt;Elections Research Center&lt;/a&gt;, where I also serve as the graduate student assistant.&lt;/p&gt;
-&lt;p&gt;You can find my cv &lt;a href=&#34;https://uwmadison.box.com/s/sdl1gj7jsmg3qqc841gv641pfj8c449n&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;!-- Mathjax test --&gt;
-&lt;!-- \begin{align}
-  p(y_{ij} = 1) &amp;= \Phi\left( \frac{\theta_{i} - \alpha_{j}}{\sigma_{j}} \right)
-\end{align}
- --&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>PS 270 Readings</title>
-      <link>/courses/reading/readings-270-s19/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/courses/reading/readings-270-s19/</guid>
-      <description>&lt;div id=&#34;j&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-1&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-2&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-3&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-4&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-5&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;j-6&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;j&lt;/h2&gt;
-&lt;/div&gt;
-&lt;div id=&#34;jan-23&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Jan 23&lt;/h2&gt;
-&lt;p&gt;Try this out. wee&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

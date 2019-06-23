@@ -44,7 +44,7 @@ knitr::include_graphics("/images/research/forum-teaser.png")
 
 ## Mobilization, Persuasion, and the Partisan Fallout of the Gender Gap in U.S. Voting (with Barry C. Burden) 
 
-[View [PDF](https://www.dropbox.com/s/y69t6x89gj8fvkt/gender-gap-public.pdf?dl=0) and [supplemental info](https://www.dropbox.com/s/0piklipw954t8zg/gap-appendix-public.pdf?dl=0)]
+[View [PDF](https://www.dropbox.com/s/0poj17dqqkda3jv/gender-gap-apw-2018.pdf?dl=0) and [appendix](https://www.dropbox.com/s/lnmgj5i0f3vaodx/gap-appendix-apw-2018.pdf?dl=0)]
 
 Does the gender gap help the Democrats? Do Republicans win more votes when the gender gap is smaller? To answer this question, we develop a generalizable theoretical framework to understand the link between group differences in voting and party vote shares, with an application to the gender gap. 
 
@@ -62,7 +62,9 @@ Our framework can be extended to understand how other group cleavages such as ra
 
 ## Voter Identification and Nonvoting in Wisconsin---Evidence from the 2016 Election (with Kenneth R. Mayer) 
 
-[View [PDF](https://www.dropbox.com/s/w44vf1lp90dd9uf/voter-id-public.pdf?dl=0)]
+[View [PDF](https://www.dropbox.com/s/f3jcbu2zneq5oik/nonvoters-rnr.pdf?dl=0),
+[appendix](https://www.dropbox.com/s/lnmgj5i0f3vaodx/nonvoters-appendix.pdf?dl=0), 
+and [questionnaire](https://www.dropbox.com/s/6hldn82w7ccfrlw/p1208-nonvoters-questionnaire.pdf?dl=0)]
 
 How much did Wisconsin's voter identification requirement matter in 2016? Who is affected by voter ID requirements? 
 
@@ -80,9 +82,9 @@ While we do not estimate the causal effect of voter ID on turnout, we do perform
 
 # Works in Progress
 
-## The Value of Bayesian Inference for Causal Modeling in Political Science
+## Bayesian Causal Inference in Political Science
 
-Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but almost never in political science does a single study employ both approaches. This stands in contrast to other fields---such as psychology, epidemiology, and biostatistics---where Bayesian analysis and causal inference methods interact regularly. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating trustworthy parameter estimates. Rather, the partition owes itself to informal norms surrounding both methodological schools in political science applications. I discuss these sources of normative tension, articulate practical strategies for doing Bayesian inference for a "causal inference audience," and demonstrate these practices using real examples from recent political science work. The purpose of the paper is *not* to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show how Bayesian analysis provides an appealing framework for evaluating causal evidence, improves causal estimates, and deserves a space in the study of causal effects in political science.
+Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields---such as psychology, epidemiology, and biostatistics---where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is *not* to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.
 
 
 
