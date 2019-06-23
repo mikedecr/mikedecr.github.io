@@ -8,7 +8,7 @@ library("tidyverse")
 library("here")
 library("knitr") 
 
-read_csv(here("content/courses/ps-270-excel.csv")) %>%
+read_csv(here("static", "270", "ps-270-excel.csv")) %>%
   select(-week) %>%
   mutate(Reading = "",
          Slides = "",

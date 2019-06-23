@@ -6,38 +6,10 @@
     <description>Recent content in Bayesian statistics on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/bayesian-statistics/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Operationalizations Make Random Variables</title>
-      <link>/2019/2019-05-07_operationalizations/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-07_operationalizations/</guid>
-      <description>Paul Musgrave tweeted recently that operationalizations aren’t definitions. In his own words:  Operationalizations aren’t definitions — Paul Musgrave (@profmusgrave) May 6, 2019    When we do social science, our theories involve “forces at work” in the world. Definitions of those forces are conceptual discussions, while operationalizations are measurement strategies for turning the concept into a data point.
-I saw this tweet and, after agreeing with its argument, wanted to take it further.</description>
-    </item>
-    
-    <item>
-      <title>The Model is Itself a Hierarchical Variable</title>
-      <link>/2019/2019-05-07_effect-distributions/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-07_effect-distributions/</guid>
-      <description>Tweets  I should do more than vague-tweet abt this. 🔸 Treatment fx are unknown! I think techniques that tell us about the distribution of plausible fx are improvements over “robustness tests” if the latter focus on the robustness of the num. of stars vs substantive inferences about fx 🔸 Engaging directly w/ the parameter val as the actual qty of interest, not its sign. Maybe it’s just me but I can’t grok a “purely directional” hypotheses.</description>
-    </item>
-    
-    <item>
-      <title>Bayesian Estimates of Wait Times at the Polls</title>
-      <link>/2019/2019-03-21_bayesian-wait-times/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-03-21_bayesian-wait-times/</guid>
-      <description>Charles Stewart tweeted some figures on the estimated average wait time to vote in 2018 (compared to 2014 and 2016). These data come from the CCES and the SPAE. Interestingly, neither of these surveys are able to get a direct measure of wait time. This makes sense; a voter will not remember if they were in line for 6 minutes versus 7. Instead, the surveys ask for a binned response.</description>
-    </item>
     
     <item>
       <title>Experimentalists Agree! When Flat Priors Lead to Worse Learning</title>

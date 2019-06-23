@@ -21,52 +21,6 @@
     </item>
     
     <item>
-      <title>Plain Text Research: None of us know what we&#39;re doing</title>
-      <link>/2019/2019-05-23_git-workflow/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-23_git-workflow/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>What if &#34;validity trade-offs&#34; are actually just priors</title>
-      <link>/2019/2019-05-31_validity-trade-offs/</link>
-      <pubDate>Thu, 23 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-31_validity-trade-offs/</guid>
-      <description>Outline  The conventional wisdom The Samii view, there is no trade-off My view: there is a trade-off, but we haven’t modeled it well  GGK vibes: we learn because there are priors Partial pooling analogy: the value of hyperpriors matters less than the structure This is what so-called “externally valid” larger scale research is. It’s not identified, so it’s not “general” but what it’s doing is providing a structure for organizing information Large scale research is an informal prior for pooling information from lower-level studies.</description>
-    </item>
-    
-    <item>
-      <title>Operationalizations Make Random Variables</title>
-      <link>/2019/2019-05-07_operationalizations/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-07_operationalizations/</guid>
-      <description>Paul Musgrave tweeted recently that operationalizations aren’t definitions. In his own words:  Operationalizations aren’t definitions — Paul Musgrave (@profmusgrave) May 6, 2019    When we do social science, our theories involve “forces at work” in the world. Definitions of those forces are conceptual discussions, while operationalizations are measurement strategies for turning the concept into a data point.
-I saw this tweet and, after agreeing with its argument, wanted to take it further.</description>
-    </item>
-    
-    <item>
-      <title>The Model is Itself a Hierarchical Variable</title>
-      <link>/2019/2019-05-07_effect-distributions/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-05-07_effect-distributions/</guid>
-      <description>Tweets  I should do more than vague-tweet abt this. 🔸 Treatment fx are unknown! I think techniques that tell us about the distribution of plausible fx are improvements over “robustness tests” if the latter focus on the robustness of the num. of stars vs substantive inferences about fx 🔸 Engaging directly w/ the parameter val as the actual qty of interest, not its sign. Maybe it’s just me but I can’t grok a “purely directional” hypotheses.</description>
-    </item>
-    
-    <item>
-      <title>Bayesian Estimates of Wait Times at the Polls</title>
-      <link>/2019/2019-03-21_bayesian-wait-times/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/2019/2019-03-21_bayesian-wait-times/</guid>
-      <description>Charles Stewart tweeted some figures on the estimated average wait time to vote in 2018 (compared to 2014 and 2016). These data come from the CCES and the SPAE. Interestingly, neither of these surveys are able to get a direct measure of wait time. This makes sense; a voter will not remember if they were in line for 6 minutes versus 7. Instead, the surveys ask for a binned response.</description>
-    </item>
-    
-    <item>
       <title>Experimentalists Agree! When Flat Priors Lead to Worse Learning</title>
       <link>/2019/2019-02-23_gerber-green-kaplan/</link>
       <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
@@ -74,15 +28,6 @@ I saw this tweet and, after agreeing with its argument, wanted to take it furthe
       <guid>/2019/2019-02-23_gerber-green-kaplan/</guid>
       <description>I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by Gerber, Green, and Kaplan about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs observational research.
 The intuition of the model is to suppose that we want to learn about some causal effect \(M\).</description>
-    </item>
-    
-    <item>
-      <title>Using the Tidyverse with Voter Registration Linkage Data</title>
-      <link>/2018/2018-11-29-hava-xl/</link>
-      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/2018-11-29-hava-xl/</guid>
-      <description>a.sourceLine { display: inline-block; line-height: 1.25; } a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; } a.sourceLine:empty { height: 1.2em; } .sourceCode { overflow: visible; } code.sourceCode { white-space: pre; position: relative; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { code.sourceCode { white-space: pre-wrap; } a.sourceLine { text-indent: -1em; padding-left: 1em; } } pre.numberSource a.</description>
     </item>
     
     <item>

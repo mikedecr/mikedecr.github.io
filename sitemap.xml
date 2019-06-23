@@ -13,69 +13,9 @@
     </url>
   
     <url>
-      <loc>/2019/2019-05-23_git-workflow/</loc>
-      
-      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/2019/2019-05-31_validity-trade-offs/</loc>
-      
-      <lastmod>2019-05-23T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/2019/2019-05-07_operationalizations/</loc>
-      
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/2019/2019-05-07_effect-distributions/</loc>
-      
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/2019/2019-03-21_bayesian-wait-times/</loc>
-      
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
       <loc>/2019/2019-02-23_gerber-green-kaplan/</loc>
       
       <lastmod>2019-02-23T00:00:00+00:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/2018/2018-11-29-hava-xl/</loc>
-      
-      <lastmod>2018-11-29T00:00:00+00:00</lastmod>
       
       
       
@@ -213,19 +153,9 @@
     </url>
   
     <url>
-      <loc>/ps-270/</loc>
+      <loc>/tags/bayesian-statistics/</loc>
       
-      <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-      
-      
-      
-      
-    </url>
-  
-    <url>
-      <loc>/categories/american-politics/</loc>
-      
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
+      <lastmod>2019-02-23T00:00:00+00:00</lastmod>
       
       
       
@@ -237,19 +167,7 @@
     <url>
       <loc>/tags/bayesian-statistics/</loc>
       
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>/tags/bayesian-statistics/</loc>
-      
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+      <lastmod>2019-02-23T00:00:00+00:00</lastmod>
       
       
       
@@ -273,20 +191,6 @@
     <url>
       <loc>/categories/</loc>
       
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>/tags/causal-inference/</loc>
-      
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
-      
       
       
       <priority>0</priority>
@@ -297,7 +201,7 @@
     <url>
       <loc>/tags/causal-inference/</loc>
       
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+      <lastmod>2019-06-19T00:00:00+00:00</lastmod>
       
       
       
@@ -322,30 +226,6 @@
       <loc>/contact/</loc>
       
       
-      
-      
-    </url>
-  
-    <url>
-      <loc>/tags/data/</loc>
-      
-      <lastmod>2018-11-29T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>/tags/election-administration/</loc>
-      
-      <lastmod>2019-03-21T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
       
       
     </url>
@@ -459,18 +339,6 @@
     </url>
   
     <url>
-      <loc>/tags/r/</loc>
-      
-      <lastmod>2018-11-29T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>/tags/reproducibility/</loc>
       
       <lastmod>2018-05-30T00:00:00+00:00</lastmod>
@@ -485,7 +353,7 @@
     <url>
       <loc>/tags/</loc>
       
-      <lastmod>2019-05-07T00:00:00+00:00</lastmod>
+      <lastmod>2019-02-23T00:00:00+00:00</lastmod>
       
       
       
@@ -498,18 +366,6 @@
       <loc>/categories/teaching/</loc>
       
       <lastmod>2018-02-23T00:00:00+00:00</lastmod>
-      
-      
-      
-      <priority>0</priority>
-      
-      
-    </url>
-  
-    <url>
-      <loc>/tags/tidyverse/</loc>
-      
-      <lastmod>2018-11-29T00:00:00+00:00</lastmod>
       
       
       

@@ -6,18 +6,18 @@
     <description>Recent content in Causal-inference on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/causal-inference/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>The Model is Itself a Hierarchical Variable</title>
-      <link>/2019/2019-05-07_effect-distributions/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      <title>Causal Mediation, Bayesianly (with Stan)</title>
+      <link>/2019/2019-06-19_bayesian-causal-mediation/</link>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>/2019/2019-05-07_effect-distributions/</guid>
-      <description>Tweets  I should do more than vague-tweet abt this. 🔸 Treatment fx are unknown! I think techniques that tell us about the distribution of plausible fx are improvements over “robustness tests” if the latter focus on the robustness of the num. of stars vs substantive inferences about fx 🔸 Engaging directly w/ the parameter val as the actual qty of interest, not its sign. Maybe it’s just me but I can’t grok a “purely directional” hypotheses.</description>
+      <guid>/2019/2019-06-19_bayesian-causal-mediation/</guid>
+      <description>Motivation for this post Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.</description>
     </item>
     
   </channel>

@@ -6,7 +6,7 @@
     <description>Recent content in Tags on Michael DeCrescenzo</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>Bayesian statistics</title>
       <link>/tags/bayesian-statistics/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/bayesian-statistics/</guid>
       <description></description>
@@ -23,7 +23,7 @@
     <item>
       <title>Bayesian-statistics</title>
       <link>/tags/bayesian-statistics/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/bayesian-statistics/</guid>
       <description></description>
@@ -39,18 +39,9 @@
     </item>
     
     <item>
-      <title>Causal inference</title>
-      <link>/tags/causal-inference/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/causal-inference/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Causal-inference</title>
       <link>/tags/causal-inference/</link>
-      <pubDate>Tue, 07 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/causal-inference/</guid>
       <description></description>
@@ -62,24 +53,6 @@
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/computational-methods/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data</title>
-      <link>/tags/data/</link>
-      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Election Administration</title>
-      <link>/tags/election-administration/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/election-administration/</guid>
       <description></description>
     </item>
     
@@ -129,29 +102,11 @@
     </item>
     
     <item>
-      <title>R&#34;</title>
-      <link>/tags/r/</link>
-      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Reproducibility</title>
       <link>/tags/reproducibility/</link>
       <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/reproducibility/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tidyverse</title>
-      <link>/tags/tidyverse/</link>
-      <pubDate>Thu, 29 Nov 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tidyverse/</guid>
       <description></description>
     </item>
     
