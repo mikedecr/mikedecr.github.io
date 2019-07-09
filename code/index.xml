@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code Projects on Michael DeCrescenzo</title>
+    <link>/code/</link>
+    <description>Recent content in Code Projects on Michael DeCrescenzo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    
+	    <atom:link href="/code/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Project Template</title>
+      <link>/code/project-template/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/project-template/</guid>
+      <description>&lt;p&gt;A blank Git repository for starting a new (research) project.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

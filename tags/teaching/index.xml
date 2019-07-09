@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Teaching on Michael DeCrescenzo</title>
+    <link>/tags/teaching/</link>
+    <description>Recent content in Teaching on Michael DeCrescenzo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/tags/teaching/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PS 270: Understanding Political Numbers
+</title>
+      <link>/teaching/numbers/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/numbers/</guid>
+      <description>&lt;p&gt;Data are increasingly prevalent in politics (and in journalism, industry, academia&amp;hellip;), but data are complex and challenging. What can we learn about politics, and the social world more broadly, when we take an empirical view of it? When should we trust data, and when will data lead us astray?&lt;/p&gt;
+
+&lt;p&gt;Political science 270 is an undergraduate course on consuming, criticizing, and producing data-driven analysis of political and social phenomena. Students learn to think about political data as evidence for or against social theories. The course emphasis practical data analysis skills that apply beyond the political science curriculum, including elementary statistical analysis, R programming (&lt;code&gt;Rstudio&lt;/code&gt;, &lt;code&gt;tidyverse&lt;/code&gt;, &lt;code&gt;ggplot2&lt;/code&gt;), and technical writing.&lt;/p&gt;
+
+&lt;p&gt;View course materials on &lt;a href=&#34;https://github.com/mikedecr/political-numbers-s19/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;Github&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>PS 811: Introductory Statistical Computing for Political Science
+</title>
+      <link>/teaching/computing-811/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/computing-811/</guid>
+      <description>&lt;p&gt;In Spring 2018 I co-taught a computing course for first-year political science graduate students. I covered R, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34; target=&#34;_blank&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
+
+&lt;p&gt;My instructional notes for the class are all online &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;. Source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

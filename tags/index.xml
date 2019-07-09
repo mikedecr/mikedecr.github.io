@@ -4,42 +4,25 @@
     <title>Tags on Michael DeCrescenzo</title>
     <link>/tags/</link>
     <description>Recent content in Tags on Michael DeCrescenzo</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 23 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bayesian statistics</title>
+      <title>Bayesian Statistics</title>
       <link>/tags/bayesian-statistics/</link>
-      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/bayesian-statistics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Bayesian-statistics</title>
-      <link>/tags/bayesian-statistics/</link>
-      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bayesian-statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blogdown</title>
-      <link>/tags/blogdown/</link>
-      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/blogdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Causal-inference</title>
+      <title>Causal Inference</title>
       <link>/tags/causal-inference/</link>
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -48,7 +31,7 @@
     </item>
     
     <item>
-      <title>Computational-methods</title>
+      <title>Computational Methods</title>
       <link>/tags/computational-methods/</link>
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
       
@@ -57,65 +40,65 @@
     </item>
     
     <item>
-      <title>Experiments</title>
-      <link>/tags/experiments/</link>
-      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      <title>Source Themes</title>
+      <link>/tags/source-themes/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/experiments/</guid>
+      <guid>/tags/source-themes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Experiments</title>
-      <link>/tags/experiments/</link>
-      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      <title>Deep Learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/experiments/</guid>
+      <guid>/tags/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Sun, 23 Sep 2018 00:00:00 +0000</pubDate>
+      <title>Demo</title>
+      <link>/tags/demo/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/hugo/</guid>
+      <guid>/tags/demo/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ps811</title>
-      <link>/tags/ps811/</link>
-      <pubDate>Fri, 23 Feb 2018 00:00:00 +0000</pubDate>
+      <title>Election Administration</title>
+      <link>/tags/election-administration/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ps811/</guid>
+      <guid>/tags/election-administration/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R</title>
-      <link>/tags/r/</link>
-      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Elections</title>
+      <link>/tags/elections/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r/</guid>
+      <guid>/tags/elections/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Reproducibility</title>
-      <link>/tags/reproducibility/</link>
-      <pubDate>Wed, 30 May 2018 00:00:00 +0000</pubDate>
+      <title>Methods</title>
+      <link>/tags/methods/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/reproducibility/</guid>
+      <guid>/tags/methods/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Visualization</title>
-      <link>/tags/visualization/</link>
-      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      <title>Teaching</title>
+      <link>/tags/teaching/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/visualization/</guid>
+      <guid>/tags/teaching/</guid>
       <description></description>
     </item>
     

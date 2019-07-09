@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.3.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michael DeCrescenzo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Read this before our first R lecture.
+How to follow along Follow the instructions in this lesson in your own .R script.
+ Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
+Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/811/811-02-basics/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#268bd2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700|Fira+Sans:500|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.710387c227532828b07a58243cbd13c3.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/811/811-02-basics/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mikedecr">
+  <meta property="twitter:creator" content="@mikedecr">
+  
+  <meta property="og:site_name" content="Michael DeCrescenzo">
+  <meta property="og:url" content="/courses/811/811-02-basics/">
+  <meta property="og:title" content="Getting Started | Michael DeCrescenzo">
+  <meta property="og:description" content="Read this before our first R lecture.
+How to follow along Follow the instructions in this lesson in your own .R script.
+ Objectives This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.
+Note: Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others."><meta property="og:image" content="/img/circular-telles.png">
+  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2018-02-08T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2018-02-08T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Getting Started | Michael DeCrescenzo</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/"><img src="/img/circular-telles.png" alt="Michael DeCrescenzo"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/code"><span>Code</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" id="search-query" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/">Introduction</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/courses/811/811-02-basics/">Getting Started</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-03-data/">Data Manipulation</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-04-graphics/">Graphics</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-05-analysis/">Analysis</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">Getting Started</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            
+
+
+<!-- # Schedule: -->
+<p>Read this before our first R lecture.</p>
+<div id="how-to-follow-along" class="section level1">
+<h1>How to follow along</h1>
+<p>Follow the instructions in this lesson in <em>your own</em> <code>.R</code> script.</p>
+</div>
+<div id="objectives" class="section level1">
+<h1>Objectives</h1>
+<p>This document describes how to get started with R and understand its basics. We discuss installing R, running simple commands, and some elementary programming concepts such as indexing, logic, and functions. We close with some higher-level discussion about the differences between R and Stata.</p>
+<p><strong>Note:</strong> Although I promised concrete lessons, this one unfortunately has to be a little more “abstract” than others. This is because we exploring R’s <em>general</em> behavior rather than a concrete application of R workflow. Luckily, this will be short, and we get much more concrete in future lessons.</p>
+<p>You should take this lesson slowly at first if you have not played with R before. Mess around with some of the code if it helps you understand what it’s doing. Type it yourself bit by bit, so you can see what each component does. If you encounter material that does not make sense, please take note of it so we can review it in class before progressing too far.</p>
+</div>
+<div id="how-to-read-these-lessons" class="section level1">
+<h1>How to read these lessons</h1>
+<p>Pages in this series contain code blocks that you can paste into R. Some of the code blocks are included with their results.</p>
+<pre class="r"><code>&quot;Code appears in blocks like this.&quot;
+&quot;You can paste this code directly into R.&quot;</code></pre>
+<pre><code>## [1] &quot;Results appear on this page with two &#39;##&#39; signs on the left&quot;</code></pre>
+</div>
+<div id="installing-r" class="section level1">
+<h1>Installing R</h1>
+<p>If you have not set up R already, click <a href="https://mirror.las.iastate.edu/CRAN/">here</a> to download R for your operating system (if you haven’t already).</p>
+<p>A little bit about what’s going on here: R is open source and is distributed from various <a href="https://en.wikipedia.org/wiki/Mirror_website">“mirrors,”</a> which are clone websites that contain essentially identical information. The CRAN (Comprehensive R Archive Network) hosts these mirrors <a href="https://cran.r-project.org/mirrors.html">all over the world</a>. It is generally recommended that you install R (and related software like R packages) using mirrors in nearby locations. Any mirror in the U.S. should be fine for our purposes. The link at the top of this section uses the Iowa State University mirror.</p>
+<p>Once R is downloaded, make sure that it is fully installed. You can run R using the GUI app (<code>R.app</code> on OSX or <code>Rgui.exe</code> on Windows), using the Rstudio application (which we discuss below), or as a program in your computer’s command-line shell (which I do, for technical reasons).</p>
+<p>If you have a Chromebook or some other computing machine that makes it impossible to install R, try the <a href="https://rstudio.cloud/">Rstudio Cloud</a> platform.</p>
+</div>
+<div id="using-r" class="section level1">
+<h1>Using R</h1>
+<p>The most essential part of using R is the <em>console</em>. This is where results of all commands are displayed. There is a prompt at the bottom of the console where commands can be submitted directly. Yours won’t be the same colors as mine, but it looks sort of like this:</p>
+<p><img src="/images/811/r-console.png" width="90%" /></p>
+<p>Although you can type commands directly into the console, most commands should be written in a <em>script file</em>. Script files serve the same purpose as they do in Stata; they provide a record of all commands you want to run in your analysis. This lets you replicate your analysis the next day, the next week, the next year, or whenever (presuming your code does not become obsolete for some reason).</p>
+</div>
+<div id="editing-an-r-script-file" class="section level1">
+<h1>Editing an R script file</h1>
+<p>Script files in R are similar to Stata. They are a place where your code should live, and you should execute code by sending it to the console to be evaluated.</p>
+<p>Use whatever program you desire to open a script file.</p>
+<ul>
+<li>The basic R application has a script editor (accessed using the <code>File</code> menu or a keyboard shortcut).</li>
+<li>Many newcomers enjoy <a href="https://www.rstudio.com/products/rstudio/">Rstudio</a> an application that provides tons of tools for R. Rstudio has many advanced features as well, so it isn’t only for newcomers.</li>
+<li>You can also use third-party editors, but you will need to figure out how to send commands to the R console. I use <a href="https://www.sublimetext.com/">Sublime Text</a> with the <a href="https://packagecontrol.io/packages/R-Box">R-Box package</a> to send commands to R.</li>
+<li>Windows users may find Notepad++ or TextMate to be useful text editors.</li>
+<li>Advanced programmers may use Emacs or Vim with some package (such as ESS for Emacs) to speak to an R console.</li>
+</ul>
+<p>I would recommend any external editor that can send commands to the R console and, as you become more comfortable with R, that contains some keyboard shortcuts for writing code quickly. Rstudio, it so happens, comes standard with many such shortcuts.</p>
+</div>
+<div id="what-goes-in-an-r-file-code-and-comments" class="section level1">
+<h1>What goes in an R file (code and comments)</h1>
+<p>Script files should begin with some description of the script’s purpose. You can include comments (text that will not be executed as R commands) after the <code>#</code> symbol. For example, your script file for this lesson might contain some comments at the top like…</p>
+<pre class="r"><code># ------------------------------------------------------------
+#  PS 811: statistical computing for political science
+#  Lesson 1: Basics of R
+# ------------------------------------------------------------</code></pre>
+<p>Comments are great for describing what code is doing, planning an analysis, writing notes to yourself, and so on. Comments are also great for <em>pseudocode</em>, which are notes to yourself that “translate” what code is doing into English. We will see some examples of this as the course progresses.</p>
+<p>An R script file may begin with some common operations:</p>
+<ul>
+<li>Setting a working directory (see the next lesson)</li>
+<li>setting up a log file (if desired… I don’t do this though!)</li>
+<li>Loading packages for extra functionality</li>
+<li>Setting other project-wide options (e.g. graphics options)</li>
+</ul>
+<p>Although a script file can be imperfect while a project is being developed, a well-written script file for a finished project should be organized, easy to read, and run from top to bottom without any errors. This is important for ensuring that you can retrace the steps of your analysis.</p>
+<p>We should save this file in a designated location for this course. Navigate to your <code>ps811</code> folder on your computer (which you should already have…), create a subfolder called <code>R</code>, and then within the R folder, create another <code>lessons</code> folder. Save this document in the <code>ps811/R/lessons/</code> folder. (This syntax represents folder pathways in your computer’s file system. We’ll be seeing more of this later.)</p>
+</div>
+<div id="executing-commands" class="section level1">
+<h1>Executing commands</h1>
+<p>Just like Stata, R processes commands one at a time. Commands are compiled while they are executed, so if something is wrong with your code, you may not realize it until you try to run it.</p>
+<p>Just to demonstrate some basic R behavior, let’s run a few commands.</p>
+<p>First, R works as a calculator. It can handle mathematical expressions. Paste or type the following lines of code DIRECTLY into the console.</p>
+<pre class="r"><code>1 + 1
+2 + 2
+100 * 2
+500 / 4</code></pre>
+<p>Ignore the <code>[1]</code> that prints in the results for now. We will explain it later.</p>
+<p>Now take the above block of code and paste the commands into your script file. Try to run the commands from the script file using the appropriate keyboard shortcut. Most computers and interfaces use <code>super + enter</code>, where <code>super</code> refers to <code>Ctrl</code> on PCs or <code>Cmd</code> on Macs. Windows machines may use a different shortcut, such as <code>Ctrl + R</code>. Take this opportunity to look up the appropriate keyboard shortcut on your own, <em>before coming to lecture!</em> :-)</p>
+</div>
+<div id="variables-and-assignment" class="section level1">
+<h1>Variables and assignment</h1>
+<p>Most of your R code will work with variables rather than raw numbers. Variables generally work the same way they do with math. The expression <span class="math inline">\(x + 4\)</span> can take different values, depending on the value of <span class="math inline">\(x\)</span>.</p>
+<p>Data must be “assigned” to a variable using the assignment operator <code>&lt;-</code>. The <code>&lt;-</code> is a combination of a less-than sign <code>&lt;</code> and a hyphen <code>-</code>.</p>
+<p>For example, assign the value of <code>5</code> to a variable called <code>x</code>.</p>
+<pre class="r"><code>x &lt;- 5</code></pre>
+<p>After this variable has been created, <code>x</code> and <code>5</code> mean the same thing as far as R is concerned.</p>
+<p>You can read the <code>&lt;-</code> operator as “gets.” A left-hand side object name “gets” the results of whatever operation is on the right-hand side. So in the above example, <code>x</code> “gets” the value of 5.</p>
+</div>
+<div id="printing-the-contents-of-an-object" class="section level1">
+<h1>Printing the contents of an object</h1>
+<p>We can display the contents of any object in R by simply typing the object name.</p>
+<pre class="r"><code>x</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>That is to say, R “evaluated” the statement <code>x</code>, and the result is 5. We could have written some more complex statement for R to evaluate, like a mathematical expression using <code>x</code>…</p>
+<pre class="r"><code>x + 4</code></pre>
+<pre><code>## [1] 9</code></pre>
+</div>
+<div id="vectors-multi-element-variables" class="section level1">
+<h1>Vectors: multi-element variables</h1>
+<p>Most of the variables you will work with in R (such as the variables in a data set) have multiple values. That is, they are <em>vectors</em>.</p>
+<p>We can create our own vectors with <code>c()</code>, which assigns a series of values to one variable. It can be helpful to think of <code>c()</code> as “combine.”</p>
+<pre class="r"><code>y &lt;- c(2, 4, 6)</code></pre>
+<p>The <code>y</code> object now contains 2, 4, and 6.</p>
+<pre class="r"><code>y</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>If you wrap an assignment statement inside of parentheses, R will assign the values <em>and</em> print the result.</p>
+<pre class="r"><code>(y &lt;- c(2, 4, 6))</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>Vectors are useful for performing operations on every element in the vector. Just as we could do math with a vector…</p>
+<p><span class="math inline">\(\begin{align} 2 \cdot \begin{bmatrix} 2 \\ 4 \\ 6 \end{bmatrix} = \begin{bmatrix} 4 \\ 8 \\ 12 \end{bmatrix} \end{align}\)</span></p>
+<p>we can also do similar things in R.</p>
+<pre class="r"><code>2 * y</code></pre>
+<pre><code>## [1]  4  8 12</code></pre>
+<p>A note about multiplying vectors: by default, R does element-wise multiplication (the “Hadamard product”). To do matrix-style multiplication (dot product/inner product) with vectors, we have a different operator.</p>
+<pre class="r"><code># element-wise product:
+y * y</code></pre>
+<pre><code>## [1]  4 16 36</code></pre>
+<pre class="r"><code># dot product
+y %*% y</code></pre>
+<pre><code>##      [,1]
+## [1,]   56</code></pre>
+</div>
+<div id="everything-is-an-object" class="section level1">
+<h1>Everything is an Object</h1>
+<p>In R, everything is an object. I can store any value as a variable, which is an object. A text string is an object. A dataset. A variable within a dataset is an object within an object. It’s objects all the way down. This makes R very flexible.</p>
+</div>
+<div id="indexing" class="section level1">
+<h1>Indexing</h1>
+<p>You can access individual elements in a vector using <em>indexing</em> notation with square brackets. Using the variable <code>y</code> from above, what are the first, second, and third elements?</p>
+<pre class="r"><code># entire y vector
+y</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<pre class="r"><code># first element of y
+y[1]</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code># second element of y
+y[2]</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code># third element of y
+y[3]</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p>This is akin to indexing in math, where we could write <span class="math inline">\(y_{1} = 2\)</span>, <span class="math inline">\(y_{2} = 4\)</span>, and so on.</p>
+<p>This is why the console prints a little <code>[1]</code> next to all results. The <code>[1]</code> indicates that the adjacent element is the first element of the results. If we print a longer object, this becomes clearer. For example, 30 repetitions of the word <code>&quot;hello&quot;</code>.</p>
+<pre class="r"><code># repeat &quot;hello&quot; 30 times
+rep(&quot;hello&quot;, 30)</code></pre>
+<pre><code>##  [1] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+##  [9] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+## [17] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;
+## [25] &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot; &quot;hello&quot;</code></pre>
+<p>Indexing works with higher-dimensional data as well. Here is a two-dimensional array of numbers.</p>
+<pre class="r"><code># row-bind separate vectors
+m &lt;- rbind(c(1, 2), 
+           c(3, 4), 
+           c(5, 6))
+m</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4
+## [3,]    5    6</code></pre>
+<p>(Notice how <code>rbind()</code> binds vectors together as rows. The <code>cbind()</code> function would bind vectors as columns.)</p>
+<p>To index a multi-dimensional object, use commas to separate the dimensions. The notation <code>object[a, b]</code> would reference the value in row <code>a</code> and column <code>b</code>.</p>
+<pre class="r"><code>m[2, 2]</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>If we specify a row but don’t specify a column, R returns every column from the specified row.</p>
+<pre class="r"><code>m[1, ]</code></pre>
+<pre><code>## [1] 1 2</code></pre>
+<p>If we specify a column but don’t specify a row, R returns every row from the specified column.</p>
+<pre class="r"><code>m[ , 2]</code></pre>
+<pre><code>## [1] 2 4 6</code></pre>
+<p>Even though <code>m[ , 2]</code> is the second <em>column</em> of <code>m</code>, the results don’t print as a vertical column. Why? Because once R evaluates <code>m[ , 2]</code>, it simply returns an object. R no longer remembers that it comes from <code>m</code>. The result is nothing more than a vector floating there. As far as R is concerned, <code>m[ , 2]</code> is exactly equivalent to a vector <code>c(2, 4, 6)</code>. <em>This is actually good</em>; it’s exactly the kind of flexibility that will be valuable in the future.</p>
+<div id="r-is-one-indexed" class="section level2">
+<h2>R is one-indexed</h2>
+<p>R is one-indexed, meaning the first element of a vector is element <code>1</code>. Some languages (like <code>C</code>) are zero-indexed. Even though R is one-indexed, calling the 0’th element of a variable does not throw an error, so be careful.</p>
+</div>
+<div id="indexing-in-practice" class="section level2">
+<h2>Indexing in practice</h2>
+<p>The code we use in this course (heavily derived from the <code>tidyverse</code> suite of packages) does not require much explicit indexing. However, you should understand the intuition of indexing for a few reasons.</p>
+<ul>
+<li>It has useful mathematical parallels, where <span class="math inline">\(y_{i}\)</span> is analogous to <code>y[i]</code>. This sometimes comes in handy for dealing with the results from statistical models.</li>
+<li>You will encounter it when searching through message boards for R help.</li>
+</ul>
+</div>
+</div>
+<div id="logic" class="section level1">
+<h1>Logic</h1>
+<p>Logic as a concept in programming is less daunting than it sounds. At it’s core, we’re working with statements that evaluate to either <code>TRUE</code> or <code>FALSE</code>.</p>
+<p>Example: is 1 greater than 0?</p>
+<pre class="r"><code>1 &gt; 0</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<p>Let’s make a new vector, a sequence of values from 1 to 10.</p>
+<pre class="r"><code>(g &lt;- 1:10)</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<p>Now that we have this vector, we can derive logical statements about it. Which elements are greater than 5?</p>
+<pre class="r"><code>g &gt; 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>The statement <code>g &gt; 5</code> is a “logical vector,” meaning that its a vector whose values are either <code>TRUE</code> or <code>FALSE</code>. <code>TRUE</code> and <code>FALSE</code> are keywords in R (and must be capital). R asks if <code>g</code> is greater than 5, and since <code>g</code> is a vector, R returns a vector of logicals with each element corresponding to the original elements in <code>g</code>.</p>
+<p>There are many logical operators. Here are some:</p>
+<pre class="r"><code># g &quot;is equal to&quot; 5 (DOUBLE EQUALS)
+g == 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code># g &quot;is greater than&quot; 5
+g &gt; 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="r"><code># g &quot;is less than&quot; 5
+g &lt; 5</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code># g &quot;is greater than or equal to&quot; 5
+g &gt;= 5</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
+<pre class="r"><code># g &quot;is less than or equal to&quot; 5
+g &lt;= 5</code></pre>
+<pre><code>##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>This seems a little abstract right now, but here’s how you may see others use logic for indexing. Let’s say that I have some data from countries around the world, and I want to look only at the European data. You might see someone online limit the data like so.</p>
+<pre class="r"><code>world_data[region == &quot;Europe&quot;, ]</code></pre>
+<p>Translated: retrieve the <code>world_data</code> object, but only the rows (notice the comma in the indexing) where <code>region</code> is equal to <code>&quot;Europe&quot;</code>.</p>
+<p>More literally, the statement <code>region == &quot;Europe&quot;</code> is either <code>TRUE</code> or <code>FALSE</code> for every observation in the data. The above statement returns the rows from <code>world_data</code> where <code>region == &quot;Europe&quot;</code> evaluates to <code>TRUE</code>.</p>
+<p>As mentioned above, we will perform this kind of case selection with a more intuitive syntax that is easier to wrap your brain around.</p>
+</div>
+<div id="data-types" class="section level1">
+<h1>Data types</h1>
+<p>There are a few different types of data in R.</p>
+<ul>
+<li>Logical: <code>TRUE</code>s and <code>FALSE</code>s.</li>
+<li>Numeric: including integers and doubles</li>
+<li>Strings: text strings that are contained in <code>&quot;quotes&quot;</code>. R calls these “character” type variables.</li>
+<li>Factors: ordered categories with text labels</li>
+</ul>
+<p>Factors are akin to labelled variables in Stata. They are somewhat like numbers, somewhat like text strings. They are like strings because they havea text label, and you can’t do math with them. They are like numbers because you can put them in order. Put another way, factors are <em>ordered categories</em> that have textual metadata.</p>
+<p>It is possible to coerce data from type to another. We cover this in our final lesson.</p>
+<p>Note: data types are different from <em>object classes</em>. Data type describes the values, but object classes describes the organization of values. Classes include vectors, matrices, data frames, tables, lists, and so on.</p>
+</div>
+<div id="missing-data" class="section level1">
+<h1>Missing data</h1>
+<p>Vectors might contain missing data. The missing data code in R is capital <code>NA</code>, without quotes.</p>
+<p>Missing data take the same data type as the vector in which they are located. For example:</p>
+<pre class="r"><code>h &lt;- c(1, 2, NA, 4)
+# what data type is h?
+str(h)</code></pre>
+<pre><code>##  num [1:4] 1 2 NA 4</code></pre>
+<p>By placing <code>NA</code> inside a numeric vector, what we’ve told R is that we know that the missing data is numeric, we just don’t know what the number is. If some function requires that we know every value, it will probably fail. Try the following.</p>
+<pre class="r"><code>mean(h)</code></pre>
+<pre><code>## [1] NA</code></pre>
+<p>This doesn’t cause an <em>error</em>. Instead, the result is a missing value. What this means is, we know that there <em>should</em> be a numeric mean (which is why there is no error), we just don’t know what the mean is because we don’t know what all of <code>h</code> is. When we want to calculate this value irrespective of the missing values, we often need to tell R to skip over missing values.</p>
+<pre class="r"><code>mean(h, na.rm = TRUE)</code></pre>
+<pre><code>## [1] 2.333333</code></pre>
+<p>Many functions have <code>na.rm</code> (“remove <code>NA</code>”) arguments that can be flipped on, such as <code>sum()</code>, <code>sd()</code>, and so on.</p>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+<p>In math, you can manipulate a variable with a function, <span class="math inline">\(f(x)\)</span>. There are tons of functions that you can use in R.</p>
+<p>There are three things you need to use a function.</p>
+<ol style="list-style-type: decimal">
+<li>The function name itself. Self-explanatory.</li>
+<li>Parentheses. This tells R that the object name is meant to be a function.</li>
+<li>Arguments inside the parentheses. These may be optional, depending on the function and its default behaviors. Arguments can be data that you pass to the function (as inputs), settings that you modify, and so on.</li>
+</ol>
+<p>Some easy, common functions.</p>
+<pre class="r"><code># 10 thousand random samples from a normal distribution
+x &lt;- rnorm(n = 10000, mean = 0, sd = 1)
+
+# sum
+sum(x) </code></pre>
+<pre><code>## [1] 163.006</code></pre>
+<pre class="r"><code># number of elements in an object
+length(x) </code></pre>
+<pre><code>## [1] 10000</code></pre>
+<pre class="r"><code># mean
+mean(x) </code></pre>
+<pre><code>## [1] 0.0163006</code></pre>
+<pre class="r"><code># variance
+var(x) </code></pre>
+<pre><code>## [1] 1.006162</code></pre>
+<pre class="r"><code># standard deviation
+sd(x) </code></pre>
+<pre><code>## [1] 1.003076</code></pre>
+<p>It is easy to write your own functions in R. We will cover this in the final lesson.</p>
+</div>
+<div id="help-files" class="section level1">
+<h1>Help files</h1>
+<p>Get help on any function using <code>?function_name</code> or <code>help(function_name)</code>.</p>
+</div>
+<div id="external-packages-for-non-base-functions" class="section level1">
+<h1>External Packages (for non-base functions)</h1>
+<p>Base R only contains a small number of functions. Most analyses require more complicated tools that are not standard with R. For these tasks, there are hundreds of packages available for download.</p>
+<p>Official R packages are hosted on CRAN and can be installed with code. For example, the following code will install the <code>tidyverse</code> package. Because the package depends on other packages, all required packages will be downloaded if not already on your system. As a result, this command would take a while to execute (but you should execute it…we will use this package in class).</p>
+<pre class="r"><code>install.packages(&quot;tidyverse&quot;)</code></pre>
+<p>Install multiple packages using <code>c()</code> to combine package names. Run this command as well. We will use all of these packages throughout our lessons.</p>
+<pre class="r"><code>install.packages(c(&quot;magrittr&quot;, &quot;haven&quot;, &quot;labelled&quot;, &quot;broom&quot;, &quot;ggplot2&quot;, &quot;stargazer&quot;, &quot;texreg&quot;, &quot;xtable&quot;, &quot;Rmisc&quot;, &quot;mvtnorm&quot;))</code></pre>
+</div>
+<div id="moving-on" class="section level1">
+<h1>Moving on</h1>
+<p>If you have made it this far, take a break!</p>
+<p>I want to remind you that future lessons will be far less abstract than this one. Many concepts in this lesson are <em>important</em> in the sense that you will see them again during your R career, but they are not all <em>essential</em> for surviving this course. Future lessons will be far more concrete and dataset-driven.</p>
+<p>Continue with the next lesson: <a href="811/811-data">Data Manipulation</a></p>
+</div>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/811/811-03-data/" rel="prev">Data Manipulation</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on Feb 8, 2018
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Michael DeCrescenzo 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bib.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/txt.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.f1a21f988a77cdbdeeb2f60c710009d1.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.3.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michael DeCrescenzo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="This is what we were already doing">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/bayes-mediation/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#268bd2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700|Fira+Sans:500|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.710387c227532828b07a58243cbd13c3.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/bayes-mediation/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mikedecr">
+  <meta property="twitter:creator" content="@mikedecr">
+  
+  <meta property="og:site_name" content="Michael DeCrescenzo">
+  <meta property="og:url" content="/post/bayes-mediation/">
+  <meta property="og:title" content="Causal Mediation, Bayesianly (with Stan) | Michael DeCrescenzo">
+  <meta property="og:description" content="This is what we were already doing"><meta property="og:image" content="/img/circular-telles.png">
+  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-06-19T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-06-19T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Causal Mediation, Bayesianly (with Stan) | Michael DeCrescenzo</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/"><img src="/img/circular-telles.png" alt="Michael DeCrescenzo"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/code"><span>Code</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Causal Mediation, Bayesianly (with Stan)</h1>
+
+  
+  <p class="page-subtitle">This is what we were already doing</p>
+  
+
+  
+    
+
+
+
+<meta content="2019-06-19 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-06-19 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  <span itemprop="author name" itemtype="http://schema.org/Person"><a href="/authors/admin/">Michael DeCrescenzo</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Jun 19, 2019</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    9 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    <a href="/categories/methods/">Methods</a></span>
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/bayes-mediation/&amp;text=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/bayes-mediation/&amp;t=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29&amp;body=/post/bayes-mediation/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/bayes-mediation/&amp;title=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29%20/post/bayes-mediation/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/bayes-mediation/&amp;title=Causal%20Mediation,%20Bayesianly%20%28with%20Stan%29" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+
+<div id="motivation-for-this-post" class="section level1">
+<h1>Motivation for this post</h1>
+<p>Over this summer, I have been organizing a reading group on causal inference for students in my department. As someone who sees data analysis problems primarily through Bayesian goggles, I have been doing extra work in my head to make sense of “Bayesian causal inference.” I’m hoping to write some articles about this for political scientists, but the dissertation (rightly) has more of my attention lately.</p>
+<p>We covered causal mediation this week (<a href="https://imai.fas.harvard.edu/research/files/mediationP.pdf">Imai et al. 2011 <em>APSR</em></a>), which I thought would be a good opportunity to explain where my thoughts are going about this. So this post will briefly describe a Bayesian vantage point on causal inference and show how to use Bayesian tools to implement it.</p>
+</div>
+<div id="posterior-predictive-draws.-i-mean-unobserved-potential-outcomes" class="section level1">
+<h1>Posterior Predictive Draws. I mean, “Unobserved Potential Outcomes”</h1>
+<p>It should be noted up front that a Bayesian take on causal inference is not at all new (I will borrow plenty of intuition from, for example, <a href="https://projecteuclid.org/download/pdf_1/euclid.aos/1176344064">Rubin 1978</a>), but it is pretty unfamiliar to the political science/econ folks I roll with.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+People often ask me, “How can you even have a Bayesian experiment; don’t you already have randomization?” as if the purpose of priors is to fix confounding somehow. In fairness to non-Bayesians, if this is how Bayesian analysis used priors, I would also be mistrusting of Bayes. Luckily, priors are less presumptuous than that. You get a Bayesian experiment (or any other credible research design) by specifying priors on the parameters and obtaining a posterior distribution. It is pretty unremarkable—no different than a Bayesian analysis of a non-causal design. Remember that the causal model (by which I mean, the definition of the potential outcomes) is distinct from the methods used to <em>estimate</em> causal parameters. Bayesian analysis is positioned closer to the estimation end of things, whereas causal modeling is a series of assumptions about identifying variation in the data. In short, you fix confounding with the design, and priors are for improving the estimation.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>While the Bayesian approach may not change the research design or the causal assumptions, it does provide a different—and intuitive, I assert—interpretation of potential outcomes. Ordinarily we write potential outcomes as <span class="math inline">\(Y_{i}(T_{i} = t)\)</span>, the outcome value for unit <span class="math inline">\(i\)</span> if it received treatment value <span class="math inline">\(t\)</span>. Only one potential outcome per unit is ever observed, so can’t observe the <em>unit-level</em> causal effect <span class="math inline">\(\tau_{i}\)</span>, but we can use a causal identification analysis to lay out the assumptions required to estimate an average effect <span class="math inline">\(\bar{\tau}\)</span> for at least some subset of units. If we knew this average effect, we would be able to state, for each observed outcome <span class="math inline">\(y_{i}\)</span>, what the <em>expected value</em> of that unit’s unobserved potential outcome would be if we could set <span class="math inline">\(T_{i}\)</span> to some value <span class="math inline">\(t&#39;\)</span> other than what was observed. In this way, the unobserved potential outcome is missing data that we can predict with an estimated the model that generates (potential) outcomes.</p>
+<p><strong><em>Maybe you can see where I’m going with this.</em></strong></p>
+<p>Bayesian analysis begins with joint model <span class="math inline">\(p\left(y, \theta \right)\)</span> for outcome data <span class="math inline">\(y\)</span> and model parameters <span class="math inline">\(\theta\)</span>. This is equivalently expressed as <span class="math inline">\(p(y \mid \theta)p(\theta)\)</span>, which is to say that the distribution of <span class="math inline">\(y\)</span> depends on the value of <span class="math inline">\(\theta\)</span> and that <span class="math inline">\(\theta\)</span> has its own distribution. We fit the model by conditioning on the observed <span class="math inline">\(y\)</span> to obtain the posterior distribution <span class="math inline">\(p\left(\theta \mid y \right)\)</span>. It is this updated model that represents our state of information about the process that generates potential outcomes <span class="math inline">\(y_{i}(t)\)</span>. If we wanted to make posterior inferences about what <span class="math inline">\(y_{i}(t)\)</span> <em>would have been</em> (in expectation) if we could arbitrarily change <span class="math inline">\(t\)</span>, we would simulate the unobserved potential outcomes <span class="math inline">\(\tilde{y}\)</span> from the model.
+<span class="math display">\[\begin{align}
+  p(\tilde{y} \mid y) &amp;= \int p(\tilde{y} \mid \theta) p(\theta \mid y)d\theta
+\end{align}\]</span>
+The unobserved potential outcome is expressed as a probability distribution because we don’t know exactly what the unobserved data would be. Its distribution depends on <span class="math inline">\(\theta\)</span>, which itself is conditioned on <span class="math inline">\(y\)</span>, and we average over our uncertainty about <span class="math inline">\(\theta\)</span> by integrating. This gives us a distribution for the unobserved potential outcomes that is marginal of our imperfectly estimated parameters.</p>
+<p><strong><em>Okay, so?</em></strong> The Bayesian view of potential outcomes is appealing because our state of ignorance about the exact potential outcomes is an explicit feature of the model, rather than a point estimate with a post-hoc standard error. Which is to say, <em>we don’t know</em> what the treatment effect is, and so we don’t know what the potential outcomes are, but we have a range of guesses that that we can directly evaluate using their probability distribution. This approach has a certain philosophical resonance before we get anywhere near the notion of prior information. And to whatever extent researchers already view point estimates and frequentist confidence intervals on treatment effects as “ranges of plausible values” with associated posterior probabilities, they are already doing Bayesian causal inference—just without the benefit of having formally set up the whole model. With the Bayesian approach we are actually allowed to say things like “the data suggest that this treatment effect is most likely positive” or what have you.</p>
+</div>
+<div id="causal-mediation" class="section level1">
+<h1>Causal Mediation</h1>
+<p>Causal mediation analysis is concerned with a causal graph where a treatment <span class="math inline">\(T\)</span> affects an outcome <span class="math inline">\(Y\)</span>, and the effect flows at least partially through a mediator <span class="math inline">\(M\)</span>. Potential outcomes are expressed as <span class="math inline">\(Y_{i}(T_{i}, M_{i}(T_{i}))\)</span>, where the value of <span class="math inline">\(Y\)</span> depends both on the treatment assignment <span class="math inline">\(T_{i} = t\)</span> and the resulting value of the mediator <span class="math inline">\(M_{i}(t)\)</span>, which is itself affected by the treatment. The causal effects are a decomposition of the total (average) treatment effect.</p>
+<ul>
+<li>The <em>total treatment effect</em>: how much total change in <span class="math inline">\(Y\)</span> is owed to setting the value of <span class="math inline">\(T\)</span>? Written as <span class="math inline">\(Y(1, M(1)) - Y(0, M(0))\)</span>.</li>
+<li>The <em>causal mediation effect</em>: how much of the total change in <span class="math inline">\(Y\)</span> is attributed to <span class="math inline">\(T\)</span>’s effect on <span class="math inline">\(M\)</span>, which also affects <span class="math inline">\(Y\)</span>? Or, how much change in <span class="math inline">\(Y\)</span> is owed to the fact that <span class="math inline">\(M\)</span> changed, as opposed to not changing? Written as <span class="math inline">\(Y(t, M(1)) - Y(t, M(0))\)</span>.</li>
+<li>The <em>direct effect</em>: how much of the change in <span class="math inline">\(Y\)</span> is not flowing through <span class="math inline">\(M\)</span>? In other words, how would <span class="math inline">\(Y\)</span> be different even if <span class="math inline">\(T\)</span> had no effect on <span class="math inline">\(M\)</span>? Written as <span class="math inline">\(Y(1, M(t)) - Y(0, M(t))\)</span>.</li>
+</ul>
+<p>Imai et al. present an algorithm to estimate these quantities. We need models to describe how <span class="math inline">\(M(T)\)</span> and <span class="math inline">\(Y(T, M(T))\)</span> are generated, but the form of these models does not affect the intuition of the algorithm. It’s like this:</p>
+<ol style="list-style-type: decimal">
+<li>Estimate mediator as a function of treatment and pre-treatment covariates: <span class="math inline">\(M_{i} = f(T_{i}, X_{i})\)</span></li>
+<li>Estimate the outcome as a function of the treatment, the observed mediator, and pre-treatment covariates. <span class="math inline">\(Y_{i} = g(T_{i}, M_{i}, X_{i})\)</span>.</li>
+<li>Using <span class="math inline">\(f()\)</span>, generate predicted values <span class="math inline">\(\hat{M}\)</span> for all <span class="math inline">\(t\)</span>.</li>
+<li>Using <span class="math inline">\(g()\)</span>, predicted values <span class="math inline">\(\hat{Y}\)</span> for all potential outcomes <span class="math inline">\(y(t, M(t&#39;))\)</span></li>
+<li>Use the appropriate <span class="math inline">\(\hat{Y}\)</span> values to calculate average total, direct, and mediation effects.</li>
+</ol>
+</div>
+<div id="doing-it" class="section level1">
+<h1>Doing it</h1>
+<p>Imai et al. demonstrate their method using (in part) an experimental study by <a href="https://www.jstor.org/stable/25193860?seq=1#metadata_info_tab_contents">Brader, Valentino, and Suhay 2008</a> on the way news stories affect immigration attitudes through specific emotional mechanisms. Let’s do the outcome where <span class="math inline">\(Y\)</span> represents a participant’s decision to send an anti-immigrant message to their Congressperson (<span class="math inline">\(Y\)</span>), which is affected by a cue in the story about a hypothetical immigrant’s ethnicity (<span class="math inline">\(T\)</span>), and moderated by the emotion of anxiety (<span class="math inline">\(M\)</span>).</p>
+<p>First, Imai et al. use an OLS model to predict respondent’s anxiety in response to treatment, with pre-treatment covariates <span class="math inline">\(X_{i}\)</span> and coefficients <span class="math inline">\(\zeta_{1}\)</span>. Parameters are subscripted <span class="math inline">\(1\)</span> for the “first stage” of the estimation.
+<span class="math display">\[\begin{align}
+  M_{i} &amp;= \alpha_{1} + T_{i}\beta_{1} + X_{i}\zeta{1} + \epsilon_{i}
+\end{align}\]</span>
+They then use a probit model to estimate the outcome variable, the “second stage” (subscripted 2). This model includes the mediator with coefficient <span class="math inline">\(\gamma\)</span>.
+<span class="math display">\[\begin{align}
+  p(Y_{i} = 1) &amp;= \Phi\left(\alpha_{2} + T_{i}\beta_{2} + M_{i}\gamma + X_{i}\zeta_{2}\right)
+\end{align}\]</span>
+You should be able to code to implement this routine in R <a href="https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/R/bayes-mediation.R">here</a>, which calls <a href="https://github.com/mikedecr/site-leavit/blob/master/static/code-blogs/stan/mediation-bvs.stan">this Stan file</a>.</p>
+<p>In Stan, it is easy to generate posterior quantities of interest in the <code>generated quantities</code> block of a Stan file. For example, generating posterior predictions for mediator values at <span class="math inline">\(T \in \{0, 1\}\)</span> is as easy as…</p>
+<pre><code>m0 = alpha_m + (0 * beta_m) + (X * zeta_m);
+m1 = alpha_m + (1 * beta_m) + (X * zeta_m);</code></pre>
+<p>Because <code>alpha_m</code>, <code>beta_m</code>, and <code>zeta_m</code> are all uncertain parameters, what we are actually doing is generating <code>m0</code> and <code>m1</code> in each iteration of the sampler, thus creating a distribution of predicted mediator values. In the integral notation from above, what we’re actually doing is generating a distribution <span class="math inline">\(p\left(M(t)\right)\)</span> by marginalizing over all of the parameters (except for the error term, which is presumably fixed in the counterfactual case).
+<span class="math display">\[\begin{align}
+  p\left(\tilde{M}(t)\right) &amp;= \int p\left(\tilde{M}(t) \mid \alpha_{1}, \beta_{1}, \zeta_{1}\right) p(\alpha_1, \beta_1, \zeta_1 \mid M)d\alpha_1 d\beta_1 d\zeta_1
+\end{align}\]</span>
+Hopefully I haven’t messed up the integral.</p>
+<p>Posterior predictions for new potential outcome observation <span class="math inline">\(\tilde{Y}(t, M(t&#39;))\)</span> would be…
+<span class="math display">\[\begin{align}
+  p\left(\tilde{Y}(t, m(t&#39;))\right) &amp;= \int p\left(\tilde{Y}(t, M(t&#39;)) \mid \alpha_2, \beta_2, \tilde{M}(t&#39;), \gamma, \zeta_2 \right) \times \\[6pt]&amp;\qquad p\left(\alpha_2, \beta_2, \tilde{M}(t&#39;), \gamma, \zeta_2 \mid Y\right) d\alpha_2 d\beta_2 d\tilde{M}(t) d\gamma d\zeta_2.
+\end{align}\]</span>
+This expression is also marginalizing over the simulated mediator value <span class="math inline">\(M(t&#39;)\)</span>. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.</p>
+<p>In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.</p>
+<p><img src="/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png" width="100%" /></p>
+<p>And here is a comparison to the <code>{mediation}</code> package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the <code>{mediation}</code> estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.</p>
+<p><img src="/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png" width="100%" /></p>
+</div>
+<div id="other-things-to-think-about" class="section level1">
+<h1>Other things to think about</h1>
+<p>Imai et al. propose a sensitivity analysis to measure “how much” post-treatment confounding among mediators would be enough to change your inference about causal mediation effects. While I won’t do this now, it would be possible to specify a prior on the sensitivity parameter. Such a move would let the researcher evaluate the mediation effect <em>marginal</em> of a distribution of potential confounding, rather than merely conditional on one fixed level of confounding. This would let us make a probabilistic statement about the threat of confounding rather than a hypothetical statement. It’s of course subject to the prior, but most researchers substantively interpret their results assuming that confounding is zero, so we can think about the prior as actually relaxing an assumption of zero confounding rather than “adding a new assumption.”</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+    </div>
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/computational-methods/">Computational Methods</a>
+  
+  <a class="badge badge-light" href="/tags/bayesian-statistics/">Bayesian Statistics</a>
+  
+  <a class="badge badge-light" href="/tags/causal-inference/">Causal Inference</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar-nelson_hue1097363fe96fa554517b0e16128d3a0_5324589_250x250_fill_lanczos_center_2.png" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Michael DeCrescenzo</a></h5>
+      <h6 class="card-subtitle">Ph.D. Candidate, Political Science</h6>
+      <p class="card-text" itemprop="description">U.S. Electoral Politics, Bayesian Analysis, Meta-Research</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-paper-plane"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://github.com/mikedecr" target="_blank" rel="noopener">
+              <i class="fas fa-code-branch"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/mikedecr" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/ggk-flat-priors/">Unrealistic Priors and the &#34;Illusion of Learning from Observational Research&#34;
+</a></li>
+          
+          <li><a href="/teaching/latex-workshop/">$\mathrm{\LaTeX}$ Workshop
+</a></li>
+          
+          <li><a href="/teaching/numbers/">PS 270: Understanding Political Numbers
+</a></li>
+          
+          <li><a href="/teaching/computing-811/">PS 811: Introductory Statistical Computing for Political Science
+</a></li>
+          
+          <li><a href="/teaching/math-camp/">UW Political Science Math Camp
+</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bib.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/txt.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.f1a21f988a77cdbdeeb2f60c710009d1.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Michael DeCrescenzo 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

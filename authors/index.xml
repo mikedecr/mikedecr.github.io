@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors on Michael DeCrescenzo</title>
+    <link>/authors/</link>
+    <description>Recent content in Authors on Michael DeCrescenzo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Robert Ford</title>
+      <link>/authors/robert-ford/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/robert-ford/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/authors/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/authors/admin/</guid>
+      <description>
+
+&lt;!-- # Michael DeCrescenzo --&gt;
+
+&lt;!-- ### Ph.D. Candidate, Political Science --&gt;
+
+&lt;!-- ### I am a Ph.D. Candidate in Political Science at the University of Wisconsin--Madison. --&gt;
+
+&lt;!-- I study U.S. politics and political methodology. --&gt;
+
+&lt;h3 id=&#34;i-study-u-s-elections-and-public-opinion-with-bayesian-methods&#34;&gt;I study U.S. elections and public opinion with Bayesian methods.&lt;/h3&gt;
+
+&lt;p&gt;My current projects deal with ideological representation in primary elections, party coalitions, and election administration. I have developing interests in model-driven measurement approaches and Bayesian approaches to causal inference.&lt;/p&gt;
+
+&lt;p&gt;I employ computational methods throughout my work, most notably with statistical analysis (MCMC methods) and open-source project development.&lt;/p&gt;
+
+&lt;!-- Most of my teaching focuses experience focuses on mathematical, statistical, and software foundations for social science research methods. --&gt;
+
+&lt;!-- My teaching experience covers research methods and American political behavior. Most of my teaching focuses on mathematical, statistical, and software foundations for social science research.  --&gt;
+
+&lt;p&gt;I am an affiliate and research fellow of the &lt;a href=&#34;https://elections.wisc.edu/&#34; target=&#34;_blank&#34;&gt;Elections Research Center&lt;/a&gt; and an &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34; target=&#34;_blank&#34;&gt;Honored Instructor&lt;/a&gt; at UW–Madison.&lt;/p&gt;
+
+&lt;!-- My work is published in ELJ, the Forum, and has been covered by NYT, WaPo --&gt;
+
+&lt;p&gt;You can view my CV &lt;a href=&#34;https://uwmadison.box.com/s/sdl1gj7jsmg3qqc841gv641pfj8c449n&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;!-- resume? --&gt;
+
+&lt;!-- &lt;center&gt;
+  Keep reading &amp;nbsp;&amp;nbsp;&lt;a href=&#34;#research&#34;&gt;&lt;i class=&#34;fas fa-arrow-down fa-2x&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/center&gt; --&gt;
+
+&lt;!-- Find me elsewhere online: 
+&lt;center&gt;
+  &lt;a href=&#34;#contact&#34;&gt;&lt;i class=&#34;fas fa-envelope&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;
+  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+  &lt;a href=&#34;https://github.com/mikedecr&#34;&gt;&lt;i class=&#34;fab fa-github&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;
+  &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+  &lt;a href=&#34;https://twitter.com/mikedecr&#34;&gt;&lt;i class=&#34;fab fa-twitter&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;
+&lt;/center&gt;
+ --&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

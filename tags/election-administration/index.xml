@@ -4,20 +4,24 @@
     <title>Election Administration on Michael DeCrescenzo</title>
     <link>/tags/election-administration/</link>
     <description>Recent content in Election Administration on Michael DeCrescenzo</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/election-administration/index.xml" rel="self" type="application/rss+xml" />
+	    <atom:link href="/tags/election-administration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Bayesian Estimates of Wait Times at the Polls</title>
-      <link>/2019/2019-03-21_bayesian-wait-times/</link>
-      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      <title>Voter Identification and Nonvoting in Wisconsin</title>
+      <link>/research/nonvoters/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
-      <guid>/2019/2019-03-21_bayesian-wait-times/</guid>
-      <description>Charles Stewart tweeted some figures on the estimated average wait time to vote in 2018 (compared to 2014 and 2016). These data come from the CCES and the SPAE. Interestingly, neither of these surveys are able to get a direct measure of wait time. This makes sense; a voter will not remember if they were in line for 6 minutes versus 7. Instead, the surveys ask for a binned response.</description>
+      <guid>/research/nonvoters/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;How much did Wisconsin&amp;rsquo;s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements &amp;ldquo;directly&amp;rdquo; affect voters who lack qualifying IDs but also &amp;ldquo;indirectly&amp;rdquo; affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

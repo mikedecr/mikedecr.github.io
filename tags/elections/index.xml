@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Elections on Michael DeCrescenzo</title>
+    <link>/tags/elections/</link>
+    <description>Recent content in Elections on Michael DeCrescenzo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/tags/elections/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Do Primaries Work?
+</title>
+      <link>/research/dissertation/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/dissertation/</guid>
+      <description>&lt;p&gt;This page under construction!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Voter Identification and Nonvoting in Wisconsin</title>
+      <link>/research/nonvoters/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/nonvoters/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;How much did Wisconsin&amp;rsquo;s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements &amp;ldquo;directly&amp;rdquo; affect voters who lack qualifying IDs but also &amp;ldquo;indirectly&amp;rdquo; affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Partisanship, Mobilization, and Persuasion in Group Voting
+</title>
+      <link>/research/gender-gap/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/gender-gap/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bayesian Causal Inference in Political Science
+</title>
+      <link>/research/causal-bayes/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/causal-bayes/</guid>
+      <description>&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields&amp;mdash;such as psychology, epidemiology, and biostatistics&amp;mdash;where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Unexceptional Gender Gap of 2016
+</title>
+      <link>/research/gender-2016/</link>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/research/gender-2016/</guid>
+      <description>
+
+&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
+
+&lt;p&gt;Because of the particular candidates who ran, the 2016 presidential campaign was defined by gender to a remarkable degree. This led many observers to expect a historically large gender gap in voting. In contrast to these expectations, the gender gap between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to matter. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
+
+&lt;h2 id=&#34;cite-this-paper&#34;&gt;Cite this paper&lt;/h2&gt;
+
+&lt;p&gt;Burden, Barry C., Evan Crawford, and Michael G. DeCrescenzo. 2016. &amp;ldquo;The Unexceptional Gender Gap of 2016.&amp;rdquo; &lt;em&gt;The Forum&lt;/em&gt; 14(4), 415–432.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;@article{burden-crawford-decrescenzo:2016:gender-gap,
+  title = {The Unexceptional Gender Gap of 2016},
+  author = {Burden, Barry C and Crawford, Evan and DeCrescenzo, Michael G},
+  journal = {The Forum},
+  volume = {14},
+  number = {4},
+  pages = {415--432},
+  year = {2016},
+  publisher = {De Gruyter}
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

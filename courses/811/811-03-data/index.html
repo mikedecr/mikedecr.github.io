@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.3.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michael DeCrescenzo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Read this before our first R lecture.
+Overview How to follow along A script file walking through some of these commands is available here.
+ Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
+ setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/courses/811/811-03-data/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#268bd2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700|Fira+Sans:500|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.710387c227532828b07a58243cbd13c3.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/courses/811/811-03-data/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mikedecr">
+  <meta property="twitter:creator" content="@mikedecr">
+  
+  <meta property="og:site_name" content="Michael DeCrescenzo">
+  <meta property="og:url" content="/courses/811/811-03-data/">
+  <meta property="og:title" content="Data Manipulation | Michael DeCrescenzo">
+  <meta property="og:description" content="Read this before our first R lecture.
+Overview How to follow along A script file walking through some of these commands is available here.
+ Objectives The goal of this lesson is to simulate some data manipulation for a research project. This requires…
+ setting up the project on your computer Get data onto the computer (the ANES should already be downloaded!) Load the data into R Cleaning and modifying the data Doing some simple calculations  Future lessons pick up where this one leaves off, so you must complete this lesson!"><meta property="og:image" content="/img/circular-telles.png">
+  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+  <meta property="article:modified_time" content="2019-05-05T00:00:00&#43;01:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Data Manipulation | Michael DeCrescenzo</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/"><img src="/img/circular-telles.png" alt="Michael DeCrescenzo"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/code"><span>Code</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  
+
+<div class="container-fluid docs">
+  <div class="row flex-xl-nowrap">
+    <div class="col-12 col-md-3 col-xl-2 docs-sidebar">
+      
+
+
+
+
+
+<form class="docs-search d-flex align-items-center">
+  <button class="btn docs-toggle d-md-none p-0 mr-3" type="button" data-toggle="collapse" data-target="#docs-nav" aria-controls="docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    <span><i class="fas fa-bars"></i></span>
+  </button>
+
+  
+  <input name="q" type="search" class="form-control" id="search-query" placeholder="Search..." autocomplete="off">
+  
+</form>
+
+<nav class="collapse docs-links" id="docs-nav">
+  
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/">Introduction</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-02-basics/">Getting Started</a>
+
+  </div>
+  
+  <div class="docs-toc-item active">
+    <a class="docs-toc-link" href="/courses/811/811-03-data/">Data Manipulation</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-04-graphics/">Graphics</a>
+
+  </div>
+  
+  <div class="docs-toc-item">
+    <a class="docs-toc-link" href="/courses/811/811-05-analysis/">Analysis</a>
+
+  </div>
+  
+  
+</nav>
+
+    </div>
+
+    
+
+    <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 docs-content" role="main">
+
+      <article class="article" itemscope itemtype="http://schema.org/Article">
+
+        <div class="docs-article-container">
+          <h1 itemprop="name">Data Manipulation</h1>
+
+          <div class="article-style" itemprop="articleBody">
+            
+
+
+<p>Read this before our first R lecture.</p>
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<div id="how-to-follow-along" class="section level2">
+<h2>How to follow along</h2>
+<p>A script file walking through some of these commands is available <a href="https://uwmadison.box.com/s/xqr5frqtwbtlv342fg7zn1ts9va2ei2t">here</a>.</p>
+</div>
+<div id="objectives" class="section level2">
+<h2>Objectives</h2>
+<p>The goal of this lesson is to simulate some data manipulation for a research project. This requires…</p>
+<ul>
+<li>setting up the project on your computer</li>
+<li>Get data onto the computer (the <a href="http://electionstudies.org/studypages/anes_timeseries_cdf/anes_timeseries_cdf.htm">ANES</a> should already be downloaded!)</li>
+<li>Load the data into R</li>
+<li>Cleaning and modifying the data</li>
+<li>Doing some simple calculations</li>
+</ul>
+<p>Future lessons pick up where this one leaves off, so you must complete this lesson!. We will be <a href="811/811-graphics">making graphics</a> and doing <a href="811/811-analysis">statistical analysis</a> that depend on the changes we make in this document.</p>
+<!-- # How to read this document -->
+<!-- I have also uploaded an R file containing the commands from this document. You can use this other file to follow along with the code on this webpage. You may also benefit from transcribing the code from this page into your own script file, as a way to practice writing the code yourself. -->
+</div>
+</div>
+<div id="setting-up-a-project" class="section level1">
+<h1>Setting up a project</h1>
+<p>Each projects should have a dedicated folder on your computer. These folders should be internally organized: separate folders for data, R scripts, writing, other documentation, and so on.</p>
+<p>Here is an example of one of my project folders.</p>
+<p><img src="/images/811/dir.png" width="80%" /></p>
+<p>For this class, set up your class folder like this:</p>
+<ul>
+<li>You should already have a dedicated <code>ps811</code> folder</li>
+<li>Inside of <code>ps811</code>, create an <code>R</code> folder for all of your R materials.</li>
+<li>Inside of <code>R</code>, create folders for <code>data</code>, <code>lessons</code>, and <code>exercises</code>. Put all data in the <code>data</code> folder, and put any R files corresponding to online lessons and lecture in the <code>lessons</code> folder.</li>
+<li>(Exercise files will go in the <code>exercises</code> folder).</li>
+</ul>
+<div id="tips-for-project-folders" class="section level2">
+<h2>Tips for project folders</h2>
+<ul>
+<li>When you name your folders and files, use hyphens or underscores to separate words, not spaces. Something like <code>811-data-lesson.R</code> is better than <code>811 data lesson.R</code>.</li>
+<li>Use short folder and file names names when you can. This makes your life easier in the long run (e.g. with Git, which I recommend learning).</li>
+<li>Avoid setting up the folders in ways that would require you to navigate <em>up</em> the directory tree. See below for more about what I mean.</li>
+</ul>
+</div>
+</div>
+<div id="directories" class="section level1">
+<h1>Directories</h1>
+<p>Just as you can look around your computer in the file browser (“Finder” on Mac and “Explorer” on Windows), R looks around your computer as well, but it needs your help knowing where to look.</p>
+<p>Find the current working directory with <code>getwd()</code>.</p>
+<pre class="r"><code># &quot;get working directory&quot; 
+# prints the current directory pathway (here is mine)
+getwd()</code></pre>
+<pre><code>## [1] &quot;/Users/michaeldecrescenzo/Box Sync/site/ac/content/courses/811&quot;</code></pre>
+<p>To find your project folder, <em>set your working directory</em> to the appropriate path (the <code>ps811/R/lessons</code> folder).</p>
+<pre class="r"><code># setwd() = &quot;set working directory&quot; 
+# changes the directory to the specified file path
+# the &quot;~&quot; is a shortcut that means &quot;the top of my user profile&quot; 
+setwd(&quot;~/pathway/to/ps811/R/lessons&quot;)
+
+# confirm directory location
+getwd()</code></pre>
+<p>As with many R functions, you know <code>setwd()</code> worked when it gives you no feedback whatsoever.</p>
+<p>You should always set your directory to the <em>top</em> of the project folder (also called the “project root” of the project). Do <em>not</em> set it all the way into the <code>data/</code> folder. This is because it is always easier to navigate <em>down</em> into the data folder than it is to navigate <em>up</em> back into the project folder. That’s because the keyword for doing up a folder, <code>..</code>, is very uninformative.</p>
+</div>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<p>Load some packages so they can be used in this R session. These should already be downloaded from the previous lesson.</p>
+<pre class="r"><code># package loading is done using library().
+# Quotes around the package name aren&#39;t necessary 
+# but recommended for technical reasons
+
+library(&quot;magrittr&quot;)
+library(&quot;tidyverse&quot;)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 3.1.0     ✔ purrr   0.3.2
+## ✔ tibble  2.1.2     ✔ dplyr   0.8.1
+## ✔ tidyr   0.8.3     ✔ stringr 1.4.0
+## ✔ readr   1.3.1     ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────── tidyverse_conflicts() ──
+## ✖ tidyr::extract()   masks magrittr::extract()
+## ✖ dplyr::filter()    masks stats::filter()
+## ✖ dplyr::lag()       masks stats::lag()
+## ✖ purrr::set_names() masks magrittr::set_names()</code></pre>
+<p>When you load <code>tidyverse</code>, you should see a warning that it “masks” some names in the <code>magrittr</code> and other packages. This means some of the function names in the packages are the same. This is <em>generally</em> something you should be watching out for, since your code may not work as intended. It won’t be a problem right now, though.</p>
+<div id="read-external-data" class="section level2">
+<h2>Read external data</h2>
+<p>With your directory set at <code>ps811/R/lessons</code>, confirm that the ANES data file
+are where they should be using <code>list.files()</code>. You can look inside folders by adding the folder path as an argument. The ANES data should be in the <code>data/</code> folder.</p>
+<pre class="r"><code># this is similar to typing `ls` in your computer&#39;s shell / command line
+list.files()
+
+# you should see the &quot;data&quot; folder.
+# Now look inside the &quot;data&quot; folder; should see the ANES file
+list.files(&quot;data&quot;)</code></pre>
+<p>R has many functions for “reading” datasets into memory, depending on the file format. They typically follow a format of <code>read.xyz()</code> or <code>read_xyz()</code>, where <code>xyz</code> refers to the file type.</p>
+<p>We want to read a Stata file, which uses the <code>.dta</code> file extension. Although many tutorials will recommend using the <code>foreign</code> package for Stata files, <code>foreign</code> is outdated and can fail with newer Stata files. I usually use the <code>haven</code> package.</p>
+<pre class="r"><code># should already be installed
+library(&quot;haven&quot;)
+
+# read_dta(&quot;path/to/data-file.dta&quot;)
+anes &lt;- read_dta(&quot;data/anes_timeseries_cdf.dta&quot;)</code></pre>
+<p>This should take a few moments to load because the ANES cumulative file is a large file. Don’t worry.</p>
+<p>You may want to check out the <code>rio</code> package for more generic file-reading functions.</p>
+</div>
+</div>
+<div id="data-frames" class="section level1">
+<h1>Data frames</h1>
+<p>Data sets in R are known as “data frames.” Data frames are tabular objects where the columns are variables with variable names. This is just like Stata, but what makes R different is that we can have many data frames in R at one time.</p>
+<p>Print the data to see what the table looks like.</p>
+<pre class="r"><code>anes</code></pre>
+<p>Technically speaking, the <code>anes</code> object isn’t an ordinary data frame. It’s a “tibble”, which is a modified data frame object, the main differences being that tibbles are often faster and prettier when printed to the console.</p>
+<p>You can always print a full data frame by coercing a tibble to the standard data frame class, but be warned: the results can be ugly if R tries to print a full data frame.</p>
+<pre class="r"><code># as.data.frame() coerces an object to be data.frame class
+# (there are many different as.class() functions for coercing data)
+
+# You should run this command to see how it works, but be warned: 
+# this is gonna look gnarsty
+as.data.frame(anes)</code></pre>
+<p>You can create your own data frame using <code>data_frame()</code>. An example:</p>
+<pre class="r"><code># create x and y variables,
+# then use x and y to create other variables 
+#   (inside the same function!)
+data_frame(x = 1:3, 
+           y = 4:6, 
+           z = x + y, 
+           abc = z * z)</code></pre>
+<pre><code>## Warning: `data_frame()` is deprecated, use `tibble()`.
+## This warning is displayed once per session.</code></pre>
+<pre><code>## # A tibble: 3 x 4
+##       x     y     z   abc
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1     1     4     5    25
+## 2     2     5     7    49
+## 3     3     6     9    81</code></pre>
+<div id="learning-about-data-frames" class="section level2">
+<h2>Learning about data frames</h2>
+<p>Some functions for learning about your data:</p>
+<p>Find the number of rows (observations). In this case, rows are survey respondents.</p>
+<pre class="r"><code># number of rows
+nrow(anes) </code></pre>
+<pre><code>## [1] 55674</code></pre>
+<p>Find the number of columns (variables).</p>
+<pre class="r"><code># number of columns
+ncol(anes)</code></pre>
+<pre><code>## [1] 952</code></pre>
+<p>Print the top or bottom of a data frame to get a glance of it.</p>
+<pre class="r"><code># top 6 and bottom 6 rows
+# can set n != 6 if you desire
+head(anes) 
+tail(anes)</code></pre>
+<p>Print a vector of variable names.</p>
+<pre class="r"><code># vector of variable names
+names(anes)</code></pre>
+</div>
+<div id="other-functions-for-viewing-data" class="section level2">
+<h2>Other functions for viewing data</h2>
+<p>There are two for interacting directly with a data table as if it were a spreadsheet: <code>View()</code> and <code>edit()</code>. I recommend against using these, because these functions often make R freak out and freeze. The <em>only time this has ever worked for me</em> is when I was using Rstudio, which has a handy spread sheet window for datasets.</p>
+<p>If you must edit data as a spread sheet, you may want to save it as a <code>csv</code> file and open it in Numbers, Excel, or some other similar program.</p>
+</div>
+</div>
+<div id="variables-in-a-data-frame" class="section level1">
+<h1>Variables in a data frame</h1>
+<p>Here is a funky but <em>extremely important</em> R thing. Variables in a dataset cannot be accessed by typing only the variable name.</p>
+<p>Try to print <code>VCF0004</code> variable. The codebook (which you should have!) tells us that it’s the election cycle variable.</p>
+<pre class="r"><code>VCF0004</code></pre>
+<p>You should get an error. To prevent the error, use <code>dataset$variable</code>.</p>
+<pre class="r"><code># this should work
+anes$VCF0004</code></pre>
+<p>The <code>$</code> symbol tells R that the variable is <em>inside</em> the <code>anes</code> dataset. This is necessary because we may have multiple datasets in R with the same variable names, so we have to be specific when we want one particular variable. Yes, this is more complicated than Stata, but it lets us do a lot of cool stuff that Stata makes difficult or tedious.</p>
+</div>
+<div id="do-not-attach-data" class="section level1">
+<h1>DO NOT attach data</h1>
+<p>Others may have advised you that you can sidestep the <code>dataset$variable</code> syntax by attaching data (<code>attach(dataset)</code>). <em>Ignore that advice</em>. You should not attach data. It does not do what you think it does, and it creates so many more (invisible) problems than it solves. Attaching data is playing with fire.</p>
+<p>My policy for this class is that attaching is forbidden. Do not attach data for your homework. Do not attach data for your final project. Do not attach data in a house or with a mouse. If you are used to attaching data, I’m sorry, but you will thank me later.</p>
+<p>Luckily for us (and all of the R community), the <code>tidyverse</code> package provides many tools that make attaching unnecessary.</p>
+</div>
+<div id="the-tidyverse" class="section level1">
+<h1>The Tidyverse</h1>
+<p>Now, the good stuff. The <a href="https://www.tidyverse.org/">Tidyverse</a> describes itself as…</p>
+<blockquote>
+<p>…an opinionated collection of R packages designed for data science. All packages share an underlying philosophy and common APIs.</p>
+</blockquote>
+<div id="in-short" class="section level2">
+<h2>In short</h2>
+<p>There are lots of R packages out there. Some of them exist under umbrellas of shared use and interface. You can think about the Tidyverse as an umbrella of similar packages that are designed to have similar interfaces and intuitions.</p>
+<p>The “Tidyverse” as a <em>concept</em> refers to the collection of packages, including <code>tidyr</code>, <code>dplyr</code>, and so on. The <code>tidyverse</code> package <em>unto itself</em> is a relatively recent entity. It is simply a bundling of the most-used Tidyverse tools (not <em>every</em> tool, however).</p>
+<p>The <a href="https://www.tidyverse.org/packages/">packages in the Tidyverse</a> are all designed to clean and manipulate data according to the principle of “tidy data” (described below). Moreover, the tools are designed with a coherent syntax that makes them easy for beginners to learn, easy to understand (when you read the code), easy to integrate into complex analysis, and easy for visualizing data. It is hard for me, as someone who has been using R for years, to describe to newcomers just how much the Tidyverse has improved the world of R in recent years.</p>
+</div>
+<div id="in-medium" class="section level2">
+<h2>In medium</h2>
+<p>The Tidyverse is based on a philosophy is based on <em>tidy data</em>, which refers to data organization where (1) rows contain cases, (2) columns contain variables, and (3) cells contain variable values.</p>
+<p>Although this sounds simple, there are many data formats that do not fit that pattern. Legislative data, for example, is often represented as a vote matrix with legislators in rows and bills in columns. The cells, in turn, would contain <code>1</code>s and <code>0</code>s to indicate legislators’ Yea and Nay votes, respectively, on each bill. A tidy legislative voting dataset, on the other hand, would have a legislator variable, a bill variable, and a vote variable. Both datasets contain the same information, but the organization of the data allow for different sorts of manipulations. And it so happens that the tidy organization is particularly helpful for doing a lot of powerful stuff with R with very little code.</p>
+<p>For more resources about the Tidyverse (aside from this course), you can visit a webpage devoted to <a href="https://www.tidyverse.org/learn/">such resources</a>, which links you to the <a href="http://r4ds.had.co.nz/">R 4 Data Science</a> book, a book on <a href="https://github.com/hadley/ggplot2-book"><code>ggplot2</code></a>, and various <a href="https://www.rstudio.com/resources/cheatsheets/">cheatsheets</a> for the constituent packages of the Tidyverse. I got my start using <a href="https://rpubs.com/bradleyboehmke/data_wrangling">this blog post</a>, which describes the concept of “piping data” (which we will cover later) and two of the most important Tidyverse packages: <code>dplyr</code> and <code>tidyr</code>. We will cover the main points of the Tidyverse, but I would bookmark these resources for later browsing.</p>
+<p><strong>One last note before <em>really</em> jumping in:</strong> It is a conscious decision to focus on the Tidyverse at the expense of other approaches (namely, “base R”). As I wrote in <a href="811/811-intro">the online introduction to these R lessons</a>, this is because we have a limited time to make R fun and accessible, and base R is not ideal for that purpose. That being said, you may encounter base R online and in replication materials for other studies, so you should be open to learning a little bit about it on your own time. But I would encourage against making it your “default” mode of doing R, because it is quite old and inefficient compared to the tools we’ll learn in class. Hopefully you’ll see how easy the Tidyverse is as we proceed!</p>
+</div>
+</div>
+<div id="how-tidyverse-functions-work" class="section level1">
+<h1>How <code>tidyverse</code> functions work</h1>
+<p>Tidyverse literature refers to its core functions as “verbs.” These are functions that take a data frame and modify it.</p>
+<p>When you call one of these verbs, you declare the dataset name in the function, so you don’t need to use the <code>$</code> to reference a variable (nice!). The function assumes that the variable is located in the declared dataset, and if not, it will check the global R memory for objects of the same name. A generic example:</p>
+<pre class="r"><code># overwrite the old dataset with the results
+# declare the dataset as the first argument, then specify any arguments
+dataset &lt;- verb_name(dataset, verb_arguments = ...)</code></pre>
+<p>We will review the following <code>tidyverse</code> functions from the <code>dplyr</code> package. The <code>dplyr</code> tools are designed to manipulate data that is already in a tidy format.</p>
+<ul>
+<li><code>rename()</code>: renaming variables</li>
+<li><code>mutate()</code>: create and recode variables</li>
+<li><code>select()</code>: keep/eliminate variables (columns)</li>
+<li><code>filter()</code>: keep/eliminate observations (rows)</li>
+<li><code>summarize()</code>: collapse/aggregate data (e.g. summary statistics, group means…)</li>
+<li><code>group_by()</code>: create groups out of your data (e.g. for summarizing within group)</li>
+<li><code>arrange()</code>: sorting data</li>
+<li>various <code>join</code> functions: merging data</li>
+</ul>
+<p>The <code>tidyr</code> package is designed to take un-tidy data and make it tidy. We’ll cover these functions:</p>
+<ul>
+<li><code>gather()</code>: turn many columns into one column (wide to long)</li>
+<li><code>spread()</code>: turn one column into many columns (long to wide)</li>
+</ul>
+<p>Most data manipulation tasks fall under the umbrella of one or more of these functions. This is what makes the Tidyverse so useful: it has a small number of very powerful tools that facilitate nearly all common data munging tasks!</p>
+</div>
+<div id="renaming" class="section level1">
+<h1>Renaming</h1>
+<p>The <code>rename()</code> function takes a data frame with one set of names, and it returns a data frame with different names.</p>
+<p>Here, we rename the following variables:</p>
+<ul>
+<li>election year</li>
+<li>respondents’ ratings of the two major US parties on a 7-pt ideological scale (1 “extremely liberal” to 7 “extremely conservative”)</li>
+<li>respondents’ ratings of themselves on the same scale</li>
+<li>and a 7-pt index of party ID (Strong Democrat, Weak Democrat, Independent leaning Democrat, True Independent, Leaning Republican, and so on)</li>
+</ul>
+<pre class="r"><code># rename(dataset, 
+#        new_name = old_name,
+#        new_name2 = old_name2)
+
+anes &lt;- rename(anes, 
+               cycle = VCF0004,
+               libcon_demparty = VCF0503, 
+               libcon_repparty = VCF0504, 
+               libcon_self = VCF0803,
+               pid7 = VCF0301)</code></pre>
+<p>Be warned: this command <em>overwrites the original <code>anes</code> dataset</em> with a new version with different variables names. If you want to keep the original variables, copy the old variable into a new variable with a new name. How would you do that? Well…</p>
+</div>
+<div id="modifying-data" class="section level1">
+<h1>Modifying data</h1>
+<p>Modify the columns of a dataset with <code>mutate()</code>. We can create new variables or modify existing variables (a.k.a. “recoding”).</p>
+<p>How it works: declare an existing data frame, modify variables within it, and the result is a new data frame with the specified changes.</p>
+<p>Let’s test it out. Let’s look at the ideological self-placement variable.</p>
+<pre class="r"><code>table(anes$libcon_self, exclude = NULL)</code></pre>
+<pre><code>## 
+##     0     1     2     3     4     5     6     7     9  &lt;NA&gt; 
+##  1748   750  3138  3603  9873  5304  5379   995  9568 15316</code></pre>
+<p>We only care about the values 1 through 7. We want to recode everything else as missing (<code>NA</code>). Here are the two methods I use most often to modify variables.</p>
+<div id="the-ifelse-function" class="section level2">
+<h2>The <code>ifelse()</code> function</h2>
+<p>The <code>ifelse()</code> function follows the following psueocode intuition:</p>
+<pre><code>if (this) then {that} 
+  else {something else}</code></pre>
+<p>You may have seen these sorts of if-else statements in other programming languages. In R, we can use the <code>ifelse()</code> function to apply an if-else statement to an entire vector (variable).</p>
+<p>A dummy example:</p>
+<pre class="r"><code>my_result &lt;- ifelse(condition, A, B)</code></pre>
+<p>The <code>ifelse()</code> function checks a condition in the data. This condition is a logical statement: is something equal to something, greater than something, and so on. If the condition applies (meaning, if the statement evaluates to <code>TRUE</code>), the result is <code>A</code>, and if the condition does not apply, the result is <code>B</code>.</p>
+<p>We will use it within the <code>mutate()</code> function. I have to get creative with code indentation to make this example more legible, so bear with me.</p>
+<pre class="r"><code># translation: 
+#   modify anes
+#   recode libson_self, the result of ifelse()
+#   ifelse(logical test, result if TRUE, result if FALSE)
+#   and recode demparty
+
+# Notes: 
+#   notice how I can break lines after the &lt;- symbol
+#   this is because &lt;- needs a left-side and right-side object
+#   if there is no right-side object, R looks for on next line
+#   this works for all &quot;binary operators&quot; such as +, -, *, and so on
+#   In general, R will look at the next line until a statement is complete
+#   so you should be careful to close all &quot;quotes&quot; and (parentheses)
+anes &lt;- 
+  mutate(anes, 
+         libcon_self = ifelse(libcon_self == 0 | 
+                                libcon_self &gt;= 8 | 
+                                is.na(libcon_self), 
+                              NA, 
+                              libcon_self), 
+         libcon_demparty = ifelse(libcon_demparty %in% 1:7, 
+                                  libcon_demparty, 
+                                  NA))</code></pre>
+<p>We recode two variables in this <code>mutate()</code> call. We use <code>ifelse()</code> in slightly different ways. Here is the translation:</p>
+<ul>
+<li>If <code>libcon_self</code> is 0 <em>or</em> greater than <em>or</em> equal to 8 <em>or</em> NA, <em>then</em> recode to <code>NA</code>, <em>else</em> recode to the existing value of <code>libcon_self</code> (i.e. no change).</li>
+<li>If <code>libcon_demparty</code> is an integer value 1 through 7, keep it the way it is, else recode to <code>NA</code>. We’ll return to the <code>%in%</code> operator at the end of this section.</li>
+</ul>
+<p>Read the binary logical operations as follows:</p>
+<ul>
+<li><code>A == B</code>: A is equal to B</li>
+<li><code>A &gt; B</code>: A is greater than to B</li>
+<li><code>A &lt; B</code>: A is less than to B</li>
+<li><code>A &gt;= B</code>: A is greater than or equal to B</li>
+<li><code>A &lt;= B</code>: A is less than or equal to B</li>
+<li><code>A | B</code>: A or B</li>
+<li><code>A &amp; B</code>: A and B</li>
+<li><code>A %in% c(B, C, D)</code>: A is equal to any of the following: <code>B</code>, <code>C</code>, or <code>D</code>. Or, <code>A</code> is some element of the set <code>{B, C, D}</code>.</li>
+<li><code>is.na(A)</code>: A is <code>NA</code>.</li>
+<li><code>!is.na(A)</code>: A is <em>not</em> <code>NA</code>.</li>
+</ul>
+<p>Heads up: nothing can be <em>equal to</em> <code>NA</code>. That’s because <code>NA</code> isn’t a value; it’s a stand-in for an unknown value. This is why we use the <code>is.na()</code> function.</p>
+<p>Also: the <code>%in%</code> operator is a godsend because…</p>
+<ul>
+<li><code>x == (1 | 2 | 3)</code> doesn’t work</li>
+<li><code>x == 1 | x == 2 | x == 3</code> works but is annoying</li>
+</ul>
+<p>Instead, it is easier to type <code>x %in% c(1, 2, 3)</code> (or <code>x %in% 1:3</code> if we want to match adjacent integers).</p>
+</div>
+<div id="the-case_when-function" class="section level2">
+<h2>The <code>case_when()</code> function</h2>
+<p>Whenever we have multiple conditions that we want to check in the same function, we could nest several <code>ifelse()</code> functions within each other or use a very complicated logical test, but it gets quickly gets ugly and is easy to mess up.</p>
+<p>In situations like this, you should use the <code>case_when()</code> function, which is a more flexible version of <code>ifelse()</code>, but it’s a little different. See the comments in the code chunk below for how it works.</p>
+<pre class="r"><code># case_when(test ~ result if test is true,
+#           test2 ~ result if test2 is true,
+#           test3 ~ you get the idea)
+
+# NOTE: all non-matched cases are given an NA by default
+# to override this, use the catch-all replacement: TRUE ~ x
+
+# case_when(test ~ result,
+#           test2 ~ result2,
+#           test3 ~ result3,
+#           TRUE ~ result4)
+
+# read as &quot;and everything else should be recoded as result4&quot;
+
+anes &lt;- mutate(anes,
+  libcon_repparty = case_when(
+                      libcon_repparty == 1 ~ libcon_repparty,
+                      libcon_repparty == 2 ~ libcon_repparty,
+                      libcon_repparty %in% c(3, 4) ~ libcon_repparty,
+                      libcon_repparty %in% (5:7) ~ libcon_repparty),
+  pid7 = case_when( (pid7 %in% 1:7) ~ pid7) )</code></pre>
+<p>You may find it helpful to place the tests in parentheses, as I do in the <code>pid7</code> example. It doesn’t affect the code, but is sometimes easier to read, especially if the logical test is complicated or lengthy.</p>
+<p>The above code, translated:</p>
+<ul>
+<li>If <code>libcon_repparty</code> is equal to 1, replace with <code>libcon_repparty</code> (i.e. keep the same). If it is 2, keep the same. Same with values 3 and 4, and 5 through 7. The only reason I break these into different conditions is to show you different ways to do this logical matching.</li>
+<li>If the <code>pid7</code> variable is an integer value 1 through 7, keep it the same.</li>
+</ul>
+</div>
+<div id="general-tips-for-recoding" class="section level2">
+<h2>General tips for recoding</h2>
+<p>Depending on what you’re doing, you may not want to overwrite the original data. Instead you might create a new variable that modifies the original.</p>
+<p>When you recode new variables, you can compare the new and old variables using the <code>table()</code> function.</p>
+<p>I try to consolidate all of my data cleaning tasks into as few calls to <code>mutate()</code> as possible. This makes it easy to retrace your steps. In fact, I usually devote an entire <code>.R</code> file in my project solely to cleaning the original data. Once the data are clean, I save a cleaned dataset, and then load the cleaned dataset in a separate <code>.R</code> file for subsequent analyses.</p>
+</div>
+<div id="variables-from-other-variables" class="section level2">
+<h2>Variables from other variables</h2>
+<p>Intuitively, you can create variables from other variables.</p>
+<p>Here, we calculate the ideological distance between one’s self placement and their placement of the two parties. We also calculate how far apart they perceive the parties to be. The sign of the result (<span class="math inline">\(+/-\)</span>) indicates the ideological direction of the difference. Negative values indicate that respondents find themselves to be more liberal than a party, or that they find the Republican Party to be more liberal than the Democratic Party (which would be weird, but hey, that’s survey data for you).</p>
+<pre class="r"><code>anes &lt;- mutate(anes, 
+               dem_distance = libcon_self - libcon_demparty,
+               rep_distance = libcon_self - libcon_repparty,
+               party_distance = libcon_repparty - libcon_demparty)</code></pre>
+<p><code>mutate()</code> is great because you can create a variable in one line and use it in another line, without ending the <code>mutate()</code> call.</p>
+</div>
+<div id="manipulating-factors-and-strings" class="section level2">
+<h2>Manipulating factors and strings</h2>
+<p>You should check out the <code>forcats</code> and <code>stringr</code> packages. They are tools for manipulating factors and character variables (a.k.a. “strings”), respectively, and are loaded when you load the <code>tidyverse</code> package. We will revisit these when we discuss graphics in the next lesson, but the functions from these packages that I use the most are (using the <code>pkg::function</code> notation)…</p>
+<ul>
+<li><code>fct_relevel()</code>: reorder the levels in a factor</li>
+<li><code>fct_recode()</code>: recoding a factor, but <code>case_when</code> works here also</li>
+<li><code>str_sub()</code>: extract a pattern from a string</li>
+<li><code>str_split()</code>: split a string at a certain character</li>
+<li><code>str_detect()</code>: returns <code>TRUE</code> if a string contains a pattern</li>
+<li><code>str_replace()</code>: replace a pattern in a string with a different pattern</li>
+</ul>
+<p>Check online or investigate the help files to learn about how they’re used. We’ll see some examples next week when we do graphics.</p>
+</div>
+</div>
+<div id="selecting-columns" class="section level1">
+<h1>Selecting columns</h1>
+<p>Maybe you don’t need all these variables for something. You can select specific variables using the <code>select()</code> function.</p>
+<pre class="r"><code># from the anes dataset, grab only the cycle variable
+select(anes, cycle)</code></pre>
+<pre><code>## # A tibble: 55,674 x 1
+##    cycle
+##    &lt;dbl&gt;
+##  1  1948
+##  2  1948
+##  3  1948
+##  4  1948
+##  5  1948
+##  6  1948
+##  7  1948
+##  8  1948
+##  9  1948
+## 10  1948
+## # … with 55,664 more rows</code></pre>
+<p>There are various “select helper” functions that aid us in selecting variables.</p>
+<pre class="r"><code># select a series of variables in the data frame using `:` 
+# grab cycle, and all variables between dem_distance and party_distance
+select(anes, cycle, dem_distance:party_distance)
+
+# select cycle and any variable containing &quot;libcon&quot; in the variable name
+select(anes, cycle, contains(&quot;libcon&quot;))
+
+# drop variables using negative sign `-`
+# matches(&quot;.&quot;) means &quot;all remaining variables&quot;
+
+# drop cycle, keep all remaining variables
+select(anes, -cycle, matches(&quot;.&quot;))</code></pre>
+<p>Learn more about “select helper functions” in the help file (<code>?select</code>).</p>
+</div>
+<div id="filtering-rows-subsetting" class="section level1">
+<h1>Filtering rows (subsetting)</h1>
+<p>Let’s say we only want some of the observations. Use the <code>filter()</code> function and a logical test to identify the cases you want.</p>
+<pre class="r"><code># keep cases from 2012 cycle
+filter(anes, cycle == 2012)</code></pre>
+<pre><code>## # A tibble: 5,914 x 955
+##    Version cycle VCF0006 VCF0006a VCF0009x VCF0010x VCF0011x VCF0009y
+##    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+##  1 ANES_c…  2012       1 20120001    0.380    0.380    0.380        0
+##  2 ANES_c…  2012       2 20120002    0.547    0.547    0.547        0
+##  3 ANES_c…  2012       3 20120003    0.498    0.498    0.498        0
+##  4 ANES_c…  2012       4 20120004    0.255    0.255    0.255        0
+##  5 ANES_c…  2012       5 20120005    0.603    0.603    0.603        0
+##  6 ANES_c…  2012       6 20120006    0.286    0.286    0.286        0
+##  7 ANES_c…  2012       7 20120007    0.195    0.195    0.195        0
+##  8 ANES_c…  2012       8 20120008    0.394    0.394    0.394        0
+##  9 ANES_c…  2012       9 20120009    0.506    0.506    0.506        0
+## 10 ANES_c…  2012      10 20120010    2.51     2.51     2.51         0
+## # … with 5,904 more rows, and 947 more variables: VCF0010y &lt;dbl&gt;,
+## #   VCF0011y &lt;dbl&gt;, VCF0009z &lt;dbl&gt;, VCF0010z &lt;dbl&gt;, VCF0011z &lt;dbl&gt;,
+## #   VCF0012 &lt;dbl&gt;, VCF0012a &lt;dbl&gt;, VCF0012b &lt;dbl&gt;, VCF0013 &lt;dbl+lbl&gt;,
+## #   VCF0014 &lt;dbl+lbl&gt;, VCF0015a &lt;dbl+lbl&gt;, VCF0015b &lt;dbl+lbl&gt;,
+## #   VCF0016 &lt;dbl+lbl&gt;, VCF0017 &lt;dbl+lbl&gt;, VCF0018a &lt;dbl+lbl&gt;,
+## #   VCF0018b &lt;dbl+lbl&gt;, VCF0019 &lt;dbl+lbl&gt;, VCF0050a &lt;dbl+lbl&gt;,
+## #   VCF0050b &lt;dbl+lbl&gt;, VCF0070a &lt;dbl+lbl&gt;, VCF0070b &lt;dbl+lbl&gt;,
+## #   VCF0071a &lt;dbl+lbl&gt;, VCF0071b &lt;dbl+lbl&gt;, VCF0071c &lt;dbl+lbl&gt;,
+## #   VCF0071d &lt;dbl+lbl&gt;, VCF0072a &lt;dbl+lbl&gt;, VCF0072b &lt;dbl+lbl&gt;,
+## #   VCF0101 &lt;dbl+lbl&gt;, VCF0102 &lt;dbl+lbl&gt;, VCF0103 &lt;dbl+lbl&gt;,
+## #   VCF0104 &lt;dbl+lbl&gt;, VCF0105a &lt;dbl+lbl&gt;, VCF0105b &lt;dbl+lbl&gt;,
+## #   VCF0106 &lt;dbl+lbl&gt;, VCF0107 &lt;dbl+lbl&gt;, VCF0108 &lt;dbl+lbl&gt;,
+## #   VCF0109 &lt;dbl+lbl&gt;, VCF0110 &lt;dbl+lbl&gt;, VCF0111 &lt;dbl+lbl&gt;,
+## #   VCF0112 &lt;dbl+lbl&gt;, VCF0113 &lt;dbl+lbl&gt;, VCF0114 &lt;dbl+lbl&gt;,
+## #   VCF0115 &lt;dbl+lbl&gt;, VCF0116 &lt;dbl+lbl&gt;, VCF0117 &lt;dbl+lbl&gt;,
+## #   VCF0118 &lt;dbl+lbl&gt;, VCF0119 &lt;dbl+lbl&gt;, VCF0120 &lt;dbl+lbl&gt;,
+## #   VCF0121 &lt;dbl+lbl&gt;, VCF0122 &lt;dbl+lbl&gt;, VCF0123 &lt;dbl+lbl&gt;,
+## #   VCF0124 &lt;dbl+lbl&gt;, VCF0125 &lt;dbl+lbl&gt;, VCF0126 &lt;dbl+lbl&gt;,
+## #   VCF0126a &lt;dbl+lbl&gt;, VCF0126b &lt;dbl+lbl&gt;, VCF0126c &lt;dbl+lbl&gt;,
+## #   VCF0127 &lt;dbl+lbl&gt;, VCF0127a &lt;dbl+lbl&gt;, VCF0127b &lt;dbl+lbl&gt;,
+## #   VCF0128 &lt;dbl+lbl&gt;, VCF0128a &lt;dbl+lbl&gt;, VCF0128b &lt;dbl+lbl&gt;,
+## #   VCF0129 &lt;dbl+lbl&gt;, VCF0130 &lt;dbl+lbl&gt;, VCF0130a &lt;dbl+lbl&gt;,
+## #   VCF0131 &lt;dbl+lbl&gt;, VCF0132 &lt;dbl+lbl&gt;, VCF0133 &lt;dbl+lbl&gt;,
+## #   VCF0134 &lt;dbl+lbl&gt;, VCF0135 &lt;dbl+lbl&gt;, VCF0136 &lt;dbl+lbl&gt;,
+## #   VCF0137 &lt;dbl+lbl&gt;, VCF0138 &lt;dbl+lbl&gt;, VCF0138a &lt;dbl+lbl&gt;,
+## #   VCF0138b &lt;dbl+lbl&gt;, VCF0138c &lt;dbl+lbl&gt;, VCF0138d &lt;dbl+lbl&gt;,
+## #   VCF0138e &lt;dbl+lbl&gt;, VCF0139 &lt;dbl+lbl&gt;, VCF0140 &lt;dbl+lbl&gt;,
+## #   VCF0140a &lt;dbl+lbl&gt;, VCF0141 &lt;dbl+lbl&gt;, VCF0142 &lt;dbl+lbl&gt;,
+## #   VCF0143 &lt;dbl+lbl&gt;, VCF0144 &lt;dbl+lbl&gt;, VCF0145 &lt;dbl+lbl&gt;,
+## #   VCF0146 &lt;dbl+lbl&gt;, VCF0147 &lt;dbl+lbl&gt;, VCF0148 &lt;dbl+lbl&gt;,
+## #   VCF0148a &lt;dbl+lbl&gt;, VCF0149 &lt;dbl+lbl&gt;, VCF0150 &lt;dbl+lbl&gt;,
+## #   VCF0151 &lt;dbl+lbl&gt;, VCF0152 &lt;dbl+lbl&gt;, VCF0153a &lt;dbl+lbl&gt;,
+## #   VCF0153b &lt;dbl+lbl&gt;, VCF0153c &lt;dbl+lbl&gt;, VCF0154a &lt;dbl+lbl&gt;,
+## #   VCF0154b &lt;dbl+lbl&gt;, …</code></pre>
+</div>
+<div id="summarizing" class="section level1">
+<h1>Summarizing</h1>
+<p><code>summarize()</code> will process multiple observations into summary statistics. This is also known as “collapsing” or “aggregating.”</p>
+<p>Find the mean ideological distance between the two parties (as judged by the respondents).</p>
+<pre class="r"><code># data contain NAs so we use na.rm = TRUE
+summarize(anes, 
+          mean_party_distance_na = mean(party_distance, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   mean_party_distance_na
+##                    &lt;dbl&gt;
+## 1                   1.92</code></pre>
+</div>
+<div id="grouping-and-summarizing" class="section level1">
+<h1>Grouping and summarizing</h1>
+<p>Most of the time you will use <code>summarize()</code> in conjunction with <code>group_by()</code>, which groups the data by some selection of variables. It doesn’t modify the cells in any way; it only implicitly partitions the data for later calculations.</p>
+<p>For instance, let’s say we want to do find the number of observations within each election year the above calculation but within each election year. The <code>n()</code> function, when used inside of <code>summarize()</code> or <code>mutate()</code>, will find the number of observations.</p>
+<pre class="r"><code># group by cycle
+s &lt;- group_by(anes, cycle)
+
+# summarize the grouped data
+summarize(s, 
+          n = n(),
+          mean_party_distance = mean(party_distance, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 30 x 3
+##    cycle     n mean_party_distance
+##    &lt;dbl&gt; &lt;int&gt;               &lt;dbl&gt;
+##  1  1948   662                 NaN
+##  2  1952  1899                 NaN
+##  3  1954  1139                 NaN
+##  4  1956  1762                 NaN
+##  5  1958  1450                 NaN
+##  6  1960  1181                 NaN
+##  7  1962  1297                 NaN
+##  8  1964  1571                 NaN
+##  9  1966  1291                 NaN
+## 10  1968  1557                 NaN
+## # … with 20 more rows</code></pre>
+<p>A data frame can later be ungrouped with (wait for it…) <code>ungroup()</code>.</p>
+</div>
+<div id="sorting-data" class="section level1">
+<h1>Sorting data</h1>
+<p>Sort data frames using <code>arrange()</code>. By default, sorting is done in ascending order. Sort variables in descending order using the <code>desc()</code> function within <code>arrange()</code>. You can also sort by multiple variables at once.</p>
+<pre class="r"><code># keep cycle and party distance variables
+# sort by cycle (descending order) and then by party distance
+arr &lt;- select(anes, cycle, party_distance) 
+arrange(arr, desc(cycle), party_distance)</code></pre>
+<pre><code>## # A tibble: 55,674 x 2
+##    cycle party_distance
+##    &lt;dbl&gt; &lt;dbl+lbl&gt;     
+##  1  2012 -6            
+##  2  2012 -6            
+##  3  2012 -6            
+##  4  2012 -6            
+##  5  2012 -6            
+##  6  2012 -6            
+##  7  2012 -6            
+##  8  2012 -6            
+##  9  2012 -6            
+## 10  2012 -6            
+## # … with 55,664 more rows</code></pre>
+<p>Get a sense for the sorting precedence with this toy example.</p>
+<pre class="r"><code># create some data to sort
+d &lt;- data_frame(x = c(1, 1, 2, 2), 
+                y = c(1, 2, 1, 2))
+d</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##       x     y
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1
+## 2     1     2
+## 3     2     1
+## 4     2     2</code></pre>
+<pre class="r"><code># sort by y and then by x (meaning, x within y)
+arrange(d, y, x)</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##       x     y
+##   &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1
+## 2     2     1
+## 3     1     2
+## 4     2     2</code></pre>
+</div>
+<div id="joining-merging" class="section level1">
+<h1>Joining (merging)</h1>
+<p>Merging is done with <code>join</code> functions.</p>
+<p>Because the ANES is so big, this concept will be easier to demonstrate with a toy example. Create two datasets with some overlapping cases and some non-overlapping cases:</p>
+<pre class="r"><code># cases 2 and 3 appear in both data sets
+# cases 1 and 4 exist in one dataset but not the other
+(data1 &lt;- data_frame(case = 1:3, 
+                     var1 = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    case var1 
+##   &lt;int&gt; &lt;chr&gt;
+## 1     1 a    
+## 2     2 b    
+## 3     3 c</code></pre>
+<pre class="r"><code>(data2 &lt;- data_frame(case = 2:4, 
+                     var2 = c(&quot;x&quot;, &quot;y&quot;, &quot;z&quot;)))</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##    case var2 
+##   &lt;int&gt; &lt;chr&gt;
+## 1     2 x    
+## 2     3 y    
+## 3     4 z</code></pre>
+<p>We want to put these datasets together into one table, matching data to the appropriate cases.</p>
+<p>The <code>full_join()</code> function keeps all cases from both datasets. Non-matching cells are filled with <code>NA</code> by default, but you can specify replacement values for non-matches if you wish.</p>
+<pre class="r"><code># join all cases, keep non-matches
+full_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##    case var1  var2 
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 a     &lt;NA&gt; 
+## 2     2 b     x    
+## 3     3 c     y    
+## 4     4 &lt;NA&gt;  z</code></pre>
+<p>You can merge along multiple variables using <code>by = c(&quot;var1&quot;, &quot;var2&quot;, ...)</code>.</p>
+<p><code>left_join()</code> keeps all cases from left dataset. If the right dataset can’t fill a cell in the left dataset, the result is <code>NA</code>. If the right dataset has other cases that aren’t present in the left, they disappear.</p>
+<pre class="r"><code># keep left data in tact, 
+# merge only matching cases from right data
+left_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##    case var1  var2 
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     1 a     &lt;NA&gt; 
+## 2     2 b     x    
+## 3     3 c     y</code></pre>
+<p><code>right_join()</code> is the mirror of <code>left_join</code>.</p>
+<pre class="r"><code>right_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##    case var1  var2 
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     2 b     x    
+## 2     3 c     y    
+## 3     4 &lt;NA&gt;  z</code></pre>
+<p><code>inner_join()</code> keeps only cases with matches in both datasets.</p>
+<pre class="r"><code># keep only matching cases, drop everything else
+inner_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##    case var1  var2 
+##   &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+## 1     2 b     x    
+## 2     3 c     y</code></pre>
+<p><code>anti_join()</code> is a little funky and different. It keeps only the <em>unmatched</em> cases from the left dataset only. This is helpful for diagnosing a problem with an imperfect attempt to join two data frames.</p>
+<pre class="r"><code># what doesn&#39;t match?
+anti_join(data1, data2, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    case var1 
+##   &lt;int&gt; &lt;chr&gt;
+## 1     1 a</code></pre>
+<pre class="r"><code>anti_join(data2, data1, by = &quot;case&quot;)</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##    case var2 
+##   &lt;int&gt; &lt;chr&gt;
+## 1     4 z</code></pre>
+</div>
+<div id="tabulating" class="section level1">
+<h1>Tabulating</h1>
+<p>Here are two ways to tabulate data: <code>table()</code> and <code>count()</code>. <code>table()</code> produces a table object; <code>count()</code> produces a data frame.</p>
+<div id="table" class="section level2">
+<h2><code>table()</code></h2>
+<p>First, <code>table()</code>. The <code>exclude = NULL</code> argument will force R to print the number of missing values (which it does not do by default).</p>
+<pre class="r"><code>table(anes$libcon_self, exclude = NULL)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7  &lt;NA&gt; 
+##   750  3138  3603  9873  5304  5379   995 26632</code></pre>
+<p>Turn frequencies into proportions by wrapping a table object with <code>prop.table()</code>.</p>
+<pre class="r"><code>prop.table(table(anes$libcon_self, exclude = NULL))</code></pre>
+<pre><code>## 
+##          1          2          3          4          5          6 
+## 0.01347128 0.05636383 0.06471603 0.17733592 0.09526889 0.09661601 
+##          7       &lt;NA&gt; 
+## 0.01787190 0.47835614</code></pre>
+<p>You can round these proportions to get more manageable values.</p>
+<pre class="r"><code># round to 3 decimal positions
+round(prop.table(table(anes$libcon_self, exclude = NULL)), 3)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7  &lt;NA&gt; 
+## 0.013 0.056 0.065 0.177 0.095 0.097 0.018 0.478</code></pre>
+<p>Notice how these are nested functions, like <span class="math inline">\(f(g(h(x)))\)</span>. This is the kind of flexibility that we like about R.</p>
+<p>To make two-way tables, the first variable prints as rows, and the second as columns.</p>
+<pre class="r"><code># pid7 as rows, libcon_self as columns
+table(anes$pid7, anes$libcon_self, exclude = NULL)</code></pre>
+<pre><code>##       
+##           1    2    3    4    5    6    7 &lt;NA&gt;
+##   1     360 1392  848 1696  455  433  131 5490
+##   2     109  643 1018 2109  799  431   72 6080
+##   3     165  609  795 1552  451  251   42 2531
+##   4      64  188  287 1552  502  337   84 3395
+##   5      17  115  257 1083  991  847  135 1937
+##   6      14   92  280 1275 1362 1009  107 3274
+##   7      16   78   97  550  725 2049  418 2421
+##   &lt;NA&gt;    5   21   21   56   19   22    6 1504</code></pre>
+<p>By default, <code>prop.table()</code> estimates proportions out of the entire table. To estimate proportions within rows or columns, use the <code>margin</code> argument (<code>margin = 1</code> for the fraction within a row, <code>margin = 2</code> for the fraction within a column).</p>
+<pre class="r"><code># two-way table
+tab &lt;- table(anes$pid7, anes$libcon_self, exclude = NULL)
+
+# proportions as fractions of each row
+ptab &lt;- prop.table(tab, margin = 1)
+
+# round the result
+round(ptab, 3)</code></pre>
+<pre><code>##       
+##            1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.033 0.129 0.078 0.157 0.042 0.040 0.012 0.508
+##   2    0.010 0.057 0.090 0.187 0.071 0.038 0.006 0.540
+##   3    0.026 0.095 0.124 0.243 0.071 0.039 0.007 0.396
+##   4    0.010 0.029 0.045 0.242 0.078 0.053 0.013 0.530
+##   5    0.003 0.021 0.048 0.201 0.184 0.157 0.025 0.360
+##   6    0.002 0.012 0.038 0.172 0.184 0.136 0.014 0.442
+##   7    0.003 0.012 0.015 0.087 0.114 0.322 0.066 0.381
+##   &lt;NA&gt; 0.003 0.013 0.013 0.034 0.011 0.013 0.004 0.909</code></pre>
+</div>
+<div id="count" class="section level2">
+<h2><code>count()</code></h2>
+<p>If you want your table to be organized as a data frame (which you often do want), use <code>count()</code>. This is nice for doing further calculations, exporting results (e.g. to <span class="math inline">\({\mathrm{\LaTeX}}\)</span>), and so on.</p>
+<pre class="r"><code># from the anes data, count the intersections of cycle and party ID
+count(anes, cycle, pid7)</code></pre>
+<pre><code>## # A tibble: 233 x 3
+##    cycle pid7          n
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;
+##  1  1948 NA          662
+##  2  1952  1          392
+##  3  1952  2          435
+##  4  1952  3          173
+##  5  1952  4           83
+##  6  1952  5          128
+##  7  1952  6          237
+##  8  1952  7          241
+##  9  1952 NA          210
+## 10  1954  1          248
+## # … with 223 more rows</code></pre>
+<p>This contains the same information as <code>table(anes\$cycle, anes\$pid7)</code>, but the result is a “tidy” data frame.</p>
+<p>To get proportions, mutate the resulting table as desired. Here we get the proportion of each partisan identity within each election cycle. Group on the cycle and then dividing each count by the number of individuals in each cycle.</p>
+<pre class="r"><code># tabulate these variables, party by cycle
+(tab &lt;- count(anes, cycle, pid7))</code></pre>
+<pre><code>## # A tibble: 233 x 3
+##    cycle pid7          n
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;
+##  1  1948 NA          662
+##  2  1952  1          392
+##  3  1952  2          435
+##  4  1952  3          173
+##  5  1952  4           83
+##  6  1952  5          128
+##  7  1952  6          237
+##  8  1952  7          241
+##  9  1952 NA          210
+## 10  1954  1          248
+## # … with 223 more rows</code></pre>
+<pre class="r"><code># group by cycle
+# find n per cycle
+# divide counts by n_in_cycle
+# round
+mutate(group_by(tab, cycle), 
+       n_in_cycle = sum(n, na.rm = TRUE),
+       p = n / n_in_cycle,
+       p = round(p, 3))</code></pre>
+<pre><code>## # A tibble: 233 x 5
+## # Groups:   cycle [30]
+##    cycle pid7          n n_in_cycle     p
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;int&gt;      &lt;int&gt; &lt;dbl&gt;
+##  1  1948 NA          662        662 1    
+##  2  1952  1          392       1899 0.206
+##  3  1952  2          435       1899 0.229
+##  4  1952  3          173       1899 0.091
+##  5  1952  4           83       1899 0.044
+##  6  1952  5          128       1899 0.067
+##  7  1952  6          237       1899 0.125
+##  8  1952  7          241       1899 0.127
+##  9  1952 NA          210       1899 0.111
+## 10  1954  1          248       1139 0.218
+## # … with 223 more rows</code></pre>
+<p>The <code>count()</code> function also handles sample weights.</p>
+<pre class="r"><code># keep only elections since 2000
+# tabulate cycle and party
+# apply sample weights
+count(filter(anes, cycle &gt;= 2000), 
+      cycle, pid7, 
+      wt = VCF0009z)</code></pre>
+<pre><code>## # A tibble: 40 x 3
+##    cycle pid7          n
+##    &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl&gt;
+##  1  2000  1        345. 
+##  2  2000  2        274. 
+##  3  2000  3        275. 
+##  4  2000  4        237. 
+##  5  2000  5        231. 
+##  6  2000  6        207. 
+##  7  2000  7        221. 
+##  8  2000 NA         16.5
+##  9  2002  1        246. 
+## 10  2002  2        250. 
+## # … with 30 more rows</code></pre>
+<p>The “counts” are no longer whole numbers, thanks to the survey weights (some people count as “partial observations” due to sample design).</p>
+</div>
+</div>
+<div id="tidyr-functions" class="section level1">
+<h1>Tidyr functions</h1>
+<p>This concludes today’s foray into the <code>dplyr</code> family of functions. Now we’ll switch to the <code>tidyr</code> functions. The main difference is that <code>dplyr</code> tends to <em>change</em> data while <code>tidyr</code> simply moves it around.</p>
+<p>We’ll talk about “wide” and “long” data.</p>
+<ul>
+<li>Wide data might be data from multiple time periods, where variables from different time periods are represented as different columns. So we might have different <code>x</code> and <code>y</code> variables from three different time periods as columns named <code>x1</code>, <code>x2</code>, <code>x3</code>, <code>y1</code>, <code>y2</code>, <code>y3</code>.</li>
+<li>Long data would have the same information as the wide data, but instead of different variables for time periods, we stack the time periods on top of one another into one variable. So we would have variables for <code>x</code> and <code>y</code> as well as a <code>time_period</code> variable to indicate which observations come from which wave.</li>
+</ul>
+<p>When we shape data, what we’re really doing is moving data around (also called “reshaping”) to make it long (elongating) or wide (widening).</p>
+</div>
+<div id="reshape-wide-to-long-with-gather" class="section level1">
+<h1>Reshape wide to long, with <code>gather()</code></h1>
+<p>Gathering will take multiple columns and stack the cells into one variable (with an accompanying variable for labeling).</p>
+<p>Here is an example using the ideological distance variables from above. First we have to prep some data so we can see how this works.</p>
+<pre class="r"><code># keep only certain variables
+d &lt;- select(anes, cycle, dem_distance, rep_distance)
+
+# keep certain election years
+d &lt;- filter(d, cycle %in% c(2004, 2008, 2012))
+
+# get mean in each year
+d &lt;- summarize(group_by(d, cycle), 
+               dem_distance = mean(dem_distance, na.rm = TRUE),
+               rep_distance = mean(rep_distance, na.rm = TRUE))
+
+# show results
+d</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   cycle dem_distance rep_distance
+##   &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1  2004         1.41        -1.05
+## 2  2008         1.09        -1.01
+## 3  2012         1.54        -1.23</code></pre>
+<p>We’ll gather the two distance variables into one variable, with another variable to indicate which party we’re contrasting from.</p>
+<pre class="r"><code># gather(data, resulting key, resulting value, initial varlist)
+l &lt;- gather(d, key = party, value = distance, dem_distance, rep_distance)
+l</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle party        distance
+##   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1  2004 dem_distance     1.41
+## 2  2008 dem_distance     1.09
+## 3  2012 dem_distance     1.54
+## 4  2004 rep_distance    -1.05
+## 5  2008 rep_distance    -1.01
+## 6  2012 rep_distance    -1.23</code></pre>
+<p>Select helper functions also work for selecting which variables to gather.</p>
+<pre class="r"><code># gather(data, key, value, varlist)
+gather(d, key = party, value = distance, contains(&quot;distance&quot;))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle party        distance
+##   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1  2004 dem_distance     1.41
+## 2  2008 dem_distance     1.09
+## 3  2012 dem_distance     1.54
+## 4  2004 rep_distance    -1.05
+## 5  2008 rep_distance    -1.01
+## 6  2012 rep_distance    -1.23</code></pre>
+</div>
+<div id="reshaping-long-to-wide-with-spread" class="section level1">
+<h1>Reshaping long to wide, with <code>spread()</code></h1>
+<p>Spreading is the opposite of gathering. It takes a column and unstacks it into several columns. We need a corresponding label variable also, which becomes the variable names. Observe:</p>
+<pre class="r"><code>l</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   cycle party        distance
+##   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
+## 1  2004 dem_distance     1.41
+## 2  2008 dem_distance     1.09
+## 3  2012 dem_distance     1.54
+## 4  2004 rep_distance    -1.05
+## 5  2008 rep_distance    -1.01
+## 6  2012 rep_distance    -1.23</code></pre>
+<pre class="r"><code># &#39;key&#39; variable becomes new variable names. 
+# &#39;value&#39; variable becomes new variable values
+spread(l, key = party, value = distance) </code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   cycle dem_distance rep_distance
+##   &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+## 1  2004         1.41        -1.05
+## 2  2008         1.09        -1.01
+## 3  2012         1.54        -1.23</code></pre>
+</div>
+<div id="piping-data" class="section level1">
+<h1>Piping data</h1>
+<p>This section is <em>extremely important</em>.</p>
+<p>Now that we have covered some essential tools for wrangling data, let’s tie it all together with the concept of <strong><em>piping</em></strong>.</p>
+<p>Let’s start by identifying the problem. Data processing requires a lot of steps (each represented by the functions we have learned so far). Many of these steps are related. Can we string these operations together in a way that is easy to understand and easy to write?</p>
+<p>One (suboptimal) way to sew multiple operations together is with nested functions. Just as we can nest functions in math like <span class="math inline">\(f(g(h(x)))\)</span>, we can also do this with R. The problem with this is that the order of operations creates an unintuitive reading experience—we have to read from the inside out. The code becomes ugly and difficult to interpret.</p>
+<pre class="r"><code># this works, and it follows order of operations, but it&#39;s annoying
+tidy_data &lt;- gather(summarize(group_by(filter(select(dataset, ...), ...), ...), ...), ...)</code></pre>
+<p>Another (suboptimal) way would be to break up the operation into multiple lines. The problem with this method is that it is verbose and creates a lot of redundancy with object assignment (which can slow down your code with big datasets).</p>
+<pre class="r"><code># each function takes the results from the previous function
+# this also works, but requires overwriting the data a lot
+# and lots of redundant `d &lt;- ` instances
+d &lt;- select(dataset, ...)
+d &lt;- filter(d, ...)
+d &lt;- group_by(d, ...)
+d &lt;- summarize(d, ...)
+d &lt;- gather(d, ...)</code></pre>
+<p>We’ll use the <em>pipe operator</em> <code>%&gt;%</code> to make this process easier. The pipe operator takes a left-hand side object and “pipes” it into a right-hand side function. It sounds trivial, but just wait.</p>
+<p>Here is how it works. We’ll use <code>x</code> to represent data and <code>f</code> to represent functions.</p>
+<ul>
+<li>By default, <code>x %&gt;% f()</code> sets <code>x</code> as the first argument in <code>f</code>. So <code>f(x)</code> is equivalent to <code>x %&gt;% f()</code>.</li>
+<li>If <code>x</code> is needed elsewhere inside of <code>f</code> besides the first argument, we can use <code>.</code> to stand-in for <code>x</code>. For example, <code>f(arguments, data = x)</code> is equivalent to <code>x %&gt;% f(arguments, data = .)</code>.</li>
+<li>If only one argument is needed, you can drop the parentheses on <code>f()</code>. So <code>f(x)</code> is equivalent to <code>x %&gt;% f()</code>, which is equivalent to <code>x %&gt;% f</code>. I would recommend you keep the parentheses, however, because it’s easier to see which names are associated with data and which names are associated with functions.</li>
+</ul>
+<p>The pipe operator allows you to do multiple dataset operations in a <em>linear</em> fashion without creating a ton of intermediary objects. The above processing task could be written as the following “pipe chain.”</p>
+<pre class="r"><code># take `dataset` object and pass it to select
+# the result from select is passed to filter
+# and so on
+d &lt;- dataset %&gt;%
+  select(...) %&gt;%
+  filter(...) %&gt;%
+  group_by(...) %&gt;%
+  summarize(...) %&gt;%
+  gather(...) %&gt;%
+  print() </code></pre>
+<p>Adding <code>print()</code> at the end of the chain will print the results even if you are assigning the results to <code>d</code>.</p>
+<p>What has the pipe chain done? It has made our code linear and readable, and it makes our workflow more straightforward because we can <em>think</em> linearly again. Reading a complex set of operations linearly isn’t normally something you can easily do with programming, so we should really appreciate this!</p>
+<p>Here’s an example using real data. The pipe chain makes it extremely easy to understand exactly what the code is doing.</p>
+<pre class="r"><code># start with anes
+#   keep certain variables
+#   keep certain observations
+#   group and summarize
+#   gather
+#   print result of the chain
+l &lt;- anes %&gt;%
+  select(cycle, contains(&quot;distance&quot;)) %&gt;%
+  filter(cycle %in% c(2004, 2008, 2012)) %&gt;%
+  group_by(cycle) %&gt;%
+  summarize(n = n(),
+            Democratic = mean(dem_distance, na.rm = TRUE),
+            Republican = mean(rep_distance, na.rm = TRUE)) %&gt;%
+  ungroup() %&gt;%
+  gather(key = party, value = distance, Democratic, Republican) %&gt;%
+  print() </code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   cycle     n party      distance
+##   &lt;dbl&gt; &lt;int&gt; &lt;chr&gt;         &lt;dbl&gt;
+## 1  2004  1212 Democratic     1.41
+## 2  2008  2322 Democratic     1.09
+## 3  2012  5914 Democratic     1.54
+## 4  2004  1212 Republican    -1.05
+## 5  2008  2322 Republican    -1.01
+## 6  2012  5914 Republican    -1.23</code></pre>
+<p>We can use pipes to simplify other tasks from earlier in this lesson, like processing a table using proportions and rounding but without all of the nested functions.</p>
+<pre class="r"><code># create a table
+# send table to prop.table to calculate proportions
+# send proportions to round() 
+table(anes$pid7, anes$libcon_self, exclude = NULL) %&gt;% 
+  prop.table(margin = 1) %&gt;%
+  round(3)</code></pre>
+<pre><code>##       
+##            1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.033 0.129 0.078 0.157 0.042 0.040 0.012 0.508
+##   2    0.010 0.057 0.090 0.187 0.071 0.038 0.006 0.540
+##   3    0.026 0.095 0.124 0.243 0.071 0.039 0.007 0.396
+##   4    0.010 0.029 0.045 0.242 0.078 0.053 0.013 0.530
+##   5    0.003 0.021 0.048 0.201 0.184 0.157 0.025 0.360
+##   6    0.002 0.012 0.038 0.172 0.184 0.136 0.014 0.442
+##   7    0.003 0.012 0.015 0.087 0.114 0.322 0.066 0.381
+##   &lt;NA&gt; 0.003 0.013 0.013 0.034 0.011 0.013 0.004 0.909</code></pre>
+<p>Although we covered piping last, you should not view it as afterthought. The pipe operator will change the way you use R forever.</p>
+</div>
+<div id="tips-for-piping" class="section level1">
+<h1>Tips for piping</h1>
+<div id="create-a-keyboard-shortcut" class="section level2">
+<h2>Create a keyboard shortcut</h2>
+<p>If your text editor has the capability, <em>create a keyboard shortcut for the pipe operator!</em> I create this kind of thing with Sublime Text all the time. Rstudio can do it as well. Here’s what I do:</p>
+<ul>
+<li><code>super + .</code> creates a pipe</li>
+<li><code>super + shift + .</code> creates a pipe and adds a new line</li>
+<li>relatedly, I use <code>super + shift + ,</code> to create an assignment operator (<code>&lt;-</code>).</li>
+</ul>
+</div>
+<div id="other-helpful-pipes" class="section level2">
+<h2>Other helpful pipes</h2>
+<p>There is one other helpful pipe-like operator that we will talk about: <code>%$%</code>. It tells a right-hand function that the variable names in the function come from the left-hand dataset. It doesn’t pipe the entire dataset per se; it only says “look here for variable names.” The two following commands do the same thing:</p>
+<pre class="r"><code># look in anes for pid7 variable
+table(anes$pid7)</code></pre>
+<pre><code>## 
+##     1     2     3     4     5     6     7 
+## 10805 11261  6396  6409  5382  7413  6354</code></pre>
+<pre class="r"><code># look in anes for pid7 variable
+anes %$% table(pid7)</code></pre>
+<pre><code>## pid7
+##     1     2     3     4     5     6     7 
+## 10805 11261  6396  6409  5382  7413  6354</code></pre>
+<p>This is useful when you need to reference multiple variables.</p>
+<pre class="r"><code># notice which pipe I use after &#39;anes&#39;
+# %$% for piping just variable names
+# %&gt;% for piping the entire object
+
+anes %$% 
+  table(pid7, libcon_self, exclude = NULL) %&gt;% 
+  prop.table(margin = 1) %&gt;%
+  round(3)</code></pre>
+<pre><code>##       libcon_self
+## pid7       1     2     3     4     5     6     7  &lt;NA&gt;
+##   1    0.033 0.129 0.078 0.157 0.042 0.040 0.012 0.508
+##   2    0.010 0.057 0.090 0.187 0.071 0.038 0.006 0.540
+##   3    0.026 0.095 0.124 0.243 0.071 0.039 0.007 0.396
+##   4    0.010 0.029 0.045 0.242 0.078 0.053 0.013 0.530
+##   5    0.003 0.021 0.048 0.201 0.184 0.157 0.025 0.360
+##   6    0.002 0.012 0.038 0.172 0.184 0.136 0.014 0.442
+##   7    0.003 0.012 0.015 0.087 0.114 0.322 0.066 0.381
+##   &lt;NA&gt; 0.003 0.013 0.013 0.034 0.011 0.013 0.004 0.909</code></pre>
+</div>
+</div>
+<div id="saving-data" class="section level1">
+<h1>Saving data</h1>
+<p>You can write or save data from R with many <code>write.xyz</code> or <code>save.xyz</code> functions. I usually prefer to save data in an R-specific format.</p>
+<p>You should save the data from this lesson so we can come back to it next week.</p>
+<pre class="r"><code>saveRDS(anes, &quot;data/anes-modified.RDS&quot;)</code></pre>
+<p>If it’s possible that someone using Stata (or some other software) might be using your data, you might save in a more accessible format such as <code>.csv</code>.</p>
+<pre class="r"><code>write_csv(anes, &quot;data/anes-modified.csv&quot;)</code></pre>
+<p>R can read and save to a multitude of file types, including <code>.dta</code> for Stata. R could put Stat/Transfer out of business if more people knew about it.</p>
+<p>Some packages provide “swiss-army-knife” data input/output services, such as the <code>import()</code> and <code>export()</code> functions in Thomas Leeper’s <code>rio</code> package.</p>
+</div>
+<div id="looking-forward" class="section level1">
+<h1>Looking forward</h1>
+<p>Make sure you are comfortable with piping, <code>dplyr</code>, and <code>tidyr</code> before beginning the <a href="811/811-graphics">lesson on graphics</a>, because we will use those concepts throughout.</p>
+<p>There are some other common data-munging tasks that we will put off until the final lesson:</p>
+<ul>
+<li>Writing your own functions</li>
+<li>Loops (and why you should not use them)</li>
+<li><code>apply()</code> functions (and why you should use them instead of loops)</li>
+<li>Nesting and mapping, a tidy (and parallel!) method for applying complex functions across many datasets at once.</li>
+</ul>
+</div>
+<div id="postscript-on-coding-style" class="section level1">
+<h1>Postscript on coding style</h1>
+<p>I would talk about coding style, but others can probably do that better than I can (though you can check the R scripts on Canvas for do-as-I-do examples). You can find lots of style guides for R online. They will broadly agree on how to write R with good style, but they won’t agree on every fine point. Here are some that I endorse:</p>
+<ul>
+<li>a <a href="http://adv-r.had.co.nz/Style.html">short style guide</a> by Hadley Wickham that will put you on the right track</li>
+<li>a <a href="http://style.tidyverse.org/">longer style guide</a> (again by Wickham) that has general style guidance but also guidance specifically for working with the <code>tidyverse</code>, for those who want to be a little more obsessive about their programming style</li>
+</ul>
+</div>
+
+          </div>
+
+          
+
+
+
+          
+          <div class="article-widget">
+            
+<div class="post-nav">
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Previous</div>
+    <a href="/courses/811/811-02-basics/" rel="next">Getting Started</a>
+  </div>
+  
+  
+  
+  <div class="post-nav-item">
+    <div class="meta-nav">Next</div>
+    <a href="/courses/811/811-04-graphics/" rel="prev">Graphics</a>
+  </div>
+  
+</div>
+
+          </div>
+          
+        </div>
+
+        <div class="body-footer">
+          Last updated on May 5, 2019
+        </div>
+
+      </article>
+
+      <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Michael DeCrescenzo 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+  </p>
+</footer>
+
+
+    </main>
+  </div>
+</div>
+
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bib.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/txt.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js" integrity="sha256-pB/deHc9CGfFpJRjC43imB29Rse8tak+5eXqntO94ck=" crossorigin="anonymous"></script>
+    <script>
+      anchors.add();
+    </script>
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.f1a21f988a77cdbdeeb2f60c710009d1.js"></script>
+
+    
+
+
+
+
+
+
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
