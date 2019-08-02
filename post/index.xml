@@ -156,6 +156,72 @@ Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;wi
       
       <guid>/post/viz-partials/</guid>
       <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+&lt;/style&gt;
 
 
 &lt;div id=&#34;background&#34; class=&#34;section level1&#34;&gt;
@@ -216,126 +282,126 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
 &lt;h1&gt;Implementation&lt;/h1&gt;
 &lt;p&gt;Now we will create the revised gif.&lt;/p&gt;
 &lt;p&gt;First we start with the original Heiss data and code.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# ---- Heiss code -----------------------
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- Heiss code -----------------------&lt;/span&gt;
 
-library(&amp;quot;magrittr&amp;quot;)
-library(&amp;quot;tidyverse&amp;quot;)
-library(&amp;quot;lubridate&amp;quot;)
-library(&amp;quot;broom&amp;quot;)
-library(&amp;quot;scales&amp;quot;)
-library(&amp;quot;gganimate&amp;quot;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;magrittr&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;lubridate&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;broom&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;scales&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;gganimate&amp;quot;&lt;/span&gt;)
 
-# Load and clean data
-# This data comes from Dark Sky&amp;#39;s API
-weather_provo_raw &amp;lt;- read_csv(&amp;quot;https://andhs.co/provoweather&amp;quot;)
+&lt;span class=&#34;co&#34;&gt;# Load and clean data&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# This data comes from Dark Sky&amp;#39;s API&lt;/span&gt;
+weather_provo_raw &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_csv&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;https://andhs.co/provoweather&amp;quot;&lt;/span&gt;)
 
-# clean dates and precip
-weather_provo_2017 &amp;lt;- weather_provo_raw %&amp;gt;% 
-  mutate(
-    month = month(date, label = TRUE, abbr = FALSE),
-    month_number = month(date, label = FALSE),
-    weekday = wday(date, label = TRUE, abbr = FALSE),
-    weekday_number = wday(date, label = FALSE),
-    precipType = ifelse(is.na(precipType), &amp;quot;none&amp;quot;, precipType)
-  ) %&amp;gt;% 
-  select(
+&lt;span class=&#34;co&#34;&gt;# clean dates and precip&lt;/span&gt;
+weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_raw &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;month_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;weekday =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;weekday_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;precipType =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ifelse&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(precipType), &lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;, precipType)
+  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(
     date, month, month_number, weekday, weekday_number,
     sunriseTime, sunsetTime, moonPhase, 
     precipProbability, precipType, temperatureHigh, temperatureLow, dewPoint, 
     humidity, pressure, windSpeed, cloudCover, visibility, uvIndex
   )
 
-# keep winter and spring, scale vars
-winter_spring &amp;lt;- weather_provo_2017 %&amp;gt;% 
-  filter(month_number &amp;lt;= 5) %&amp;gt;% 
-  mutate(month = factor(month, ordered = FALSE)) %&amp;gt;% 
-  mutate(
-    humidity = humidity * 100, 
-    cloudCover = cloudCover * 100, 
-    precipProbability = precipProbability * 100
+&lt;span class=&#34;co&#34;&gt;# keep winter and spring, scale vars&lt;/span&gt;
+winter_spring &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(month_number &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(month, &lt;span class=&#34;dt&#34;&gt;ordered =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;humidity =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;cloudCover =&lt;/span&gt; cloudCover &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;precipProbability =&lt;/span&gt; precipProbability &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;
   )&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We combine several model formulas into a data frame and estimate each regression using &lt;code&gt;purrr::map()&lt;/code&gt;. We’ve added the results from &lt;code&gt;broom::augment()&lt;/code&gt; because we want the residuals from each model to create the “noise” in the data for the graphic.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# ---- mike decrescenzo modifications begin -----------------------
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- mike decrescenzo modifications begin -----------------------&lt;/span&gt;
 
-# Run all these models in one data frame (purrr::map)
-# add the data as a list column because we&amp;#39;ll want it later
-models &amp;lt;- 
-  tribble(
-    ~formula,
-    &amp;quot;temperatureHigh ~ humidity&amp;quot;,
-    &amp;quot;temperatureHigh ~ humidity + windSpeed&amp;quot;,
-    &amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover&amp;quot;,
-    &amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&amp;quot;,
-    &amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&amp;quot;) %&amp;gt;%
-  # data in a list column
-  mutate(spring_data = list(winter_spring)) %&amp;gt;%
-  # Run a model in each row
-  mutate(model = map2(formula, spring_data, ~ lm(.x, data = .y))) %&amp;gt;%
-  # Extract model elements
-  mutate(
-    model_tidy = map(model, tidy, conf.int = TRUE), 
-    model_glance = map(model, glance), 
-    model_fits = map(model, augment)
+&lt;span class=&#34;co&#34;&gt;# Run all these models in one data frame (purrr::map)&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# add the data as a list column because we&amp;#39;ll want it later&lt;/span&gt;
+models &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(
+    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;formula,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# data in a list column&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;spring_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(winter_spring)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Run a model in each row&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;model =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map2&lt;/span&gt;(formula, spring_data, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(.x, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; .y))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Extract model elements&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;model_tidy =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, tidy, &lt;span class=&#34;dt&#34;&gt;conf.int =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;), 
+    &lt;span class=&#34;dt&#34;&gt;model_glance =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, glance), 
+    &lt;span class=&#34;dt&#34;&gt;model_fits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, augment)
   )&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the &lt;code&gt;augment&lt;/code&gt; results). We will lazily refer to this as the humidity’s “partial prediction” of temperature (thanks to &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# compute the partial effect of humidity: beta * humidity
-model_partials &amp;lt;- models %&amp;gt;%
-  # get the humidity beta and bounds
-  mutate(
-    humidity_beta = 
-      map(model_tidy, ~ filter(.x, term == &amp;quot;humidity&amp;quot;)$estimate) %&amp;gt;% 
-                        as.numeric(),
-    beta_low = 
-      map(model_tidy, ~ filter(.x, term == &amp;quot;humidity&amp;quot;)$conf.low) %&amp;gt;% 
-                        as.numeric(),
-    beta_high = 
-      map(model_tidy, ~ filter(.x, term == &amp;quot;humidity&amp;quot;)$conf.high) %&amp;gt;%
-                        as.numeric()
-  ) %&amp;gt;% 
-  # calculate partial effect of humidity and keep the residual
-  unnest(model_fits) %&amp;gt;%
-  mutate(partial = humidity * humidity_beta) %&amp;gt;%
-  select(formula, humidity, contains(&amp;quot;beta&amp;quot;), partial, .resid) 
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# compute the partial effect of humidity: beta * humidity&lt;/span&gt;
+model_partials &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;models &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# get the humidity beta and bounds&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;humidity_beta =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;estimate) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),
+    &lt;span class=&#34;dt&#34;&gt;beta_low =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.low) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),
+    &lt;span class=&#34;dt&#34;&gt;beta_high =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.high) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;()
+  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# calculate partial effect of humidity and keep the residual&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(model_fits) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;partial =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;humidity_beta) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, humidity, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;), partial, .resid) 
 
-# get the beta for label plotting
-model_beta &amp;lt;- model_partials %&amp;gt;%
-  select(formula, contains(&amp;quot;beta&amp;quot;)) %&amp;gt;%
-  distinct() &lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&#34;co&#34;&gt;# get the beta for label plotting&lt;/span&gt;
+model_beta &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;model_partials &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;distinct&lt;/span&gt;() &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now we create the figure. The horizontal axis is the raw humidity data. The vertical axis is the humidity effect (&lt;span class=&#34;math inline&#34;&gt;\(\beta \times \mathit{Humidity}_{i}\)&lt;/span&gt;) plus the regression residual &lt;span class=&#34;math inline&#34;&gt;\(\varepsilon_{i}\)&lt;/span&gt;. The regression line is simply &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mathit{High}}_{i} = \hat{\beta}\mathit{Humidity}_{i}\)&lt;/span&gt; with a constant of zero. That is, on a given day, a humidity level of &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt; exerts a negative impact on temperature amounting to &lt;span class=&#34;math inline&#34;&gt;\(\beta z\)&lt;/span&gt;, setting other factors aside. Conveniently, we don’t have to manually subtract the other covariates because we already know how to calculate the vertical axis using the partial effect and the residual (thanks to the math above).&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# animate 
-ggplot(data = model_partials, aes(x = humidity, y = partial + .resid)) +
-  geom_point(color = &amp;quot;gray&amp;quot;) +
-  geom_abline(
-    data = model_beta, 
-    aes(intercept = 0, slope = humidity_beta, group = formula)
-  ) +
-  geom_abline(
-    data = model_beta, 
-    aes(intercept = 0, slope = beta_low, group = formula), 
-    linetype = 3
-  ) +
-  geom_abline(
-    data = model_beta, 
-    aes(intercept = 0, slope = beta_high, group = formula), 
-    linetype = 3
-    ) +
-  theme_minimal(base_family = &amp;quot;Fira Sans&amp;quot;) +
-  geom_label(
-    data = model_beta, 
-    aes(x = 35, y = -70, 
-        label = paste0(&amp;quot;beta: &amp;quot;, round(humidity_beta, 3)), 
-        group = formula), 
-    parse = TRUE, 
-    family = &amp;quot;Fira Sans&amp;quot;, 
-    size = 4) +
-  labs(
-    x = &amp;quot;Humidity&amp;quot;, 
-    y = &amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;, 
-    subtitle = &amp;quot;{closest_state}&amp;quot;
-  ) +
-  transition_states(formula, transition_length = 0.25, state_length = 0.5) +
-  enter_fade() +
-  ease_aes(&amp;#39;sine-in-out&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# animate &lt;/span&gt;
+&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_partials, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; humidity, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; partial &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.resid)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_point&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; humidity_beta, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula)
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_low, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_high, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;
+    ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;base_family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;35&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-70&lt;/span&gt;, 
+        &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta: &amp;quot;&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(humidity_beta, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)), 
+        &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;parse =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Humidity&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;subtitle =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{closest_state}&amp;quot;&lt;/span&gt;
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(formula, &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.25&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fade&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ease_aes&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;sine-in-out&amp;#39;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-19-partialling-out_files/figure-html/animated-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
 &lt;p&gt;Two notes about the confidence interval&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;

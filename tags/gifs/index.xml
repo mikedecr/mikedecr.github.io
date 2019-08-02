@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GIFs on Michael DeCrescenzo</title>
+    <link>/tags/gifs/</link>
+    <description>Recent content in GIFs on Michael DeCrescenzo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	    <atom:link href="/tags/gifs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Creating the Mandelbrot Set with ggplot</title>
+      <link>/post/2019-07-20_ggbrot/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019-07-20_ggbrot/</guid>
+      <description>
+
+
+&lt;div id=&#34;disclaimer&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Disclaimer&lt;/h1&gt;
+&lt;p&gt;This post contains flashing images.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;This post is a callback to when I used to experiment with making GIFs in &lt;code&gt;R&lt;/code&gt;. In one instance I had learned a bit about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Mandelbrot_set&#34;&gt;Mandelbrot Set&lt;/a&gt; fractal and some of its &lt;a href=&#34;https://en.wikipedia.org/wiki/Mandelbrot_set#Multibrot_sets&#34;&gt;generalizations&lt;/a&gt; and turned that into some neat GIFs.&lt;/p&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+New GIF! An animation of Multibrot fractals (&lt;a href=&#34;https://t.co/0UzFqOLSvF&#34;&gt;https://t.co/0UzFqOLSvF&lt;/a&gt;), made to look hazy by “under-iterating” the underlying function &lt;a href=&#34;https://t.co/KUVaGnqafV&#34;&gt;pic.twitter.com/KUVaGnqafV&lt;/a&gt;
+&lt;/p&gt;
+— Michael DeCrescenzo (&lt;span class=&#34;citation&#34;&gt;@mikedecr&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/mikedecr/status/879824717229805570?ref_src=twsrc%5Etfw&#34;&gt;June 27, 2017&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-conversation=&#34;none&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Making the bulb shrink down on the other side. Shrink effect is made by reversing the “growing” half while reflecting it over the real axis &lt;a href=&#34;https://t.co/OsGmqvZetP&#34;&gt;pic.twitter.com/OsGmqvZetP&lt;/a&gt;
+&lt;/p&gt;
+— Michael DeCrescenzo (&lt;span class=&#34;citation&#34;&gt;@mikedecr&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/mikedecr/status/879862708270706689?ref_src=twsrc%5Etfw&#34;&gt;June 28, 2017&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-conversation=&#34;none&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+ayyyyyy, tweak some things in the underlying math and you achieve p e r f e c t _ l o o p &lt;a href=&#34;https://t.co/E5w3uLuOwT&#34;&gt;pic.twitter.com/E5w3uLuOwT&lt;/a&gt;
+&lt;/p&gt;
+— Michael DeCrescenzo (&lt;span class=&#34;citation&#34;&gt;@mikedecr&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/mikedecr/status/879865117541892096?ref_src=twsrc%5Etfw&#34;&gt;June 28, 2017&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;The text accompanying each of these images is ambiguous, but this post will explain what’s going on. Here are my goals:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Introduce the math behind the Mandelbrot and “Multibrot” Sets (with the huge caveat that I’m not a mathematician and therefore understand only a tiny fraction of what’s really going on here and why).&lt;/li&gt;
+&lt;li&gt;Implement the fractals in &lt;code&gt;R&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Visualize the fractals with &lt;code&gt;ggplot2&lt;/code&gt;, which I’ve actually never done before.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-is-the-mandelbrot-set&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What Is the Mandelbrot Set?&lt;/h1&gt;
+&lt;p&gt;The Mandelbrot Set is maybe the most recognizable fractal image out there. It looks like this in the macro:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Mandel_zoom_00_mandelbrot_set.jpg/1920px-Mandel_zoom_00_mandelbrot_set.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;…and like this up close.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Mandel_zoom_01_head_and_shoulder.jpg/1600px-Mandel_zoom_01_head_and_shoulder.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Mandel_zoom_02_seehorse_valley.jpg/1600px-Mandel_zoom_02_seehorse_valley.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Mandel_zoom_03_seehorse.jpg/1600px-Mandel_zoom_03_seehorse.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Mandel_zoom_04_seehorse_tail.jpg/1600px-Mandel_zoom_04_seehorse_tail.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Mandel_zoom_05_tail_part.jpg/1600px-Mandel_zoom_05_tail_part.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Mandel_zoom_06_double_hook.jpg/1600px-Mandel_zoom_06_double_hook.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Mandel_zoom_07_satellite.jpg/1600px-Mandel_zoom_07_satellite.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We could zoom in on these images forever, if we had the computational power, and find the same patterns with infinitely repeating detail. It is an amazing thing.&lt;/p&gt;
+&lt;p&gt;These images are created from the math of the Mandelbrot Set, but the image isn’t really what the Mandelbrot Set &lt;em&gt;is&lt;/em&gt;. Strictly speaking, the Mandelbrot Set is the set of complex numbers &lt;span class=&#34;math inline&#34;&gt;\(c\)&lt;/span&gt; that do not cause the function
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  z_{t + 1} = z_{t}^2 + c
+\end{align}\]&lt;/span&gt;
+to explode to &lt;span class=&#34;math inline&#34;&gt;\(\pm\infty\)&lt;/span&gt; when iterated from the initial condition of &lt;span class=&#34;math inline&#34;&gt;\(z_{t} = 0\)&lt;/span&gt;.&lt;/p&gt;
+&lt;div id=&#34;uhh&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Uhh…&lt;/h2&gt;
+&lt;p&gt;Remember complex numbers? Complex numbers contain some &lt;em&gt;real&lt;/em&gt; component and some &lt;em&gt;imaginary&lt;/em&gt; component, where the imaginary number &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; is equal to the square root of &lt;span class=&#34;math inline&#34;&gt;\(-1\)&lt;/span&gt; (and &lt;span class=&#34;math inline&#34;&gt;\(i^{2} = -1)\)&lt;/span&gt;. You can think of real numbers as special cases of complex numbers, where the imaginary components are all zero. For example, the real number &lt;span class=&#34;math inline&#34;&gt;\(6\)&lt;/span&gt; is…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  6 = 6 + 0i,
+\end{align}\]&lt;/span&gt;
+and the &lt;span class=&#34;math inline&#34;&gt;\(0i\)&lt;/span&gt; just drops out.&lt;/p&gt;
+&lt;p&gt;The images of the Mandelbrot Set are visualizations of complex numbers. Meaning, they are visualized in a coordinate system called the &lt;em&gt;complex plane&lt;/em&gt;, which is a lot like the Cartesian plane—that is, &lt;span class=&#34;math inline&#34;&gt;\((x, y)\)&lt;/span&gt; coordinates—but where we have a &lt;em&gt;real&lt;/em&gt; axis and an &lt;em&gt;imaginary&lt;/em&gt; axis.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2019-07-20_ggbrot_files/figure-html/complex-plane-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
