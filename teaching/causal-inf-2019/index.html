@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.3.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michael DeCrescenzo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Guided Reading Workshop on Causal Inference in Political Science
+">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/teaching/causal-inf-2019/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#268bd2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700|Fira+Sans:500|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.710387c227532828b07a58243cbd13c3.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/teaching/causal-inf-2019/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mikedecr">
+  <meta property="twitter:creator" content="@mikedecr">
+  
+  <meta property="og:site_name" content="Michael DeCrescenzo">
+  <meta property="og:url" content="/teaching/causal-inf-2019/">
+  <meta property="og:title" content="Causal Inference Reading Group
+ | Michael DeCrescenzo">
+  <meta property="og:description" content="Guided Reading Workshop on Causal Inference in Political Science
+"><meta property="og:image" content="/img/circular-telles.png">
+  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2016-04-27T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2019-08-20T12:24:29-05:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Causal Inference Reading Group
+ | Michael DeCrescenzo</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/"><img src="/img/circular-telles.png" alt="Michael DeCrescenzo"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/research"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/code"><span>Code</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Causal Inference Reading Group
+</h1>
+
+  
+  <p class="page-subtitle">Guided Reading Workshop on Causal Inference in Political Science</p>
+  
+
+  
+    
+
+
+
+<meta content="2016-04-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-20 12:24:29 -0500 CDT" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+          Last updated on
+      
+    
+    <time>Aug 20, 2019</time>
+  </span>
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/teaching/causal-inf-2019/&amp;text=Causal%20Inference%20Reading%20Group%0a" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/teaching/causal-inf-2019/&amp;t=Causal%20Inference%20Reading%20Group%0a" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Causal%20Inference%20Reading%20Group%0a&amp;body=/teaching/causal-inf-2019/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/teaching/causal-inf-2019/&amp;title=Causal%20Inference%20Reading%20Group%0a" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Causal%20Inference%20Reading%20Group%0a%20/teaching/causal-inf-2019/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/teaching/causal-inf-2019/&amp;title=Causal%20Inference%20Reading%20Group%0a" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+
+<p>Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &ldquo;the view from political science,&rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.</p>
+
+<p>The reading list below contains both the &ldquo;assigned&rdquo; and the &ldquo;bonus&rdquo; readings (without bothering to denote which is which).</p>
+
+<h2 id="readings">Readings</h2>
+
+<p>Introduction</p>
+
+<ul>
+<li>Rubin (1974), <a href="http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf" target="_blank">&ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&rdquo;</a></li>
+<li>LaLonde (1986), <a href="https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg" target="_blank">&ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&rdquo;</a></li>
+<li>McElreath (2019), <a href="https://youtu.be/l_7yIUqWBmE" target="_blank">&ldquo;Statistical Rethinking 2019&rdquo; Lecture 6 (DAGs)</a></li>
+<li>Aronow and Samii (2016), <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ" target="_blank">&ldquo;Does Regression Produce Representative Estimates of Causal Effects?&rdquo;</a></li>
+</ul>
+
+<p>Causal Identification</p>
+
+<ul>
+<li>Holland (1986), <a href="https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w" target="_blank">&ldquo;Statistics and Causal Inference&rdquo;</a></li>
+<li>Kang and Schafer (2007), <a href="https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167" target="_blank">&ldquo;Demystifying Double Robustness:A Comparison of Alternative Strategies forEstimating a Population Mean fromIncomplete Data&rdquo;</a></li>
+<li>Sekhon (2007), <a href="https://www.researchgate.net/profile/Henry_Brady/publication/255476843_The_Neyman-Rubin_Model_of_Causal_Inference_and_Estimation_Via_Matching_Methods/links/54d8dd670cf25013d0405ce3/The-Neyman-Rubin-Model-of-Causal-Inference-and-Estimation-Via-Matching-Methods.pdf" target="_blank">&ldquo;The Neyman-Rubin Model of Causal Inference and Estimation via Matching Methods&rdquo;</a></li>
+<li>Stuart (2010), <a href="https://projecteuclid.org/download/pdfview_1/euclid.ss/1280841730" target="_blank">&ldquo;Matching methods for causal inference: A review and a look forward&rdquo;</a></li>
+<li>Bowers, Fredrickson, and Panagopoulos (2013), <a href="https://www.jstor.org/stable/pdf/23359695.pdf?casa_token=wI0j9lMiDx0AAAAA:tnvEGu14_-fGNjbUZxLq0ln9foKBOd85zKIor3nQYj3pwxo4ch_wXQyZ_qeTSBxngpQjfOBNZwKr3ARWj1uBjGbnxWQ7LFyTWHZGX7og8udmimMLGA" target="_blank">&ldquo;Reasoning about Interference Between Units: A General Framework&rdquo;</a></li>
+<li>Hartman, Grieve, Ramsahai, and Sekhon (2015), <a href="https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12094" target="_blank">&ldquo;From sample average treatment effect to population average treatment effect on the treated: combining experimental with observational studies to estimate population treatment effects&rdquo;</a></li>
+<li>Keele (2015), <a href="https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw" target="_blank">&ldquo;The statistics of causal inference: A view from political methodology&rdquo;</a></li>
+<li>Hartman and Hidalgo (2018), <a href="https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw" target="_blank">&ldquo;An equivalence approach to balance and placebo tests&rdquo;</a></li>
+</ul>
+
+<p>Causal Mediation</p>
+
+<ul>
+<li>Imai, Keele, Tingley, and Yamamoto (2010), <a href="https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA" target="_blank">&ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&rdquo;</a></li>
+<li>VanderWeele and Vansteelandt (2015), <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf" target="_blank">&ldquo;Mediation Analysis with Multiple Mediators&rdquo;</a></li>
+<li>Myers and Tingley (2016), <a href="https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B" target="_blank">&ldquo;The Influence of Emotion on Trust&rdquo;</a></li>
+</ul>
+
+<p>Causal Heterogeneity</p>
+
+<ul>
+<li>Kam and Trussler (2017) <a href="https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf" target="_blank">&ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&rdquo;</a></li>
+<li>Coppock, Leeper, and Mullinix (2017), <a href="https://www.pnas.org/content/pnas/115/49/12441.full.pdf" target="_blank">&ldquo;Generalizability of heterogeneous treatment effect estimates across samples&rdquo;</a></li>
+<li>Meager (2019), <a href="http://eprints.lse.ac.uk/88190/1/app.20170299.pdf" target="_blank">&ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&rdquo;</a></li>
+</ul>
+
+<p>Null Effects and Statistical Power</p>
+
+<ul>
+<li>Mayo (2004), <a href="https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf" target="_blank">&ldquo;An error-statistical philosophy of evidence&rdquo;</a></li>
+<li>Gelman and Carlin (2014), <a href="https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642" target="_blank">&ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&rdquo;</a></li>
+<li>Coppenolle (2017), <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164" target="_blank">&ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&rdquo;</a></li>
+<li>Loken and Gelman (2017), <a href="http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf" target="_blank">&ldquo;Measurement error and the replication crisis&rdquo;</a></li>
+<li>Fowler (2019), <a href="https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/" target="_blank">&ldquo;But Shouldn’t That Work Against Me?&rdquo;</a></li>
+</ul>
+
+<p>G-Methods</p>
+
+<ul>
+<li>Naimi, Cole, and Kennedy (2017), <a href="https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw" target="_blank">&ldquo;An introduction to g methods&rdquo;</a></li>
+<li>Acharya, Blackwell, and Sen (2016), <a href="https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf" target="_blank">&ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&rdquo;</a></li>
+</ul>
+
+<p>DAGs (1)</p>
+
+<ul>
+<li>Greenland, Pearl, Robins (1999), <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf" target="_blank">&ldquo;Causal Diagrams for Epidemiological Research&rdquo;</a></li>
+<li>Keele, Stevenson, and Elwert (2019) <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf" target="_blank">&ldquo;The causal interpretation of estimated associations in regression models&rdquo;</a></li>
+</ul>
+
+<p>DAGs (2)</p>
+
+<ul>
+<li>VanderWeele and Robins (2014) <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf" target="_blank">&ldquo;Signed directed acyclic graphs for causal inference&rdquo;</a></li>
+<li>Mohan and Pearl (2014), <a href="https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf" target="_blank">&ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&rdquo;</a></li>
+<li>Imbens (2019), <a href="https://arxiv.org/abs/1907.07271" target="_blank">&ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&rdquo;</a></li>
+<li>Lattimore and Rohde (2019), <a href="https://arxiv.org/pdf/1906.07125.pdf" target="_blank">&ldquo;Replacing the do-calculus with Bayes rule&rdquo;</a></li>
+</ul>
+
+<p>Machine Learning</p>
+
+<ul>
+<li>Hastie, Tibshirani, and Friedman (2009) <a href="https://web.stanford.edu/~hastie/Papers/ESLII.pdf" target="_blank">&ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&rdquo;</a></li>
+<li>Hill (2011), <a href="https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E" target="_blank">&ldquo;Bayesian Nonparametric Modeling for Causal Inference&rdquo;</a></li>
+<li>Samii, Paler, and Daly (2016), <a href="https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B" target="_blank">&ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&rdquo;</a></li>
+<li>Wager and Athey (2018), <a href="https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true" target="_blank">&ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&rdquo;</a></li>
+<li>McElreath (2019), <a href="https://youtu.be/pwMRbt2CbSU" target="_blank">&ldquo;Statistical Rethinking 2019&rdquo; Lecture 19 (Gaussian Processes)</a></li>
+<li>Cheng, Khomtchouk, Matloff, and Mohanty (2019), <a href="https://arxiv.org/pdf/1806.06850.pdf" target="_blank">&ldquo;Polynomial Regression as an Alternative to Neural Nets&rdquo;</a></li>
+<li>Hahn, Murray, and Carvalho (2019), <a href="https://arxiv.org/pdf/1706.09523.pdf" target="_blank">&ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&rdquo;</a></li>
+</ul>
+
+<p>Regression Discontinuity</p>
+
+<ul>
+<li>Calonico, Cattaneo, and Titiunik (2014), <a href="https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw" target="_blank">&ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&rdquo;</a></li>
+<li>Caughey and Sekhon (2014), <a href="http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf" target="_blank">&ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&rdquo;</a></li>
+<li>Skovron and Titiunik (2015), <a href="https://pdfs.semanticscholar.org/5461/c817976f51a4fb0073b772c03cd670be8def.pdf" target="_blank">&ldquo;A Practical Guide to Regression Discontinuity
+Designs in Political Science&rdquo;</a></li>
+<li>Imbens and Wager (2019), <a href="https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv" target="_blank">&ldquo;Optimized Regression Discontinuity Designs&rdquo;</a></li>
+</ul>
+
+<p>Time-Series Cross-Sectional Data</p>
+
+<ul>
+<li>Blackwell and Glynn (2018), <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584" target="_blank">&ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&rdquo;</a></li>
+<li>Torres (2019), <a href="https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0" target="_blank">&ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&rdquo;</a></li>
+</ul>
+
+    </div>
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/teaching/">Teaching</a>
+  
+  <a class="badge badge-light" href="/tags/methods/">Methods</a>
+  
+  <a class="badge badge-light" href="/tags/causal-inference/">Causal Inference</a>
+  
+  <a class="badge badge-light" href="/tags/bayesian-statistics/">Bayesian statistics</a>
+  
+  <a class="badge badge-light" href="/tags/computational-methods/">Computational Methods</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/teaching/numbers/">PS 270: Understanding Political Numbers
+</a></li>
+          
+          <li><a href="/teaching/computing-811/">PS 811: Introductory Statistical Computing for Political Science
+</a></li>
+          
+          <li><a href="/teaching/latex-workshop/">$\mathrm{\LaTeX}$ Workshop
+</a></li>
+          
+          <li><a href="/research/causal-bayes/">Bayesian Causal Inference in Political Science
+</a></li>
+          
+          <li><a href="/research/dissertation/">Do Primaries Work? Local Partisan Preferences in Nominating Elections
+</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bib.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/txt.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.f1a21f988a77cdbdeeb2f60c710009d1.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    &copy; Michael DeCrescenzo 2019 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="free hit
+counter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/11382424/0/647b3843/1/"
+alt="free hit counter"></a></div></noscript>
+
+
+</body>
+</html>
