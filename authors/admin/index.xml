@@ -166,6 +166,279 @@ Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;wi
     </item>
     
     <item>
+      <title>A Visualization of Partial Effects in Multiple Regression</title>
+      <link>/post/viz-partials/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/viz-partials/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;div id=&#34;background&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Background&lt;/h1&gt;
+&lt;p&gt;A few days ago, &lt;a href=&#34;https://www.andrewheiss.com/&#34;&gt;Andrew Heiss&lt;/a&gt; was &lt;a href=&#34;https://twitter.com/andrewheiss/status/1052232993723494400?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1052232993723494400&amp;amp;ref_url=http%3A%2F%2F127.0.0.1%3A4321%2F2018%2F2018-10-19-partialling-out%2F&#34;&gt;looking&lt;/a&gt; for a way to visualize multiple regression with an emphasis on one predictor, without 3(+)-dimensional plots. He works through a method and posts this cool animation, which shows the changing relationship between &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; when adding controls, superimposed over the scatterplot of the raw data. (He credits &lt;a href=&#34;https://twitter.com/petemohanty&#34;&gt;Pete Mohanty&lt;/a&gt; with the shifting abline idea.)&lt;/p&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Helpful animated &lt;a href=&#34;https://twitter.com/hashtag/dataviz?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#dataviz&lt;/a&gt; showing what happens to the slope of one coefficient in a model when controlling for other variables in multiple regression&lt;br&gt;&lt;br&gt;(&lt;a href=&#34;https://twitter.com/hashtag/rstats?src=hash&amp;amp;ref_src=twsrc%5Etfw&#34;&gt;#rstats&lt;/a&gt; code: &lt;a href=&#34;https://t.co/yhVLj325Oh&#34;&gt;https://t.co/yhVLj325Oh&lt;/a&gt;) &lt;a href=&#34;https://t.co/2foYfXDo28&#34;&gt;pic.twitter.com/2foYfXDo28&lt;/a&gt;
+&lt;/p&gt;
+— 🎃 Andrew Heiss, scary PhD 🦇 (&lt;span class=&#34;citation&#34;&gt;@andrewheiss&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/andrewheiss/status/1052978108255498240?ref_src=twsrc%5Etfw&#34;&gt;October 18, 2018&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;This is cool, but based on Andrew’s initial question, I had something a little different come to mind. I thought we’d be seeing the impact of the regression in both the regression line &lt;em&gt;and&lt;/em&gt; in the data. So I tried to make that (starting with &lt;a href=&#34;https://t.co/yhVLj325Oh&#34;&gt;his code&lt;/a&gt;)…&lt;/p&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-conversation=&#34;none&#34; data-lang=&#34;en&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Ok fixed. &lt;br&gt;&lt;br&gt;In this fig, y is (beta * humidity), plus the regression residual. This is equivalent to starting with the fully estimated regression and subtracting out terms for every other covariate &lt;a href=&#34;https://t.co/fLs4WxHTaK&#34;&gt;pic.twitter.com/fLs4WxHTaK&lt;/a&gt;
+&lt;/p&gt;
+— Michael DeCrescenzo (&lt;span class=&#34;citation&#34;&gt;@mikedecr&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/mikedecr/status/1053028075170975744?ref_src=twsrc%5Etfw&#34;&gt;October 18, 2018&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;which he &lt;a href=&#34;https://twitter.com/andrewheiss/status/1053031575770718208&#34;&gt;liked&lt;/a&gt; and asked to see the code for.&lt;/p&gt;
+&lt;p&gt;So I will deliver. &lt;a href=&#34;https://gist.github.com/mikedecr/f6ffdb716d62af32e701f95231f00bee&#34;&gt;Here&lt;/a&gt; is a gist containing an example, and below is some explanation.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;intuition&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Intuition&lt;/h1&gt;
+&lt;p&gt;Some math will help. Let’s start by writing the regression equation to suit the task at hand: although we include multiple predictors, we only want to highlight one of them, putting the other predictors into a black box “vector of controls.” Andrew’s example uses Dark Sky data on weather in Provo, UT, highlighting the relationship between humidity and a daily temperature high for each day &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mathit{HighTemp}_{i} &amp;amp;= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \mathbf{x}_{i}^{T}\gamma + \varepsilon_{i}
+\end{align}\]&lt;/span&gt;
+where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the constant, &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{x}_{i}\)&lt;/span&gt; is a column-vector of covariate observations for unit &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt; (everything but humidity), and &lt;span class=&#34;math inline&#34;&gt;\(\gamma\)&lt;/span&gt; is a vector of coefficients for all non-humidity predictors.&lt;/p&gt;
+&lt;p&gt;Operationally, what we want to do is show how &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; changes with the inclusion of additional controls. Andrew’s example shows this by plotting different regressions overtop the raw data. If we run the code&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; from his &lt;a href=&#34;https://gist.github.com/andrewheiss/5e162c836575721d1dd53ec2af38753c&#34;&gt;Gist&lt;/a&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-10-19-partialling-out_files/figure-html/andrew-animate-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;The line being plotted starts with &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mathit{High}}_{i} = {\alpha} + {\beta}(\mathit{Humidity}_{i})\)&lt;/span&gt; and adds additional covariates one at a time. The data remain intact.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;variation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Variation&lt;/h1&gt;
+&lt;p&gt;But let’s say that we wanted to see the effect of controls in the data as well. This is, I think, where the real umph from this kind of visualization would be; after all, we have already told students that including other predictors will affect the line.&lt;/p&gt;
+&lt;p&gt;Thinking about the math, this is as easy as doing to the raw data what we’ve already done to the regression line: subtract out the effect of the covariates. That is, purge the effect of other variables from the raw data. Start with the fully specified regression model…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mathit{High}_{i} &amp;amp;= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \mathbf{x}_{i}^{T}\gamma + \varepsilon_{i}
+\end{align}\]&lt;/span&gt;
+…and then subtract out the influence of variables in &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{x}_{i}\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \label{eq:sub} \mathit{High}_{i} - \mathbf{x}^{T}\gamma &amp;amp;= \alpha + \beta\left(\mathit{Humidity}_{i}\right) + \varepsilon_{i}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We still have to decide what to do with the constant. We could…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Leave the constant there, which is probably undesirable because the value of the constant reflects the scaling of other covariates.&lt;/li&gt;
+&lt;li&gt;Start by setting all covariates equal to their means. This would give us a prediction that is no longer subject to the &lt;em&gt;scaling&lt;/em&gt; of the covariates but the covariates still affect the mean of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt; overall. This works but I think we can make it simpler.&lt;/li&gt;
+&lt;li&gt;Subtract the constant along with the covariates. This leaves us with only the predicted partial effect of humidity (plus error). This is what we’ll do, because it zooms in only on the predictor that we care about.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;implementation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Implementation&lt;/h1&gt;
+&lt;p&gt;Now we will create the revised gif.&lt;/p&gt;
+&lt;p&gt;First we start with the original Heiss data and code.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- Heiss code -----------------------&lt;/span&gt;
+
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;magrittr&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;lubridate&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;broom&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;scales&amp;quot;&lt;/span&gt;)
+&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;gganimate&amp;quot;&lt;/span&gt;)
+
+&lt;span class=&#34;co&#34;&gt;# Load and clean data&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# This data comes from Dark Sky&amp;#39;s API&lt;/span&gt;
+weather_provo_raw &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_csv&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;https://andhs.co/provoweather&amp;quot;&lt;/span&gt;)
+
+&lt;span class=&#34;co&#34;&gt;# clean dates and precip&lt;/span&gt;
+weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_raw &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;month_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;weekday =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;weekday_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),
+    &lt;span class=&#34;dt&#34;&gt;precipType =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ifelse&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(precipType), &lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;, precipType)
+  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(
+    date, month, month_number, weekday, weekday_number,
+    sunriseTime, sunsetTime, moonPhase, 
+    precipProbability, precipType, temperatureHigh, temperatureLow, dewPoint, 
+    humidity, pressure, windSpeed, cloudCover, visibility, uvIndex
+  )
+
+&lt;span class=&#34;co&#34;&gt;# keep winter and spring, scale vars&lt;/span&gt;
+winter_spring &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(month_number &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(month, &lt;span class=&#34;dt&#34;&gt;ordered =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;humidity =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;cloudCover =&lt;/span&gt; cloudCover &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;precipProbability =&lt;/span&gt; precipProbability &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We combine several model formulas into a data frame and estimate each regression using &lt;code&gt;purrr::map()&lt;/code&gt;. We’ve added the results from &lt;code&gt;broom::augment()&lt;/code&gt; because we want the residuals from each model to create the “noise” in the data for the graphic.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- mike decrescenzo modifications begin -----------------------&lt;/span&gt;
+
+&lt;span class=&#34;co&#34;&gt;# Run all these models in one data frame (purrr::map)&lt;/span&gt;
+&lt;span class=&#34;co&#34;&gt;# add the data as a list column because we&amp;#39;ll want it later&lt;/span&gt;
+models &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(
+    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;formula,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&amp;quot;&lt;/span&gt;,
+    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# data in a list column&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;spring_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(winter_spring)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Run a model in each row&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;model =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map2&lt;/span&gt;(formula, spring_data, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(.x, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; .y))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Extract model elements&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;model_tidy =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, tidy, &lt;span class=&#34;dt&#34;&gt;conf.int =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;), 
+    &lt;span class=&#34;dt&#34;&gt;model_glance =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, glance), 
+    &lt;span class=&#34;dt&#34;&gt;model_fits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, augment)
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the &lt;code&gt;augment&lt;/code&gt; results). We will lazily refer to this as the humidity’s “partial prediction” of temperature (thanks to &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# compute the partial effect of humidity: beta * humidity&lt;/span&gt;
+model_partials &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;models &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# get the humidity beta and bounds&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;humidity_beta =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;estimate) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),
+    &lt;span class=&#34;dt&#34;&gt;beta_low =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.low) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),
+    &lt;span class=&#34;dt&#34;&gt;beta_high =&lt;/span&gt; 
+      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.high) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;()
+  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# calculate partial effect of humidity and keep the residual&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(model_fits) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;partial =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;humidity_beta) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, humidity, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;), partial, .resid) 
+
+&lt;span class=&#34;co&#34;&gt;# get the beta for label plotting&lt;/span&gt;
+model_beta &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;model_partials &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;distinct&lt;/span&gt;() &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now we create the figure. The horizontal axis is the raw humidity data. The vertical axis is the humidity effect (&lt;span class=&#34;math inline&#34;&gt;\(\beta \times \mathit{Humidity}_{i}\)&lt;/span&gt;) plus the regression residual &lt;span class=&#34;math inline&#34;&gt;\(\varepsilon_{i}\)&lt;/span&gt;. The regression line is simply &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mathit{High}}_{i} = \hat{\beta}\mathit{Humidity}_{i}\)&lt;/span&gt; with a constant of zero. That is, on a given day, a humidity level of &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt; exerts a negative impact on temperature amounting to &lt;span class=&#34;math inline&#34;&gt;\(\beta z\)&lt;/span&gt;, setting other factors aside. Conveniently, we don’t have to manually subtract the other covariates because we already know how to calculate the vertical axis using the partial effect and the residual (thanks to the math above).&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;co&#34;&gt;# animate &lt;/span&gt;
+&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_partials, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; humidity, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; partial &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.resid)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_point&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; humidity_beta, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula)
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_low, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_high, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;
+    ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;base_family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, 
+    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;35&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-70&lt;/span&gt;, 
+        &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta: &amp;quot;&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(humidity_beta, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)), 
+        &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), 
+    &lt;span class=&#34;dt&#34;&gt;parse =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(
+    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Humidity&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;&lt;/span&gt;, 
+    &lt;span class=&#34;dt&#34;&gt;subtitle =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{closest_state}&amp;quot;&lt;/span&gt;
+  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(formula, &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.25&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fade&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;
+&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ease_aes&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;sine-in-out&amp;#39;&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2018-10-19-partialling-out_files/figure-html/animated-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;Two notes about the confidence interval&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;The confidence intervals here don’t look like the ordinary hourglass-shaped intervals in linear regression. This is because the hourglass shape comes from uncertainty in both the constant and coefficients. However, the constant has been subtracted out of these predictions, so uncertainty in this visualization only reflects uncertainty in the humidity effect.&lt;/li&gt;
+&lt;li&gt;I would show confidence intervals with &lt;code&gt;geom_ribbon()&lt;/code&gt;, except I can’t get ribbons to animate because of some weird stuff that’s interfering with &lt;a href=&#34;https://github.com/thomasp85/transformr&#34;&gt;transformr&lt;/a&gt; during animation.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;thats-it&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;That’s it&lt;/h1&gt;
+&lt;p&gt;I don’t have comments enabled on the website but get at me on &lt;a href=&#34;https://twitter.com/mikedecr&#34;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Maybe it’s a dev version thing, but &lt;code&gt;scales::degree_format()&lt;/code&gt; doesn’t work for me, so I removed it.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>An example journal article</title>
       <link>/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
