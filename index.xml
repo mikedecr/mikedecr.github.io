@@ -3768,6 +3768,28 @@ ggplot(gender_gaps, aes(x = cycle, y = estimate, color = term)) +
     </item>
     
     <item>
+      <title>State Election Landscapes: The Great Lakes States</title>
+      <link>/code/great-lakes/</link>
+      <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/great-lakes/</guid>
+      <description>&lt;p&gt;This &lt;a href=&#34;https://github.com/mikedecr/great-lakes-elections-project&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; contains code and documentation for compiling and cleaning data for the &lt;a href=&#34;https://medsl-landscapes.netlify.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;State Election Landscapes&lt;/strong&gt;&lt;/a&gt; landscapes project. In the project&amp;rsquo;s own words&amp;hellip;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;State Election Landscapes provides a comprehensive overview of how elections are conducted in the six Great Lake States: Illinois, Indiana, Michigan, Michigan, Minnesota, and Wisconsin. [The] project&amp;hellip;provides:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;narrative material about the legal setting of elections&lt;/li&gt;
+&lt;li&gt;links to important official information about the conduct of elections, and&lt;/li&gt;
+&lt;li&gt;a visualization tool that helps display important statistical information about elections.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The project was led by the MIT Election Data and Sciences Lab in collaboration with researchers at the University of Wisconsin, the University of Minnesota, the Ohio State University.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Causal Inference Reading Group
 </title>
       <link>/teaching/causal-inf-2019/</link>
@@ -3900,6 +3922,24 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
     </item>
     
     <item>
+      <title>Rmarkdown and $\mathrm{\LaTeX}$ Templates
+</title>
+      <link>/code/doc-templates/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/doc-templates/</guid>
+      <description>&lt;p&gt;Custom document templates for the following document types:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$\mathrm{\LaTeX}$ article ($\mathrm{pdf\LaTeX}$)&lt;/li&gt;
+&lt;li&gt;Rmarkdown template files for articles and syllabi ($\mathrm{pdf\LaTeX}$)&lt;/li&gt;
+&lt;li&gt;Preamble for Rmarkdown document compiled to $\mathrm{pdf\LaTeX}$&lt;/li&gt;
+&lt;li&gt;(Coming soon) Bookdown template file for UW–Madison thesis (based on &lt;a href=&#34;https://github.com/tjmahr/buckydown&#34; target=&#34;_blank&#34;&gt;buckydown&lt;/a&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>PS 811: Introductory Statistical Computing for Political Science
 </title>
       <link>/teaching/computing-811/</link>
@@ -3923,6 +3963,16 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;How much did Wisconsin&amp;rsquo;s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements &amp;ldquo;directly&amp;rdquo; affect voters who lack qualifying IDs but also &amp;ldquo;indirectly&amp;rdquo; affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Project Template</title>
+      <link>/code/project-template/</link>
+      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/project-template/</guid>
+      <description>&lt;p&gt;A blank Git repository for starting a new (research) project.&lt;/p&gt;
 </description>
     </item>
     
@@ -4078,16 +4128,6 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Further talk details can easily be added to this page using &lt;em&gt;Markdown&lt;/em&gt; and $\rm \LaTeX$ math code.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Project Template</title>
-      <link>/code/project-template/</link>
-      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/code/project-template/</guid>
-      <description>&lt;p&gt;A blank Git repository for starting a new (research) project.&lt;/p&gt;
 </description>
     </item>
     

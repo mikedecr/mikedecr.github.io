@@ -48,6 +48,11 @@
   </url>
   
   <url>
+    <loc>/code/great-lakes/</loc>
+    <lastmod>2019-08-22T10:01:04-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/teaching/causal-inf-2019/</loc>
     <lastmod>2019-08-20T14:04:21-05:00</lastmod>
   </url>
@@ -58,6 +63,11 @@
   </url>
   
   <url>
+    <loc>/code/doc-templates/</loc>
+    <lastmod>2019-08-22T10:01:04-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/teaching/computing-811/</loc>
     <lastmod>2019-07-09T11:30:34-05:00</lastmod>
   </url>
@@ -65,6 +75,11 @@
   <url>
     <loc>/research/nonvoters/</loc>
     <lastmod>2019-08-02T17:23:42-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/code/project-template/</loc>
+    <lastmod>2019-08-22T10:01:04-05:00</lastmod>
   </url>
   
   <url>
@@ -99,7 +114,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-08-20T14:04:21-05:00</lastmod>
+    <lastmod>2019-08-22T10:01:04-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -111,11 +126,6 @@
   <url>
     <loc>/talk/polmeth-2019/</loc>
     <lastmod>2019-07-18T12:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/project-template/</loc>
-    <lastmod>2019-07-09T11:11:30-05:00</lastmod>
   </url>
   
   <url>
