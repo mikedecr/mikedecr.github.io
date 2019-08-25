@@ -117,23 +117,24 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;dev&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot;
-##  [8] &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot;
-## [15] &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot;
-## [22] &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot;
-## [29] &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot;
-## [36] &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot;
-## [43] &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot;
-## [50] &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot;
-## [57] &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot;
-## [64] &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot;
-## [71] &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot;
+##  [8] &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot;
+## [15] &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot;
+## [22] &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot;
+## [29] &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot;
+## [36] &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot;
+## [43] &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot;
+## [50] &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot;
+## [57] &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot;
+## [64] &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot;
+## [71] &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot;
+## [78] &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;549e2f0&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;32e03b8&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;less annoying blurb&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;git-paper post is public&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
@@ -151,123 +152,6 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;div id=&#34;caveat&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Caveat&lt;/h1&gt;
 &lt;p&gt;When you push to Github, it creates new hashes that differ from your local machine. As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github. This is a current shortcoming in my approach, and I expect to update this post soon once I figure out a system for incorporating the remote hash in addition to the local hash.&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>
-&lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
-div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
-&lt;/style&gt;
-
-
-&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;summary&lt;/span&gt;(cars)
-&lt;span class=&#34;co&#34;&gt;##      speed           dist       &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  Min.   : 4.0   Min.   :  2.00  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  1st Qu.:12.0   1st Qu.: 26.00  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  Median :15.0   Median : 36.00  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  Mean   :15.4   Mean   : 42.98  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  3rd Qu.:19.0   3rd Qu.: 56.00  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##  Max.   :25.0   Max.   :120.00&lt;/span&gt;
-fit &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(dist &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;speed, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; cars)
-fit
-&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;## Call:&lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;## lm(formula = dist ~ speed, data = cars)&lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;## Coefficients:&lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;## (Intercept)        speed  &lt;/span&gt;
-&lt;span class=&#34;co&#34;&gt;##     -17.579        3.932&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;par&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;mar =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))
-&lt;span class=&#34;kw&#34;&gt;pie&lt;/span&gt;(
-  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;280&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;60&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;),
-  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Sky&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Sunny side of pyramid&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Shady side of pyramid&amp;#39;&lt;/span&gt;),
-  &lt;span class=&#34;dt&#34;&gt;col =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;#0292D8&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#F7EA39&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#C4B632&amp;#39;&lt;/span&gt;),
-  &lt;span class=&#34;dt&#34;&gt;init.angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-50&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;border =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
-&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>

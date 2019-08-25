@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/computational-methods/index.xml" rel="self" type="application/rss+xml" />
     
@@ -182,6 +182,150 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <description>&lt;p&gt;Every year, the UW Political Science department holds a $\mathrm{\LaTeX}$ workshop&amp;mdash;a few introductory training sessions for graduate students on document preparation. I have been involved with organizing this workshop since 2015, and have been leading it since 2017.&lt;/p&gt;
 
 &lt;p&gt;All materials for the worksho, source code and all, are publicly available (in their 2018 vintage) on my &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Displaying Git information in your open-source research paper (with Rmarkdown)
+</title>
+      <link>/post/git-in-papers/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/git-in-papers/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;One benefit of open-source research is that it is possible to trace the history of a research product through its (potentially many) iterations using a versioning system such as Git. This is great for readers who encounter the project’s remote repository, but it’s more likely the case that readers will encounter only a PDF of your paper in an email or through a preprint archive. While services like ArXiv will watermark your paper, it (or so it seems) only includes information about the paper’s history in ArXiv specifically, rather its history in your Git repository. This post describes how you can use Rmarkdown to include Git information into a working draft of your research paper.&lt;/p&gt;
+&lt;p&gt;What exactly do I mean? Your paper typically includes the date of compilation, but you could also include the current commit hash, the branch of the current commit, and so on. Why would you want to do this?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A compilation system like &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.&lt;/li&gt;
+&lt;li&gt;As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.&lt;/li&gt;
+&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here is an example from one of my in-progress papers.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/for-posts/git-date.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;p&gt;This setup prioritizes the commit hash over the compilation date as a method for “dating” your paper. The branch name is included in cases where the PDF is generated on a development branch instead of on the master/public branch. The footnote corresponding to the commit information contains the commit message (not shown). And lastly, the link to the public version takes you to the master branch PDF on Github—the most recent major version.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-do-it&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;How to do it&lt;/h1&gt;
+&lt;p&gt;Setting this up consists of essentially two steps:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Learn to print Git commands to the console using R.&lt;/li&gt;
+&lt;li&gt;Place that R code in your &lt;code&gt;.Rmd&lt;/code&gt; document’s YAML header.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id=&#34;console-commands-with-r&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Console commands with R&lt;/h2&gt;
+&lt;p&gt;We can run console commands within R using the &lt;code&gt;system()&lt;/code&gt; function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the &lt;code&gt;intern = TRUE&lt;/code&gt; argument.&lt;/p&gt;
+&lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
+&lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;dev&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot;
+##  [8] &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot;
+## [15] &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot;
+## [22] &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot;
+## [29] &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot;
+## [36] &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot;
+## [43] &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot;
+## [50] &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot;
+## [57] &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot;
+## [64] &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot;
+## [71] &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot;
+## [78] &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;32e03b8&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
+&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;git-paper post is public&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;R results in the YAML&lt;/h2&gt;
+&lt;p&gt;Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This image shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/img/for-posts/git-yaml.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;We use the &lt;code&gt;date&lt;/code&gt; variable, but we supply multiple lines of content. To do this, place a pipe &lt;code&gt;|&lt;/code&gt; after declaring the &lt;code&gt;date&lt;/code&gt; variable, and begin each line with a new pipe &lt;code&gt;|&lt;/code&gt;. This will line-break the content in your compiled PDF and let you supply &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; code directly to the variable.&lt;/li&gt;
+&lt;li&gt;To use teletype/fixed-width font, type the &lt;code&gt;\texttt{}&lt;/code&gt; command for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; directly in Rmarkdown.&lt;/li&gt;
+&lt;li&gt;We can evaluate and print the results of inline R code by including the letter &lt;code&gt;r&lt;/code&gt; at the beginning of an inline code chunk (delimited by backticks). This code is evaluated before the document is compiled, so the information being passed to &lt;code&gt;\texttt{}&lt;/code&gt; is the &lt;em&gt;results&lt;/em&gt; of the R code rather than the text of the R code itself.&lt;/li&gt;
+&lt;li&gt;Do the same basic setup for the commit hash, commit message (in a footnote), and the compilation date. Note that the formatting of the compilation date gives you prettier results than the Rmarkdown default.&lt;/li&gt;
+&lt;li&gt;Lastly, you can link the reader to the most recent public PDF by linking to your remote master branch. By linking directly to Github (or wherever else you host the remote repository), any time you push an update to remote, your PDF will automatically be up to date. This will be true of any offline PDF, any previous PDF, and any PDF generated on any branch. This is because the URL to your master branch PDF will not change even if the PDF file itself changes!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;caveat&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Caveat&lt;/h1&gt;
+&lt;p&gt;When you push to Github, it creates new hashes that differ from your local machine. As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github. This is a current shortcoming in my approach, and I expect to update this post soon once I figure out a system for incorporating the remote hash in addition to the local hash.&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
