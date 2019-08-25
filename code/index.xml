@@ -17,7 +17,7 @@
       <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/code/great-lakes/</guid>
-      <description>&lt;p&gt;This &lt;a href=&#34;https://github.com/mikedecr/great-lakes-elections-project&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; contains code and documentation for compiling and cleaning data for the &lt;a href=&#34;https://medsl-landscapes.netlify.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;State Election Landscapes&lt;/strong&gt;&lt;/a&gt; landscapes project. In the project&amp;rsquo;s own words&amp;hellip;&lt;/p&gt;
+      <description>&lt;p&gt;This &lt;a href=&#34;https://github.com/mikedecr/great-lakes-elections-project&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; contains code and documentation for compiling and cleaning data for the &lt;a href=&#34;https://medsl-landscapes.netlify.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;State Election Landscapes&lt;/strong&gt;&lt;/a&gt; project. In the project&amp;rsquo;s own words&amp;hellip;&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;State Election Landscapes provides a comprehensive overview of how elections are conducted in the six Great Lake States: Illinois, Indiana, Michigan, Michigan, Minnesota, and Wisconsin. [The] project&amp;hellip;provides:&lt;/p&gt;
@@ -30,6 +30,21 @@
 &lt;/blockquote&gt;
 
 &lt;p&gt;The project was led by the MIT Election Data and Sciences Lab in collaboration with researchers at the University of Wisconsin, the University of Minnesota, the Ohio State University.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>$\mathrm{\LaTeX}$ Business Card
+</title>
+      <link>/code/business-card/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/code/business-card/</guid>
+      <description>&lt;p&gt;A Github repo for a simple business card built with $\mathrm{\LaTeX}$.&lt;/p&gt;
+
+&lt;p&gt;An example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://github.com/mikedecr/latex-business-card/raw/master/example.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -52,7 +67,7 @@
     </item>
     
     <item>
-      <title>Project Template</title>
+      <title>Blank Project Template</title>
       <link>/code/project-template/</link>
       <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
       

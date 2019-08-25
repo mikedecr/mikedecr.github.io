@@ -80,7 +80,9 @@
 
 &lt;ul&gt;
 &lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Gelman and Carlin (2014), &lt;a href=&#34;https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bhavnani (2017), &lt;a href=&#34;https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20160030&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do the Effects of Temporary Ethnic Group Quotas Persist? Evidence from India&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Coppenolle (2017), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -116,9 +118,10 @@
 &lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Samii, Paler, and Daly (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Wager and Athey (2018), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Abraham and Sun (2019), &lt;a href=&#34;http://economics.mit.edu/files/14964&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Cheng, Khomtchouk, Matloff, and Mohanty (2019), &lt;a href=&#34;https://arxiv.org/pdf/1806.06850.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Polynomial Regression as an Alternative to Neural Nets&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Regression Discontinuity&lt;/p&gt;
@@ -131,10 +134,11 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Time-Series Cross-Sectional Data&lt;/p&gt;
+&lt;p&gt;Time-Series Cross-Sectional and Panel Data&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
