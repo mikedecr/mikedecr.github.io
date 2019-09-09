@@ -98,13 +98,18 @@
   </url>
   
   <url>
+    <loc>/research/causal-bayes/</loc>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/teaching/latex-workshop/</loc>
     <lastmod>2019-08-22T10:11:00-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/research/causal-bayes/</loc>
-    <lastmod>2019-08-19T22:44:28-05:00</lastmod>
+    <loc>/research/forecast-uncertainty/</loc>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
   </url>
   
   <url>
@@ -119,7 +124,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-08-25T16:02:19-05:00</lastmod>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -166,7 +171,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-08-25T15:47:00-05:00</lastmod>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -267,7 +272,7 @@
   
   <url>
     <loc>/tags/elections/</loc>
-    <lastmod>2019-08-19T22:44:28-05:00</lastmod>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,7 +288,7 @@
   
   <url>
     <loc>/tags/methods/</loc>
-    <lastmod>2019-08-25T15:47:00-05:00</lastmod>
+    <lastmod>2019-09-09T15:19:29-05:00</lastmod>
     <priority>0</priority>
   </url>
   
