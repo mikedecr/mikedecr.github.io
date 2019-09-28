@@ -28,11 +28,11 @@
   
     
   
-  <meta name="description" content="How to timestamp your paper with a commit hash and branch name
+  <meta name="description" content="A quick note on reproducibility and remote computing
 ">
 
   
-  <link rel="alternate" hreflang="en-us" href="/post/git-in-papers/">
+  <link rel="alternate" hreflang="en-us" href="/post/love-list2env/">
 
   
 
@@ -97,7 +97,7 @@
   <link rel="icon" type="image/png" href="/img/icon.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/post/git-in-papers/">
+  <link rel="canonical" href="/post/love-list2env/">
 
   
   
@@ -111,28 +111,28 @@
   <meta property="twitter:creator" content="@mikedecr">
   
   <meta property="og:site_name" content="Michael DeCrescenzo">
-  <meta property="og:url" content="/post/git-in-papers/">
-  <meta property="og:title" content="Git information in your open-source research paper (with Rmarkdown)
+  <meta property="og:url" content="/post/love-list2env/">
+  <meta property="og:title" content="A Love Letter to list2env()
  | Michael DeCrescenzo">
-  <meta property="og:description" content="How to timestamp your paper with a commit hash and branch name
+  <meta property="og:description" content="A quick note on reproducibility and remote computing
 "><meta property="og:image" content="/img/circular-telles.png">
   <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
   
-  <meta property="article:published_time" content="2019-08-25T00:00:00&#43;00:00">
+  <meta property="article:published_time" content="2019-09-27T00:00:00&#43;00:00">
   
-  <meta property="article:modified_time" content="2019-08-25T00:00:00&#43;00:00">
+  <meta property="article:modified_time" content="2019-09-27T00:00:00&#43;00:00">
   
-
-  
-
 
   
 
 
+  
 
 
 
-  <title>Git information in your open-source research paper (with Rmarkdown)
+
+
+  <title>A Love Letter to list2env()
  | Michael DeCrescenzo</title>
 
 </head>
@@ -378,11 +378,11 @@
   
   
 <div class="article-container pt-3">
-  <h1 itemprop="name">Git information in your open-source research paper (with Rmarkdown)
+  <h1 itemprop="name">A Love Letter to list2env()
 </h1>
 
   
-  <p class="page-subtitle">How to timestamp your paper with a commit hash and branch name</p>
+  <p class="page-subtitle">A quick note on reproducibility and remote computing</p>
   
 
   
@@ -390,8 +390,8 @@
 
 
 
-<meta content="2019-08-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">
-<meta content="2019-08-25 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+<meta content="2019-09-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-09-27 00:00:00 &#43;0000 UTC" itemprop="dateModified">
 
 <div class="article-metadata">
 
@@ -416,7 +416,7 @@
     
       
     
-    <time>Aug 25, 2019</time>
+    <time>Sep 27, 2019</time>
   </span>
   
 
@@ -425,7 +425,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    6 min read
   </span>
   
 
@@ -539,71 +539,74 @@ code span.wa { color: #bf0303; } /* Warning */
 </style>
 
 
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
-<p>One benefit of open-source research is that it is possible to trace the history of a research product through its (potentially many) iterations using a versioning system such as Git. This is great for readers who encounter the project’s remote repository, but it’s more likely the case that readers will encounter only a PDF of your paper in an email or through a preprint archive. While services like ArXiv will watermark your paper, it (or so it seems) only includes information about the paper’s history in ArXiv specifically, rather its history in your Git repository. This post describes how you can use Rmarkdown to include Git information into a working draft of your research paper.</p>
-<p>What exactly do I mean? Your paper typically includes the date of compilation, but you could also include the current commit hash, the branch of the current commit, and so on. Why would you want to do this?</p>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>This is a short post about a function that I didn’t know about until recently: <code>list2env()</code>. In brief, <code>list2env()</code> does the following:</p>
 <ul>
-<li>A compilation system like <span class="math inline">\(\mathrm{\LaTeX}\)</span> can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.</li>
-<li>As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.</li>
-<li>A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with <a href="https://datasift.github.io/gitflow/IntroducingGitFlow.html">“Git flow”</a>). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.</li>
+<li>takes a named list as an argument</li>
+<li>“multiply assigns” list components to objects with respective names</li>
+<li>You can pick which environment these objects are assigned to. This can be the global environment if you want.</li>
 </ul>
-<p>Here is an example from one of my in-progress papers.</p>
-<p><img src="/img/for-posts/git-date.png" /><!-- --></p>
-<p>This setup prioritizes the commit hash over the compilation date as a method for “dating” your paper. The branch name is included in cases where the PDF is generated on a development branch instead of on the master/public branch. The footnote corresponding to the commit information contains the commit message (not shown). And lastly, the link to the public version takes you to the master branch PDF on Github—the most recent major version.</p>
+<p>An example of how it works in action:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a named list</span>
+my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>)
+
+<span class="co"># assign list objects</span>
+<span class="kw">list2env</span>(my_list, <span class="dt">envir =</span> .GlobalEnv)</code></pre>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># did objects make it into environment?</span>
+<span class="kw">ls</span>(); a; b</code></pre>
+<pre><code>## [1] &quot;a&quot;       &quot;b&quot;       &quot;my_list&quot;</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>So that’s what <code>list2env()</code> does, but why would you use it? I will describe a workflow that I have been implementing for my dissertation.</p>
+<ul>
+<li>I do a lot of work with Bayesian models/MCMC. I estimate these models on a remote machine (connected using <code>ssh</code>) so not to overburden my laptop.</li>
+<li>Objects created on the remote machine (posterior samples, the number of Markov chains, number of iterations, etc.) have to get passed back to my machine.</li>
+<li>Once on my machine, read data into R in a format that is convenient. I then use these objects for analysis or for writing an <code>.Rmd</code> document.</li>
+</ul>
 </div>
-<div id="how-to-do-it" class="section level1">
-<h1>How to do it</h1>
-<p>Setting this up consists of essentially two steps:</p>
-<ol style="list-style-type: decimal">
-<li>Learn to print Git commands to the console using R.</li>
-<li>Place that R code in your <code>.Rmd</code> document’s YAML header.</li>
-</ol>
-<div id="console-commands-with-r" class="section level2">
-<h2>Console commands with R</h2>
-<p>We can run console commands within R using the <code>system()</code> function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the <code>intern = TRUE</code> argument.</p>
-<p>Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).</p>
-<p>For instance, how can we print the branch name?</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>## [1] &quot;master&quot;</code></pre>
-<p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</code></pre>
-<pre><code>##  [1] &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot;
-##  [8] &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot;
-## [15] &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot;
-## [22] &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot;
-## [29] &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot;
-## [36] &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot;
-## [43] &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot;
-## [50] &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot;
-## [57] &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot;
-## [64] &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot;
-## [71] &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot;
-## [78] &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot;
-## [85] &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
-<p>Use indexing to isolate only the most recent hash from this vector of results.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</code></pre>
-<pre><code>## [1] &quot;72ecc5a&quot;</code></pre>
-<p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</code></pre>
-<pre><code>## [1] &quot;blog: new list2env post, title changes&quot;</code></pre>
+<div id="where-list2env-comes-in" class="section level2">
+<h2>Where <code>list2env()</code> comes in</h2>
+<p>Why is this function special? Mainly because of what <em>won’t</em> work for me. This remote-local hybrid workflow requires a few things to go right.</p>
+<p><strong>The whole routine needs to be reproducible.</strong> I’m a huge geek about making sure my projects run from top to bottom. But more importantly in the near term, I have to do this routine <em>a ton</em>, because a lot of my work requires me to bounce between multiple machines. I can’t just email a one-off data file to myself. This has to work with code, and it has to work smoothly.</p>
+<p><strong>When I’m on the remote machine, I don’t want to save the whole workspace.</strong> I don’t need to keep every object that I create on the remote computer. I only want to use <em>some</em> of these later. So while a routine that involves saving the whole R workspace as an <code>.Rdata</code> might work when you’re on a local machine without too many objects, I want to be careful which things I save from the remote machine.</p>
+<p><strong>More to the point, an <code>.Rdata</code> file won’t work.</strong> Even if I were to remove (using <code>rm()</code>) all of the objects I don’t want to keep, exporting the image as <code>.Rdata</code> flat out won’t work for me. Why? Because the <code>{boxr}</code> package, which I use to push data to/pull data from folders synced on Box, doesn’t work with <code>.Rdata</code> files. At least, not the package version that I have. But it does handle <code>.RDS</code> files, and we can save lists as <code>.RDS</code>.</p>
 </div>
-<div id="r-results-in-the-yaml" class="section level2">
-<h2>R results in the YAML</h2>
-<p>Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This image shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.</p>
-<p><img src="/img/for-posts/git-yaml.png" /><!-- --></p>
-<ol style="list-style-type: decimal">
-<li>We use the <code>date</code> variable, but we supply multiple lines of content. To do this, place a pipe <code>|</code> after declaring the <code>date</code> variable, and begin each line with a new pipe <code>|</code>. This will line-break the content in your compiled PDF and let you supply <span class="math inline">\(\mathrm{\LaTeX}\)</span> code directly to the variable.</li>
-<li>To use teletype/fixed-width font, type the <code>\texttt{}</code> command for <span class="math inline">\(\mathrm{\LaTeX}\)</span> directly in Rmarkdown.</li>
-<li>We can evaluate and print the results of inline R code by including the letter <code>r</code> at the beginning of an inline code chunk (delimited by backticks). This code is evaluated before the document is compiled, so the information being passed to <code>\texttt{}</code> is the <em>results</em> of the R code rather than the text of the R code itself.</li>
-<li>Do the same basic setup for the commit hash, commit message (in a footnote), and the compilation date. Note that the formatting of the compilation date gives you prettier results than the Rmarkdown default.</li>
-<li>Lastly, you can link the reader to the most recent public PDF by linking to your remote master branch. By linking directly to Github (or wherever else you host the remote repository), any time you push an update to remote, your PDF will automatically be up to date. This will be true of any offline PDF, any previous PDF, and any PDF generated on any branch. This is because the URL to your master branch PDF will not change even if the PDF file itself changes!</li>
-</ol>
-</div>
-</div>
-<div id="caveat" class="section level1">
-<h1>Caveat</h1>
-<p>When you push to Github, it creates new hashes that differ from your local machine. As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github. This is a current shortcoming in my approach, and I expect to update this post soon once I figure out a system for incorporating the remote hash in addition to the local hash.</p>
+<div id="slightly-longer-demo" class="section level2">
+<h2>Slightly longer demo</h2>
+<p>To see it in practice, pretend we’re on the remote machine. We have created a handful of objects, only some of which we want to save. I will add some objects to our environment to demonstrate.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
+<span class="kw">data</span>(mtcars)</code></pre>
+<p>Let’s see what all we have now.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<pre><code>## [1] &quot;a&quot;       &quot;b&quot;       &quot;iris&quot;    &quot;mtcars&quot;  &quot;my_list&quot;</code></pre>
+<p>Now, suppose I want to pass data back to my home machine, but I only want to keep the objects <code>b</code> and <code>iris</code>. I could do this by putting them into a list. These objects should be <em>named!</em></p>
+<pre class="sourceCode r"><code class="sourceCode r">objs_to_save &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">b =</span> b, <span class="dt">iris =</span> iris)</code></pre>
+<p>Now imagine that I upload the files to Box. This is done using <code>boxr::box_write(objs_to_save, &quot;saved-list.RDS&quot;, dir_id = ...)</code> where <code>...</code> is a numeric ID assigned to a synced folder on Box.com.</p>
+<p>Now pretend I’m on my home machine again. I will wipe our workspace (all but <code>objs_to_save</code>) to simulate the effect.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()[<span class="kw">ls</span>() <span class="op">!=</span><span class="st"> &quot;objs_to_save&quot;</span>])</code></pre>
+<p>I read the saved list from Box, so now it’s in my workspace as a list:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<pre><code>## [1] &quot;objs_to_save&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(objs_to_save, head)</code></pre>
+<pre><code>## $b
+## [1] 2
+## 
+## $iris
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<p>Here is where we use <code>list2env()</code>. We simply drop the objects in this list into the global environment.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list2env</span>(objs_to_save, <span class="dt">envir =</span> .GlobalEnv)</code></pre>
+<pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<pre><code>## [1] &quot;b&quot;            &quot;iris&quot;         &quot;objs_to_save&quot;</code></pre>
+<p>Now we can use these objects for analysis in an <code>R</code> script, or we can use them in an <code>.Rmd</code> report to write up the results of what we did on the remote machine. Whatever you’re doing, saving objects as a list and then reading the list into R can be a quick way to move data between R sessions, and <code>list2env()</code> makes it easy.</p>
 </div>
 
     </div>
@@ -724,6 +727,9 @@ code span.wa { color: #bf0303; } /* Warning */
         <h3>Related</h3>
         <ul>
           
+          <li><a href="/post/git-in-papers/">Git information in your open-source research paper (with Rmarkdown)
+</a></li>
+          
           <li><a href="/post/bayes-mediation/">Causal Mediation, Bayesianly</a></li>
           
           <li><a href="/post/viz-partials/">A Visualization of Partial Effects in Multiple Regression</a></li>
@@ -732,9 +738,6 @@ code span.wa { color: #bf0303; } /* Warning */
 </a></li>
           
           <li><a href="/teaching/latex-workshop/">Graduate $\mathrm{\LaTeX}$ Workshop (UW–Madison Political Science)
-</a></li>
-          
-          <li><a href="/teaching/math-camp/">Graduate Math Camp (UW–Madison Political Science)
 </a></li>
           
         </ul>
