@@ -548,14 +548,14 @@ code span.wa { color: #bf0303; } /* Warning */
 <li>You can pick which environment these objects are assigned to. This can be the global environment if you want.</li>
 </ul>
 <p>An example of how it works in action:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># create a named list</span>
-my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>)
-
-<span class="co"># assign list objects</span>
-<span class="kw">list2env</span>(my_list, <span class="dt">envir =</span> .GlobalEnv)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># create a named list</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># assign list objects</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">list2env</span>(my_list, <span class="dt">envir =</span> .GlobalEnv)</a></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># did objects make it into environment?</span>
-<span class="kw">ls</span>(); a; b</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># did objects make it into environment?</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">ls</span>(); a; b</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot;       &quot;b&quot;       &quot;my_list&quot;</code></pre>
 <pre><code>## [1] 1</code></pre>
 <pre><code>## [1] 2</code></pre>
@@ -575,20 +575,20 @@ my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="
 <div id="slightly-longer-demo" class="section level2">
 <h2>Slightly longer demo</h2>
 <p>To see it in practice, pretend we’re on the remote machine. We have created a handful of objects, only some of which we want to save. I will add some objects to our environment to demonstrate.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(iris)
-<span class="kw">data</span>(mtcars)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">data</span>(iris)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">data</span>(mtcars)</a></code></pre></div>
 <p>Let’s see what all we have now.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;a&quot;       &quot;b&quot;       &quot;iris&quot;    &quot;mtcars&quot;  &quot;my_list&quot;</code></pre>
 <p>Now, suppose I want to pass data back to my home machine, but I only want to keep the objects <code>b</code> and <code>iris</code>. I could do this by putting them into a list. These objects should be <em>named!</em></p>
-<pre class="sourceCode r"><code class="sourceCode r">objs_to_save &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">b =</span> b, <span class="dt">iris =</span> iris)</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">objs_to_save &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">b =</span> b, <span class="dt">iris =</span> iris)</a></code></pre></div>
 <p>Now imagine that I upload the files to Box. This is done using <code>boxr::box_write(objs_to_save, &quot;saved-list.RDS&quot;, dir_id = ...)</code> where <code>...</code> is a numeric ID assigned to a synced folder on Box.com. (If I wanted to save the whole <code>.Rdata</code> image, I could use <code>box_save_image()</code>).</p>
 <p>Now pretend I’m on my home machine again. I will wipe our workspace (all but <code>objs_to_save</code>) to simulate the effect.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()[<span class="kw">ls</span>() <span class="op">!=</span><span class="st"> &quot;objs_to_save&quot;</span>])</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">rm</span>(<span class="dt">list =</span> <span class="kw">ls</span>()[<span class="kw">ls</span>() <span class="op">!=</span><span class="st"> &quot;objs_to_save&quot;</span>])</a></code></pre></div>
 <p>I read the saved list from Box, so now it’s in my workspace as a list:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;objs_to_save&quot;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lapply</span>(objs_to_save, head)</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">lapply</span>(objs_to_save, head)</a></code></pre></div>
 <pre><code>## $b
 ## [1] 2
 ## 
@@ -601,9 +601,9 @@ my_list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
 <p>Here is where we use <code>list2env()</code>. We simply drop the objects in this list into the global environment.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">list2env</span>(objs_to_save, <span class="dt">envir =</span> .GlobalEnv)</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">list2env</span>(objs_to_save, <span class="dt">envir =</span> .GlobalEnv)</a></code></pre></div>
 <pre><code>## &lt;environment: R_GlobalEnv&gt;</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">ls</span>()</a></code></pre></div>
 <pre><code>## [1] &quot;b&quot;            &quot;iris&quot;         &quot;objs_to_save&quot;</code></pre>
 <p>Now we can use these objects for analysis in an <code>R</code> script, or we can use them in an <code>.Rmd</code> report to write up the results of what we did on the remote machine. Whatever you’re doing, saving objects as a list and then reading the list into R can be a quick way to move data between R sessions, and <code>list2env()</code> makes it easy.</p>
 </div>
