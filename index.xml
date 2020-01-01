@@ -55,7 +55,15 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/dissertation/</guid>
-      <description>&lt;p&gt;This page under construction!&lt;/p&gt;
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    This page under construction
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As general election competition in the U.S. becomes increasingly driven by partisanship, party nomination contests are perhaps more consequential than ever. Yet research on U.S. elections knows little about whether primaries serve their stated purpose: to represent the preferences of local partisan voters. Political scientists believe that primary elections present candidates with a &amp;ldquo;strategic positioning dilemma&amp;rdquo;&amp;mdash;to win both the nomination and the general election, candidates must position themselves as some spatial compromise between the preferences of their partisan base and the district median voter. This theory of primaries is theoretically and empirically tenuous. Theoretically, primary elections present voters with uniquely high informational demands. Learning the policy positions of candidates is costly, especially when all candidates share the same party label. Moreover, informal party networks may overshadow voter preferences in shaping primary outcomes. Empirically, research on primary representation is hindered by a limited understanding of local partisan preferences. Most existing research measures local preferences using rough proxies that do not distinguish between Republican and Democratic preferences (such as vote shares) or do not operationalize citizen preferences at all.&lt;/p&gt;
+
+&lt;p&gt;This dissertation puts the big questions of primary representation to the test using recent data on U.S. House primaries. Do candidates position themselves in response to the ideological median in their partisan constituency? Do partisan constituencies nominate candidates that better match their ideological preferences? These questions are key to understanding primaries, but they are not confronted directly in existing research. This project develops a unique set of ideal point estimates for local &amp;ldquo;party publics&amp;rdquo;&amp;mdash;partisan groups within districts&amp;mdash;by fitting a group-level IRT model to public opinion data in recent election cycles. The model estimates the ideological medians of Republican and Democratic identifiers within districts and the degree of ideological heterogeneity within each group. With direct measures of local partisan preferences, further research can examine the power of individuals vs. groups in shaping nomination contests, the quality of electoral accountability in &amp;ldquo;safe&amp;rdquo; districts, and the ideological dimensions along which the two parties compete in primaries.&lt;/p&gt;
 </description>
     </item>
     
@@ -68,13 +76,18 @@
       <guid>/about/</guid>
       <description>
 
+&lt;p&gt;I grew up near St. Louis, MO, and studied political science the University of Missouri. I have spent some time in Berkeley, CA, taking summer courses and working in a nearby sandwich shop. I moved to Madison for graduate school in 2014.&lt;/p&gt;
+
+&lt;p&gt;In my free time, I am a fledgling cyclist and a jack-of-many-trades musician.
+&lt;!-- soon, GIFs --&gt;&lt;/p&gt;
+
 &lt;h3 id=&#34;about-my-research&#34;&gt;About my research&lt;/h3&gt;
 
 &lt;p&gt;My research focuses on American electoral politics and statistical research methods.&lt;/p&gt;
 
-&lt;p&gt;I am interested in the &lt;em&gt;performance&lt;/em&gt; of elections: how elections represent citizen views, how they are administered, how citizens experience the task of voting. I study these topics with historical election returns, online experiments, targeted surveys, voting and registration records, and polling place reports.&lt;/p&gt;
+&lt;p&gt;I am interested in the performance and functioning of elections: how well elections represent citizen views, how they are administered, how citizens experience the task of voting. I have studied these topics with historical election returns, online experiments, targeted surveys, voting and registration records, and polling place reports.&lt;/p&gt;
 
-&lt;p&gt;My current &lt;a href=&#34;/research/&#34;&gt;projects&lt;/a&gt; deal with voter identification requirements in the state of Wisconsin, the gender gap and other group dynamics in electoral coalitions, voters&amp;rsquo; perceptions of uncertainty in election polls and forecasts, and Bayesian causal inference. My dissertation examines ideological representation in primary elections, developing new models to estimate the policy preferences of local partisan groups.&lt;/p&gt;
+&lt;p&gt;My &lt;a href=&#34;/#publications&#34;&gt;publications&lt;/a&gt; and &lt;a href=&#34;/#research&#34;&gt;current projects&lt;/a&gt; deal with voter identification requirements in the state of Wisconsin, the gender gap and other group dynamics in electoral coalitions, voters&amp;rsquo; perceptions of uncertainty in election polls and forecasts, and Bayesian causal inference. My dissertation examines ideological representation in primary elections, developing new models to estimate the policy preferences of local partisan groups.&lt;/p&gt;
 
 &lt;p&gt;Methodologically, I explore and apply Bayesian methods for measurement and causal inference. I try to give each of my projects something methodologically distinctive&amp;mdash;innovations on ideal point models, a bespoke Bayesian analysis for unconventional data, or new modeling approaches for old problems. I am also concerned with meta-research problems related to statistical and scientific inference, transparency and reproducibility, and publication bias.&lt;/p&gt;
 
@@ -85,13 +98,6 @@
 &lt;p&gt;Most notably I have been instructor-of-record for statistical software courses for undergraduate and graduate students, and led graduate workshops on causal inference, reproducible workflows/typesetting, and math camp.&lt;/p&gt;
 
 &lt;p&gt;I have also served as a teaching assistant for courses about American political behavior, campaign finance, and survey research methods.&lt;/p&gt;
-
-&lt;h3 id=&#34;background&#34;&gt;Background&lt;/h3&gt;
-
-&lt;p&gt;I grew up near St. Louis, MO, and studied political science the University of Missouri. I have spent some time in Berkeley, CA, taking summer courses and working in a nearby sandwich shop. I moved to Madison for graduate school in 2014.&lt;/p&gt;
-
-&lt;p&gt;In my free time, I am a fledgling cyclist and a jack-of-many-trades musician.
-&lt;!-- soon, GIFs --&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -3977,6 +3983,22 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
     </item>
     
     <item>
+      <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
+      <link>/publication/nonvoters/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nonvoters/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Git repo link coming soon
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Rmarkdown/$\mathrm{\LaTeX}$ Templates for Papers and Syllabi
 </title>
       <link>/code/doc-templates/</link>
@@ -4008,20 +4030,6 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
     </item>
     
     <item>
-      <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
-      <link>/research/nonvoters/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/research/nonvoters/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;How much did Wisconsin&amp;rsquo;s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements &amp;ldquo;directly&amp;rdquo; affect voters who lack qualifying IDs but also &amp;ldquo;indirectly&amp;rdquo; affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Blank Project Template</title>
       <link>/code/project-template/</link>
       <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
@@ -4049,9 +4057,9 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/gender-gap/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
 
-&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -4062,9 +4070,9 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/causal-bayes/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/reeves-pooling.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields&amp;mdash;such as psychology, epidemiology, and biostatistics&amp;mdash;where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.&lt;/p&gt;
 
-&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields&amp;mdash;such as psychology, epidemiology, and biostatistics&amp;mdash;where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/reeves-pooling.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -4095,33 +4103,11 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
     <item>
       <title>The Unexceptional Gender Gap of 2016
 </title>
-      <link>/research/gender-2016/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <link>/publication/gender-2016/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/research/gender-2016/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-
-&lt;p&gt;Because of the particular candidates who ran, the 2016 presidential campaign was defined by gender to a remarkable degree. This led many observers to expect a historically large gender gap in voting. In contrast to these expectations, the gender gap between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to matter. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
-
-&lt;h2 id=&#34;cite-this-paper&#34;&gt;Cite this paper&lt;/h2&gt;
-
-&lt;p&gt;Burden, Barry C., Evan Crawford, and Michael G. DeCrescenzo. 2016. &amp;ldquo;The Unexceptional Gender Gap of 2016.&amp;rdquo; &lt;em&gt;The Forum&lt;/em&gt; 14(4), 415–432.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;@article{burden-crawford-decrescenzo:2016:gender-gap,
-  title = {The Unexceptional Gender Gap of 2016},
-  author = {Burden, Barry C and Crawford, Evan and DeCrescenzo, Michael G},
-  journal = {The Forum},
-  volume = {14},
-  number = {4},
-  pages = {415--432},
-  year = {2016},
-  publisher = {De Gruyter}
-}
-&lt;/code&gt;&lt;/pre&gt;
+      <guid>/publication/gender-2016/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -4398,28 +4384,29 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
 &lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;dev&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot;
-##  [8] &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot;
-## [15] &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot;
-## [22] &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot;
-## [29] &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot;
-## [36] &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot;
-## [43] &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot;
-## [50] &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot;
-## [57] &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot;
-## [64] &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot;
-## [71] &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot;
-## [78] &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot;
-## [85] &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot;
+##  [8] &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot;
+## [15] &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot;
+## [22] &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot;
+## [29] &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot;
+## [36] &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot;
+## [43] &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot;
+## [50] &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot;
+## [57] &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot;
+## [64] &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot;
+## [71] &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot;
+## [78] &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot;
+## [85] &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot;
+## [92] &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;3e3d9d1&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;5b6cd16&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;nonvoters is published online, bio tweak&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;bio tweaks&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
@@ -4581,10 +4568,10 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
     
     <item>
       <title>An example preprint / working paper</title>
-      <link>/publication/preprint/</link>
+      <link>/example-publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
-      <guid>/publication/preprint/</guid>
+      <guid>/example-publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
@@ -5127,10 +5114,10 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
     
     <item>
       <title>An example journal article</title>
-      <link>/publication/journal-article/</link>
+      <link>/example-publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>/publication/journal-article/</guid>
+      <guid>/example-publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -5149,10 +5136,10 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
     
     <item>
       <title>An example conference paper</title>
-      <link>/publication/conference-paper/</link>
+      <link>/example-publication/conference-paper/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
       
-      <guid>/publication/conference-paper/</guid>
+      <guid>/example-publication/conference-paper/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.

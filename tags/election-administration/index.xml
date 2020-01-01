@@ -7,22 +7,24 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/election-administration/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
-      <link>/research/nonvoters/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <link>/publication/nonvoters/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>/research/nonvoters/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <guid>/publication/nonvoters/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Git repo link coming soon
+  &lt;/div&gt;
+&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;How much did Wisconsin&amp;rsquo;s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements &amp;ldquo;directly&amp;rdquo; affect voters who lack qualifying IDs but also &amp;ldquo;indirectly&amp;rdquo; affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

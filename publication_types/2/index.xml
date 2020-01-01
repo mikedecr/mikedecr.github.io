@@ -7,17 +7,44 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Tue, 01 Sep 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/publication_types/2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
+      <link>/publication/nonvoters/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/nonvoters/</guid>
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    Git repo link coming soon
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The Unexceptional Gender Gap of 2016
+</title>
+      <link>/publication/gender-2016/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/publication/gender-2016/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>An example journal article</title>
-      <link>/publication/journal-article/</link>
+      <link>/example-publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
-      <guid>/publication/journal-article/</guid>
+      <guid>/example-publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.

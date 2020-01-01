@@ -7,10 +7,28 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Fri, 27 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 13 Dec 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Election Administration</title>
+      <link>/tags/election-administration/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/election-administration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Elections</title>
+      <link>/tags/elections/</link>
+      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/elections/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Computational Methods</title>
@@ -76,6 +94,15 @@
     </item>
     
     <item>
+      <title>Methods</title>
+      <link>/tags/methods/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/methods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Deep Learning</title>
       <link>/tags/deep-learning/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
@@ -90,33 +117,6 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/demo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Election Administration</title>
-      <link>/tags/election-administration/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/election-administration/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Elections</title>
-      <link>/tags/elections/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/elections/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Methods</title>
-      <link>/tags/methods/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/methods/</guid>
       <description></description>
     </item>
     

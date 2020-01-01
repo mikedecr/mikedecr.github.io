@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 01 Dec 2016 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/methods/index.xml" rel="self" type="application/rss+xml" />
     
@@ -19,7 +19,15 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/dissertation/</guid>
-      <description>&lt;p&gt;This page under construction!&lt;/p&gt;
+      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    This page under construction
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As general election competition in the U.S. becomes increasingly driven by partisanship, party nomination contests are perhaps more consequential than ever. Yet research on U.S. elections knows little about whether primaries serve their stated purpose: to represent the preferences of local partisan voters. Political scientists believe that primary elections present candidates with a &amp;ldquo;strategic positioning dilemma&amp;rdquo;&amp;mdash;to win both the nomination and the general election, candidates must position themselves as some spatial compromise between the preferences of their partisan base and the district median voter. This theory of primaries is theoretically and empirically tenuous. Theoretically, primary elections present voters with uniquely high informational demands. Learning the policy positions of candidates is costly, especially when all candidates share the same party label. Moreover, informal party networks may overshadow voter preferences in shaping primary outcomes. Empirically, research on primary representation is hindered by a limited understanding of local partisan preferences. Most existing research measures local preferences using rough proxies that do not distinguish between Republican and Democratic preferences (such as vote shares) or do not operationalize citizen preferences at all.&lt;/p&gt;
+
+&lt;p&gt;This dissertation puts the big questions of primary representation to the test using recent data on U.S. House primaries. Do candidates position themselves in response to the ideological median in their partisan constituency? Do partisan constituencies nominate candidates that better match their ideological preferences? These questions are key to understanding primaries, but they are not confronted directly in existing research. This project develops a unique set of ideal point estimates for local &amp;ldquo;party publics&amp;rdquo;&amp;mdash;partisan groups within districts&amp;mdash;by fitting a group-level IRT model to public opinion data in recent election cycles. The model estimates the ideological medians of Republican and Democratic identifiers within districts and the degree of ideological heterogeneity within each group. With direct measures of local partisan preferences, further research can examine the power of individuals vs. groups in shaping nomination contests, the quality of electoral accountability in &amp;ldquo;safe&amp;rdquo; districts, and the ideological dimensions along which the two parties compete in primaries.&lt;/p&gt;
 </description>
     </item>
     
@@ -179,9 +187,9 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/gender-gap/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
 
-&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -192,42 +200,20 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/research/causal-bayes/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/reeves-pooling.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields&amp;mdash;such as psychology, epidemiology, and biostatistics&amp;mdash;where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.&lt;/p&gt;
 
-&lt;p&gt;Causal inference and Bayesian analysis are two powerful and attractive methodological approaches for conducting empirical research, but rarely in political science does a single study employ both approaches. This stands in contrast to other fields&amp;mdash;such as psychology, epidemiology, and biostatistics&amp;mdash;where Bayesian and causal methods are more commonly applied together. In this paper I argue that the partition between these methodological schools in political science has no inherent basis in their fundamental goals, which are actually quite compatible: generating the best parameter estimates. In fact, Bayesian analysis provides a number of distinct benefits for estimating statistical models for causal inference. The methodological partition instead owes itself to informal norms surrounding each school in empirical political science. I discuss these sources of normative tension, describe go-to practices doing Bayesian inference for a skeptical audience, and demonstrate these practices using real examples from recent political science publications. The purpose of the paper is &lt;em&gt;not&lt;/em&gt; to convince all causal inference practitioners to adopt Bayesian estimation. The purpose is to show that Bayesian methods deserve space in the study of causal effects because they improve causal estimates and provide an appealing framework for evaluating causal evidence.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/reeves-pooling.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>The Unexceptional Gender Gap of 2016
 </title>
-      <link>/research/gender-2016/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <link>/publication/gender-2016/</link>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
       
-      <guid>/research/gender-2016/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-
-&lt;h1 id=&#34;abstract&#34;&gt;Abstract&lt;/h1&gt;
-
-&lt;p&gt;Because of the particular candidates who ran, the 2016 presidential campaign was defined by gender to a remarkable degree. This led many observers to expect a historically large gender gap in voting. In contrast to these expectations, the gender gap between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to matter. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
-
-&lt;h2 id=&#34;cite-this-paper&#34;&gt;Cite this paper&lt;/h2&gt;
-
-&lt;p&gt;Burden, Barry C., Evan Crawford, and Michael G. DeCrescenzo. 2016. &amp;ldquo;The Unexceptional Gender Gap of 2016.&amp;rdquo; &lt;em&gt;The Forum&lt;/em&gt; 14(4), 415–432.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-tex&#34;&gt;@article{burden-crawford-decrescenzo:2016:gender-gap,
-  title = {The Unexceptional Gender Gap of 2016},
-  author = {Burden, Barry C and Crawford, Evan and DeCrescenzo, Michael G},
-  journal = {The Forum},
-  volume = {14},
-  number = {4},
-  pages = {415--432},
-  year = {2016},
-  publisher = {De Gruyter}
-}
-&lt;/code&gt;&lt;/pre&gt;
+      <guid>/publication/gender-2016/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
