@@ -174,9 +174,25 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/computing-811/</guid>
-      <description>&lt;p&gt;In Spring 2018 I co-taught a computing course for first-year political science graduate students. I covered R, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34; target=&#34;_blank&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
+      <description>
 
-&lt;p&gt;My instructional notes for the class are all online &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;. Source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;A one-unit computing course for first-year political science graduate students.&lt;/p&gt;
+
+&lt;h1 id=&#34;2020-materials&#34;&gt;2020 Materials&lt;/h1&gt;
+
+&lt;div class=&#34;alert alert-note&#34;&gt;
+  &lt;div&gt;
+    2020 material under construction.
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;p&gt;View &lt;a href=&#34;/courses/811/ps811-s20-syllabus.pdf&#34;&gt;2020 syllabus&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;2018-materials&#34;&gt;2018 materials&lt;/h1&gt;
+
+&lt;p&gt;In 2018, this course was split between R and Stata. I covered the R unit, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34; target=&#34;_blank&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
+
+&lt;p&gt;R notes for 2018 are &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;, and the source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
