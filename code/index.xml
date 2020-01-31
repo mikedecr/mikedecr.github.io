@@ -17,18 +17,15 @@
       <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/code/great-lakes/</guid>
-      <description>&lt;p&gt;This &lt;a href=&#34;https://github.com/mikedecr/great-lakes-elections-project&#34; target=&#34;_blank&#34;&gt;repository&lt;/a&gt; contains code and documentation for compiling and cleaning data for the &lt;a href=&#34;https://medsl-landscapes.netlify.com&#34; target=&#34;_blank&#34;&gt;&lt;strong&gt;State Election Landscapes&lt;/strong&gt;&lt;/a&gt; project. In the project&amp;rsquo;s own words&amp;hellip;&lt;/p&gt;
-
+      <description>&lt;p&gt;This &lt;a href=&#34;https://github.com/mikedecr/great-lakes-elections-project&#34;&gt;repository&lt;/a&gt; contains code and documentation for compiling and cleaning data for the &lt;a href=&#34;https://medsl-landscapes.netlify.com&#34;&gt;&lt;strong&gt;State Election Landscapes&lt;/strong&gt;&lt;/a&gt; project. In the project&amp;rsquo;s own words&amp;hellip;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;State Election Landscapes provides a comprehensive overview of how elections are conducted in the six Great Lake States: Illinois, Indiana, Michigan, Michigan, Minnesota, and Wisconsin. [The] project&amp;hellip;provides:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;narrative material about the legal setting of elections&lt;/li&gt;
 &lt;li&gt;links to important official information about the conduct of elections, and&lt;/li&gt;
 &lt;li&gt;a visualization tool that helps display important statistical information about elections.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;The project was led by the MIT Election Data and Sciences Lab in collaboration with researchers at the University of Wisconsin, the University of Minnesota, the Ohio State University.&lt;/p&gt;
 </description>
     </item>
@@ -41,10 +38,8 @@
       
       <guid>/code/business-card/</guid>
       <description>&lt;p&gt;A Github repo for a simple business card built with $\mathrm{\LaTeX}$.&lt;/p&gt;
-
 &lt;p&gt;An example:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://github.com/mikedecr/latex-business-card/raw/master/example.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://github.com/mikedecr/latex-business-card/raw/master/example.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -56,12 +51,11 @@
       
       <guid>/code/doc-templates/</guid>
       <description>&lt;p&gt;Custom document templates for the following document types:&lt;/p&gt;
-
 &lt;ul&gt;
 &lt;li&gt;$\mathrm{\LaTeX}$ article ($\mathrm{pdf\LaTeX}$)&lt;/li&gt;
 &lt;li&gt;Rmarkdown template files for articles and syllabi ($\mathrm{pdf\LaTeX}$)&lt;/li&gt;
 &lt;li&gt;Preamble for Rmarkdown document compiled to $\mathrm{pdf\LaTeX}$&lt;/li&gt;
-&lt;li&gt;(Coming soon) Bookdown template file for UW–Madison thesis (based on &lt;a href=&#34;https://github.com/tjmahr/buckydown&#34; target=&#34;_blank&#34;&gt;buckydown&lt;/a&gt;)&lt;/li&gt;
+&lt;li&gt;(Coming soon) Bookdown template file for UW–Madison thesis (based on &lt;a href=&#34;https://github.com/tjmahr/buckydown&#34;&gt;buckydown&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>

@@ -19,27 +19,29 @@
       
       <guid>/post/2015-07-23-r-rmarkdown/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -51,7 +53,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -91,34 +93,34 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;h1&gt;R Markdown&lt;/h1&gt;
 &lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;summary&lt;/span&gt;(cars)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;##      speed           dist       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  Min.   : 4.0   Min.   :  2.00  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1st Qu.:12.0   1st Qu.: 26.00  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  Median :15.0   Median : 36.00  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  Mean   :15.4   Mean   : 42.98  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3rd Qu.:19.0   3rd Qu.: 56.00  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  Max.   :25.0   Max.   :120.00&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; data-line-number=&#34;9&#34;&gt;fit &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(dist &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;speed, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; cars)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; data-line-number=&#34;10&#34;&gt;fit&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;## Call:&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;## lm(formula = dist ~ speed, data = cars)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;## Coefficients:&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;## (Intercept)        speed  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;##     -17.579        3.932&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;summary&lt;/span&gt;(cars)&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##      speed           dist       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Min.   : 4.0   Min.   :  2.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1st Qu.:12.0   1st Qu.: 26.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Median :15.0   Median : 36.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Mean   :15.4   Mean   : 42.98  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3rd Qu.:19.0   3rd Qu.: 56.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Max.   :25.0   Max.   :120.00&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34;&gt;&lt;/a&gt;fit &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(dist &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;speed, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; cars)&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34;&gt;&lt;/a&gt;fit&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Call:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## lm(formula = dist ~ speed, data = cars)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Coefficients:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## (Intercept)        speed  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##     -17.579        3.932&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Including Plots&lt;/h1&gt;
 &lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;par&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;mar =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;pie&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; data-line-number=&#34;3&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;280&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;60&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; data-line-number=&#34;4&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Sky&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Sunny side of pyramid&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Shady side of pyramid&amp;#39;&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; data-line-number=&#34;5&#34;&gt;  &lt;span class=&#34;dt&#34;&gt;col =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;#0292D8&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#F7EA39&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#C4B632&amp;#39;&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; data-line-number=&#34;6&#34;&gt;  &lt;span class=&#34;dt&#34;&gt;init.angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-50&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;border =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; data-line-number=&#34;7&#34;&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;par&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;mar =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;pie&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;280&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;60&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Sky&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Sunny side of pyramid&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Shady side of pyramid&amp;#39;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;dt&#34;&gt;col =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;#0292D8&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#F7EA39&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#C4B632&amp;#39;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;dt&#34;&gt;init.angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-50&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;border =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
 &lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
 &lt;p class=&#34;caption&#34;&gt;

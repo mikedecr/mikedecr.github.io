@@ -19,116 +19,90 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/causal-inf-2019/</guid>
-      <description>
-
-&lt;p&gt;Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.&lt;/p&gt;
-
+      <description>&lt;p&gt;Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.&lt;/p&gt;
 &lt;p&gt;The reading list below contains both the &amp;ldquo;assigned&amp;rdquo; and the &amp;ldquo;bonus&amp;rdquo; readings (without bothering to denote which is which).&lt;/p&gt;
-
 &lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
-
 &lt;p&gt;Introduction&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Rubin (1974), &lt;a href=&#34;http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;LaLonde (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/l_7yIUqWBmE&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 6 (DAGs)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Aronow and Samii (2016), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Does Regression Produce Representative Estimates of Causal Effects?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Rubin (1974), &lt;a href=&#34;http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf&#34;&gt;&amp;ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LaLonde (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg&#34;&gt;&amp;ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/l_7yIUqWBmE&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 6 (DAGs)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Aronow and Samii (2016), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ&#34;&gt;&amp;ldquo;Does Regression Produce Representative Estimates of Causal Effects?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Identification&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Holland (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistics and Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Kang and Schafer (2007), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Sekhon (2007), &lt;a href=&#34;https://www.researchgate.net/profile/Henry_Brady/publication/255476843_The_Neyman-Rubin_Model_of_Causal_Inference_and_Estimation_Via_Matching_Methods/links/54d8dd670cf25013d0405ce3/The-Neyman-Rubin-Model-of-Causal-Inference-and-Estimation-Via-Matching-Methods.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Neyman-Rubin Model of Causal Inference and Estimation via Matching Methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Stuart (2010), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1280841730&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Matching methods for causal inference: A review and a look forward&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Bowers, Fredrickson, and Panagopoulos (2013), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23359695.pdf?casa_token=wI0j9lMiDx0AAAAA:tnvEGu14_-fGNjbUZxLq0ln9foKBOd85zKIor3nQYj3pwxo4ch_wXQyZ_qeTSBxngpQjfOBNZwKr3ARWj1uBjGbnxWQ7LFyTWHZGX7og8udmimMLGA&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Reasoning about Interference Between Units: A General Framework&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hartman, Grieve, Ramsahai, and Sekhon (2015), &lt;a href=&#34;https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12094&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;From sample average treatment effect to population average treatment effect on the treated: combining experimental with observational studies to estimate population treatment effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Keele (2015), &lt;a href=&#34;https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The statistics of causal inference: A view from political methodology&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hartman and Hidalgo (2018), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An equivalence approach to balance and placebo tests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Holland (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w&#34;&gt;&amp;ldquo;Statistics and Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kang and Schafer (2007), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167&#34;&gt;&amp;ldquo;Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sekhon (2007), &lt;a href=&#34;https://www.researchgate.net/profile/Henry_Brady/publication/255476843_The_Neyman-Rubin_Model_of_Causal_Inference_and_Estimation_Via_Matching_Methods/links/54d8dd670cf25013d0405ce3/The-Neyman-Rubin-Model-of-Causal-Inference-and-Estimation-Via-Matching-Methods.pdf&#34;&gt;&amp;ldquo;The Neyman-Rubin Model of Causal Inference and Estimation via Matching Methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Stuart (2010), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1280841730&#34;&gt;&amp;ldquo;Matching methods for causal inference: A review and a look forward&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bowers, Fredrickson, and Panagopoulos (2013), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23359695.pdf?casa_token=wI0j9lMiDx0AAAAA:tnvEGu14_-fGNjbUZxLq0ln9foKBOd85zKIor3nQYj3pwxo4ch_wXQyZ_qeTSBxngpQjfOBNZwKr3ARWj1uBjGbnxWQ7LFyTWHZGX7og8udmimMLGA&#34;&gt;&amp;ldquo;Reasoning about Interference Between Units: A General Framework&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hartman, Grieve, Ramsahai, and Sekhon (2015), &lt;a href=&#34;https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12094&#34;&gt;&amp;ldquo;From sample average treatment effect to population average treatment effect on the treated: combining experimental with observational studies to estimate population treatment effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keele (2015), &lt;a href=&#34;https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw&#34;&gt;&amp;ldquo;The statistics of causal inference: A view from political methodology&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hartman and Hidalgo (2018), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw&#34;&gt;&amp;ldquo;An equivalence approach to balance and placebo tests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Mediation&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Imai, Keele, Tingley, and Yamamoto (2010), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;VanderWeele and Vansteelandt (2015), &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Mediation Analysis with Multiple Mediators&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Myers and Tingley (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Influence of Emotion on Trust&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imai, Keele, Tingley, and Yamamoto (2010), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA&#34;&gt;&amp;ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VanderWeele and Vansteelandt (2015), &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf&#34;&gt;&amp;ldquo;Mediation Analysis with Multiple Mediators&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Myers and Tingley (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B&#34;&gt;&amp;ldquo;The Influence of Emotion on Trust&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Heterogeneity&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Kam and Trussler (2017) &lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Coppock, Leeper, and Mullinix (2017), &lt;a href=&#34;https://www.pnas.org/content/pnas/115/49/12441.full.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Generalizability of heterogeneous treatment effect estimates across samples&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Meager (2019), &lt;a href=&#34;http://eprints.lse.ac.uk/88190/1/app.20170299.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kam and Trussler (2017) &lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf&#34;&gt;&amp;ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Coppock, Leeper, and Mullinix (2017), &lt;a href=&#34;https://www.pnas.org/content/pnas/115/49/12441.full.pdf&#34;&gt;&amp;ldquo;Generalizability of heterogeneous treatment effect estimates across samples&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Meager (2019), &lt;a href=&#34;http://eprints.lse.ac.uk/88190/1/app.20170299.pdf&#34;&gt;&amp;ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Null Effects and Statistical Power&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Gelman and Carlin (2014), &lt;a href=&#34;https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Bhavnani (2017), &lt;a href=&#34;https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20160030&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do the Effects of Temporary Ethnic Group Quotas Persist? Evidence from India&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Coppenolle (2017), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Gelman and Carlin (2014), &lt;a href=&#34;https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642&#34;&gt;&amp;ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bhavnani (2017), &lt;a href=&#34;https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20160030&#34;&gt;&amp;ldquo;Do the Effects of Temporary Ethnic Group Quotas Persist? Evidence from India&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Coppenolle (2017), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164&#34;&gt;&amp;ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;G-Methods&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Naimi, Cole, and Kennedy (2017), &lt;a href=&#34;https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An introduction to g methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Acharya, Blackwell, and Sen (2016), &lt;a href=&#34;https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Naimi, Cole, and Kennedy (2017), &lt;a href=&#34;https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw&#34;&gt;&amp;ldquo;An introduction to g methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Acharya, Blackwell, and Sen (2016), &lt;a href=&#34;https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf&#34;&gt;&amp;ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;DAGs (1)&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Greenland, Pearl, Robins (1999), &lt;a href=&#34;https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Causal Diagrams for Epidemiological Research&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Keele, Stevenson, and Elwert (2019) &lt;a href=&#34;https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The causal interpretation of estimated associations in regression models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Greenland, Pearl, Robins (1999), &lt;a href=&#34;https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf&#34;&gt;&amp;ldquo;Causal Diagrams for Epidemiological Research&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keele, Stevenson, and Elwert (2019) &lt;a href=&#34;https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf&#34;&gt;&amp;ldquo;The causal interpretation of estimated associations in regression models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;DAGs (2)&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;VanderWeele and Robins (2014) &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Signed directed acyclic graphs for causal inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Mohan and Pearl (2014), &lt;a href=&#34;https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imbens (2019), &lt;a href=&#34;https://arxiv.org/abs/1907.07271&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Lattimore and Rohde (2019), &lt;a href=&#34;https://arxiv.org/pdf/1906.07125.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Replacing the do-calculus with Bayes rule&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VanderWeele and Robins (2014) &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf&#34;&gt;&amp;ldquo;Signed directed acyclic graphs for causal inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mohan and Pearl (2014), &lt;a href=&#34;https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf&#34;&gt;&amp;ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imbens (2019), &lt;a href=&#34;https://arxiv.org/abs/1907.07271&#34;&gt;&amp;ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Lattimore and Rohde (2019), &lt;a href=&#34;https://arxiv.org/pdf/1906.07125.pdf&#34;&gt;&amp;ldquo;Replacing the do-calculus with Bayes rule&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Machine Learning&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Hastie, Tibshirani, and Friedman (2009) &lt;a href=&#34;https://web.stanford.edu/~hastie/Papers/ESLII.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Samii, Paler, and Daly (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Wager and Athey (2018), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Abraham and Sun (2019), &lt;a href=&#34;http://economics.mit.edu/files/14964&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Cheng, Khomtchouk, Matloff, and Mohanty (2019), &lt;a href=&#34;https://arxiv.org/pdf/1806.06850.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Polynomial Regression as an Alternative to Neural Nets&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hastie, Tibshirani, and Friedman (2009) &lt;a href=&#34;https://web.stanford.edu/~hastie/Papers/ESLII.pdf&#34;&gt;&amp;ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&amp;quot;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Samii, Paler, and Daly (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B&#34;&gt;&amp;ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Wager and Athey (2018), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true&#34;&gt;&amp;ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Abraham and Sun (2019), &lt;a href=&#34;http://economics.mit.edu/files/14964&#34;&gt;&amp;ldquo;Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Cheng, Khomtchouk, Matloff, and Mohanty (2019), &lt;a href=&#34;https://arxiv.org/pdf/1806.06850.pdf&#34;&gt;&amp;ldquo;Polynomial Regression as an Alternative to Neural Nets&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Regression Discontinuity&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Calonico, Cattaneo, and Titiunik (2014), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Caughey and Sekhon (2014), &lt;a href=&#34;http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Skovron and Titiunik (2015), &lt;a href=&#34;https://pdfs.semanticscholar.org/5461/c817976f51a4fb0073b772c03cd670be8def.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;A Practical Guide to Regression Discontinuity
+&lt;li&gt;Calonico, Cattaneo, and Titiunik (2014), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw&#34;&gt;&amp;ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Caughey and Sekhon (2014), &lt;a href=&#34;http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf&#34;&gt;&amp;ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Skovron and Titiunik (2015), &lt;a href=&#34;https://pdfs.semanticscholar.org/5461/c817976f51a4fb0073b772c03cd670be8def.pdf&#34;&gt;&amp;ldquo;A Practical Guide to Regression Discontinuity
 Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Time-Series Cross-Sectional and Panel Data&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -141,10 +115,8 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       
       <guid>/teaching/numbers/</guid>
       <description>&lt;p&gt;Data are increasingly prevalent in politics (and in journalism, industry, academia&amp;hellip;), but data are complex and challenging. What can we learn about politics, and the social world more broadly, when we take an empirical view of it? When should we trust data, and when will data lead us astray?&lt;/p&gt;
-
 &lt;p&gt;Political science 270 is an undergraduate course on consuming, criticizing, and producing data-driven analysis of political and social phenomena. Students learn to think about political data as evidence for or against social theories. The course emphasis practical data analysis skills that apply beyond the political science curriculum, including elementary statistical analysis, R programming (&lt;code&gt;Rstudio&lt;/code&gt;, &lt;code&gt;tidyverse&lt;/code&gt;, &lt;code&gt;ggplot2&lt;/code&gt;), and technical writing.&lt;/p&gt;
-
-&lt;p&gt;View course materials on &lt;a href=&#34;https://github.com/mikedecr/political-numbers-s19/&#34; target=&#34;_blank&#34;&gt;&lt;code&gt;Github&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;View course materials on &lt;a href=&#34;https://github.com/mikedecr/political-numbers-s19/&#34;&gt;&lt;code&gt;Github&lt;/code&gt;&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -155,25 +127,16 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/computing-811/</guid>
-      <description>
-
-&lt;p&gt;A one-unit computing course for first-year political science graduate students.&lt;/p&gt;
-
-&lt;h1 id=&#34;2020-materials&#34;&gt;2020 Materials&lt;/h1&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    2020 material under construction.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;View &lt;a href=&#34;/courses/811/ps811-s20-syllabus.pdf&#34;&gt;2020 syllabus&lt;/a&gt;.&lt;/p&gt;
-
+      <description>&lt;h1 id=&#34;2020-materials&#34;&gt;2020 Materials&lt;/h1&gt;
+&lt;p&gt;View syllabus &lt;a href=&#34;/courses/811/ps811-s20-syllabus.pdf&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Slides:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;/teaching/computing-811/slides/01-intro/01-intro.html&#34;&gt;01: Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;/teaching/computing-811/slides/02-rmd-proj/02-rmd-proj.html&#34;&gt;02: Projects/R Markdown&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;2018-materials&#34;&gt;2018 materials&lt;/h1&gt;
-
-&lt;p&gt;In 2018, this course was split between R and Stata. I covered the R unit, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34; target=&#34;_blank&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
-
-&lt;p&gt;R notes for 2018 are &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;, and the source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In 2018, this course was split between R and Stata. I covered the R unit, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
+&lt;p&gt;R notes for 2018 are &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;, and the source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -184,7 +147,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/math-camp/</guid>
-      <description>&lt;p&gt;I have two years of experience teaching the UW political science &amp;ldquo;math bootcamp&amp;rdquo; for incoming graduate students. My most recent materials (2018) are open-source on &lt;a href=&#34;https://github.com/mikedecr/math-camp-2018&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;I have two years of experience teaching the UW political science &amp;ldquo;math bootcamp&amp;rdquo; for incoming graduate students. My most recent materials (2018) are open-source on &lt;a href=&#34;https://github.com/mikedecr/math-camp-2018&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -196,8 +159,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       
       <guid>/teaching/latex-workshop/</guid>
       <description>&lt;p&gt;Every year, the UW Political Science department holds a $\mathrm{\LaTeX}$ workshop&amp;mdash;a few introductory training sessions for graduate students on document preparation. I have been involved with organizing this workshop since 2015, and have been leading it since 2017.&lt;/p&gt;
-
-&lt;p&gt;All materials for the worksho, source code and all, are publicly available (in their 2018 vintage) on my &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34; target=&#34;_blank&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;All materials for the worksho, source code and all, are publicly available (in their 2018 vintage) on my &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -209,27 +171,29 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       
       <guid>/post/love-list2env/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -241,7 +205,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -286,14 +250,14 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;li&gt;You can pick which environment these objects are assigned to. This can be the global environment if you want.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;An example of how it works in action:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# create a named list&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; data-line-number=&#34;2&#34;&gt;my_list &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;a =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# assign list objects&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(my_list, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# create a named list&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;my_list &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;a =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# assign list objects&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(my_list, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## &amp;lt;environment: R_GlobalEnv&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# did objects make it into environment?&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;(); a; b&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# did objects make it into environment?&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;(); a; b&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot;       &amp;quot;b&amp;quot;       &amp;quot;my_list&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 2&lt;/code&gt;&lt;/pre&gt;
@@ -313,20 +277,20 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;div id=&#34;slightly-longer-demo&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Slightly longer demo&lt;/h2&gt;
 &lt;p&gt;To see it in practice, pretend we’re on the remote machine. We have created a handful of objects, only some of which we want to save. I will add some objects to our environment to demonstrate.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(iris)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(mtcars)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(iris)&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(mtcars)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Let’s see what all we have now.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot;       &amp;quot;b&amp;quot;       &amp;quot;iris&amp;quot;    &amp;quot;mtcars&amp;quot;  &amp;quot;my_list&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now, suppose I want to pass data back to my home machine, but I only want to keep the objects &lt;code&gt;b&lt;/code&gt; and &lt;code&gt;iris&lt;/code&gt;. I could do this by putting them into a list. These objects should be &lt;em&gt;named!&lt;/em&gt;&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-1&#34; data-line-number=&#34;1&#34;&gt;objs_to_save &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; b, &lt;span class=&#34;dt&#34;&gt;iris =&lt;/span&gt; iris)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now imagine that I upload the files to Box. This is done using &lt;code&gt;boxr::box_write(objs_to_save, &amp;quot;saved-list.RDS&amp;quot;, dir_id = ...)&lt;/code&gt; where &lt;code&gt;...&lt;/code&gt; is a numeric ID assigned to a synced folder on Box.com. (If I wanted to save the whole &lt;code&gt;.Rdata&lt;/code&gt; image, I could use &lt;code&gt;box_save_image()&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34;&gt;&lt;/a&gt;objs_to_save &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; b, &lt;span class=&#34;dt&#34;&gt;iris =&lt;/span&gt; iris)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now imagine that I upload the files to Box. This is done using &lt;code&gt;boxr::box_write(objs_to_save, &#34;saved-list.RDS&#34;, dir_id = ...)&lt;/code&gt; where &lt;code&gt;...&lt;/code&gt; is a numeric ID assigned to a synced folder on Box.com. (If I wanted to save the whole &lt;code&gt;.Rdata&lt;/code&gt; image, I could use &lt;code&gt;box_save_image()&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Now pretend I’m on my home machine again. I will wipe our workspace (all but &lt;code&gt;objs_to_save&lt;/code&gt;) to simulate the effect.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;rm&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;list =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()[&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;objs_to_save&amp;quot;&lt;/span&gt;])&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;rm&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;list =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()[&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;objs_to_save&amp;quot;&lt;/span&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I read the saved list from Box, so now it’s in my workspace as a list:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb12-1&#34;&gt;&lt;a href=&#34;#cb12-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;objs_to_save&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb14-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(objs_to_save, head)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb14-1&#34;&gt;&lt;a href=&#34;#cb14-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(objs_to_save, head)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## $b
 ## [1] 2
 ## 
@@ -339,9 +303,9 @@ code span.wa { color: #bf0303; } /* Warning */
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here is where we use &lt;code&gt;list2env()&lt;/code&gt;. We simply drop the objects in this list into the global environment.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb16-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(objs_to_save, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb16-1&#34;&gt;&lt;a href=&#34;#cb16-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(objs_to_save, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## &amp;lt;environment: R_GlobalEnv&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb18-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb18-1&#34;&gt;&lt;a href=&#34;#cb18-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;b&amp;quot;            &amp;quot;iris&amp;quot;         &amp;quot;objs_to_save&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now we can use these objects for analysis in an &lt;code&gt;R&lt;/code&gt; script, or we can use them in an &lt;code&gt;.Rmd&lt;/code&gt; report to write up the results of what we did on the remote machine. Whatever you’re doing, saving objects as a list and then reading the list into R can be a quick way to move data between R sessions, and &lt;code&gt;list2env()&lt;/code&gt; makes it easy.&lt;/p&gt;
 &lt;/div&gt;
@@ -356,27 +320,29 @@ code span.wa { color: #bf0303; } /* Warning */
       
       <guid>/post/git-in-papers/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -388,7 +354,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -431,7 +397,7 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;ul&gt;
 &lt;li&gt;A compilation system like &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.&lt;/li&gt;
 &lt;li&gt;As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.&lt;/li&gt;
-&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
+&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Here is an example from one of my in-progress papers.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/for-posts/git-date.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
@@ -449,30 +415,30 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;p&gt;We can run console commands within R using the &lt;code&gt;system()&lt;/code&gt; function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the &lt;code&gt;intern = TRUE&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
 &lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot;
-##  [8] &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot;
-## [15] &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot;
-## [22] &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot;
-## [29] &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot;
-## [36] &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot;
-## [43] &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot;
-## [50] &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot;
-## [57] &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot;
-## [64] &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot;
-## [71] &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot;
-## [78] &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot;
-## [85] &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot;
-## [92] &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot;
+##  [8] &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot;
+## [15] &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot;
+## [22] &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot;
+## [29] &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot;
+## [36] &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot;
+## [43] &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot;
+## [50] &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot;
+## [57] &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot;
+## [64] &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot;
+## [71] &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot;
+## [78] &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot;
+## [85] &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot;
+## [92] &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;b204b83&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;322d6d8&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;811 page prep, upload syllabus&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;begin 811 slides, links on computing page, code to copy&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
@@ -501,6 +467,7 @@ code span.wa { color: #bf0303; } /* Warning */
       
       <guid>/post/bayes-mediation/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;motivation-for-this-post&#34; class=&#34;section level1&#34;&gt;
@@ -564,6 +531,9 @@ Hopefully I haven’t messed up the integral.&lt;/p&gt;
 \end{align}\]&lt;/span&gt;
 This expression is also marginalizing over the simulated mediator value &lt;span class=&#34;math inline&#34;&gt;\(M(t&amp;#39;)\)&lt;/span&gt;. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.&lt;/p&gt;
 &lt;p&gt;In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &amp;#39;GGally&amp;#39;:
+##   method from   
+##   +.gg   ggplot2&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here is a comparison to the &lt;code&gt;{mediation}&lt;/code&gt; package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the &lt;code&gt;{mediation}&lt;/code&gt; estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
@@ -576,9 +546,9 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
-Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

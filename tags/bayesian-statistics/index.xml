@@ -19,116 +19,90 @@
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/causal-inf-2019/</guid>
-      <description>
-
-&lt;p&gt;Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.&lt;/p&gt;
-
+      <description>&lt;p&gt;Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.&lt;/p&gt;
 &lt;p&gt;The reading list below contains both the &amp;ldquo;assigned&amp;rdquo; and the &amp;ldquo;bonus&amp;rdquo; readings (without bothering to denote which is which).&lt;/p&gt;
-
 &lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
-
 &lt;p&gt;Introduction&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Rubin (1974), &lt;a href=&#34;http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;LaLonde (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/l_7yIUqWBmE&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 6 (DAGs)&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Aronow and Samii (2016), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Does Regression Produce Representative Estimates of Causal Effects?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Rubin (1974), &lt;a href=&#34;http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf&#34;&gt;&amp;ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;LaLonde (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg&#34;&gt;&amp;ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/l_7yIUqWBmE&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 6 (DAGs)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Aronow and Samii (2016), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ&#34;&gt;&amp;ldquo;Does Regression Produce Representative Estimates of Causal Effects?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Identification&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Holland (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistics and Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Kang and Schafer (2007), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Sekhon (2007), &lt;a href=&#34;https://www.researchgate.net/profile/Henry_Brady/publication/255476843_The_Neyman-Rubin_Model_of_Causal_Inference_and_Estimation_Via_Matching_Methods/links/54d8dd670cf25013d0405ce3/The-Neyman-Rubin-Model-of-Causal-Inference-and-Estimation-Via-Matching-Methods.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Neyman-Rubin Model of Causal Inference and Estimation via Matching Methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Stuart (2010), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1280841730&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Matching methods for causal inference: A review and a look forward&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Bowers, Fredrickson, and Panagopoulos (2013), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23359695.pdf?casa_token=wI0j9lMiDx0AAAAA:tnvEGu14_-fGNjbUZxLq0ln9foKBOd85zKIor3nQYj3pwxo4ch_wXQyZ_qeTSBxngpQjfOBNZwKr3ARWj1uBjGbnxWQ7LFyTWHZGX7og8udmimMLGA&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Reasoning about Interference Between Units: A General Framework&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hartman, Grieve, Ramsahai, and Sekhon (2015), &lt;a href=&#34;https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12094&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;From sample average treatment effect to population average treatment effect on the treated: combining experimental with observational studies to estimate population treatment effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Keele (2015), &lt;a href=&#34;https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The statistics of causal inference: A view from political methodology&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hartman and Hidalgo (2018), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An equivalence approach to balance and placebo tests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Holland (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w&#34;&gt;&amp;ldquo;Statistics and Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kang and Schafer (2007), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167&#34;&gt;&amp;ldquo;Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Sekhon (2007), &lt;a href=&#34;https://www.researchgate.net/profile/Henry_Brady/publication/255476843_The_Neyman-Rubin_Model_of_Causal_Inference_and_Estimation_Via_Matching_Methods/links/54d8dd670cf25013d0405ce3/The-Neyman-Rubin-Model-of-Causal-Inference-and-Estimation-Via-Matching-Methods.pdf&#34;&gt;&amp;ldquo;The Neyman-Rubin Model of Causal Inference and Estimation via Matching Methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Stuart (2010), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1280841730&#34;&gt;&amp;ldquo;Matching methods for causal inference: A review and a look forward&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bowers, Fredrickson, and Panagopoulos (2013), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23359695.pdf?casa_token=wI0j9lMiDx0AAAAA:tnvEGu14_-fGNjbUZxLq0ln9foKBOd85zKIor3nQYj3pwxo4ch_wXQyZ_qeTSBxngpQjfOBNZwKr3ARWj1uBjGbnxWQ7LFyTWHZGX7og8udmimMLGA&#34;&gt;&amp;ldquo;Reasoning about Interference Between Units: A General Framework&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hartman, Grieve, Ramsahai, and Sekhon (2015), &lt;a href=&#34;https://rss.onlinelibrary.wiley.com/doi/pdf/10.1111/rssa.12094&#34;&gt;&amp;ldquo;From sample average treatment effect to population average treatment effect on the treated: combining experimental with observational studies to estimate population treatment effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keele (2015), &lt;a href=&#34;https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw&#34;&gt;&amp;ldquo;The statistics of causal inference: A view from political methodology&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hartman and Hidalgo (2018), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw&#34;&gt;&amp;ldquo;An equivalence approach to balance and placebo tests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Mediation&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Imai, Keele, Tingley, and Yamamoto (2010), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;VanderWeele and Vansteelandt (2015), &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Mediation Analysis with Multiple Mediators&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Myers and Tingley (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Influence of Emotion on Trust&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imai, Keele, Tingley, and Yamamoto (2010), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA&#34;&gt;&amp;ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VanderWeele and Vansteelandt (2015), &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf&#34;&gt;&amp;ldquo;Mediation Analysis with Multiple Mediators&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Myers and Tingley (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B&#34;&gt;&amp;ldquo;The Influence of Emotion on Trust&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Causal Heterogeneity&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Kam and Trussler (2017) &lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Coppock, Leeper, and Mullinix (2017), &lt;a href=&#34;https://www.pnas.org/content/pnas/115/49/12441.full.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Generalizability of heterogeneous treatment effect estimates across samples&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Meager (2019), &lt;a href=&#34;http://eprints.lse.ac.uk/88190/1/app.20170299.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Kam and Trussler (2017) &lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf&#34;&gt;&amp;ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Coppock, Leeper, and Mullinix (2017), &lt;a href=&#34;https://www.pnas.org/content/pnas/115/49/12441.full.pdf&#34;&gt;&amp;ldquo;Generalizability of heterogeneous treatment effect estimates across samples&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Meager (2019), &lt;a href=&#34;http://eprints.lse.ac.uk/88190/1/app.20170299.pdf&#34;&gt;&amp;ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Null Effects and Statistical Power&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Gelman and Carlin (2014), &lt;a href=&#34;https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Bhavnani (2017), &lt;a href=&#34;https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20160030&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Do the Effects of Temporary Ethnic Group Quotas Persist? Evidence from India&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Coppenolle (2017), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Gelman and Carlin (2014), &lt;a href=&#34;https://journals.sagepub.com/doi/pdf/10.1177/1745691614551642&#34;&gt;&amp;ldquo;Beyond Power Calculations: Assessing Type S (Sign) and Type M (Magnitude) Errors&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Bhavnani (2017), &lt;a href=&#34;https://pubs.aeaweb.org/doi/pdfplus/10.1257/app.20160030&#34;&gt;&amp;ldquo;Do the Effects of Temporary Ethnic Group Quotas Persist? Evidence from India&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Coppenolle (2017), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/epdf/10.1111/lsq.12164&#34;&gt;&amp;ldquo;Political Dynasties in the UK House of Commons: The Null Effect of Narrow Electoral Selection&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;G-Methods&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Naimi, Cole, and Kennedy (2017), &lt;a href=&#34;https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;An introduction to g methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Acharya, Blackwell, and Sen (2016), &lt;a href=&#34;https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Naimi, Cole, and Kennedy (2017), &lt;a href=&#34;https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw&#34;&gt;&amp;ldquo;An introduction to g methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Acharya, Blackwell, and Sen (2016), &lt;a href=&#34;https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf&#34;&gt;&amp;ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;DAGs (1)&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Greenland, Pearl, Robins (1999), &lt;a href=&#34;https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Causal Diagrams for Epidemiological Research&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Keele, Stevenson, and Elwert (2019) &lt;a href=&#34;https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The causal interpretation of estimated associations in regression models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Greenland, Pearl, Robins (1999), &lt;a href=&#34;https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf&#34;&gt;&amp;ldquo;Causal Diagrams for Epidemiological Research&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Keele, Stevenson, and Elwert (2019) &lt;a href=&#34;https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf&#34;&gt;&amp;ldquo;The causal interpretation of estimated associations in regression models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;DAGs (2)&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;VanderWeele and Robins (2014) &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Signed directed acyclic graphs for causal inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Mohan and Pearl (2014), &lt;a href=&#34;https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imbens (2019), &lt;a href=&#34;https://arxiv.org/abs/1907.07271&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Lattimore and Rohde (2019), &lt;a href=&#34;https://arxiv.org/pdf/1906.07125.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Replacing the do-calculus with Bayes rule&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;VanderWeele and Robins (2014) &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf&#34;&gt;&amp;ldquo;Signed directed acyclic graphs for causal inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Mohan and Pearl (2014), &lt;a href=&#34;https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf&#34;&gt;&amp;ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imbens (2019), &lt;a href=&#34;https://arxiv.org/abs/1907.07271&#34;&gt;&amp;ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Lattimore and Rohde (2019), &lt;a href=&#34;https://arxiv.org/pdf/1906.07125.pdf&#34;&gt;&amp;ldquo;Replacing the do-calculus with Bayes rule&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Machine Learning&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Hastie, Tibshirani, and Friedman (2009) &lt;a href=&#34;https://web.stanford.edu/~hastie/Papers/ESLII.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Samii, Paler, and Daly (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Wager and Athey (2018), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Abraham and Sun (2019), &lt;a href=&#34;http://economics.mit.edu/files/14964&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Cheng, Khomtchouk, Matloff, and Mohanty (2019), &lt;a href=&#34;https://arxiv.org/pdf/1806.06850.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Polynomial Regression as an Alternative to Neural Nets&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hastie, Tibshirani, and Friedman (2009) &lt;a href=&#34;https://web.stanford.edu/~hastie/Papers/ESLII.pdf&#34;&gt;&amp;ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&amp;quot;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Samii, Paler, and Daly (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/retrospective-causal-inference-with-machine-learning-ensembles-an-application-to-antirecidivism-policies-in-colombia/B27477770599A4CE0ACB9204685EA95B&#34;&gt;&amp;ldquo;Retrospective causal inference with machine learning ensembles: An application to anti-recidivism policies in Colombia&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Wager and Athey (2018), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1080/01621459.2017.1319839?needAccess=true&#34;&gt;&amp;ldquo;Estimation and Inference of Heterogeneous Treatment Effects using Random Forests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Abraham and Sun (2019), &lt;a href=&#34;http://economics.mit.edu/files/14964&#34;&gt;&amp;ldquo;Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Cheng, Khomtchouk, Matloff, and Mohanty (2019), &lt;a href=&#34;https://arxiv.org/pdf/1806.06850.pdf&#34;&gt;&amp;ldquo;Polynomial Regression as an Alternative to Neural Nets&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Regression Discontinuity&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Calonico, Cattaneo, and Titiunik (2014), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Caughey and Sekhon (2014), &lt;a href=&#34;http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Skovron and Titiunik (2015), &lt;a href=&#34;https://pdfs.semanticscholar.org/5461/c817976f51a4fb0073b772c03cd670be8def.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;A Practical Guide to Regression Discontinuity
+&lt;li&gt;Calonico, Cattaneo, and Titiunik (2014), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw&#34;&gt;&amp;ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Caughey and Sekhon (2014), &lt;a href=&#34;http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf&#34;&gt;&amp;ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Skovron and Titiunik (2015), &lt;a href=&#34;https://pdfs.semanticscholar.org/5461/c817976f51a4fb0073b772c03cd670be8def.pdf&#34;&gt;&amp;ldquo;A Practical Guide to Regression Discontinuity
 Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;p&gt;Time-Series Cross-Sectional and Panel Data&lt;/p&gt;
-
 &lt;ul&gt;
-&lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34; target=&#34;_blank&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
     </item>
@@ -140,6 +114,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       
       <guid>/post/bayes-mediation/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;motivation-for-this-post&#34; class=&#34;section level1&#34;&gt;
@@ -203,6 +178,9 @@ Hopefully I haven’t messed up the integral.&lt;/p&gt;
 \end{align}\]&lt;/span&gt;
 This expression is also marginalizing over the simulated mediator value &lt;span class=&#34;math inline&#34;&gt;\(M(t&amp;#39;)\)&lt;/span&gt;. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.&lt;/p&gt;
 &lt;p&gt;In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &amp;#39;GGally&amp;#39;:
+##   method from   
+##   +.gg   ggplot2&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here is a comparison to the &lt;code&gt;{mediation}&lt;/code&gt; package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the &lt;code&gt;{mediation}&lt;/code&gt; estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
@@ -215,9 +193,9 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
-Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -231,6 +209,7 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
       
       <guid>/post/ggk-flat-priors/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by &lt;a href=&#34;https://books.google.com/books?hl=en&amp;amp;lr=&amp;amp;id=RDueAgAAQBAJ&amp;amp;oi=fnd&amp;amp;pg=PA9&amp;amp;dq=gerber+green+kaplan&amp;amp;ots=0I3f6Jfn33&amp;amp;sig=wVKOfRF39mkiT4vnMe8YecMMpeY#v=onepage&amp;amp;q=gerber%20green%20kaplan&amp;amp;f=false&#34;&gt;Gerber, Green, and Kaplan&lt;/a&gt; (hereafter “GGK”) about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs. observational research.&lt;/p&gt;
@@ -265,7 +244,7 @@ The bias &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; is the d
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

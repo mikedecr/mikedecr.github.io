@@ -7,25 +7,10 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
+    <lastBuildDate>Fri, 27 Sep 2019 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
-      <link>/publication/nonvoters/</link>
-      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/nonvoters/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Git repo link coming soon
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
     
     <item>
       <title>Partisanship, Mobilization, and Persuasion in Group Voting: A Study of the Gender Gap
@@ -35,19 +20,7 @@
       
       <guid>/research/gender-gap/</guid>
       <description>&lt;p&gt;Groups in the electorate vote differently from one another. Racial minorities and young voters prefer Democratic candidates on average, while evangelicals and rural voters prefer Republican candidates. How do these group differences affect party vote shares, given that the underlying groups are differently sized? We provide a theoretical framework to understand group differences in voting and party vote by expressing each as the result of partisan predispositions in the electorate that are transformed through partisan mobilization, partisan defection, and the choices of unaffiliated voters. We apply this method to the gender gap in U.S. presidential voting. We find that the size of the gender gap has no necessary bearing on the partisan vote outcome. Rather, the relationship is contingent on the changing numerical impact of partisanship, partisan mobilization, and persuasion over time. Although the gender gap and the Democratic vote in presidential elections have both increased over the years, this relationship is spurious. The primary cause of the gender gap (partisan change) was actually harmful to the Democrats. Meanwhile, forces that increased the Democratic vote (mobilization and persuasion) were minor influences on the gender gap.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The Unexceptional Gender Gap of 2016
-</title>
-      <link>/publication/gender-2016/</link>
-      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/gender-2016/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/research/gap-flow.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -59,27 +32,29 @@
       
       <guid>/post/love-list2env/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -91,7 +66,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -136,14 +111,14 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;li&gt;You can pick which environment these objects are assigned to. This can be the global environment if you want.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;An example of how it works in action:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# create a named list&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; data-line-number=&#34;2&#34;&gt;my_list &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;a =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# assign list objects&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(my_list, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# create a named list&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;my_list &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;a =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# assign list objects&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(my_list, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## &amp;lt;environment: R_GlobalEnv&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# did objects make it into environment?&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;(); a; b&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# did objects make it into environment?&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;(); a; b&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot;       &amp;quot;b&amp;quot;       &amp;quot;my_list&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 1&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 2&lt;/code&gt;&lt;/pre&gt;
@@ -163,20 +138,20 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;div id=&#34;slightly-longer-demo&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Slightly longer demo&lt;/h2&gt;
 &lt;p&gt;To see it in practice, pretend we’re on the remote machine. We have created a handful of objects, only some of which we want to save. I will add some objects to our environment to demonstrate.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(iris)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(mtcars)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(iris)&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;data&lt;/span&gt;(mtcars)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Let’s see what all we have now.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;a&amp;quot;       &amp;quot;b&amp;quot;       &amp;quot;iris&amp;quot;    &amp;quot;mtcars&amp;quot;  &amp;quot;my_list&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now, suppose I want to pass data back to my home machine, but I only want to keep the objects &lt;code&gt;b&lt;/code&gt; and &lt;code&gt;iris&lt;/code&gt;. I could do this by putting them into a list. These objects should be &lt;em&gt;named!&lt;/em&gt;&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-1&#34; data-line-number=&#34;1&#34;&gt;objs_to_save &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; b, &lt;span class=&#34;dt&#34;&gt;iris =&lt;/span&gt; iris)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Now imagine that I upload the files to Box. This is done using &lt;code&gt;boxr::box_write(objs_to_save, &amp;quot;saved-list.RDS&amp;quot;, dir_id = ...)&lt;/code&gt; where &lt;code&gt;...&lt;/code&gt; is a numeric ID assigned to a synced folder on Box.com. (If I wanted to save the whole &lt;code&gt;.Rdata&lt;/code&gt; image, I could use &lt;code&gt;box_save_image()&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34;&gt;&lt;/a&gt;objs_to_save &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;b =&lt;/span&gt; b, &lt;span class=&#34;dt&#34;&gt;iris =&lt;/span&gt; iris)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now imagine that I upload the files to Box. This is done using &lt;code&gt;boxr::box_write(objs_to_save, &#34;saved-list.RDS&#34;, dir_id = ...)&lt;/code&gt; where &lt;code&gt;...&lt;/code&gt; is a numeric ID assigned to a synced folder on Box.com. (If I wanted to save the whole &lt;code&gt;.Rdata&lt;/code&gt; image, I could use &lt;code&gt;box_save_image()&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Now pretend I’m on my home machine again. I will wipe our workspace (all but &lt;code&gt;objs_to_save&lt;/code&gt;) to simulate the effect.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;rm&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;list =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()[&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;objs_to_save&amp;quot;&lt;/span&gt;])&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;rm&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;list =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()[&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;objs_to_save&amp;quot;&lt;/span&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;I read the saved list from Box, so now it’s in my workspace as a list:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb12-1&#34;&gt;&lt;a href=&#34;#cb12-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;objs_to_save&amp;quot;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb14-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(objs_to_save, head)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb14-1&#34;&gt;&lt;a href=&#34;#cb14-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(objs_to_save, head)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## $b
 ## [1] 2
 ## 
@@ -189,9 +164,9 @@ code span.wa { color: #bf0303; } /* Warning */
 ## 5          5.0         3.6          1.4         0.2  setosa
 ## 6          5.4         3.9          1.7         0.4  setosa&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Here is where we use &lt;code&gt;list2env()&lt;/code&gt;. We simply drop the objects in this list into the global environment.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb16-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(objs_to_save, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb16-1&#34;&gt;&lt;a href=&#34;#cb16-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;list2env&lt;/span&gt;(objs_to_save, &lt;span class=&#34;dt&#34;&gt;envir =&lt;/span&gt; .GlobalEnv)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## &amp;lt;environment: R_GlobalEnv&amp;gt;&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb18-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb18-1&#34;&gt;&lt;a href=&#34;#cb18-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ls&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;b&amp;quot;            &amp;quot;iris&amp;quot;         &amp;quot;objs_to_save&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now we can use these objects for analysis in an &lt;code&gt;R&lt;/code&gt; script, or we can use them in an &lt;code&gt;.Rmd&lt;/code&gt; report to write up the results of what we did on the remote machine. Whatever you’re doing, saving objects as a list and then reading the list into R can be a quick way to move data between R sessions, and &lt;code&gt;list2env()&lt;/code&gt; makes it easy.&lt;/p&gt;
 &lt;/div&gt;
@@ -206,27 +181,29 @@ code span.wa { color: #bf0303; } /* Warning */
       
       <guid>/post/git-in-papers/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -238,7 +215,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -281,7 +258,7 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;ul&gt;
 &lt;li&gt;A compilation system like &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.&lt;/li&gt;
 &lt;li&gt;As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.&lt;/li&gt;
-&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
+&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Here is an example from one of my in-progress papers.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/for-posts/git-date.png&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
@@ -299,30 +276,30 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;p&gt;We can run console commands within R using the &lt;code&gt;system()&lt;/code&gt; function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the &lt;code&gt;intern = TRUE&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
 &lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot;
-##  [8] &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot;
-## [15] &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot;
-## [22] &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot;
-## [29] &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot;
-## [36] &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot;
-## [43] &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot;
-## [50] &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot;
-## [57] &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot;
-## [64] &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot;
-## [71] &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot;
-## [78] &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot;
-## [85] &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot;
-## [92] &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot;
+##  [8] &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot;
+## [15] &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot;
+## [22] &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot;
+## [29] &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot;
+## [36] &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot;
+## [43] &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot;
+## [50] &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot;
+## [57] &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot;
+## [64] &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot;
+## [71] &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot;
+## [78] &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot;
+## [85] &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot;
+## [92] &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;b204b83&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;322d6d8&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;811 page prep, upload syllabus&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;begin 811 slides, links on computing page, code to copy&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
@@ -351,6 +328,7 @@ code span.wa { color: #bf0303; } /* Warning */
       
       <guid>/post/bayes-mediation/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;motivation-for-this-post&#34; class=&#34;section level1&#34;&gt;
@@ -414,6 +392,9 @@ Hopefully I haven’t messed up the integral.&lt;/p&gt;
 \end{align}\]&lt;/span&gt;
 This expression is also marginalizing over the simulated mediator value &lt;span class=&#34;math inline&#34;&gt;\(M(t&amp;#39;)\)&lt;/span&gt;. Because the simulated mediator is a function of random variables, it itself is also a random variable with a probability distribution.&lt;/p&gt;
 &lt;p&gt;In order to get total, direct, and mediation effects, we calculate each comparison of potential outcomes using the posterior predictive draws, and then average over each observation in the data. Here are the posterior samples for each treatment effect component.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &amp;#39;GGally&amp;#39;:
+##   method from   
+##   +.gg   ggplot2&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here is a comparison to the &lt;code&gt;{mediation}&lt;/code&gt; package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the &lt;code&gt;{mediation}&lt;/code&gt; estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
@@ -426,9 +407,9 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
-Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -440,13 +421,8 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       
       <guid>/example-publication/preprint/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -458,6 +434,7 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
       
       <guid>/post/ggk-flat-priors/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by &lt;a href=&#34;https://books.google.com/books?hl=en&amp;amp;lr=&amp;amp;id=RDueAgAAQBAJ&amp;amp;oi=fnd&amp;amp;pg=PA9&amp;amp;dq=gerber+green+kaplan&amp;amp;ots=0I3f6Jfn33&amp;amp;sig=wVKOfRF39mkiT4vnMe8YecMMpeY#v=onepage&amp;amp;q=gerber%20green%20kaplan&amp;amp;f=false&#34;&gt;Gerber, Green, and Kaplan&lt;/a&gt; (hereafter “GGK”) about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs. observational research.&lt;/p&gt;
@@ -492,7 +469,7 @@ The bias &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; is the d
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -505,27 +482,29 @@ Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;wi
       
       <guid>/post/viz-partials/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -537,7 +516,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -631,126 +610,126 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
 &lt;h1&gt;Implementation&lt;/h1&gt;
 &lt;p&gt;Now we will create the revised gif.&lt;/p&gt;
 &lt;p&gt;First we start with the original Heiss data and code.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- Heiss code -----------------------&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; data-line-number=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;magrittr&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;lubridate&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;broom&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;scales&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;gganimate&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; data-line-number=&#34;9&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;# Load and clean data&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;# This data comes from Dark Sky&amp;#39;s API&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; data-line-number=&#34;12&#34;&gt;weather_provo_raw &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_csv&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;https://andhs.co/provoweather&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; data-line-number=&#34;13&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;# clean dates and precip&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; data-line-number=&#34;15&#34;&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_raw &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; data-line-number=&#34;17&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-18&#34; data-line-number=&#34;18&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;month_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-19&#34; data-line-number=&#34;19&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;weekday =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-20&#34; data-line-number=&#34;20&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;weekday_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-21&#34; data-line-number=&#34;21&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;precipType =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ifelse&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(precipType), &lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;, precipType)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-22&#34; data-line-number=&#34;22&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-23&#34; data-line-number=&#34;23&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-24&#34; data-line-number=&#34;24&#34;&gt;    date, month, month_number, weekday, weekday_number,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-25&#34; data-line-number=&#34;25&#34;&gt;    sunriseTime, sunsetTime, moonPhase, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-26&#34; data-line-number=&#34;26&#34;&gt;    precipProbability, precipType, temperatureHigh, temperatureLow, dewPoint, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-27&#34; data-line-number=&#34;27&#34;&gt;    humidity, pressure, windSpeed, cloudCover, visibility, uvIndex&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-28&#34; data-line-number=&#34;28&#34;&gt;  )&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-29&#34; data-line-number=&#34;29&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-30&#34; data-line-number=&#34;30&#34;&gt;&lt;span class=&#34;co&#34;&gt;# keep winter and spring, scale vars&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-31&#34; data-line-number=&#34;31&#34;&gt;winter_spring &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-32&#34; data-line-number=&#34;32&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(month_number &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-33&#34; data-line-number=&#34;33&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(month, &lt;span class=&#34;dt&#34;&gt;ordered =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-34&#34; data-line-number=&#34;34&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-35&#34; data-line-number=&#34;35&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;humidity =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-36&#34; data-line-number=&#34;36&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;cloudCover =&lt;/span&gt; cloudCover &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-37&#34; data-line-number=&#34;37&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;precipProbability =&lt;/span&gt; precipProbability &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-38&#34; data-line-number=&#34;38&#34;&gt;  )&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# ---- Heiss code -----------------------&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;magrittr&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;lubridate&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;broom&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;scales&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;gganimate&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Load and clean data&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# This data comes from Dark Sky&amp;#39;s API&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34;&gt;&lt;/a&gt;weather_provo_raw &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read_csv&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;https://andhs.co/provoweather&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# clean dates and precip&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34;&gt;&lt;/a&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_raw &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;month_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;month&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;weekday =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;abbr =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;weekday_number =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;wday&lt;/span&gt;(date, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;precipType =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ifelse&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(precipType), &lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;, precipType)&lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34;&gt;&lt;/a&gt;    date, month, month_number, weekday, weekday_number,&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34;&gt;&lt;/a&gt;    sunriseTime, sunsetTime, moonPhase, &lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34;&gt;&lt;/a&gt;    precipProbability, precipType, temperatureHigh, temperatureLow, dewPoint, &lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34;&gt;&lt;/a&gt;    humidity, pressure, windSpeed, cloudCover, visibility, uvIndex&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# keep winter and spring, scale vars&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34;&gt;&lt;/a&gt;winter_spring &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weather_provo_&lt;span class=&#34;dv&#34;&gt;2017&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(month_number &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(month, &lt;span class=&#34;dt&#34;&gt;ordered =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-35&#34;&gt;&lt;a href=&#34;#cb1-35&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;humidity =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb1-36&#34;&gt;&lt;a href=&#34;#cb1-36&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;cloudCover =&lt;/span&gt; cloudCover &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb1-37&#34;&gt;&lt;a href=&#34;#cb1-37&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;precipProbability =&lt;/span&gt; precipProbability &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-38&#34;&gt;&lt;a href=&#34;#cb1-38&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We combine several model formulas into a data frame and estimate each regression using &lt;code&gt;purrr::map()&lt;/code&gt;. We’ve added the results from &lt;code&gt;broom::augment()&lt;/code&gt; because we want the residuals from each model to create the “noise” in the data for the graphic.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# ---- mike decrescenzo modifications begin -----------------------&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; data-line-number=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;# Run all these models in one data frame (purrr::map)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# add the data as a list column because we&amp;#39;ll want it later&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; data-line-number=&#34;5&#34;&gt;models &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; data-line-number=&#34;7&#34;&gt;    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;formula,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; data-line-number=&#34;8&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; data-line-number=&#34;9&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; data-line-number=&#34;10&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; data-line-number=&#34;11&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; data-line-number=&#34;12&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# data in a list column&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;spring_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(winter_spring)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Run a model in each row&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;model =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map2&lt;/span&gt;(formula, spring_data, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(.x, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; .y))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Extract model elements&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; data-line-number=&#34;19&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;model_tidy =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, tidy, &lt;span class=&#34;dt&#34;&gt;conf.int =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; data-line-number=&#34;20&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;model_glance =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, glance), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-21&#34; data-line-number=&#34;21&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;model_fits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, augment)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-22&#34; data-line-number=&#34;22&#34;&gt;  )&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# ---- mike decrescenzo modifications begin -----------------------&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Run all these models in one data frame (purrr::map)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# add the data as a list column because we&amp;#39;ll want it later&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34;&gt;&lt;/a&gt;models &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;formula,&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;temperatureHigh ~ humidity + windSpeed + cloudCover + precipProbability + visibility&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# data in a list column&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;spring_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;list&lt;/span&gt;(winter_spring)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Run a model in each row&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;model =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map2&lt;/span&gt;(formula, spring_data, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(.x, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; .y))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Extract model elements&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;model_tidy =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, tidy, &lt;span class=&#34;dt&#34;&gt;conf.int =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;), &lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;model_glance =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, glance), &lt;/span&gt;
+&lt;span id=&#34;cb2-21&#34;&gt;&lt;a href=&#34;#cb2-21&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;model_fits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model, augment)&lt;/span&gt;
+&lt;span id=&#34;cb2-22&#34;&gt;&lt;a href=&#34;#cb2-22&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We calculate the impact of humidity on the high temperature by extracting the humidity coefficient from each model and multiplying it by the raw humidity data (which comes in the &lt;code&gt;augment&lt;/code&gt; results). We will lazily refer to this as the humidity’s “partial prediction” of temperature (thanks to &lt;a href=&#34;https://twitter.com/EvaMaeRey&#34;&gt;Gina Reynolds&lt;/a&gt; for feedback on what this should be called). As a bonus, we will also save the upper and lower bounds of the humidity beta confidence interval.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# compute the partial effect of humidity: beta * humidity&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; data-line-number=&#34;2&#34;&gt;model_partials &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;models &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# get the humidity beta and bounds&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; data-line-number=&#34;5&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;humidity_beta =&lt;/span&gt; &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; data-line-number=&#34;6&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;estimate) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; data-line-number=&#34;8&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;beta_low =&lt;/span&gt; &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-9&#34; data-line-number=&#34;9&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.low) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-11&#34; data-line-number=&#34;11&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;beta_high =&lt;/span&gt; &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-12&#34; data-line-number=&#34;12&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.high) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-14&#34; data-line-number=&#34;14&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# calculate partial effect of humidity and keep the residual&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(model_fits) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;partial =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;humidity_beta) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, humidity, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;), partial, .resid) &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-19&#34; data-line-number=&#34;19&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;# get the beta for label plotting&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-21&#34; data-line-number=&#34;21&#34;&gt;model_beta &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;model_partials &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-22&#34; data-line-number=&#34;22&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-23&#34; data-line-number=&#34;23&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;distinct&lt;/span&gt;() &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# compute the partial effect of humidity: beta * humidity&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34;&gt;&lt;/a&gt;model_partials &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;models &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# get the humidity beta and bounds&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;humidity_beta =&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;estimate) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;beta_low =&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-9&#34;&gt;&lt;a href=&#34;#cb3-9&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.low) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-10&#34;&gt;&lt;a href=&#34;#cb3-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb3-11&#34;&gt;&lt;a href=&#34;#cb3-11&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;beta_high =&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-12&#34;&gt;&lt;a href=&#34;#cb3-12&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(model_tidy, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(.x, term &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;humidity&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;conf.high) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-13&#34;&gt;&lt;a href=&#34;#cb3-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;                        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb3-14&#34;&gt;&lt;a href=&#34;#cb3-14&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-15&#34;&gt;&lt;a href=&#34;#cb3-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# calculate partial effect of humidity and keep the residual&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-16&#34;&gt;&lt;a href=&#34;#cb3-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(model_fits) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-17&#34;&gt;&lt;a href=&#34;#cb3-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;partial =&lt;/span&gt; humidity &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;humidity_beta) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-18&#34;&gt;&lt;a href=&#34;#cb3-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, humidity, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;), partial, .resid) &lt;/span&gt;
+&lt;span id=&#34;cb3-19&#34;&gt;&lt;a href=&#34;#cb3-19&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-20&#34;&gt;&lt;a href=&#34;#cb3-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# get the beta for label plotting&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-21&#34;&gt;&lt;a href=&#34;#cb3-21&#34;&gt;&lt;/a&gt;model_beta &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;model_partials &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-22&#34;&gt;&lt;a href=&#34;#cb3-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(formula, &lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-23&#34;&gt;&lt;a href=&#34;#cb3-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;distinct&lt;/span&gt;() &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Now we create the figure. The horizontal axis is the raw humidity data. The vertical axis is the humidity effect (&lt;span class=&#34;math inline&#34;&gt;\(\beta \times \mathit{Humidity}_{i}\)&lt;/span&gt;) plus the regression residual &lt;span class=&#34;math inline&#34;&gt;\(\varepsilon_{i}\)&lt;/span&gt;. The regression line is simply &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mathit{High}}_{i} = \hat{\beta}\mathit{Humidity}_{i}\)&lt;/span&gt; with a constant of zero. That is, on a given day, a humidity level of &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt; exerts a negative impact on temperature amounting to &lt;span class=&#34;math inline&#34;&gt;\(\beta z\)&lt;/span&gt;, setting other factors aside. Conveniently, we don’t have to manually subtract the other covariates because we already know how to calculate the vertical axis using the partial effect and the residual (thanks to the math above).&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# animate &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_partials, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; humidity, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; partial &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.resid)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_point&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; data-line-number=&#34;5&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; data-line-number=&#34;6&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; humidity_beta, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; data-line-number=&#34;7&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-9&#34; data-line-number=&#34;9&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-10&#34; data-line-number=&#34;10&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_low, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-11&#34; data-line-number=&#34;11&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-12&#34; data-line-number=&#34;12&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-14&#34; data-line-number=&#34;14&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-15&#34; data-line-number=&#34;15&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_high, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-16&#34; data-line-number=&#34;16&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-17&#34; data-line-number=&#34;17&#34;&gt;    ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;base_family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-20&#34; data-line-number=&#34;20&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-21&#34; data-line-number=&#34;21&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;35&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-70&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-22&#34; data-line-number=&#34;22&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta: &amp;quot;&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(humidity_beta, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-23&#34; data-line-number=&#34;23&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-24&#34; data-line-number=&#34;24&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;parse =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-25&#34; data-line-number=&#34;25&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-26&#34; data-line-number=&#34;26&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-27&#34; data-line-number=&#34;27&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-28&#34; data-line-number=&#34;28&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Humidity&amp;quot;&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-29&#34; data-line-number=&#34;29&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;&lt;/span&gt;, &lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-30&#34; data-line-number=&#34;30&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;subtitle =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{closest_state}&amp;quot;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-31&#34; data-line-number=&#34;31&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-32&#34; data-line-number=&#34;32&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(formula, &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.25&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-33&#34; data-line-number=&#34;33&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fade&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-34&#34; data-line-number=&#34;34&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ease_aes&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;sine-in-out&amp;#39;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# animate &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_partials, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; humidity, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; partial &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.resid)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_point&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;gray&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; humidity_beta, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula)&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/span&gt;
+&lt;span id=&#34;cb4-10&#34;&gt;&lt;a href=&#34;#cb4-10&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_low, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/span&gt;
+&lt;span id=&#34;cb4-11&#34;&gt;&lt;a href=&#34;#cb4-11&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-12&#34;&gt;&lt;a href=&#34;#cb4-12&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-13&#34;&gt;&lt;a href=&#34;#cb4-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_abline&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb4-14&#34;&gt;&lt;a href=&#34;#cb4-14&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/span&gt;
+&lt;span id=&#34;cb4-15&#34;&gt;&lt;a href=&#34;#cb4-15&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;intercept =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;slope =&lt;/span&gt; beta_high, &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/span&gt;
+&lt;span id=&#34;cb4-16&#34;&gt;&lt;a href=&#34;#cb4-16&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;linetype =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-17&#34;&gt;&lt;a href=&#34;#cb4-17&#34;&gt;&lt;/a&gt;    ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-18&#34;&gt;&lt;a href=&#34;#cb4-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;base_family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-19&#34;&gt;&lt;a href=&#34;#cb4-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb4-20&#34;&gt;&lt;a href=&#34;#cb4-20&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; model_beta, &lt;/span&gt;
+&lt;span id=&#34;cb4-21&#34;&gt;&lt;a href=&#34;#cb4-21&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;35&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-70&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-22&#34;&gt;&lt;a href=&#34;#cb4-22&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;beta: &amp;quot;&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(humidity_beta, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)), &lt;/span&gt;
+&lt;span id=&#34;cb4-23&#34;&gt;&lt;a href=&#34;#cb4-23&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; formula), &lt;/span&gt;
+&lt;span id=&#34;cb4-24&#34;&gt;&lt;a href=&#34;#cb4-24&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;parse =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-25&#34;&gt;&lt;a href=&#34;#cb4-25&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;family =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Fira Sans&amp;quot;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-26&#34;&gt;&lt;a href=&#34;#cb4-26&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-27&#34;&gt;&lt;a href=&#34;#cb4-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb4-28&#34;&gt;&lt;a href=&#34;#cb4-28&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Humidity&amp;quot;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-29&#34;&gt;&lt;a href=&#34;#cb4-29&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Partial Predicted High Temperature (plus residual, °F)&amp;quot;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-30&#34;&gt;&lt;a href=&#34;#cb4-30&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;subtitle =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{closest_state}&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-31&#34;&gt;&lt;a href=&#34;#cb4-31&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-32&#34;&gt;&lt;a href=&#34;#cb4-32&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(formula, &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.25&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-33&#34;&gt;&lt;a href=&#34;#cb4-33&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fade&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-34&#34;&gt;&lt;a href=&#34;#cb4-34&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ease_aes&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;sine-in-out&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018-10-19-partialling-out_files/figure-html/animated-1.gif&#34; /&gt;&lt;!-- --&gt;&lt;/p&gt;
 &lt;p&gt;Two notes about the confidence interval&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
@@ -765,7 +744,7 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
 &lt;div class=&#34;footnotes&#34;&gt;
 &lt;hr /&gt;
 &lt;ol&gt;
-&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Maybe it’s a dev version thing, but &lt;code&gt;scales::degree_format()&lt;/code&gt; doesn’t work for me, so I removed it.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Maybe it’s a dev version thing, but &lt;code&gt;scales::degree_format()&lt;/code&gt; doesn’t work for me, so I removed it.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -777,19 +756,9 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>/example-publication/journal-article/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -799,43 +768,9 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
       
       <guid>/example-publication/conference-paper/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/authors/admin/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/authors/admin/</guid>
-      <description>&lt;!-- ### About me --&gt;
-
-&lt;p&gt;I am a political science Ph.D. student at the University of Wisconsin–Madison, where I am also an affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34; target=&#34;_blank&#34;&gt;Elections Research Center&lt;/a&gt; and an &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34; target=&#34;_blank&#34;&gt;Honored Instructor&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;My work develops and applies new Bayesian approaches to the study of U.S. elections, election administration, public opinion, and causal inference.
-You can find my academic CV &lt;a href=&#34;https://uwmadison.box.com/s/sdl1gj7jsmg3qqc841gv641pfj8c449n&#34; target=&#34;_blank&#34;&gt;here&lt;/a&gt;.
-&lt;!-- resume? --&gt;&lt;/p&gt;
-
-&lt;p&gt;I expect to finish my Ph.D. and begin a non-academic career in 2020.&lt;/p&gt;
-
-&lt;!-- My work is published in the *Election Law Journal* (forthcoming) and *The Forum*, and it has been covered by the New York Times, the Washington Post, FiveThirtyEight, and more. --&gt;
-
-&lt;!-- &lt;center&gt;
-  Keep reading &amp;nbsp;&amp;nbsp;&lt;a href=&#34;#research&#34;&gt;&lt;i class=&#34;fas fa-arrow-down fa-2x&#34; aria-hidden=&#34;true&#34;&gt;&lt;/i&gt;&lt;/a&gt;
-&lt;/center&gt; --&gt;
+      <description>&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

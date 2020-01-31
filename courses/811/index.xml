@@ -19,6 +19,7 @@
       
       <guid>/courses/811/811-02-basics/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- # Schedule: --&gt;
@@ -159,7 +160,7 @@ y[2]&lt;/code&gt;&lt;/pre&gt;
 y[3]&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] 6&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is akin to indexing in math, where we could write &lt;span class=&#34;math inline&#34;&gt;\(y_{1} = 2\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(y_{2} = 4\)&lt;/span&gt;, and so on.&lt;/p&gt;
-&lt;p&gt;This is why the console prints a little &lt;code&gt;[1]&lt;/code&gt; next to all results. The &lt;code&gt;[1]&lt;/code&gt; indicates that the adjacent element is the first element of the results. If we print a longer object, this becomes clearer. For example, 30 repetitions of the word &lt;code&gt;&amp;quot;hello&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This is why the console prints a little &lt;code&gt;[1]&lt;/code&gt; next to all results. The &lt;code&gt;[1]&lt;/code&gt; indicates that the adjacent element is the first element of the results. If we print a longer object, this becomes clearer. For example, 30 repetitions of the word &lt;code&gt;&#34;hello&#34;&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# repeat &amp;quot;hello&amp;quot; 30 times
 rep(&amp;quot;hello&amp;quot;, 30)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot; &amp;quot;hello&amp;quot;
@@ -231,8 +232,8 @@ g &amp;lt;= 5&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;##  [1]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE FALSE&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This seems a little abstract right now, but here’s how you may see others use logic for indexing. Let’s say that I have some data from countries around the world, and I want to look only at the European data. You might see someone online limit the data like so.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;world_data[region == &amp;quot;Europe&amp;quot;, ]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Translated: retrieve the &lt;code&gt;world_data&lt;/code&gt; object, but only the rows (notice the comma in the indexing) where &lt;code&gt;region&lt;/code&gt; is equal to &lt;code&gt;&amp;quot;Europe&amp;quot;&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;More literally, the statement &lt;code&gt;region == &amp;quot;Europe&amp;quot;&lt;/code&gt; is either &lt;code&gt;TRUE&lt;/code&gt; or &lt;code&gt;FALSE&lt;/code&gt; for every observation in the data. The above statement returns the rows from &lt;code&gt;world_data&lt;/code&gt; where &lt;code&gt;region == &amp;quot;Europe&amp;quot;&lt;/code&gt; evaluates to &lt;code&gt;TRUE&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Translated: retrieve the &lt;code&gt;world_data&lt;/code&gt; object, but only the rows (notice the comma in the indexing) where &lt;code&gt;region&lt;/code&gt; is equal to &lt;code&gt;&#34;Europe&#34;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;More literally, the statement &lt;code&gt;region == &#34;Europe&#34;&lt;/code&gt; is either &lt;code&gt;TRUE&lt;/code&gt; or &lt;code&gt;FALSE&lt;/code&gt; for every observation in the data. The above statement returns the rows from &lt;code&gt;world_data&lt;/code&gt; where &lt;code&gt;region == &#34;Europe&#34;&lt;/code&gt; evaluates to &lt;code&gt;TRUE&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;As mentioned above, we will perform this kind of case selection with a more intuitive syntax that is easier to wrap your brain around.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;data-types&#34; class=&#34;section level1&#34;&gt;
@@ -241,7 +242,7 @@ g &amp;lt;= 5&lt;/code&gt;&lt;/pre&gt;
 &lt;ul&gt;
 &lt;li&gt;Logical: &lt;code&gt;TRUE&lt;/code&gt;s and &lt;code&gt;FALSE&lt;/code&gt;s.&lt;/li&gt;
 &lt;li&gt;Numeric: including integers and doubles&lt;/li&gt;
-&lt;li&gt;Strings: text strings that are contained in &lt;code&gt;&amp;quot;quotes&amp;quot;&lt;/code&gt;. R calls these “character” type variables.&lt;/li&gt;
+&lt;li&gt;Strings: text strings that are contained in &lt;code&gt;&#34;quotes&#34;&lt;/code&gt;. R calls these “character” type variables.&lt;/li&gt;
 &lt;li&gt;Factors: ordered categories with text labels&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Factors are akin to labelled variables in Stata. They are somewhat like numbers, somewhat like text strings. They are like strings because they havea text label, and you can’t do math with them. They are like numbers because you can put them in order. Put another way, factors are &lt;em&gt;ordered categories&lt;/em&gt; that have textual metadata.&lt;/p&gt;
@@ -322,6 +323,7 @@ sd(x) &lt;/code&gt;&lt;/pre&gt;
       
       <guid>/courses/811/811-03-data/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;Read this before our first R lecture.&lt;/p&gt;
@@ -898,7 +900,7 @@ full_join(data1, data2, by = &amp;quot;case&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 ## 2     2 b     x    
 ## 3     3 c     y    
 ## 4     4 &amp;lt;NA&amp;gt;  z&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;You can merge along multiple variables using &lt;code&gt;by = c(&amp;quot;var1&amp;quot;, &amp;quot;var2&amp;quot;, ...)&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;You can merge along multiple variables using &lt;code&gt;by = c(&#34;var1&#34;, &#34;var2&#34;, ...)&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;left_join()&lt;/code&gt; keeps all cases from left dataset. If the right dataset can’t fill a cell in the left dataset, the result is &lt;code&gt;NA&lt;/code&gt;. If the right dataset has other cases that aren’t present in the left, they disappear.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# keep left data in tact, 
 # merge only matching cases from right data
@@ -1327,6 +1329,7 @@ anes %$%
       
       <guid>/courses/811/811-04-graphics/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- # Schedule: --&gt;
@@ -1609,7 +1612,7 @@ ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   labs(x = &amp;quot;Party ID Index&amp;quot;, y = &amp;quot;Relative Candidate Thermometer Score&amp;quot;,
        color = &amp;quot;Gender&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/courses/811/811-04-graphics_files/figure-html/unnamed-chunk-19-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;The &lt;code&gt;labs()&lt;/code&gt; function only changes the names that you specify. To fix this dirty legend, I should specify the name for color, fill, and linetype all as &lt;code&gt;&amp;quot;Gender&amp;quot;&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;labs()&lt;/code&gt; function only changes the names that you specify. To fix this dirty legend, I should specify the name for color, fill, and linetype all as &lt;code&gt;&#34;Gender&#34;&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# specify all labels
 ggplot(data = anes, aes(x = pid7, y = reltherm_cand)) +
   geom_jitter(width = 0.2, 
@@ -2392,6 +2395,7 @@ str_replace_all(state.name, pattern = &amp;quot; &amp;quot;, replacement = &amp;
       
       <guid>/courses/811/811-05-analysis/</guid>
       <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;!-- # Schedule --&gt;
@@ -2879,7 +2883,7 @@ print(xtable(therm_mod))&lt;/code&gt;&lt;/pre&gt;
 &lt;div id=&#34;exporting-regression-tables&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Exporting regression tables&lt;/h1&gt;
 &lt;p&gt;This is not that difficult, but it requires some thinking about your project directory.&lt;/p&gt;
-&lt;p&gt;Whenever you have some project, your directory should contain separate folders for &lt;code&gt;R/&lt;/code&gt;, &lt;code&gt;data/&lt;/code&gt;, and your writing (which I call &lt;code&gt;tex/&lt;/code&gt; or &lt;code&gt;paper/&lt;/code&gt;). Let’s assume that we’re writing a &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; document inside a folder called &lt;code&gt;tex/&lt;/code&gt;, and we want to save a regression table from R. We should also assume that our directory in R is set to the &lt;em&gt;project root&lt;/em&gt;, i.e. the top of the project folder (for example, &lt;code&gt;&amp;quot;users/michaeldecrescenzo/box sync/research/thesis&amp;quot;&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Whenever you have some project, your directory should contain separate folders for &lt;code&gt;R/&lt;/code&gt;, &lt;code&gt;data/&lt;/code&gt;, and your writing (which I call &lt;code&gt;tex/&lt;/code&gt; or &lt;code&gt;paper/&lt;/code&gt;). Let’s assume that we’re writing a &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; document inside a folder called &lt;code&gt;tex/&lt;/code&gt;, and we want to save a regression table from R. We should also assume that our directory in R is set to the &lt;em&gt;project root&lt;/em&gt;, i.e. the top of the project folder (for example, &lt;code&gt;&#34;users/michaeldecrescenzo/box sync/research/thesis&#34;&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;We can use R to create a subfolder inside of the &lt;code&gt;tex/&lt;/code&gt; folder dedicated to tables, if we don’t already have one.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# makes a &amp;quot;tex&amp;quot; folder
 dir.create(&amp;quot;tex&amp;quot;)

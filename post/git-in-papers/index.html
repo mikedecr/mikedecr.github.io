@@ -83,7 +83,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.710387c227532828b07a58243cbd13c3.css">
+  <link rel="stylesheet" href="/css/academic.min.dd75c6b920d285055d76459426bdfc45.css">
 
   
 
@@ -507,27 +507,29 @@
 
     <div class="article-style" itemprop="articleBody">
       
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -539,7 +541,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-le
 div.sourceCode
   { color: #1f1c1b; background-color: #ffffff; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span. { color: #1f1c1b; } /* Normal */
 code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
@@ -582,7 +584,7 @@ code span.wa { color: #bf0303; } /* Warning */
 <ul>
 <li>A compilation system like <span class="math inline">\(\mathrm{\LaTeX}\)</span> can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.</li>
 <li>As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.</li>
-<li>A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with <a href="https://datasift.github.io/gitflow/IntroducingGitFlow.html">“Git flow”</a>). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.</li>
+<li>A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with <a href="https://datasift.github.io/gitflow/IntroducingGitFlow.html">“Git flow”</a>). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.</li>
 </ul>
 <p>Here is an example from one of my in-progress papers.</p>
 <p><img src="/img/for-posts/git-date.png" /><!-- --></p>
@@ -600,30 +602,30 @@ code span.wa { color: #bf0303; } /* Warning */
 <p>We can run console commands within R using the <code>system()</code> function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the <code>intern = TRUE</code> argument.</p>
 <p>Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).</p>
 <p>For instance, how can we print the branch name?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>##  [1] &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot;
-##  [8] &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot;
-## [15] &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot;
-## [22] &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot;
-## [29] &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot;
-## [36] &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot;
-## [43] &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot;
-## [50] &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot;
-## [57] &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot;
-## [64] &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot;
-## [71] &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot;
-## [78] &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot;
-## [85] &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot;
-## [92] &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot;
+##  [8] &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot;
+## [15] &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot;
+## [22] &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot;
+## [29] &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot;
+## [36] &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot;
+## [43] &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot;
+## [50] &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot;
+## [57] &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot;
+## [64] &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot;
+## [71] &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot;
+## [78] &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot;
+## [85] &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot;
+## [92] &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [1] &quot;b204b83&quot;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;322d6d8&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [1] &quot;811 page prep, upload syllabus&quot;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
+<pre><code>## [1] &quot;begin 811 slides, links on computing page, code to copy&quot;</code></pre>
 </div>
 <div id="r-results-in-the-yaml" class="section level2">
 <h2>R results in the YAML</h2>
@@ -896,7 +898,7 @@ code span.wa { color: #bf0303; } /* Warning */
     
     
     
-    <script src="/js/academic.min.f1a21f988a77cdbdeeb2f60c710009d1.js"></script>
+    <script src="/js/academic.min.23e2fabfaf271b1b075bb9e0280085b7.js"></script>
 
     
 
@@ -911,7 +913,7 @@ code span.wa { color: #bf0303; } /* Warning */
   
 
   <p class="powered-by">
-    &copy; Michael DeCrescenzo 2020 &middot; 
+    © Michael DeCrescenzo 2020 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

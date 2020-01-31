@@ -14,16 +14,15 @@
     <item>
       <title>Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election</title>
       <link>/publication/nonvoters/</link>
-      <pubDate>Fri, 13 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/publication/nonvoters/</guid>
-      <description>&lt;div class=&#34;alert alert-note&#34;&gt;
-  &lt;div&gt;
-    Git repo link coming soon
-  &lt;/div&gt;
-&lt;/div&gt;
+      <description>
 
-&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;/research/nonvoting-posteriors.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;(Git repo link coming soon)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;How much did Wisconsin’s voter identification requirement matter in 2016? We conducted a survey of registered nonvoters in the counties surrounding the cities of Milwaukee and Madison to estimate the number of registrants who experienced ID-related voting difficulties in the 2016 presidential election. We estimate that 10 percent of nonvoters in these counties lack a qualifying voter ID or report that voter ID was at least a &lt;em&gt;partial&lt;/em&gt; reason why they did not vote in 2016, and 6 percent of nonvoters lacked a voter ID or cited voter ID as their &lt;em&gt;primary&lt;/em&gt; reason for not voting. Theoretically, we argue that voter ID requirements “directly” affect voters who lack qualifying IDs but also “indirectly” affect voters who are confused about their compliance with the law. We find evidence of such confusion, with many respondents mistakenly believing that they did not have the necessary ID to vote when they actually did. Our analysis permits us to calculate bounds on the possible turnout effect in 2016. Most of our credible estimates suggest that turnout in these counties was reduced by the voter ID requirement by up to 1 percentage point.&lt;/p&gt;
 </description>
     </item>
     
@@ -31,10 +30,29 @@
       <title>The Unexceptional Gender Gap of 2016
 </title>
       <link>/publication/gender-2016/</link>
-      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/publication/gender-2016/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34; /&gt;&lt;/p&gt;
+      <description>
+
+
+&lt;blockquote&gt;
+&lt;p&gt;Because of the particular candidates who ran, the 2016 presidential campaign was defined by gender to a remarkable degree. This led many observers to expect a historically large gender gap in voting. In contrast to these expectations, the gender gap between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to matter. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div id=&#34;cite-this-paper&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Cite this paper&lt;/h2&gt;
+&lt;p&gt;Burden, Barry C., Evan Crawford, and Michael G. DeCrescenzo. 2016. “The Unexceptional Gender Gap of 2016.” &lt;em&gt;The Forum&lt;/em&gt; 14(4), 415–432.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;@inproceedings&lt;/span&gt;{burden2016unexceptional,
+title={The unexceptional gender gap of 2016},
+author={Burden, Barry C and Crawford, Evan and DeCrescenzo, Michael G},
+booktitle={The Forum},
+volume={14},
+number={4},
+pages={415–432},
+year={2016},
+organization={De Gruyter}
+}&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     
