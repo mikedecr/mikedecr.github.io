@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.3.1">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Michael DeCrescenzo">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="pre  code.sourceCode { white-space: pre; position: relative; } pre  code.sourceCode  span { display: inline-block; line-height: 1.25; } pre  code.sourceCode  span:empty { height: 1.2em; } code.sourceCode  span { color: inherit; text-decoration: inherit; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { pre  code.sourceCode { white-space: pre-wrap; } pre  code.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/randomization-inference-purrr/">
+
+  
+
+
+  
+
+  
+  
+  
+  <meta name="theme-color" content="#268bd2">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" integrity="sha256-ygkqlh3CYSUri3LhQxzdcm0n1EQvH2Y+U5S2idbLtxs=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,700|Fira+Sans:500|Roboto+Mono&display=swap">
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.min.dd75c6b920d285055d76459426bdfc45.css">
+
+  
+
+  
+  
+  
+
+  
+
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="icon" type="image/png" href="/img/icon.png">
+  <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
+
+  <link rel="canonical" href="/post/randomization-inference-purrr/">
+
+  
+  
+  
+  
+    
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="twitter:site" content="@mikedecr">
+  <meta property="twitter:creator" content="@mikedecr">
+  
+  <meta property="og:site_name" content="Michael DeCrescenzo">
+  <meta property="og:url" content="/post/randomization-inference-purrr/">
+  <meta property="og:title" content="Scalable Randomization Inference with Purrr | Michael DeCrescenzo">
+  <meta property="og:description" content="pre  code.sourceCode { white-space: pre; position: relative; } pre  code.sourceCode  span { display: inline-block; line-height: 1.25; } pre  code.sourceCode  span:empty { height: 1.2em; } code.sourceCode  span { color: inherit; text-decoration: inherit; } div.sourceCode { margin: 1em 0; } pre.sourceCode { margin: 0; } @media screen { div.sourceCode { overflow: auto; } } @media print { pre  code.sourceCode { white-space: pre-wrap; } pre  code."><meta property="og:image" content="/img/circular-telles.png">
+  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  
+  <meta property="article:published_time" content="2020-02-02T00:00:00&#43;00:00">
+  
+  <meta property="article:modified_time" content="2020-02-02T00:00:00&#43;00:00">
+  
+
+  
+
+
+  
+
+
+
+
+
+  <title>Scalable Randomization Inference with Purrr | Michael DeCrescenzo</title>
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-target="#TableOfContents" data-offset="71" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" role="textbox" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/"><img src="/img/circular-telles.png" alt="Michael DeCrescenzo"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/about"><span>About</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#publications"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#research"><span>Research in Progress</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/teaching"><span>Teaching</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/code"><span>Code Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article" itemscope itemtype="http://schema.org/Article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1 itemprop="name">Scalable Randomization Inference with Purrr</h1>
+
+  
+
+  
+    
+
+
+
+<meta content="2020-02-02 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2020-02-02 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  <span itemprop="author name" itemtype="http://schema.org/Person"><a href="/authors/admin/">Michael DeCrescenzo</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>Feb 2, 2020</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    8 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    <a href="/categories/methods/">Methods</a></span>
+  
+
+  
+    
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style" itemprop="articleBody">
+      
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+</style>
+
+
+<div id="overview" class="section level1">
+<h1>Overview</h1>
+<p>Randomization inference (RI) is an approach to conducting statistical inference based on hypothetical allocations of treatment rather than sampling error. It has an appealing intuition, but researchers may feel intimidated by the prospect of implementing it computationally. Although packages exist for conducting RI in R, this post shows that <code>tidyverse</code> tools (in particular, functional programming with <code>purrr</code>) provide an easy interface for performing RI both flexibly and at a large scale.</p>
+<p>The post provides a brief overview of RI’s logic, walks through an implementation of RI for a single treatment, and implements a more general workflow to accommodate a greater number of treatments, randomization schemes, and propensity weights.</p>
+</div>
+<div id="what-is-randomization-inference" class="section level1">
+<h1>What is Randomization Inference</h1>
+<p>Randomization inference is a method for conducting statistical hypothesis tests without making distributional assumptions about test statistics. Like all null hypothesis tests, it is a comparison between (1) an estimated effect or relationship from observed data and (2) a “null distribution” of estimates that we might have observed if the null hypothesis were true. Unlike traditional null hypothesis tests, the null distribution is not based on repeated sampling of a hypothetical population. Instead, it is constructed by imagining other ways that treatment may have been randomly allocated among units</p>
+<p>“If treatment had no average effect, it doesn’t matter which value we assign to which unit.”</p>
+<p>more complex randomization schemes.</p>
+<p><a href="https://declaredesign.org/r/randomizr/">randomizr</a>.</p>
+<p><span class="math inline">\(\mathbf{t}\)</span> is a random vector of treatment assignments.</p>
+<p>A test statistic <span class="math inline">\(S\)</span> that is a function of <span class="math inline">\(\mathbf{t}\)</span> and outcome data <span class="math inline">\(\mathbf{y}\)</span>.
+<span class="math display">\[\begin{align}
+  S = f\left( \mathbf{y}, \mathbf{t} \right)
+\end{align}\]</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(<span class="st">&quot;here&quot;</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>Estimate <span class="math inline">\(\hat{\tau}\)</span> from the observed data.</li>
+<li>Permute the value of the independent variable of interest. If there is some tractable number of permutations <span class="math inline">\(\Omega\)</span>, calculate those permutations. Else perform some <span class="math inline">\(M\)</span> permutations where <span class="math inline">\(M &lt; \Omega\)</span>.</li>
+<li>Obtain treatment effect estimate <span class="math inline">\(\hat{\tau}&#39;_{m}\)</span> for every permutation <span class="math inline">\(m \in \mathcal{M}\)</span>.</li>
+<li>For a sequence of sharp null values <span class="math inline">\(\boldsymbol{\mathbf{\tau}}_{0}\)</span>, find the estimated <span class="math inline">\(p\)</span>-value where <span class="math inline">\(p\)</span> is the proportion of <span class="math inline">\(\hat{\tau}&#39;_{m}\)</span> that exceed the value <span class="math inline">\(\hat{\tau} - \tau_{0}\)</span> estimated from the observed data.</li>
+</ol>
+</div>
+<div id="randomization-inference-for-a-simple-experiment" class="section level1">
+<h1>Randomization Inference for a Simple Experiment</h1>
+<p>Preview the workflow</p>
+<div id="why-not-just-use-a-package" class="section level2">
+<h2>Why not just use a package?</h2>
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>For this example, I will simulate a dataset of <span class="math inline">\(n = 500\)</span> who are assigned a binary treatment status <span class="math inline">\(z_{i} \in \left\{0, 1\right\}\)</span> with treatment probability <span class="math inline">\(0.5\)</span>. Binary outcome data <span class="math inline">\(y_{i}\)</span> are simulated according to the following model,
+<span class="math display">\[\begin{align}
+  y_{i} &amp;\sim \mathrm{Bernoulli}\left(\pi_{i}\right) \\
+  \pi_{i} &amp;= 0.5 + \tau z_{i} 
+\end{align}\]</span>
+where the treatment effect <span class="math inline">\(\tau\)</span> has a true value of <span class="math inline">\(0.05\)</span>.</p>
+<pre><code>## # A tibble: 500 x 3
+##       id treatment     y
+##    &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1     1         1     1
+##  2     2         0     0
+##  3     3         0     0
+##  4     4         1     1
+##  5     5         1     1
+##  6     6         1     1
+##  7     7         0     0
+##  8     8         0     1
+##  9     9         0     1
+## 10    10         0     1
+## # … with 490 more rows</code></pre>
+<p>Because the data are a random draw from the generative model, the treatment effect in the data won’t be exactly equal to the true effect. In these data, we estimate an in-sample treatment effect of 0.04</p>
+<p><img src="/post/2020-02-22_randomization-inference-purrr_files/figure-html/plot-observed-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p>We will want to save these estimates from the observed data.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>observed_estimates &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
+<span id="cb3-3"><a href="#cb3-3"></a>    <span class="dt">mean_control =</span> <span class="kw">mean</span>(y[treatment <span class="op">==</span><span class="st"> </span><span class="dv">0</span>]),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="dt">mean_treatment =</span> <span class="kw">mean</span>(y[treatment <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="dt">diff_means =</span> mean_treatment <span class="op">-</span><span class="st"> </span>mean_control</span>
+<span id="cb3-6"><a href="#cb3-6"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="st">  </span><span class="kw">print</span>()</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">## # A tibble: 1 x 3</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">##   mean_control mean_treatment diff_means</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">##          &lt;dbl&gt;          &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">## 1        0.514          0.555     0.0414</span></span></code></pre></div>
+</div>
+<div id="simulating-alternate-treatment-assignments" class="section level2">
+<h2>Simulating Alternate Treatment Assignments</h2>
+<p>Simulating alternate treatment vectors can be computationally costly if the researcher performs the simulation using a loop, since loops are famously slow in R. Fortunately, treatment assignments in one iteration do not depend on the assignments in other iterations, so there is no need to simulate treatment assignments using loops. Instead, we can take a functional approach by mapping a treatment assignment function across a set of simulations. We do this using tools contained in the R package <code>purrr</code>, which is contained in <code>tidyverse</code>.</p>
+<p>The key to this approach is that it runs out of a nested data frame. Here I will create a large number of copies of our original dataset and store them in a list-column.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>n_sims &lt;-<span class="st"> </span><span class="dv">2000</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a>sim_table &lt;-<span class="st"> </span>d <span class="op">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="st">  </span><span class="kw">crossing</span>(<span class="dt">m =</span> <span class="dv">1</span><span class="op">:</span>n_sims) <span class="op">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="st">  </span><span class="kw">group_by</span>(m) <span class="op">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="st">  </span><span class="kw">nest</span>() <span class="op">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="st">  </span><span class="kw">print</span>()</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## # A tibble: 2,000 x 2</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## # Groups:   m [2,000]</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">##        m data              </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">##    &lt;int&gt; &lt;list&gt;            </span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">##  1     1 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">##  2     2 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">##  3     3 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">##  4     4 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">##  5     5 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">##  6     6 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">##  7     7 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">##  8     8 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">##  9     9 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">## 10    10 &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">## # … with 1,990 more rows</span></span></code></pre></div>
+<p>The column <code>data</code> contains a list of data frames. What we will do now is apply a function over the list, the purpose of which is to permute the treatment assignments in each iteration <span class="math inline">\(m \in \{1, 2, \ldots, M\}\)</span>. This is done by applying the <code>mutate</code> function within <code>purrr::map()</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>sim_table &lt;-<span class="st"> </span>sim_table <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="dt">permuted_data =</span> </span>
+<span id="cb5-4"><a href="#cb5-4"></a>      <span class="kw">map</span>(data, mutate, <span class="dt">treatment =</span> <span class="kw">sample</span>(treatment, <span class="kw">n</span>(),  <span class="dt">replace =</span> <span class="ot">FALSE</span>))</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="st">  </span><span class="kw">print</span>()</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## # A tibble: 2,000 x 3</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">## # Groups:   m [2,000]</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">##        m data               permuted_data     </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##    &lt;int&gt; &lt;list&gt;             &lt;list&gt;            </span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">##  1     1 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">##  2     2 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">##  3     3 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">##  4     4 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">##  5     5 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="co">##  6     6 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="co">##  7     7 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">##  8     8 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="co">##  9     9 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="co">## 10    10 &lt;tibble [500 × 3]&gt; &lt;tibble [500 × 3]&gt;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="co">## # … with 1,990 more rows</span></span></code></pre></div>
+<p>Now we have <span class="math inline">\(M\)</span> data frames, each with a permuted treatment assignment variable. We estimate the difference in means in each iteration and then unnest the estimates back into one data frame.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>est_table &lt;-<span class="st"> </span>sim_table <span class="op">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">estimates =</span> <span class="kw">map</span>(</span>
+<span id="cb6-4"><a href="#cb6-4"></a>      <span class="dt">.x =</span> permuted_data, <span class="dt">.f =</span> summarize, </span>
+<span id="cb6-5"><a href="#cb6-5"></a>      <span class="dt">mean_control_m =</span> <span class="kw">mean</span>(y[treatment <span class="op">==</span><span class="st"> </span><span class="dv">0</span>]),</span>
+<span id="cb6-6"><a href="#cb6-6"></a>      <span class="dt">mean_treatment_m =</span> <span class="kw">mean</span>(y[treatment <span class="op">==</span><span class="st"> </span><span class="dv">1</span>]),</span>
+<span id="cb6-7"><a href="#cb6-7"></a>      <span class="dt">diff_means_m =</span> mean_treatment_m <span class="op">-</span><span class="st"> </span>mean_control_m</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    )</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  ) <span class="op">%&gt;%</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">c</span>(data, permuted_data)) <span class="op">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="st">  </span><span class="kw">unnest</span>(<span class="dt">cols =</span> estimates) <span class="op">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="st">  </span><span class="kw">print</span>()</span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">## # A tibble: 2,000 x 4</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##        m mean_control_m mean_treatment_m diff_means_m</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##    &lt;int&gt;          &lt;dbl&gt;            &lt;dbl&gt;        &lt;dbl&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##  1     1          0.510            0.559      0.0494 </span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##  2     2          0.533            0.535      0.00136</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">##  3     3          0.510            0.559      0.0494 </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">##  4     4          0.533            0.535      0.00136</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">##  5     5          0.525            0.543      0.0174 </span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">##  6     6          0.506            0.563      0.0574 </span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">##  7     7          0.576            0.490     -0.0867 </span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">##  8     8          0.537            0.531     -0.00664</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">##  9     9          0.557            0.510     -0.0467 </span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">## 10    10          0.486            0.584      0.0974 </span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">## # … with 1,990 more rows</span></span></code></pre></div>
+<p>The distribution of null treatment effects is now ready for plotting. In this case, we find a two-sided p-value of 0.334, which is the proportion of null treatment estimates whose magnitude exceeds the treatment effect in the observed data.</p>
+<p><img src="/post/2020-02-22_randomization-inference-purrr_files/figure-html/compare-null-1.png" width="80%" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+    </div>
+
+    
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/causal-inference/">Causal Inference</a>
+  
+  <a class="badge badge-light" href="/tags/computational-methods/">Computational Methods</a>
+  
+  <a class="badge badge-light" href="/tags/bayesian-statistics/">Bayesian Statistics</a>
+  
+</div>
+
+
+
+    
+      
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card" itemscope itemtype="http://schema.org/Person">
+    
+      
+      <img class="portrait mr-3" src="/authors/admin/avatar-nelson_hue1097363fe96fa554517b0e16128d3a0_5324589_250x250_fill_lanczos_center_2.png" itemprop="image" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title" itemprop="name"><a href="/">Michael DeCrescenzo</a></h5>
+      <h6 class="card-subtitle">Ph.D. Candidate, Political Science</h6>
+      <p class="card-text" itemprop="description">U.S. Electoral Politics, Bayesian Analysis, Open Source Research</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="/#contact" >
+              <i class="fas fa-paper-plane"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://github.com/mikedecr" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a itemprop="sameAs" href="https://twitter.com/mikedecr" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+
+      
+      
+      <div class="article-widget">
+        <div class="hr-light"></div>
+        <h3>Related</h3>
+        <ul>
+          
+          <li><a href="/post/bayes-mediation/">Causal Mediation, Bayesianly</a></li>
+          
+          <li><a href="/post/learning-splines/">Teaching Myself Splines In Public</a></li>
+          
+          <li><a href="/post/ggk-flat-priors/">Unrealistic Priors and the &#34;Illusion of Learning from Observational Research&#34;
+</a></li>
+          
+          <li><a href="/teaching/causal-inf-2019/">Causal Inference Reading Group
+</a></li>
+          
+          <li><a href="/post/love-list2env/">A Love Letter to list2env()
+</a></li>
+          
+        </ul>
+      </div>
+      
+    
+
+    
+
+    
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" integrity="sha256-X5PoE3KU5l+JcX+w09p/wHl9AzK333C4hJ2I9S5mD4M=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/r.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/tex.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/bib.min.js"></script>
+        
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/languages/txt.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS_CHTML-full" integrity="sha256-GhM+5JHb6QUzOQPXSJLEWP7R73CbkisjzK5Eyij4U9w=" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+    
+    <script>
+      const search_index_filename = "/index.json";
+      const i18n = {
+        'placeholder': "Search...",
+        'results': "results found",
+        'no_results': "No results found"
+      };
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.23e2fabfaf271b1b075bb9e0280085b7.js"></script>
+
+    
+
+
+
+
+
+
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    <a href="/privacy/">Privacy Policy</a>
+  </p>
+  
+
+  <p class="powered-by">
+    © Michael DeCrescenzo 2020 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" id="back_to_top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+<script type="text/javascript">
+var sc_project=11382424; 
+var sc_invisible=1; 
+var sc_security="647b3843"; 
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="free hit
+counter" href="https://statcounter.com/"
+target="_blank"><img class="statcounter"
+src="https://c.statcounter.com/11382424/0/647b3843/1/"
+alt="free hit counter"></a></div></noscript>
+
+
+</body>
+</html>
