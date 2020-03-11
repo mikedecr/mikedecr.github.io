@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 10 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/causal-inference/index.xml" rel="self" type="application/rss+xml" />
     
@@ -104,6 +104,620 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Purrrmutation Test: Randomization Inference with the Tidyverse</title>
+      <link>/post/randomization-inference-purrr/</link>
+      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/randomization-inference-purrr/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    background-color: #ffffff;
+    color: #a0a0a0;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+div.sourceCode
+  { color: #1f1c1b; background-color: #ffffff; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span. { color: #1f1c1b; } /* Normal */
+code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
+code span.an { color: #ca60ca; } /* Annotation */
+code span.at { color: #0057ae; } /* Attribute */
+code span.bn { color: #b08000; } /* BaseN */
+code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
+code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #924c9d; } /* Char */
+code span.cn { color: #aa5500; } /* Constant */
+code span.co { color: #898887; } /* Comment */
+code span.cv { color: #0095ff; } /* CommentVar */
+code span.do { color: #607880; } /* Documentation */
+code span.dt { color: #0057ae; } /* DataType */
+code span.dv { color: #b08000; } /* DecVal */
+code span.er { color: #bf0303; text-decoration: underline; } /* Error */
+code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
+code span.fl { color: #b08000; } /* Float */
+code span.fu { color: #644a9b; } /* Function */
+code span.im { color: #ff5500; } /* Import */
+code span.in { color: #b08000; } /* Information */
+code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
+code span.op { color: #1f1c1b; } /* Operator */
+code span.ot { color: #006e28; } /* Other */
+code span.pp { color: #006e28; } /* Preprocessor */
+code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
+code span.sc { color: #3daee9; } /* SpecialChar */
+code span.ss { color: #ff5500; } /* SpecialString */
+code span.st { color: #bf0303; } /* String */
+code span.va { color: #0057ae; } /* Variable */
+code span.vs { color: #bf0303; } /* VerbatimString */
+code span.wa { color: #bf0303; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;div id=&#34;overview&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Overview&lt;/h1&gt;
+&lt;p&gt;Permutation testing (or “randomization inference,” RI) is an approach to statistical inference based on hypothetical allocations of treatment rather than sampling error. It has an appealing intuition, but researchers may feel intimidated by the prospect of implementing it computationally. Although helpful packages exist for conducting permutation tests in R,&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
+my goal for this post is to show that &lt;code&gt;tidyverse&lt;/code&gt; tools (in particular, functional programming with &lt;code&gt;purrr&lt;/code&gt;) make it easy to implement randomization inference in R flexibly and efficiently.&lt;/p&gt;
+&lt;p&gt;Below I provide a brief overview of RI’s logic, implement a simple permutation test for a single treatment, and then demonstrate how to incorporate additional design features such as blocking or clustered randomization into the workflow. We will see that many of these design features are easily translated into &lt;code&gt;tidyverse&lt;/code&gt; dialect without warping or overextending the workflow into something unrecognizable or impractical.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-is-randomization-inference&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is Randomization Inference&lt;/h1&gt;
+&lt;p&gt;Randomization inference is a method for conducting statistical hypothesis tests without making distributional assumptions about test statistics. Like all null hypothesis tests, it is a comparison between (1) an estimated effect or relationship from observed data and (2) a “null distribution” of estimates that we might have observed if the null hypothesis were true. Unlike traditional null hypothesis tests, however, the null distribution is not based on repeated sampling of a hypothetical population. Instead, it is constructed by imagining &lt;em&gt;other ways that treatment may have been randomly allocated&lt;/em&gt; among units.&lt;/p&gt;
+&lt;p&gt;For instance, suppose we had some small sample of data for &lt;span class=&#34;math inline&#34;&gt;\(n = 6\)&lt;/span&gt; units. We randomly assign half of the units to treatment and half to control:&lt;/p&gt;
+&lt;!-- centering this table --&gt;
+&lt;center&gt;
+&lt;table style=&#34;width:40%;&#34;&gt;
+&lt;colgroup&gt;
+&lt;col width=&#34;6%&#34; /&gt;
+&lt;col width=&#34;16%&#34; /&gt;
+&lt;col width=&#34;16%&#34; /&gt;
+&lt;/colgroup&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;center&#34;&gt;ID&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Treatment&lt;/th&gt;
+&lt;th align=&#34;center&#34;&gt;Outcome&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_1\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;2&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_2\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;3&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_3\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;4&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_4\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;5&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;1&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_5\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;6&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;0&lt;/td&gt;
+&lt;td align=&#34;center&#34;&gt;&lt;span class=&#34;math inline&#34;&gt;\(Y_6\)&lt;/span&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/center&gt;
+&lt;p&gt;We could use this data to calculate some difference in means &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta} = \bar{Y}_{1} - \bar{Y}_{0}\)&lt;/span&gt;. How do we form an inference about &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; from &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt;? Typically we would standardize &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt; and compare it against a &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;-distribution, finding a &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value that represents “the probability of obtaining some other &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}&amp;#39;\)&lt;/span&gt; at least as extreme as &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt;, under the null hypothesis that the true &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; is zero.” Under this approach, this &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt;-distribution serves as our “null distribution,” the sampling distribution of estimates that we would obtain assuming that the null is true.&lt;/p&gt;
+&lt;p&gt;Randomization inference constructs this null distribution using a different method. Instead of making the parametric assumption that the standardized &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt; follows a &lt;span class=&#34;math inline&#34;&gt;\(t\)&lt;/span&gt; distribution, we take advantage of random assignment in the research design, constructing a null distribution of treatment effect estimates by &lt;em&gt;repeatedly permuting the treatment assignments&lt;/em&gt; for our units. For example, the treatment vector in the small sample of data above was &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T} = \left[0, 0, 1, 1, 1, 0\right]\)&lt;/span&gt;, but we could have obtained a different treatment vector by random chance alone. We could have randomly realized treatment assignments as &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}&amp;#39; = \left[0, 0, 1, 0, 1, 1\right]\)&lt;/span&gt;, or &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}&amp;#39; = \left[1, 1, 1, 0, 0, 0\right]\)&lt;/span&gt;. Imagine that in each of these alternate treatment assignments, we estimate the treatment effect &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt;. Under the null hypothesis, outcomes are not affected (on average) by treatment assignment, so each &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt; that we estimate under the permuted treatment assignments a draw from the “null distribution” of &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt;. If we could specify every possible treatment assignment, we would have a full accounting of every equally-likely null &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt; estimate under the research design. This would let us calculate an “exact” &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value by comparing our in-sample estimate to the null distribution: the proportion of null estimates that are more extreme than the estimate obtained in our real data. These &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-values are valid even in nonrandom samples because they operate by &lt;em&gt;design uncertainty&lt;/em&gt; instead of sampling uncertainty.&lt;/p&gt;
+&lt;p&gt;More formally, suppose that random variable &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt; is a test statistic that is a function of &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{T}\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\mathbf{Y}\)&lt;/span&gt;, vectors of treatment assignments and outcome data respectively (&lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1540-5907.2011.00576.x?casa_token=YjkCBZcxieAAAAAA:-WVWyv9NfA_83dsFCKLYjofLTVBEKehe0cG3a3na-7OQhSQrURDVGsjgeKwHSv6KI5jrXpmNV5Bog9A&#34;&gt;Keele, McConnaughy, and White&lt;/a&gt;). A &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value is the probability that &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt; exceeds the test statistic calculated from your data, &lt;span class=&#34;math inline&#34;&gt;\(s^{*}\)&lt;/span&gt;, given the null distribution of &lt;span class=&#34;math inline&#34;&gt;\(S\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34; id=&#34;eq:theoretical-p&#34;&gt;\[\begin{align}
+  p &amp;amp;= \mathrm{Pr}\left(S ≥ s^{*} | H_{0}\right) %*
+  \tag{1}
+\end{align}\]&lt;/span&gt;
+A permutation test finds this &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value by calculating the test statistic for your sample of data, &lt;span class=&#34;math inline&#34;&gt;\(s^{*}\)&lt;/span&gt;, as well as test statistics &lt;span class=&#34;math inline&#34;&gt;\(s_{m}\)&lt;/span&gt; for &lt;span class=&#34;math inline&#34;&gt;\(m \in \mathcal{M}\)&lt;/span&gt;, treatment permutations from the set of possible treatment permutations. The &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value in the permutation test is the proportion of permuted test statistics that exceed the in-sample test statistic.
+&lt;span class=&#34;math display&#34; id=&#34;eq:permute-p&#34;&gt;\[\begin{align}
+  p &amp;amp;= \frac{\sum\limits_{m = 1}^{M} I(s_{m} &amp;gt; s^{*})}{M}
+  \tag{2}
+\end{align}\]&lt;/span&gt;
+where &lt;span class=&#34;math inline&#34;&gt;\(I(\cdot)\)&lt;/span&gt; is the indicator function and &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt; is the number of permutations being considered. If &lt;span class=&#34;math inline&#34;&gt;\(M\)&lt;/span&gt; is equal to the total number of possible permutations, this &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value is exact. If the set of permutations &lt;span class=&#34;math inline&#34;&gt;\(\mathcal{M}\)&lt;/span&gt; is too large to calculate every &lt;span class=&#34;math inline&#34;&gt;\(s_{m}\)&lt;/span&gt; (which is likely for even moderate samples sizes), sampling a subset of &lt;span class=&#34;math inline&#34;&gt;\(M &amp;lt; |\mathcal{M}|\)&lt;/span&gt; permutations lets you treat Equation &lt;a href=&#34;#eq:permute-p&#34;&gt;(2)&lt;/a&gt; as an approximation of the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;TLDR&lt;/em&gt;&lt;/strong&gt;, how do we perform randomization inference?&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Estimate the treatment effect in our sample&lt;/li&gt;
+&lt;li&gt;Compute or approximate the null distribution of the treatment effect estimate under repeated reallocations of treatment to units (conditional on the sample)&lt;/li&gt;
+&lt;li&gt;Compare the in-sample estimate to its null distribution&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;randomization-inference-for-a-simple-experiment&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Randomization Inference for a Simple Experiment&lt;/h1&gt;
+&lt;p&gt;This section shows how to implement permutation tests for a simple experiment with a binary treatment and binary outcome. First I describe the model used to generate data, and then we perform a permutation test using the generated data.&lt;/p&gt;
+&lt;div id=&#34;data&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Data&lt;/h2&gt;
+&lt;p&gt;We will use various tools in the &lt;code&gt;tidyverse&lt;/code&gt;, so for now that is the only package we will load.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I simulate a dataset of &lt;span class=&#34;math inline&#34;&gt;\(n = 500\)&lt;/span&gt; units with outcome variable &lt;span class=&#34;math inline&#34;&gt;\(y_{i} \in \left\{0, 1\right\}\)&lt;/span&gt;, treatment status &lt;span class=&#34;math inline&#34;&gt;\(z_{i} \in \left\{0, 1\right\}\)&lt;/span&gt;, treatment probability &lt;span class=&#34;math inline&#34;&gt;\(0.5\)&lt;/span&gt;. The generative model can be represented as follows:
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{i} &amp;amp;\sim \mathrm{Bernoulli}\left(0.5 + \delta z_{i}\right) \\
+  z_{i} &amp;amp;\sim \mathrm{Bernoulli}\left(0.5 \right)
+\end{align}\]&lt;/span&gt;
+where the treatment effect &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; has a true value of &lt;span class=&#34;math inline&#34;&gt;\(0.06\)&lt;/span&gt;. In R, I generate the data like so:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;set.seed&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;90181&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34;&gt;&lt;/a&gt;n_obs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34;&gt;&lt;/a&gt;control_mean &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34;&gt;&lt;/a&gt;treat_effect &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;.06&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34;&gt;&lt;/a&gt;d &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tibble&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;id =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;n_obs) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rbernoulli&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;n =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;(), &lt;span class=&#34;dt&#34;&gt;p =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rbernoulli&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;n =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;(), &lt;span class=&#34;dt&#34;&gt;p =&lt;/span&gt; control_mean &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;(treatment &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;treat_effect)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 500 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##       id treatment     y&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1         1     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2         0     0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3         0     0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-21&#34;&gt;&lt;a href=&#34;#cb2-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4         1     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-22&#34;&gt;&lt;a href=&#34;#cb2-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5         1     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-23&#34;&gt;&lt;a href=&#34;#cb2-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6         1     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-24&#34;&gt;&lt;a href=&#34;#cb2-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7         0     0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-25&#34;&gt;&lt;a href=&#34;#cb2-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8         0     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-26&#34;&gt;&lt;a href=&#34;#cb2-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9         0     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-27&#34;&gt;&lt;a href=&#34;#cb2-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10         0     1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-28&#34;&gt;&lt;a href=&#34;#cb2-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 490 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The data are a random draw from the generative model, so the treatment effect in the data won’t be exactly equal to the true effect. In these data, we estimate an in-sample treatment effect of about 0.05. We will want to save a data frame of in-sample estimates.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;observed_estimates &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;d &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;mean_control =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;mean_treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;diff_means =&lt;/span&gt; mean_treatment &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;mean_control&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 1 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-9&#34;&gt;&lt;a href=&#34;#cb3-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##   mean_control mean_treatment diff_means&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-10&#34;&gt;&lt;a href=&#34;#cb3-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##          &amp;lt;dbl&amp;gt;          &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-11&#34;&gt;&lt;a href=&#34;#cb3-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 1        0.514          0.563     0.0495&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;permuting-treatment-assignments-tidily&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Permuting treatment assignments, tidily&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;tidyverse&lt;/code&gt; advantage comes in when we permute the treatment assignments. Ordinarily we might think about permuting treatment assignments using a for loop—for each iteration &lt;code&gt;m&lt;/code&gt; in &lt;code&gt;1:M&lt;/code&gt;, reshuffle the treatment assignments and calculate &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}_{\mathtt{m}}\)&lt;/span&gt;. Except we want to avoid a for loop because…&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;For loops in R are famously slow.&lt;/li&gt;
+&lt;li&gt;For loops in R are rarely necessary. For many common data wrangling problems, iteration &lt;span class=&#34;math inline&#34;&gt;\(m\)&lt;/span&gt; does not depend on iteration &lt;span class=&#34;math inline&#34;&gt;\(m-1\)&lt;/span&gt;, so a vectorized approach is usually more efficient.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;A technical but important workflow point&lt;/strong&gt;: the data structure that results from a loop (usually a vector or a list) often throws away useful information, and it can be &lt;em&gt;organizationally idiosyncratic&lt;/em&gt; if the rest of our work is data frame-driven. If we can do this routine using a more capable data structure and extensible workflow, we have the potential to do more cool things while staying organized along the way.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We deal with points (1) and (2) by using functional programming: applying a function over groups of data (see &lt;a href=&#34;http://adv-r.had.co.nz/Functional-programming.html&#34;&gt;here&lt;/a&gt; for instance). In our case, a &lt;em&gt;group&lt;/em&gt; will be a data frame, and the &lt;em&gt;function&lt;/em&gt; is permuting the treatment assignments and estimating the treatment effect. We address point (3) by doing everything with a &lt;em&gt;nested data frame&lt;/em&gt; and applying functions to groups using &lt;code&gt;purrr::map()&lt;/code&gt;. I will describe the approach below one step at a time. After each step is explained, I will show how simple it is to combine them into a small, efficient block of readable code.&lt;/p&gt;
+&lt;p&gt;The first step is to make a nested data frame: a data frame that itself contains data frames (see e.g. &lt;a href=&#34;https://blog.rstudio.com/2016/02/02/tidyr-0-4-0/&#34;&gt;[1]&lt;/a&gt;, &lt;a href=&#34;https://r4ds.had.co.nz/many-models.html&#34;&gt;[2]&lt;/a&gt;, &lt;a href=&#34;https://cran.r-project.org/web/packages/tidyr/vignettes/nest.html&#34;&gt;[3]&lt;/a&gt;). Here I create a data frame with two columns: an identifier &lt;code&gt;m&lt;/code&gt; that indexes our treatment permutations, and a data column that contains copies of our original dataset for each &lt;code&gt;m&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# total number of iterations&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34;&gt;&lt;/a&gt;n_sims &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2000&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# nested data frame of all M iterations&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34;&gt;&lt;/a&gt;sim_table &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;d &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;m =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;n_sims) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(m) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb4-10&#34;&gt;&lt;a href=&#34;#cb4-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 2,000 x 2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-11&#34;&gt;&lt;a href=&#34;#cb4-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [2,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-12&#34;&gt;&lt;a href=&#34;#cb4-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data              &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-13&#34;&gt;&lt;a href=&#34;#cb4-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;            &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-14&#34;&gt;&lt;a href=&#34;#cb4-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-15&#34;&gt;&lt;a href=&#34;#cb4-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-16&#34;&gt;&lt;a href=&#34;#cb4-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-17&#34;&gt;&lt;a href=&#34;#cb4-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-18&#34;&gt;&lt;a href=&#34;#cb4-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-19&#34;&gt;&lt;a href=&#34;#cb4-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-20&#34;&gt;&lt;a href=&#34;#cb4-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-21&#34;&gt;&lt;a href=&#34;#cb4-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-22&#34;&gt;&lt;a href=&#34;#cb4-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-23&#34;&gt;&lt;a href=&#34;#cb4-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-24&#34;&gt;&lt;a href=&#34;#cb4-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 1,990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;data&lt;/code&gt; column is a &lt;em&gt;list column&lt;/em&gt;, in this case a list of data frames for each row &lt;code&gt;m&lt;/code&gt; (but it could contain other object types if we wanted). List columns are powerful for large-scale data manipulation because we can apply functions over each element in the list, similar to the way &lt;code&gt;apply()&lt;/code&gt; functions work in base R. In our case, we want to apply a function that permutes the values in the &lt;code&gt;treatment&lt;/code&gt; variable. We map this function over the nested data using &lt;code&gt;purrr::map()&lt;/code&gt;, creating a new list column of data frames.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;perm_table &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;sim_table &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;permuted_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; data, &lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; mutate, &lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sample&lt;/span&gt;(treatment)&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-9&#34;&gt;&lt;a href=&#34;#cb5-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb5-10&#34;&gt;&lt;a href=&#34;#cb5-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 2,000 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-11&#34;&gt;&lt;a href=&#34;#cb5-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [2,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-12&#34;&gt;&lt;a href=&#34;#cb5-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-13&#34;&gt;&lt;a href=&#34;#cb5-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;            &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-14&#34;&gt;&lt;a href=&#34;#cb5-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-15&#34;&gt;&lt;a href=&#34;#cb5-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-16&#34;&gt;&lt;a href=&#34;#cb5-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-17&#34;&gt;&lt;a href=&#34;#cb5-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-18&#34;&gt;&lt;a href=&#34;#cb5-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-19&#34;&gt;&lt;a href=&#34;#cb5-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-20&#34;&gt;&lt;a href=&#34;#cb5-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-21&#34;&gt;&lt;a href=&#34;#cb5-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-22&#34;&gt;&lt;a href=&#34;#cb5-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-23&#34;&gt;&lt;a href=&#34;#cb5-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-24&#34;&gt;&lt;a href=&#34;#cb5-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 1,990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If you are new to &lt;code&gt;purrr::map()&lt;/code&gt;, it needs to know two things: a vector or list column &lt;code&gt;.x&lt;/code&gt;, and a function &lt;code&gt;.f&lt;/code&gt; that is applied to each element in &lt;code&gt;.x&lt;/code&gt;. In this case, &lt;code&gt;.x&lt;/code&gt; is a list of data frames, and the function we apply is &lt;code&gt;mutate()&lt;/code&gt;, which creates/modifies variables. We supply the additional function argument saying that we are overwriting the &lt;code&gt;treatment&lt;/code&gt; variable by sampling its current values without replacement. This adds a list-column of 2,000 new data frames, each with a different permutation of treatment assignments. In case you need convincing, here is a table that glimpses the treatment assignments for a subset of &lt;code&gt;m&lt;/code&gt; values.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34;&gt;&lt;/a&gt;perm_table &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sample_n&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(permuted_data) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(m, id, treatment) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;pivot_wider&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;names_from =&lt;/span&gt; m, &lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;values_from =&lt;/span&gt; treatment,&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;names_prefix =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;trt, m = &amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 500 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##       id `trt, m = 561` `trt, m = 1471` `trt, m = 1325` `trt, m = 844`&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt;          &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;          &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1              0               0               0              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2              0               1               1              0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-16&#34;&gt;&lt;a href=&#34;#cb6-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3              1               0               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-17&#34;&gt;&lt;a href=&#34;#cb6-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4              0               1               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-18&#34;&gt;&lt;a href=&#34;#cb6-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5              1               0               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-19&#34;&gt;&lt;a href=&#34;#cb6-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6              0               0               1              0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-20&#34;&gt;&lt;a href=&#34;#cb6-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7              0               0               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-21&#34;&gt;&lt;a href=&#34;#cb6-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8              1               0               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-22&#34;&gt;&lt;a href=&#34;#cb6-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9              1               1               0              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-23&#34;&gt;&lt;a href=&#34;#cb6-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10              0               0               1              1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-24&#34;&gt;&lt;a href=&#34;#cb6-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 490 more rows, and 1 more variable: `trt, m = 943` &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now that we have datasets with permuted treatments, we calculate some test statistic in each iteration. I will calculate the difference between the treatment and control means, but other statistics are possible as well.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;
+We again do this with &lt;code&gt;map()&lt;/code&gt;, this time applying the &lt;code&gt;summarize()&lt;/code&gt; function to calculate the treatment mean, the control mean, and the difference.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;est_table &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;perm_table &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;estimates =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; permuted_data,&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; summarize, &lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;mean_treatment_m =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;mean_control_m =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;diff_means_m =&lt;/span&gt; mean_treatment_m &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;mean_control_m&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-11&#34;&gt;&lt;a href=&#34;#cb7-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb7-12&#34;&gt;&lt;a href=&#34;#cb7-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 2,000 x 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-13&#34;&gt;&lt;a href=&#34;#cb7-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [2,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-14&#34;&gt;&lt;a href=&#34;#cb7-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data      estimates       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-15&#34;&gt;&lt;a href=&#34;#cb7-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;          &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-16&#34;&gt;&lt;a href=&#34;#cb7-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-17&#34;&gt;&lt;a href=&#34;#cb7-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-18&#34;&gt;&lt;a href=&#34;#cb7-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-19&#34;&gt;&lt;a href=&#34;#cb7-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-20&#34;&gt;&lt;a href=&#34;#cb7-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-21&#34;&gt;&lt;a href=&#34;#cb7-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-22&#34;&gt;&lt;a href=&#34;#cb7-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-23&#34;&gt;&lt;a href=&#34;#cb7-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-24&#34;&gt;&lt;a href=&#34;#cb7-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-25&#34;&gt;&lt;a href=&#34;#cb7-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-26&#34;&gt;&lt;a href=&#34;#cb7-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 1,990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can view the estimates in each iteration by unnesting the &lt;code&gt;estimates&lt;/code&gt; column…&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34;&gt;&lt;/a&gt;est_summary &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;est_table &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(m, estimates) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;cols =&lt;/span&gt; estimates) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 2,000 x 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m mean_treatment_m mean_control_m diff_means_m&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt;            &amp;lt;dbl&amp;gt;          &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1            0.563          0.514      0.0495 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2            0.539          0.537      0.00152&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3            0.563          0.514      0.0495 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4            0.535          0.541     -0.00648&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5            0.551          0.525      0.0255 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6            0.567          0.510      0.0575 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7            0.490          0.584     -0.0945 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8            0.535          0.541     -0.00648&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9            0.518          0.557     -0.0385 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10            0.588          0.490      0.0976 &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 1,990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We can calculate our &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value by comparing our sample estimate to the null distribution…&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34;&gt;&lt;/a&gt;pval &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;est_summary &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;p.value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;abs&lt;/span&gt;(diff_means_m) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;abs&lt;/span&gt;(observed_estimates&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;diff_means))&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;pull&lt;/span&gt;(p.value) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## [1] 0.2515&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;and we can plot our estimate against the null distribution. In our case, 25% of estimates from the null distribution exceed our in-sample estimate in magnitude, so we would not reject a null hypothesis in this setting.&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-02-22_randomization-inference-purrr_files/figure-html/compare-null-1.png&#34; width=&#34;80%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;putting-it-all-together&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Putting it all together&lt;/h2&gt;
+&lt;p&gt;In practice, we would not tediously create lots of objects to trace our method every step of the way. Instead, we could build our nested data frame, permute the treatment assignments, and estimate null treatment effects in one continuous operation.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# nested data, permute, estimate.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# bonus: permuted_data demos the &amp;quot;quosure-style lambda function&amp;quot; syntax &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34;&gt;&lt;/a&gt;ri_data &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;d &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;m =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;n_sims) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(m) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb10-8&#34;&gt;&lt;a href=&#34;#cb10-8&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;permuted_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb10-9&#34;&gt;&lt;a href=&#34;#cb10-9&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; data, &lt;/span&gt;
+&lt;span id=&#34;cb10-10&#34;&gt;&lt;a href=&#34;#cb10-10&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(.x, &lt;span class=&#34;dt&#34;&gt;treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sample&lt;/span&gt;(treatment))&lt;/span&gt;
+&lt;span id=&#34;cb10-11&#34;&gt;&lt;a href=&#34;#cb10-11&#34;&gt;&lt;/a&gt;    ),&lt;/span&gt;
+&lt;span id=&#34;cb10-12&#34;&gt;&lt;a href=&#34;#cb10-12&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;estimates =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb10-13&#34;&gt;&lt;a href=&#34;#cb10-13&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; permuted_data,&lt;/span&gt;
+&lt;span id=&#34;cb10-14&#34;&gt;&lt;a href=&#34;#cb10-14&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; summarize,&lt;/span&gt;
+&lt;span id=&#34;cb10-15&#34;&gt;&lt;a href=&#34;#cb10-15&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;mean_treatment_m =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb10-16&#34;&gt;&lt;a href=&#34;#cb10-16&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;mean_control_m =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(y[treatment &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]),&lt;/span&gt;
+&lt;span id=&#34;cb10-17&#34;&gt;&lt;a href=&#34;#cb10-17&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;diff_means_m =&lt;/span&gt; mean_treatment_m &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;mean_control_m&lt;/span&gt;
+&lt;span id=&#34;cb10-18&#34;&gt;&lt;a href=&#34;#cb10-18&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb10-19&#34;&gt;&lt;a href=&#34;#cb10-19&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-20&#34;&gt;&lt;a href=&#34;#cb10-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb10-21&#34;&gt;&lt;a href=&#34;#cb10-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 2,000 x 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-22&#34;&gt;&lt;a href=&#34;#cb10-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [2,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-23&#34;&gt;&lt;a href=&#34;#cb10-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data      estimates       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-24&#34;&gt;&lt;a href=&#34;#cb10-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;          &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-25&#34;&gt;&lt;a href=&#34;#cb10-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-26&#34;&gt;&lt;a href=&#34;#cb10-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-27&#34;&gt;&lt;a href=&#34;#cb10-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-28&#34;&gt;&lt;a href=&#34;#cb10-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-29&#34;&gt;&lt;a href=&#34;#cb10-29&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-30&#34;&gt;&lt;a href=&#34;#cb10-30&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-31&#34;&gt;&lt;a href=&#34;#cb10-31&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-32&#34;&gt;&lt;a href=&#34;#cb10-32&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-33&#34;&gt;&lt;a href=&#34;#cb10-33&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-34&#34;&gt;&lt;a href=&#34;#cb10-34&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [500 × 3]&amp;gt; &amp;lt;tibble [1 × 3]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-35&#34;&gt;&lt;a href=&#34;#cb10-35&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 1,990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;extensibility-of-the-tidy-approach&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Extensibility of the Tidy Approach&lt;/h1&gt;
+&lt;p&gt;We’ve seen that using &lt;code&gt;purrr::map()&lt;/code&gt; lets us push around a &lt;em&gt;lot&lt;/em&gt; of data with little code. Yet the &lt;code&gt;purrr&lt;/code&gt; approach is still more verbose than other approaches that we might have used (see Thomas Leeper’s use of &lt;code&gt;replicate()&lt;/code&gt; and &lt;code&gt;by()&lt;/code&gt; &lt;a href=&#34;https://thomasleeper.com/Rcourse/Tutorials/permutationtests.html&#34;&gt;here&lt;/a&gt;). Why would we use the tidy approach if slimmer methods exist? For one, it is eminently extensible. By keeping the fruits of your work together in one data frame, it is easy to adapt the workflow to incorporate other quantities of interest and research design features while keeping your work organized. This section will take a quick tour of how easy it is to (1) calculate confidence intervals and permute data from (2) multiple treatments, (3) cluster randomization, and (4) block-randomization.&lt;/p&gt;
+&lt;div id=&#34;confidence-intervals&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Confidence Intervals&lt;/h3&gt;
+&lt;p&gt;So far we have entertained a generative model where (1) treatment has a constant, additive effect &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; on unit-level response and (2) a null hypothesis that &lt;span class=&#34;math inline&#34;&gt;\(\delta = 0\)&lt;/span&gt;.&lt;a href=&#34;#fn4&#34; class=&#34;footnote-ref&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt;
+If we entertain null hypothesis values for &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; other than strictly zero, we can construct a &lt;span class=&#34;math inline&#34;&gt;\(100 - \alpha\)&lt;/span&gt; confidence region as &lt;em&gt;the values of &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; for which we cannot reject the null hypothesis&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;We do this as follows. For a null value of &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Adjust the in-sample test statistic by subtracting &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt; from the difference in means. This is similar to the way we would subtract the null value from a standard &lt;span class=&#34;math inline&#34;&gt;\(z\)&lt;/span&gt;-test &lt;span class=&#34;math inline&#34;&gt;\(\left(\frac{\hat{\mu} - \mu_{0}}{\sigma}\right)\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;Calculate the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; value for this adjusted &lt;span class=&#34;math inline&#34;&gt;\(\hat{\delta}\)&lt;/span&gt;.&lt;/li&gt;
+&lt;li&gt;If &lt;span class=&#34;math inline&#34;&gt;\(p &amp;lt; \frac{\alpha}{2}\)&lt;/span&gt;, we reject the null hypothesis that &lt;span class=&#34;math inline&#34;&gt;\(\delta = \delta_0\)&lt;/span&gt;, meaning the value &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt; is &lt;em&gt;not&lt;/em&gt; contained in the confidence interval.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We can implement this routine by augmenting our data structure with a sequence of null values and performing the appropriate adjustments.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# for each m x delta_0, adjust the test statistic&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# for each delta_0, calculate p-value &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34;&gt;&lt;/a&gt;conf_table &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;ri_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(m, estimates) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-5&#34;&gt;&lt;a href=&#34;#cb11-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(estimates) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-6&#34;&gt;&lt;a href=&#34;#cb11-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;null_value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;seq&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;, &lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;, &lt;span class=&#34;fl&#34;&gt;.01&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-7&#34;&gt;&lt;a href=&#34;#cb11-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;test_value =&lt;/span&gt; observed_estimates&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;diff_means &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;null_value) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-8&#34;&gt;&lt;a href=&#34;#cb11-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(null_value) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-9&#34;&gt;&lt;a href=&#34;#cb11-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb11-10&#34;&gt;&lt;a href=&#34;#cb11-10&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;p.value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(diff_means_m &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;abs&lt;/span&gt;(test_value))&lt;/span&gt;
+&lt;span id=&#34;cb11-11&#34;&gt;&lt;a href=&#34;#cb11-11&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-12&#34;&gt;&lt;a href=&#34;#cb11-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb11-13&#34;&gt;&lt;a href=&#34;#cb11-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 41 x 2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-14&#34;&gt;&lt;a href=&#34;#cb11-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    null_value p.value&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-15&#34;&gt;&lt;a href=&#34;#cb11-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##         &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-16&#34;&gt;&lt;a href=&#34;#cb11-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1      -0.2        0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-17&#34;&gt;&lt;a href=&#34;#cb11-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2      -0.19       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-18&#34;&gt;&lt;a href=&#34;#cb11-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3      -0.18       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-19&#34;&gt;&lt;a href=&#34;#cb11-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4      -0.17       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-20&#34;&gt;&lt;a href=&#34;#cb11-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5      -0.16       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-21&#34;&gt;&lt;a href=&#34;#cb11-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6      -0.15       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-22&#34;&gt;&lt;a href=&#34;#cb11-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7      -0.14       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-23&#34;&gt;&lt;a href=&#34;#cb11-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8      -0.13       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-24&#34;&gt;&lt;a href=&#34;#cb11-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9      -0.12       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-25&#34;&gt;&lt;a href=&#34;#cb11-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10      -0.11       0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-26&#34;&gt;&lt;a href=&#34;#cb11-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 31 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We saw above that our point estimate for the difference in means is roughly 0.05, but now that we found the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value under this sequence of hypothesis tests, we know the null values of &lt;span class=&#34;math inline&#34;&gt;\(\delta_0\)&lt;/span&gt; that cannot be rejected, giving us a 93% interval [-0.04, 0.13] inclusive.&lt;a href=&#34;#fn5&#34; class=&#34;footnote-ref&#34; id=&#34;fnref5&#34;&gt;&lt;sup&gt;5&lt;/sup&gt;&lt;/a&gt;
+Below I plot the &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;-value at each null &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt; as bars. Bars are colored red if they represent values of &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt; that can be rejected at &lt;span class=&#34;math inline&#34;&gt;\(\alpha = .05\)&lt;/span&gt;. What remains is the values that cannot be rejected, which I use to draw the confidence interval below the bars. It’s important to remember that this is not a plot of a posterior distribution, so the height of the bar does not indicate the plausibility or credibility of a given &lt;span class=&#34;math inline&#34;&gt;\(\delta\)&lt;/span&gt; value.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-02-22_randomization-inference-purrr_files/figure-html/plot-conf-1.png&#34; width=&#34;90%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;multiple-treatments&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Multiple treatments&lt;/h2&gt;
+&lt;p&gt;Suppose that we had outcome data that were a function of multiple treatment conditions. Here is some fake data from an experiment where subjects rate potential candidates on a 0-10 scale, where the researcher manipulates the candidates party affiliation, occupation, and issue stances.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 500 x 7
+##       id cand_rating party occupation issue_tax issue_abortion issue_environment
+##    &amp;lt;int&amp;gt;       &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;      &amp;lt;int&amp;gt;     &amp;lt;int&amp;gt;          &amp;lt;int&amp;gt;             &amp;lt;int&amp;gt;
+##  1     1           9     1          4         3              2                 3
+##  2     2           2     2          2         1              3                 3
+##  3     3           2     2          4         2              4                 1
+##  4     4           7     2          3         2              3                 3
+##  5     5           2     1          4         2              3                 1
+##  6     6           5     2          2         1              2                 2
+##  7     7           2     2          1         3              4                 3
+##  8     8           8     2          3         3              2                 3
+##  9     9          10     1          4         3              3                 2
+## 10    10           6     1          2         2              1                 2
+## # … with 490 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It is easy to permute the values of multiple variables at once. The only thing that changes from the above workflow is that we map &lt;code&gt;mutate_at()&lt;/code&gt; to each iteration, specifying that we want to sample the values of an arbitrary set of treatment variables. Supposing that this data were called &lt;code&gt;multi_treat&lt;/code&gt;…&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# helpful but not necessary:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-3&#34;&gt;&lt;a href=&#34;#cb13-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# save a vector of treatment names for easy access&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-4&#34;&gt;&lt;a href=&#34;#cb13-4&#34;&gt;&lt;/a&gt;treatments &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-5&#34;&gt;&lt;a href=&#34;#cb13-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;party&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;occupation&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;issue_tax&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;issue_abortion&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;issue_environment&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb13-6&#34;&gt;&lt;a href=&#34;#cb13-6&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-7&#34;&gt;&lt;a href=&#34;#cb13-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# resample values for each var in `treatments`&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-8&#34;&gt;&lt;a href=&#34;#cb13-8&#34;&gt;&lt;/a&gt;multi_permuted &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;multi_treat &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-9&#34;&gt;&lt;a href=&#34;#cb13-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;m =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-10&#34;&gt;&lt;a href=&#34;#cb13-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(m) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-11&#34;&gt;&lt;a href=&#34;#cb13-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-12&#34;&gt;&lt;a href=&#34;#cb13-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb13-13&#34;&gt;&lt;a href=&#34;#cb13-13&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;permuted_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb13-14&#34;&gt;&lt;a href=&#34;#cb13-14&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; data, &lt;/span&gt;
+&lt;span id=&#34;cb13-15&#34;&gt;&lt;a href=&#34;#cb13-15&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; mutate_at,&lt;/span&gt;
+&lt;span id=&#34;cb13-16&#34;&gt;&lt;a href=&#34;#cb13-16&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.vars =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;one_of&lt;/span&gt;(treatments)),&lt;/span&gt;
+&lt;span id=&#34;cb13-17&#34;&gt;&lt;a href=&#34;#cb13-17&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.funs =&lt;/span&gt; sample&lt;/span&gt;
+&lt;span id=&#34;cb13-18&#34;&gt;&lt;a href=&#34;#cb13-18&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb13-19&#34;&gt;&lt;a href=&#34;#cb13-19&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-20&#34;&gt;&lt;a href=&#34;#cb13-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb13-21&#34;&gt;&lt;a href=&#34;#cb13-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 1,000 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-22&#34;&gt;&lt;a href=&#34;#cb13-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [1,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-23&#34;&gt;&lt;a href=&#34;#cb13-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-24&#34;&gt;&lt;a href=&#34;#cb13-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;            &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-25&#34;&gt;&lt;a href=&#34;#cb13-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-26&#34;&gt;&lt;a href=&#34;#cb13-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-27&#34;&gt;&lt;a href=&#34;#cb13-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-28&#34;&gt;&lt;a href=&#34;#cb13-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-29&#34;&gt;&lt;a href=&#34;#cb13-29&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-30&#34;&gt;&lt;a href=&#34;#cb13-30&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-31&#34;&gt;&lt;a href=&#34;#cb13-31&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-32&#34;&gt;&lt;a href=&#34;#cb13-32&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-33&#34;&gt;&lt;a href=&#34;#cb13-33&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-34&#34;&gt;&lt;a href=&#34;#cb13-34&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 7]&amp;gt; &amp;lt;tibble [500 × 7]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-35&#34;&gt;&lt;a href=&#34;#cb13-35&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You would then be able to &lt;code&gt;map()&lt;/code&gt; whatever estimation model you wanted over the &lt;code&gt;permuted_data&lt;/code&gt; column, thereby estimating the model in each group &lt;code&gt;m&lt;/code&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;block-randomization&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Block Randomization&lt;/h2&gt;
+&lt;p&gt;Suppose we had data that were randomized within blocks. The data below contain &lt;span class=&#34;math inline&#34;&gt;\(n = 500\)&lt;/span&gt; observations and 5 blocks, with each block containing 50 treated units and 50 control units.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 500 x 4
+##       id block treatment     y
+##    &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1     1     2         1     0
+##  2     2     3         0     1
+##  3     3     4         0     0
+##  4     4     5         1     1
+##  5     5     1         0     0
+##  6     6     2         0     1
+##  7     7     3         1     1
+##  8     8     4         1     0
+##  9     9     5         1     0
+## 10    10     1         1     1
+## # … with 490 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can’t naively permute the treatments over the whole data, since we want to respect the blocking structure. To permute treatments within blocks, we only require one additional step, which is to group the data by block during the permutation step.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb15&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb15-1&#34;&gt;&lt;a href=&#34;#cb15-1&#34;&gt;&lt;/a&gt;block_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-2&#34;&gt;&lt;a href=&#34;#cb15-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;m =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-3&#34;&gt;&lt;a href=&#34;#cb15-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(m) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-4&#34;&gt;&lt;a href=&#34;#cb15-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-5&#34;&gt;&lt;a href=&#34;#cb15-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb15-6&#34;&gt;&lt;a href=&#34;#cb15-6&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;permuted_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb15-7&#34;&gt;&lt;a href=&#34;#cb15-7&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; data, &lt;/span&gt;
+&lt;span id=&#34;cb15-8&#34;&gt;&lt;a href=&#34;#cb15-8&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.x &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-9&#34;&gt;&lt;a href=&#34;#cb15-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(block) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-10&#34;&gt;&lt;a href=&#34;#cb15-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sample&lt;/span&gt;(treatment)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-11&#34;&gt;&lt;a href=&#34;#cb15-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb15-12&#34;&gt;&lt;a href=&#34;#cb15-12&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb15-13&#34;&gt;&lt;a href=&#34;#cb15-13&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-14&#34;&gt;&lt;a href=&#34;#cb15-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb15-15&#34;&gt;&lt;a href=&#34;#cb15-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 1,000 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-16&#34;&gt;&lt;a href=&#34;#cb15-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [1,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-17&#34;&gt;&lt;a href=&#34;#cb15-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-18&#34;&gt;&lt;a href=&#34;#cb15-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;            &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-19&#34;&gt;&lt;a href=&#34;#cb15-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-20&#34;&gt;&lt;a href=&#34;#cb15-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-21&#34;&gt;&lt;a href=&#34;#cb15-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-22&#34;&gt;&lt;a href=&#34;#cb15-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-23&#34;&gt;&lt;a href=&#34;#cb15-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-24&#34;&gt;&lt;a href=&#34;#cb15-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-25&#34;&gt;&lt;a href=&#34;#cb15-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-26&#34;&gt;&lt;a href=&#34;#cb15-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-27&#34;&gt;&lt;a href=&#34;#cb15-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-28&#34;&gt;&lt;a href=&#34;#cb15-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-29&#34;&gt;&lt;a href=&#34;#cb15-29&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cluster-randomization&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Cluster randomization&lt;/h2&gt;
+&lt;p&gt;With cluster-randomized data, units are grouped within a cluster, and then every unit within a cluster gets the same treatment. Cluster-randomized data might look like so:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 500 x 4
+##       id cluster treatment     y
+##    &amp;lt;int&amp;gt;   &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+##  1     1       1         0     1
+##  2     2       1         0     0
+##  3     3       1         0     0
+##  4     4       1         0     1
+##  5     5       1         0     0
+##  6     6       2         1     1
+##  7     7       2         1     0
+##  8     8       2         1     1
+##  9     9       2         1     1
+## 10    10       2         1     0
+## # … with 490 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In order to permute the treatment assignments, we have to reshuffle the treatment status for each cluster such that all units in the same cluster get the same treatment. This is possible, but it’s a bit abstract, since it requires a nest-within-a-nest (whoa…). When we &lt;code&gt;map()&lt;/code&gt; the function to permute the data, we do the following within each iteration &lt;code&gt;m&lt;/code&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Nest the unit-level variables (&lt;code&gt;id&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;) into a list-column. What remains is a data frame that is one row per cluster.&lt;/li&gt;
+&lt;li&gt;Permute the treatment assignments at the cluster level&lt;/li&gt;
+&lt;li&gt;Unnest the unit-level data, at which point every unit inherits its cluster-level treatment assignment.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb17&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb17-1&#34;&gt;&lt;a href=&#34;#cb17-1&#34;&gt;&lt;/a&gt;cluster_permuted &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;cluster_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-2&#34;&gt;&lt;a href=&#34;#cb17-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;crossing&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;m =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-3&#34;&gt;&lt;a href=&#34;#cb17-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(m) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-4&#34;&gt;&lt;a href=&#34;#cb17-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-5&#34;&gt;&lt;a href=&#34;#cb17-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb17-6&#34;&gt;&lt;a href=&#34;#cb17-6&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;permuted_data =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb17-7&#34;&gt;&lt;a href=&#34;#cb17-7&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.x =&lt;/span&gt; data,&lt;/span&gt;
+&lt;span id=&#34;cb17-8&#34;&gt;&lt;a href=&#34;#cb17-8&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;dt&#34;&gt;.f =&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;.x &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-9&#34;&gt;&lt;a href=&#34;#cb17-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nest&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;within_cluster =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(id, y)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-10&#34;&gt;&lt;a href=&#34;#cb17-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;treatment =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sample&lt;/span&gt;(treatment)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-11&#34;&gt;&lt;a href=&#34;#cb17-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unnest&lt;/span&gt;(within_cluster)&lt;/span&gt;
+&lt;span id=&#34;cb17-12&#34;&gt;&lt;a href=&#34;#cb17-12&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb17-13&#34;&gt;&lt;a href=&#34;#cb17-13&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-14&#34;&gt;&lt;a href=&#34;#cb17-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb17-15&#34;&gt;&lt;a href=&#34;#cb17-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 1,000 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-16&#34;&gt;&lt;a href=&#34;#cb17-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # Groups:   m [1,000]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-17&#34;&gt;&lt;a href=&#34;#cb17-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##        m data               permuted_data     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-18&#34;&gt;&lt;a href=&#34;#cb17-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;int&amp;gt; &amp;lt;list&amp;gt;             &amp;lt;list&amp;gt;            &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-19&#34;&gt;&lt;a href=&#34;#cb17-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1     1 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-20&#34;&gt;&lt;a href=&#34;#cb17-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2     2 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-21&#34;&gt;&lt;a href=&#34;#cb17-21&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3     3 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-22&#34;&gt;&lt;a href=&#34;#cb17-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4     4 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-23&#34;&gt;&lt;a href=&#34;#cb17-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5     5 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-24&#34;&gt;&lt;a href=&#34;#cb17-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6     6 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-25&#34;&gt;&lt;a href=&#34;#cb17-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7     7 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-26&#34;&gt;&lt;a href=&#34;#cb17-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8     8 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-27&#34;&gt;&lt;a href=&#34;#cb17-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9     9 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-28&#34;&gt;&lt;a href=&#34;#cb17-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10    10 &amp;lt;tibble [500 × 4]&amp;gt; &amp;lt;tibble [500 × 4]&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb17-29&#34;&gt;&lt;a href=&#34;#cb17-29&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 990 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;To assure you that this works, I will plot the treatment status of all units within 3 clusters across the first 10 permutations. We should see that all units in the same cluster share the same treatment status within the same treatment permutation &lt;code&gt;m&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-02-22_randomization-inference-purrr_files/figure-html/plot-unit-clusters-1.png&#34; width=&#34;90%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
+I’ll shout out &lt;a href=&#34;https://cran.r-project.org/web/packages/ri2/&#34;&gt;ri2&lt;/a&gt; in particular.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
+The paper by &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1540-5907.2011.00576.x?casa_token=YjkCBZcxieAAAAAA:-WVWyv9NfA_83dsFCKLYjofLTVBEKehe0cG3a3na-7OQhSQrURDVGsjgeKwHSv6KI5jrXpmNV5Bog9A&#34;&gt;Keele, McConnaughy, and White&lt;/a&gt; discusses and includes examples of other statistics such as rank-based tests, encouraging researchers to consider theory and the assumptions they are willing to make about the data, such as the choice of a “sharp” null hypothesis.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;
+The estimated treatment effect is actually very close to the true effect, so what we’re seeing is a low-powered study.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;
+This arguably requires more (or at least “different”) assumptions compared to a pure “Fisherian” approach to randomization inference, which is possible under a sharp null hypothesis that &lt;em&gt;treatment has zero effect for all units&lt;/em&gt;.&lt;a href=&#34;#fnref4&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn5&#34;&gt;&lt;p&gt;
+Due to the discrete nature of the &lt;span class=&#34;math inline&#34;&gt;\(\delta_{0}\)&lt;/span&gt; values, we do not obtain a perfect 95% interval.&lt;a href=&#34;#fnref5&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     

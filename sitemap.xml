@@ -129,36 +129,51 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-02-28T13:26:10-06:00</lastmod>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/admin/</loc>
-    <lastmod>2020-02-28T13:26:10-06:00</lastmod>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/causal-inference/</loc>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/computational-methods/</loc>
-    <lastmod>2020-02-27T21:53:35-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/git-in-papers/</loc>
-    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/methods/</loc>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/randomization-inference-purrr/</loc>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/git-in-papers/</loc>
     <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -173,17 +188,7 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-02-27T21:53:35-06:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/bayesian-statistics/</loc>
-    <lastmod>2019-08-25T15:47:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/causal-inference/</loc>
     <lastmod>2019-08-25T15:47:00-05:00</lastmod>
   </url>
   
