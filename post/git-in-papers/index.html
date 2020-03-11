@@ -606,27 +606,27 @@ code span.wa { color: #bf0303; } /* Warning */
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>##   [1] &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot; &quot;eabf878&quot;
-##   [8] &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot; &quot;7f3d4e8&quot;
-##  [15] &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot;
-##  [22] &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot;
-##  [29] &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot;
-##  [36] &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot;
-##  [43] &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot;
-##  [50] &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot;
-##  [57] &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot;
-##  [64] &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot;
-##  [71] &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot;
-##  [78] &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot;
-##  [85] &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot;
-##  [92] &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot;
-##  [99] &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
+<pre><code>##   [1] &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot;
+##   [8] &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot;
+##  [15] &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot;
+##  [22] &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot;
+##  [29] &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot;
+##  [36] &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot;
+##  [43] &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot;
+##  [50] &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot;
+##  [57] &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot;
+##  [64] &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot;
+##  [71] &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot;
+##  [78] &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot;
+##  [85] &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot;
+##  [92] &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot;
+##  [99] &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;3854af2&quot;</code></pre>
+<pre><code>## [1] &quot;22fea55&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;update office hours&quot;</code></pre>
+<pre><code>## [1] &quot;oops wrote a blog post about RI&quot;</code></pre>
 </div>
 <div id="r-results-in-the-yaml" class="section level2">
 <h2>R results in the YAML</h2>
