@@ -129,36 +129,56 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/admin/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/causal-inference/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/computational-methods/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/methods/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/visualizing-what-matters/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/visualization/</loc>
+    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/causal-inference/</loc>
     <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
@@ -168,17 +188,7 @@
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/git-in-papers/</loc>
-    <lastmod>2019-08-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
     <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -239,11 +249,6 @@
   
   <url>
     <loc>/post/viz-partials/</loc>
-    <lastmod>2018-10-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/visualization/</loc>
     <lastmod>2018-10-19T00:00:00+00:00</lastmod>
   </url>
   

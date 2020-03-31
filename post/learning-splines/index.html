@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -456,7 +457,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    3 min read
   </span>
   
 
@@ -507,12 +508,41 @@
 
 <div id="what-were-doing" class="section level1">
 <h1>What we’re doing</h1>
-<p>The more I learn about causal inference, the more I learn to appreciate the difference between</p>
+<p>The more I learn about causal inference, the more I learn to appreciate the differences between the goals generative modeling vs. predictive modeling, as well as the trade-offs between interpretable models vs. accurate predictions.</p>
+<div id="comment-on-interpretability" class="section level2">
+<h2>Comment on Interpretability</h2>
+<p>I come at this from the point of view of academic political science, where a lot of applied work insists that there is a premium on interpretable methods.</p>
+<p>I can think of two ways to define interpretability:</p>
+<ol style="list-style-type: decimal">
+<li>simple enough that the researcher knows at a technical level why the model works for the use case, which is valuable for ensuring that the audience also knows how to understand the model.</li>
+<li>simple enough that the researcher can see, from the model output (coefficients) alone, the predictive influence of a single <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>, which (spicy take) I am skeptical is <em>in itself</em> a virtue.</li>
+</ol>
+<p>Elaborating: we want models that are appropriate for the task at hand, so the analyst needs to be able to understand why it would be appropriate, what its value added is over other potential model choices, and so on. If your audience is smart (you can assume that they are), your job is to be a good explainer of why the model works and where it can go wrong.</p>
+<p>What I think is <em>less</em> important is to be able to directly eyeball one covariate’s linear effect on your conditional expectation of <span class="math inline">\(y\)</span>. For binary variables? Sure, if we <em>know</em> that there aren’t important interactions. But let’s think about the way that we model vs. what the “appropriate model” could possibly be.</p>
+<ol style="list-style-type: decimal">
+<li><p>A predictive model: The</p></li>
+<li><p>A generative model: We want to statistically adjust for confounding variables. We rarely know exactly what variables are in the set of important confounders to adjust for. And even if we did know that set, we rarely know how to think about their functional forms of interactions among them. This is why even in causal modeling—a place where <em>you would think</em> we want an easily interpretable model—complex nonlinear modeling and machine learning have a place. We want to model the treatment propensity, generate good case matches, or do some other kind of covariate adjustment, and in many of these cases we don’t need to be able to</p></li>
+<li><p>A model should be <em>interpretable</em> in that the researcher understands how the model works, the mathematical intuitions and areas of value added, and potential drawbacks of the method and how to diagnose them. This type of interpretability is good for ensuring that the audience knows what’s going on and why the results are what they are.</p></li>
+<li></li>
+<li><p>can communicate to the audience how the model works, explain its key mathematical intuitions and value added, why using this model is preferred</p></li>
+</ol>
 <p>Interpretability:</p>
 <ul>
 <li>simple enough that I know how the model works and why it works, which can be good for ensuring that you and your audience knows what’s going on.</li>
 <li>simple enough that I can “directly interpret” the predictive influence of <span class="math inline">\(x\)</span> on <span class="math inline">\(y\)</span>, which is never a virtue in itself.</li>
 </ul>
+</div>
+</div>
+<div id="resources" class="section level1">
+<h1>Resources</h1>
+<ul>
+<li><a href="https://noamross.github.io/gams-in-r-course/"><em>GAMs in R</em></a> by Noam Ross</li>
+<li>Wood (2017)</li>
+<li>“Random Effects Old and New,” Hodges and Clayton (2011)</li>
+</ul>
+</div>
+<div id="demo" class="section level1">
+<h1>Demo</h1>
 </div>
 
     </div>

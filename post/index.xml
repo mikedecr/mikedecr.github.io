@@ -12,6 +12,137 @@
     
     
     <item>
+      <title>Plotting What Matters</title>
+      <link>/post/visualizing-what-matters/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/visualizing-what-matters/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;this-is-a-post-about-temptation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;This is a post about temptation&lt;/h1&gt;
+&lt;p&gt;Or, resisting temptations when presenting statistical results.&lt;/p&gt;
+&lt;p&gt;When you build a model to answer a question, it is often tempting to make a graphic about the &lt;em&gt;coolest thing about the model&lt;/em&gt;. Maybe you learned something new to build the model, or you noticed and corrected an important structure in the data, so naturally you want to show off your good work. The purpose of this post is to &lt;strong&gt;reflect on why this practice isn’t useful for communicating statistical results&lt;/strong&gt;, Instead, we should be communicating the information that will help the audience grasp the important takeaways of the analysis. A different focus entirely.&lt;/p&gt;
+&lt;p&gt;This is almost too obvious, but it is easier said than done. Researchers wrestle with it in different ways based on our audiences, our professional goals, and (to be honest) our insecurities. Speaking for myself, I find myself needing to grapple with my biases and how they manifest in my work product. As a PhD student, I sometimes feel like academia cultivates incentives to convince our colleagues that we are Very Smart&lt;sup&gt;TM&lt;/sup&gt;, which is a distinct goal from doing good work (however defined). Cool graphics can be a way to show how much thought and work we put into something—a way of signaling that we belong. Understandable, but not always useful. I also like to use Bayesian methods, but I feel constant pressure to justify the Bayesian approach to audiences that I (rightly or wrongly) assume will be hostile to that choice. As a result, I feel tempted to plot something that would be impossible without Bayes—a way of saying, “Get off my back!” as if it ultimately mattered for what I’m trying to communicate with my analysis overall. Sometimes it does matter, but they way that it matters won’t be so simple as “just plot the flashy thing.”&lt;/p&gt;
+&lt;p&gt;This post unpacks this using a recent example from a grad methods course that I am TA-ing. The assignment requires students to write a policy memo informed by a statistical analysis. The statistical model contains an important component that students are learning about in the course, but that component &lt;strong&gt;isn’t actually important to communicate in the policy memo&lt;/strong&gt;. So the assignment challenges students both on model-building but also communication skills: exercising restraint and judgment about what is and is not important to communicate about the details of the analysis.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-setting&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The setting&lt;/h1&gt;
+&lt;p&gt;The assignment for students to complete lays out the following scenario.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;You are an advisor to a newly elected mayor of Smallville. During the campaign, the mayor-elect charged that the Sanitation Department was being grossly mismanaged. Last year it cost &lt;span class=&#34;math inline&#34;&gt;\(\$ 48.50\)&lt;/span&gt; per household for once-a-week curbside waste pick-up. A private contractor has made an informal bid of &lt;span class=&#34;math inline&#34;&gt;\(\$ 40.60\)&lt;/span&gt; per household for collection services, but this would require eliminating Sanitation Department jobs, which would be difficult and politically costly. Before switching to private contracting, the mayor would like to know how much costs might be reduced with the appointment of a more competent Sanitation Department supervisor.&lt;/p&gt;
+&lt;p&gt;Prepare a memorandum to the mayor advising her about the potential gains from better management. The mayor has had little statistical training, so be sure to explain your empirical work clearly and carefully.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Students are given a dataset of 30 other municipalities in the region, simulated from a model that they don’t directly see.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 30 x 5
+##    hholds density  wage snowdays cost_per_household
+##     &amp;lt;dbl&amp;gt;   &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;    &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt;
+##  1   3.35    565.  18.2        3               29.4
+##  2  11.2     740.  15.7       10               52.0
+##  3   9.48    540.  17.4        3               34.4
+##  4   9.43    629.  19.6        1               41.5
+##  5  11.3     685.  20.6        6               63.4
+##  6   6.18    605.  20.2        6               30.0
+##  7   2.82    510.  16.5        4               20.8
+##  8   2.95    459.  15.8        2               12.9
+##  9   6.98    507.  16.5        3               21.8
+## 10   7.89    524.  19.9        2               37.8
+## # … with 20 more rows&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The variables are described as follows.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;cost_per_household&lt;/code&gt;: cost per household (&lt;span class=&#34;math inline&#34;&gt;\(\$\)&lt;/span&gt; U.S.) of once weekly curbside refuse pickup for last year.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;hholds&lt;/code&gt;: number of households served in 10,000s. &lt;strong&gt;(Note: previous studies suggest refuse collection may involve non-constant returns to scale; that is, there may be some number of households at which the cost per household is minimized; communities with smaller or larger numbers of households have higher costs per household.)&lt;/strong&gt; Value for your city: 6.28.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;density&lt;/code&gt;: density of households per square mile. Value for your city: 620.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wage&lt;/code&gt;: average hourly wage in dollars for collection workers. Value for your city: 19.50.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;snowdays&lt;/code&gt;: number of snow emergency days last year; may raise costs by interfering with regular schedule. Value for your city: 5.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;So what’s the objective?&lt;/strong&gt; Students are supposed to use the data to build a predictive (OLS) model for &lt;code&gt;cost_per_household&lt;/code&gt;, and then interpret the model to advise the mayor about the choice between (a) enlisting the private sanitation contractor or (b) replacing the supervisor of the Sanitation Department.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;source-of-temptation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Source of temptation&lt;/h1&gt;
+&lt;p&gt;Students typically begin with a simple model where every variable is linearly related to the outcome variable…
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mathtt{cost\_per\_household}_{i} &amp;amp;= 
+    \alpha + 
+    \beta_{1} \mathtt{hholds} +
+    \beta_{2} \mathtt{density} \\
+  &amp;amp; \quad 
+    + \beta_{3} \mathtt{wage} +
+    \beta_{4} \mathtt{snowdays} +
+    \varepsilon_{i}
+\end{align}\]&lt;/span&gt;
+…with a normally distributed error. But they should find that the simple model violates OLS assumptions by producing residuals with a curvilinear pattern. If students inspect the data more, they detect that the likely culprit is the &lt;code&gt;hholds&lt;/code&gt; variable, the number of households in the municipality. This is consistent with the hint in the variable descriptions above, that there may be some number of households that minimize sanitation costs per household. So they build a model with a quadratic term for &lt;code&gt;hholds&lt;/code&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mathtt{cost\_per\_household}_{i} &amp;amp;= 
+    \alpha + 
+    \beta_{1} \mathtt{hholds} +
+    \beta_{2} \mathtt{hholds}^{2} +
+    \beta_{3} \mathtt{density} \\
+  &amp;amp; \quad 
+    + \beta_{4} \mathtt{wage} +
+    \beta_{5} \mathtt{snowdays} +
+    \varepsilon_{i}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;For the purposes of the assignment, this is the “correct” model, and the residuals look better than they did before (see below).&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;80%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Now that we have the appropriate model, how do we visualize it? It’s tempting for students to think that the important thing to plot is something to do with the nonlinear effect of the number of households. And indeed this is &lt;em&gt;exactly&lt;/em&gt; what I did when I took this course many years ago. It the most interesting part of the model, and it was hidden in the data…how could it not be the important thing that I should focus on? I think I did something like this: generate model predictions with other variables fixed at their means, and then plot those model predictions alongside my city’s data (Smallville) and the private contractor’s proposal for reducing the curbside pickup costs per household.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/wrong-plot-1.png&#34; width=&#34;90%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;From this graphic, we could reason that even if we enlist the private contractor, their bid does not get us close to what we would expect from the model. This leads us the direction of saying that maybe we expect more savings from better mismanagement of the Sanitation Department than what the current supervisor is delivering.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;disciplined-plotting-choices&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Disciplined plotting choices&lt;/h1&gt;
+&lt;p&gt;There are a few things that are misguided about the above approach.&lt;/p&gt;
+&lt;p&gt;First, the comparison in this above graphic isn’t actually the relevant comparison. It is typical to teach students to visualize partial relationships in regression by varying one predictor and fixing other predictors to their means. But we don’t always want to compare against a typical observation. In this example, we would be more interested in holding covariates to the same values as we observe for our city. Applied situations like this remind us that many of the problems that we encounter aren’t questions about “typical” observations at all.&lt;/p&gt;
+&lt;p&gt;Second, and more importantly, the only reason why we make the previous mistake is because we think that the quadratic relationship is the important thing to visualize. It’s understandable that we’re distracted by the quadratic relationship because it was initially a challenge to discover, but if we discipline ourselves about what is important to communicate to our audience (in this case, the mayor of “Smallville”), we would see that the nonlinearity is irrelevant to visualize. All that matters is comparing our city’s data and the contractor’s proposal to a specific model-based prediction for our city. Exploring how the prediction changes as we arbitrarily assign other values on key covariates doesn’t help us make a policy recommendation. We aren’t in a position to intervene on those variables (and we aren’t confident that our model identifies causal effects anyway), so we shouldn’t distract the mayor by presenting irrelevant information that draws focus away from the key insights.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;What is a simpler way to show the model’s key takeaway? Here.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/plot-smallville-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The takeaway from this figure is similar as it was above. We show a model-based prediction for a city with the same observable characteristics as Smallville (a point estimate, 95% confidence interval, and 95% prediction interval) alongside Smallville’s current costs and the contractor’s proposal.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;
+We see that the contractor’s proposal reduces sanitation costs, but they still get us nowhere near a level that we should expect given the characteristics of our city. If we are confident that replacing the Sanitation Department supervisor would make our costs “representative” of other similar towns, we would save a lot more money by replacing the supervisor than we would by hiring the contractor.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;we-can-do-better-visualize-cost-savings-directly&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;We can do better: visualize cost-savings directly&lt;/h1&gt;
+&lt;p&gt;Even though the above graphic does a little better than what we were working with before, it still doesn’t directly communicate the aggregate financial impact of the policy. The audience has to do that work on their own still. If we really wanted to communicate the insights of the model, we could translate these predictions directly into something that mayors, comptrollers, and so on really understand: dollars.&lt;/p&gt;
+&lt;p&gt;Here’s the idea. In terms of annual cost cost-per-household, we know our city’s current value, the contractor’s bid, and a distribution of model-based estimates for a city with our data. We also know the total number of households in our city, so it is straightforward to calculate the total costs from each of these per-household figures:
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \text{Total annual cost} &amp;amp;= \text{Cost per household} \times \text{Number of households}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;So we calculate annual costs for the current per-household rate, the contractor’s bid, and three model-based scenarios&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;
+that result from replacing the Sanitation Dept. supervisor:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;An “average” scenario: plugging in the point estimate from the model as the annual cost per household under a new supervisor.&lt;/li&gt;
+&lt;li&gt;An “optimistic” scenario: plugging in the 10th percentile of the predictive distribution as the estimated cost per household.&lt;/li&gt;
+&lt;li&gt;A “pessimistic” scenario: plugging in the 90th percentile of the predictive distribution as the annual cost per household.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We plot two quantities for each scenario. First, how much money is saved annually if replacing the supervisor brings pickup costs to each of these benchmarks? And second, how much &lt;em&gt;more&lt;/em&gt; does each benchmark save us when we compare to the private contractor’s bid?&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;The comparison against the contractor bid isn’t just for show! It gives decision-makers valuable information because it represents a “budget” for replacing the supervisor. How so? Replacing the supervisor wouldn’t be costless: the replacement may require a higher salary than the current supervisor, and the job search will involve some fixed costs. Comparing each scenario’s savings to the amount saved from the enlisting the contractor conveys how much money we can &lt;em&gt;invest&lt;/em&gt; in a new supervisor while still saving more money than hiring the contractor. Visualizing the results this way shows exactly how much money we’re working with and how much we stand to save by hiring supervisors with different salary expectations.&lt;/p&gt;
+&lt;p&gt;By doing some further processing of the model’s insights, and in-turn moving &lt;em&gt;farther&lt;/em&gt; from the technical details of the model, we actually learn more about the consequences of our choices. We see that even under the pessimistic cost-savings scenario, we still have a roughly half-million dollar cushion before the decision to replace the supervisor starts to look like the wrong choice.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;reframing-what-to-be-proud-of&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Reframing what to be “proud” of&lt;/h1&gt;
+&lt;p&gt;We feel proud when we build a technologically complex model. It makes us feel valuable when we work through something challenging, so we want to show it off. When we need to hide these technical details in order to communicate the results to non-experts, the choice is painful at first, especially for someone like me who takes a lot of pride in the time and effort that I invest in improving my statistical skills. This is a psychological game that we are playing with ourselves.&lt;/p&gt;
+&lt;p&gt;But the “difficulty-level” of our work isn’t the only skill to take pride in. Distilling essential information out of a complicated piece of machinery is valuable, and we can see it as a distinct source of pride when we do it well. Better still, doing an effective job summarizing the important takeaways of an analysis makes it all the more rewarding to describe the technical backend, since the technical backend has a much stronger clarity-of-purpose after if is introduced effectively.&lt;/p&gt;
+&lt;p&gt;Just to drive the point home, that last graph was a bar graph. I kinda hate bar graphs. But I don’t hate the fact that I recognized a context where it made something simpler to communicate. That’s valuable.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
+At this point you may wonder if we can intervene on the system by reducing the wages of sanitation workers to make up the cost difference. First of all, how dare you. Secondly, even though we know that lowering wages should have a causal effect on pickup costs, we don’t know that the coefficient for &lt;code&gt;wage&lt;/code&gt; in the model represents the causal effect of wages—certainly it doesn’t. Third, even if we could make that assumption, the numerical impact of decreasing sanitation worker wages to (say) the median wage for other cities would amount to only $5.54 saved per household, so we save even less than we would save from hiring the contractor.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
+The language used in the graphic (“95% range of predictions”) is doing a little violence against the meaning of a frequentist confidence interval. If I were implementing this analysis in real life, I would build a Bayesian model that lets me say, “This is the likely range of scenarios, as the data suggest,” because that’s conveniently what a posterior distribution actually means!&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;
+Once again, interpreting the prediction interval as “possible scenarios” is more closely tied to Bayes than to a frequentist model. The more I think about the value of communicating model predictions as “possible scenarios,” the more I think this warrants its own blog post. &lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Purrrmutation Testing</title>
       <link>/post/randomization-inference-purrr/</link>
       <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
@@ -45,46 +176,42 @@ pre.numberSource code &gt; span &gt; a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
+  {  background-color: #f8f8f8; }
 @media screen {
 pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 &lt;/style&gt;
 
 
@@ -660,46 +787,42 @@ pre.numberSource code &gt; span &gt; a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
+  {  background-color: #f8f8f8; }
 @media screen {
 pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 &lt;/style&gt;
 
 
@@ -732,28 +855,28 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot; &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot;
-##   [8] &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot; &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot;
-##  [15] &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot;
-##  [22] &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot;
-##  [29] &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot;
-##  [36] &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot;
-##  [43] &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot;
-##  [50] &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot;
-##  [57] &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot;
-##  [64] &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot;
-##  [71] &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot;
-##  [78] &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot;
-##  [85] &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot;
-##  [92] &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot;
-##  [99] &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot;
-## [106] &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot; &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot;
+##   [8] &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot; &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot;
+##  [15] &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot;
+##  [22] &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot;
+##  [29] &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot;
+##  [36] &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot;
+##  [43] &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot;
+##  [50] &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot;
+##  [57] &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot;
+##  [64] &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot;
+##  [71] &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot;
+##  [78] &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot;
+##  [85] &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot;
+##  [92] &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot;
+##  [99] &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot;
+## [106] &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;6ebb3b0&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;9da4ece&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;avatar -&amp;gt; me at Grace&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;kate -&amp;gt; tango syntax highlight&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
@@ -952,46 +1075,42 @@ pre.numberSource code &gt; span &gt; a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
+  {  background-color: #f8f8f8; }
 @media screen {
 pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 &lt;/style&gt;
 
 

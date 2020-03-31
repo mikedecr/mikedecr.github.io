@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-us">
 
@@ -534,46 +535,42 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
+  {  background-color: #f8f8f8; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -606,28 +603,28 @@ code span.wa { color: #bf0303; } /* Warning */
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<pre><code>##   [1] &quot;6ebb3b0&quot; &quot;af8a617&quot; &quot;2c6ec85&quot; &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot;
-##   [8] &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot; &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot;
-##  [15] &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot;
-##  [22] &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot;
-##  [29] &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot;
-##  [36] &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot;
-##  [43] &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot;
-##  [50] &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot;
-##  [57] &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot;
-##  [64] &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot;
-##  [71] &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot;
-##  [78] &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot;
-##  [85] &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot;
-##  [92] &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot;
-##  [99] &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot;
-## [106] &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
+<pre><code>##   [1] &quot;9da4ece&quot; &quot;8cccbf9&quot; &quot;45d0315&quot; &quot;9d26ba5&quot; &quot;6ebb3b0&quot; &quot;af8a617&quot; &quot;2c6ec85&quot;
+##   [8] &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot;
+##  [15] &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot;
+##  [22] &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot;
+##  [29] &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot;
+##  [36] &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot;
+##  [43] &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot;
+##  [50] &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot;
+##  [57] &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot;
+##  [64] &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot;
+##  [71] &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot;
+##  [78] &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot;
+##  [85] &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot;
+##  [92] &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot;
+##  [99] &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot;
+## [106] &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;6ebb3b0&quot;</code></pre>
+<pre><code>## [1] &quot;9da4ece&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
-<pre><code>## [1] &quot;avatar -&gt; me at Grace&quot;</code></pre>
+<pre><code>## [1] &quot;kate -&gt; tango syntax highlight&quot;</code></pre>
 </div>
 <div id="r-results-in-the-yaml" class="section level2">
 <h2>R results in the YAML</h2>

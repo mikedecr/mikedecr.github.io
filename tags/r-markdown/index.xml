@@ -47,46 +47,42 @@ pre.numberSource code &gt; span &gt; a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    background-color: #ffffff;
-    color: #a0a0a0;
+    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #a0a0a0;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { color: #1f1c1b; background-color: #ffffff; }
+  {  background-color: #f8f8f8; }
 @media screen {
 pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
-code span. { color: #1f1c1b; } /* Normal */
-code span.al { color: #bf0303; background-color: #f7e6e6; font-weight: bold; } /* Alert */
-code span.an { color: #ca60ca; } /* Annotation */
-code span.at { color: #0057ae; } /* Attribute */
-code span.bn { color: #b08000; } /* BaseN */
-code span.bu { color: #644a9b; font-weight: bold; } /* BuiltIn */
-code span.cf { color: #1f1c1b; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #924c9d; } /* Char */
-code span.cn { color: #aa5500; } /* Constant */
-code span.co { color: #898887; } /* Comment */
-code span.cv { color: #0095ff; } /* CommentVar */
-code span.do { color: #607880; } /* Documentation */
-code span.dt { color: #0057ae; } /* DataType */
-code span.dv { color: #b08000; } /* DecVal */
-code span.er { color: #bf0303; text-decoration: underline; } /* Error */
-code span.ex { color: #0095ff; font-weight: bold; } /* Extension */
-code span.fl { color: #b08000; } /* Float */
-code span.fu { color: #644a9b; } /* Function */
-code span.im { color: #ff5500; } /* Import */
-code span.in { color: #b08000; } /* Information */
-code span.kw { color: #1f1c1b; font-weight: bold; } /* Keyword */
-code span.op { color: #1f1c1b; } /* Operator */
-code span.ot { color: #006e28; } /* Other */
-code span.pp { color: #006e28; } /* Preprocessor */
-code span.re { color: #0057ae; background-color: #e0e9f8; } /* RegionMarker */
-code span.sc { color: #3daee9; } /* SpecialChar */
-code span.ss { color: #ff5500; } /* SpecialString */
-code span.st { color: #bf0303; } /* String */
-code span.va { color: #0057ae; } /* Variable */
-code span.vs { color: #bf0303; } /* VerbatimString */
-code span.wa { color: #bf0303; } /* Warning */
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
 &lt;/style&gt;
 
 
@@ -119,28 +115,28 @@ code span.wa { color: #bf0303; } /* Warning */
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot; &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot;
-##   [8] &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot; &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot;
-##  [15] &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot;
-##  [22] &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot;
-##  [29] &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot;
-##  [36] &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot;
-##  [43] &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot;
-##  [50] &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot;
-##  [57] &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot;
-##  [64] &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot;
-##  [71] &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot;
-##  [78] &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot;
-##  [85] &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot;
-##  [92] &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot;
-##  [99] &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot;
-## [106] &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot; &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot;
+##   [8] &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot; &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot;
+##  [15] &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot;
+##  [22] &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot;
+##  [29] &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot;
+##  [36] &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot;
+##  [43] &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot;
+##  [50] &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot;
+##  [57] &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot;
+##  [64] &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot;
+##  [71] &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot;
+##  [78] &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot;
+##  [85] &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot;
+##  [92] &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot;
+##  [99] &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot;
+## [106] &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;6ebb3b0&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;9da4ece&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;avatar -&amp;gt; me at Grace&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;kate -&amp;gt; tango syntax highlight&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;R results in the YAML&lt;/h2&gt;
