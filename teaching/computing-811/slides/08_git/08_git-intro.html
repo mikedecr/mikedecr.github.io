@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Git Introduction</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.1/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: middle, center
+
+
+
+
+
+
+
+.pull-left[
+# **PS 811: Statistical Computing**
+
+&lt;br&gt;
+Michael DeCrescenzo
+&lt;br&gt;
+University of Wisconsin–Madison
+
+]
+
+.pull-right[
+&lt;img src="08_git-intro_files/figure-html/title-graphic-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+## Version Control with Git
+
+April 3, 2020
+
+---
+
+# Before we begin...
+
+Canvas Announcement:
+
+
+- **Install Git**
+ 
+    - Mac: `xcode-select --install` in Terminal
+    
+    - Windows: download Git Bash app
+
+- **Install Sourcetree**
+
+    - A _graphical user interface_ (GUI) to GIt
+
+
+
+---
+
+# What is Git?
+
+A technology that records the development of your project's **source code**
+
+Changes to each file are **tracked**
+
+**History of changes** like a trail of breadcrumbs
+
+Retrace your steps, rewind progress, create "experimental" development paths, incorporate/manage collaborator contributions
+
+
+---
+
+# Why is Git?
+
+Everything in one place: **portable** and **reproducible**
+
+Trace the history of a project
+
+- Radical transparency. You can share the whole development arc of the project.
+- Helps you fix broken things, learn why results may have changed, etc.
+- Natural complement to "preregistration" of study designs
+
+Collaboration
+
+- Who did what? Track changes for code!
+- Enables division of labor, parallel development
+
+
+---
+
+# Why Git _for this class_?
+
+Benefits of Git are routine in other technologies (MS Word track changes, etc...). No exaggeration to say that these are essential functions of modern intellectual labor.
+
+--
+
+Mysteriously (or, infuriatingly), the people who control your lives in grad school don't teach you how to implement them for code-based work, which is _a ton of what we do_.
+
+--
+
+In the industry world: an extremely valuable real-world skill for "deploying" code-based products (websites, apps, statistical/ML models, database management...). Employers require it.
+
+--
+
+&lt;center&gt;&lt;h2&gt;~*~That's why I'm here~*~&lt;/h2&gt;&lt;/center&gt;
+
+
+
+---
+
+class: middle
+
+.pull-left[
+
+# Today: &lt;br&gt; Basics
+
+- Important concepts &amp; terms
+
+- Simple actions: staging, committing, ignoring
+
+- Remote repositories
+
+- **Everything you need** for final project
+
+]
+
+--
+
+.pull-right[
+
+# Next Week: &lt;br&gt; Intermediate
+
+- Large files
+
+- Navigating git "history"
+
+- Branches: collaborating/task management
+
+- **Important skills** for real-world Git
+
+]
+
+
+
+---
+
+class: center, middle
+
+# Should I be scared?
+
+
+--
+
+## A little.
+
+--
+
+### Git is weird, but we will stick to the simple stuff at first
+
+
+---
+
+class: center, middle, inverse
+
+# Project Workflow
+
+
+---
+
+class: middle
+
+# So, I have a new project
+
+
+1. Create a directory ("folder") for the project
+
+2. Make it an Rstudio Project
+
+3. Initialize Git repository
+
+4. Periodically **commit** file changes (Saving files ≠ commiting)
+
+[more...](https://happygitwithr.com/big-picture.html#is-it-going-to-hurt)
+
+---
+
+class: center, middle, inverse
+
+# Step 1: Initialize Repository
+
+In Sourcetree: `New` &gt; `Create Local Repository`
+
+
+
+
+---
+
+class: center, middle, inverse
+
+# Step 2: Assess your working directory
+
+
+---
+
+# Step 2: Assess your working directory
+
+
+The "File Status" screen in Sourcetree shows you the current state of your files.
+
+- When you first begin a project, every file is **untracked**. Files will not be tracked until you first add/commit them. 
+- Previously-committed files will show if they have been **modified** since previous commit
+- Ignored files won't show up at all (more later)
+
+
+
+---
+
+class: center, middle, inverse
+
+# Step 3: Add and Commit Files
+
+
+---
+
+# Step 3: Add and Commit Files
+
+A **"commit"** is a multi-file snapshot of your progress on a project.
+
+- Choose which files to commit and "stage" them (check box beside file)
+- Once files are staged, write "commit message" and **commit**
+- **Give it a try**
+
+
+--
+
+Commit tips:
+
+- Don't commit private stuff (passwords, confidential info...)
+- Commits should be internally coherent, task-oriented.
+- Don't group multiple tasks into one commit. 
+- You can stage _lines_ in a file without staging the whole file.
+- Write _informative_, verb-based commit messages (e.g. "simplify lit review").
+
+
+
+---
+
+class: middle
+class: center, middle
+
+&lt;img src="08_git-intro_files/figure-html/blank_commits-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+The "History" view in Sourcetree shows your "git tree" (a.k.a. "graph")
+
+---
+
+class: center, middle
+
+![](https://happygitwithr.com/img/commit-diff-sha-tag.png)
+
+Commits only save **changes** to files. Commits ID'd by "hash"
+
+
+---
+
+class: center, middle
+
+![](https://gitbookdown.site/img/git_branch_merge.png)
+
+Next week: Git with many "branches"
+
+---
+
+# What (not) to commit
+
+The programmer's philosophy: commit the source code, not the output.
+
+--
+
+Data science is a little different:
+
+- Obviously we commit the source code (otherwise, no output)
+- Rmd makes _intermediate_ files that aren't important.
+- Rmd final output? I commit.
+- Statistical output? Sometimes helpful to diagnose why something changed/doesn't work anymore
+- One possibility: use `sink()` to save R output &amp; commit log file
+
+--
+
+Separate issue: big files
+
+
+
+---
+
+# Ignoring files
+
+"I will never want to commit this file"
+
+Ignoring files alters your `.gitignore` file, which you should commit/track.
+
+You can ignore entire subfolders.
+
+You can ignore certain file **patterns** (e.g. any `*.bbl` file, any folder that ends with `*_cache`)
+
+
+---
+
+#  Review/taking stock
+
+.pull-left[
+Project folder :: git repository
+
+- source code
+- data (we'll come back to this)
+- notes/documentation
+- graphics
+- output
+- intermediary files
+
+]
+
+.pull-right[
+Git commands
+
+- `git init`: create git repository
+- `git status`: what's the state of my working directory?
+- `git add ...`: stage files for commit
+- `git commit ...`: commit file changes
+- No `git ignore` command. Just add info to `.gitignore`
+
+]
+
+
+---
+
+# Other quick tips
+
+.pull-left[
+Put `README.md` file(s) in your repository! 
+
+- basic description of project and folder contents
+- also helpful to explain contents of sub-folders (e.g. explaining how your script files relate to one another...)
+]
+
+.pull-right[
+Computing environment:
+
+- Save and commit the output from `devtools::session_info()`: info about your OS, R version, package versions...
+- Use [`{renv}`](https://rstudio.github.io/renv/articles/renv.html) to manage package versions at the project level
+]
+
+
+
+---
+
+class: middle, center, inverse
+
+# Step 4: Push to remote
+
+
+---
+
+# Step 4: Push to remote
+
+Create a "remote repository" to share/back up your project
+
+- On Github: New repository
+    - Name repository (e.g. `polisci-811`), description optional
+    - Set to public (upgrade to Github "student premium" for free private repo)
+    - "Create Repository"
+    - Copy repo URL: `https://github.com/username/repo-name.git`  
+
+- In Sourcetree: Repository &gt; Add Remote...
+    - Remote name: `origin`
+    - Paste URL, click OK
+
+---
+
+# Step 4: Push to remote
+
+If we have done at least one commit, we can "push" the git repo to remote
+
+In Sourcetree:
+
+- On the Toolbar: click "Push" 
+- Select "master". Pushing our local "master" branch to remote
+- May need to authenticate Github username credentials
+
+Copy of your repository is now on Github
+
+
+
+---
+
+# Why Remote?
+
+If your computer dies in a fire, your project is safe
+
+If you break your local repository, you can pull an unbroken copy
+
+If you're collaborating with people, combine changes online
+
+Share replication archive _as an entire project_
+
+
+---
+
+# Getting Help
+
+Check out the [example project](https://github.com/mikedecr/example-project) from earlier in the semester or my [other repositories](https://github.com/mikedecr?tab=repositories)
+
+Check the syllabus for resources.
+
+Google before you try something new! Git is weird and you WILL mess things up. 
+
+Again, you WILL mess things up. That's OK. Sometimes you need to throw away the `/.git/` folder and start it again...
+
+
+
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
