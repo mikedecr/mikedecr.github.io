@@ -1,0 +1,1270 @@
+---
+title: "Bayesian Statistics"
+subtitle: ""
+author: ""
+date: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    selfcontained: true
+    # mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_HTMLorMML"
+    # mathjax: "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_SVG"
+    # css: "kunoichi"
+    css: xaringan-themer.css
+    seal: false
+    nature:
+      ratio: "16:9"
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      beforeInit: "https://platform.twitter.com/widgets.js"
+# bibliography: ../../paper-rmd/assets/voter-id-bib.bib
+# biblio-style: ../../paper-rmd/assets/apsr-leeper.bst
+---
+
+class: middle, center
+
+
+```{r setup-rmd, eval = TRUE, include = FALSE, cache = FALSE}
+source(here::here("slides", "miller_2020", "assets", "slide-helpers.R"))
+filter <- dplyr::filter
+```
+
+```{r inf, include = FALSE, cache = FALSE, eval = FALSE}
+xaringan::inf_mr(here::here("slides", "miller_2020", "lecture_bayes-intro.Rmd"))
+# servr::daemon_stop()
+```
+
+
+.pull-left[
+
+# **Bayesian Statistics**
+
+## View from the Inside
+
+#### Michael DeCrescenzo <br> University of Wisconsin–Madison
+
+]
+
+.pull-right[
+
+```{r title-graphic, include = TRUE, fig.width = 4, fig.height = 3, out.width = "100%"}
+tibble(
+  x = seq(0, 1, .01)
+) %>%
+  crossing(b = seq(1, 10, length.out = 5)) %>%
+  mutate(dbeta = dbeta(x, 3, b)) %>%
+  ggplot() +
+  aes(
+    x = x, 
+    y = dbeta, 
+    color = as.factor(b), 
+    fill = as.factor(b)
+  ) +
+  geom_line() +
+  geom_ribbon(
+    aes(ymin = 0, ymax = dbeta),
+    color = NA,
+    alpha = 0.2
+  ) +
+  scale_fill_viridis_d(end = 0.8) +
+  scale_color_viridis_d(end = 0.8) +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    axis.title = element_blank(),
+    legend.position = "none",
+    panel.border = element_blank(),
+    panel.background = element_blank()
+  ) 
+```
+
+]
+
+
+---
+
+class: middle
+
+.pull-left[
+
+.center[
+
+<img src="https://mikedecr.github.io/authors/admin/avatar-grace_hu05a9fa9b849008cfd0c58ea39efc7f26_83291_250x250_fill_q90_lanczos_center.jpg">
+
+Ph.D. Candidate <br>
+Political Science
+
+[@mikedecr](https://twitter.com/mikedecr)  <br>
+[mikedecr.github.io](https://mikedecr.github.io)
+]
+]
+
+
+.pull-right[
+
+### U.S. Electoral Politics
+
+Ideology and primary elections <br>
+Election administration (voter ID) <br>
+Group voting and party coalitions <br>
+Understanding election forecasts
+
+### Quantitative Methods
+
+Ideal points / other measurement  <br>
+Causal inference <br>
+All with **Bayesian methods**
+
+]
+
+---
+
+class: center, middle
+
+# Agenda 
+
+### 1. Bayesian statistics...WTF?
+
+<!-- 
+
+- Information vs. Belief
+- What can we do?
+    - Introduce extra-model information
+    - regularization
+    - stabilization
+
+-->
+
+### 2. Priors...WTF?
+
+<!-- 
+- types of priors
+    - weak/diffuse priors
+    - weakly informative priors
+    - strongly informative priors
+- how do we actually implement these priors
+    - not for fixing confounding!
+    - we don't usually do directional priors unless you're in an area of weak ID
+    - Usually regularization and stabilization. Some prior that pulls me back to zero
+- features of a probability distribution
+    - concentration of probability
+        - Normal: 68% of draws within 1 sd.
+    - shape of the prior
+ -->
+
+### 3. Bayes in Action
+
+???
+
+- wrapping our head around what Bayesian statistics actually means
+
+- Priors: the most difficult to swallow element of Bayes, so we can talk about how to think about that
+
+- What it looks like to think through a problem as a Bayesian
+
+
+
+---
+
+class: center, middle, inverse
+
+# Bayesian Analysis in Theory
+
+???
+
+Don't want to duplicate Prof. Miller
+
+Instead rephrase some things about Bayes so that it makes a little more sense to a newcomer
+
+
+---
+
+class: center, middle
+
+## "Bayesian inference is no more than **counting the numbers of ways things can happen**, according to our assumptions"
+
+#### - Richard McElreath
+
+
+???
+
+Convince you of an interpretation of Bayesian analysis that makes it straightforward like this
+
+Makes it unremarkable, non-magical, nothing mystical other than applying probability theory
+
+---
+
+## Counting the ways data can happen, according to assumptions
+
+???
+
+Introduce more math as we go,
+
+inch closer and closer to Bayes theorem
+
+--
+
+.pull-left[
+### We entertain assumptions about the world
+
+We suppose that $y = f(\theta)$, but we don't know $\theta$
+
+Consider possible values of $\theta$
+
+]
+
+--
+
+.pull-right[
+### Data tell us which assumptions make more sense
+
+Some $\theta$ have an **easier time generating $y$**
+
+These $\theta$ represent "likely scenarios"
+]
+
+
+---
+
+## Bayes' Theorem is nothing but **machinery** for translating this intuition
+
+--
+
+.pull-left[
+
+Assumptions about the world: 
+
+- A model of the data: $p(y \mid \theta)$
+
+- A range of possible input values: $p(\theta)$
+
+- Some $\theta$ might make more sense ahead of time, but not always the case
+
+]
+
+???
+
+LIKELIHOOD of the data
+
+PRIOR distribution of theta
+
+--
+
+
+.pull-right[
+
+Posterior distribution $p(\theta \mid y)$
+
+- $p(\theta \mid y) = \dfrac{p(y \mid \theta)p(\theta)}{p(y)}$
+
+- Some $\theta$ more plausible because they have **more ways to make data**: $p(y \mid \theta)$
+
+- or because they were **more plausible from the outset**: $p(\theta)$
+
+]
+
+
+???
+
+How do I increase the plausibility of a parameter?
+
+- increase y | theta
+- increase p(theta)
+
+
+
+---
+
+class: middle
+
+.pull-left[
+
+```{r small-data}
+set.seed(5679)
+
+small_data <- 
+  tibble(
+    x = rnorm(n = 30),
+    y = 0.45*x + rnorm(n = 30)
+  )
+```
+
+```{r plot-small-data, include = TRUE, fig.width = 4, fig.height = 3, out.width = "100%"}
+small_plot <- 
+  ggplot(small_data) +
+  aes(x = x, y = y) +
+  geom_point() +
+  coord_cartesian(xlim = c(-3, 3), ylim = c(-3, 3))
+
+small_plot
+
+```
+]
+
+--
+
+.pull-right[
+Data model, $p(y \mid \theta)$:
+
+\begin{align}
+  y_{i} &\sim \text{Normal}(\alpha + \beta x_{i}, \sigma)
+\end{align}
+
+Parameter model, $p(\theta)$:
+\begin{align}
+  \beta &\sim \text{Normal}(0, 5) \\
+  \alpha &\sim \text{Student's T}(3, 0, 10) \\
+  \sigma &\sim \text{Half-T}(3, 0, 10)
+\end{align}
+
+]
+
+???
+
+Data model: what you've already been doing
+
+Parameter model is what's new
+
+- just extends the idea of a modeling features of the system
+- Likelihoods are just priors for data
+- priors are just likelihoods for parameters
+- What's $y$ going to be? I learn more about y by conditioning on the parameters.
+- What't $\theta$ going to be? I learn more about theta by conditioning on the data.
+
+
+```{r}
+get_prior(y ~ x, data = small_data)
+```
+
+```{r}
+normal_model <- 
+  brm(
+    y ~ 1 + x,
+    data = small_data,
+    prior = set_prior("normal(0, 5)", class = "b", coef = "x")
+  )
+```
+
+---
+
+class: middle
+
+.pull-left[
+```{r add-small-data, include = TRUE, fig.width = 4, fig.height = 3, out.width = "100%"}
+small_data %>%
+  modelr::data_grid(x = modelr::seq_range(x, n = 100)) %>% 
+  tidybayes::add_fitted_draws(normal_model, n = 1000) %>%
+  ggplot() +
+  # tidybayes::stat_lineribbon(alpha = 0.5) +
+  aes(x = x, y = .value) +
+  # geom_smooth(
+  #   data = small_data,
+  #   color = "black",
+  #   fill = primary,
+  #   aes(y = y),
+  #   method = "lm"
+  # ) +
+  geom_line(
+    aes(group = .draw), 
+    color = secondary,
+    alpha = 0.2
+  ) +
+  geom_smooth(
+    data = small_data,
+    color = "black",
+    aes(y = y),
+    method = "lm",
+    se = FALSE
+  ) +
+  geom_point(data = small_data, aes(y = y)) +
+  coord_cartesian(xlim = c(-3, 3), ylim = c(-3, 3)) +
+  labs(y = "y")
+```
+
+]
+
+.pull-right[
+Update parameters/condition on the data
+
+Posterior distribution $p(\theta \mid y)$: **joint distribution of plausible parameters**
+
+**Sample** posterior with Markov chain Monte Carlo (MCMC)
+
+Every sample equally possible, but many samples are similar
+
+]
+
+???
+
+
+You get the whole distribution
+
+- A Bayesian model has the mathematical machinery to define the entire posterior distribution
+- Sometimes the solutions are very complicated, and it doesn't make sense to just compute the posterior distribution analytically
+- To get around that, we usually "estimate" a model by generating samples of the posterior distribution, and then manipulating those samples
+- The algorithms that generate those samples are called "Markov chain Monte Carlo" algorithms, which you might have seen before. They are basically just algorithms that explore and figure out how to sample a complex distribution
+
+
+---
+
+### What does the model say?
+
+.pull-left[
+
+```{r ols-coef, include = TRUE, fig.height = 3, fig.width = 4, out.width = "100%"}
+lm(y ~ x, data = small_data) %>%
+  tidy(conf.int = TRUE) %>%
+  filter(term == "x") %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_pointrange(
+    aes(ymin = conf.low, ymax = conf.high),
+    position = position_dodge(width = -0.25)
+  ) +
+  coord_flip(ylim = c(-1, 2)) +
+  labs(title = "OLS Model", y = "Coefficient", x = NULL)
+```
+
+Estimator is one number
+
+Interval is "values that I can't reject"
+
+]
+
+--
+
+.pull-right[
+
+```{r post-coef, include = TRUE, fig.height = 3, fig.width = 4, out.width = "100%"}
+normal_model %>%
+  tidybayes::tidy_draws() %>%
+  ggplot(aes(x = b_x)) +
+  coord_cartesian(xlim = c(-1, 2)) +
+  geom_histogram(fill = secondary, color = NA, bins = 50) +
+  labs(
+    title = "Histogram of Posterior Samples", 
+    x = "Coefficient", 
+    y = "Posterior Frequency"
+  )
+```
+
+"Height" of distribution represents **more plausible assumptions**
+
+]
+
+
+???
+
+Difference in what you can say
+
+- intervals
+- probability that a parameter is in a region
+- what is "likely" or "unlikely"
+
+
+
+Simple regression, answers are similar
+
+- answers diverge if we introduce prior information
+- some situations (small samples, complex models) where answers diverge
+
+
+---
+
+class: middle
+
+## Outside view of Bayesian stats
+
+
+
+.pull-left[
+
+Frequentist inference:
+
+- data have distributions, parameters are fixed
+- statistics are estimates of parameters
+- uncertainty from repeated sampling
+
+]
+
+.pull-right[
+
+Bayesian inference: 
+
+- All of the above, _plus a prior_
+- Priors are "subjective beliefs"
+- Priors are "penalties" on new data
+- "Penalized maximum likelihood"
+
+]
+
+
+???
+
+Why don't I like this?
+
+- makes Bayes look kind of absurd
+- if priors are nothing more than extra fixtures, I should just get rid of them.
+- If priors are subjective, then the whole exercise seems like it's misguided. 
+- There may be other ways to penalize that are more principled than consulting my beliefs, for instance doing some kind of MSE-optimal penalization that I'm tuning by cross-validating a model or something, which is more like machine learning
+
+---
+
+class: middle
+
+## Inside view of Bayesian stats
+
+.pull-left[
+
+A Bayesian model is a joint model for **all parts of the system**
+\begin{align}
+  p(y, \theta) \equiv p(y \cap \theta) \equiv p(y \mid \theta)p(\theta)
+\end{align}
+
+Nothing fundamentally different about data and parameters
+
+- Prior : Parameter :: Likelihood : Data
+- Justifications for likelihoods work for priors
+
+]
+--
+
+.pull-right[
+
+
+Run the model **forward** (generate $y$):
+\begin{align}
+  \theta \longrightarrow p(y, \theta) \longrightarrow p(y \mid \theta)
+\end{align}
+
+Run the model **backward** (update $\theta$):
+\begin{align}
+  y \longrightarrow p(y, \theta) \longrightarrow p(\theta \mid y)
+\end{align}
+
+(McElreath: ["Bayesian Statistics without Frequentist Language"](https://www.youtube.com/watch?v=yakg94HyWdE))
+
+]
+
+???
+
+Joint model:
+
+- nothing different about data and parameters
+- Only one is observed
+- the moment we have missing data, we're suddenly in exactly the same world
+
+The model is a description of the types of process that generate variables
+
+- functional, distributional relationships between variables
+- The joint model contains _more than_ 
+
+"Forward and backward" 
+
+---
+
+class: center, middle, inverse
+
+# Prior Distributions
+
+
+---
+
+## Prior Distributions
+
+.pull-left[
+Posterior is **impossible to get** without a prior distribution
+\begin{align}
+  p(\theta \mid y) \propto p(y \mid \theta)p(\theta)
+\end{align}
+
+Posterior is "precision-weighted average" of prior and likelihood (data)
+
+How do we pick a prior?
+
+]
+
+.pull-right[
+![](https://www.analyticsvidhya.com/wp-content/uploads/2016/06/12.jpg)
+]
+
+???
+
+Posterior is the payoff
+
+Precision wt: means that the prior has consequences for what our conclusions are
+
+- If I have really rigid prior beliefs, I don't learn from data
+- If I have really loose prior beliefs, I overfit the data
+
+---
+
+class: middle
+
+### Prior information as a probability distribution
+
+.pull-left[
+
+```{r, include = TRUE, out.width = "100%", fig.width = 4, fig.height = 3}
+tibble(x = seq(-10, 10, .01)) %>%
+  crossing(sd = c(1, 5)) %>%
+  group_by(sd) %>%
+  mutate(density = dnorm(x, mean = 0, sd = sd)) %>%
+  ggplot() +
+  # facet_wrap(
+  #   ~ sd
+  # ) +
+  aes(x = x, y = density, color = as.factor(sd), fill = as.factor(sd)) +
+  geom_ribbon(
+    aes(ymin = 0, ymax = density), 
+    alpha = 0.5
+  ) +
+  geom_line() +
+  scale_color_viridis_d(end = 0.6, name = "Prior Std. Dev") +
+  scale_fill_viridis_d(end = 0.6, name = "Prior Std. Dev") +
+  labs(
+    title = '"Strong" and "Weak" Priors',
+    x = latex2exp::TeX("$\\theta$")
+  ) +
+  theme(legend.position = "none")
+```
+
+]
+
+.pull-right[
+
+
+**Informative/strong priors** are skeptical of noisy data
+
+**Diffuse/weak priors** trust the data
+
+**Flat prior**: $p(\theta)$ is constant for all $\theta$
+\begin{align}
+  p(\theta \mid y) &\propto p(y \mid \theta)
+\end{align}
+
+Bias v. variance (or in- v. out-of-sample)
+
+]
+
+???
+
+Bayesian estimates are _consistent_. More data approach the right answer.
+
+
+---
+
+class: middle
+
+.pull-left[
+
+### What's the goal?
+
+- "Merely facilitate" Bayesian inference
+
+- Encode **structural information** about a parameter
+
+- **Regularize** against overfitting
+
+- **Stabilize** a weakly identified parameter
+
+- Sensitivity testing
+
+- Represent **prior _beliefs_**
+]
+
+--
+
+.pull-right[
+### "Weakly Informative Priors"
+
+- **Information, not beliefs**
+
+- "Encoding your beliefs" is impossible
+
+- Diffuse priors are unstable, absurd, or pointless
+
+- _Pragmatic_ shift: stabilizing/regularizing with structural information
+
+- Gelman: ["Weakly Informative Priors"](https://www.youtube.com/watch?v=UH6-9FU6bRg)
+
+]
+
+???
+
+- Prior isn't beliefs, so posterior isn't beliefs. We shouldn't trust the posterior too much as "the truth" or as an "automatic inference engine." It's a construct of the model. It only makes sense in the world of the model. The posterior fails to account for any way that the model isn't "good enough" for the real world.
+
+
+---
+
+class: middle
+
+.pull-left[
+
+## More problems with priors as "beliefs"
+
+- The world ≠ the model
+
+- Gelman, Simpson, Betancourt: ["The Prior Can Often Only Be Understood in the Context of the Likelihood"](https://www.mdpi.com/1099-4300/19/10/555)
+
+]
+
+--
+
+.pull-right[
+
+## "Modern Bayesian Workflow" 
+
+- Prior predictive simulation
+
+- Posterior predictive checking
+
+- Simulation-based calibration
+
+]
+
+
+---
+
+##  Prior predictive simulation
+
+![](https://www.tjmahr.com/assets/images/2020-03-bayes-triple.png)
+
+.right[– TJ Mahr, ["Bayes' theorem in three panels"](https://www.tjmahr.com/bayes-theorem-in-three-panels/)]
+
+---
+
+## Posterior predictive draws
+
+.left-code[
+Coding Club, ["Generalised Linear Models in Stan"](https://ourcodingclub.github.io/tutorials/stan-2/)
+
+See also Gabry et al., [Visualization in Bayesian workflow](https://arxiv.org/pdf/1709.01449.pdf)
+]
+
+.right-plot[
+![](https://ourcodingclub.github.io/assets/img/tutorials/stan-2/stan2_density.png)
+]
+
+
+---
+
+class: middle, inverse, center
+
+## Bayesian Problem-Solving
+
+
+
+---
+
+### What Happens When Extremists Win Primaries?
+
+
+
+---
+
+### What Happens When Extremists Win Primaries?
+
+.left-code[
+
+RDD study of **candidate ideology** on **general election outcome**
+
+- **Treatment**: U.S. House candidate is ideologically extreme
+- **Running variable**: extremist's primary margin
+- **Cutoff**: extremist wins primary nomination
+- **Finding**: Extremists less likely to win the general election than non-extremists
+
+]
+
+--
+
+.right-plot[
+
+```{r hall-flat-data}
+hall_flat <- 
+  readRDS(here("data", "mcmc", "hall", "MC_linear-win-flat.RDS")) %>%
+  tidybayes::spread_draws(alpha[trt], beta[trt]) %>%
+  crossing(running = seq(-.05, .05, .0001)) %>%
+  filter((trt == 1 & running <= 0) |
+         (trt == 2 & running >= 0)) %>%
+  mutate(yhat = alpha + beta*running) %>%
+  group_by(running, trt) %>%
+  summarize(mean = mean(yhat),
+            conf.low = quantile(yhat, .025),
+            conf.high = quantile(yhat, .975))
+```
+
+```{r hall-unif-data}
+hall_wip <- 
+  readRDS(here("data", "mcmc", "hall", "brm-win_trunc.RDS"))
+```
+
+```{r hall-flat, include = TRUE, out.width = "90%", fig.height = 3.5, fig.width = 4}
+ggplot(hall_flat) +
+  aes(x = running, y = mean) +
+  geom_ribbon(
+    aes(ymin = conf.low, ymax = conf.high, group = trt), 
+    fill = primary, alpha = 0.5
+  ) +
+  geom_line(aes(group = as.factor(trt))) +
+  geom_vline(xintercept = 0, color = "maroon") +
+  geom_line(aes( y = 0), linetype = 2) +
+  geom_line(aes( y = 1), linetype = 2) +
+  annotate(geom = "segment", x = -0.05, xend = -0.05,
+           y = 0, yend = 1, linetype = 2) +
+  annotate(geom = "segment", x = 0.05, xend = 0.05,
+           y = 0, yend = 1, linetype = 2) +
+  theme(panel.background = element_blank(),
+        panel.border = element_blank()) +
+  scale_y_continuous(breaks = seq(0, 1, .5), labels = scales::percent) +
+  scale_x_continuous(labels = scales::percent) +
+  labs(x = "Extremist Primary Margin",
+       y = "Probability of\nGeneral Election Win") +
+  coord_cartesian(ylim = c(-0.05, 1.2))
+```
+
+]
+
+---
+
+.pull-left[
+### What I do in the paper
+
+Let $w \in \{0,1\}$ index treatment
+
+\begin{align}
+  y_{i} &\sim 
+  \text{Normal}\left(\mu_{i}, \sigma \right) \\
+  \mu_{i} &= \alpha_{w[i]} + \beta_{w[i]} \mathit{Margin}_{i} \\
+  LATE &= \alpha_1  - \alpha_0 \\[12pt]
+  \alpha_{w} &\sim \text{Uniform}(0,1) \\
+  \beta_{w} &\sim \ldots \\
+  \sigma &\sim \ldots 
+\end{align}
+
+Priors **constrain intercepts**, <br> still flat over valid values
+
+]
+
+--
+
+.pull-left[
+
+### "Do a logit instead"
+
+How do I get flat priors at the cutoff?
+
+\begin{align}
+  y_{i} &\sim 
+  \text{Bernoulli}\left(\pi_{i}\right) \\
+  \pi_{i} &= \text{logit}^{-1}\left(\alpha_{w[i]} + \beta_{w[i]} \mathit{Margin}_{i}\right) \\
+  LATE &= \text{logit}^{-1}\left(\alpha_1\right) - \text{logit}^{-1}\left(\alpha_0\right) \\[12pt]
+  \alpha_{w} &\sim \quad ??????
+\end{align}
+
+Logit models are nonlinear... <br>
+How to devise a prior?
+
+]
+
+
+
+---
+
+## Win probability at the cutoff
+
+$\alpha_{w} \sim \mathrm{Logistic}\left(0, 1\right)$ on the logit scale **is a flat prior for the win probability**
+
+```{r logistic, include = TRUE, out.width = "80%", fig.width = 6, fig.height = 2.5}
+set.seed(908)
+tibble(
+  `α ~ Logistic(0, 1)` = rlogis(n = 50000),
+  `InvLogit(α)` = plogis(`α ~ Logistic(0, 1)`)
+) %>%
+  pivot_longer(
+    cols = everything()
+  ) %>%
+  ggplot() +
+  aes(x = value) +
+  facet_wrap(~ fct_rev(name), ncol = 2, scales = "free_x") +
+  geom_histogram(
+    boundary = 0, bins = 50,
+    fill = primary, color = white
+  ) +
+  scale_y_continuous(breaks = NULL, name = NULL) +
+  labs(x = NULL)
+```
+
+.center[Why **prior predictive simulation** is valuable]
+
+---
+
+class: middle
+
+```{r hall-rdd}
+
+hall_raw <- 
+  haven::read_dta(here("data", "hall-extremists", "primary_analysis.dta")) %>%
+  rename(dv_vote = dv) %>%
+  print()
+
+
+
+# ---- cutoff parameters -----------------------
+
+# vote shares near cutoff (for "local linear")
+(local_margin <- 0.05)
+(min_ideo_distance <- hall_raw %$% median(absdist))
+
+# checking N obs
+hall_raw %>% filter(absdist > min_ideo_distance)
+hall_raw %>% filter(margin < local_margin, absdist > min_ideo_distance)
+
+
+# ---- make rdd data -----------------------
+
+rd_data <- hall_raw %>%
+  filter(margin < local_margin) %>%
+  filter(absdist > min_ideo_distance) %>%
+  mutate(
+    control = case_when(treat == 1 ~ 0,
+                        treat == 0 ~ 1),
+    rv_control = rv * control
+  ) %>%
+  print()
+```
+
+```{r}
+get_prior(
+  formula = dv_win ~ 0 + treat + control + rv_treat + rv_control,
+  data = rd_data
+)
+```
+
+```{r hall-priors}
+hall_w_priors <- 
+  brm(
+    formula = dv_win ~ 0 + treat + control + rv_treat + rv_control,
+    data = rd_data,
+    family = bernoulli(link = "logit"),
+    prior = c(
+      set_prior("logistic(0, 1)", class = "b", coef = "treat"),
+      set_prior("logistic(0, 1)", class = "b", coef = "control")
+    ),
+    sample_prior = "yes"
+  )
+```
+
+```{r}
+prepost_logit <- hall_w_priors %>%
+  spread_draws(prior_b_treat, prior_b_control, b_treat, b_control) %>%
+  mutate(
+    prior_p_effect = plogis(prior_b_treat) - plogis(prior_b_control),
+    prior_p_treat = plogis(prior_b_treat),
+    prior_p_control = plogis(prior_b_control),
+    p_effect = plogis(b_treat) - plogis(b_control),
+    p_treat = plogis(b_treat),
+    p_control = plogis(b_control)
+  ) %>%
+  pivot_longer(
+    cols = c(starts_with("prior"), 
+             starts_with("p_"), starts_with("b_")),
+    names_to = "param"
+  ) %>%
+  mutate(
+    prior = case_when(
+      str_detect(param, "prior") ~ "Prior",
+      TRUE ~ "Posterior"
+    ),
+    beta_prob = case_when(
+      str_detect(param, "b_") ~ "beta", 
+      str_detect(param, "p_") ~ "prob"
+    ),
+    param_cat = case_when(
+      str_detect(param, "control") ~ "Control Intercept",
+      str_detect(param, "treat") ~ "Treatment Intercept",
+      str_detect(param, "effect") ~ "Treatment Effect"
+    )
+  ) %>%
+  print()
+```
+
+
+```{r beta-prepost, include = TRUE, out.width = "100%", fig.width = 7, fig.height = 3.5}
+prepost_logit %>%
+  filter(beta_prob == "beta") %>%
+  ggplot() +
+  aes(x = value, fill = fct_rev(prior)) +
+  geom_histogram(
+  # geom_density(
+    boundary = 0, bins = 100,
+    # bw = 0.5, 
+    # aes(fill = fct_rev(prior)), color = white,
+    aes(fill = fct_rev(prior)),
+    alpha = 0.7,
+    position = "identity"
+  ) +
+  facet_wrap(~ param_cat, strip.position = "bottom") +
+  scale_fill_manual(
+    values = c("Prior" = primary, "Posterior" = secondary),
+    name = NULL
+  ) +
+  scale_y_continuous(breaks = NULL, name = NULL)  +
+  scale_x_continuous(breaks = seq(-10, 10, 2), name = NULL)  +
+  theme(
+    strip.placement = "outside",
+    legend.position = c(.1, .8)
+  ) +
+  labs(
+    title = "Intercepts on the Log-Odds (Logit) Scale", 
+    subtitle = latex2exp::TeX(
+      "Prior $p(\\alpha_{w})$ and Posterior $p(\\alpha_{w} | y)$"
+    )
+)
+```
+
+---
+
+class: middle
+
+
+```{r prob-prepost, include = TRUE, out.width = "100%", fig.width = 7, fig.height = 3.5}
+prepost_logit %>%
+  filter(beta_prob == "prob") %>%
+  mutate(
+    param_cat = case_when(
+      param_cat == "Control Intercept" ~ "Non-Extremists",
+      param_cat == "Treatment Intercept" ~ "Extremists",
+      TRUE ~ param_cat
+    ) %>% 
+    fct_relevel("Non-Extremists", "Extremists")
+  ) %>%
+  ggplot() +
+  aes(x = value, fill = fct_rev(prior)) +
+  geom_histogram(
+  # geom_density(
+    boundary = 1, bins = 50,
+    # bw = 0.5, 
+    # aes(fill = fct_rev(prior)), color = "white",
+    aes(fill = fct_rev(prior)),
+    alpha = 0.7,
+    position = "identity"
+  ) +
+  facet_wrap(~ param_cat, scales = "free_x", strip.position = "bottom") +
+  scale_fill_manual(
+    values = c("Prior" = primary, "Posterior" = secondary),
+    name = NULL
+  ) +
+  scale_y_continuous(breaks = NULL, name = NULL)  +
+  scale_x_continuous(breaks = seq(-1, 1, 0.5), name = NULL)  +
+  theme(
+    strip.placement = "outside",
+    legend.position = c(.1, .8)
+  ) +
+  labs(
+    title = "How Extremism Affects Win Probability", 
+    subtitle = latex2exp::TeX(
+      "Prior/Posterior Win Probabilities and Treatment Effect"
+    )
+)
+
+```
+
+---
+
+class: middle
+
+```{r hall-freq}
+hall_ols <- lm(
+  dv_win ~ treat*rv,
+  data = rd_data
+)
+
+hall_mle <- glm(
+  dv_win ~ 0 + treat + control + rv_treat + rv_control,
+  data = rd_data,
+  family = binomial(link = "logit")
+)
+```
+
+
+```{r}
+compare_estimates <- 
+  hall_w_priors %>%
+  spread_draws(b_control, b_treat) %>%
+  mutate(treatment_effect = plogis(b_treat) - plogis(b_control)) %>%
+  summarize(
+    term = "treat",
+    estimate = mean(treatment_effect),
+    conf.low = quantile(treatment_effect, .025),
+    conf.high = quantile(treatment_effect, .975)
+  ) %>%
+  bind_rows(
+    "Bayes Logit" = ., 
+    "Bayes LPM" = hall_wip %>% 
+      spread_draws(b_control, b_treat) %>% 
+      mutate(treatment_effect = b_treat - b_control) %>% 
+      summarize(
+        estimate = mean(treatment_effect), 
+        conf.low = quantile(treatment_effect, .025), 
+        conf.high = quantile(treatment_effect, .975), 
+        term = "treat"),
+    "OLS LPM" = tidy(hall_ols, conf.int = TRUE),
+    .id = "model"
+  ) %>%
+  filter(term == "treat") %>%
+  mutate(
+    model = fct_relevel(model, "Bayes Logit")
+  )
+```
+
+```{r, include = TRUE, out.width = "80%", fig.width = 5.5, fig.height = 2.5}
+ggplot(compare_estimates) +
+  aes(x = model, y = estimate, color = str_detect(model, "Bayes")) +
+  geom_pointrange(
+    aes(ymin = conf.low, ymax = conf.high),
+    position = position_dodge(width = -0.25)
+  ) +
+  coord_flip(ylim = c(-1, 0)) +
+  geom_hline(yintercept = 0, color = primary) +
+  scale_y_continuous(breaks = seq(-1, 1, .25), name = "Local Treatment Effect Estimate") +
+  labs(
+    title = "Bayesian vs. Non-Bayesian Estimates",
+    subtitle = "Prior Info Leads to Bias–Variance Trade-Off",
+    x = NULL
+  ) +
+  scale_color_manual(values = c("FALSE" = black, "TRUE" = secondary)) +
+  theme(legend.position = "none")
+```
+
+
+
+
+
+
+```{r}
+pdfs <- 
+  tibble(
+    x = seq(-5, 5, .01),
+    Normal = dnorm(x),
+    `T (df = 4)` = dt(x, df = 4),
+    Cauchy = dcauchy(x)
+  ) %>%
+  pivot_longer(
+    cols = -x,
+    names_to = "distribution",
+    values_to = "density"
+  ) %>%
+  mutate(
+    distribution = fct_relevel(distribution, "Normal", "T (df = 4)")
+  ) %>%
+  print()
+```
+
+
+```{r}
+ggplot(pdfs) +
+  aes(x = x, y = density) +
+  facet_wrap(~ distribution, nrow = 1) +
+  geom_line()
+```
+
+
+
+---
+
+class: middle, center, inverse
+
+## Bayes for Practical Research
+
+---
+
+class: middle
+
+.pull-left[
+
+## Benefits
+
+- Conceptual basis for uncertainty
+
+- Confidence interval vs. Bayesian interval
+
+- Actually **easier to explain** to decision-makers
+
+- In the real world: getting the answer right
+
+]
+
+--
+
+.pull-right[
+
+## Drawbacks
+
+- Slower to build models
+
+- Slower to fit models (Markov chain Monte Carlo)
+
+- Doesn't fix other big problems (likelihood specification, confounding, data accuracy)
+
+- In academia? People hate you
+
+]
+
+
+
+---
+
+## Things we did not talk about
+
+.pull-left[
+
+- Which prior "families" [make sense](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)? (conjugacy, entropy, Jeffreys, etc)
+
+- "Default" priors ([Normal? T?](https://twitter.com/avehtari/status/1218896617346162688))
+
+- MCMC algorithms: Metropolis(/Hastings), Gibbs, [Hamiltonian](https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
+
+- Software packages: BUGS/JAGS, Stan, `brms`, `rstanarm`
+
+
+
+]
+
+.pull-right[
+
+Hypothesis testing: Bayes factors, likelihood ratios
+
+Model [selection](https://link.springer.com/article/10.1007/s42113-018-0019-z): information criteria, LOO/cross-validation, KL divergence
+
+Hierarchical models/partial pooling (and [parameterization](https://mc-stan.org/docs/2_18/stan-users-guide/reparameterization-section.html))
+
+[Meta-analysis](https://www.aeaweb.org/articles?id=10.1257/app.20170299) (see [also](https://statmodeling.stat.columbia.edu/2014/01/21/everything-need-know-bayesian-statistics-learned-eight-schools/))
+
+Measurement models, horseshoe priors, and so much more
+
+]
+
+
+
+
+---
+
+class: middle, center
+
+.pull-left[
+
+# **Bayesian Statistics**
+
+## View from the Inside
+
+#### Michael DeCrescenzo <br> University of Wisconsin–Madison
+
+]
+
+.pull-right[
+
+```{r title-graphic, include = TRUE, fig.width = 4, fig.height = 3, out.width = "100%"}
+```
+
+]

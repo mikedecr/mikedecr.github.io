@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Bayesian Statistics</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.1/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+class: middle, center
+
+
+
+
+
+
+
+.pull-left[
+
+# **Bayesian Statistics**
+
+## View from the Inside
+
+#### Michael DeCrescenzo &lt;br&gt; University of Wisconsin–Madison
+
+]
+
+.pull-right[
+
+&lt;img src="lecture_bayes-intro_files/figure-html/title-graphic-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+
+---
+
+class: middle
+
+.pull-left[
+
+.center[
+
+&lt;img src="https://mikedecr.github.io/authors/admin/avatar-grace_hu05a9fa9b849008cfd0c58ea39efc7f26_83291_250x250_fill_q90_lanczos_center.jpg"&gt;
+
+Ph.D. Candidate &lt;br&gt;
+Political Science
+
+[@mikedecr](https://twitter.com/mikedecr)  &lt;br&gt;
+[mikedecr.github.io](https://mikedecr.github.io)
+]
+]
+
+
+.pull-right[
+
+### U.S. Electoral Politics
+
+Ideology and primary elections &lt;br&gt;
+Election administration (voter ID) &lt;br&gt;
+Group voting and party coalitions &lt;br&gt;
+Understanding election forecasts
+
+### Quantitative Methods
+
+Ideal points / other measurement  &lt;br&gt;
+Causal inference &lt;br&gt;
+All with **Bayesian methods**
+
+]
+
+---
+
+class: center, middle
+
+# Agenda 
+
+### 1. Bayesian statistics...WTF?
+
+&lt;!-- 
+
+- Information vs. Belief
+- What can we do?
+    - Introduce extra-model information
+    - regularization
+    - stabilization
+
+--&gt;
+
+### 2. Priors...WTF?
+
+&lt;!-- 
+- types of priors
+    - weak/diffuse priors
+    - weakly informative priors
+    - strongly informative priors
+- how do we actually implement these priors
+    - not for fixing confounding!
+    - we don't usually do directional priors unless you're in an area of weak ID
+    - Usually regularization and stabilization. Some prior that pulls me back to zero
+- features of a probability distribution
+    - concentration of probability
+        - Normal: 68% of draws within 1 sd.
+    - shape of the prior
+ --&gt;
+
+### 3. Bayes in Action
+
+???
+
+- wrapping our head around what Bayesian statistics actually means
+
+- Priors: the most difficult to swallow element of Bayes, so we can talk about how to think about that
+
+- What it looks like to think through a problem as a Bayesian
+
+
+
+---
+
+class: center, middle, inverse
+
+# Bayesian Analysis in Theory
+
+???
+
+Don't want to duplicate Prof. Miller
+
+Instead rephrase some things about Bayes so that it makes a little more sense to a newcomer
+
+
+---
+
+class: center, middle
+
+## "Bayesian inference is no more than **counting the numbers of ways things can happen**, according to our assumptions"
+
+#### - Richard McElreath
+
+
+???
+
+Convince you of an interpretation of Bayesian analysis that makes it straightforward like this
+
+Makes it unremarkable, non-magical, nothing mystical other than applying probability theory
+
+---
+
+## Counting the ways data can happen, according to assumptions
+
+???
+
+Introduce more math as we go,
+
+inch closer and closer to Bayes theorem
+
+--
+
+.pull-left[
+### We entertain assumptions about the world
+
+We suppose that `\(y = f(\theta)\)`, but we don't know `\(\theta\)`
+
+Consider possible values of `\(\theta\)`
+
+]
+
+--
+
+.pull-right[
+### Data tell us which assumptions make more sense
+
+Some `\(\theta\)` have an **easier time generating `\(y\)`**
+
+These `\(\theta\)` represent "likely scenarios"
+]
+
+
+---
+
+## Bayes' Theorem is nothing but **machinery** for translating this intuition
+
+--
+
+.pull-left[
+
+Assumptions about the world: 
+
+- A model of the data: `\(p(y \mid \theta)\)`
+
+- A range of possible input values: `\(p(\theta)\)`
+
+- Some `\(\theta\)` might make more sense ahead of time, but not always the case
+
+]
+
+???
+
+LIKELIHOOD of the data
+
+PRIOR distribution of theta
+
+--
+
+
+.pull-right[
+
+Posterior distribution `\(p(\theta \mid y)\)`
+
+- `\(p(\theta \mid y) = \dfrac{p(y \mid \theta)p(\theta)}{p(y)}\)`
+
+- Some `\(\theta\)` more plausible because they have **more ways to make data**: `\(p(y \mid \theta)\)`
+
+- or because they were **more plausible from the outset**: `\(p(\theta)\)`
+
+]
+
+
+???
+
+How do I increase the plausibility of a parameter?
+
+- increase y | theta
+- increase p(theta)
+
+
+
+---
+
+class: middle
+
+.pull-left[
+
+
+
+&lt;img src="lecture_bayes-intro_files/figure-html/plot-small-data-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+.pull-right[
+Data model, `\(p(y \mid \theta)\)`:
+
+`\begin{align}
+  y_{i} &amp;\sim \text{Normal}(\alpha + \beta x_{i}, \sigma)
+\end{align}`
+
+Parameter model, `\(p(\theta)\)`:
+`\begin{align}
+  \beta &amp;\sim \text{Normal}(0, 5) \\
+  \alpha &amp;\sim \text{Student's T}(3, 0, 10) \\
+  \sigma &amp;\sim \text{Half-T}(3, 0, 10)
+\end{align}`
+
+]
+
+???
+
+Data model: what you've already been doing
+
+Parameter model is what's new
+
+- just extends the idea of a modeling features of the system
+- Likelihoods are just priors for data
+- priors are just likelihoods for parameters
+- What's `\(y\)` going to be? I learn more about y by conditioning on the parameters.
+- What't `\(\theta\)` going to be? I learn more about theta by conditioning on the data.
+
+
+
+
+
+
+---
+
+class: middle
+
+.pull-left[
+&lt;img src="lecture_bayes-intro_files/figure-html/add-small-data-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+Update parameters/condition on the data
+
+Posterior distribution `\(p(\theta \mid y)\)`: **joint distribution of plausible parameters**
+
+**Sample** posterior with Markov chain Monte Carlo (MCMC)
+
+Every sample equally possible, but many samples are similar
+
+]
+
+???
+
+
+You get the whole distribution
+
+- A Bayesian model has the mathematical machinery to define the entire posterior distribution
+- Sometimes the solutions are very complicated, and it doesn't make sense to just compute the posterior distribution analytically
+- To get around that, we usually "estimate" a model by generating samples of the posterior distribution, and then manipulating those samples
+- The algorithms that generate those samples are called "Markov chain Monte Carlo" algorithms, which you might have seen before. They are basically just algorithms that explore and figure out how to sample a complex distribution
+
+
+---
+
+### What does the model say?
+
+.pull-left[
+
+&lt;img src="lecture_bayes-intro_files/figure-html/ols-coef-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+Estimator is one number
+
+Interval is "values that I can't reject"
+
+]
+
+--
+
+.pull-right[
+
+&lt;img src="lecture_bayes-intro_files/figure-html/post-coef-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+"Height" of distribution represents **more plausible assumptions**
+
+]
+
+
+???
+
+Difference in what you can say
+
+- intervals
+- probability that a parameter is in a region
+- what is "likely" or "unlikely"
+
+
+
+Simple regression, answers are similar
+
+- answers diverge if we introduce prior information
+- some situations (small samples, complex models) where answers diverge
+
+
+---
+
+class: middle
+
+## Outside view of Bayesian stats
+
+
+
+.pull-left[
+
+Frequentist inference:
+
+- data have distributions, parameters are fixed
+- statistics are estimates of parameters
+- uncertainty from repeated sampling
+
+]
+
+.pull-right[
+
+Bayesian inference: 
+
+- All of the above, _plus a prior_
+- Priors are "subjective beliefs"
+- Priors are "penalties" on new data
+- "Penalized maximum likelihood"
+
+]
+
+
+???
+
+Why don't I like this?
+
+- makes Bayes look kind of absurd
+- if priors are nothing more than extra fixtures, I should just get rid of them.
+- If priors are subjective, then the whole exercise seems like it's misguided. 
+- There may be other ways to penalize that are more principled than consulting my beliefs, for instance doing some kind of MSE-optimal penalization that I'm tuning by cross-validating a model or something, which is more like machine learning
+
+---
+
+class: middle
+
+## Inside view of Bayesian stats
+
+.pull-left[
+
+A Bayesian model is a joint model for **all parts of the system**
+`\begin{align}
+  p(y, \theta) \equiv p(y \cap \theta) \equiv p(y \mid \theta)p(\theta)
+\end{align}`
+
+Nothing fundamentally different about data and parameters
+
+- Prior : Parameter :: Likelihood : Data
+- Justifications for likelihoods work for priors
+
+]
+--
+
+.pull-right[
+
+
+Run the model **forward** (generate `\(y\)`):
+`\begin{align}
+  \theta \longrightarrow p(y, \theta) \longrightarrow p(y \mid \theta)
+\end{align}`
+
+Run the model **backward** (update `\(\theta\)`):
+`\begin{align}
+  y \longrightarrow p(y, \theta) \longrightarrow p(\theta \mid y)
+\end{align}`
+
+(McElreath: ["Bayesian Statistics without Frequentist Language"](https://www.youtube.com/watch?v=yakg94HyWdE))
+
+]
+
+???
+
+Joint model:
+
+- nothing different about data and parameters
+- Only one is observed
+- the moment we have missing data, we're suddenly in exactly the same world
+
+The model is a description of the types of process that generate variables
+
+- functional, distributional relationships between variables
+- The joint model contains _more than_ 
+
+"Forward and backward" 
+
+---
+
+class: center, middle, inverse
+
+# Prior Distributions
+
+
+---
+
+## Prior Distributions
+
+.pull-left[
+Posterior is **impossible to get** without a prior distribution
+`\begin{align}
+  p(\theta \mid y) \propto p(y \mid \theta)p(\theta)
+\end{align}`
+
+Posterior is "precision-weighted average" of prior and likelihood (data)
+
+How do we pick a prior?
+
+]
+
+.pull-right[
+![](https://www.analyticsvidhya.com/wp-content/uploads/2016/06/12.jpg)
+]
+
+???
+
+Posterior is the payoff
+
+Precision wt: means that the prior has consequences for what our conclusions are
+
+- If I have really rigid prior beliefs, I don't learn from data
+- If I have really loose prior beliefs, I overfit the data
+
+---
+
+class: middle
+
+### Prior information as a probability distribution
+
+.pull-left[
+
+&lt;img src="lecture_bayes-intro_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+
+.pull-right[
+
+
+**Informative/strong priors** are skeptical of noisy data
+
+**Diffuse/weak priors** trust the data
+
+**Flat prior**: `\(p(\theta)\)` is constant for all `\(\theta\)`
+`\begin{align}
+  p(\theta \mid y) &amp;\propto p(y \mid \theta)
+\end{align}`
+
+Bias v. variance (or in- v. out-of-sample)
+
+]
+
+???
+
+Bayesian estimates are _consistent_. More data approach the right answer.
+
+
+---
+
+class: middle
+
+.pull-left[
+
+### What's the goal?
+
+- "Merely facilitate" Bayesian inference
+
+- Encode **structural information** about a parameter
+
+- **Regularize** against overfitting
+
+- **Stabilize** a weakly identified parameter
+
+- Sensitivity testing
+
+- Represent **prior _beliefs_**
+]
+
+--
+
+.pull-right[
+### "Weakly Informative Priors"
+
+- **Information, not beliefs**
+
+- "Encoding your beliefs" is impossible
+
+- Diffuse priors are unstable, absurd, or pointless
+
+- _Pragmatic_ shift: stabilizing/regularizing with structural information
+
+- Gelman: ["Weakly Informative Priors"](https://www.youtube.com/watch?v=UH6-9FU6bRg)
+
+]
+
+???
+
+- Prior isn't beliefs, so posterior isn't beliefs. We shouldn't trust the posterior too much as "the truth" or as an "automatic inference engine." It's a construct of the model. It only makes sense in the world of the model. The posterior fails to account for any way that the model isn't "good enough" for the real world.
+
+
+---
+
+class: middle
+
+.pull-left[
+
+## More problems with priors as "beliefs"
+
+- The world ≠ the model
+
+- Gelman, Simpson, Betancourt: ["The Prior Can Often Only Be Understood in the Context of the Likelihood"](https://www.mdpi.com/1099-4300/19/10/555)
+
+]
+
+--
+
+.pull-right[
+
+## "Modern Bayesian Workflow" 
+
+- Prior predictive simulation
+
+- Posterior predictive checking
+
+- Simulation-based calibration
+
+]
+
+
+---
+
+##  Prior predictive simulation
+
+![](https://www.tjmahr.com/assets/images/2020-03-bayes-triple.png)
+
+.right[– TJ Mahr, ["Bayes' theorem in three panels"](https://www.tjmahr.com/bayes-theorem-in-three-panels/)]
+
+---
+
+## Posterior predictive draws
+
+.left-code[
+Coding Club, ["Generalised Linear Models in Stan"](https://ourcodingclub.github.io/tutorials/stan-2/)
+
+See also Gabry et al., [Visualization in Bayesian workflow](https://arxiv.org/pdf/1709.01449.pdf)
+]
+
+.right-plot[
+![](https://ourcodingclub.github.io/assets/img/tutorials/stan-2/stan2_density.png)
+]
+
+
+---
+
+class: middle, inverse, center
+
+## Bayesian Problem-Solving
+
+
+
+---
+
+### What Happens When Extremists Win Primaries?
+
+
+
+---
+
+### What Happens When Extremists Win Primaries?
+
+.left-code[
+
+RDD study of **candidate ideology** on **general election outcome**
+
+- **Treatment**: U.S. House candidate is ideologically extreme
+- **Running variable**: extremist's primary margin
+- **Cutoff**: extremist wins primary nomination
+- **Finding**: Extremists less likely to win the general election than non-extremists
+
+]
+
+--
+
+.right-plot[
+
+
+
+
+
+&lt;img src="lecture_bayes-intro_files/figure-html/hall-flat-1.png" width="90%" style="display: block; margin: auto;" /&gt;
+
+]
+
+---
+
+.pull-left[
+### What I do in the paper
+
+Let `\(w \in \{0,1\}\)` index treatment
+
+`\begin{align}
+  y_{i} &amp;\sim 
+  \text{Normal}\left(\mu_{i}, \sigma \right) \\
+  \mu_{i} &amp;= \alpha_{w[i]} + \beta_{w[i]} \mathit{Margin}_{i} \\
+  LATE &amp;= \alpha_1  - \alpha_0 \\[12pt]
+  \alpha_{w} &amp;\sim \text{Uniform}(0,1) \\
+  \beta_{w} &amp;\sim \ldots \\
+  \sigma &amp;\sim \ldots 
+\end{align}`
+
+Priors **constrain intercepts**, &lt;br&gt; still flat over valid values
+
+]
+
+--
+
+.pull-left[
+
+### "Do a logit instead"
+
+How do I get flat priors at the cutoff?
+
+`\begin{align}
+  y_{i} &amp;\sim 
+  \text{Bernoulli}\left(\pi_{i}\right) \\
+  \pi_{i} &amp;= \text{logit}^{-1}\left(\alpha_{w[i]} + \beta_{w[i]} \mathit{Margin}_{i}\right) \\
+  LATE &amp;= \text{logit}^{-1}\left(\alpha_1\right) - \text{logit}^{-1}\left(\alpha_0\right) \\[12pt]
+  \alpha_{w} &amp;\sim \quad ??????
+\end{align}`
+
+Logit models are nonlinear... &lt;br&gt;
+How to devise a prior?
+
+]
+
+
+
+---
+
+## Win probability at the cutoff
+
+`\(\alpha_{w} \sim \mathrm{Logistic}\left(0, 1\right)\)` on the logit scale **is a flat prior for the win probability**
+
+&lt;img src="lecture_bayes-intro_files/figure-html/logistic-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+.center[Why **prior predictive simulation** is valuable]
+
+---
+
+class: middle
+
+
+
+
+
+
+
+
+
+
+&lt;img src="lecture_bayes-intro_files/figure-html/beta-prepost-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+
+&lt;img src="lecture_bayes-intro_files/figure-html/prob-prepost-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: middle
+
+
+
+
+
+
+&lt;img src="lecture_bayes-intro_files/figure-html/unnamed-chunk-7-1.png" width="80%" style="display: block; margin: auto;" /&gt;
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
+class: middle, center, inverse
+
+## Bayes for Practical Research
+
+---
+
+class: middle
+
+.pull-left[
+
+## Benefits
+
+- Conceptual basis for uncertainty
+
+- Confidence interval vs. Bayesian interval
+
+- Actually **easier to explain** to decision-makers
+
+- In the real world: getting the answer right
+
+]
+
+--
+
+.pull-right[
+
+## Drawbacks
+
+- Slower to build models
+
+- Slower to fit models (Markov chain Monte Carlo)
+
+- Doesn't fix other big problems (likelihood specification, confounding, data accuracy)
+
+- In academia? People hate you
+
+]
+
+
+
+---
+
+## Things we did not talk about
+
+.pull-left[
+
+- Which prior "families" [make sense](https://github.com/stan-dev/stan/wiki/Prior-Choice-Recommendations)? (conjugacy, entropy, Jeffreys, etc)
+
+- "Default" priors ([Normal? T?](https://twitter.com/avehtari/status/1218896617346162688))
+
+- MCMC algorithms: Metropolis(/Hastings), Gibbs, [Hamiltonian](https://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
+
+- Software packages: BUGS/JAGS, Stan, `brms`, `rstanarm`
+
+
+
+]
+
+.pull-right[
+
+Hypothesis testing: Bayes factors, likelihood ratios
+
+Model [selection](https://link.springer.com/article/10.1007/s42113-018-0019-z): information criteria, LOO/cross-validation, KL divergence
+
+Hierarchical models/partial pooling (and [parameterization](https://mc-stan.org/docs/2_18/stan-users-guide/reparameterization-section.html))
+
+[Meta-analysis](https://www.aeaweb.org/articles?id=10.1257/app.20170299) (see [also](https://statmodeling.stat.columbia.edu/2014/01/21/everything-need-know-bayesian-statistics-learned-eight-schools/))
+
+Measurement models, horseshoe priors, and so much more
+
+]
+
+
+
+
+---
+
+class: middle, center
+
+.pull-left[
+
+# **Bayesian Statistics**
+
+## View from the Inside
+
+#### Michael DeCrescenzo &lt;br&gt; University of Wisconsin–Madison
+
+]
+
+.pull-right[
+
+&lt;img src="lecture_bayes-intro_files/figure-html/title-graphic-1.png" width="100%" style="display: block; margin: auto;" /&gt;
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
