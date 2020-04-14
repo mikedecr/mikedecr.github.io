@@ -557,7 +557,9 @@ class: middle
 
 ## More problems with priors as "beliefs"
 
-- The world ≠ the model
+- I have prior knowledge about **the world**, not about **model parameters**
+
+- Reparameterization: same likelihood, different parameters
 
 - Gelman, Simpson, Betancourt: ["The Prior Can Often Only Be Understood in the Context of the Likelihood"](https://www.mdpi.com/1099-4300/19/10/555)
 
@@ -567,7 +569,7 @@ class: middle
 
 .pull-right[
 
-## "Modern Bayesian Workflow" 
+## "Modern Bayesian Workflow"
 
 - Prior predictive simulation
 
@@ -609,19 +611,16 @@ class: middle, inverse, center
 
 
 
----
-
-### What Happens When Extremists Win Primaries?
-
 
 
 ---
 
-### What Happens When Extremists Win Primaries?
+### What Happens When Extremists Win Primaries? (Hall 2015)
+
 
 .left-code[
 
-RDD study of **candidate ideology** on **general election outcome**
+**Great** RDD study of candidate ideology's effect on general election outcomes
 
 - **Treatment**: U.S. House candidate is ideologically extreme
 - **Running variable**: extremist's primary margin
@@ -645,7 +644,7 @@ RDD study of **candidate ideology** on **general election outcome**
 ---
 
 .pull-left[
-### What I do in the paper
+### What I do in my "causal Bayes" paper [[link]](https://github.com/mikedecr/causal-bayes/blob/master/writing/causal-bayes-paper.pdf)
 
 Let `\(w \in \{0,1\}\)` index treatment
 
@@ -667,7 +666,7 @@ Priors **constrain intercepts**, &lt;br&gt; still flat over valid values
 
 .pull-left[
 
-### "Do a logit instead"
+### Critique: &lt;br&gt; Do a logit instead?
 
 How do I get flat priors at the cutoff?
 
@@ -816,7 +815,7 @@ Measurement models, horseshoe priors, and so much more
 ]
 
 
-
+ 
 
 ---
 
