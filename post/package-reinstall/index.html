@@ -572,8 +572,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="motivation" class="section level1">
 <h1>Motivation</h1>
 <p>R 4.0 <a href="https://cran.r-project.org/">is here</a>, and that’s great. Be warned that if you install it, you will lose all of your installed packages. How should you reinstall them?</p>
-<p>If you don’t want to install-as-you-go when you hit a bunch of errors in your existing projects, one way to revitalize your R environment is to <em>record which packages you have installed</em> and automate their re-installation with some code. You can find several helpful online guides that <a href="https://rstats.wtf/maintaining-r.html#how-to-transfer-your-library-when-updating-r">walk through the main idea</a>: save the names of installed packages as a vector, and then pass these names to <code>install.packages()</code> to do a batch installation from CRAN.</p>
-<p><strong>But what about the packages that don’t live on CRAN?</strong> My experiments with R have led me to install several packages from Github: maybe they were “development versions” that had yet to be published on CRAN, or they will never be on CRAN due to policy incompatibilities or the wishes of the package developer. How can we automate the reinstall process when these packages have different online sources? This post walks through a process for doing that, adapted from this <a href="https://gist.github.com/mikedecr/6fd2e7855c71e4358534d5af3b72a03d">Gist</a> that I <a href="https://twitter.com/mikedecr/status/1254152352241782787">shared on Twitter</a>.</p>
+<p><strong>First,</strong> there’s something to be said for installing as you go rather than inheriting all of your packages from your past self. A major upgrade can be a good excuse to clean house, trim unnecessary stuff from your computer, and <a href="https://twitter.com/hadleywickham/status/1254387031842701312">install packages from scratch</a>. As much as I like to take this approach myself, I have to teach next week, so I want my R environment established quickly.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
+<p>If you don’t particularly want to install-as-you-go, one way to revitalize your R environment is to <em>record which packages you have installed</em> and automate their re-installation with some code. You can find several helpful online guides that <a href="https://rstats.wtf/maintaining-r.html#how-to-transfer-your-library-when-updating-r">walk through the main idea</a>: save the names of installed packages as a vector, and then pass these names to <code>install.packages()</code> to do a batch installation from CRAN.</p>
+<p><strong>But what about the packages that don’t live on CRAN?</strong> My experiments with R have led me to install several packages from Github: maybe they were “development versions” that had yet to be published on CRAN, or they will never be on CRAN due to policy incompatibilities or the wishes of the package developer. (See Reason #5 in <a href="https://twitter.com/hadleywickham/status/1254421747014737920">this tweet</a>.) How can we automate the reinstall process when these packages have different online sources? This post walks through a process for doing that, adapted from this <a href="https://gist.github.com/mikedecr/6fd2e7855c71e4358534d5af3b72a03d">Gist</a> that I <a href="https://twitter.com/mikedecr/status/1254152352241782787">shared on Twitter</a>. I adapted the whole thing to go into a little <a href="https://github.com/mikedecr/update-R">Github repository</a> if you’d like to fork/clone that instead.</p>
 </div>
 <div id="roadmap" class="section level1">
 <h1>Roadmap</h1>
@@ -652,7 +653,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2"></a>cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,530 x 17</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,531 x 17</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></span>
@@ -665,7 +666,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">##  8 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="co">##  9 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="co">## 10 abcdeF… 0.4     &lt;NA&gt;     Rglpk,…  &lt;NA&gt;   &lt;NA&gt;      LIM,syb… &lt;NA&gt;     GPL-2  </span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,520 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,521 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></span></code></pre></div>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
@@ -755,13 +756,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-2"><a href="#cb10-2"></a>github_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">==</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;github_repo&quot;</span>]]</span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
 <span id="cb10-4"><a href="#cb10-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(github_pkgs)</span></code></pre></div>
-<p>Finally, everything that we said we wouldn’t get from Github, we get by using plain ol’ <code>install.packages()</code>.</p>
+<p>Finally, everything that we said we wouldn’t get from Github, we get by using plain ol’ <code>install.packages()</code>. Before doing this, you may find it beneficial to filter out some of the packages that you don’t use anymore or that maybe we only installed as dependencies for other packages.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># install from cran with remaining package names</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>cran_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">!=</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;package&quot;</span>]]</span>
 <span id="cb11-3"><a href="#cb11-3"></a></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="kw">install.packages</span>(cran_pkgs)</span></code></pre></div>
 <p>This should get you (more or less) up and running with R 4.0 and all of your old packages.</p>
-<p>I should note that I’m already getting burned by some C++ configuration problems for packages that want to compile from source. I think this is particular to my own computer and the klugey fixes required to set up <code>{rstan}</code> with MacOS Catalina. I remember reading somewhere that R 4.0 fixed some of the Stan x Catalina problems, but I will cross that bridge when I get to it.</p>
+<p>Fair warning: I’m already getting burned by some C++ configuration problems for packages that want to compile from source. I think this is particular to my own computer and the klugey fixes I undertook to set up <code>{rstan}</code> with MacOS Catalina. I remember reading somewhere that R 4.0 fixed some of the Stan x Catalina problems, so maybe I will confront these choices again soon, but I will cross that bridge when I get to it.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>
+And maybe I will do a fresh install of <em>everything</em> once the semester is over.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
 </div>
 
     </div>
