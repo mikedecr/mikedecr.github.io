@@ -129,47 +129,57 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-04-24T07:53:29-05:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/admin/</loc>
-    <lastmod>2020-04-22T11:49:06-05:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/computational-methods/</loc>
-    <lastmod>2020-04-24T07:53:29-05:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/package-reinstall/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/methods/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/methods/</loc>
-    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/visualizing-what-matters/</loc>
     <lastmod>2020-03-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2020-03-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-04-24T07:53:29-05:00</lastmod>
   </url>
   
   <url>
@@ -188,6 +198,16 @@
   </url>
   
   <url>
+    <loc>/tags/bayesian-statistics/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/learning-splines/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/git-in-papers/</loc>
     <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
@@ -198,8 +218,8 @@
   </url>
   
   <url>
-    <loc>/tags/bayesian-statistics/</loc>
-    <lastmod>2019-08-25T15:47:00-05:00</lastmod>
+    <loc>/post/operate-measure/</loc>
+    <lastmod>2019-07-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -238,6 +258,11 @@
   </url>
   
   <url>
+    <loc>/post/jupyter/</loc>
+    <lastmod>2019-07-09T11:16:18-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/slides/</loc>
     <lastmod>2019-06-28T17:56:11-05:00</lastmod>
   </url>
@@ -250,6 +275,11 @@
   <url>
     <loc>/post/viz-partials/</loc>
     <lastmod>2018-10-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
   </url>
   
   <url>
@@ -288,11 +318,6 @@
   </url>
   
   <url>
-    <loc>/tags/methods/</loc>
-    <lastmod>2020-04-24T07:53:29-05:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/project/</loc>
     <lastmod>2019-06-28T17:56:11-05:00</lastmod>
   </url>
@@ -300,6 +325,16 @@
   <url>
     <loc>/tags/teaching/</loc>
     <lastmod>2020-04-24T07:53:29-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/academic/</loc>
+    <lastmod>2019-07-09T11:16:38-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/getting-started/</loc>
+    <lastmod>2019-07-09T11:16:38-05:00</lastmod>
   </url>
   
   <url>
@@ -315,6 +350,26 @@
   <url>
     <loc>/authors/robert-ford/</loc>
     <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2015-07-23-r-rmarkdown/</loc>
+    <lastmod>2019-08-19T22:46:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/plot/</loc>
+    <lastmod>2019-08-19T22:46:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-08-19T22:46:30-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/regression/</loc>
+    <lastmod>2019-08-19T22:46:30-05:00</lastmod>
   </url>
   
   <url>
@@ -335,6 +390,11 @@
   <url>
     <loc>/code/</loc>
     <lastmod>2019-07-09T11:31:06-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/code/guide/</loc>
+    <lastmod>2019-08-25T16:02:19-05:00</lastmod>
   </url>
   
   <url>

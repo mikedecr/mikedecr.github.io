@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Sun, 29 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,16 +15,25 @@
     <item>
       <title>Computational Methods</title>
       <link>/tags/computational-methods/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/computational-methods/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Methods</title>
+      <link>/tags/methods/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/methods/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -49,20 +58,20 @@
     </item>
     
     <item>
+      <title>Bayesian Statistics</title>
+      <link>/tags/bayesian-statistics/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/bayesian-statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R Markdown</title>
       <link>/tags/r-markdown/</link>
       <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/r-markdown/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bayesian Statistics</title>
-      <link>/tags/bayesian-statistics/</link>
-      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bayesian-statistics/</guid>
       <description></description>
     </item>
     
@@ -112,20 +121,38 @@
     </item>
     
     <item>
-      <title>Methods</title>
-      <link>/tags/methods/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/methods/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Teaching</title>
       <link>/tags/teaching/</link>
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/tags/teaching/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Academic</title>
+      <link>/tags/academic/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/academic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>plot</title>
+      <link>/tags/plot/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/plot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regression</title>
+      <link>/tags/regression/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/tags/regression/</guid>
       <description></description>
     </item>
     

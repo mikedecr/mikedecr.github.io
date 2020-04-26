@@ -70,5 +70,25 @@
 </description>
     </item>
     
+    <item>
+      <title>Code To-Do list</title>
+      <link>/code/guide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/code/guide/</guid>
+      <description>&lt;h1 id=&#34;documentproject-templates&#34;&gt;Document/project templates&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;make READMEs&lt;/li&gt;
+&lt;li&gt;make &lt;code&gt;.here&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;try &lt;code&gt;.Rproj&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;data subfolders?&lt;/li&gt;
+&lt;li&gt;Extra &lt;code&gt;latex&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;sublime-user-settings&#34;&gt;Sublime User Settings&lt;/h1&gt;
+&lt;h1 id=&#34;double-up-on-latex-workshop&#34;&gt;Double up on LaTeX workshop?&lt;/h1&gt;
+&lt;h1 id=&#34;double-up-on-math-camp&#34;&gt;Double up on Math Camp?&lt;/h1&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

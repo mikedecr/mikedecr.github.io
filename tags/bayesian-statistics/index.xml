@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Wed, 19 Jun 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/bayesian-statistics/index.xml" rel="self" type="application/rss+xml" />
     
@@ -104,6 +104,167 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Torres (2019), &lt;a href=&#34;https://www.dropbox.com/s/872jdkg3dgo8ics/MSM_PSRM_2.pdf?dl=0&#34;&gt;&amp;ldquo;Estimating Controlled Direct Effects Through Marginal Structural Models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Teaching Myself Splines In Public</title>
+      <link>/post/learning-splines/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/learning-splines/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;what-were-doing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What we’re doing&lt;/h1&gt;
+&lt;p&gt;The more I learn about causal inference, the more I learn to appreciate the differences between the goals generative modeling vs. predictive modeling, as well as the trade-offs between interpretable models vs. accurate predictions.&lt;/p&gt;
+&lt;div id=&#34;comment-on-interpretability&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comment on Interpretability&lt;/h2&gt;
+&lt;p&gt;I come at this from the point of view of academic political science, where a lot of applied work insists that there is a premium on interpretable methods.&lt;/p&gt;
+&lt;p&gt;I can think of two ways to define interpretability:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;simple enough that the researcher knows at a technical level why the model works for the use case, which is valuable for ensuring that the audience also knows how to understand the model.&lt;/li&gt;
+&lt;li&gt;simple enough that the researcher can see, from the model output (coefficients) alone, the predictive influence of a single &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, which (spicy take) I am skeptical is &lt;em&gt;in itself&lt;/em&gt; a virtue.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Elaborating: we want models that are appropriate for the task at hand, so the analyst needs to be able to understand why it would be appropriate, what its value added is over other potential model choices, and so on. If your audience is smart (you can assume that they are), your job is to be a good explainer of why the model works and where it can go wrong.&lt;/p&gt;
+&lt;p&gt;What I think is &lt;em&gt;less&lt;/em&gt; important is to be able to directly eyeball one covariate’s linear effect on your conditional expectation of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;. For binary variables? Sure, if we &lt;em&gt;know&lt;/em&gt; that there aren’t important interactions. But let’s think about the way that we model vs. what the “appropriate model” could possibly be.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A predictive model: The&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A generative model: We want to statistically adjust for confounding variables. We rarely know exactly what variables are in the set of important confounders to adjust for. And even if we did know that set, we rarely know how to think about their functional forms of interactions among them. This is why even in causal modeling—a place where &lt;em&gt;you would think&lt;/em&gt; we want an easily interpretable model—complex nonlinear modeling and machine learning have a place. We want to model the treatment propensity, generate good case matches, or do some other kind of covariate adjustment, and in many of these cases we don’t need to be able to&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A model should be &lt;em&gt;interpretable&lt;/em&gt; in that the researcher understands how the model works, the mathematical intuitions and areas of value added, and potential drawbacks of the method and how to diagnose them. This type of interpretability is good for ensuring that the audience knows what’s going on and why the results are what they are.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;can communicate to the audience how the model works, explain its key mathematical intuitions and value added, why using this model is preferred&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Interpretability:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;simple enough that I know how the model works and why it works, which can be good for ensuring that you and your audience knows what’s going on.&lt;/li&gt;
+&lt;li&gt;simple enough that I can “directly interpret” the predictive influence of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, which is never a virtue in itself.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;resources&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Resources&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://noamross.github.io/gams-in-r-course/&#34;&gt;&lt;em&gt;GAMs in R&lt;/em&gt;&lt;/a&gt; by Noam Ross&lt;/li&gt;
+&lt;li&gt;Wood (2017)&lt;/li&gt;
+&lt;li&gt;“Random Effects Old and New,” Hodges and Clayton (2011)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;demo&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Demo&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>&#34;Operationalizations Aren&#39;t Definitions&#34; and Random Variables
+</title>
+      <link>/post/operate-measure/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/operate-measure/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;Paul Musgrave &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760&#34;&gt;tweeted&lt;/a&gt; a while back that operationalizations aren’t definitions.&lt;/p&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Operationalizations aren’t definitions
+&lt;/p&gt;
+— Paul Musgrave (&lt;span class=&#34;citation&#34;&gt;@profmusgrave&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760?ref_src=twsrc%5Etfw&#34;&gt;May 6, 2019&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;What’s this all about? When we do (social) science, our theories involve “forces at work in the world.” We often think and talk about these forces with some fuzziness, but in order to systematically analyze the world, we need to be careful about what we’re talking about and how we know that we’re properly observing it. This applies equally to quantitative or qualitative work.&lt;/p&gt;
+&lt;p&gt;When we are being appropriately careful, we provide definitions for important theoretical constructs. These definitions are conceptual: what are we talking about, what are we not talking about, and so on. We also, as a separate part of the work, operationalize a concept. Operationalization the researcher’s strategy for observing the construct. “I’m using [some such observable phenomenon] as an indicator of the concept I’m interested in.”&lt;/p&gt;
+&lt;p&gt;The purpose of this post is to explore a statistical argument about “operationalizations,” how we ought to be far more uncertain about them. Others have certainly made arguments like this before (and I’d be interested in citations to related work about this). What will maybe be distinctive about this piece is that I will use “racial resentment” as a working example throughout.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;measures-of-an-unknown-truth&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Measures of an unknown truth&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \text{X}_{i} &amp;amp;= \text{Truth}_{i} + \text{Bias}_{i} + \text{Error}_{i}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Bias: conceptual or operational bias. We’re looking in the wrong place even if we could perfectly observe what we wanted.&lt;/p&gt;
+&lt;p&gt;Error: measurement imprecision. Even if we’re looking in the right place, the process of &lt;em&gt;measurement&lt;/em&gt; is distinct from definition and operationalization.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(X_{i}\)&lt;/span&gt; as a random draw from a probability distribution of measurements with location &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; and dispersion &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \text{X}_{i} &amp;amp;\sim \mathcal{D}\left(\mu = \text{Truth}_{i} + \text{Bias}_{i}, \sigma = \text{Error}_{i}\right)
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;racial-resentment-as-a-latent-variable&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Racial resentment as a latent variable&lt;/h1&gt;
+&lt;p&gt;We have a sample of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; respondents indexed &lt;span class=&#34;math inline&#34;&gt;\(i \in \{1, 2, \ldots, n\}\)&lt;/span&gt; and racial resentment battery items indexed &lt;span class=&#34;math inline&#34;&gt;\(j \in \{ 1, 2, \ldots, J \}\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(J\)&lt;/span&gt; typically equals 4.&lt;/p&gt;
+&lt;p&gt;Suppose &lt;span class=&#34;math inline&#34;&gt;\(x_{ij}\)&lt;/span&gt; is respondent &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;’s response to item &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= \Phi\left( \beta_{j}\left[\theta - \kappa_{j}\right]\right) \\[12pt]
+  x_{ij} &amp;amp;= \Phi\left( \beta_{j}\theta + \alpha_{j}\right), \text{ where } \alpha_{j} = -\beta_j\kappa_j
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:rr&#34;&gt;\[\begin{align}
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} x_{ij} \tag{1}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;What assumptions get us to this…&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:ordinary&#34;&gt;\[\begin{align}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= x_{ij}  \tag{2}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where we can assume that
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \sum_{j = 1}^{J} \epsilon_{ij} &amp;amp;= 0 \text{ for all } i
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We get back to the original by summing responses over &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= x_{ij} \\[12pt]
+  \sum\limits_{j=1}^{J} \left(\theta_{i} + \epsilon_{ij}\right) &amp;amp;= \sum\limits_{j=1}^{J} x_{ij} \\[12pt]
+  \left(J \times \theta_{i}\right) + 0 &amp;amp;= \sum\limits_{j=1}^{J} x_{ij} \\[12pt]
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} x_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;IRT reverse-engineering&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= \beta_{j}\left(\theta_{i} - \kappa_{j}\right) + \epsilon_{ij} \\
+  x_{ij} &amp;amp;= \beta_{j}\theta_{i} + \alpha_{j} + \epsilon_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;we only get Equation &lt;a href=&#34;#eq:ordinary&#34;&gt;(2)&lt;/a&gt; when &lt;span class=&#34;math inline&#34;&gt;\(\alpha_{j} = 0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_{j} = 1\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= (1)\theta_{i} + (0) + \epsilon_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Latent variable models get criticism for problems that non-latent models also have but somehow manage to deal with worse.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;empirical-implications&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Empirical implications&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;parting-thoughts&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Parting thoughts&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Outline:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;gap between operationalization and measurement is not zero.&lt;/li&gt;
+&lt;li&gt;Theory of measurement, hidden variable intuition, random variable
+&lt;ul&gt;
+&lt;li&gt;what is RR&lt;/li&gt;
+&lt;li&gt;what are the items&lt;/li&gt;
+&lt;li&gt;lay out the standard model&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Latent model
+&lt;ul&gt;
+&lt;li&gt;double standards in the amount of flack&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Estimating&lt;/li&gt;
+&lt;li&gt;Concerns
+&lt;ul&gt;
+&lt;li&gt;practicality&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;concerns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Concerns&lt;/h1&gt;
+&lt;p&gt;Practicality&lt;/p&gt;
+&lt;/div&gt;
 </description>
     </item>
     

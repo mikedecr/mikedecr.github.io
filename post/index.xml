@@ -12,6 +12,276 @@
     
     
     <item>
+      <title>How do I reinstall my packages for R 4.0 when many of them came from Github?</title>
+      <link>/post/package-reinstall/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/package-reinstall/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;R 4.0 &lt;a href=&#34;https://cran.r-project.org/&#34;&gt;is here&lt;/a&gt;, and that’s great. Be warned that if you install it, you will lose all of your installed packages. How should you reinstall them?&lt;/p&gt;
+&lt;p&gt;If you don’t want to install-as-you-go when you hit a bunch of errors in your existing projects, one way to revitalize your R environment is to &lt;em&gt;record which packages you have installed&lt;/em&gt; and automate their re-installation with some code. You can find several helpful online guides that &lt;a href=&#34;https://rstats.wtf/maintaining-r.html#how-to-transfer-your-library-when-updating-r&#34;&gt;walk through the main idea&lt;/a&gt;: save the names of installed packages as a vector, and then pass these names to &lt;code&gt;install.packages()&lt;/code&gt; to do a batch installation from CRAN.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;But what about the packages that don’t live on CRAN?&lt;/strong&gt; My experiments with R have led me to install several packages from Github: maybe they were “development versions” that had yet to be published on CRAN, or they will never be on CRAN due to policy incompatibilities or the wishes of the package developer. How can we automate the reinstall process when these packages have different online sources? This post walks through a process for doing that, adapted from this &lt;a href=&#34;https://gist.github.com/mikedecr/6fd2e7855c71e4358534d5af3b72a03d&#34;&gt;Gist&lt;/a&gt; that I &lt;a href=&#34;https://twitter.com/mikedecr/status/1254152352241782787&#34;&gt;shared on Twitter&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;roadmap&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Roadmap&lt;/h1&gt;
+&lt;p&gt;The routine has the following main ideas.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;What packages have I installed, and where did they come from?&lt;/li&gt;
+&lt;li&gt;Check my local package versions against the CRAN versions. Are the most recent versions on CRAN, or was I using a Github version that I should keep using?&lt;/li&gt;
+&lt;li&gt;Render unto Caesar: install the packages from CRAN that makes sense to get from CRAN, but install the packages from Github that makes sense to get from Github.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-is-already-installed&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is already installed?&lt;/h1&gt;
+&lt;p&gt;First we collect information on the packages we already have installed. I am working out of a project directory that manages all of my R updating business, so I &lt;a href=&#34;https://rstats.wtf/safe-paths.html&#34;&gt;use the &lt;code&gt;{here}&lt;/code&gt; package&lt;/a&gt; consistent with a &lt;a href=&#34;https://rstats.wtf/project-oriented-workflow.html&#34;&gt;project-oriented R workflow&lt;/a&gt;. We will also use tidyverse-style data manipulation.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;here&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;installed.packages()&lt;/code&gt; function returns a table of package information for all packages in your library. I convert this to a tibble to make things easier.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# data frame of all installed packages&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34;&gt;&lt;/a&gt;local_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;installed.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 290 x 16&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind   /Libra… 1.4-5   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2 AER     /Libra… 1.2-9   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… stats,… &amp;lt;NA&amp;gt;      &amp;quot;boot, … &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3 Amelia  /Libra… 1.7.6   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… foreig… Rcpp (&amp;gt;=… &amp;quot;tcltk,… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4 arrayh… /Libra… 1.1-0   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5 askpass /Libra… 1.1     &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   sys (&amp;gt;… &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6 assert… /Libra… 0.2.1   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   tools   &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7 audio   /Libra… 0.1-7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 backpo… /Libra… 1.1.6   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… utils   &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 base    /Libra… 4.0.0   base      &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;      &amp;quot;method… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 base64… /Libra… 0.1-3   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    png     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 280 more rows, and 7 more variables: License &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   License_is_FOSS &amp;lt;chr&amp;gt;, License_restricts_use &amp;lt;chr&amp;gt;, OS_type &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   MD5sum &amp;lt;chr&amp;gt;, NeedsCompilation &amp;lt;chr&amp;gt;, Built &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with &lt;code&gt;sessioninfo::package_info()&lt;/code&gt;, passing a vector of package names to the function.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# get source details (cran, github...) from package_info()&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34;&gt;&lt;/a&gt;local_details &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;sessioninfo&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;package_info&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;pkgs =&lt;/span&gt; local_pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;Package) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(package, &lt;span class=&#34;dt&#34;&gt;local_version =&lt;/span&gt; ondiskversion, source) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 276 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source        &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-9&#34;&gt;&lt;a href=&#34;#cb3-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;         &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-10&#34;&gt;&lt;a href=&#34;#cb3-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-11&#34;&gt;&lt;a href=&#34;#cb3-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2 AER          1.2-9         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-12&#34;&gt;&lt;a href=&#34;#cb3-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3 Amelia       1.7.6         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-13&#34;&gt;&lt;a href=&#34;#cb3-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4 arrayhelpers 1.1-0         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-14&#34;&gt;&lt;a href=&#34;#cb3-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5 askpass      1.1           CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-15&#34;&gt;&lt;a href=&#34;#cb3-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6 assertthat   0.2.1         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-16&#34;&gt;&lt;a href=&#34;#cb3-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7 audio        0.1-7         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-17&#34;&gt;&lt;a href=&#34;#cb3-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 backports    1.1.6         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-18&#34;&gt;&lt;a href=&#34;#cb3-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 base64enc    0.1-3         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-19&#34;&gt;&lt;a href=&#34;#cb3-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 bayesplot    1.7.1         CRAN (R 4.0.0)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-20&#34;&gt;&lt;a href=&#34;#cb3-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 266 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Notice that this new table has 14 fewer rows. That’s because &lt;code&gt;sessioninfo::package_info()&lt;/code&gt; isn’t returning the base packages that show up in &lt;code&gt;installed.packages()&lt;/code&gt;. That’s fine, since those will come with R 4.0 anyway.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;source&lt;/code&gt; column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(local_details, &lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;Github&amp;quot;&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 6 x 3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##   package        local_version source                                   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;                                    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 1 colorout       1.2-2         Github (jalvesaq/colorout@726d681)       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 2 emo            0.0.0.9000    Github (hadley/emo@3f03b11)              &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 3 rethinking     2.00          Github (rmcelreath/rethinking@f393f30)   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 4 Statamarkdown  0.4.5         Github (hemken/Statamarkdown@506cfc9)    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 5 waffle         1.0.1         Github (hrbrmstr/waffle@3f61463)         &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-10&#34;&gt;&lt;a href=&#34;#cb4-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 6 xaringanthemer 0.2.0.9100    Github (gadenbuie/xaringanthemer@86233be)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;determining-install-source-by-comparing-package-versions&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Determining install source by comparing package versions&lt;/h1&gt;
+&lt;p&gt;Before you update R, you may be using packages installed from Github, even if those packages are also on CRAN. We want to compare our locally installed package versions against the versions on CRAN. If the CRAN versions are more recent, we can go ahead and get those packages from CRAN. If the Github versions are still the most recent (or the &lt;em&gt;only&lt;/em&gt;) versions of some packages, we want to get them from Github.&lt;/p&gt;
+&lt;p&gt;We will want to get a table of data on CRAN package versions. The &lt;code&gt;available.packages()&lt;/code&gt; function returns info for &lt;strong&gt;all&lt;/strong&gt; packages on CRAN.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# available.packages() returns pkg info for ALL pkgs on CRAN.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34;&gt;&lt;/a&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;available.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;.name_repair =&lt;/span&gt; tolower) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,530 x 17&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    package version priority depends imports linkingto suggests enhances license&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-9&#34;&gt;&lt;a href=&#34;#cb5-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2 aaSEA   1.1.0   &amp;lt;NA&amp;gt;     R(&amp;gt;= 3… &amp;quot;DT(&amp;gt;=… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-10&#34;&gt;&lt;a href=&#34;#cb5-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3 ABACUS  1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;ggplo… &amp;lt;NA&amp;gt;      rmarkdo… &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-11&#34;&gt;&lt;a href=&#34;#cb5-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4 abbyyR  0.5.5   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;httr,… &amp;lt;NA&amp;gt;      testtha… &amp;lt;NA&amp;gt;     MIT + …&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-12&#34;&gt;&lt;a href=&#34;#cb5-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5 abc     2.1     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-13&#34;&gt;&lt;a href=&#34;#cb5-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6 abc.da… 1.0     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-14&#34;&gt;&lt;a href=&#34;#cb5-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-15&#34;&gt;&lt;a href=&#34;#cb5-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-16&#34;&gt;&lt;a href=&#34;#cb5-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-17&#34;&gt;&lt;a href=&#34;#cb5-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 abcdeF… 0.4     &amp;lt;NA&amp;gt;     Rglpk,…  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      LIM,syb… &amp;lt;NA&amp;gt;     GPL-2  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-18&#34;&gt;&lt;a href=&#34;#cb5-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,520 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-19&#34;&gt;&lt;a href=&#34;#cb5-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-20&#34;&gt;&lt;a href=&#34;#cb5-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34;&gt;&lt;/a&gt;slimmer_frame &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;left_join&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(local_details, package, local_version, source),&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(cran_pkgs, package, &lt;span class=&#34;dt&#34;&gt;cran_version =&lt;/span&gt; version)&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 276 x 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source         cran_version&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5 askpass      1.1           CRAN (R 4.0.0) 1.1         &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-16&#34;&gt;&lt;a href=&#34;#cb6-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-17&#34;&gt;&lt;a href=&#34;#cb6-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 backports    1.1.6         CRAN (R 4.0.0) 1.1.6       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-18&#34;&gt;&lt;a href=&#34;#cb6-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 base64enc    0.1-3         CRAN (R 4.0.0) 0.1-3       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-19&#34;&gt;&lt;a href=&#34;#cb6-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 bayesplot    1.7.1         CRAN (R 4.0.0) 1.7.1       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-20&#34;&gt;&lt;a href=&#34;#cb6-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 266 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: &lt;strong&gt;We want to install from Github only if our local Github version is more recent than the CRAN version.&lt;/strong&gt; This also applies when there is no version of a package on CRAN.&lt;/p&gt;
+&lt;p&gt;Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.&lt;/p&gt;
+&lt;p&gt;There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, &lt;em&gt;even if&lt;/em&gt; the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of &lt;a href=&#34;https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f&#34;&gt;StanHeaders&lt;/a&gt;), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).&lt;/p&gt;
+&lt;p&gt;The code below does this categorization using the &lt;code&gt;utils::compareVersion()&lt;/code&gt; function, which interprets the version numbers so we don’t have to. We do an additional step to note the Github repostory for any package that we still want to obtain from Github.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;compare_frame &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;slimmer_frame &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(package) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;source_locale =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;Github&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(cran_version) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;CRAN&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Unavailable on CRAN&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-11&#34;&gt;&lt;a href=&#34;#cb7-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-12&#34;&gt;&lt;a href=&#34;#cb7-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;CRAN&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Downgraded on CRAN&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-13&#34;&gt;&lt;a href=&#34;#cb7-13&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;CRAN&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-14&#34;&gt;&lt;a href=&#34;#cb7-14&#34;&gt;&lt;/a&gt;    ),&lt;/span&gt;
+&lt;span id=&#34;cb7-15&#34;&gt;&lt;a href=&#34;#cb7-15&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;dt&#34;&gt;github_repo =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-16&#34;&gt;&lt;a href=&#34;#cb7-16&#34;&gt;&lt;/a&gt;      source_locale &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-17&#34;&gt;&lt;a href=&#34;#cb7-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_split&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;string =&lt;/span&gt; source, &lt;span class=&#34;dt&#34;&gt;pattern =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;@&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;simplify =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-18&#34;&gt;&lt;a href=&#34;#cb7-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_replace&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Github &lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\\&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;(&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb7-19&#34;&gt;&lt;a href=&#34;#cb7-19&#34;&gt;&lt;/a&gt;      &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(&lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-20&#34;&gt;&lt;a href=&#34;#cb7-20&#34;&gt;&lt;/a&gt;    ),&lt;/span&gt;
+&lt;span id=&#34;cb7-21&#34;&gt;&lt;a href=&#34;#cb7-21&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-22&#34;&gt;&lt;a href=&#34;#cb7-22&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-23&#34;&gt;&lt;a href=&#34;#cb7-23&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb7-24&#34;&gt;&lt;a href=&#34;#cb7-24&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 276 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-25&#34;&gt;&lt;a href=&#34;#cb7-25&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    package     local_version source       cran_version source_locale github_repo&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-26&#34;&gt;&lt;a href=&#34;#cb7-26&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;      &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-27&#34;&gt;&lt;a href=&#34;#cb7-27&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-28&#34;&gt;&lt;a href=&#34;#cb7-28&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  2 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-29&#34;&gt;&lt;a href=&#34;#cb7-29&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-30&#34;&gt;&lt;a href=&#34;#cb7-30&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  4 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-31&#34;&gt;&lt;a href=&#34;#cb7-31&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  5 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-32&#34;&gt;&lt;a href=&#34;#cb7-32&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  6 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-33&#34;&gt;&lt;a href=&#34;#cb7-33&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  7 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-34&#34;&gt;&lt;a href=&#34;#cb7-34&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 backports   1.1.6         CRAN (R 4.0… 1.1.6        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-35&#34;&gt;&lt;a href=&#34;#cb7-35&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 base64enc   0.1-3         CRAN (R 4.0… 0.1-3        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-36&#34;&gt;&lt;a href=&#34;#cb7-36&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 bayesplot   1.7.1         CRAN (R 4.0… 1.7.1        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-37&#34;&gt;&lt;a href=&#34;#cb7-37&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 266 more rows&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;updating-r-and-reinstalling-packages&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Updating R and reinstalling packages&lt;/h1&gt;
+&lt;p&gt;When we are satisfied with our decisions about where to install a package from, save this comparison table to file.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# output data location&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;dir.create&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# output file&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34;&gt;&lt;/a&gt;out_file &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;str_glue&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;pkg-data_{Sys.Date()}.rds&amp;quot;&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;write_rds&lt;/span&gt;(compare_frame, &lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;, out_file))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;After updating, we reopen R and install our packages according to our classifications. We want to begin by installing &lt;code&gt;{remotes}&lt;/code&gt; to enable installation from Github.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# to install from github&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;remotes&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# should still be operating in your working directory&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# so downloading {here} makes sense also&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;here&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# read package data&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34;&gt;&lt;/a&gt;pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;readRDS&lt;/span&gt;(here&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;pkg-data_2020-04-25.rds&amp;quot;&lt;/span&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Everything that we want to install from Github, we install by iterating &lt;code&gt;remotes::install_github&lt;/code&gt; over the github repository slugs that we saved previously. This requires us to write the code in “hard mode” because we aren’t using tidyverse dialect.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# install from github repos&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34;&gt;&lt;/a&gt;github_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;pkgs[pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;source_locale &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;, ][[&lt;span class=&#34;st&#34;&gt;&amp;quot;github_repo&amp;quot;&lt;/span&gt;]]&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34;&gt;&lt;/a&gt;remotes&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;install_github&lt;/span&gt;(github_pkgs)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finally, everything that we said we wouldn’t get from Github, we get by using plain ol’ &lt;code&gt;install.packages()&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# install from cran with remaining package names&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34;&gt;&lt;/a&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;pkgs[pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;source_locale &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;, ][[&lt;span class=&#34;st&#34;&gt;&amp;quot;package&amp;quot;&lt;/span&gt;]]&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(cran_pkgs)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This should get you (more or less) up and running with R 4.0 and all of your old packages.&lt;/p&gt;
+&lt;p&gt;I should note that I’m already getting burned by some C++ configuration problems for packages that want to compile from source. I think this is particular to my own computer and the klugey fixes required to set up &lt;code&gt;{rstan}&lt;/code&gt; with MacOS Catalina. I remember reading somewhere that R 4.0 fixed some of the Stan x Catalina problems, but I will cross that bridge when I get to it.&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Plotting What Matters</title>
       <link>/post/visualizing-what-matters/</link>
       <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
@@ -753,6 +1023,57 @@ Due to the discrete nature of the &lt;span class=&#34;math inline&#34;&gt;\(\del
     </item>
     
     <item>
+      <title>Teaching Myself Splines In Public</title>
+      <link>/post/learning-splines/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/learning-splines/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;what-were-doing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What we’re doing&lt;/h1&gt;
+&lt;p&gt;The more I learn about causal inference, the more I learn to appreciate the differences between the goals generative modeling vs. predictive modeling, as well as the trade-offs between interpretable models vs. accurate predictions.&lt;/p&gt;
+&lt;div id=&#34;comment-on-interpretability&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Comment on Interpretability&lt;/h2&gt;
+&lt;p&gt;I come at this from the point of view of academic political science, where a lot of applied work insists that there is a premium on interpretable methods.&lt;/p&gt;
+&lt;p&gt;I can think of two ways to define interpretability:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;simple enough that the researcher knows at a technical level why the model works for the use case, which is valuable for ensuring that the audience also knows how to understand the model.&lt;/li&gt;
+&lt;li&gt;simple enough that the researcher can see, from the model output (coefficients) alone, the predictive influence of a single &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, which (spicy take) I am skeptical is &lt;em&gt;in itself&lt;/em&gt; a virtue.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Elaborating: we want models that are appropriate for the task at hand, so the analyst needs to be able to understand why it would be appropriate, what its value added is over other potential model choices, and so on. If your audience is smart (you can assume that they are), your job is to be a good explainer of why the model works and where it can go wrong.&lt;/p&gt;
+&lt;p&gt;What I think is &lt;em&gt;less&lt;/em&gt; important is to be able to directly eyeball one covariate’s linear effect on your conditional expectation of &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;. For binary variables? Sure, if we &lt;em&gt;know&lt;/em&gt; that there aren’t important interactions. But let’s think about the way that we model vs. what the “appropriate model” could possibly be.&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;&lt;p&gt;A predictive model: The&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A generative model: We want to statistically adjust for confounding variables. We rarely know exactly what variables are in the set of important confounders to adjust for. And even if we did know that set, we rarely know how to think about their functional forms of interactions among them. This is why even in causal modeling—a place where &lt;em&gt;you would think&lt;/em&gt; we want an easily interpretable model—complex nonlinear modeling and machine learning have a place. We want to model the treatment propensity, generate good case matches, or do some other kind of covariate adjustment, and in many of these cases we don’t need to be able to&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;A model should be &lt;em&gt;interpretable&lt;/em&gt; in that the researcher understands how the model works, the mathematical intuitions and areas of value added, and potential drawbacks of the method and how to diagnose them. This type of interpretability is good for ensuring that the audience knows what’s going on and why the results are what they are.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;can communicate to the audience how the model works, explain its key mathematical intuitions and value added, why using this model is preferred&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Interpretability:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;simple enough that I know how the model works and why it works, which can be good for ensuring that you and your audience knows what’s going on.&lt;/li&gt;
+&lt;li&gt;simple enough that I can “directly interpret” the predictive influence of &lt;span class=&#34;math inline&#34;&gt;\(x\)&lt;/span&gt; on &lt;span class=&#34;math inline&#34;&gt;\(y\)&lt;/span&gt;, which is never a virtue in itself.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;resources&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Resources&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://noamross.github.io/gams-in-r-course/&#34;&gt;&lt;em&gt;GAMs in R&lt;/em&gt;&lt;/a&gt; by Noam Ross&lt;/li&gt;
+&lt;li&gt;Wood (2017)&lt;/li&gt;
+&lt;li&gt;“Random Effects Old and New,” Hodges and Clayton (2011)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;demo&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Demo&lt;/h1&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Git information in your open-source research paper (with Rmarkdown)
 </title>
       <link>/post/git-in-papers/</link>
@@ -901,6 +1222,116 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
+      <title>&#34;Operationalizations Aren&#39;t Definitions&#34; and Random Variables
+</title>
+      <link>/post/operate-measure/</link>
+      <pubDate>Tue, 30 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/operate-measure/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;Paul Musgrave &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760&#34;&gt;tweeted&lt;/a&gt; a while back that operationalizations aren’t definitions.&lt;/p&gt;
+&lt;center&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34;&gt;
+&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;
+Operationalizations aren’t definitions
+&lt;/p&gt;
+— Paul Musgrave (&lt;span class=&#34;citation&#34;&gt;@profmusgrave&lt;/span&gt;) &lt;a href=&#34;https://twitter.com/profmusgrave/status/1125494153205493760?ref_src=twsrc%5Etfw&#34;&gt;May 6, 2019&lt;/a&gt;
+&lt;/blockquote&gt;
+&lt;script async src=&#34;https://platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;/center&gt;
+&lt;p&gt;What’s this all about? When we do (social) science, our theories involve “forces at work in the world.” We often think and talk about these forces with some fuzziness, but in order to systematically analyze the world, we need to be careful about what we’re talking about and how we know that we’re properly observing it. This applies equally to quantitative or qualitative work.&lt;/p&gt;
+&lt;p&gt;When we are being appropriately careful, we provide definitions for important theoretical constructs. These definitions are conceptual: what are we talking about, what are we not talking about, and so on. We also, as a separate part of the work, operationalize a concept. Operationalization the researcher’s strategy for observing the construct. “I’m using [some such observable phenomenon] as an indicator of the concept I’m interested in.”&lt;/p&gt;
+&lt;p&gt;The purpose of this post is to explore a statistical argument about “operationalizations,” how we ought to be far more uncertain about them. Others have certainly made arguments like this before (and I’d be interested in citations to related work about this). What will maybe be distinctive about this piece is that I will use “racial resentment” as a working example throughout.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;measures-of-an-unknown-truth&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Measures of an unknown truth&lt;/h1&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \text{X}_{i} &amp;amp;= \text{Truth}_{i} + \text{Bias}_{i} + \text{Error}_{i}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Bias: conceptual or operational bias. We’re looking in the wrong place even if we could perfectly observe what we wanted.&lt;/p&gt;
+&lt;p&gt;Error: measurement imprecision. Even if we’re looking in the right place, the process of &lt;em&gt;measurement&lt;/em&gt; is distinct from definition and operationalization.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(X_{i}\)&lt;/span&gt; as a random draw from a probability distribution of measurements with location &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; and dispersion &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \text{X}_{i} &amp;amp;\sim \mathcal{D}\left(\mu = \text{Truth}_{i} + \text{Bias}_{i}, \sigma = \text{Error}_{i}\right)
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;racial-resentment-as-a-latent-variable&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Racial resentment as a latent variable&lt;/h1&gt;
+&lt;p&gt;We have a sample of &lt;span class=&#34;math inline&#34;&gt;\(n\)&lt;/span&gt; respondents indexed &lt;span class=&#34;math inline&#34;&gt;\(i \in \{1, 2, \ldots, n\}\)&lt;/span&gt; and racial resentment battery items indexed &lt;span class=&#34;math inline&#34;&gt;\(j \in \{ 1, 2, \ldots, J \}\)&lt;/span&gt;, where &lt;span class=&#34;math inline&#34;&gt;\(J\)&lt;/span&gt; typically equals 4.&lt;/p&gt;
+&lt;p&gt;Suppose &lt;span class=&#34;math inline&#34;&gt;\(x_{ij}\)&lt;/span&gt; is respondent &lt;span class=&#34;math inline&#34;&gt;\(i\)&lt;/span&gt;’s response to item &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= \Phi\left( \beta_{j}\left[\theta - \kappa_{j}\right]\right) \\[12pt]
+  x_{ij} &amp;amp;= \Phi\left( \beta_{j}\theta + \alpha_{j}\right), \text{ where } \alpha_{j} = -\beta_j\kappa_j
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:rr&#34;&gt;\[\begin{align}
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} x_{ij} \tag{1}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;What assumptions get us to this…&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34; id=&#34;eq:ordinary&#34;&gt;\[\begin{align}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= x_{ij}  \tag{2}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Where we can assume that
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \sum_{j = 1}^{J} \epsilon_{ij} &amp;amp;= 0 \text{ for all } i
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;We get back to the original by summing responses over &lt;span class=&#34;math inline&#34;&gt;\(j\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \theta_{i} + \epsilon_{ij} &amp;amp;= x_{ij} \\[12pt]
+  \sum\limits_{j=1}^{J} \left(\theta_{i} + \epsilon_{ij}\right) &amp;amp;= \sum\limits_{j=1}^{J} x_{ij} \\[12pt]
+  \left(J \times \theta_{i}\right) + 0 &amp;amp;= \sum\limits_{j=1}^{J} x_{ij} \\[12pt]
+  \theta_{i} &amp;amp;= \frac{1}{J} \sum\limits_{j=1}^{J} x_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;IRT reverse-engineering&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= \beta_{j}\left(\theta_{i} - \kappa_{j}\right) + \epsilon_{ij} \\
+  x_{ij} &amp;amp;= \beta_{j}\theta_{i} + \alpha_{j} + \epsilon_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;we only get Equation &lt;a href=&#34;#eq:ordinary&#34;&gt;(2)&lt;/a&gt; when &lt;span class=&#34;math inline&#34;&gt;\(\alpha_{j} = 0\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\beta_{j} = 1\)&lt;/span&gt;
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  x_{ij} &amp;amp;= (1)\theta_{i} + (0) + \epsilon_{ij}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Latent variable models get criticism for problems that non-latent models also have but somehow manage to deal with worse.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;empirical-implications&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Empirical implications&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;parting-thoughts&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Parting thoughts&lt;/h1&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Outline:&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;gap between operationalization and measurement is not zero.&lt;/li&gt;
+&lt;li&gt;Theory of measurement, hidden variable intuition, random variable
+&lt;ul&gt;
+&lt;li&gt;what is RR&lt;/li&gt;
+&lt;li&gt;what are the items&lt;/li&gt;
+&lt;li&gt;lay out the standard model&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Latent model
+&lt;ul&gt;
+&lt;li&gt;double standards in the amount of flack&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Estimating&lt;/li&gt;
+&lt;li&gt;Concerns
+&lt;ul&gt;
+&lt;li&gt;practicality&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;concerns&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Concerns&lt;/h1&gt;
+&lt;p&gt;Practicality&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Causal Mediation, Bayesianly</title>
       <link>/post/bayes-mediation/</link>
       <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
@@ -1040,6 +1471,44 @@ The bias &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; is the d
 Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Display Jupyter Notebooks with Academic</title>
+      <link>/post/jupyter/</link>
+      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/jupyter/</guid>
+      <description>&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;from&lt;/span&gt; IPython.core.display &lt;span style=&#34;color:#f92672&#34;&gt;import&lt;/span&gt; Image
+Image(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;https://www.python.org/static/community_logos/python-logo-master-v3-TM-flattened.png&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;./academic_0_0.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;Welcome to Academic!&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;pre&gt;&lt;code&gt;Welcome to Academic!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;install-python-and-jupyter&#34;&gt;Install Python and Jupyter&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.anaconda.com/distribution/#download-section&#34;&gt;Install Anaconda&lt;/a&gt; which includes Python 3 and Jupyter notebook.&lt;/p&gt;
+&lt;p&gt;Otherwise, for advanced users, install Jupyter notebook with &lt;code&gt;pip3 install jupyter&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;create-a-new-blog-post-as-usualhttpssourcethemescomacademicdocsmanaging-contentcreate-a-blog-post&#34;&gt;Create a new blog post &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#create-a-blog-post&#34;&gt;as usual&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Run the following commands in your Terminal, substituting &lt;code&gt;&amp;lt;MY_WEBSITE_FOLDER&amp;gt;&lt;/code&gt; and &lt;code&gt;my-post&lt;/code&gt; with the file path to your Academic website folder and a name for your blog post (without spaces), respectively:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;cd &amp;lt;MY_WEBSITE_FOLDER&amp;gt;
+hugo new  --kind post post/my-post
+cd &amp;lt;MY_WEBSITE_FOLDER&amp;gt;/content/post/my-post/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;create-or-upload-a-jupyter-notebook&#34;&gt;Create or upload a Jupyter notebook&lt;/h2&gt;
+&lt;p&gt;Run the following command to start Jupyter within your new blog post folder. Then create a new Jupyter notebook (&lt;em&gt;New &amp;gt; Python Notebook&lt;/em&gt;) or upload a notebook.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;jupyter notebook
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;convert-notebook-to-markdown&#34;&gt;Convert notebook to Markdown&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;jupyter nbconvert Untitled.ipynb --to markdown --NbConvertApp.output_files_dir&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;.
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Copy the contents of Untitled.md and append it to index.md:&lt;/span&gt;
+cat Untitled.md | tee -a index.md
+
+&lt;span style=&#34;color:#75715e&#34;&gt;# Remove the temporary file:&lt;/span&gt;
+rm Untitled.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;edit-your-post-metadata&#34;&gt;Edit your post metadata&lt;/h2&gt;
+&lt;p&gt;Open &lt;code&gt;index.md&lt;/code&gt; in your text editor and edit the title etc. in the &lt;a href=&#34;https://sourcethemes.com/academic/docs/front-matter/&#34;&gt;front matter&lt;/a&gt; according to your preference.&lt;/p&gt;
+&lt;p&gt;To set a &lt;a href=&#34;https://sourcethemes.com/academic/docs/managing-content/#featured-image&#34;&gt;featured image&lt;/a&gt;, place an image named &lt;code&gt;featured&lt;/code&gt; into your post&amp;rsquo;s folder.&lt;/p&gt;
+&lt;p&gt;For other tips, such as using math, see the guide on &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;writing content with Academic&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
@@ -1310,6 +1779,315 @@ where &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; is the con
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;Maybe it’s a dev version thing, but &lt;code&gt;scales::degree_format()&lt;/code&gt; doesn’t work for me, so I removed it.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Academic: the website builder for Hugo</title>
+      <link>/post/getting-started/</link>
+      <pubDate>Wed, 20 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/getting-started/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Create a free website with Academic using Markdown, Jupyter, or RStudio. Choose a beautiful color theme and build anything with the Page Builder - over 40 &lt;em&gt;widgets&lt;/em&gt;, &lt;em&gt;themes&lt;/em&gt;, and &lt;em&gt;language packs&lt;/em&gt; included!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://academic-demo.netlify.com/&#34;&gt;Check out the latest &lt;strong&gt;demo&lt;/strong&gt;&lt;/a&gt; of what you&amp;rsquo;ll get in less than 10 minutes, or &lt;a href=&#34;https://sourcethemes.com/academic/#expo&#34;&gt;view the &lt;strong&gt;showcase&lt;/strong&gt;&lt;/a&gt; of personal, project, and business sites.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#install&#34;&gt;&lt;strong&gt;Setup Academic&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/get-started/&#34;&gt;&lt;strong&gt;Get Started&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/&#34;&gt;View the documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://discuss.gohugo.io/&#34;&gt;Ask a question&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/issues&#34;&gt;Request a feature or report a bug&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Updating? View the &lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34;&gt;Update Guide&lt;/a&gt; and &lt;a href=&#34;https://sourcethemes.com/academic/updates/&#34;&gt;Release Notes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Support development of Academic:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://paypal.me/cushen&#34;&gt;Donate a coffee&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.patreon.com/cushen&#34;&gt;Become a backer on Patreon&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.redbubble.com/people/neutreno/works/34387919-academic&#34;&gt;Decorate your laptop or journal with an Academic sticker&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://academic.threadless.com/&#34;&gt;Wear the T-shirt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34;&gt;&lt;img src=&#34;https://raw.githubusercontent.com/gcushen/hugo-academic/master/academic.png&#34; alt=&#34;Screenshot&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Key features:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Page builder&lt;/strong&gt; - Create &lt;em&gt;anything&lt;/em&gt; with &lt;a href=&#34;https://sourcethemes.com/academic/docs/page-builder/&#34;&gt;&lt;strong&gt;widgets&lt;/strong&gt;&lt;/a&gt; and &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;&lt;strong&gt;elements&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit any type of content&lt;/strong&gt; - Blog posts, publications, talks, slides, projects, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Create content&lt;/strong&gt; in &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34;&gt;&lt;strong&gt;Markdown&lt;/strong&gt;&lt;/a&gt;, &lt;a href=&#34;https://sourcethemes.com/academic/docs/jupyter/&#34;&gt;&lt;strong&gt;Jupyter&lt;/strong&gt;&lt;/a&gt;, or &lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34;&gt;&lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Plugin System&lt;/strong&gt; - Fully customizable &lt;a href=&#34;https://sourcethemes.com/academic/themes/&#34;&gt;&lt;strong&gt;color&lt;/strong&gt; and &lt;strong&gt;font themes&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Display Code and Math&lt;/strong&gt; - Code highlighting and &lt;a href=&#34;https://en.wikibooks.org/wiki/LaTeX/Mathematics&#34;&gt;LaTeX math&lt;/a&gt; supported&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Integrations&lt;/strong&gt; - &lt;a href=&#34;https://analytics.google.com&#34;&gt;Google Analytics&lt;/a&gt;, &lt;a href=&#34;https://disqus.com&#34;&gt;Disqus commenting&lt;/a&gt;, Maps, Contact Forms, and more!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Beautiful Site&lt;/strong&gt; - Simple and refreshing one page design&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Industry-Leading SEO&lt;/strong&gt; - Help get your website found on search engines and social media&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Media Galleries&lt;/strong&gt; - Display your images and videos with captions in a customizable gallery&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mobile Friendly&lt;/strong&gt; - Look amazing on every screen with a mobile friendly version of your site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-language&lt;/strong&gt; - 15+ language packs including English, 中文, and Português&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-user&lt;/strong&gt; - Each author gets their own profile page&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Privacy Pack&lt;/strong&gt; - Assists with GDPR&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Stand Out&lt;/strong&gt; - Bring your site to life with animation, parallax backgrounds, and scroll effects&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;One-Click Deployment&lt;/strong&gt; - No servers. No databases. Only files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;color-themes&#34;&gt;Color Themes&lt;/h2&gt;
+&lt;p&gt;Academic comes with &lt;strong&gt;day (light) and night (dark) mode&lt;/strong&gt; built-in. Click the sun/moon icon in the top right of the &lt;a href=&#34;https://academic-demo.netlify.com/&#34;&gt;Demo&lt;/a&gt; to see it in action!&lt;/p&gt;
+&lt;p&gt;Choose a stunning color and font theme for your site. Themes are fully customizable and include:&lt;/p&gt;
+
+
+
+
+
+
+
+
+  
+  
+
+
+&lt;div class=&#34;gallery&#34;&gt;
+
+  
+  
+  
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-1950s.png&#34; data-caption=&#34;1950s&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-1950s_huaf5482f8cea0c5a703a328640e3b7509_21614_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-apogee.png&#34; data-caption=&#34;Apogee&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-apogee_hu4b45d99db97150df01464c393bfd17d4_24119_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-coffee-playfair.png&#34; data-caption=&#34;Coffee theme with Playfair font&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-coffee-playfair_hu446a8f670cc5622adcc77b97ba95f6c5_22462_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-dark.png&#34; data-caption=&#34;Dark&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-dark_hu1e8601ecc47f58eada7743fdcd709d3d_21456_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-default.png&#34; data-caption=&#34;Default&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-default_huba6228b7bdf30e2f03f12ea91b2cba0d_21751_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-forest.png&#34; data-caption=&#34;Forest&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-forest_hu4f093a1c683134431456584193ea41ee_21797_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-ocean.png&#34; data-caption=&#34;Ocean&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-ocean_hu14831ccafc2219f30a7a096fa7617e01_21760_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+    
+    
+    
+    
+    
+      
+        
+      
+    
+  &lt;a data-fancybox=&#34;gallery-gallery&#34; href=&#34;/post/getting-started/gallery/theme-strawberry.png&#34; data-caption=&#34;Strawberry&#34;&gt;
+  &lt;img src=&#34;/post/getting-started/gallery/theme-strawberry_hu36b0b347fcca08bd39e2df22dcedbdfb_39532_0x190_resize_lanczos_2.png&#34; alt=&#34;&#34;&gt;
+  &lt;/a&gt;
+  
+
+  
+&lt;/div&gt;
+&lt;h2 id=&#34;ecosystem&#34;&gt;Ecosystem&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-admin&#34;&gt;Academic Admin&lt;/a&gt;:&lt;/strong&gt; An admin tool to import publications from BibTeX or import assets for an offline site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;a href=&#34;https://github.com/sourcethemes/academic-scripts&#34;&gt;Academic Scripts&lt;/a&gt;:&lt;/strong&gt; Scripts to help migrate content to new versions of Academic&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;install&#34;&gt;Install&lt;/h2&gt;
+&lt;p&gt;You can choose from one of the following four methods to install:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-web-browser&#34;&gt;&lt;strong&gt;one-click install using your web browser (recommended)&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-git&#34;&gt;install on your computer using &lt;strong&gt;Git&lt;/strong&gt; with the Command Prompt/Terminal app&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-zip&#34;&gt;install on your computer by downloading the &lt;strong&gt;ZIP files&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/install/#install-with-rstudio&#34;&gt;install on your computer with &lt;strong&gt;RStudio&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Then &lt;a href=&#34;https://sourcethemes.com/academic/docs/get-started/&#34;&gt;personalize and deploy your new site&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;updating&#34;&gt;Updating&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://sourcethemes.com/academic/docs/update/&#34;&gt;View the Update Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Feel free to &lt;em&gt;star&lt;/em&gt; the project on &lt;a href=&#34;https://github.com/gcushen/hugo-academic/&#34;&gt;Github&lt;/a&gt; to help keep track of &lt;a href=&#34;https://sourcethemes.com/academic/updates&#34;&gt;updates&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;license&#34;&gt;License&lt;/h2&gt;
+&lt;p&gt;Copyright 2016-present &lt;a href=&#34;https://georgecushen.com&#34;&gt;George Cushen&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Released under the &lt;a href=&#34;https://github.com/gcushen/hugo-academic/blob/master/LICENSE.md&#34;&gt;MIT&lt;/a&gt; license.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hello R Markdown</title>
+      <link>/post/2015-07-23-r-rmarkdown/</link>
+      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      
+      <guid>/post/2015-07-23-r-rmarkdown/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;R Markdown&lt;/h1&gt;
+&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;summary&lt;/span&gt;(cars)&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##      speed           dist       &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Min.   : 4.0   Min.   :  2.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1st Qu.:12.0   1st Qu.: 26.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Median :15.0   Median : 36.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Mean   :15.4   Mean   : 42.98  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  3rd Qu.:19.0   3rd Qu.: 56.00  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  Max.   :25.0   Max.   :120.00&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34;&gt;&lt;/a&gt;fit &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;lm&lt;/span&gt;(dist &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;speed, &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; cars)&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34;&gt;&lt;/a&gt;fit&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Call:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## lm(formula = dist ~ speed, data = cars)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Coefficients:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## (Intercept)        speed  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##     -17.579        3.932&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Including Plots&lt;/h1&gt;
+&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;par&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;mar =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;pie&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;280&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;60&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Sky&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Sunny side of pyramid&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Shady side of pyramid&amp;#39;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;dt&#34;&gt;col =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;#0292D8&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#F7EA39&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;#C4B632&amp;#39;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;dt&#34;&gt;init.angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-50&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;border =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
+&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;
+Figure 1: A fancy pie chart.
+&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 </description>
     </item>
