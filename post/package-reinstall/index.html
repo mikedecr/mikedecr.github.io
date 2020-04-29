@@ -264,7 +264,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#research"><span>Research in Progress</span></a>
+          <a class="nav-link " href="/#research"><span>Research</span></a>
         </li>
 
         
@@ -448,7 +448,7 @@
     
       
     
-    <time>Apr 26, 2020</time>
+    <time>2020-04-26</time>
   </span>
   
 
@@ -653,7 +653,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2"></a>cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,531 x 17</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,557 x 17</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></span>
@@ -666,7 +666,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">##  8 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="co">##  9 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="co">## 10 abcdeF… 0.4     &lt;NA&gt;     Rglpk,…  &lt;NA&gt;   &lt;NA&gt;      LIM,syb… &lt;NA&gt;     GPL-2  </span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,521 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,547 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></span></code></pre></div>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
@@ -1038,10 +1038,6 @@ And maybe I will do a fresh install of <em>everything</em> once the semester is 
   
   <div class="container">
     <footer class="site-footer">
-  
-  <p class="powered-by">
-    <a href="/privacy/">Privacy Policy</a>
-  </p>
   
 
   <p class="powered-by">

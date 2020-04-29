@@ -191,29 +191,10 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <title>The Unexceptional Gender Gap of 2016
 </title>
       <link>/publication/gender-2016/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 01 Dec 2016 00:00:00 +0000</pubDate>
       
       <guid>/publication/gender-2016/</guid>
-      <description>
-
-
-&lt;blockquote&gt;
-&lt;p&gt;Because of the particular candidates who ran, the 2016 presidential campaign was defined by gender to a remarkable degree. This led many observers to expect a historically large gender gap in voting. In contrast to these expectations, the gender gap between men and women’s votes in 2016 was only slightly larger than in other recent elections. We argue that an immense gender divide did not emerge because it was constrained by high levels of partisanship in the electorate, especially “negative partisanship” toward the opposing party that leaves little room for gender to matter. In addition, we challenge two common assumptions: that the gender gap helps Democratic candidates and that women were more persuadable than men over the course of the campaign. Both men and women vacillated in their views of Clinton’s honesty during the campaign, with men shifting away from her and toward Trump just before election day.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;div id=&#34;cite-this-paper&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Cite this paper&lt;/h2&gt;
-&lt;p&gt;Burden, Barry C., Evan Crawford, and Michael G. DeCrescenzo. 2016. “The Unexceptional Gender Gap of 2016.” &lt;em&gt;The Forum&lt;/em&gt; 14(4), 415–432.&lt;/p&gt;
-&lt;p&gt;&lt;span class=&#34;citation&#34;&gt;@inproceedings&lt;/span&gt;{burden2016unexceptional,
-title={The unexceptional gender gap of 2016},
-author={Burden, Barry C and Crawford, Evan and DeCrescenzo, Michael G},
-booktitle={The Forum},
-volume={14},
-number={4},
-pages={415–432},
-year={2016},
-organization={De Gruyter}
-}&lt;/p&gt;
-&lt;/div&gt;
+      <description>&lt;p&gt;&lt;img src=&#34;/research/gap-16.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -374,7 +355,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34;&gt;&lt;/a&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;available.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;.name_repair =&lt;/span&gt; tolower) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/span&gt;
-&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,531 x 17&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,557 x 17&lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    package version priority depends imports linkingto suggests enhances license&lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/span&gt;
@@ -387,7 +368,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;span id=&#34;cb5-15&#34;&gt;&lt;a href=&#34;#cb5-15&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  8 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-16&#34;&gt;&lt;a href=&#34;#cb5-16&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;##  9 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-17&#34;&gt;&lt;a href=&#34;#cb5-17&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## 10 abcdeF… 0.4     &amp;lt;NA&amp;gt;     Rglpk,…  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      LIM,syb… &amp;lt;NA&amp;gt;     GPL-2  &lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb5-18&#34;&gt;&lt;a href=&#34;#cb5-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,521 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-18&#34;&gt;&lt;a href=&#34;#cb5-18&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,547 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-19&#34;&gt;&lt;a href=&#34;#cb5-19&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/span&gt;
 &lt;span id=&#34;cb5-20&#34;&gt;&lt;a href=&#34;#cb5-20&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;
