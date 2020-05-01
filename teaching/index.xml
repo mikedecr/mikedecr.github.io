@@ -142,6 +142,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Intermediate Git: Data, branches, rewinding. &lt;a href=&#34;/teaching/computing-811/slides/09_more-git/09_more-git.html&#34;&gt;[Slides]&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Functional Programming: scoped verbs, apply functions, purrr. &lt;a href=&#34;https://github.com/mikedecr/PS811-computing/blob/master/code/07_functional-programming.R&#34;&gt;[Script]&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Causal Inference: regression discontinuity, bootstrapping. &lt;a href=&#34;/teaching/computing-811/slides/10_causal-modeling/10_causal-modeling.html&#34;&gt;[Slides]&lt;/a&gt; &lt;a href=&#34;https://github.com/mikedecr/PS811-computing/blob/master/code/08_rdd-bootstrap.R&#34;&gt;[Script]&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Machine Learning for Prediction and Causal Inference. &lt;a href=&#34;/teaching/computing-811/slides/11_predictive-modeling/11_predictive-modeling.html&#34;&gt;[Slides]&lt;/a&gt; [Script coming soon]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h1 id=&#34;2018-materials&#34;&gt;2018 materials&lt;/h1&gt;
 &lt;p&gt;In 2018, this course was split between R and Stata. I covered the R unit, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
