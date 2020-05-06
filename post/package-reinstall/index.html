@@ -595,20 +595,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-2"><a href="#cb2-2"></a>local_pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>() <span class="op">%&gt;%</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">## # A tibble: 296 x 16</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">## # A tibble: 307 x 16</span></span>
 <span id="cb2-6"><a href="#cb2-6"></a><span class="co">##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances</span></span>
 <span id="cb2-7"><a href="#cb2-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   </span></span>
 <span id="cb2-8"><a href="#cb2-8"></a><span class="co">##  1 abind   /Libra… 1.4-5   &lt;NA&gt;     &quot;R (&gt;=… method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">##  2 AER     /Libra… 1.2-9   &lt;NA&gt;     &quot;R (&gt;=… stats,… &lt;NA&gt;      &quot;boot, … &lt;NA&gt;    </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##  3 Amelia  /Libra… 1.7.6   &lt;NA&gt;     &quot;R (&gt;=… foreig… Rcpp (&gt;=… &quot;tcltk,… &lt;NA&gt;    </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">##  4 arrayh… /Libra… 1.1-0   &lt;NA&gt;      &lt;NA&gt;   method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">##  5 askpass /Libra… 1.1     &lt;NA&gt;      &lt;NA&gt;   sys (&gt;… &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">##  6 assert… /Libra… 0.2.1   &lt;NA&gt;      &lt;NA&gt;   tools   &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">##  7 audio   /Libra… 0.1-7   &lt;NA&gt;     &quot;R (&gt;=… &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">##  8 backpo… /Libra… 1.1.6   &lt;NA&gt;     &quot;R (&gt;=… utils   &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">##  9 BART    /Libra… 2.7     &lt;NA&gt;     &quot;R (&gt;=… Rcpp (… Rcpp      &quot;MASS, … &lt;NA&gt;    </span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">## 10 base    /Libra… 4.0.0   base      &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;      &quot;method… &lt;NA&gt;    </span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">## # … with 286 more rows, and 7 more variables: License &lt;chr&gt;,</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">##  2 adagio  /Libra… 0.7.1   &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##  3 ade4    /Libra… 1.7-15  &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;      &quot;ade4Tk… &lt;NA&gt;    </span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">##  4 AER     /Libra… 1.2-9   &lt;NA&gt;     &quot;R (&gt;=… stats,… &lt;NA&gt;      &quot;boot, … &lt;NA&gt;    </span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">##  5 Amelia  /Libra… 1.7.6   &lt;NA&gt;     &quot;R (&gt;=… foreig… Rcpp (&gt;=… &quot;tcltk,… &lt;NA&gt;    </span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">##  6 arrayh… /Libra… 1.1-0   &lt;NA&gt;      &lt;NA&gt;   method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">##  7 askpass /Libra… 1.1     &lt;NA&gt;      &lt;NA&gt;   sys (&gt;… &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">##  8 assert… /Libra… 0.2.1   &lt;NA&gt;      &lt;NA&gt;   tools   &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">##  9 audio   /Libra… 0.1-7   &lt;NA&gt;     &quot;R (&gt;=… &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">## 10 backpo… /Libra… 1.1.6   &lt;NA&gt;     &quot;R (&gt;=… utils   &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">## # … with 297 more rows, and 7 more variables: License &lt;chr&gt;,</span></span>
 <span id="cb2-19"><a href="#cb2-19"></a><span class="co">## #   License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;, OS_type &lt;chr&gt;,</span></span>
 <span id="cb2-20"><a href="#cb2-20"></a><span class="co">## #   MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;, Built &lt;chr&gt;</span></span></code></pre></div>
 <p>This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with <code>sessioninfo::package_info()</code>, passing a vector of package names to the function.</p>
@@ -618,20 +618,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">select</span>(package, <span class="dt">local_version =</span> ondiskversion, source) <span class="op">%&gt;%</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## # A tibble: 282 x 3</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## # A tibble: 293 x 3</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="co">##    package      local_version source        </span></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;         </span></span>
 <span id="cb3-10"><a href="#cb3-10"></a><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0)</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">##  2 AER          1.2-9         CRAN (R 4.0.0)</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">##  3 Amelia       1.7.6         CRAN (R 4.0.0)</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">##  4 arrayhelpers 1.1-0         CRAN (R 4.0.0)</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">##  5 askpass      1.1           CRAN (R 4.0.0)</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">##  6 assertthat   0.2.1         CRAN (R 4.0.0)</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">##  7 audio        0.1-7         CRAN (R 4.0.0)</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">##  8 backports    1.1.6         CRAN (R 4.0.0)</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">##  9 BART         2.7           CRAN (R 4.0.0)</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">## 10 base64enc    0.1-3         CRAN (R 4.0.0)</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">## # … with 272 more rows</span></span></code></pre></div>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0)</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0)</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0)</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0)</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0)</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0)</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0)</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0)</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">## 10 backports    1.1.6         CRAN (R 4.0.0)</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
 <p>Notice that this new table has 14 fewer rows. That’s because <code>sessioninfo::package_info()</code> isn’t returning the base packages that show up in <code>installed.packages()</code>. That’s fine, since those will come with R 4.0 anyway.</p>
 <p>The <code>source</code> column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">filter</span>(local_details, <span class="kw">str_detect</span>(source, <span class="st">&quot;Github&quot;</span>))</span>
@@ -653,7 +653,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-2"><a href="#cb5-2"></a>cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,564 x 17</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,591 x 17</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></span>
@@ -666,7 +666,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">##  8 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-16"><a href="#cb5-16"></a><span class="co">##  9 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
 <span id="cb5-17"><a href="#cb5-17"></a><span class="co">## 10 abcdeF… 0.4     &lt;NA&gt;     Rglpk,…  &lt;NA&gt;   &lt;NA&gt;      LIM,syb… &lt;NA&gt;     GPL-2  </span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,554 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,581 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
 <span id="cb5-19"><a href="#cb5-19"></a><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></span>
 <span id="cb5-20"><a href="#cb5-20"></a><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></span></code></pre></div>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
@@ -676,20 +676,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-4"><a href="#cb6-4"></a>    <span class="dt">y =</span> <span class="kw">select</span>(cran_pkgs, package, <span class="dt">cran_version =</span> version)</span>
 <span id="cb6-5"><a href="#cb6-5"></a>  ) <span class="op">%&gt;%</span></span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## # A tibble: 282 x 4</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## # A tibble: 293 x 4</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">##    package      local_version source         cran_version</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;       </span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##  2 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">##  3 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">##  4 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">##  5 askpass      1.1           CRAN (R 4.0.0) 1.1         </span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##  6 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       </span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##  7 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       </span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##  8 backports    1.1.6         CRAN (R 4.0.0) 1.1.6       </span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##  9 BART         2.7           CRAN (R 4.0.0) 2.7         </span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">## 10 base64enc    0.1-3         CRAN (R 4.0.0) 0.1-3       </span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">## # … with 272 more rows</span></span></code></pre></div>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       </span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       </span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         </span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       </span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       </span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">## 10 backports    1.1.6         CRAN (R 4.0.0) 1.1.6       </span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
 <p>Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: <strong>We want to install from Github only if our local Github version is more recent than the CRAN version.</strong> This also applies when there is no version of a package on CRAN.</p>
 <p>Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.</p>
 <p>There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, <em>even if</em> the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of <a href="https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f">StanHeaders</a>), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).</p>
@@ -717,20 +717,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-21"><a href="#cb7-21"></a>  ) <span class="op">%&gt;%</span></span>
 <span id="cb7-22"><a href="#cb7-22"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
 <span id="cb7-23"><a href="#cb7-23"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">## # A tibble: 282 x 6</span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">## # A tibble: 293 x 6</span></span>
 <span id="cb7-25"><a href="#cb7-25"></a><span class="co">##    package     local_version source       cran_version source_locale github_repo</span></span>
 <span id="cb7-26"><a href="#cb7-26"></a><span class="co">##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;      </span></span>
 <span id="cb7-27"><a href="#cb7-27"></a><span class="co">##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="co">##  2 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="co">##  3 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="co">##  4 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">##  5 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-32"><a href="#cb7-32"></a><span class="co">##  6 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="co">##  7 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="co">##  8 backports   1.1.6         CRAN (R 4.0… 1.1.6        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="co">##  9 BART        2.7           CRAN (R 4.0… 2.7          CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co">## 10 base64enc   0.1-3         CRAN (R 4.0… 0.1-3        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="co">## # … with 272 more rows</span></span></code></pre></div>
+<span id="cb7-28"><a href="#cb7-28"></a><span class="co">##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-29"><a href="#cb7-29"></a><span class="co">##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-30"><a href="#cb7-30"></a><span class="co">##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-31"><a href="#cb7-31"></a><span class="co">##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-32"><a href="#cb7-32"></a><span class="co">##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-33"><a href="#cb7-33"></a><span class="co">##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-34"><a href="#cb7-34"></a><span class="co">##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-35"><a href="#cb7-35"></a><span class="co">##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-36"><a href="#cb7-36"></a><span class="co">## 10 backports   1.1.6         CRAN (R 4.0… 1.1.6        CRAN          &lt;NA&gt;       </span></span>
+<span id="cb7-37"><a href="#cb7-37"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
 </div>
 <div id="updating-r-and-reinstalling-packages" class="section level1">
 <h1>Updating R and reinstalling packages</h1>
