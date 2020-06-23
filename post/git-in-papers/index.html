@@ -508,29 +508,27 @@
 
     <div class="article-style" itemprop="articleBody">
       
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -539,9 +537,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -581,7 +579,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>A compilation system like <span class="math inline">\(\mathrm{\LaTeX}\)</span> can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.</li>
 <li>As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.</li>
-<li>A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with <a href="https://datasift.github.io/gitflow/IntroducingGitFlow.html">“Git flow”</a>). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.</li>
+<li>A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with <a href="https://datasift.github.io/gitflow/IntroducingGitFlow.html">“Git flow”</a>). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.</li>
 </ul>
 <p>Here is an example from one of my in-progress papers.</p>
 <p><img src="git-date.png" width="732" /></p>
@@ -599,10 +597,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>We can run console commands within R using the <code>system()</code> function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the <code>intern = TRUE</code> argument.</p>
 <p>Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).</p>
 <p>For instance, how can we print the branch name?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##   [1] &quot;1856a0b&quot; &quot;5823e01&quot; &quot;66e52d7&quot; &quot;0f043a4&quot; &quot;af6087c&quot; &quot;56bc096&quot; &quot;ebd98df&quot;
 ##   [8] &quot;3074778&quot; &quot;94bcada&quot; &quot;fa8f4fa&quot; &quot;1079fd7&quot; &quot;1a3553b&quot; &quot;f352285&quot; &quot;0e7c4b4&quot;
 ##  [15] &quot;3be8c27&quot; &quot;2a80372&quot; &quot;950065a&quot; &quot;b8d24f2&quot; &quot;9da4ece&quot; &quot;8cccbf9&quot; &quot;45d0315&quot;
@@ -623,10 +621,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## [120] &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot;
 ## [127] &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] &quot;1856a0b&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
 <pre><code>## [1] &quot;link to ML slides&quot;</code></pre>
 </div>
 <div id="r-results-in-the-yaml" class="section level2">

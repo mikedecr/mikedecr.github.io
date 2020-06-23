@@ -457,7 +457,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    9 min read
+    10 min read
   </span>
   
 
@@ -503,7 +503,6 @@
 
     <div class="article-style" itemprop="articleBody">
       
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <div id="motivation-for-this-post" class="section level1">
@@ -570,6 +569,10 @@ This expression is also marginalizing over the simulated mediator value <span cl
 <pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
 ##   method from   
 ##   +.gg   ggplot2</code></pre>
+<pre><code>## Warning: `tbl_df()` is deprecated as of dplyr 1.0.0.
+## Please use `tibble::as_tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
 <p><img src="/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png" width="100%" /></p>
 <p>And here is a comparison to the <code>{mediation}</code> package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the <code>{mediation}</code> estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.</p>
 <p><img src="/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png" width="100%" /></p>
@@ -582,9 +585,9 @@ This expression is also marginalizing over the simulated mediator value <span cl
 <hr />
 <ol>
 <li id="fn1"><p>
-There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.<a href="#fnref1" class="footnote-back">↩</a></p></li>
 <li id="fn2"><p>
-Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.<a href="#fnref2" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 

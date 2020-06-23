@@ -461,7 +461,6 @@ Overview How to follow along A script file walking through some of these command
 
           <div class="article-style" itemprop="articleBody">
             
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 
 
 <p>Read this before our first R lecture.</p>
@@ -1038,7 +1037,7 @@ full_join(data1, data2, by = &quot;case&quot;)</code></pre>
 ## 2     2 b     x    
 ## 3     3 c     y    
 ## 4     4 &lt;NA&gt;  z</code></pre>
-<p>You can merge along multiple variables using <code>by = c("var1", "var2", ...)</code>.</p>
+<p>You can merge along multiple variables using <code>by = c(&quot;var1&quot;, &quot;var2&quot;, ...)</code>.</p>
 <p><code>left_join()</code> keeps all cases from left dataset. If the right dataset can’t fill a cell in the left dataset, the result is <code>NA</code>. If the right dataset has other cases that aren’t present in the left, they disappear.</p>
 <pre class="r"><code># keep left data in tact, 
 # merge only matching cases from right data

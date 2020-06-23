@@ -114,7 +114,6 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       
       <guid>/post/bayes-mediation/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;motivation-for-this-post&#34; class=&#34;section level1&#34;&gt;
@@ -181,6 +180,10 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;pre&gt;&lt;code&gt;## Registered S3 method overwritten by &amp;#39;GGally&amp;#39;:
 ##   method from   
 ##   +.gg   ggplot2&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `tbl_df()` is deprecated as of dplyr 1.0.0.
+## Please use `tibble::as_tibble()` instead.
+## This warning is displayed once every 8 hours.
+## Call `lifecycle::last_warnings()` to see where this warning was generated.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/post-hist-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;And here is a comparison to the &lt;code&gt;{mediation}&lt;/code&gt; package by the Imai et al. team. We can see that, because the posterior distributions for the ACMEs are not symmetrical, there is some difference between the &lt;code&gt;{mediation}&lt;/code&gt; estimates (which come from an maximum likelihood model) and the Bayesian estimate, which is a posterior mean.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2019-06-19_bayesian-causal-mediation_files/figure-html/graph-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
@@ -193,9 +196,9 @@ This expression is also marginalizing over the simulated mediator value &lt;span
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+There are a few examples of it in political science, but the Bayesian component is used mostly for computation (MCMC) rather than for the Bayesian ideas themselves. Meanwhile Bayes-for-its-own-sake seems far more prevalent in fields like psychology, epidemiology, and biostatistics.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
-Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Ugh, caveating. It would be possible to represent identification assumptions as special cases of prior distributions, where the parameters of the prior can be manipulated to “relax” the assumption. For example, unconfoundedness or exclusion restrictions imply a model that contains additional covariates that each have priors that stack all probability density at exactly zero. This exercise is actually very similar to the specification of the “sensitivity parameter” in the Imai et al. mediation analysis routine.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>
@@ -209,7 +212,6 @@ Ugh, caveating. It would be possible to represent identification assumptions as 
       
       <guid>/post/ggk-flat-priors/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;I’ve been reading about Bayesian causal inference for a paper I’m hoping to write, and this has led me to dig into the work by &lt;a href=&#34;https://books.google.com/books?hl=en&amp;amp;lr=&amp;amp;id=RDueAgAAQBAJ&amp;amp;oi=fnd&amp;amp;pg=PA9&amp;amp;dq=gerber+green+kaplan&amp;amp;ots=0I3f6Jfn33&amp;amp;sig=wVKOfRF39mkiT4vnMe8YecMMpeY#v=onepage&amp;amp;q=gerber%20green%20kaplan&amp;amp;f=false&#34;&gt;Gerber, Green, and Kaplan&lt;/a&gt; (hereafter “GGK”) about the “Illusion of Learning from Observational Research.” In it, they put forth a model to describe how much you “update” your information about causal effects from experimental vs. observational research.&lt;/p&gt;
@@ -244,7 +246,7 @@ The bias &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; is the d
 &lt;hr /&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
-Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩︎&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+Furthermore, it is worth emphasizing that flat priors are only flat &lt;em&gt;with respect to a likelihood&lt;/em&gt;. As soon as you have a quantity that is a function of multiple parameters, the prior for this resulting quantity will &lt;em&gt;not&lt;/em&gt; be flat even if the priors for each parameter are flat. If you have ever demonstrated the Central Limit Theorem by summing a bunch of uniform random variables that results in a bell curve, you have already seen this in action!&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 </description>

@@ -20,29 +20,27 @@
       
       <guid>/post/git-in-papers/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-pre &gt; code.sourceCode { white-space: pre; position: relative; }
-pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
-pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
-code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre &gt; code.sourceCode { white-space: pre-wrap; }
-pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code &gt; span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code &gt; span &gt; a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -51,9 +49,9 @@ pre.numberSource code &gt; span &gt; a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -93,7 +91,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;ul&gt;
 &lt;li&gt;A compilation system like &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; can print the date of compilation, but it is often the case that documents are re-compiled without any real changes. This means the compilation date can be a deceiving signal about when the paper was most recently modified. You may want to “timestamp” a version of your paper in a way that is robust to re-compilation at an arbitrary future time.&lt;/li&gt;
 &lt;li&gt;As you develop your paper locally, you may commit several small changes between major versions of your paper. To prevent your “in-development” copy from being confused for a major version of the paper, you may want to note which commit generated the current PDF and perhaps link to a more stable “for public eyes” version of the paper elsewhere.&lt;/li&gt;
-&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
+&lt;li&gt;A more general case of the previous point: suppose you develop your project across multiple branches (e.g. as with &lt;a href=&#34;https://datasift.github.io/gitflow/IntroducingGitFlow.html&#34;&gt;“Git flow”&lt;/a&gt;). You may reserve your “master” branch for major versions of the project while iteratively developing the project (and compiling the document) on a non-master branch. In this case, you might want to know if a PDF was compiled from source code on the master branch (i.e. “Am I looking at a major version of the paper”) or on an in-development branch.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Here is an example from one of my in-progress papers.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;git-date.png&#34; width=&#34;732&#34; /&gt;&lt;/p&gt;
@@ -111,10 +109,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;We can run console commands within R using the &lt;code&gt;system()&lt;/code&gt; function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the &lt;code&gt;intern = TRUE&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
 &lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;1856a0b&amp;quot; &amp;quot;5823e01&amp;quot; &amp;quot;66e52d7&amp;quot; &amp;quot;0f043a4&amp;quot; &amp;quot;af6087c&amp;quot; &amp;quot;56bc096&amp;quot; &amp;quot;ebd98df&amp;quot;
 ##   [8] &amp;quot;3074778&amp;quot; &amp;quot;94bcada&amp;quot; &amp;quot;fa8f4fa&amp;quot; &amp;quot;1079fd7&amp;quot; &amp;quot;1a3553b&amp;quot; &amp;quot;f352285&amp;quot; &amp;quot;0e7c4b4&amp;quot;
 ##  [15] &amp;quot;3be8c27&amp;quot; &amp;quot;2a80372&amp;quot; &amp;quot;950065a&amp;quot; &amp;quot;b8d24f2&amp;quot; &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot;
@@ -135,10 +133,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ## [120] &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot;
 ## [127] &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;1856a0b&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;link to ML slides&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;

@@ -503,29 +503,27 @@
 
     <div class="article-style" itemprop="articleBody">
       
-<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -534,9 +532,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  background-color: #f8f8f8; }
+  { background-color: #f8f8f8; }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -588,179 +586,183 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="what-is-already-installed" class="section level1">
 <h1>What is already installed?</h1>
 <p>First we collect information on the packages we already have installed. I am working out of a project directory that manages all of my R updating business, so I <a href="https://rstats.wtf/safe-paths.html">use the <code>{here}</code> package</a> consistent with a <a href="https://rstats.wtf/project-oriented-workflow.html">project-oriented R workflow</a>. We will also use tidyverse-style data manipulation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(<span class="st">&quot;here&quot;</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;here&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;tidyverse&quot;</span>)</a></code></pre></div>
 <p>The <code>installed.packages()</code> function returns a table of package information for all packages in your library. I convert this to a tibble to make things easier.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># data frame of all installed packages</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>local_pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>() <span class="op">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">## # A tibble: 307 x 16</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">##  1 abind   /Libra… 1.4-5   &lt;NA&gt;     &quot;R (&gt;=… method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">##  2 adagio  /Libra… 0.7.1   &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">##  3 ade4    /Libra… 1.7-15  &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;      &quot;ade4Tk… &lt;NA&gt;    </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">##  4 AER     /Libra… 1.2-9   &lt;NA&gt;     &quot;R (&gt;=… stats,… &lt;NA&gt;      &quot;boot, … &lt;NA&gt;    </span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">##  5 Amelia  /Libra… 1.7.6   &lt;NA&gt;     &quot;R (&gt;=… foreig… Rcpp (&gt;=… &quot;tcltk,… &lt;NA&gt;    </span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">##  6 arrayh… /Libra… 1.1-0   &lt;NA&gt;      &lt;NA&gt;   method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">##  7 askpass /Libra… 1.1     &lt;NA&gt;      &lt;NA&gt;   sys (&gt;… &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">##  8 assert… /Libra… 0.2.1   &lt;NA&gt;      &lt;NA&gt;   tools   &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">##  9 audio   /Libra… 0.1-7   &lt;NA&gt;     &quot;R (&gt;=… &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">## 10 backpo… /Libra… 1.1.6   &lt;NA&gt;     &quot;R (&gt;=… utils   &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">## # … with 297 more rows, and 7 more variables: License &lt;chr&gt;,</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">## #   License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;, OS_type &lt;chr&gt;,</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">## #   MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;, Built &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># data frame of all installed packages</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">local_pkgs &lt;-<span class="st"> </span><span class="kw">installed.packages</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="st">  </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">## # A tibble: 360 x 16</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">##  1 abind   /Libra… 1.4-5   &lt;NA&gt;     &quot;R (&gt;=… method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">##  2 adagio  /Libra… 0.7.1   &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co">##  3 ade4    /Libra… 1.7-15  &lt;NA&gt;     &quot;R (&gt;=… graphi… &lt;NA&gt;      &quot;ade4Tk… &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">##  4 AER     /Libra… 1.2-9   &lt;NA&gt;     &quot;R (&gt;=… stats,… &lt;NA&gt;      &quot;boot, … &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">##  5 Amelia  /Libra… 1.7.6   &lt;NA&gt;     &quot;R (&gt;=… foreig… Rcpp (&gt;=… &quot;tcltk,… &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">##  6 arrayh… /Libra… 1.1-0   &lt;NA&gt;      &lt;NA&gt;   method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">##  7 askpass /Libra… 1.1     &lt;NA&gt;      &lt;NA&gt;   sys (&gt;… &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">##  8 assert… /Libra… 0.2.1   &lt;NA&gt;      &lt;NA&gt;   tools   &lt;NA&gt;      &quot;testth… &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-16" data-line-number="16"><span class="co">##  9 audio   /Libra… 0.1-7   &lt;NA&gt;     &quot;R (&gt;=… &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17"><span class="co">## 10 backpo… /Libra… 1.1.7   &lt;NA&gt;     &quot;R (&gt;=… utils   &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    </span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18"><span class="co">## # … with 350 more rows, and 7 more variables: License &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19"><span class="co">## #   License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;, OS_type &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb2-20" data-line-number="20"><span class="co">## #   MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;, Built &lt;chr&gt;</span></a></code></pre></div>
 <p>This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with <code>sessioninfo::package_info()</code>, passing a vector of package names to the function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># get source details (cran, github...) from package_info()</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>local_details &lt;-<span class="st"> </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span>sessioninfo<span class="op">::</span><span class="kw">package_info</span>(<span class="dt">pkgs =</span> local_pkgs<span class="op">$</span>Package) <span class="op">%&gt;%</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">select</span>(package, <span class="dt">local_version =</span> ondiskversion, source) <span class="op">%&gt;%</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">## # A tibble: 293 x 3</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">##    package      local_version source        </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;         </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0)</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0)</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0)</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0)</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0)</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0)</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0)</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0)</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0)</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">## 10 backports    1.1.6         CRAN (R 4.0.0)</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># get source details (cran, github...) from package_info()</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">local_details &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span>sessioninfo<span class="op">::</span><span class="kw">package_info</span>(<span class="dt">pkgs =</span> local_pkgs<span class="op">$</span>Package) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">  </span><span class="kw">select</span>(package, <span class="dt">local_version =</span> ondiskversion, source) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">  </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">## # A tibble: 346 x 3</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">##    package      local_version source        </span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;         </span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">## 10 backports    1.1.7         CRAN (R 4.0.0)</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">## # … with 336 more rows</span></a></code></pre></div>
 <p>Notice that this new table has 14 fewer rows. That’s because <code>sessioninfo::package_info()</code> isn’t returning the base packages that show up in <code>installed.packages()</code>. That’s fine, since those will come with R 4.0 anyway.</p>
 <p>The <code>source</code> column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">filter</span>(local_details, <span class="kw">str_detect</span>(source, <span class="st">&quot;Github&quot;</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">## # A tibble: 6 x 3</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">##   package        local_version source                                   </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">##   &lt;chr&gt;          &lt;chr&gt;         &lt;chr&gt;                                    </span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">## 1 colorout       1.2-2         Github (jalvesaq/colorout@726d681)       </span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">## 2 emo            0.0.0.9000    Github (hadley/emo@3f03b11)              </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">## 3 rethinking     2.00          Github (rmcelreath/rethinking@f393f30)   </span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">## 4 Statamarkdown  0.4.5         Github (hemken/Statamarkdown@506cfc9)    </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">## 5 waffle         1.0.1         Github (hrbrmstr/waffle@3f61463)         </span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">## 6 xaringanthemer 0.2.0.9100    Github (gadenbuie/xaringanthemer@86233be)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">filter</span>(local_details, <span class="kw">str_detect</span>(source, <span class="st">&quot;Github&quot;</span>))</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">## # A tibble: 10 x 3</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">##    package              local_version source                                    </span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">##    &lt;chr&gt;                &lt;chr&gt;         &lt;chr&gt;                                     </span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">##  1 bookdown             0.18.3        Github (rstudio/bookdown@c5df29f)         </span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">##  2 colorout             1.2-2         Github (jalvesaq/colorout@726d681)        </span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">##  3 emo                  0.0.0.9000    Github (hadley/emo@3f03b11)               </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">##  4 mRkov                0.0.0.9000    Github (serrat839/mRkov@0f520e8)          </span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">##  5 rethinking           2.00          Github (rmcelreath/rethinking@f393f30)    </span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">##  6 rmarkdown            2.2.1         Github (rstudio/rmarkdown@dcd932f)        </span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">##  7 springerQuarantineB… 0.1.0         Github (renanxcortes/springerQuarantineBo…</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">##  8 Statamarkdown        0.4.5         Github (hemken/Statamarkdown@506cfc9)     </span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">##  9 texreg               1.36.28       Github (leifeld/texreg@c1da5c8)           </span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">## 10 waffle               1.0.1         Github (hrbrmstr/waffle@3f61463)</span></a></code></pre></div>
 </div>
 <div id="determining-install-source-by-comparing-package-versions" class="section level1">
 <h1>Determining install source by comparing package versions</h1>
 <p>Before you update R, you may be using packages installed from Github, even if those packages are also on CRAN. We want to compare our locally installed package versions against the versions on CRAN. If the CRAN versions are more recent, we can go ahead and get those packages from CRAN. If the Github versions are still the most recent (or the <em>only</em>) versions of some packages, we want to get them from Github.</p>
 <p>We will want to get a table of data on CRAN package versions. The <code>available.packages()</code> function returns info for <strong>all</strong> packages on CRAN.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># available.packages() returns pkg info for ALL pkgs on CRAN.</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">## # A tibble: 15,591 x 17</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">##  2 aaSEA   1.1.0   &lt;NA&gt;     R(&gt;= 3… &quot;DT(&gt;=… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  </span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">##  3 ABACUS  1.0.0   &lt;NA&gt;     R (&gt;= … &quot;ggplo… &lt;NA&gt;      rmarkdo… &lt;NA&gt;     GPL-3  </span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">##  4 abbyyR  0.5.5   &lt;NA&gt;     R (&gt;= … &quot;httr,… &lt;NA&gt;      testtha… &lt;NA&gt;     MIT + …</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">##  5 abc     2.1     &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">##  6 abc.da… 1.0     &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">##  7 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  </span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">##  8 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">##  9 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="co">## 10 abcdeF… 0.4     &lt;NA&gt;     Rglpk,…  &lt;NA&gt;   &lt;NA&gt;      LIM,syb… &lt;NA&gt;     GPL-2  </span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="co">## # … with 15,581 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># available.packages() returns pkg info for ALL pkgs on CRAN.</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">## # A tibble: 15,817 x 17</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">##  2 aaSEA   1.1.0   &lt;NA&gt;     R(&gt;= 3… &quot;DT(&gt;=… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">##  3 AATtoo… 0.0.1   &lt;NA&gt;     R (&gt;= … &quot;magri… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">##  4 ABACUS  1.0.0   &lt;NA&gt;     R (&gt;= … &quot;ggplo… &lt;NA&gt;      rmarkdo… &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">##  5 abbyyR  0.5.5   &lt;NA&gt;     R (&gt;= … &quot;httr,… &lt;NA&gt;      testtha… &lt;NA&gt;     MIT + …</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">##  6 abc     2.1     &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…</span></a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">##  7 abc.da… 1.0     &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL (&gt;…</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">##  8 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">##  9 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">## 10 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">## # … with 15,807 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></a></code></pre></div>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>slimmer_frame &lt;-<span class="st"> </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">left_join</span>(</span>
-<span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">x =</span> <span class="kw">select</span>(local_details, package, local_version, source),</span>
-<span id="cb6-4"><a href="#cb6-4"></a>    <span class="dt">y =</span> <span class="kw">select</span>(cran_pkgs, package, <span class="dt">cran_version =</span> version)</span>
-<span id="cb6-5"><a href="#cb6-5"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">## # A tibble: 293 x 4</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">##    package      local_version source         cran_version</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;       </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       </span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       </span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         </span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       </span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       </span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">## 10 backports    1.1.6         CRAN (R 4.0.0) 1.1.6       </span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">slimmer_frame &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw">left_join</span>(</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">x =</span> <span class="kw">select</span>(local_details, package, local_version, source),</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="dt">y =</span> <span class="kw">select</span>(cran_pkgs, package, <span class="dt">cran_version =</span> version)</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">## # A tibble: 346 x 4</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">##    package      local_version source         cran_version</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;       </span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       </span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       </span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      </span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       </span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       </span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       </span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         </span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       </span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       </span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.8       </span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">## # … with 336 more rows</span></a></code></pre></div>
 <p>Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: <strong>We want to install from Github only if our local Github version is more recent than the CRAN version.</strong> This also applies when there is no version of a package on CRAN.</p>
 <p>Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.</p>
 <p>There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, <em>even if</em> the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of <a href="https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f">StanHeaders</a>), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).</p>
 <p>The code below does this categorization using the <code>utils::compareVersion()</code> function, which interprets the version numbers so we don’t have to. We do an additional step to note the Github repostory for any package that we still want to obtain from Github.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>compare_frame &lt;-<span class="st"> </span>slimmer_frame <span class="op">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">group_by</span>(package) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">mutate</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="dt">source_locale =</span> <span class="kw">case_when</span>(</span>
-<span id="cb7-5"><a href="#cb7-5"></a>      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;Github&quot;</span>) <span class="op">~</span><span class="st"> &quot;Github&quot;</span>,</span>
-<span id="cb7-7"><a href="#cb7-7"></a>      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="st">        </span><span class="kw">is.na</span>(cran_version) <span class="op">&amp;</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;CRAN&quot;</span>) <span class="op">~</span><span class="st"> &quot;Unavailable on CRAN&quot;</span>,</span>
-<span id="cb7-10"><a href="#cb7-10"></a>      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="st">        </span>(<span class="kw">is.na</span>(cran_version) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) <span class="op">&amp;</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;CRAN&quot;</span>) <span class="op">~</span><span class="st"> &quot;Downgraded on CRAN&quot;</span>,</span>
-<span id="cb7-13"><a href="#cb7-13"></a>      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>) <span class="op">~</span><span class="st"> &quot;CRAN&quot;</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a>    ),</span>
-<span id="cb7-15"><a href="#cb7-15"></a>    <span class="dt">github_repo =</span> <span class="kw">case_when</span>(</span>
-<span id="cb7-16"><a href="#cb7-16"></a>      source_locale <span class="op">==</span><span class="st"> &quot;Github&quot;</span> <span class="op">~</span><span class="st"> </span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="st">        </span><span class="kw">str_split</span>(<span class="dt">string =</span> source, <span class="dt">pattern =</span> <span class="st">&quot;@&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)[,<span class="dv">1</span>] <span class="op">%&gt;%</span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="st">        </span><span class="kw">str_replace</span>(<span class="st">&quot;Github </span><span class="ch">\\</span><span class="st">(&quot;</span>, <span class="st">&quot;&quot;</span>),</span>
-<span id="cb7-19"><a href="#cb7-19"></a>      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="ot">NA</span>)</span>
-<span id="cb7-20"><a href="#cb7-20"></a>    ),</span>
-<span id="cb7-21"><a href="#cb7-21"></a>  ) <span class="op">%&gt;%</span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="st">  </span><span class="kw">print</span>()</span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">## # A tibble: 293 x 6</span></span>
-<span id="cb7-25"><a href="#cb7-25"></a><span class="co">##    package     local_version source       cran_version source_locale github_repo</span></span>
-<span id="cb7-26"><a href="#cb7-26"></a><span class="co">##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;      </span></span>
-<span id="cb7-27"><a href="#cb7-27"></a><span class="co">##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-28"><a href="#cb7-28"></a><span class="co">##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-29"><a href="#cb7-29"></a><span class="co">##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-30"><a href="#cb7-30"></a><span class="co">##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-31"><a href="#cb7-31"></a><span class="co">##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-32"><a href="#cb7-32"></a><span class="co">##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-33"><a href="#cb7-33"></a><span class="co">##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-34"><a href="#cb7-34"></a><span class="co">##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-35"><a href="#cb7-35"></a><span class="co">##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-36"><a href="#cb7-36"></a><span class="co">## 10 backports   1.1.6         CRAN (R 4.0… 1.1.6        CRAN          &lt;NA&gt;       </span></span>
-<span id="cb7-37"><a href="#cb7-37"></a><span class="co">## # … with 283 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">compare_frame &lt;-<span class="st"> </span>slimmer_frame <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw">group_by</span>(package) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    <span class="dt">source_locale =</span> <span class="kw">case_when</span>(</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;Github&quot;</span>) <span class="op">~</span><span class="st"> &quot;Github&quot;</span>,</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">        </span><span class="kw">is.na</span>(cran_version) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;CRAN&quot;</span>) <span class="op">~</span><span class="st"> &quot;Unavailable on CRAN&quot;</span>,</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">        </span>(<span class="kw">is.na</span>(cran_version) <span class="op">==</span><span class="st"> </span><span class="ot">FALSE</span>) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="st">        </span><span class="kw">str_detect</span>(source, <span class="st">&quot;CRAN&quot;</span>) <span class="op">~</span><span class="st"> &quot;Downgraded on CRAN&quot;</span>,</a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">      <span class="kw">compareVersion</span>(local_version, cran_version) <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>) <span class="op">~</span><span class="st"> &quot;CRAN&quot;</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">    ),</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15">    <span class="dt">github_repo =</span> <span class="kw">case_when</span>(</a>
+<a class="sourceLine" id="cb7-16" data-line-number="16">      source_locale <span class="op">==</span><span class="st"> &quot;Github&quot;</span> <span class="op">~</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="st">        </span><span class="kw">str_split</span>(<span class="dt">string =</span> source, <span class="dt">pattern =</span> <span class="st">&quot;@&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)[,<span class="dv">1</span>] <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="st">        </span><span class="kw">str_replace</span>(<span class="st">&quot;Github </span><span class="ch">\\</span><span class="st">(&quot;</span>, <span class="st">&quot;&quot;</span>),</a>
+<a class="sourceLine" id="cb7-19" data-line-number="19">      <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span><span class="kw">as.character</span>(<span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb7-20" data-line-number="20">    ),</a>
+<a class="sourceLine" id="cb7-21" data-line-number="21">  ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="st">  </span><span class="kw">print</span>()</a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">## # A tibble: 346 x 6</span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">##    package     local_version source       cran_version source_locale github_repo</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;      </span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-30" data-line-number="30"><span class="co">##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-31" data-line-number="31"><span class="co">##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-32" data-line-number="32"><span class="co">##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-33" data-line-number="33"><span class="co">##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-34" data-line-number="34"><span class="co">##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-35" data-line-number="35"><span class="co">##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-36" data-line-number="36"><span class="co">## 10 backports   1.1.7         CRAN (R 4.0… 1.1.8        CRAN          &lt;NA&gt;       </span></a>
+<a class="sourceLine" id="cb7-37" data-line-number="37"><span class="co">## # … with 336 more rows</span></a></code></pre></div>
 </div>
 <div id="updating-r-and-reinstalling-packages" class="section level1">
 <h1>Updating R and reinstalling packages</h1>
 <p>When we are satisfied with our decisions about where to install a package from, save this comparison table to file.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># output data location</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw">dir.create</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>))</span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># output file</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>out_file &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">str_glue</span>(<span class="st">&quot;pkg-data_{Sys.Date()}.rds&quot;</span>))</span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw">write_rds</span>(compare_frame, <span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, out_file))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># output data location</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">dir.create</span>(<span class="kw">here</span>(<span class="st">&quot;data&quot;</span>))</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># output file</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">out_file &lt;-<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">str_glue</span>(<span class="st">&quot;pkg-data_{Sys.Date()}.rds&quot;</span>))</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="kw">write_rds</span>(compare_frame, <span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, out_file))</a></code></pre></div>
 <p>After updating, we reopen R and install our packages according to our classifications. We want to begin by installing <code>{remotes}</code> to enable installation from Github.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># to install from github</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># should still be operating in your working directory</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># so downloading {here} makes sense also</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="kw">install.packages</span>(<span class="st">&quot;here&quot;</span>)</span>
-<span id="cb9-7"><a href="#cb9-7"></a></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># read package data</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a>pkgs &lt;-<span class="st"> </span><span class="kw">readRDS</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;pkg-data_2020-04-25.rds&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># to install from github</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># should still be operating in your working directory</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># so downloading {here} makes sense also</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw">install.packages</span>(<span class="st">&quot;here&quot;</span>)</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co"># read package data</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9">pkgs &lt;-<span class="st"> </span><span class="kw">readRDS</span>(here<span class="op">::</span><span class="kw">here</span>(<span class="st">&quot;data&quot;</span>, <span class="st">&quot;pkg-data_2020-04-25.rds&quot;</span>))</a></code></pre></div>
 <p>Everything that we want to install from Github, we install by iterating <code>remotes::install_github</code> over the github repository slugs that we saved previously. This requires us to write the code in “hard mode” because we aren’t using tidyverse dialect.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># install from github repos</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>github_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">==</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;github_repo&quot;</span>]]</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(github_pkgs)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co"># install from github repos</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">github_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">==</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;github_repo&quot;</span>]]</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">remotes<span class="op">::</span><span class="kw">install_github</span>(github_pkgs)</a></code></pre></div>
 <p>Finally, everything that we said we wouldn’t get from Github, we get by using plain ol’ <code>install.packages()</code>. Before doing this, you may find it beneficial to filter out some of the packages that you don’t use anymore or that maybe we only installed as dependencies for other packages.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># install from cran with remaining package names</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>cran_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">!=</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;package&quot;</span>]]</span>
-<span id="cb11-3"><a href="#cb11-3"></a></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="kw">install.packages</span>(cran_pkgs)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># install from cran with remaining package names</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">cran_pkgs &lt;-<span class="st"> </span>pkgs[pkgs<span class="op">$</span>source_locale <span class="op">!=</span><span class="st"> &quot;Github&quot;</span>, ][[<span class="st">&quot;package&quot;</span>]]</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw">install.packages</span>(cran_pkgs)</a></code></pre></div>
 <p>This should get you (more or less) up and running with R 4.0 and all of your old packages.</p>
 <p>Fair warning: I’m already getting burned by some C++ configuration problems for packages that want to compile from source. I think this is particular to my own computer and the klugey fixes I undertook to set up <code>{rstan}</code> with MacOS Catalina. I remember reading somewhere that R 4.0 fixed some of the Stan x Catalina problems, so maybe I will confront these choices again soon, but I will cross that bridge when I get to it.</p>
 </div>
@@ -768,7 +770,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <hr />
 <ol>
 <li id="fn1"><p>
-And maybe I will do a fresh install of <em>everything</em> once the semester is over.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+And maybe I will do a fresh install of <em>everything</em> once the semester is over.<a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
