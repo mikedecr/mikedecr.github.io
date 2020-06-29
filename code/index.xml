@@ -60,15 +60,5 @@
 </description>
     </item>
     
-    <item>
-      <title>Blank Project Template</title>
-      <link>/code/project-template/</link>
-      <pubDate>Tue, 09 Jul 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/code/project-template/</guid>
-      <description>&lt;p&gt;A blank Git repository for starting a new (research) project.&lt;/p&gt;
-</description>
-    </item>
-    
   </channel>
 </rss>

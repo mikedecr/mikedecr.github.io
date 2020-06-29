@@ -19,12 +19,12 @@
   
   <url>
     <loc>/research/dissertation/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/about/</loc>
-    <lastmod>2020-04-22T11:49:06-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -74,7 +74,7 @@
   
   <url>
     <loc>/publication/nonvoters/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -84,12 +84,7 @@
   
   <url>
     <loc>/teaching/computing-811/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/project-template/</loc>
-    <lastmod>2019-08-25T15:58:16-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -99,12 +94,12 @@
   
   <url>
     <loc>/research/gender-gap/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/research/causal-bayes/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -114,12 +109,12 @@
   
   <url>
     <loc>/research/forecast-uncertainty/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/publication/gender-2016/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -129,17 +124,17 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/admin/</loc>
-    <lastmod>2020-04-27T11:59:20-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -149,7 +144,7 @@
   
   <url>
     <loc>/tags/computational-methods/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -158,13 +153,13 @@
   </url>
   
   <url>
-    <loc>/tags/methods/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
+    <loc>/categories/methods/</loc>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/methods/</loc>
-    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
+    <loc>/tags/methods/</loc>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -174,7 +169,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -198,28 +193,28 @@
   </url>
   
   <url>
-    <loc>/publication_types/3/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <loc>/publication_types/2/</loc>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/election-administration/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/elections/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/kenneth-r.-mayer/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/publication_types/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -240,6 +235,11 @@
   <url>
     <loc>/post/bayes-mediation/</loc>
     <lastmod>2019-06-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/publication_types/3/</loc>
+    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
   </url>
   
   <url>
@@ -279,12 +279,12 @@
   
   <url>
     <loc>/authors/barry-c.-burden/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/evan-crawford/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>
@@ -314,12 +314,7 @@
   
   <url>
     <loc>/tags/teaching/</loc>
-    <lastmod>2020-05-01T11:28:09-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/2/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
+    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
   </url>
   
   <url>

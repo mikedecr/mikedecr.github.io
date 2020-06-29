@@ -655,7 +655,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-2" data-line-number="2">cran_pkgs &lt;-<span class="st"> </span><span class="kw">available.packages</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw">as_tibble</span>(<span class="dt">.name_repair =</span> tolower) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"><span class="st">  </span><span class="kw">print</span>()</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">## # A tibble: 15,817 x 17</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">## # A tibble: 15,930 x 17</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">##    package version priority depends imports linkingto suggests enhances license</span></a>
 <a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  </span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…</span></a>
@@ -668,7 +668,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">##  8 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  </span></a>
 <a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">##  9 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></a>
 <a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">## 10 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  </span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">## # … with 15,807 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">## # … with 15,920 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</span></a></code></pre></div>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
