@@ -7,7 +7,7 @@
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
     <language>en-us</language>
     <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Sun, 26 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	    <atom:link href="/tags/computational-methods/index.xml" rel="self" type="application/rss+xml" />
     
@@ -171,6 +171,232 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <guid>/teaching/latex-workshop/</guid>
       <description>&lt;p&gt;Every year, the UW Political Science department holds a $\mathrm{\LaTeX}$ workshop&amp;mdash;a few introductory training sessions for graduate students on document preparation. I have been involved with organizing this workshop since 2015, and have been leading it since 2017.&lt;/p&gt;
 &lt;p&gt;All materials for the worksho, source code and all, are publicly available (in their 2018 vintage) on my &lt;a href=&#34;https://github.com/mikedecr/latex-workshop-2018&#34;&gt;Github&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Non-Flat Implications of Flat Priors</title>
+      <link>/post/nonflat-implications/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/nonflat-implications/</guid>
+      <description>
+
+
+&lt;div id=&#34;motivation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;Many researchers, when they’re introduced to Bayesian methods, are nervous about the possibility that their prior distributions will corrupt their posterior inferences.
+Since they know that the posterior distribution is a precision-weighted average of the prior and the data (or “likelihood”), it initially makes sense to err toward a flatter, more diffuse prior density for model parameters.
+These diffuse densities let the model put relatively more weight on data, which feels safer.&lt;/p&gt;
+&lt;p&gt;The purpose of this post is to highlight a few areas where this “default tendency” to use flat priors runs into unexpected consequences.
+We show how functions of model parameters have &lt;em&gt;implied priors&lt;/em&gt;: density functions of their own that inherit the prior uncertainty about the parameters that compose the function.
+These implied priors can have strange shapes that you wouldn’t anticipate based on the raw parameters.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;
+We then show two cases where these strange shapes appear.
+The first case comes from &lt;a href=&#34;/publication/nonvoters&#34;&gt;my own published work on voter ID in Wisconsin&lt;/a&gt;.
+The second case is a hypothetical experiment where we “accidentally” create a non-flat prior for the treatment effect in a randomized experiment where we weren’t expecting it.&lt;/p&gt;
+&lt;p&gt;Together, these exercises give concrete examples for the way flat priors and “uninformative” don’t necessarily mean the same thing.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;implied-priors&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Implied priors&lt;/h2&gt;
+&lt;p&gt;We’ll begin with a notion of the &lt;em&gt;implied prior&lt;/em&gt;.
+With some random variable &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt;, we can construct a function &lt;span class=&#34;math inline&#34;&gt;\(f\left(\theta\right)\)&lt;/span&gt;, which is necessarily a random variable as well.
+If &lt;span class=&#34;math inline&#34;&gt;\(\theta\)&lt;/span&gt; has a probability distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(\theta\right)\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(f\left(\theta\right)\)&lt;/span&gt; will have some probability distribution &lt;span class=&#34;math inline&#34;&gt;\(p\left(f\left(\theta\right)\right)\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;A simple example.
+Imagine some standard normal variable &lt;span class=&#34;math inline&#34;&gt;\(\nu\)&lt;/span&gt; that is distributed &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Normal}\left(0, 1\right)\)&lt;/span&gt; prior.
+If we have some function &lt;span class=&#34;math inline&#34;&gt;\(f(\nu) = \mu + \sigma\nu\)&lt;/span&gt;, then &lt;span class=&#34;math inline&#34;&gt;\(f(\nu)\)&lt;/span&gt; will have a probability distribution.
+In this case, it is straightforward to see that this prior would be &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Normal}(\mu, \sigma)\)&lt;/span&gt;, but in more complicated examples it won’t be so easy to glean the implied prior directly.
+We can create this example using code, setting &lt;span class=&#34;math inline&#34;&gt;\(\mu = 4\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma = 2\)&lt;/span&gt;, to reassure you that I’m telling the truth.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;quot;tidyverse&amp;quot;)
+library(&amp;quot;hrbrthemes&amp;quot;)
+library(&amp;quot;latex2exp&amp;quot;)
+library(&amp;quot;viridisLite&amp;quot;)
+
+theme_ipsum(base_family = &amp;quot;Fira Sans&amp;quot;) %+replace%
+  theme(
+    panel.grid.minor = element_blank(),
+    axis.title.x.bottom = element_text(
+      margin = margin(t = 0.35, unit = &amp;quot;cm&amp;quot;),
+      size = rel(1.5)
+    )
+  ) %&amp;gt;%
+  theme_set()
+accent &amp;lt;- viridis(n = 1, begin = 0.5, end = 0.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# set mu and sigma values
+mu &amp;lt;- 4
+sigma &amp;lt;- 2
+
+# simulate nu and f(nu)
+normal_example &amp;lt;- 
+  tibble(
+    nu = rnorm(100000),
+    f_nu = mu + (nu * sigma)
+  ) %&amp;gt;%
+  print(n = 4) 
+## # A tibble: 100,000 x 2
+##        nu  f_nu
+##     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;
+## 1  0.669   5.34
+## 2 -0.448   3.10
+## 3  0.0987  4.20
+## 4  0.591   5.18
+## # … with 99,996 more rows
+
+# implied prior is Normal(mu, sigma)
+ggplot(normal_example) +
+  aes(x = f_nu) +
+  geom_histogram(binwidth = .1, fill = accent) +
+  geom_vline(
+    xintercept = c(mu - sigma, mu + sigma),
+    linetype = &amp;quot;dashed&amp;quot;,
+    size = 0.25
+  ) +
+  geom_vline(xintercept = mu) +
+  scale_x_continuous(
+    breaks = seq(mu - 5*sigma, mu + 5*sigma, sigma)
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = &amp;quot;Implied Prior for Transformed Normal&amp;quot;,
+    subtitle = &amp;quot;Histogram of prior samples&amp;quot;,
+    x = TeX(&amp;quot;$f(\\nu) = \\mu + \\sigma\\nu, \\; \\nu \\sim N(0, 1)$&amp;quot;),
+    y = NULL
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/nonflat-implied-priors/index_files/figure-html/implied-normal-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Bayesians will recognize this as a “non-centered parameterization” of a Normal distribution, or a normal distribution that sneaks the mean and standard deviation values out of the random variable.
+Bayesian modelers invoke this trick all the time in hierarchical models, since sampling &lt;span class=&#34;math inline&#34;&gt;\(\nu\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; separately is easier for a computer to do than sampling a distribution for &lt;span class=&#34;math inline&#34;&gt;\(f(\nu)\)&lt;/span&gt; that itself contains &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;.
+Parameterizations that de-correlate these parameters are generally easier to sampler &lt;em&gt;and&lt;/em&gt;, conveniently, more manageable to set priors for.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;flat-priors-meet-nonlinear-transformations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Flat priors meet nonlinear transformations&lt;/h2&gt;
+&lt;p&gt;Suppose we have a parameter &lt;span class=&#34;math inline&#34;&gt;\(\pi\)&lt;/span&gt; has a flat prior in the &lt;span class=&#34;math inline&#34;&gt;\([0, 1]\)&lt;/span&gt; interval, and we calculate some function &lt;span class=&#34;math inline&#34;&gt;\(g(\pi)\)&lt;/span&gt;.
+Will &lt;span class=&#34;math inline&#34;&gt;\(g(\pi)\)&lt;/span&gt; have a flat distribution?
+It depends.&lt;/p&gt;
+&lt;p&gt;I encountered an example of this in my work with Ken Mayer on &lt;a href=&#34;/publication/nonvoters&#34;&gt;voter ID in Wisconsin&lt;/a&gt; in Wisconsin,&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;
+although I didn’t put this lesson about prior flatness in the paper.
+We wanted to estimate the &lt;em&gt;number of eligible registered voters&lt;/em&gt; in two Wisconsin counties for whom Wisconsin’s voter ID requirement hindered their voting in 2016.
+This estimate contains three ingredients.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(N\)&lt;/span&gt;: the number of individual records in the registered voter file for the target population.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt;: the proportion of the population in the voter file that was eligible to vote in 2016.
+This is relevant because voter files contain individuals who moved, died, or who were otherwise ineligible, that have to be cleaned out of voter files periodically.
+The population size must be penalized by &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt; to remove these ineligible records from our estimate.
+Estimated by coding a finite sample of the voter file.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\pi\)&lt;/span&gt;: the proportion of eligible registrants who experienced ID-related difficulty voting.
+Estimated using a survey sample of registrants in the voter file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The quantity we want to estimate is &lt;span class=&#34;math inline&#34;&gt;\(N\epsilon\pi\)&lt;/span&gt;, an eligibility-penalized population estimate for the number of voters affected by the voter ID requirement.
+Suppose that we know &lt;span class=&#34;math inline&#34;&gt;\(N = 229,625\)&lt;/span&gt; from the voter file, but &lt;span class=&#34;math inline&#34;&gt;\(\pi\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\epsilon\)&lt;/span&gt; are proportions that must be estimated.
+We give each proportion a flat &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{Beta}(1, 1)\)&lt;/span&gt; prior on the &lt;span class=&#34;math inline&#34;&gt;\([0, 1]\)&lt;/span&gt; interval.
+What is our implied prior for the population estimate?&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tibble(
+  pi = rbeta(10000, 1, 1),
+  epsilon = rbeta(10000, 1, 1),
+  N = 229625,
+  pop_estimate = N * epsilon * pi
+) %&amp;gt;%
+  ggplot() +
+  aes(x = pop_estimate) +
+  geom_histogram(fill = accent, bins = 100, boundary = 0) +
+  labs(
+    title = &amp;quot;Implied Prior for Population Estimate&amp;quot;,
+    subtitle = TeX(&amp;quot;Histogram of prior simulations&amp;quot;),
+    x = TeX(&amp;quot;Population estimate $= N \\epsilon \\pi$&amp;quot;),
+    y = NULL
+  ) +
+  scale_x_continuous(labels = scales::comma)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/nonflat-implied-priors/index_files/figure-html/voter-id-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Seriously, what?
+If I had plopped this graphic into my paper and said that it was my prior for this population quantity, I would have been in trouble.
+Look at how swoopy that prior looks!
+How can that be an uninformative prior?
+Well, we know that the random components have vague priors, so this is the natural result of sending these parameters through a nonlinear function.
+If you don’t like it, you should think about how this quantity is parameterized and whether some other priors make more sense.&lt;/p&gt;
+&lt;p&gt;Bayesians may recognize this feature of prior distributions as well, where nonlinear functions of parameters have a density that does not simply reflect a shifting or scaling of the original density.
+This happens because nonlinear transformations of parameters can “squish” or “stretch” probability mass into different areas/volumes than they were previously, thereby changing probability density.
+If we wanted to write out the new density, we would need to start with the old density and use (spooky voice) &lt;em&gt;&lt;strong&gt;the Jacobian&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;honey-i-shrunk-my-treatment-effect&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Honey, I shrunk my treatment effect&lt;/h2&gt;
+&lt;p&gt;When we think about causal inference, we are thinking about methods that want to be light on their assumptions.
+If we imagine a Bayesian interpretation of this experiment (even if we don’t specify the Bayesian &lt;em&gt;model&lt;/em&gt; per se), it makes sense that we want vague priors on important quantities in order to “let the data speak” instead of deriving results from the prior.
+This turns out to be less straightforward than you would think.&lt;/p&gt;
+&lt;p&gt;Imagine an experiment where we treat individuals with an advertisement or we don’t, &lt;span class=&#34;math inline&#34;&gt;\(z_{i} \in \{0, 1\}\)&lt;/span&gt;, and then we measure whether they intend to vote for the Democratic candidate or not, &lt;span class=&#34;math inline&#34;&gt;\(y_{i} \in \{0, 1\}\)&lt;/span&gt;.
+My treatment effect &lt;span class=&#34;math inline&#34;&gt;\(\tau\)&lt;/span&gt; is the comparison between the Democratic vote proportion in the control group, &lt;span class=&#34;math inline&#34;&gt;\(\mu_{z = 0}\)&lt;/span&gt;, and the Democratic vote proportion in the treatment group, &lt;span class=&#34;math inline&#34;&gt;\(\mu_{z = 1}\)&lt;/span&gt;.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \tau = \mu_{1} - \mu_{0}
+\end{align}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;If we estimate this effect with a linear model, we have a choice about how to parameterize the regression function.
+We could use a constant and a treatment effect with error term &lt;span class=&#34;math inline&#34;&gt;\(u_{i}\)&lt;/span&gt;,
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{i} = \mu_{0} + \tau z_{i} + u_{i}  
+\end{align}\]&lt;/span&gt;
+or we have two intercepts for each condition.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  y_{i} = \mu_{z[i]} + u_{i}
+\end{align}\]&lt;/span&gt;
+Bayesians think it makes more sense to use the second parameterization.
+Why?
+If we want to set the same prior on both groups, it’s easier to do that when we can directly set priors on each mean instead of on one mean and the difference-in-means.
+So let’s take that approach, giving each vote share a flat prior that says any vote share for both groups is &lt;em&gt;a priori&lt;/em&gt; equally likely. I will write these as flat Beta densities, but you could imagine them as standard Uniform densities as well.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align}
+  \mu_{1}, \mu_{0} \sim \mathrm{Beta}(1, 1)
+\end{align}\]&lt;/span&gt;
+What is the prior for the treatment effect (the difference-in-means)?
+Not flat!
+We will again simulate to see the effect of combining parameters into a single function.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# simulate means and calculate difference
+tibble(
+  mu_0 = rbeta(100000, 1, 1), 
+  mu_1 = rbeta(100000, 1, 1),
+  trt = mu_1 - mu_0 
+) %&amp;gt;%
+  ggplot() +
+  aes(x = trt) +
+  geom_histogram(fill = accent, binwidth = .05, boundary = 0) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = &amp;quot;Implied Prior for Treatment Effect&amp;quot;,
+    subtitle = &amp;quot;Histogram of prior samples&amp;quot;,
+    x = &amp;quot;Difference in means&amp;quot;,
+    y = NULL
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/nonflat-implied-priors/index_files/figure-html/rct-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;What happened to my vague prior beliefs?
+Why do I have this non-flat prior for something I thought I wanted to have vague information for?&lt;a href=&#34;#fn3&#34; class=&#34;footnote-ref&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It still is a vague prior, but we’re wrong to expect it to be flat.
+Why?
+Well, averaging over my prior uncertainty in both groups, my expected difference in means ought to be &lt;em&gt;mean&lt;/em&gt; zero (natch).
+But more than that, the reason why we get a &lt;em&gt;mode&lt;/em&gt; at zero there are many more to produce differences near zero with my raw means than differences far from zero.
+The only way to get big differences (near &lt;span class=&#34;math inline&#34;&gt;\(-1\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt;) is for both means to be far apart, which isn’t as likely to happen randomly as two means that are closer together in the prior.
+When we think about the treatment effect prior in this way, we can understand why this actually feels &lt;em&gt;less informed&lt;/em&gt; than a direct flat prior for the treatment effect.
+Putting a flat prior on the treatment effect is saying that we think big differences are just as likely as small differences.
+This is like a prior that says my group means should be negatively correlated, effectively upweighting bigger differences from what we’d otherwise expect.
+Weird!
+I’d rather set reasonable priors for my means and let my treatment prior do what it do.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;flat-priors-often-have-non-flat-implications&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Flat priors often have non-flat implications&lt;/h2&gt;
+&lt;p&gt;These implications feel strange at first, but they are all around us whether or not we notice them.
+The flatness of a prior (or any shape, flat or not) is a &lt;em&gt;relative&lt;/em&gt; feature of a model parameterization or a quantity of interest, not an &lt;em&gt;absolute&lt;/em&gt; one.
+Inasmuch as we believe priors are at work even when we don’t want to think about them—i.e. we accept Bayesian models as generalizations of likelihood models—we should respect how transforming a likelihood affects &lt;a href=&#34;https://www.mdpi.com/1099-4300/19/10/555&#34;&gt;which parameters are exposed to the researcher, and which spaces those parameters are defined in&lt;/a&gt;.
+We should know that flat doesn’t imply uninformative, and that non-flat doesn’t imply informative.
+What we’re seeing here is that flatness begets non-flatness in tons of circumstances, and that’s totally ordinary.
+And more examples of how prior predictive checks show us what our model thinks about key quantities of interest.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;
+These strange shapes tend to be extremely useful in practice.
+For example, it is straightforward to create Bayesian versions of “L1” and “L2” by combining parameters with particular densities.
+Topic for a future post maybe.&lt;a href=&#34;#fnref1&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;
+Or see the &lt;a href=&#34;https://www.liebertpub.com/doi/10.1089/elj.2018.0536&#34;&gt;published version&lt;/a&gt;.&lt;a href=&#34;#fnref2&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;
+You’ve probably seen this phenomenon previously in our stats education.
+If you keep adding and subtracting more uniform variables, we would approach a Normal distribution.&lt;a href=&#34;#fnref3&#34; class=&#34;footnote-back&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
     </item>
     
