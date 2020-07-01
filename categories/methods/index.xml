@@ -102,7 +102,7 @@ ggplot(normal_example) +
 &lt;p&gt;&lt;img src=&#34;/post/nonflat-implied-priors/index_files/figure-html/implied-normal-1.png&#34; width=&#34;100%&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Bayesians will recognize this as a “non-centered parameterization” of a Normal distribution, or a normal distribution that sneaks the mean and standard deviation values out of the random variable.
 Bayesian modelers invoke this trick all the time in hierarchical models, since sampling &lt;span class=&#34;math inline&#34;&gt;\(\nu\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, and &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt; separately is easier for a computer to do than sampling a distribution for &lt;span class=&#34;math inline&#34;&gt;\(f(\nu)\)&lt;/span&gt; that itself contains &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(\sigma\)&lt;/span&gt;.
-Parameterizations that de-correlate these parameters are generally easier to sampler &lt;em&gt;and&lt;/em&gt;, conveniently, more manageable to set priors for.&lt;/p&gt;
+Parameterizations that de-correlate these parameters are generally easier to sample &lt;em&gt;and&lt;/em&gt;, conveniently, more manageable to set priors for.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;flat-priors-meet-nonlinear-transformations&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Flat priors meet nonlinear transformations&lt;/h2&gt;
