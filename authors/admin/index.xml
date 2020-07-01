@@ -253,7 +253,7 @@ Why do I have this non-flat prior for something I thought I wanted to have vague
 &lt;p&gt;It still is a vague prior, but we’re wrong to expect it to be flat.
 Why?
 Well, averaging over my prior uncertainty in both groups, my expected difference in means ought to be &lt;em&gt;mean&lt;/em&gt; zero (natch).
-But more than that, the reason why we get a &lt;em&gt;mode&lt;/em&gt; at zero there are many more to produce differences near zero with my raw means than differences far from zero.
+But more than that, the reason why we get a &lt;em&gt;mode&lt;/em&gt; at zero there are many more ways to produce differences near zero with my raw means than differences far from zero.
 The only way to get big differences (near &lt;span class=&#34;math inline&#34;&gt;\(-1\)&lt;/span&gt; or &lt;span class=&#34;math inline&#34;&gt;\(1\)&lt;/span&gt;) is for both means to be far apart, which isn’t as likely to happen randomly as two means that are closer together in the prior.
 When we think about the treatment effect prior in this way, we can understand why this actually feels &lt;em&gt;less informed&lt;/em&gt; than a direct flat prior for the treatment effect.
 Putting a flat prior on the treatment effect is saying that we think big differences are just as likely as small differences.
