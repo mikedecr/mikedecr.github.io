@@ -335,7 +335,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; data-line-number=&#34;2&#34;&gt;local_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;installed.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 360 x 16&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 361 x 16&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind   /Libra… 1.4-5   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
@@ -348,7 +348,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assert… /Libra… 0.2.1   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   tools   &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio   /Libra… 0.1-7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backpo… /Libra… 1.1.7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… utils   &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 350 more rows, and 7 more variables: License &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 351 more rows, and 7 more variables: License &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   License_is_FOSS &amp;lt;chr&amp;gt;, License_restricts_use &amp;lt;chr&amp;gt;, OS_type &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   MD5sum &amp;lt;chr&amp;gt;, NeedsCompilation &amp;lt;chr&amp;gt;, Built &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with &lt;code&gt;sessioninfo::package_info()&lt;/code&gt;, passing a vector of package names to the function.&lt;/p&gt;
@@ -358,7 +358,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(package, &lt;span class=&#34;dt&#34;&gt;local_version =&lt;/span&gt; ondiskversion, source) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 346 x 3&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 3&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source        &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;         &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
@@ -371,7 +371,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat   0.2.1         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio        0.1-7         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports    1.1.7         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 336 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Notice that this new table has 14 fewer rows. That’s because &lt;code&gt;sessioninfo::package_info()&lt;/code&gt; isn’t returning the base packages that show up in &lt;code&gt;installed.packages()&lt;/code&gt;. That’s fine, since those will come with R 4.0 anyway.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;source&lt;/code&gt; column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(local_details, &lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;Github&amp;quot;&lt;/span&gt;))&lt;/a&gt;
@@ -397,7 +397,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; data-line-number=&#34;2&#34;&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;available.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;.name_repair =&lt;/span&gt; tolower) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,944 x 17&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,991 x 17&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package version priority depends imports linkingto suggests enhances license&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/a&gt;
@@ -410,7 +410,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,934 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,981 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;
@@ -420,7 +420,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-4&#34; data-line-number=&#34;4&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(cran_pkgs, package, &lt;span class=&#34;dt&#34;&gt;cran_version =&lt;/span&gt; version)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-5&#34; data-line-number=&#34;5&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 346 x 4&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 4&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source         cran_version&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       &lt;/span&gt;&lt;/a&gt;
@@ -433,7 +433,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb6-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.8       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 336 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: &lt;strong&gt;We want to install from Github only if our local Github version is more recent than the CRAN version.&lt;/strong&gt; This also applies when there is no version of a package on CRAN.&lt;/p&gt;
 &lt;p&gt;Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.&lt;/p&gt;
 &lt;p&gt;There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, &lt;em&gt;even if&lt;/em&gt; the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of &lt;a href=&#34;https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f&#34;&gt;StanHeaders&lt;/a&gt;), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).&lt;/p&gt;
@@ -461,7 +461,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-21&#34; data-line-number=&#34;21&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-22&#34; data-line-number=&#34;22&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-23&#34; data-line-number=&#34;23&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-24&#34; data-line-number=&#34;24&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 346 x 6&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-24&#34; data-line-number=&#34;24&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 6&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-25&#34; data-line-number=&#34;25&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package     local_version source       cran_version source_locale github_repo&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-26&#34; data-line-number=&#34;26&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;      &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-27&#34; data-line-number=&#34;27&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
@@ -474,7 +474,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-34&#34; data-line-number=&#34;34&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-35&#34; data-line-number=&#34;35&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-36&#34; data-line-number=&#34;36&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports   1.1.7         CRAN (R 4.0… 1.1.8        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-37&#34; data-line-number=&#34;37&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 336 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-37&#34; data-line-number=&#34;37&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;updating-r-and-reinstalling-packages&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Updating R and reinstalling packages&lt;/h1&gt;
@@ -527,15 +527,15 @@ And maybe I will do a fresh install of &lt;em&gt;everything&lt;/em&gt; once the 
       <description>
 
 
-&lt;div id=&#34;this-is-a-post-about-temptation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;This is a post about temptation&lt;/h1&gt;
+&lt;div id=&#34;this-is-a-post-about-temptation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;This is a post about temptation&lt;/h2&gt;
 &lt;p&gt;Or, resisting temptations when presenting statistical results.&lt;/p&gt;
 &lt;p&gt;When you build a model to answer a question, it is often tempting to make a graphic about the &lt;em&gt;coolest thing about the model&lt;/em&gt;. Maybe you learned something new to build the model, or you noticed and corrected an important structure in the data, so naturally you want to show off your good work. The purpose of this post is to &lt;strong&gt;reflect on why this practice isn’t useful for communicating statistical results&lt;/strong&gt;. Instead, we should be communicating the information that will help the audience grasp the important takeaways of the analysis. A different focus entirely.&lt;/p&gt;
 &lt;p&gt;This is almost too obvious, but it is easier said than done. Researchers wrestle with it in different ways based on our audiences, our professional goals, and (to be honest) our insecurities. Speaking for myself, I need to grapple with my biases and how they manifest in my work product. As a PhD student, I sometimes feel like academia cultivates incentives to convince our colleagues that we are Very Smart&lt;sup&gt;TM&lt;/sup&gt;, which is a distinct goal from doing good work (however defined). Cool graphics can be a way to show how much thought and work we put into something—a way of signaling that we belong. Understandable, but not always useful. I also like to use Bayesian methods, but I feel constant pressure to justify the Bayesian approach to audiences that I (rightly or wrongly) assume will be hostile to that choice. As a result, I feel tempted to plot something that would be impossible without Bayes—a way of saying, “Get off my back!” as if it ultimately mattered for what I’m trying to communicate with my analysis overall. Sometimes it does matter, but the way that it matters won’t be so simple as “just plot the flashy thing.”&lt;/p&gt;
 &lt;p&gt;This post unpacks this using a recent example from a grad methods course that I am TA’ing. The assignment requires students to write a policy memo informed by a statistical analysis. The statistical model contains an important component that students are learning about in the course, but that component &lt;strong&gt;isn’t actually important to communicate in the policy memo&lt;/strong&gt;. So the assignment challenges students both on model-building but also communication skills: exercising restraint and judgment about what is and is not important to communicate about the details of the analysis.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;the-setting&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;The setting&lt;/h1&gt;
+&lt;div id=&#34;the-setting&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The setting&lt;/h2&gt;
 &lt;p&gt;The assignment for students to complete lays out the following scenario.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;You are an advisor to a newly elected mayor of Smallville. During the campaign, the mayor-elect charged that the Sanitation Department was being grossly mismanaged. Last year it cost &lt;span class=&#34;math inline&#34;&gt;\(\$ 48.50\)&lt;/span&gt; per household for once-a-week curbside waste pick-up. A private contractor has made an informal bid of &lt;span class=&#34;math inline&#34;&gt;\(\$ 40.60\)&lt;/span&gt; per household for collection services, but this would require eliminating Sanitation Department jobs, which would be difficult and politically costly. Before switching to private contracting, the mayor would like to know how much costs might be reduced with the appointment of a more competent Sanitation Department supervisor.&lt;/p&gt;
@@ -568,8 +568,8 @@ And maybe I will do a fresh install of &lt;em&gt;everything&lt;/em&gt; once the 
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;So what’s the objective?&lt;/strong&gt; Students are supposed to use the data to build a predictive (OLS) model for &lt;code&gt;cost_per_household&lt;/code&gt;, and then interpret the model to advise the mayor about the choice between (a) enlisting the private sanitation contractor or (b) replacing the supervisor of the Sanitation Department.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;source-of-temptation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Source of temptation&lt;/h1&gt;
+&lt;div id=&#34;source-of-temptation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Source of temptation&lt;/h2&gt;
 &lt;p&gt;Students typically begin with a simple model where every variable is linearly related to the outcome variable…
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
   \mathtt{cost\_per\_household}_{i} &amp;amp;= 
@@ -594,23 +594,23 @@ And maybe I will do a fresh install of &lt;em&gt;everything&lt;/em&gt; once the 
     \varepsilon_{i}
 \end{align}\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;For the purposes of the assignment, this is the “correct” model, and the residuals look better than they did before (see below).&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;80%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/vizualizing-what-matters/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;80%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Now that we have the appropriate model, how do we visualize it? I’ll tell you what I did when I was a student in this course (many years ago): I plotted the nonlinear relationship between the number of households and the outcome variable. It the most interesting part of the model, and it was hidden in the data…how could it not be the important thing that I should focus on? I think I did something like this: generate model predictions with other variables fixed at their means, and then plot those model predictions alongside my city’s data (Smallville) and the private contractor’s proposal for reducing the curbside pickup costs per household.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/wrong-plot-1.png&#34; width=&#34;90%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/vizualizing-what-matters/index_files/figure-html/wrong-plot-1.png&#34; width=&#34;90%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;From this graphic, we could reason that even if we enlist the private contractor, their bid does not get us close to what we would expect from the model. This leads us the direction of saying that maybe we expect more savings from better mismanagement of the Sanitation Department than what the current supervisor is delivering.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;disciplined-plotting-choices&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Disciplined plotting choices&lt;/h1&gt;
+&lt;div id=&#34;disciplined-plotting-choices&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Disciplined plotting choices&lt;/h2&gt;
 &lt;p&gt;There are a few things that are misguided about the above approach.&lt;/p&gt;
 &lt;p&gt;First, the comparison in this above graphic isn’t actually the relevant comparison. It is typical to teach students to visualize partial relationships in regression by varying one predictor and fixing other predictors to their means. But we don’t always want to compare against a typical observation. In this example, we would be more interested in holding covariates to the same values as we observe for our city. Applied situations like this remind us that many of the problems that we encounter aren’t questions about “typical” observations at all.&lt;/p&gt;
 &lt;p&gt;Second, and more importantly, the only reason why we make the previous mistake is because we think that the quadratic relationship is the important thing to visualize. It’s understandable that we’re distracted by the quadratic relationship because it was initially a challenge to discover, but if we discipline ourselves about what is important to communicate to our audience (in this case, the mayor of “Smallville”), we would see that the nonlinearity is irrelevant to visualize. All that matters is comparing our city’s data and the contractor’s proposal to a specific model-based prediction for our city. Exploring how the prediction changes as we arbitrarily assign other values on key covariates doesn’t help us make a policy recommendation. We aren’t in a position to intervene on those variables (and we aren’t confident that our model identifies causal effects anyway), so we shouldn’t distract the mayor by presenting irrelevant information that draws focus away from the key insights.&lt;a href=&#34;#fn1&#34; class=&#34;footnote-ref&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;What is a simpler way to show the model’s key takeaway? Here.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/plot-smallville-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/vizualizing-what-matters/index_files/figure-html/plot-smallville-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The takeaway from this figure is similar as it was above. We show a model-based prediction for a city with the same observable characteristics as Smallville (a point estimate, 95% confidence interval, and 95% prediction interval) alongside Smallville’s current costs and the contractor’s proposal.&lt;a href=&#34;#fn2&#34; class=&#34;footnote-ref&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;
 We see that the contractor’s proposal reduces sanitation costs, but they still get us nowhere near a level that we should expect given the characteristics of our city. If we are confident that replacing the Sanitation Department supervisor would make our costs “representative” of other similar towns, we would save a lot more money by replacing the supervisor than we would by hiring the contractor.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;we-can-do-better-visualize-cost-savings-directly&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;We can do better: visualize cost-savings directly&lt;/h1&gt;
+&lt;div id=&#34;we-can-do-better-visualize-cost-savings-directly&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;We can do better: visualize cost-savings directly&lt;/h2&gt;
 &lt;p&gt;Even though the above graphic does a little better than what we were working with before, it still doesn’t directly communicate the aggregate financial impact of the policy. The audience has to do that work on their own still. If we really wanted to communicate the insights of the model, we could translate these predictions directly into something that mayors, comptrollers, and so on really understand: dollars.&lt;/p&gt;
 &lt;p&gt;Here’s the idea. In terms of annual cost cost-per-household, we know our city’s current value, the contractor’s bid, and a distribution of model-based estimates for a city with our data. We also know the total number of households in our city, so it is straightforward to calculate the total costs from each of these per-household figures:
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align}
@@ -624,12 +624,12 @@ that result from replacing the Sanitation Dept. supervisor:&lt;/p&gt;
 &lt;li&gt;A “pessimistic” scenario: plugging in the 90th percentile of the predictive distribution as the annual cost per household.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;We plot two quantities for each scenario. First, how much money is saved annually by replacing the supervisor brings pickup costs to each of these benchmarks? And second, how much &lt;em&gt;more&lt;/em&gt; does each benchmark save us when we compare to the private contractor’s bid?&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/vizualizing-what-matters/index_files/figure-html/unnamed-chunk-5-1.png&#34; width=&#34;100%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;The comparison against the contractor bid isn’t just for show! It gives decision-makers valuable information because it represents a “budget” for replacing the supervisor. How so? Replacing the supervisor wouldn’t be costless: the replacement may require a higher salary than the current supervisor, and the job search will involve some fixed costs. Comparing each scenario’s savings to the amount saved from the enlisting the contractor conveys how much money we can &lt;em&gt;invest&lt;/em&gt; in a new supervisor while still saving more money than hiring the contractor. Visualizing the results this way shows exactly how much money we’re working with and how much we stand to save by hiring supervisors with different salary expectations.&lt;/p&gt;
 &lt;p&gt;By doing some further processing of the model’s insights, and in-turn moving &lt;em&gt;farther&lt;/em&gt; from the technical details of the model, we actually learn more about the consequences of our choices. We see that even under the pessimistic cost-savings scenario, we still have a roughly half-million dollar cushion before the decision to replace the supervisor starts to look like the wrong choice.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;reframing-what-to-be-proud-of&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Reframing what to be “proud” of&lt;/h1&gt;
+&lt;div id=&#34;reframing-what-to-be-proud-of&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Reframing what to be “proud” of&lt;/h2&gt;
 &lt;p&gt;We feel proud when we build a technologically complex model. It makes us feel valuable when we work through something challenging, so we want to show it off. When we need to hide these technical details in order to communicate the results to non-experts, the choice is painful at first, especially for someone like me who takes a lot of pride in the time and effort that I invest in improving my statistical skills. This is a psychological game that we are playing with ourselves.&lt;/p&gt;
 &lt;p&gt;But the “difficulty-level” of our work isn’t the only skill to take pride in. Distilling essential information out of a complicated piece of machinery is valuable, and we can see it as a distinct source of pride when we do it well. Better still, doing an effective job summarizing the important takeaways of an analysis makes it all the more rewarding to describe the technical backend, since the technical backend has a much stronger clarity-of-purpose after if is introduced effectively.&lt;/p&gt;
 &lt;p&gt;Just to drive the point home, that last graph was a bar graph. I kinda hate bar graphs. But I don’t hate the fact that I recognized a context where it made something simpler to communicate. That’s valuable.&lt;/p&gt;
@@ -1264,72 +1264,10 @@ Due to the discrete nature of the &lt;span class=&#34;math inline&#34;&gt;\(\del
       
       <guid>/post/git-in-papers/</guid>
       <description>
-&lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-&lt;/style&gt;
 
 
-&lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;div id=&#34;motivation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Motivation&lt;/h2&gt;
 &lt;p&gt;One benefit of open-source research is that it is possible to trace the history of a research product through its (potentially many) iterations using a versioning system such as Git. This is great for readers who encounter the project’s remote repository, but it’s more likely the case that readers will encounter only a PDF of your paper in an email or through a preprint archive. While services like ArXiv will watermark your paper, it (or so it seems) only includes information about the paper’s history in ArXiv specifically, rather its history in your Git repository. This post describes how you can use Rmarkdown to include Git information into a working draft of your research paper.&lt;/p&gt;
 &lt;p&gt;What exactly do I mean? Your paper typically includes the date of compilation, but you could also include the current commit hash, the branch of the current commit, and so on. Why would you want to do this?&lt;/p&gt;
 &lt;ul&gt;
@@ -1341,52 +1279,56 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;img src=&#34;git-date.png&#34; width=&#34;732&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;This setup prioritizes the commit hash over the compilation date as a method for “dating” your paper. The branch name is included in cases where the PDF is generated on a development branch instead of on the master/public branch. The footnote corresponding to the commit information contains the commit message (not shown). And lastly, the link to the public version takes you to the master branch PDF on Github—the most recent major version.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;how-to-do-it&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;How to do it&lt;/h1&gt;
+&lt;div id=&#34;how-to-do-it&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;How to do it&lt;/h2&gt;
 &lt;p&gt;Setting this up consists of essentially two steps:&lt;/p&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Learn to print Git commands to the console using R.&lt;/li&gt;
 &lt;li&gt;Place that R code in your &lt;code&gt;.Rmd&lt;/code&gt; document’s YAML header.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div id=&#34;console-commands-with-r&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;Console commands with R&lt;/h2&gt;
+&lt;div id=&#34;console-commands-with-r&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Console commands with R&lt;/h3&gt;
 &lt;p&gt;We can run console commands within R using the &lt;code&gt;system()&lt;/code&gt; function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the &lt;code&gt;intern = TRUE&lt;/code&gt; argument.&lt;/p&gt;
 &lt;p&gt;Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).&lt;/p&gt;
 &lt;p&gt;For instance, how can we print the branch name?&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git symbolic-ref --short HEAD&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git symbolic-ref --short HEAD&amp;quot;, intern = TRUE)&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;2e7c7a8&amp;quot; &amp;quot;eaee307&amp;quot; &amp;quot;43bfc74&amp;quot; &amp;quot;1856a0b&amp;quot; &amp;quot;5823e01&amp;quot; &amp;quot;66e52d7&amp;quot; &amp;quot;0f043a4&amp;quot;
-##   [8] &amp;quot;af6087c&amp;quot; &amp;quot;56bc096&amp;quot; &amp;quot;ebd98df&amp;quot; &amp;quot;3074778&amp;quot; &amp;quot;94bcada&amp;quot; &amp;quot;fa8f4fa&amp;quot; &amp;quot;1079fd7&amp;quot;
-##  [15] &amp;quot;1a3553b&amp;quot; &amp;quot;f352285&amp;quot; &amp;quot;0e7c4b4&amp;quot; &amp;quot;3be8c27&amp;quot; &amp;quot;2a80372&amp;quot; &amp;quot;950065a&amp;quot; &amp;quot;b8d24f2&amp;quot;
-##  [22] &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot; &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot;
-##  [29] &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot; &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot;
-##  [36] &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot;
-##  [43] &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot;
-##  [50] &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot;
-##  [57] &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot;
-##  [64] &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot;
-##  [71] &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot;
-##  [78] &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot;
-##  [85] &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot;
-##  [92] &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot;
-##  [99] &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot;
-## [106] &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot;
-## [113] &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot;
-## [120] &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot;
-## [127] &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%t&amp;quot;, intern = TRUE)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;533e975&amp;quot; &amp;quot;2e7c7a8&amp;quot; &amp;quot;eaee307&amp;quot; &amp;quot;43bfc74&amp;quot; &amp;quot;1856a0b&amp;quot; &amp;quot;5823e01&amp;quot; &amp;quot;66e52d7&amp;quot;
+##   [8] &amp;quot;0f043a4&amp;quot; &amp;quot;af6087c&amp;quot; &amp;quot;56bc096&amp;quot; &amp;quot;ebd98df&amp;quot; &amp;quot;3074778&amp;quot; &amp;quot;94bcada&amp;quot; &amp;quot;fa8f4fa&amp;quot;
+##  [15] &amp;quot;1079fd7&amp;quot; &amp;quot;1a3553b&amp;quot; &amp;quot;f352285&amp;quot; &amp;quot;0e7c4b4&amp;quot; &amp;quot;3be8c27&amp;quot; &amp;quot;2a80372&amp;quot; &amp;quot;950065a&amp;quot;
+##  [22] &amp;quot;b8d24f2&amp;quot; &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot; &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot;
+##  [29] &amp;quot;2c6ec85&amp;quot; &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot; &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot;
+##  [36] &amp;quot;6fc4555&amp;quot; &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot;
+##  [43] &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot;
+##  [50] &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot;
+##  [57] &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot;
+##  [64] &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot;
+##  [71] &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot;
+##  [78] &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot;
+##  [85] &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot;
+##  [92] &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot;
+##  [99] &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot;
+## [106] &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot;
+## [113] &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot;
+## [120] &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot;
+## [127] &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot;
+## [134] &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%t&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;2e7c7a8&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%t&amp;quot;, intern = TRUE)[1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;533e975&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;system&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;git log --pretty=%s&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;intern =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;post: nonflat functions of flat priors&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%s&amp;quot;, intern = TRUE)[1]&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;move posts into folders; add post featured imgs&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;R results in the YAML&lt;/h2&gt;
-&lt;p&gt;Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This image shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;git-yaml.png&#34; width=&#34;981&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;R results in the YAML&lt;/h3&gt;
+&lt;p&gt;Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This code block shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.&lt;/p&gt;
+&lt;pre class=&#34;yaml&#34;&gt;&lt;code&gt;date: |
+  | Commit \texttt{`r system(&amp;quot;git log --pretty=%t&amp;quot;, intern = TRUE)[1]`} on branch \texttt{`r system(&amp;quot;git symbolic-ref --short HEAD&amp;quot;, intern = TRUE)`}\footnote{Commit message: \texttt{`r system(&amp;quot;git log --pretty=%s&amp;quot;, intern = TRUE)[1]`}}
+  | Compiled `r format(Sys.time(), &amp;#39;%B %d, %Y&amp;#39;)`
+  | Most recent online version [here](https://github.com/mikedecr/causal-bayes/blob/master/writing/causal-bayes-paper.pdf).&lt;/code&gt;&lt;/pre&gt;
 &lt;ol style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;We use the &lt;code&gt;date&lt;/code&gt; variable, but we supply multiple lines of content. To do this, place a pipe &lt;code&gt;|&lt;/code&gt; after declaring the &lt;code&gt;date&lt;/code&gt; variable, and begin each line with a new pipe &lt;code&gt;|&lt;/code&gt;. This will line-break the content in your compiled PDF and let you supply &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; code directly to the variable.&lt;/li&gt;
 &lt;li&gt;To use teletype/fixed-width font, type the &lt;code&gt;\texttt{}&lt;/code&gt; command for &lt;span class=&#34;math inline&#34;&gt;\(\mathrm{\LaTeX}\)&lt;/span&gt; directly in Rmarkdown.&lt;/li&gt;
@@ -1396,9 +1338,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;caveat&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Caveat&lt;/h1&gt;
-&lt;p&gt;When you push to Github, it creates new hashes that differ from your local machine. As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github. This is a current shortcoming in my approach, and I expect to update this post soon once I figure out a system for incorporating the remote hash in addition to the local hash.&lt;/p&gt;
+&lt;div id=&#34;caveat&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Caveat&lt;/h2&gt;
+&lt;p&gt;When you push to Github, it creates new hashes that differ from your local machine.
+As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github.
+This is a shortcoming of the approach, and if I think of a feasible way around it, I will update this post or write a new post altogether.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

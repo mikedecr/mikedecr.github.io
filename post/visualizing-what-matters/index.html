@@ -505,15 +505,15 @@
       
 
 
-<div id="this-is-a-post-about-temptation" class="section level1">
-<h1>This is a post about temptation</h1>
+<div id="this-is-a-post-about-temptation" class="section level2">
+<h2>This is a post about temptation</h2>
 <p>Or, resisting temptations when presenting statistical results.</p>
 <p>When you build a model to answer a question, it is often tempting to make a graphic about the <em>coolest thing about the model</em>. Maybe you learned something new to build the model, or you noticed and corrected an important structure in the data, so naturally you want to show off your good work. The purpose of this post is to <strong>reflect on why this practice isn’t useful for communicating statistical results</strong>. Instead, we should be communicating the information that will help the audience grasp the important takeaways of the analysis. A different focus entirely.</p>
 <p>This is almost too obvious, but it is easier said than done. Researchers wrestle with it in different ways based on our audiences, our professional goals, and (to be honest) our insecurities. Speaking for myself, I need to grapple with my biases and how they manifest in my work product. As a PhD student, I sometimes feel like academia cultivates incentives to convince our colleagues that we are Very Smart<sup>TM</sup>, which is a distinct goal from doing good work (however defined). Cool graphics can be a way to show how much thought and work we put into something—a way of signaling that we belong. Understandable, but not always useful. I also like to use Bayesian methods, but I feel constant pressure to justify the Bayesian approach to audiences that I (rightly or wrongly) assume will be hostile to that choice. As a result, I feel tempted to plot something that would be impossible without Bayes—a way of saying, “Get off my back!” as if it ultimately mattered for what I’m trying to communicate with my analysis overall. Sometimes it does matter, but the way that it matters won’t be so simple as “just plot the flashy thing.”</p>
 <p>This post unpacks this using a recent example from a grad methods course that I am TA’ing. The assignment requires students to write a policy memo informed by a statistical analysis. The statistical model contains an important component that students are learning about in the course, but that component <strong>isn’t actually important to communicate in the policy memo</strong>. So the assignment challenges students both on model-building but also communication skills: exercising restraint and judgment about what is and is not important to communicate about the details of the analysis.</p>
 </div>
-<div id="the-setting" class="section level1">
-<h1>The setting</h1>
+<div id="the-setting" class="section level2">
+<h2>The setting</h2>
 <p>The assignment for students to complete lays out the following scenario.</p>
 <blockquote>
 <p>You are an advisor to a newly elected mayor of Smallville. During the campaign, the mayor-elect charged that the Sanitation Department was being grossly mismanaged. Last year it cost <span class="math inline">\(\$ 48.50\)</span> per household for once-a-week curbside waste pick-up. A private contractor has made an informal bid of <span class="math inline">\(\$ 40.60\)</span> per household for collection services, but this would require eliminating Sanitation Department jobs, which would be difficult and politically costly. Before switching to private contracting, the mayor would like to know how much costs might be reduced with the appointment of a more competent Sanitation Department supervisor.</p>
@@ -546,8 +546,8 @@
 </blockquote>
 <p><strong>So what’s the objective?</strong> Students are supposed to use the data to build a predictive (OLS) model for <code>cost_per_household</code>, and then interpret the model to advise the mayor about the choice between (a) enlisting the private sanitation contractor or (b) replacing the supervisor of the Sanitation Department.</p>
 </div>
-<div id="source-of-temptation" class="section level1">
-<h1>Source of temptation</h1>
+<div id="source-of-temptation" class="section level2">
+<h2>Source of temptation</h2>
 <p>Students typically begin with a simple model where every variable is linearly related to the outcome variable…
 <span class="math display">\[\begin{align}
   \mathtt{cost\_per\_household}_{i} &amp;= 
@@ -572,23 +572,23 @@
     \varepsilon_{i}
 \end{align}\]</span></p>
 <p>For the purposes of the assignment, this is the “correct” model, and the residuals look better than they did before (see below).</p>
-<p><img src="/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/vizualizing-what-matters/index_files/figure-html/unnamed-chunk-2-1.png" width="80%" style="display: block; margin: auto;" /></p>
 <p>Now that we have the appropriate model, how do we visualize it? I’ll tell you what I did when I was a student in this course (many years ago): I plotted the nonlinear relationship between the number of households and the outcome variable. It the most interesting part of the model, and it was hidden in the data…how could it not be the important thing that I should focus on? I think I did something like this: generate model predictions with other variables fixed at their means, and then plot those model predictions alongside my city’s data (Smallville) and the private contractor’s proposal for reducing the curbside pickup costs per household.</p>
-<p><img src="/post/2020-03-28_viz-choices_files/figure-html/wrong-plot-1.png" width="90%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/vizualizing-what-matters/index_files/figure-html/wrong-plot-1.png" width="90%" style="display: block; margin: auto;" /></p>
 <p>From this graphic, we could reason that even if we enlist the private contractor, their bid does not get us close to what we would expect from the model. This leads us the direction of saying that maybe we expect more savings from better mismanagement of the Sanitation Department than what the current supervisor is delivering.</p>
 </div>
-<div id="disciplined-plotting-choices" class="section level1">
-<h1>Disciplined plotting choices</h1>
+<div id="disciplined-plotting-choices" class="section level2">
+<h2>Disciplined plotting choices</h2>
 <p>There are a few things that are misguided about the above approach.</p>
 <p>First, the comparison in this above graphic isn’t actually the relevant comparison. It is typical to teach students to visualize partial relationships in regression by varying one predictor and fixing other predictors to their means. But we don’t always want to compare against a typical observation. In this example, we would be more interested in holding covariates to the same values as we observe for our city. Applied situations like this remind us that many of the problems that we encounter aren’t questions about “typical” observations at all.</p>
 <p>Second, and more importantly, the only reason why we make the previous mistake is because we think that the quadratic relationship is the important thing to visualize. It’s understandable that we’re distracted by the quadratic relationship because it was initially a challenge to discover, but if we discipline ourselves about what is important to communicate to our audience (in this case, the mayor of “Smallville”), we would see that the nonlinearity is irrelevant to visualize. All that matters is comparing our city’s data and the contractor’s proposal to a specific model-based prediction for our city. Exploring how the prediction changes as we arbitrarily assign other values on key covariates doesn’t help us make a policy recommendation. We aren’t in a position to intervene on those variables (and we aren’t confident that our model identifies causal effects anyway), so we shouldn’t distract the mayor by presenting irrelevant information that draws focus away from the key insights.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></p>
 <p>What is a simpler way to show the model’s key takeaway? Here.</p>
-<p><img src="/post/2020-03-28_viz-choices_files/figure-html/plot-smallville-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/vizualizing-what-matters/index_files/figure-html/plot-smallville-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>The takeaway from this figure is similar as it was above. We show a model-based prediction for a city with the same observable characteristics as Smallville (a point estimate, 95% confidence interval, and 95% prediction interval) alongside Smallville’s current costs and the contractor’s proposal.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
 We see that the contractor’s proposal reduces sanitation costs, but they still get us nowhere near a level that we should expect given the characteristics of our city. If we are confident that replacing the Sanitation Department supervisor would make our costs “representative” of other similar towns, we would save a lot more money by replacing the supervisor than we would by hiring the contractor.</p>
 </div>
-<div id="we-can-do-better-visualize-cost-savings-directly" class="section level1">
-<h1>We can do better: visualize cost-savings directly</h1>
+<div id="we-can-do-better-visualize-cost-savings-directly" class="section level2">
+<h2>We can do better: visualize cost-savings directly</h2>
 <p>Even though the above graphic does a little better than what we were working with before, it still doesn’t directly communicate the aggregate financial impact of the policy. The audience has to do that work on their own still. If we really wanted to communicate the insights of the model, we could translate these predictions directly into something that mayors, comptrollers, and so on really understand: dollars.</p>
 <p>Here’s the idea. In terms of annual cost cost-per-household, we know our city’s current value, the contractor’s bid, and a distribution of model-based estimates for a city with our data. We also know the total number of households in our city, so it is straightforward to calculate the total costs from each of these per-household figures:
 <span class="math display">\[\begin{align}
@@ -602,12 +602,12 @@ that result from replacing the Sanitation Dept. supervisor:</p>
 <li>A “pessimistic” scenario: plugging in the 90th percentile of the predictive distribution as the annual cost per household.</li>
 </ul>
 <p>We plot two quantities for each scenario. First, how much money is saved annually by replacing the supervisor brings pickup costs to each of these benchmarks? And second, how much <em>more</em> does each benchmark save us when we compare to the private contractor’s bid?</p>
-<p><img src="/post/2020-03-28_viz-choices_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
+<p><img src="/post/vizualizing-what-matters/index_files/figure-html/unnamed-chunk-5-1.png" width="100%" style="display: block; margin: auto;" /></p>
 <p>The comparison against the contractor bid isn’t just for show! It gives decision-makers valuable information because it represents a “budget” for replacing the supervisor. How so? Replacing the supervisor wouldn’t be costless: the replacement may require a higher salary than the current supervisor, and the job search will involve some fixed costs. Comparing each scenario’s savings to the amount saved from the enlisting the contractor conveys how much money we can <em>invest</em> in a new supervisor while still saving more money than hiring the contractor. Visualizing the results this way shows exactly how much money we’re working with and how much we stand to save by hiring supervisors with different salary expectations.</p>
 <p>By doing some further processing of the model’s insights, and in-turn moving <em>farther</em> from the technical details of the model, we actually learn more about the consequences of our choices. We see that even under the pessimistic cost-savings scenario, we still have a roughly half-million dollar cushion before the decision to replace the supervisor starts to look like the wrong choice.</p>
 </div>
-<div id="reframing-what-to-be-proud-of" class="section level1">
-<h1>Reframing what to be “proud” of</h1>
+<div id="reframing-what-to-be-proud-of" class="section level2">
+<h2>Reframing what to be “proud” of</h2>
 <p>We feel proud when we build a technologically complex model. It makes us feel valuable when we work through something challenging, so we want to show it off. When we need to hide these technical details in order to communicate the results to non-experts, the choice is painful at first, especially for someone like me who takes a lot of pride in the time and effort that I invest in improving my statistical skills. This is a psychological game that we are playing with ourselves.</p>
 <p>But the “difficulty-level” of our work isn’t the only skill to take pride in. Distilling essential information out of a complicated piece of machinery is valuable, and we can see it as a distinct source of pride when we do it well. Better still, doing an effective job summarizing the important takeaways of an analysis makes it all the more rewarding to describe the technical backend, since the technical backend has a much stronger clarity-of-purpose after if is introduced effectively.</p>
 <p>Just to drive the point home, that last graph was a bar graph. I kinda hate bar graphs. But I don’t hate the fact that I recognized a context where it made something simpler to communicate. That’s valuable.</p>

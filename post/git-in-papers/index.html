@@ -29,7 +29,7 @@
   
     
   
-  <meta name="description" content="How to timestamp your paper with a commit hash and branch name
+  <meta name="description" content="Timestamp a paper with a commit hash and branch name
 ">
 
   
@@ -115,9 +115,9 @@
   <meta property="og:url" content="/post/git-in-papers/">
   <meta property="og:title" content="Git information in your open-source research paper (with Rmarkdown)
  | Michael DeCrescenzo">
-  <meta property="og:description" content="How to timestamp your paper with a commit hash and branch name
-"><meta property="og:image" content="/img/circular-telles.png">
-  <meta property="twitter:image" content="/img/circular-telles.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Timestamp a paper with a commit hash and branch name
+"><meta property="og:image" content="/post/git-in-papers/featured.png">
+  <meta property="twitter:image" content="/post/git-in-papers/featured.png"><meta property="og:locale" content="en-us">
   
   <meta property="article:published_time" content="2019-08-25T00:00:00&#43;00:00">
   
@@ -409,21 +409,25 @@
 
 
 
-  
 
+<div class="article-header d-xl-none">
+  <div class="featured-image" style="background-image: url('/post/git-in-papers/featured_hu7e78d94fe3972bfb574817a055822724_29822_800x0_resize_lanczos_2.png');"></div>
   
-  
-  
-<div class="article-container pt-3">
-  <h1 itemprop="name">Git information in your open-source research paper (with Rmarkdown)
+</div>
+
+
+<div class="container-fluid split-header d-none d-xl-block">
+  <div class="row">
+    <div class="col-6">
+      <div class="split-header-content">
+        <h1 itemprop="name">Git information in your open-source research paper (with Rmarkdown)
 </h1>
 
-  
-  <p class="page-subtitle">How to timestamp your paper with a commit hash and branch name</p>
-  
+        
+        <p class="page-subtitle">Timestamp a paper with a commit hash and branch name</p>
+        
 
-  
-    
+        
 
 
 
@@ -462,7 +466,103 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    8 min read
+    6 min read
+  </span>
+  
+
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder"></i>
+    <a href="/categories/methods/">Methods</a></span>
+  
+
+  
+
+</div>
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="split-header-image">
+        <img src="/post/git-in-papers/featured_hu7e78d94fe3972bfb574817a055822724_29822_680x500_fill_q90_lanczos_smart1_2.png" itemprop="image" alt="">
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="article-container d-xl-none">
+  <h1 itemprop="name">Git information in your open-source research paper (with Rmarkdown)
+</h1>
+
+  
+  <p class="page-subtitle">Timestamp a paper with a commit hash and branch name</p>
+  
+
+  
+
+
+
+<meta content="2019-08-25 00:00:00 &#43;0000 UTC" itemprop="datePublished">
+<meta content="2019-08-25 00:00:00 &#43;0000 UTC" itemprop="dateModified">
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  <span itemprop="author name" itemtype="http://schema.org/Person"><a href="/authors/admin/">Michael DeCrescenzo</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    <time>2019-08-25</time>
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
   </span>
   
 
@@ -484,22 +584,21 @@
 
 </div>
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 
@@ -508,72 +607,10 @@
 
     <div class="article-style" itemprop="articleBody">
       
-<style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 
-<div id="motivation" class="section level1">
-<h1>Motivation</h1>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
 <p>One benefit of open-source research is that it is possible to trace the history of a research product through its (potentially many) iterations using a versioning system such as Git. This is great for readers who encounter the project’s remote repository, but it’s more likely the case that readers will encounter only a PDF of your paper in an email or through a preprint archive. While services like ArXiv will watermark your paper, it (or so it seems) only includes information about the paper’s history in ArXiv specifically, rather its history in your Git repository. This post describes how you can use Rmarkdown to include Git information into a working draft of your research paper.</p>
 <p>What exactly do I mean? Your paper typically includes the date of compilation, but you could also include the current commit hash, the branch of the current commit, and so on. Why would you want to do this?</p>
 <ul>
@@ -585,52 +622,56 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="git-date.png" width="732" /></p>
 <p>This setup prioritizes the commit hash over the compilation date as a method for “dating” your paper. The branch name is included in cases where the PDF is generated on a development branch instead of on the master/public branch. The footnote corresponding to the commit information contains the commit message (not shown). And lastly, the link to the public version takes you to the master branch PDF on Github—the most recent major version.</p>
 </div>
-<div id="how-to-do-it" class="section level1">
-<h1>How to do it</h1>
+<div id="how-to-do-it" class="section level2">
+<h2>How to do it</h2>
 <p>Setting this up consists of essentially two steps:</p>
 <ol style="list-style-type: decimal">
 <li>Learn to print Git commands to the console using R.</li>
 <li>Place that R code in your <code>.Rmd</code> document’s YAML header.</li>
 </ol>
-<div id="console-commands-with-r" class="section level2">
-<h2>Console commands with R</h2>
+<div id="console-commands-with-r" class="section level3">
+<h3>Console commands with R</h3>
 <p>We can run console commands within R using the <code>system()</code> function. Ordinarily the results of the commands merely print to the console instead of being treated as objects, but we want to make these objects be accessible in the R environment using the <code>intern = TRUE</code> argument.</p>
 <p>Here are some examples that will display Git information for my website repo (where this code is currently being evaluated).</p>
 <p>For instance, how can we print the branch name?</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git symbolic-ref --short HEAD&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="r"><code>system(&quot;git symbolic-ref --short HEAD&quot;, intern = TRUE)</code></pre>
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
-<pre><code>##   [1] &quot;2e7c7a8&quot; &quot;eaee307&quot; &quot;43bfc74&quot; &quot;1856a0b&quot; &quot;5823e01&quot; &quot;66e52d7&quot; &quot;0f043a4&quot;
-##   [8] &quot;af6087c&quot; &quot;56bc096&quot; &quot;ebd98df&quot; &quot;3074778&quot; &quot;94bcada&quot; &quot;fa8f4fa&quot; &quot;1079fd7&quot;
-##  [15] &quot;1a3553b&quot; &quot;f352285&quot; &quot;0e7c4b4&quot; &quot;3be8c27&quot; &quot;2a80372&quot; &quot;950065a&quot; &quot;b8d24f2&quot;
-##  [22] &quot;9da4ece&quot; &quot;8cccbf9&quot; &quot;45d0315&quot; &quot;9d26ba5&quot; &quot;6ebb3b0&quot; &quot;af8a617&quot; &quot;2c6ec85&quot;
-##  [29] &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot;
-##  [36] &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot;
-##  [43] &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot;
-##  [50] &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot;
-##  [57] &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot;
-##  [64] &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot;
-##  [71] &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot;
-##  [78] &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot;
-##  [85] &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot;
-##  [92] &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot;
-##  [99] &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot;
-## [106] &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot;
-## [113] &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot;
-## [120] &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot;
-## [127] &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
+<pre class="r"><code>system(&quot;git log --pretty=%t&quot;, intern = TRUE)</code></pre>
+<pre><code>##   [1] &quot;533e975&quot; &quot;2e7c7a8&quot; &quot;eaee307&quot; &quot;43bfc74&quot; &quot;1856a0b&quot; &quot;5823e01&quot; &quot;66e52d7&quot;
+##   [8] &quot;0f043a4&quot; &quot;af6087c&quot; &quot;56bc096&quot; &quot;ebd98df&quot; &quot;3074778&quot; &quot;94bcada&quot; &quot;fa8f4fa&quot;
+##  [15] &quot;1079fd7&quot; &quot;1a3553b&quot; &quot;f352285&quot; &quot;0e7c4b4&quot; &quot;3be8c27&quot; &quot;2a80372&quot; &quot;950065a&quot;
+##  [22] &quot;b8d24f2&quot; &quot;9da4ece&quot; &quot;8cccbf9&quot; &quot;45d0315&quot; &quot;9d26ba5&quot; &quot;6ebb3b0&quot; &quot;af8a617&quot;
+##  [29] &quot;2c6ec85&quot; &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot;
+##  [36] &quot;6fc4555&quot; &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot;
+##  [43] &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot;
+##  [50] &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot;
+##  [57] &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot;
+##  [64] &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot;
+##  [71] &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot;
+##  [78] &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot;
+##  [85] &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot;
+##  [92] &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot;
+##  [99] &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot;
+## [106] &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot;
+## [113] &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot;
+## [120] &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot;
+## [127] &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot;
+## [134] &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%t&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [1] &quot;2e7c7a8&quot;</code></pre>
+<pre class="r"><code>system(&quot;git log --pretty=%t&quot;, intern = TRUE)[1]</code></pre>
+<pre><code>## [1] &quot;533e975&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">system</span>(<span class="st">&quot;git log --pretty=%s&quot;</span>, <span class="dt">intern =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span>]</a></code></pre></div>
-<pre><code>## [1] &quot;post: nonflat functions of flat priors&quot;</code></pre>
+<pre class="r"><code>system(&quot;git log --pretty=%s&quot;, intern = TRUE)[1]</code></pre>
+<pre><code>## [1] &quot;move posts into folders; add post featured imgs&quot;</code></pre>
 </div>
-<div id="r-results-in-the-yaml" class="section level2">
-<h2>R results in the YAML</h2>
-<p>Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This image shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.</p>
-<p><img src="git-yaml.png" width="981" /></p>
+<div id="r-results-in-the-yaml" class="section level3">
+<h3>R results in the YAML</h3>
+<p>Now that we know which commands to run to get the Git info, how do we get this information into our YAML? We will do this using inline R code chunks. This code block shows what I’ve done for the above paper example, and I describe a few of the tricks I use below.</p>
+<pre class="yaml"><code>date: |
+  | Commit \texttt{`r system(&quot;git log --pretty=%t&quot;, intern = TRUE)[1]`} on branch \texttt{`r system(&quot;git symbolic-ref --short HEAD&quot;, intern = TRUE)`}\footnote{Commit message: \texttt{`r system(&quot;git log --pretty=%s&quot;, intern = TRUE)[1]`}}
+  | Compiled `r format(Sys.time(), &#39;%B %d, %Y&#39;)`
+  | Most recent online version [here](https://github.com/mikedecr/causal-bayes/blob/master/writing/causal-bayes-paper.pdf).</code></pre>
 <ol style="list-style-type: decimal">
 <li>We use the <code>date</code> variable, but we supply multiple lines of content. To do this, place a pipe <code>|</code> after declaring the <code>date</code> variable, and begin each line with a new pipe <code>|</code>. This will line-break the content in your compiled PDF and let you supply <span class="math inline">\(\mathrm{\LaTeX}\)</span> code directly to the variable.</li>
 <li>To use teletype/fixed-width font, type the <code>\texttt{}</code> command for <span class="math inline">\(\mathrm{\LaTeX}\)</span> directly in Rmarkdown.</li>
@@ -640,9 +681,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 </div>
 </div>
-<div id="caveat" class="section level1">
-<h1>Caveat</h1>
-<p>When you push to Github, it creates new hashes that differ from your local machine. As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github. This is a current shortcoming in my approach, and I expect to update this post soon once I figure out a system for incorporating the remote hash in addition to the local hash.</p>
+<div id="caveat" class="section level2">
+<h2>Caveat</h2>
+<p>When you push to Github, it creates new hashes that differ from your local machine.
+As a result, you can’t use the hash in the PDF to cross-reference the same hash on Github.
+This is a shortcoming of the approach, and if I think of a feasible way around it, I will update this post or write a new post altogether.</p>
 </div>
 
     </div>
