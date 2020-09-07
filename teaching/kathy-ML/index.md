@@ -5,8 +5,8 @@
 title: "Machine Learning Methods for Automated Text and Content Analysis"
 author: "Michael G. DeCrescenzo"
 date: |
-  | Compiled September 07, 2020: 11:45
-#  September 07, 2020: 11:45 
+  | 2020-09-07
+#  September 07, 2020: 12:06 
 site: "bookdown::bookdown_site"
 # github-repo: "mikedecr/kathy-ml"
 
