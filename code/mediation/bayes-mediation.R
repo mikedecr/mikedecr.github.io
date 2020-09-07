@@ -115,6 +115,7 @@ mcmc
 # ---- Graphic -----------------------
 
 # want to get the mediation results into a "tidy" looking table
+
 tidy_med <- summary(med_obj) %$%
   tribble(
     ~ term   , ~ estimate , ~ conf.low , ~ conf.high ,
@@ -123,7 +124,8 @@ tidy_med <- summary(med_obj) %$%
     "ADE_0"  , z0         , z0.ci[1]   , z0.ci[2]    ,
     "ADE_1"  , z1         , z1.ci[1]   , z1.ci[2]    ,
     "TE"     , tau.coef   , tau.ci[1]  , tau.ci[2]
-  )
+  ) %>%
+  print()
 
 # combines all models in a tidy data frame
 alltidy <- 

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Statistics from the ML Point of View | Machine Learning Methods for Automated Text and Content Analysis</title>
+  <meta name="description" content="Chapter 1 Statistics from the ML Point of View | Machine Learning Methods for Automated Text and Content Analysis" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Statistics from the ML Point of View | Machine Learning Methods for Automated Text and Content Analysis" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Statistics from the ML Point of View | Machine Learning Methods for Automated Text and Content Analysis" />
+  
+  
+  
+
+<meta name="author" content="Michael G. DeCrescenzo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="02-papers.html"/>
+<script src="_assets-gitbook/jquery-2.2.3/jquery.min.js"></script>
+<link href="_assets-gitbook/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="_assets-gitbook/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./index.html">ML for Text and Content</a></li>
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="1" data-path="01-ML-stats.html"><a href="01-ML-stats.html"><i class="fa fa-check"></i><b>1</b> Statistics from the ML Point of View</a><ul>
+<li class="chapter" data-level="1.1" data-path="01-ML-stats.html"><a href="01-ML-stats.html#broad-contours"><i class="fa fa-check"></i><b>1.1</b> Broad contours</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="01-ML-stats.html"><a href="01-ML-stats.html#mapping-between-jargons"><i class="fa fa-check"></i><b>1.1.1</b> Mapping between jargons</a></li>
+<li class="chapter" data-level="1.1.2" data-path="01-ML-stats.html"><a href="01-ML-stats.html#predictive-accuracyerror"><i class="fa fa-check"></i><b>1.1.2</b> Predictive accuracy/error</a></li>
+<li class="chapter" data-level="1.1.3" data-path="01-ML-stats.html"><a href="01-ML-stats.html#overfitting"><i class="fa fa-check"></i><b>1.1.3</b> Overfitting</a></li>
+<li class="chapter" data-level="1.1.4" data-path="01-ML-stats.html"><a href="01-ML-stats.html#sample-splitting"><i class="fa fa-check"></i><b>1.1.4</b> Sample splitting</a></li>
+<li class="chapter" data-level="1.1.5" data-path="01-ML-stats.html"><a href="01-ML-stats.html#regularization"><i class="fa fa-check"></i><b>1.1.5</b> Regularization</a></li>
+<li class="chapter" data-level="1.1.6" data-path="01-ML-stats.html"><a href="01-ML-stats.html#tuning-a-model-with-cross-validation"><i class="fa fa-check"></i><b>1.1.6</b> Tuning a model with cross-validation</a></li>
+<li class="chapter" data-level="1.1.7" data-path="01-ML-stats.html"><a href="01-ML-stats.html#workflow-recap"><i class="fa fa-check"></i><b>1.1.7</b> Workflow Recap</a></li>
+</ul></li>
+<li class="chapter" data-level="1.2" data-path="01-ML-stats.html"><a href="01-ML-stats.html#broad-takeaways-for-academic-statistics"><i class="fa fa-check"></i><b>1.2</b> Broad takeaways for academic statistics</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="02-papers.html"><a href="02-papers.html"><i class="fa fa-check"></i><b>2</b> Papers</a><ul>
+<li class="chapter" data-level="2.1" data-path="02-papers.html"><a href="02-papers.html#shugars-the-structure-of-reasoning-measuring-justification-and-preferences-in-text"><i class="fa fa-check"></i><b>2.1</b> Shugars, “The Structure of Reasoning: Measuring Justification and Preferences in Text”</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="02-papers.html"><a href="02-papers.html#word-embedding"><i class="fa fa-check"></i><b>2.1.1</b> Word embedding</a></li>
+<li class="chapter" data-level="2.1.2" data-path="02-papers.html"><a href="02-papers.html#network-structure"><i class="fa fa-check"></i><b>2.1.2</b> Network structure</a></li>
+<li class="chapter" data-level="2.1.3" data-path="02-papers.html"><a href="02-papers.html#analysis-of-similar-networks"><i class="fa fa-check"></i><b>2.1.3</b> Analysis of similar networks</a></li>
+<li class="chapter" data-level="2.1.4" data-path="02-papers.html"><a href="02-papers.html#analysis-of-dissimilar-networks"><i class="fa fa-check"></i><b>2.1.4</b> Analysis of dissimilar networks:</a></li>
+<li class="chapter" data-level="2.1.5" data-path="02-papers.html"><a href="02-papers.html#original-data"><i class="fa fa-check"></i><b>2.1.5</b> Original data</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Machine Learning Methods for Automated Text and Content Analysis</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistics-from-the-ml-point-of-view" class="section level1">
+<h1><span class="header-section-number">Chapter 1</span> Statistics from the ML Point of View</h1>
+<p>“Machine learning” evolved somewhat separately in statistics as it did in computer science.
+As a result, there are important differences in philosophy and in jargon that are worth establishing from the outset.
+The purpose of this introduction is to lay out a broad enough view of the objectives of machine learning, discuss important differences in jargon, and draw a broad contrast between the predictive modeling workflow/philosophy and the “traditional academic statistics” workflow that we learn in political science.</p>
+<div id="broad-contours" class="section level2">
+<h2><span class="header-section-number">1.1</span> Broad contours</h2>
+<p>Personally I don’t so much like the phrase “machine learning” because it is hard to tell what counts as “statistics” and what counts as “machine learning.”
+My experience with the non-academic world suggests that all statistical methods belong to a class of methods known as “machine learning,”
+i.e. any method where the computer estimates patterns in data and has the capacity to predict new data.
+I personally like to use the phrase <em>predictive models</em> because it feels more closely aligned with what we’re actually doing, and more broadly encompassing predictive modeling approaches from both “statistics” and “computer science.”
+If I refer to “machine learning” or “ML,” I usually mean to distinguish the computer science methods from the more familiar statistical methods that we’re used to.</p>
+<p>Predictive models generally take the following form.
+We have some <span class="math inline">\(y_{i}\)</span>, an outcome measure for some unit <span class="math inline">\(i\)</span>, that we want to predict using <span class="math inline">\(\mathbf{x}_{i}\)</span>, a vector of covariates for unit <span class="math inline">\(i\)</span>.
+An equation for <span class="math inline">\(y_{i}\)</span> is given by
+<span class="math display" id="eq:yfx">\[\begin{align}
+  y_{i} &amp;= f\left(\mathbf{x}_{i}\right) + \epsilon_{i}
+  \tag{1.1}
+\end{align}\]</span>
+where <span class="math inline">\(\epsilon_{i}\)</span> is an error term.
+We’re remaining more general than any regression setup that we’re familiar with in political science or social science more broadly.
+All we have is <span class="math inline">\(y_{i}\)</span> as a function of <span class="math inline">\(\mathbf{x}_{i}\)</span> plus error.
+Currently we’re imposing no functional form assumptions on <span class="math inline">\(f(\cdot)\)</span> and no distributional assumptions on <span class="math inline">\(\epsilon_{i}\)</span>.</p>
+<p>Predictive models/“machine learning” is nothing but a bunch of models that people design to estimate <span class="math inline">\(f(\cdot)\)</span>.
+Let <span class="math inline">\(\hat{f}(\cdot)\)</span> be our predictive model for <span class="math inline">\(f(\cdot)\)</span>, which lets usrelate the observed <span class="math inline">\(y_{i}\)</span> to our model of choice.
+<span class="math display" id="eq:yfhatx">\[\begin{align}
+  y_{i} &amp;= \hat{f}\left(\mathbf{x}_{i}\right) + e_{i}
+  \tag{1.2}
+\end{align}\]</span>
+where <span class="math inline">\(e_{i}\)</span> now represents the error in our model predictions.
+<span class="math display" id="eq:model-error">\[\begin{align}
+   e_{i} &amp;= y_{i} - \hat{f}\left(\mathbf{x}_{i}\right)
+  \tag{1.3}
+\end{align}\]</span>
+How do we pick <span class="math inline">\(\hat{f}(\cdot)\)</span>?
+Sometimes by minimizing the error <span class="math inline">\(\epsilon_{i}\)</span>, like simple OLS without distributional assumptions for the error.
+Sometimes we do make statistical assumptions about <span class="math inline">\(\epsilon_{i}\)</span> and then optimize a function of <span class="math inline">\(\epsilon_{i}\)</span> subject to the constrains of those assumptions, like with maximum likelihood.
+Because predictive methods are also used in industry settings, some methods work by assigning dollar values to the <span class="math inline">\(\epsilon_{i}\)</span> and optimizing a dollar-weighted error.
+This latter estimation objective introduces the notion of “loss,” which you can think about as a generalization of the notion of error.
+“Loss” is essentially a cost function of model inaccuracy: inaccurate predictions are mad, they lose money, and so the preferred model is the one that minimizes money lost.
+As a result, optimizing model <em>accuracy</em> on its own won’t be the best way to diagnose diseases if misdiagnosis in one direction is more costly than in the other direction.</p>
+<div id="mapping-between-jargons" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Mapping between jargons</h3>
+<p><strong>Bold</strong> is ML jargon, and the rest is translation.</p>
+<ul>
+<li><strong>Target.</strong> The dependent variable.
+The thing we’re trying to predict.</li>
+<li><strong>Label.</strong> the dependent variable value.
+If I have “labeled data,” it means I know the target value for those observations. These are the observations often used to “train” a model especially in text settings.</li>
+<li><strong>Features.</strong> Independent variables/covariates.
+Characteristics of units that inform us about the “target.”</li>
+<li><strong>Objective function.</strong> The function we want to optimize in order to fit a model or make predictions.
+This could be residual sum of squares, a likelihood function, a posterior density, dollar-weighted combinations of any of these…</li>
+<li><strong>Loss function.</strong> An objective function construed in terms of “loss.”
+For objective functions that we want to maximize (likelihood functions, posterior densities…) the loss function can just be a sign-flipped version of the objective function.</li>
+<li><strong>Class.</strong> “Levels” of a discrete outcome variable.
+As in, we have an outcome variable with <span class="math inline">\(K\)</span> possible classes, each indexed <span class="math inline">\(k\)</span>.
+For a binary outcome, <span class="math inline">\(K = 2\)</span> and <span class="math inline">\(k \in \{1, 2\}\)</span>.
+More generally, <span class="math inline">\(k \in \{1, 2, \ldots, K \}\)</span>.</li>
+<li><strong>Classification.</strong> Predicting a class for a unit.
+Ordinarily we estimate probabilities in social science, but classification goes one step farther to make a decision about predicted “class membership” for each unit.
+This extra step usually requires a decision rule that maps predicted probabilities to predicted classes.
+ML theory considers optimal models for generating predicted probabilities as well as optimal decision rules (optimal in terms of loss).
+For instance, logit or multinomial logit estimate the probabilities of class membership, but K-nearest-neighbor classification simply says that the predicted class for unit <span class="math inline">\(i\)</span> is the modal class among the neighboring observations, which entails a decision rule.</li>
+<li><strong>Inference.</strong> This one bugs me to no end.
+In statistics, “inference” refers to decision-making about estimates under uncertainty, i.e. what are the statistical properties of my estimator and how do I leverage those properties to make decisions about my model.
+In machine learning, inference usually just means “prediction.”
+Once I fit a model, making a prediction for a new data point is “inference” about <span class="math inline">\(y_i\)</span> given <span class="math inline">\(\mathbf{x}_{i}\)</span>.
+This makes a little more sense if you mentally imagine a Bayesian analogy.
+I have updated beliefs about <span class="math inline">\(y_{i} \mid \mathbf{x}_{i}\)</span>, so prediction is like “posterior inference.”
+But, unaccountably, ML uses this language with no homage to Bayesian inference in particular, and in general any statistical consciousness at all is not strictly necessary.</li>
+<li><strong>Training.</strong> Model fitting.
+“Training a model” means fitting it to data.
+The significance of “training” as opposed to “fitting” is usually that we have no interest in making predictions for model used to “fit” the data, so the quality of model “fit” for in-sample data is not an ingredient for marginal decision-making most of the time.
+Instead, the whole point of “training” is for the model to make predictions elsewhere.</li>
+<li><strong>Learner.</strong> Infuriatingly, this just means “model.”
+Sometimes the “learner” jargin comes in handy for some models that are actually compositions/ensembles of other models, or compositions of many low-weight predictions.
+For instance, tree models (BART, random forests, etc.) generate a prediction as the sum or average of all of the predictions from many decision trees.
+Each individual tree is sometimes called a “weak learner,” since an individual tree isn’t very good, but aggregating over trees is better.</li>
+<li><strong>Training set/training data.</strong> The data used for fitting a model.</li>
+<li><strong>Test data/test set</strong>.
+Held-out data for measurement a model’s out-of-sample predictive performance.
+Typically the researcher considers many model configurations, and the chosen model configuration is the one that minimizes out-of-sample predictive loss (or maximizes out-of-sample “value” however measures).
+You have to give props to ML over academic stats here because the predictive performance of the model <em>actually matters for decision-making</em>, unlike in traditional academic stats where performance is almost never a concern, or if it is, it is measured in-sample and thus is prone to overfitting.</li>
+<li><strong>Supervised learning.</strong>
+Fitting a model to data with known <span class="math inline">\(y\)</span> and known <span class="math inline">\(\mathbf{x}\)</span>.
+“Supervised” only means that for the data being used to fit the model, we know the correct left-hand data.</li>
+<li><strong>Unsupervised learning.</strong>
+Looking for patterns where there is no perfect analogy to <span class="math inline">\(y\)</span>.
+This most typically includes dimensional reduction, where I have data of some unknown high dimensionality that I’m trying to simplify into fewer dimensions.
+The reduced space could be made of discrete clusters of observations, low-dimensional summaries of high dimensional data (e.g. “principal components”, latent factors, etc.).
+My soap-box is that this isn’t “unsupervised” at all, it’s just a model for a process that makes <span class="math inline">\(\mathbf{x}\)</span> instead of modeling the process that makes <span class="math inline">\(y\)</span>.
+Any model of latent structure probably fits in here, especially models where we have to discover the latent structure.
+In PS context this includes ideal point models, models for “democracy as a latent variable.”
+It is also where we will probably spend most of our time when it comes to topic models (cluster assignments for text), sentiment analysis (factor analysis for text), since the text itself is being modeled for its underlying structure.</li>
+</ul>
+</div>
+<div id="predictive-accuracyerror" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Predictive accuracy/error</h3>
+<p>Because most ML methods make predictive accuracy a preeminent goal, being explicit about the measure of predictive accuracy is essential.
+In a standard continuous outcome setting, this measure is often mean square error,
+<span class="math display" id="eq:mse">\[\begin{align}
+  \mathit{MSE} &amp;= \frac{1}{n} \left(y_{i} - \hat{y}_{i} \right)^{2}
+  \tag{1.4}
+\end{align}\]</span>
+where <span class="math inline">\(\hat{y}_{i} = \hat{f}\left(\mathbf{x}_{i}\right)\)</span>.
+Sometimes this is discussed in terms of root mean square error, <span class="math inline">\(\mathit{RMSE} = \sqrt{\mathit{MSE}}\)</span>.
+Reminder, MSE can be decomposed as the sum of of bias and variance.
+As long as either term is nonzero, MSE is nonzero:
+<span class="math display" id="eq:mse-decomp">\[\begin{align}
+  \mathit{MSE} &amp;= \mathit{Bias}\left(\hat{y}_{i}\right)^2 + \mathit{Var}\left(\hat{y}_{i}\right)
+  \tag{1.5}
+\end{align}\]</span>
+where <span class="math inline">\(\mathit{Bias}(y_{i}) = E\left[y_{i} - E\left[\hat{y}_{i}\right]\right]\)</span>.
+This is helpful to remember when people explain the benefits of one model over another in terms of which model settings move us which direction along the bias–variance trade-off.</p>
+</div>
+<div id="overfitting" class="section level3">
+<h3><span class="header-section-number">1.1.3</span> Overfitting</h3>
+<p>As stated before, ML methods consist of any method for functionally predicting <span class="math inline">\(y\)</span> using <span class="math inline">\(\mathit{x}\)</span>, and the predictive accuracy of that function is crucial.
+This is different from standard academic approaches, where our most important modeling goal<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>
+is to <em>interpret</em> the prediction function even if other prediction functions out there would give better predictions.
+We might say that the standard social science workflow does not usually have much incentive to improve predictive accuracy (for <em>most</em> problems, measurement being an important exception).
+A natural consequence is that the typical modeling workflow does not contain tools or routines for controlling overfitting as a standard matter of course.
+In the ML workflow, however, it is impossible to conceive of model-building without dedicating major effort to preventing overfitting, because the primary decision margin for evaluating a model is its predictive performance <em>out of sample</em>, i.e. on data that the model has not seen before.</p>
+<p>All the same, the “social science statistical workflow” is at least <em>aware</em> of the potential problems with prediction.
+If we include too many meaningless predictors in a regression, we will improve the predictive accuracy of the model (e.g. increasing <span class="math inline">\(R^{2}\)</span>) by fitting noise instead of actually-existing predictive signals in the data.
+The sections that follow discuss how to prevent overfitting in a general ML workflow.
+How these routines get implemented will naturally vary by the model type.</p>
+</div>
+<div id="sample-splitting" class="section level3">
+<h3><span class="header-section-number">1.1.4</span> Sample splitting</h3>
+<p>A crucial distinction in ML is the “training” vs. “test” data.
+AKA in-sample data vs. out-of-sample data.
+The main idea is that a complex model with lots of predictive flexibility can do a great job fitting in-sample data.
+More and more complex models can only ever do better predicting in-sample data.
+But that doesn’t make a model good.
+Models are well designed when they do a good job predicting out-of-sample data, or data that the model has never seen before.</p>
+<p>The ML workflow traditionally proceeds by taking any dataset and splitting it into a “training set” and “test set.”
+We fit a model on the training set, and generate predictions for the test set.
+As expected, our MSE will be higher in the training set, since those observations were used to fit the model, and MSE will be lower in the test set.
+We know that we are designing the best model not when its in-sample MSE is smallest, but when its out-of-sample MSE is smallest.</p>
+<p>Stated more succinctly, in the ML point of view, there is no point to a more complex model if it can’t predict <em>unseen data</em> better than a simpler model.
+The whole purpose for the model to exist is to predict unseen, out-of-sample data.</p>
+</div>
+<div id="regularization" class="section level3">
+<h3><span class="header-section-number">1.1.5</span> Regularization</h3>
+<p><span class="math inline">\(\DeclareMathOperator*{\argmin}{arg\,min}\)</span></p>
+<p>How does a model increase out of sample performance?
+The main thing we want to do is <em>regularize</em> a model, or constrain its solutions to prevent overfitting.</p>
+<p>Standard models estimated in political science tend to be of an OLS or MLE framework.
+The OLS solution is
+<span class="math display" id="eq:ols">\[\begin{align}
+  \hat{\beta} &amp;= \argmin_{\beta} \quad (\mathbf{y} - X\beta)^{\intercal}(\mathbf{y} - X\beta)
+  \tag{1.6}
+\end{align}\]</span>
+or, “find the <span class="math inline">\(\beta\)</span> values that would minimize the residual sum of squares.”
+This solution is unbiased (given the true model), but for overly complex models, predictions for new data are likely to have higher MSE than a model whose estimation is penalized in some way.</p>
+<p><em>Regularization</em> is any method that penalizes the algorithm that fits a model.
+In the OLS case, one example is a “ridge regression estimator,” which penalizes the optimization problem by a factor of the overall coefficient magnitude.
+<span class="math display" id="eq:ridge">\[\begin{align}
+  \hat{\beta} &amp;= \argmin_{\beta} \quad (\mathbf{y} - X\beta)^{\intercal}(\mathbf{y} - X\beta) + \lambda \sum_p \beta_p
+  \tag{1.7} 
+\end{align}\]</span>
+where <span class="math inline">\(\lambda\)</span> is a penalty parameter that controls the amount of regularization.
+At <span class="math inline">\(\lambda = 0\)</span>, the optimization problem simply is OLS.
+For larger <span class="math inline">\(\lambda\)</span> values, coefficients are shrunk toward zero, which introduces bias but tends to make more accurate predictions out-of-sample.</p>
+<p>As a religious Bayesian, I like to think about regularization as different methods for placing priors on model parameters.
+In fact, the ridge penalty is actually equivalent to giving the coefficients a Normal prior.
+This is an important connection to make because text models often use Bayesian estimation approaches due to the large number of parameters in a given model.</p>
+<p>Other models regularize in different ways.
+Tree models are biased toward “shorter trees.”
+Neural networks may “drop out” entire “nodes” to “simplify the signal” that passes through the network (zeroing out coefficients in a chain of regressions).</p>
+</div>
+<div id="tuning-a-model-with-cross-validation" class="section level3">
+<h3><span class="header-section-number">1.1.6</span> Tuning a model with cross-validation</h3>
+<p>Once we introduce regularization into a model fitting/training problem, the researcher faces a choice of how much to regularize.
+For the ridge example, it isn’t obvious which value of <span class="math inline">\(\lambda\)</span> should be chosen (analogously, how tight the Normal prior should be on the coefficients).
+For tree models, we have choices to make about how short to keep the trees.
+These knobs are usually known as “hyperparameters” (parameters that control parameter estimation) or in a Bayesian context,
+<span class="math display">\[\begin{align}
+  \beta &amp;\sim \mathrm{Normal}(0, \gamma)
+\end{align}\]</span>
+the hyperparameter <span class="math inline">\(\gamma\)</span> controls the amount of regularization.
+How do we choose which hyperparameters are best to prevent overfitting?</p>
+<p>The most common way to do this is to use <em>cross-validation</em>, which is an iterative sample splitting technique.
+Just as we split the sample above to train and test a model, cross-validation proceeds by chopping the data into many smaller pieces, testing hyperparameter values in each slice, and seeing which hyperparameters lead to optimal out-of-sample prediction.
+The way this usually goes is that there is an “initial split” to divide data into training and testing sets.
+After the initial split, the training data is divided into <span class="math inline">\(K\)</span> many “folds,” where a model with a certain hyperparameter configuration is trained on <span class="math inline">\(K-1\)</span> folds and then tested on fold <span class="math inline">\(K\)</span>.
+The <span class="math inline">\(K\)</span> folds are used to select hyperparameter settings, and then the final test set is used to test the model that is most preferred by the cross validation routine.</p>
+</div>
+<div id="workflow-recap" class="section level3">
+<h3><span class="header-section-number">1.1.7</span> Workflow Recap</h3>
+<p>The model-training workflow, as a result, usually follows a pattern like</p>
+<ol style="list-style-type: decimal">
+<li>initial split</li>
+<li>cross-validation of hyperparameters in training set</li>
+<li>choose best model from cross-validation</li>
+<li>test CV-chosen model on out-of-sample data</li>
+<li>repeat for other settings</li>
+</ol>
+<p>Typically you want to optimize the predictive error in step 4.</p>
+</div>
+</div>
+<div id="broad-takeaways-for-academic-statistics" class="section level2">
+<h2><span class="header-section-number">1.2</span> Broad takeaways for academic statistics</h2>
+<p>Predictive modeling contrasts with the traditional academic workflow, even though it is useful for academics.</p>
+<ul>
+<li>In “academic stats,” we fit a model to all data and then make in-sample predictions. For flexible predictive models, this is a huge no-no.</li>
+<li>Even in academic stats, we try to generalize from data to something not in the data.
+So I think it <em>does</em> make sense to take a predictive modeling approach and develop a model for optimal out-of-sample prediction, since whatever “general reality” we’re trying to describe is not fully contained in the sample (most of the time).
+I think academics actually would agree with that, but they don’t typically do any of the model validation work.</li>
+</ul>
+<p>Why point this out?
+Because text papers WILL include model validation descriptions, and this will make it easier to understand why.
+Your methods classes probably described OLS and other estimates in terms of the “true model.”
+In the industry predictive modeling world, there isn’t usually any such thing.
+In the academic predictive modeling world, there is probably some hybrid that different papers will try to nail, but I don’t know if there’s any way to describe this trade-off perfectly.</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>
+After getting those sweet, sweet significance stars and getting published.<a href="01-ML-stats.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="02-papers.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="_assets-gitbook/gitbook-2.6.7/js/app.min.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/lunr.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="_assets-gitbook/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["kathy-ML-primer.pdf"],
+"toc": {
+"collapse": "subsection"
+},
+"split_bib": true
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

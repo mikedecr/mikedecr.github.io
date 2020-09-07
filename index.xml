@@ -13,15 +13,13 @@
     
     
     <item>
-      <title>About Me
-</title>
+      <title>About Me</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
       <description>&lt;!-- raw HTML omitted --&gt;
-&lt;h2 id=&#34;about-my-research&#34;&gt;About my research&lt;/h2&gt;
-&lt;p&gt;My research focuses on American electoral politics and statistical research methods.&lt;/p&gt;
+&lt;h2 id=&#34;my-research-focuses-on-american-electoral-politics-and-statistical-research-methods&#34;&gt;My research focuses on American electoral politics and statistical research methods.&lt;/h2&gt;
 &lt;p&gt;I am interested in the performance and functioning of elections: how well elections represent citizen views, how elections are administered, how citizens experience the task of voting.
 I have studied these topics with historical election returns, online experiments, targeted surveys, voting and registration records, and polling place reports.
 I am a student affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;&gt;Elections Research Center&lt;/a&gt; at UW–Madison.&lt;/p&gt;
@@ -30,15 +28,15 @@ I am a student affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;
 I am also concerned with meta-research problems related to statistical and scientific inference, transparency and reproducibility, publication bias, and computing practices for social science research.
 Accordingly, my work is &lt;a href=&#34;https://www.github.com/mikedecr&#34;&gt;open-source&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;My dissertation develops new Bayesian methods to study ideological representation in congressional primary elections.
-These innovations include&lt;/p&gt;
+These innovations include&amp;hellip;&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;Extensions of hierarchical item response models to estimate the aggregate policy preferences of partisan constituents&lt;/li&gt;
-&lt;li&gt;Theoretical framework and practical guidance for Bayesian causal models, which are nearly absent from academic politics research.&lt;/li&gt;
-&lt;li&gt;Flexible machine learning methods for Bayesian causal modeling.&lt;/li&gt;
+&lt;li&gt;Extensions of hierarchical item response models to estimate the aggregate policy preferences of partisan constituents.&lt;/li&gt;
+&lt;li&gt;Theoretical framework and practical guidance for Bayesian approaches to causal inference.&lt;/li&gt;
+&lt;li&gt;Flexible response modeling with Bayesian tools.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;about-my-teaching&#34;&gt;About my teaching&lt;/h2&gt;
-&lt;p&gt;My &lt;a href=&#34;/teaching/&#34;&gt;teaching&lt;/a&gt; focuses on the mathematical, statistical, and software foundations for social science research.
-I h ave taught courses and workshops focused on causal inference, predictive modeling, statistical computing, survey science, voting and public opinion, and U.S. campaign finance.&lt;/p&gt;
+&lt;h2 id=&#34;i-teach-quantitative-research-methods-for-undergraduate-and-graduate-students&#34;&gt;I teach quantitative research methods for undergraduate and graduate students,&lt;/h2&gt;
+&lt;p&gt;focusing on the mathematical, statistical, and software foundations for social science research.
+I have taught &lt;a href=&#34;/teaching/&#34;&gt;courses and workshops&lt;/a&gt; on causal inference, predictive modeling, statistical computing, survey science, voting and public opinion, and U.S. campaign finance.&lt;/p&gt;
 &lt;p&gt;I have been recognized with the &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34;&gt;Honored Instructor&lt;/a&gt; award at UW–Madison.&lt;/p&gt;
 </description>
     </item>

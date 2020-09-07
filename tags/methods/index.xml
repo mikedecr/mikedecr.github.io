@@ -34,6 +34,7 @@ Empirically, research of representation in primaries is held back by a limited u
 Most existing research measures voters&amp;rsquo; preferences using coarse proxies that do not distinguish between Republican and Democratic groups or may not meaningfully capture policy preferences at all.&lt;/p&gt;
 &lt;p&gt;This dissertation seeks to improve the measurement of the policy preferences of partisan voters at the local level and apply these new measures to the study of representation in primary elections.
 Along the way, it exposes and clarifies key causal assumptions at work in prior research, and it explores new methodological tools for the statistical analysis of a broader range of causal inference problems in political science.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;non-id.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;h3 id=&#34;goals-of-this-project&#34;&gt;Goals of this project:&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -61,17 +62,19 @@ Along the way, it exposes and clarifies key causal assumptions at work in prior 
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/causal-inf-2019/</guid>
-      <description>&lt;p&gt;Over the summer of 2019, I organized and led discussion for a semi-formal reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but I tried to broaden the scope in particular ways. We explored DAG approaches to causal identification in addition to potential outcomes, and we went beyond research designs for causal estimands to include estimation methods aside from common regression models.&lt;/p&gt;
-&lt;p&gt;The reading list below contains both the &amp;ldquo;assigned&amp;rdquo; and the &amp;ldquo;bonus&amp;rdquo; readings (without bothering to denote which is which).&lt;/p&gt;
+      <description>&lt;p&gt;In 2019 I organized and led discussion for a summer reading group on causal inference methods.
+Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but we often brought in resources from statistics, economics, and epidemiology.
+We explored potential outcomes and graphical models for causal inference, with estimation approaches covering regression approaches, propensity score adjustments, and other structural models.&lt;/p&gt;
+&lt;p&gt;The reading list below contains both the assigned and the &amp;ldquo;bonus&amp;rdquo; readings.&lt;/p&gt;
 &lt;h2 id=&#34;readings&#34;&gt;Readings&lt;/h2&gt;
-&lt;p&gt;Introduction&lt;/p&gt;
+&lt;h3 id=&#34;introduction&#34;&gt;Introduction&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Rubin (1974), &lt;a href=&#34;http://www.fsb.muohio.edu/lij14/420_paper_Rubin74.pdf&#34;&gt;&amp;ldquo;Estimating Causal Effects of Treatments in Randomized and Nonrandomized Studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;LaLonde (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/1806062.pdf?casa_token=F5r8Z1JwiHMAAAAA:dJ7TKfvXSkhNZWr20eLIV3V7v1SuPWSh-i_98wRQl3jf4gadsB-K8UsSiWV2-QcaEj4AUR6Bpg2yG5e3wH6SRsIxEzqwzuxY5ySQ1DyE8rUqpNo8Wg&#34;&gt;&amp;ldquo;Evaluating the Econometric Evaluations of Training Programs with Experimental Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/l_7yIUqWBmE&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 6 (DAGs)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Aronow and Samii (2016), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12185?casa_token=ni-7Ez1IOr0AAAAA:iaBEJKWKDCduQDQjgE1YOtbkJTtSDO9Z6-xlY7PreUPM4IzwJ634U9kZvovCAGE_25W4shlhNKnGJrQ&#34;&gt;&amp;ldquo;Does Regression Produce Representative Estimates of Causal Effects?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Causal Identification&lt;/p&gt;
+&lt;h3 id=&#34;causal-identification&#34;&gt;Causal Identification&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Holland (1986), &lt;a href=&#34;https://www.jstor.org/stable/pdf/2289064.pdf?casa_token=t__em5YLS3QAAAAA:bRijEbuXZ1vc8wndntsVlUSkP8HGfHtd5gzBT7xGuvtMQ4bbpxATiou0wIcWv-h7TsFeISmNgAWK3MywsZD3izZ7dlknR_Lu6iCTo-xVP4ZlZPcJ8w&#34;&gt;&amp;ldquo;Statistics and Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Kang and Schafer (2007), &lt;a href=&#34;https://projecteuclid.org/download/pdfview_1/euclid.ss/1207580167&#34;&gt;&amp;ldquo;Demystifying Double Robustness: A Comparison of Alternative Strategies for Estimating a Population Mean from Incomplete Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -82,19 +85,19 @@ Along the way, it exposes and clarifies key causal assumptions at work in prior 
 &lt;li&gt;Keele (2015), &lt;a href=&#34;https://www.jstor.org/stable/pdf/24573164.pdf?casa_token=o7xKm1U2WtUAAAAA:auheq_VJJPJA_i92nhwMo0gPZAKS7NeVL9qgsAsXi2JQk0UYqInRMaVmF-EY14Siq4eS1-ZmIaSj30Dr3trXzWbzEWeoEvhNeQVT42vGxAxGqIyTQw&#34;&gt;&amp;ldquo;The statistics of causal inference: A view from political methodology&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Hartman and Hidalgo (2018), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.1111/ajps.12387?casa_token=fuTLoS2dIhgAAAAA:MTLN-y62YNdgtSmT7lDUAO3z4zvDsDpjGdTrwwwYbxgD4vYqJXcCTmjgtw5RxeDouIzNFrlXNmsiFw&#34;&gt;&amp;ldquo;An equivalence approach to balance and placebo tests&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Causal Mediation&lt;/p&gt;
+&lt;h3 id=&#34;causal-mediation&#34;&gt;Causal Mediation&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Imai, Keele, Tingley, and Yamamoto (2010), &lt;a href=&#34;https://www.jstor.org/stable/pdf/23275352.pdf?casa_token=ijN2lRaBMnMAAAAA:Bcg68xjAPuuy-8adQxtg0fkSYL2GZqy2pAOcQj6r7aJkl3mqyQYv1qIGm_ZzLAhGD46PhBPXy_vt3vqRhr2YondO4BjuNkQzKsTz43iXYcYg11XxzA&#34;&gt;&amp;ldquo;Unpacking the black box of causality: Learning about causal mechanisms from experimental and observational studies&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;VanderWeele and Vansteelandt (2015), &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4287269/pdf/nihms-633002.pdf&#34;&gt;&amp;ldquo;Mediation Analysis with Multiple Mediators&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Myers and Tingley (2016), &lt;a href=&#34;https://www.cambridge.org/core/journals/political-analysis/article/influence-of-emotion-on-trust/2A90FCCAA46B8EF2B41308C7C80E876B&#34;&gt;&amp;ldquo;The Influence of Emotion on Trust&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Causal Heterogeneity&lt;/p&gt;
+&lt;h3 id=&#34;causal-heterogeneity&#34;&gt;Causal Heterogeneity&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Kam and Trussler (2017) &lt;a href=&#34;https://link.springer.com/content/pdf/10.1007%2Fs11109-016-9379-z.pdf&#34;&gt;&amp;ldquo;At the Nexus of Observational and Experimental Research: Theory, Specification, and Analysis of Experiments with Heterogeneous Treatment Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Coppock, Leeper, and Mullinix (2017), &lt;a href=&#34;https://www.pnas.org/content/pnas/115/49/12441.full.pdf&#34;&gt;&amp;ldquo;Generalizability of heterogeneous treatment effect estimates across samples&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Meager (2019), &lt;a href=&#34;http://eprints.lse.ac.uk/88190/1/app.20170299.pdf&#34;&gt;&amp;ldquo;Understanding the Average Impact of Microcredit Expansions: A Bayesian Hierarchical Analysis of Seven Randomized Experiments&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Null Effects and Statistical Power&lt;/p&gt;
+&lt;h3 id=&#34;null-effects-and-statistical-power&#34;&gt;Null Effects and Statistical Power&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Mayo (2004), &lt;a href=&#34;https://www.phil.vt.edu/dmayo/personal_website/evidence_MAYO_opt.pdf&#34;&gt;&amp;ldquo;An error-statistical philosophy of evidence&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Broockman (2014), &lt;a href=&#34;https://www.sciencedirect.com/science/article/pii/S0261379413001583&#34;&gt;&amp;ldquo;Do female politicians empower women to vote or run for office? A regression discontinuity approach&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -104,24 +107,24 @@ Along the way, it exposes and clarifies key causal assumptions at work in prior 
 &lt;li&gt;Loken and Gelman (2017), &lt;a href=&#34;http://www.stat.columbia.edu/~gelman/research/published/measurement.pdf&#34;&gt;&amp;ldquo;Measurement error and the replication crisis&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Fowler (2019), &lt;a href=&#34;https://thepoliticalmethodologist.com/2019/05/24/but-shouldnt-that-work-against-me/&#34;&gt;&amp;ldquo;But Shouldn’t That Work Against Me?&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;G-Methods&lt;/p&gt;
+&lt;h3 id=&#34;g-methods&#34;&gt;G-Methods&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Naimi, Cole, and Kennedy (2017), &lt;a href=&#34;https://watermark.silverchair.com/dyw323.pdf?token=AQECAHi208BE49Ooan9kkhW_Ercy7Dm3ZL_9Cf3qfKAc485ysgAAAjowggI2BgkqhkiG9w0BBwagggInMIICIwIBADCCAhwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMlLYhK-XfIUHDcRhIAgEQgIIB7Xps8vAzzNwv6RuE8NwHCHcE_n_w0UzDvZlYG5u0NhLLLspOzyfJjN1PbwTCUcf1zlFZ_uXQzVn8ObXIX3WwZl-9v-WYtAetq3Kf6709OeSsaQhyFo8ssXvhor-qfJ4D4zwJpCFi58sm95sQ73Ifn1z1hzUgKuNFe_xaBwP2Zkd4va0yUYj3IIzHLU6y9sauuxbWKvALysdW8se9PQdzON_lfyPTAEGLx1katG9k0kRdABGcrOL0ODhTlZHc-uODteK-jwFYqOp36qKOl1prnINhTpBVaoUKPiBqC_Rs0rzsEKBPmYtg3-0glrCi9cssBQ5L9id5v3UskEZ3immwewUuqKuHbf-1SLzTGFmBLt6u8GdOZZzLTT32mRduX-rueaZoSHD8gAE1xq123-bBTO3W7rdD2yWgG6tkTGFux91vGRhMd9PxerJ1k5UU_382jz5PomFArHwp3pwowr3INn_5Q7xlrd_OhPh0G0vyps2xQu2b9HugYVOfJVR3OBV2u9BINUCMpIhaVL3rS8ePByFhjaQVGF2iSzS7iqQ9tCIlH7xf2hSfiHjztJAGw09NkIxTyTt_Nj8HHk2wih2OMIiKhXGXlXpVYxha6m_lKDldSb_XUBQqDvCGcoUIVGVV7eFtcLkdpTq_VY-BJMw&#34;&gt;&amp;ldquo;An introduction to g methods&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Acharya, Blackwell, and Sen (2016), &lt;a href=&#34;https://pdfs.semanticscholar.org/553b/d629b87aab05781cca1f3b0e42358d74fbda.pdf&#34;&gt;&amp;ldquo;Explaining Causal Findings Without Bias: Detecting and Assessing Direct Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;DAGs (1)&lt;/p&gt;
+&lt;h3 id=&#34;dags-1&#34;&gt;DAGs (1)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Greenland, Pearl, Robins (1999), &lt;a href=&#34;https://ftp.cs.ucla.edu/pub/stat_ser/r251.pdf&#34;&gt;&amp;ldquo;Causal Diagrams for Epidemiological Research&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Keele, Stevenson, and Elwert (2019) &lt;a href=&#34;https://www.cambridge.org/core/services/aop-cambridge-core/content/view/4488EC8925CF8F623CDE655E01268F6F/S2049847019000311a.pdf/causal_interpretation_of_estimated_associations_in_regression_models.pdf&#34;&gt;&amp;ldquo;The causal interpretation of estimated associations in regression models&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;DAGs (2)&lt;/p&gt;
+&lt;h3 id=&#34;dags-2&#34;&gt;DAGs (2)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;VanderWeele and Robins (2014) &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4239133/pdf/nihms632478.pdf&#34;&gt;&amp;ldquo;Signed directed acyclic graphs for causal inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Mohan and Pearl (2014), &lt;a href=&#34;https://papers.nips.cc/paper/5575-graphical-models-for-recovering-probabilistic-and-causal-queries-from-missing-data.pdf&#34;&gt;&amp;ldquo;Graphical Models for Recovering Probabilistic and Causal Queries from Missing Data&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Imbens (2019), &lt;a href=&#34;https://arxiv.org/abs/1907.07271&#34;&gt;&amp;ldquo;Potential Outcome and Directed Acyclic Graph Approaches to Causality: Relevance for Empirical Practice in Economics&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Lattimore and Rohde (2019), &lt;a href=&#34;https://arxiv.org/pdf/1906.07125.pdf&#34;&gt;&amp;ldquo;Replacing the do-calculus with Bayes rule&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Machine Learning&lt;/p&gt;
+&lt;h3 id=&#34;machine-learning&#34;&gt;Machine Learning&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Hastie, Tibshirani, and Friedman (2009) &lt;a href=&#34;https://web.stanford.edu/~hastie/Papers/ESLII.pdf&#34;&gt;&amp;ldquo;The Elements of Statistical Learning Data Mining, Inference, and Prediction (2 ed.)&amp;quot;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Hill (2011), &lt;a href=&#34;https://www.tandfonline.com/doi/pdf/10.1198/jcgs.2010.08162?casa_token=LzuXt92SeEoAAAAA:KW4xyog-6_yOMM7B5zPiqpHdUQv7eLIf0fIdHPTKMxv5FHX5mfbnb9hQnjc2EzLhU_4FjY3lh5E&#34;&gt;&amp;ldquo;Bayesian Nonparametric Modeling for Causal Inference&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -132,7 +135,7 @@ Along the way, it exposes and clarifies key causal assumptions at work in prior 
 &lt;li&gt;Hahn, Murray, and Carvalho (2019), &lt;a href=&#34;https://arxiv.org/pdf/1706.09523.pdf&#34;&gt;&amp;ldquo;Bayesian Regression Tree Models for Causal Inference: Regularization, Confounding, and Heterogeneous Effects&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;McElreath (2019), &lt;a href=&#34;https://youtu.be/pwMRbt2CbSU&#34;&gt;&amp;ldquo;Statistical Rethinking 2019&amp;rdquo; Lecture 19 (Gaussian Processes)&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Regression Discontinuity&lt;/p&gt;
+&lt;h3 id=&#34;regression-discontinuity&#34;&gt;Regression Discontinuity&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Calonico, Cattaneo, and Titiunik (2014), &lt;a href=&#34;https://onlinelibrary.wiley.com/doi/pdf/10.3982/ECTA11757?casa_token=ReSBtC9lfNsAAAAA:i6a-m-R6qyB0wsn5v1Y76d0MrIEalQO-QuXiknTrJCCXBXbxxWLNXyV092CCROUyWlO8gAiXrP2Nvw&#34;&gt;&amp;ldquo;Robust Nonparametric Confidence Intervals for Regression-discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Caughey and Sekhon (2014), &lt;a href=&#34;http://zmjones.com/static/causal-inference/caughey-pa-2011.pdf&#34;&gt;&amp;ldquo;Elections and the regression discontinuity design: Lessons from close US house races, 1942–2008&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -140,7 +143,7 @@ Along the way, it exposes and clarifies key causal assumptions at work in prior 
 Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Imbens and Wager (2019), &lt;a href=&#34;https://www.mitpressjournals.org/doi/pdfplus/10.1162/rest_a_00793?casa_token=fhbRGkrXL4EAAAAA:UpisrmCWbq4jGpVRfrdNcSqRxbaFmPDuK6f6P17oSu4XQCY2UFaj0mNIVdHkxjVIaZItXKCv&#34;&gt;&amp;ldquo;Optimized Regression Discontinuity Designs&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Time-Series Cross-Sectional and Panel Data&lt;/p&gt;
+&lt;h3 id=&#34;time-series-cross-sectional-and-panel-data&#34;&gt;Time-Series Cross-Sectional and Panel Data&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Blackwell and Glynn (2018), &lt;a href=&#34;https://www.cambridge.org/core/journals/american-political-science-review/article/how-to-make-causal-inferences-with-timeseries-crosssectional-data-under-selection-on-observables/498BE04E5AF9802EC4D33DD7A4016584&#34;&gt;&amp;ldquo;How to Make Causal Inferences with Time-Series Cross-Sectional Data under Selection on Observables&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Goodman-Bacon (2018), &lt;a href=&#34;https://cdn.vanderbilt.edu/vu-my/wp-content/uploads/sites/2318/2019/04/14141044/ddtiming_9_5_2018.pdf&#34;&gt;&amp;ldquo;Difference-in-Differences with Variation in Treatment Timing&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
@@ -169,7 +172,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
       <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
       
       <guid>/teaching/computing-811/</guid>
-      <description>&lt;h1 id=&#34;2020-materials&#34;&gt;2020 Materials&lt;/h1&gt;
+      <description>&lt;h2 id=&#34;2020-materials&#34;&gt;2020 Materials&lt;/h2&gt;
 &lt;p&gt;View syllabus &lt;a href=&#34;/courses/811/ps811-s20-syllabus.pdf&#34;&gt;here&lt;/a&gt;. Weekly materials below:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Introduction. &lt;a href=&#34;/teaching/computing-811/slides/01-intro/01-intro.html&#34;&gt;[Slides]&lt;/a&gt;&lt;/li&gt;
@@ -187,7 +190,7 @@ Designs in Political Science&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Causal Inference: regression discontinuity, bootstrapping. &lt;a href=&#34;/teaching/computing-811/slides/10_causal-modeling/10_causal-modeling.html&#34;&gt;[Slides]&lt;/a&gt; &lt;a href=&#34;https://github.com/mikedecr/PS811-computing/blob/master/code/08_rdd-bootstrap.R&#34;&gt;[Script]&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Machine Learning for Prediction and Causal Inference. &lt;a href=&#34;/teaching/computing-811/slides/11_predictive-modeling/11_predictive-modeling.html&#34;&gt;[Slides]&lt;/a&gt; [Script coming soon]&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h1 id=&#34;2018-materials&#34;&gt;2018 materials&lt;/h1&gt;
+&lt;h2 id=&#34;2018-materials&#34;&gt;2018 materials&lt;/h2&gt;
 &lt;p&gt;In 2018, this course was split between R and Stata. I covered the R unit, and &lt;a href=&#34;https://miamioh.edu/cas/academics/departments/political-science/about/faculty-staff/faculty-bios/chapman/index.html&#34;&gt;Hannah Chapman&lt;/a&gt; covered Stata.&lt;/p&gt;
 &lt;p&gt;R notes for 2018 are &lt;a href=&#34;/courses/811&#34;&gt;here&lt;/a&gt;, and the source code (&lt;code&gt;.rmd&lt;/code&gt; files) for these workbooks are &lt;a href=&#34;https://github.com/mikedecr/site-leavit/tree/master/content/811&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
@@ -258,68 +261,6 @@ The purpose is to show how Bayesian methods add value to causal effects by impro
       
       <guid>/post/package-reinstall/</guid>
       <description>
-&lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
-}
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  { background-color: #f8f8f8; }
-@media screen {
-a.sourceLine::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-&lt;/style&gt;
 
 
 &lt;div id=&#34;motivation&#34; class=&#34;section level1&#34;&gt;
@@ -341,183 +282,183 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;div id=&#34;what-is-already-installed&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;What is already installed?&lt;/h1&gt;
 &lt;p&gt;First we collect information on the packages we already have installed. I am working out of a project directory that manages all of my R updating business, so I &lt;a href=&#34;https://rstats.wtf/safe-paths.html&#34;&gt;use the &lt;code&gt;{here}&lt;/code&gt; package&lt;/a&gt; consistent with a &lt;a href=&#34;https://rstats.wtf/project-oriented-workflow.html&#34;&gt;project-oriented R workflow&lt;/a&gt;. We will also use tidyverse-style data manipulation.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;here&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;tidyverse&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(&amp;quot;here&amp;quot;)
+library(&amp;quot;tidyverse&amp;quot;)
+## Warning: package &amp;#39;tibble&amp;#39; was built under R version 4.0.2&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The &lt;code&gt;installed.packages()&lt;/code&gt; function returns a table of package information for all packages in your library. I convert this to a tibble to make things easier.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# data frame of all installed packages&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; data-line-number=&#34;2&#34;&gt;local_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;installed.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 361 x 16&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind   /Libra… 1.4-5   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 adagio  /Libra… 0.7.1   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… graphi… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 ade4    /Libra… 1.7-15  &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… graphi… &amp;lt;NA&amp;gt;      &amp;quot;ade4Tk… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 AER     /Libra… 1.2-9   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… stats,… &amp;lt;NA&amp;gt;      &amp;quot;boot, … &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 Amelia  /Libra… 1.7.6   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… foreig… Rcpp (&amp;gt;=… &amp;quot;tcltk,… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 arrayh… /Libra… 1.1-0   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 askpass /Libra… 1.1     &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   sys (&amp;gt;… &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assert… /Libra… 0.2.1   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   tools   &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio   /Libra… 0.1-7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backpo… /Libra… 1.1.7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… utils   &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 351 more rows, and 7 more variables: License &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   License_is_FOSS &amp;lt;chr&amp;gt;, License_restricts_use &amp;lt;chr&amp;gt;, OS_type &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   MD5sum &amp;lt;chr&amp;gt;, NeedsCompilation &amp;lt;chr&amp;gt;, Built &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# data frame of all installed packages
+local_pkgs &amp;lt;- installed.packages() %&amp;gt;%
+  as_tibble() %&amp;gt;%
+  print()
+## # A tibble: 383 x 16
+##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances
+##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   
+##  1 abind   /Libra… 1.4-5   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    
+##  2 adagio  /Libra… 0.7.1   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… graphi… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    
+##  3 ade4    /Libra… 1.7-15  &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… graphi… &amp;lt;NA&amp;gt;      &amp;quot;ade4Tk… &amp;lt;NA&amp;gt;    
+##  4 AER     /Libra… 1.2-9   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… stats,… &amp;lt;NA&amp;gt;      &amp;quot;boot, … &amp;lt;NA&amp;gt;    
+##  5 Amelia  /Libra… 1.7.6   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… foreig… Rcpp (&amp;gt;=… &amp;quot;tcltk,… &amp;lt;NA&amp;gt;    
+##  6 arrayh… /Libra… 1.1-0   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   method… &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    
+##  7 askpass /Libra… 1.1     &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   sys (&amp;gt;… &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    
+##  8 assert… /Libra… 0.2.1   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;   tools   &amp;lt;NA&amp;gt;      &amp;quot;testth… &amp;lt;NA&amp;gt;    
+##  9 audio   /Libra… 0.1-7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    
+## 10 backpo… /Libra… 1.1.7   &amp;lt;NA&amp;gt;     &amp;quot;R (&amp;gt;=… utils   &amp;lt;NA&amp;gt;       &amp;lt;NA&amp;gt;    &amp;lt;NA&amp;gt;    
+## # … with 373 more rows, and 7 more variables: License &amp;lt;chr&amp;gt;,
+## #   License_is_FOSS &amp;lt;chr&amp;gt;, License_restricts_use &amp;lt;chr&amp;gt;, OS_type &amp;lt;chr&amp;gt;,
+## #   MD5sum &amp;lt;chr&amp;gt;, NeedsCompilation &amp;lt;chr&amp;gt;, Built &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with &lt;code&gt;sessioninfo::package_info()&lt;/code&gt;, passing a vector of package names to the function.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# get source details (cran, github...) from package_info()&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; data-line-number=&#34;2&#34;&gt;local_details &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;sessioninfo&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;package_info&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;pkgs =&lt;/span&gt; local_pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;Package) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(package, &lt;span class=&#34;dt&#34;&gt;local_version =&lt;/span&gt; ondiskversion, source) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 3&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source        &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;         &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 adagio       0.7.1         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 ade4         1.7-15        CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 AER          1.2-9         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 Amelia       1.7.6         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 askpass      1.1           CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat   0.2.1         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio        0.1-7         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports    1.1.7         CRAN (R 4.0.0)&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# get source details (cran, github...) from package_info()
+local_details &amp;lt;- 
+  sessioninfo::package_info(pkgs = local_pkgs$Package) %&amp;gt;%
+  as_tibble() %&amp;gt;%
+  select(package, local_version = ondiskversion, source) %&amp;gt;%
+  print()
+## # A tibble: 369 x 3
+##    package      local_version source        
+##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;         
+##  1 abind        1.4-5         CRAN (R 4.0.0)
+##  2 adagio       0.7.1         CRAN (R 4.0.0)
+##  3 ade4         1.7-15        CRAN (R 4.0.0)
+##  4 AER          1.2-9         CRAN (R 4.0.0)
+##  5 Amelia       1.7.6         CRAN (R 4.0.0)
+##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0)
+##  7 askpass      1.1           CRAN (R 4.0.0)
+##  8 assertthat   0.2.1         CRAN (R 4.0.0)
+##  9 audio        0.1-7         CRAN (R 4.0.0)
+## 10 backports    1.1.7         CRAN (R 4.0.0)
+## # … with 359 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Notice that this new table has 14 fewer rows. That’s because &lt;code&gt;sessioninfo::package_info()&lt;/code&gt; isn’t returning the base packages that show up in &lt;code&gt;installed.packages()&lt;/code&gt;. That’s fine, since those will come with R 4.0 anyway.&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;source&lt;/code&gt; column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(local_details, &lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;Github&amp;quot;&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 10 x 3&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package              local_version source                                    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;                &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;                                     &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 bookdown             0.18.3        Github (rstudio/bookdown@c5df29f)         &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 colorout             1.2-2         Github (jalvesaq/colorout@726d681)        &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 emo                  0.0.0.9000    Github (hadley/emo@3f03b11)               &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 mRkov                0.0.0.9000    Github (serrat839/mRkov@0f520e8)          &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 rethinking           2.00          Github (rmcelreath/rethinking@f393f30)    &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 rmarkdown            2.2.1         Github (rstudio/rmarkdown@dcd932f)        &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 springerQuarantineB… 0.1.0         Github (renanxcortes/springerQuarantineBo…&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 Statamarkdown        0.4.5         Github (hemken/Statamarkdown@506cfc9)     &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 texreg               1.36.28       Github (leifeld/texreg@c1da5c8)           &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 waffle               1.0.1         Github (hrbrmstr/waffle@3f61463)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;filter(local_details, str_detect(source, &amp;quot;Github&amp;quot;))
+## # A tibble: 9 x 3
+##   package               local_version source                                    
+##   &amp;lt;chr&amp;gt;                 &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;                                     
+## 1 colorout              1.2-2         Github (jalvesaq/colorout@726d681)        
+## 2 emo                   0.0.0.9000    Github (hadley/emo@3f03b11)               
+## 3 ggkeyboard            0.0.0.9009    Github (sharlagelfand/ggkeyboard@b1a965d) 
+## 4 mRkov                 0.0.0.9000    Github (serrat839/mRkov@0f520e8)          
+## 5 rethinking            2.00          Github (rmcelreath/rethinking@f393f30)    
+## 6 springerQuarantineBo… 0.1.0         Github (renanxcortes/springerQuarantineBo…
+## 7 Statamarkdown         0.4.5         Github (hemken/Statamarkdown@506cfc9)     
+## 8 texreg                1.36.28       Github (leifeld/texreg@c1da5c8)           
+## 9 waffle                1.0.1         Github (hrbrmstr/waffle@3f61463)&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;determining-install-source-by-comparing-package-versions&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Determining install source by comparing package versions&lt;/h1&gt;
 &lt;p&gt;Before you update R, you may be using packages installed from Github, even if those packages are also on CRAN. We want to compare our locally installed package versions against the versions on CRAN. If the CRAN versions are more recent, we can go ahead and get those packages from CRAN. If the Github versions are still the most recent (or the &lt;em&gt;only&lt;/em&gt;) versions of some packages, we want to get them from Github.&lt;/p&gt;
 &lt;p&gt;We will want to get a table of data on CRAN package versions. The &lt;code&gt;available.packages()&lt;/code&gt; function returns info for &lt;strong&gt;all&lt;/strong&gt; packages on CRAN.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# available.packages() returns pkg info for ALL pkgs on CRAN.&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; data-line-number=&#34;2&#34;&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;available.packages&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;.name_repair =&lt;/span&gt; tolower) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 15,991 x 17&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package version priority depends imports linkingto suggests enhances license&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 aaSEA   1.1.0   &amp;lt;NA&amp;gt;     R(&amp;gt;= 3… &amp;quot;DT(&amp;gt;=… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 AATtoo… 0.0.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;magri… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 ABACUS  1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;ggplo… &amp;lt;NA&amp;gt;      rmarkdo… &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 abbyyR  0.5.5   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;httr,… &amp;lt;NA&amp;gt;      testtha… &amp;lt;NA&amp;gt;     MIT + …&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 abc     2.1     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 abc.da… 1.0     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 15,981 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# available.packages() returns pkg info for ALL pkgs on CRAN.
+cran_pkgs &amp;lt;- available.packages() %&amp;gt;% 
+  as_tibble(.name_repair = tolower) %&amp;gt;%
+  print()
+## # A tibble: 16,222 x 17
+##    package version priority depends imports linkingto suggests enhances license
+##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  
+##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…
+##  2 aaSEA   1.1.0   &amp;lt;NA&amp;gt;     R(&amp;gt;= 3… &amp;quot;DT(&amp;gt;=… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  
+##  3 AATtoo… 0.0.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;magri… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
+##  4 ABACUS  1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;ggplo… &amp;lt;NA&amp;gt;      rmarkdo… &amp;lt;NA&amp;gt;     GPL-3  
+##  5 abbyyR  0.5.5   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;httr,… &amp;lt;NA&amp;gt;      testtha… &amp;lt;NA&amp;gt;     MIT + …
+##  6 abc     2.1     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…
+##  7 abc.da… 1.0     &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL (&amp;gt;…
+##  8 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  
+##  9 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
+## 10 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
+## # … with 16,212 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,
+## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,
+## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-1&#34; data-line-number=&#34;1&#34;&gt;slimmer_frame &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;left_join&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-3&#34; data-line-number=&#34;3&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(local_details, package, local_version, source),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-4&#34; data-line-number=&#34;4&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(cran_pkgs, package, &lt;span class=&#34;dt&#34;&gt;cran_version =&lt;/span&gt; version)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-5&#34; data-line-number=&#34;5&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-7&#34; data-line-number=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 4&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package      local_version source         cran_version&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-10&#34; data-line-number=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-13&#34; data-line-number=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-14&#34; data-line-number=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-15&#34; data-line-number=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-16&#34; data-line-number=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-19&#34; data-line-number=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.8       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-20&#34; data-line-number=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;slimmer_frame &amp;lt;- 
+  left_join(
+    x = select(local_details, package, local_version, source),
+    y = select(cran_pkgs, package, cran_version = version)
+  ) %&amp;gt;%
+  print()
+## # A tibble: 369 x 4
+##    package      local_version source         cran_version
+##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       
+##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       
+##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       
+##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      
+##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       
+##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       
+##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       
+##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         
+##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       
+##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       
+## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.9       
+## # … with 359 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: &lt;strong&gt;We want to install from Github only if our local Github version is more recent than the CRAN version.&lt;/strong&gt; This also applies when there is no version of a package on CRAN.&lt;/p&gt;
 &lt;p&gt;Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.&lt;/p&gt;
 &lt;p&gt;There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, &lt;em&gt;even if&lt;/em&gt; the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of &lt;a href=&#34;https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f&#34;&gt;StanHeaders&lt;/a&gt;), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).&lt;/p&gt;
 &lt;p&gt;The code below does this categorization using the &lt;code&gt;utils::compareVersion()&lt;/code&gt; function, which interprets the version numbers so we don’t have to. We do an additional step to note the Github repostory for any package that we still want to obtain from Github.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; data-line-number=&#34;1&#34;&gt;compare_frame &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;slimmer_frame &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(package) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-3&#34; data-line-number=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-4&#34; data-line-number=&#34;4&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;source_locale =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-5&#34; data-line-number=&#34;5&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;Github&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-7&#34; data-line-number=&#34;7&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(cran_version) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-9&#34; data-line-number=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;CRAN&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Unavailable on CRAN&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; data-line-number=&#34;10&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-11&#34; data-line-number=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(cran_version) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-12&#34; data-line-number=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(source, &lt;span class=&#34;st&#34;&gt;&amp;quot;CRAN&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Downgraded on CRAN&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-13&#34; data-line-number=&#34;13&#34;&gt;      &lt;span class=&#34;kw&#34;&gt;compareVersion&lt;/span&gt;(local_version, cran_version) &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;CRAN&amp;quot;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-14&#34; data-line-number=&#34;14&#34;&gt;    ),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-15&#34; data-line-number=&#34;15&#34;&gt;    &lt;span class=&#34;dt&#34;&gt;github_repo =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;case_when&lt;/span&gt;(&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-16&#34; data-line-number=&#34;16&#34;&gt;      source_locale &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-17&#34; data-line-number=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_split&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;string =&lt;/span&gt; source, &lt;span class=&#34;dt&#34;&gt;pattern =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;@&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;simplify =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)[,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-18&#34; data-line-number=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_replace&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Github &lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\\&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;(&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-19&#34; data-line-number=&#34;19&#34;&gt;      &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(&lt;span class=&#34;ot&#34;&gt;NA&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-20&#34; data-line-number=&#34;20&#34;&gt;    ),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-21&#34; data-line-number=&#34;21&#34;&gt;  ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-22&#34; data-line-number=&#34;22&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-23&#34; data-line-number=&#34;23&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;()&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-24&#34; data-line-number=&#34;24&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # A tibble: 347 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-25&#34; data-line-number=&#34;25&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    package     local_version source       cran_version source_locale github_repo&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-26&#34; data-line-number=&#34;26&#34;&gt;&lt;span class=&#34;co&#34;&gt;##    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;      &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-27&#34; data-line-number=&#34;27&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-28&#34; data-line-number=&#34;28&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-29&#34; data-line-number=&#34;29&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-30&#34; data-line-number=&#34;30&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-31&#34; data-line-number=&#34;31&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-32&#34; data-line-number=&#34;32&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-33&#34; data-line-number=&#34;33&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-34&#34; data-line-number=&#34;34&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-35&#34; data-line-number=&#34;35&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-36&#34; data-line-number=&#34;36&#34;&gt;&lt;span class=&#34;co&#34;&gt;## 10 backports   1.1.7         CRAN (R 4.0… 1.1.8        CRAN          &amp;lt;NA&amp;gt;       &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-37&#34; data-line-number=&#34;37&#34;&gt;&lt;span class=&#34;co&#34;&gt;## # … with 337 more rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;compare_frame &amp;lt;- slimmer_frame %&amp;gt;%
+  group_by(package) %&amp;gt;% 
+  mutate(
+    source_locale = case_when(
+      compareVersion(local_version, cran_version) == 1 &amp;amp;
+        str_detect(source, &amp;quot;Github&amp;quot;) ~ &amp;quot;Github&amp;quot;,
+      compareVersion(local_version, cran_version) == 1 &amp;amp;
+        is.na(cran_version) &amp;amp;
+        str_detect(source, &amp;quot;CRAN&amp;quot;) ~ &amp;quot;Unavailable on CRAN&amp;quot;,
+      compareVersion(local_version, cran_version) == 1 &amp;amp;
+        (is.na(cran_version) == FALSE) &amp;amp;
+        str_detect(source, &amp;quot;CRAN&amp;quot;) ~ &amp;quot;Downgraded on CRAN&amp;quot;,
+      compareVersion(local_version, cran_version) %in% c(-1, 0) ~ &amp;quot;CRAN&amp;quot;
+    ),
+    github_repo = case_when(
+      source_locale == &amp;quot;Github&amp;quot; ~ 
+        str_split(string = source, pattern = &amp;quot;@&amp;quot;, simplify = TRUE)[,1] %&amp;gt;%
+        str_replace(&amp;quot;Github \\(&amp;quot;, &amp;quot;&amp;quot;),
+      TRUE ~ as.character(NA)
+    ),
+  ) %&amp;gt;%
+  ungroup() %&amp;gt;%
+  print()
+## # A tibble: 369 x 6
+##    package     local_version source       cran_version source_locale github_repo
+##    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;      
+##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &amp;lt;NA&amp;gt;       
+##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &amp;lt;NA&amp;gt;       
+##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &amp;lt;NA&amp;gt;       
+##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &amp;lt;NA&amp;gt;       
+##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &amp;lt;NA&amp;gt;       
+##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &amp;lt;NA&amp;gt;       
+##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &amp;lt;NA&amp;gt;       
+##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &amp;lt;NA&amp;gt;       
+##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &amp;lt;NA&amp;gt;       
+## 10 backports   1.1.7         CRAN (R 4.0… 1.1.9        CRAN          &amp;lt;NA&amp;gt;       
+## # … with 359 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;updating-r-and-reinstalling-packages&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Updating R and reinstalling packages&lt;/h1&gt;
 &lt;p&gt;When we are satisfied with our decisions about where to install a package from, save this comparison table to file.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# output data location&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;dir.create&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# output file&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-5&#34; data-line-number=&#34;5&#34;&gt;out_file &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;str_glue&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;pkg-data_{Sys.Date()}.rds&amp;quot;&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;write_rds&lt;/span&gt;(compare_frame, &lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;, out_file))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# output data location
+dir.create(here(&amp;quot;data&amp;quot;))
+
+# output file
+out_file &amp;lt;- as.character(str_glue(&amp;quot;pkg-data_{Sys.Date()}.rds&amp;quot;))
+write_rds(compare_frame, here(&amp;quot;data&amp;quot;, out_file))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;After updating, we reopen R and install our packages according to our classifications. We want to begin by installing &lt;code&gt;{remotes}&lt;/code&gt; to enable installation from Github.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# to install from github&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-2&#34; data-line-number=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;remotes&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# should still be operating in your working directory&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-5&#34; data-line-number=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;# so downloading {here} makes sense also&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-6&#34; data-line-number=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;here&amp;quot;&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-7&#34; data-line-number=&#34;7&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-8&#34; data-line-number=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# read package data&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-9&#34; data-line-number=&#34;9&#34;&gt;pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;readRDS&lt;/span&gt;(here&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;here&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;pkg-data_2020-04-25.rds&amp;quot;&lt;/span&gt;))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# to install from github
+install.packages(&amp;quot;remotes&amp;quot;)
+
+# should still be operating in your working directory
+# so downloading {here} makes sense also
+install.packages(&amp;quot;here&amp;quot;)
+
+# read package data
+pkgs &amp;lt;- readRDS(here::here(&amp;quot;data&amp;quot;, &amp;quot;pkg-data_2020-04-25.rds&amp;quot;))&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Everything that we want to install from Github, we install by iterating &lt;code&gt;remotes::install_github&lt;/code&gt; over the github repository slugs that we saved previously. This requires us to write the code in “hard mode” because we aren’t using tidyverse dialect.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# install from github repos&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-2&#34; data-line-number=&#34;2&#34;&gt;github_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;pkgs[pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;source_locale &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;, ][[&lt;span class=&#34;st&#34;&gt;&amp;quot;github_repo&amp;quot;&lt;/span&gt;]]&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-4&#34; data-line-number=&#34;4&#34;&gt;remotes&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;install_github&lt;/span&gt;(github_pkgs)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install from github repos
+github_pkgs &amp;lt;- pkgs[pkgs$source_locale == &amp;quot;Github&amp;quot;, ][[&amp;quot;github_repo&amp;quot;]]
+
+remotes::install_github(github_pkgs)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, everything that we said we wouldn’t get from Github, we get by using plain ol’ &lt;code&gt;install.packages()&lt;/code&gt;. Before doing this, you may find it beneficial to filter out some of the packages that you don’t use anymore or that maybe we only installed as dependencies for other packages.&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; data-line-number=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# install from cran with remaining package names&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; data-line-number=&#34;2&#34;&gt;cran_pkgs &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;pkgs[pkgs&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;source_locale &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Github&amp;quot;&lt;/span&gt;, ][[&lt;span class=&#34;st&#34;&gt;&amp;quot;package&amp;quot;&lt;/span&gt;]]&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-3&#34; data-line-number=&#34;3&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-4&#34; data-line-number=&#34;4&#34;&gt;&lt;span class=&#34;kw&#34;&gt;install.packages&lt;/span&gt;(cran_pkgs)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;# install from cran with remaining package names
+cran_pkgs &amp;lt;- pkgs[pkgs$source_locale != &amp;quot;Github&amp;quot;, ][[&amp;quot;package&amp;quot;]]
+
+install.packages(cran_pkgs)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This should get you (more or less) up and running with R 4.0 and all of your old packages.&lt;/p&gt;
 &lt;p&gt;Fair warning: I’m already getting burned by some C++ configuration problems for packages that want to compile from source. I think this is particular to my own computer and the klugey fixes I undertook to set up &lt;code&gt;{rstan}&lt;/code&gt; with MacOS Catalina. I remember reading somewhere that R 4.0 fixed some of the Stan x Catalina problems, so maybe I will confront these choices again soon, but I will cross that bridge when I get to it.&lt;/p&gt;
 &lt;/div&gt;
