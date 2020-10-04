@@ -532,7 +532,7 @@ library(&quot;tidyverse&quot;)
 local_pkgs &lt;- installed.packages() %&gt;%
   as_tibble() %&gt;%
   print()
-## # A tibble: 383 x 16
+## # A tibble: 392 x 16
 ##    Package LibPath Version Priority Depends Imports LinkingTo Suggests Enhances
 ##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;   
 ##  1 abind   /Libra… 1.4-5   &lt;NA&gt;     &quot;R (&gt;=… method… &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    
@@ -545,7 +545,7 @@ local_pkgs &lt;- installed.packages() %&gt;%
 ##  8 assert… /Libra… 0.2.1   &lt;NA&gt;      &lt;NA&gt;   tools   &lt;NA&gt;      &quot;testth… &lt;NA&gt;    
 ##  9 audio   /Libra… 0.1-7   &lt;NA&gt;     &quot;R (&gt;=… &lt;NA&gt;    &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    
 ## 10 backpo… /Libra… 1.1.7   &lt;NA&gt;     &quot;R (&gt;=… utils   &lt;NA&gt;       &lt;NA&gt;    &lt;NA&gt;    
-## # … with 373 more rows, and 7 more variables: License &lt;chr&gt;,
+## # … with 382 more rows, and 7 more variables: License &lt;chr&gt;,
 ## #   License_is_FOSS &lt;chr&gt;, License_restricts_use &lt;chr&gt;, OS_type &lt;chr&gt;,
 ## #   MD5sum &lt;chr&gt;, NeedsCompilation &lt;chr&gt;, Built &lt;chr&gt;</code></pre>
 <p>This is a start, but I also want to know if I got these packages from CRAN or from Github. I can do this with <code>sessioninfo::package_info()</code>, passing a vector of package names to the function.</p>
@@ -555,7 +555,7 @@ local_details &lt;-
   as_tibble() %&gt;%
   select(package, local_version = ondiskversion, source) %&gt;%
   print()
-## # A tibble: 369 x 3
+## # A tibble: 378 x 3
 ##    package      local_version source        
 ##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;         
 ##  1 abind        1.4-5         CRAN (R 4.0.0)
@@ -568,22 +568,21 @@ local_details &lt;-
 ##  8 assertthat   0.2.1         CRAN (R 4.0.0)
 ##  9 audio        0.1-7         CRAN (R 4.0.0)
 ## 10 backports    1.1.7         CRAN (R 4.0.0)
-## # … with 359 more rows</code></pre>
+## # … with 368 more rows</code></pre>
 <p>Notice that this new table has 14 fewer rows. That’s because <code>sessioninfo::package_info()</code> isn’t returning the base packages that show up in <code>installed.packages()</code>. That’s fine, since those will come with R 4.0 anyway.</p>
 <p>The <code>source</code> column in this new table shows us what we want to know. For instance, let’s look at packages that I have from Github.</p>
 <pre class="r"><code>filter(local_details, str_detect(source, &quot;Github&quot;))
-## # A tibble: 9 x 3
-##   package               local_version source                                    
-##   &lt;chr&gt;                 &lt;chr&gt;         &lt;chr&gt;                                     
-## 1 colorout              1.2-2         Github (jalvesaq/colorout@726d681)        
-## 2 emo                   0.0.0.9000    Github (hadley/emo@3f03b11)               
-## 3 ggkeyboard            0.0.0.9009    Github (sharlagelfand/ggkeyboard@b1a965d) 
-## 4 mRkov                 0.0.0.9000    Github (serrat839/mRkov@0f520e8)          
-## 5 rethinking            2.00          Github (rmcelreath/rethinking@f393f30)    
-## 6 springerQuarantineBo… 0.1.0         Github (renanxcortes/springerQuarantineBo…
-## 7 Statamarkdown         0.4.5         Github (hemken/Statamarkdown@506cfc9)     
-## 8 texreg                1.36.28       Github (leifeld/texreg@c1da5c8)           
-## 9 waffle                1.0.1         Github (hrbrmstr/waffle@3f61463)</code></pre>
+## # A tibble: 8 x 3
+##   package       local_version source                                   
+##   &lt;chr&gt;         &lt;chr&gt;         &lt;chr&gt;                                    
+## 1 colorout      1.2-2         Github (jalvesaq/colorout@726d681)       
+## 2 emo           0.0.0.9000    Github (hadley/emo@3f03b11)              
+## 3 ggkeyboard    0.0.0.9009    Github (sharlagelfand/ggkeyboard@b1a965d)
+## 4 mRkov         0.0.0.9000    Github (serrat839/mRkov@0f520e8)         
+## 5 rethinking    2.00          Github (rmcelreath/rethinking@f393f30)   
+## 6 Statamarkdown 0.4.5         Github (hemken/Statamarkdown@506cfc9)    
+## 7 texreg        1.36.28       Github (leifeld/texreg@c1da5c8)          
+## 8 waffle        1.0.1         Github (hrbrmstr/waffle@3f61463)</code></pre>
 </div>
 <div id="determining-install-source-by-comparing-package-versions" class="section level1">
 <h1>Determining install source by comparing package versions</h1>
@@ -593,7 +592,7 @@ local_details &lt;-
 cran_pkgs &lt;- available.packages() %&gt;% 
   as_tibble(.name_repair = tolower) %&gt;%
   print()
-## # A tibble: 16,222 x 17
+## # A tibble: 16,373 x 17
 ##    package version priority depends imports linkingto suggests enhances license
 ##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
 ##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…
@@ -606,7 +605,7 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##  8 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  
 ##  9 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  
 ## 10 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  
-## # … with 16,212 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
+## # … with 16,363 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
 ## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,
 ## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</code></pre>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
@@ -616,7 +615,7 @@ cran_pkgs &lt;- available.packages() %&gt;%
     y = select(cran_pkgs, package, cran_version = version)
   ) %&gt;%
   print()
-## # A tibble: 369 x 4
+## # A tibble: 378 x 4
 ##    package      local_version source         cran_version
 ##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;       
 ##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       
@@ -628,8 +627,8 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         
 ##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       
 ##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       
-## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.9       
-## # … with 359 more rows</code></pre>
+## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.10      
+## # … with 368 more rows</code></pre>
 <p>Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: <strong>We want to install from Github only if our local Github version is more recent than the CRAN version.</strong> This also applies when there is no version of a package on CRAN.</p>
 <p>Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.</p>
 <p>There are edge cases to be aware of: we may find that the CRAN version of a package is behind our local version, <em>even if</em> the local version was installed from CRAN. This happens for (at least) two reasons: if a package version was reverted on CRAN (which appeared to happen in the case of <a href="https://github.com/cran/StanHeaders/commit/2294a66cb1876568b6af74a6c4a1233bf6b6e00f">StanHeaders</a>), or if the package is currently unavailable for installation from CRAN (due to some incompatibility, perhaps).</p>
@@ -657,7 +656,7 @@ cran_pkgs &lt;- available.packages() %&gt;%
   ) %&gt;%
   ungroup() %&gt;%
   print()
-## # A tibble: 369 x 6
+## # A tibble: 378 x 6
 ##    package     local_version source       cran_version source_locale github_repo
 ##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;      
 ##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &lt;NA&gt;       
@@ -669,8 +668,8 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       
 ##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       
 ##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       
-## 10 backports   1.1.7         CRAN (R 4.0… 1.1.9        CRAN          &lt;NA&gt;       
-## # … with 359 more rows</code></pre>
+## 10 backports   1.1.7         CRAN (R 4.0… 1.1.10       CRAN          &lt;NA&gt;       
+## # … with 368 more rows</code></pre>
 </div>
 <div id="updating-r-and-reinstalling-packages" class="section level1">
 <h1>Updating R and reinstalling packages</h1>
