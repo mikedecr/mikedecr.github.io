@@ -350,7 +350,7 @@ local_details &amp;lt;-
 cran_pkgs &amp;lt;- available.packages() %&amp;gt;% 
   as_tibble(.name_repair = tolower) %&amp;gt;%
   print()
-## # A tibble: 16,373 x 17
+## # A tibble: 16,418 x 17
 ##    package version priority depends imports linkingto suggests enhances license
 ##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  
 ##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…
@@ -363,7 +363,7 @@ cran_pkgs &amp;lt;- available.packages() %&amp;gt;%
 ##  8 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  
 ##  9 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
 ## 10 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
-## # … with 16,363 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,
+## # … with 16,408 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,
 ## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,
 ## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;

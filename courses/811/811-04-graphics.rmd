@@ -1248,7 +1248,7 @@ Some general advice for plotting:
 
 ## Other `gg` tools
 
-There are many extensions for `ggplot` that you can install. Rather than tediously describe them, I'll point you to a [web page](http://www.ggplot2-exts.org/gallery/?utm_content=buffer6d153&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer) discussing many of the tools out there. These let you create heatmaps, choropleths, network graphs, mosaic plots, autocorrelation plots, and much more. Extensions I have used in the past include `ggfortify`, `ggridges`, `ggthemes`, `ggsci`, `GGally`, and `ggalt`.
+There are many extensions for `ggplot` that you can install. Rather than tediously describe them, I'll point you to a [web page](https://exts.ggplot2.tidyverse.org/) discussing many of the tools out there. These let you create heatmaps, choropleths, network graphs, mosaic plots, autocorrelation plots, and much more. Extensions I have used in the past include `ggfortify`, `ggridges`, `ggthemes`, `ggsci`, `GGally`, and `ggalt`.
 
 Many more extensions are in development and cannot be found on CRAN, but they can be downloaded and installed. One that I particularly like is [`patchwork`](https://github.com/thomasp85/patchwork), which combines multiple graphics into the same image using an extremely simple syntax.
 

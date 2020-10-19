@@ -638,32 +638,33 @@
 <pre><code>## [1] &quot;master&quot;</code></pre>
 <p>To print only the hashes in your Git log, you can supply <code>%t</code> to the the <code>--pretty</code> argument of <code>git log</code>.</p>
 <pre class="r"><code>system(&quot;git log --pretty=%t&quot;, intern = TRUE)</code></pre>
-<pre><code>##   [1] &quot;c5fcaa0&quot; &quot;d3b381a&quot; &quot;ad7ee18&quot; &quot;c5fcaa0&quot; &quot;533e975&quot; &quot;2e7c7a8&quot; &quot;eaee307&quot;
-##   [8] &quot;43bfc74&quot; &quot;1856a0b&quot; &quot;5823e01&quot; &quot;66e52d7&quot; &quot;0f043a4&quot; &quot;af6087c&quot; &quot;56bc096&quot;
-##  [15] &quot;ebd98df&quot; &quot;3074778&quot; &quot;94bcada&quot; &quot;fa8f4fa&quot; &quot;1079fd7&quot; &quot;1a3553b&quot; &quot;f352285&quot;
-##  [22] &quot;0e7c4b4&quot; &quot;3be8c27&quot; &quot;2a80372&quot; &quot;950065a&quot; &quot;b8d24f2&quot; &quot;9da4ece&quot; &quot;8cccbf9&quot;
-##  [29] &quot;45d0315&quot; &quot;9d26ba5&quot; &quot;6ebb3b0&quot; &quot;af8a617&quot; &quot;2c6ec85&quot; &quot;22fea55&quot; &quot;3854af2&quot;
-##  [36] &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot; &quot;6fc4555&quot; &quot;eabf878&quot; &quot;d6bf55f&quot;
-##  [43] &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot; &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot;
-##  [50] &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot; &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot;
-##  [57] &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot; &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot;
-##  [64] &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot; &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot;
-##  [71] &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot; &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot;
-##  [78] &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot; &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot;
-##  [85] &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot; &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot;
-##  [92] &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot; &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot;
-##  [99] &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot; &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot;
-## [106] &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot; &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot;
-## [113] &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot; &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot;
-## [120] &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot; &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot;
-## [127] &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot; &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot;
-## [134] &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot; &quot;943687e&quot;</code></pre>
+<pre><code>##   [1] &quot;d17d13e&quot; &quot;04293bd&quot; &quot;d9c823e&quot; &quot;c5fcaa0&quot; &quot;d3b381a&quot; &quot;ad7ee18&quot; &quot;c5fcaa0&quot;
+##   [8] &quot;533e975&quot; &quot;2e7c7a8&quot; &quot;eaee307&quot; &quot;43bfc74&quot; &quot;1856a0b&quot; &quot;5823e01&quot; &quot;66e52d7&quot;
+##  [15] &quot;0f043a4&quot; &quot;af6087c&quot; &quot;56bc096&quot; &quot;ebd98df&quot; &quot;3074778&quot; &quot;94bcada&quot; &quot;fa8f4fa&quot;
+##  [22] &quot;1079fd7&quot; &quot;1a3553b&quot; &quot;f352285&quot; &quot;0e7c4b4&quot; &quot;3be8c27&quot; &quot;2a80372&quot; &quot;950065a&quot;
+##  [29] &quot;b8d24f2&quot; &quot;9da4ece&quot; &quot;8cccbf9&quot; &quot;45d0315&quot; &quot;9d26ba5&quot; &quot;6ebb3b0&quot; &quot;af8a617&quot;
+##  [36] &quot;2c6ec85&quot; &quot;22fea55&quot; &quot;3854af2&quot; &quot;93d13c4&quot; &quot;b297079&quot; &quot;f8b6836&quot; &quot;d988f5c&quot;
+##  [43] &quot;6fc4555&quot; &quot;eabf878&quot; &quot;d6bf55f&quot; &quot;ecc0c17&quot; &quot;322d6d8&quot; &quot;b204b83&quot; &quot;604a055&quot;
+##  [50] &quot;5b6cd16&quot; &quot;7f3d4e8&quot; &quot;3e3d9d1&quot; &quot;c5c2a6b&quot; &quot;72ecc5a&quot; &quot;bd25ad7&quot; &quot;2820840&quot;
+##  [57] &quot;f8be89c&quot; &quot;5011495&quot; &quot;b4f159a&quot; &quot;471d45e&quot; &quot;32e03b8&quot; &quot;d55b641&quot; &quot;175df3e&quot;
+##  [64] &quot;03985bd&quot; &quot;549e2f0&quot; &quot;8effeb6&quot; &quot;e7c1fc3&quot; &quot;19f3bcd&quot; &quot;0647521&quot; &quot;5913357&quot;
+##  [71] &quot;b146ac2&quot; &quot;494f860&quot; &quot;557bf2a&quot; &quot;2b367c7&quot; &quot;734e099&quot; &quot;8ef25d4&quot; &quot;1d949ce&quot;
+##  [78] &quot;ed14db3&quot; &quot;ba4694c&quot; &quot;57d5fc6&quot; &quot;1656482&quot; &quot;28d68d7&quot; &quot;5b8e92a&quot; &quot;a807aab&quot;
+##  [85] &quot;359f06a&quot; &quot;78c3ee3&quot; &quot;defc14f&quot; &quot;ec7e081&quot; &quot;e4c9176&quot; &quot;ab502db&quot; &quot;7fe3ee6&quot;
+##  [92] &quot;2f97534&quot; &quot;3259f27&quot; &quot;bec13bd&quot; &quot;f3142cc&quot; &quot;2959bf6&quot; &quot;b4754c2&quot; &quot;91fe96a&quot;
+##  [99] &quot;91bba9b&quot; &quot;071d153&quot; &quot;8e4cce3&quot; &quot;ba09b95&quot; &quot;741632b&quot; &quot;3569cdc&quot; &quot;d99c163&quot;
+## [106] &quot;5c135e3&quot; &quot;2671a4b&quot; &quot;2b7d810&quot; &quot;ea7d44d&quot; &quot;6c7656c&quot; &quot;e40d5d8&quot; &quot;bb9199d&quot;
+## [113] &quot;ca4e593&quot; &quot;c42c33f&quot; &quot;d17291e&quot; &quot;38d1910&quot; &quot;6bc2299&quot; &quot;3131d9d&quot; &quot;5906234&quot;
+## [120] &quot;d355f02&quot; &quot;7a6e215&quot; &quot;c5befba&quot; &quot;b0dba1c&quot; &quot;c1d6342&quot; &quot;87f3ceb&quot; &quot;83ca75b&quot;
+## [127] &quot;69e41cf&quot; &quot;f9278c7&quot; &quot;a3ee86e&quot; &quot;816ebb5&quot; &quot;030278d&quot; &quot;2d9384b&quot; &quot;fec8391&quot;
+## [134] &quot;83dbb8c&quot; &quot;1210553&quot; &quot;ce35ec0&quot; &quot;ab3c776&quot; &quot;c62ad9f&quot; &quot;3148687&quot; &quot;c3621d8&quot;
+## [141] &quot;943687e&quot;</code></pre>
 <p>Use indexing to isolate only the most recent hash from this vector of results.</p>
 <pre class="r"><code>system(&quot;git log --pretty=%t&quot;, intern = TRUE)[1]</code></pre>
-<pre><code>## [1] &quot;c5fcaa0&quot;</code></pre>
+<pre><code>## [1] &quot;d17d13e&quot;</code></pre>
 <p>To print the commit message, use <code>--pretty=%s</code> instead.</p>
 <pre class="r"><code>system(&quot;git log --pretty=%s&quot;, intern = TRUE)[1]</code></pre>
-<pre><code>## [1] &quot;JK the kathy notes mess up all site styling&quot;</code></pre>
+<pre><code>## [1] &quot;fix Marcy&#39;s ggplot extension link&quot;</code></pre>
 </div>
 <div id="r-results-in-the-yaml" class="section level3">
 <h3>R results in the YAML</h3>

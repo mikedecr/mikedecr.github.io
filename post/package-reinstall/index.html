@@ -592,7 +592,7 @@ local_details &lt;-
 cran_pkgs &lt;- available.packages() %&gt;% 
   as_tibble(.name_repair = tolower) %&gt;%
   print()
-## # A tibble: 16,373 x 17
+## # A tibble: 16,418 x 17
 ##    package version priority depends imports linkingto suggests enhances license
 ##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
 ##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…
@@ -605,7 +605,7 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##  8 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  
 ##  9 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  
 ## 10 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  
-## # … with 16,363 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
+## # … with 16,408 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
 ## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,
 ## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</code></pre>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
