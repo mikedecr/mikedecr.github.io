@@ -499,7 +499,7 @@ local_details &amp;lt;-
 cran_pkgs &amp;lt;- available.packages() %&amp;gt;% 
   as_tibble(.name_repair = tolower) %&amp;gt;%
   print()
-## # A tibble: 16,418 x 17
+## # A tibble: 16,578 x 17
 ##    package version priority depends imports linkingto suggests enhances license
 ##    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;   &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;    &amp;lt;chr&amp;gt;  
 ##  1 A3      1.0.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= …  &amp;lt;NA&amp;gt;   &amp;lt;NA&amp;gt;      randomF… &amp;lt;NA&amp;gt;     GPL (&amp;gt;…
@@ -512,7 +512,7 @@ cran_pkgs &amp;lt;- available.packages() %&amp;gt;%
 ##  8 ABC.RAP 0.9.0   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;graph… &amp;lt;NA&amp;gt;      knitr, … &amp;lt;NA&amp;gt;     GPL-3  
 ##  9 abcADM  1.0     &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;    &amp;quot;Rcpp … Rcpp, BH  &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
 ## 10 ABCana… 1.2.1   &amp;lt;NA&amp;gt;     R (&amp;gt;= … &amp;quot;plotr… &amp;lt;NA&amp;gt;      &amp;lt;NA&amp;gt;     &amp;lt;NA&amp;gt;     GPL-3  
-## # … with 16,408 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,
+## # … with 16,568 more rows, and 8 more variables: license_is_foss &amp;lt;chr&amp;gt;,
 ## #   license_restricts_use &amp;lt;chr&amp;gt;, os_type &amp;lt;chr&amp;gt;, archs &amp;lt;chr&amp;gt;, md5sum &amp;lt;chr&amp;gt;,
 ## #   needscompilation &amp;lt;chr&amp;gt;, file &amp;lt;chr&amp;gt;, repository &amp;lt;chr&amp;gt;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.&lt;/p&gt;
@@ -527,14 +527,14 @@ cran_pkgs &amp;lt;- available.packages() %&amp;gt;%
 ##    &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;       
 ##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       
 ##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       
-##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      
+##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-16      
 ##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       
 ##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       
 ##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       
 ##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         
 ##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       
 ##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       
-## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.10      
+## 10 backports    1.1.7         CRAN (R 4.0.0) 1.2.0       
 ## # … with 368 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: &lt;strong&gt;We want to install from Github only if our local Github version is more recent than the CRAN version.&lt;/strong&gt; This also applies when there is no version of a package on CRAN.&lt;/p&gt;
 &lt;p&gt;Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.&lt;/p&gt;
@@ -568,14 +568,14 @@ cran_pkgs &amp;lt;- available.packages() %&amp;gt;%
 ##    &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;        &amp;lt;chr&amp;gt;         &amp;lt;chr&amp;gt;      
 ##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &amp;lt;NA&amp;gt;       
 ##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &amp;lt;NA&amp;gt;       
-##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &amp;lt;NA&amp;gt;       
+##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-16       CRAN          &amp;lt;NA&amp;gt;       
 ##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &amp;lt;NA&amp;gt;       
 ##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &amp;lt;NA&amp;gt;       
 ##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &amp;lt;NA&amp;gt;       
 ##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &amp;lt;NA&amp;gt;       
 ##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &amp;lt;NA&amp;gt;       
 ##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &amp;lt;NA&amp;gt;       
-## 10 backports   1.1.7         CRAN (R 4.0… 1.1.10       CRAN          &amp;lt;NA&amp;gt;       
+## 10 backports   1.1.7         CRAN (R 4.0… 1.2.0        CRAN          &amp;lt;NA&amp;gt;       
 ## # … with 368 more rows&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;updating-r-and-reinstalling-packages&#34; class=&#34;section level1&#34;&gt;
@@ -1335,33 +1335,33 @@ Due to the discrete nature of the &lt;span class=&#34;math inline&#34;&gt;\(\del
 &lt;pre&gt;&lt;code&gt;## [1] &amp;quot;master&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print only the hashes in your Git log, you can supply &lt;code&gt;%t&lt;/code&gt; to the the &lt;code&gt;--pretty&lt;/code&gt; argument of &lt;code&gt;git log&lt;/code&gt;.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%t&amp;quot;, intern = TRUE)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;d17d13e&amp;quot; &amp;quot;04293bd&amp;quot; &amp;quot;d9c823e&amp;quot; &amp;quot;c5fcaa0&amp;quot; &amp;quot;d3b381a&amp;quot; &amp;quot;ad7ee18&amp;quot; &amp;quot;c5fcaa0&amp;quot;
-##   [8] &amp;quot;533e975&amp;quot; &amp;quot;2e7c7a8&amp;quot; &amp;quot;eaee307&amp;quot; &amp;quot;43bfc74&amp;quot; &amp;quot;1856a0b&amp;quot; &amp;quot;5823e01&amp;quot; &amp;quot;66e52d7&amp;quot;
-##  [15] &amp;quot;0f043a4&amp;quot; &amp;quot;af6087c&amp;quot; &amp;quot;56bc096&amp;quot; &amp;quot;ebd98df&amp;quot; &amp;quot;3074778&amp;quot; &amp;quot;94bcada&amp;quot; &amp;quot;fa8f4fa&amp;quot;
-##  [22] &amp;quot;1079fd7&amp;quot; &amp;quot;1a3553b&amp;quot; &amp;quot;f352285&amp;quot; &amp;quot;0e7c4b4&amp;quot; &amp;quot;3be8c27&amp;quot; &amp;quot;2a80372&amp;quot; &amp;quot;950065a&amp;quot;
-##  [29] &amp;quot;b8d24f2&amp;quot; &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot; &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot;
-##  [36] &amp;quot;2c6ec85&amp;quot; &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot; &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot;
-##  [43] &amp;quot;6fc4555&amp;quot; &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot; &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot;
-##  [50] &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot; &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot;
-##  [57] &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot; &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot;
-##  [64] &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot; &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot;
-##  [71] &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot; &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot;
-##  [78] &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot; &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot;
-##  [85] &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot; &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot;
-##  [92] &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot; &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot;
-##  [99] &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot; &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot;
-## [106] &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot; &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot;
-## [113] &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot; &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot;
-## [120] &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot; &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot;
-## [127] &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot; &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot;
-## [134] &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot; &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot;
-## [141] &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;##   [1] &amp;quot;7ee9385&amp;quot; &amp;quot;2441a5b&amp;quot; &amp;quot;d17d13e&amp;quot; &amp;quot;04293bd&amp;quot; &amp;quot;d9c823e&amp;quot; &amp;quot;c5fcaa0&amp;quot; &amp;quot;d3b381a&amp;quot;
+##   [8] &amp;quot;ad7ee18&amp;quot; &amp;quot;c5fcaa0&amp;quot; &amp;quot;533e975&amp;quot; &amp;quot;2e7c7a8&amp;quot; &amp;quot;eaee307&amp;quot; &amp;quot;43bfc74&amp;quot; &amp;quot;1856a0b&amp;quot;
+##  [15] &amp;quot;5823e01&amp;quot; &amp;quot;66e52d7&amp;quot; &amp;quot;0f043a4&amp;quot; &amp;quot;af6087c&amp;quot; &amp;quot;56bc096&amp;quot; &amp;quot;ebd98df&amp;quot; &amp;quot;3074778&amp;quot;
+##  [22] &amp;quot;94bcada&amp;quot; &amp;quot;fa8f4fa&amp;quot; &amp;quot;1079fd7&amp;quot; &amp;quot;1a3553b&amp;quot; &amp;quot;f352285&amp;quot; &amp;quot;0e7c4b4&amp;quot; &amp;quot;3be8c27&amp;quot;
+##  [29] &amp;quot;2a80372&amp;quot; &amp;quot;950065a&amp;quot; &amp;quot;b8d24f2&amp;quot; &amp;quot;9da4ece&amp;quot; &amp;quot;8cccbf9&amp;quot; &amp;quot;45d0315&amp;quot; &amp;quot;9d26ba5&amp;quot;
+##  [36] &amp;quot;6ebb3b0&amp;quot; &amp;quot;af8a617&amp;quot; &amp;quot;2c6ec85&amp;quot; &amp;quot;22fea55&amp;quot; &amp;quot;3854af2&amp;quot; &amp;quot;93d13c4&amp;quot; &amp;quot;b297079&amp;quot;
+##  [43] &amp;quot;f8b6836&amp;quot; &amp;quot;d988f5c&amp;quot; &amp;quot;6fc4555&amp;quot; &amp;quot;eabf878&amp;quot; &amp;quot;d6bf55f&amp;quot; &amp;quot;ecc0c17&amp;quot; &amp;quot;322d6d8&amp;quot;
+##  [50] &amp;quot;b204b83&amp;quot; &amp;quot;604a055&amp;quot; &amp;quot;5b6cd16&amp;quot; &amp;quot;7f3d4e8&amp;quot; &amp;quot;3e3d9d1&amp;quot; &amp;quot;c5c2a6b&amp;quot; &amp;quot;72ecc5a&amp;quot;
+##  [57] &amp;quot;bd25ad7&amp;quot; &amp;quot;2820840&amp;quot; &amp;quot;f8be89c&amp;quot; &amp;quot;5011495&amp;quot; &amp;quot;b4f159a&amp;quot; &amp;quot;471d45e&amp;quot; &amp;quot;32e03b8&amp;quot;
+##  [64] &amp;quot;d55b641&amp;quot; &amp;quot;175df3e&amp;quot; &amp;quot;03985bd&amp;quot; &amp;quot;549e2f0&amp;quot; &amp;quot;8effeb6&amp;quot; &amp;quot;e7c1fc3&amp;quot; &amp;quot;19f3bcd&amp;quot;
+##  [71] &amp;quot;0647521&amp;quot; &amp;quot;5913357&amp;quot; &amp;quot;b146ac2&amp;quot; &amp;quot;494f860&amp;quot; &amp;quot;557bf2a&amp;quot; &amp;quot;2b367c7&amp;quot; &amp;quot;734e099&amp;quot;
+##  [78] &amp;quot;8ef25d4&amp;quot; &amp;quot;1d949ce&amp;quot; &amp;quot;ed14db3&amp;quot; &amp;quot;ba4694c&amp;quot; &amp;quot;57d5fc6&amp;quot; &amp;quot;1656482&amp;quot; &amp;quot;28d68d7&amp;quot;
+##  [85] &amp;quot;5b8e92a&amp;quot; &amp;quot;a807aab&amp;quot; &amp;quot;359f06a&amp;quot; &amp;quot;78c3ee3&amp;quot; &amp;quot;defc14f&amp;quot; &amp;quot;ec7e081&amp;quot; &amp;quot;e4c9176&amp;quot;
+##  [92] &amp;quot;ab502db&amp;quot; &amp;quot;7fe3ee6&amp;quot; &amp;quot;2f97534&amp;quot; &amp;quot;3259f27&amp;quot; &amp;quot;bec13bd&amp;quot; &amp;quot;f3142cc&amp;quot; &amp;quot;2959bf6&amp;quot;
+##  [99] &amp;quot;b4754c2&amp;quot; &amp;quot;91fe96a&amp;quot; &amp;quot;91bba9b&amp;quot; &amp;quot;071d153&amp;quot; &amp;quot;8e4cce3&amp;quot; &amp;quot;ba09b95&amp;quot; &amp;quot;741632b&amp;quot;
+## [106] &amp;quot;3569cdc&amp;quot; &amp;quot;d99c163&amp;quot; &amp;quot;5c135e3&amp;quot; &amp;quot;2671a4b&amp;quot; &amp;quot;2b7d810&amp;quot; &amp;quot;ea7d44d&amp;quot; &amp;quot;6c7656c&amp;quot;
+## [113] &amp;quot;e40d5d8&amp;quot; &amp;quot;bb9199d&amp;quot; &amp;quot;ca4e593&amp;quot; &amp;quot;c42c33f&amp;quot; &amp;quot;d17291e&amp;quot; &amp;quot;38d1910&amp;quot; &amp;quot;6bc2299&amp;quot;
+## [120] &amp;quot;3131d9d&amp;quot; &amp;quot;5906234&amp;quot; &amp;quot;d355f02&amp;quot; &amp;quot;7a6e215&amp;quot; &amp;quot;c5befba&amp;quot; &amp;quot;b0dba1c&amp;quot; &amp;quot;c1d6342&amp;quot;
+## [127] &amp;quot;87f3ceb&amp;quot; &amp;quot;83ca75b&amp;quot; &amp;quot;69e41cf&amp;quot; &amp;quot;f9278c7&amp;quot; &amp;quot;a3ee86e&amp;quot; &amp;quot;816ebb5&amp;quot; &amp;quot;030278d&amp;quot;
+## [134] &amp;quot;2d9384b&amp;quot; &amp;quot;fec8391&amp;quot; &amp;quot;83dbb8c&amp;quot; &amp;quot;1210553&amp;quot; &amp;quot;ce35ec0&amp;quot; &amp;quot;ab3c776&amp;quot; &amp;quot;c62ad9f&amp;quot;
+## [141] &amp;quot;3148687&amp;quot; &amp;quot;c3621d8&amp;quot; &amp;quot;943687e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Use indexing to isolate only the most recent hash from this vector of results.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%t&amp;quot;, intern = TRUE)[1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;d17d13e&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;7ee9385&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;To print the commit message, use &lt;code&gt;--pretty=%s&lt;/code&gt; instead.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;system(&amp;quot;git log --pretty=%s&amp;quot;, intern = TRUE)[1]&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;fix Marcy&amp;#39;s ggplot extension link&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;home page: no more skills, add interests/ed, new bio &amp;amp; abt page&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div id=&#34;r-results-in-the-yaml&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;R results in the YAML&lt;/h3&gt;

@@ -19,25 +19,23 @@
       
       <guid>/about/</guid>
       <description>&lt;!-- raw HTML omitted --&gt;
-&lt;h2 id=&#34;my-research-focuses-on-american-electoral-politics-and-statistical-research-methods&#34;&gt;My research focuses on American electoral politics and statistical research methods.&lt;/h2&gt;
-&lt;p&gt;I am interested in the performance and functioning of elections: how well elections represent citizen views, how elections are administered, how citizens experience the task of voting.
-I have studied these topics with historical election returns, online experiments, targeted surveys, voting and registration records, and polling place reports.
-I am a student affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;&gt;Elections Research Center&lt;/a&gt; at UW–Madison.&lt;/p&gt;
-&lt;p&gt;My &lt;a href=&#34;/#publications&#34;&gt;publications&lt;/a&gt; and &lt;a href=&#34;/#research&#34;&gt;current projects&lt;/a&gt; deal with voter identification requirements in the state of Wisconsin, the gender gap and other group dynamics in electoral coalitions, voters&amp;rsquo; perceptions of uncertainty in election polls and forecasts, and Bayesian causal inference.&lt;/p&gt;
-&lt;p&gt;My methodological interests are focused on the development and application of Bayesian methods for generative modeling, measurement, and causal inference.
-I am also concerned with meta-research problems related to statistical and scientific inference, transparency and reproducibility, publication bias, and computing practices for social science research.
-Accordingly, my work is &lt;a href=&#34;https://www.github.com/mikedecr&#34;&gt;open-source&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;My dissertation develops new Bayesian methods to study ideological representation in congressional primary elections.
-These innovations include&amp;hellip;&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;Extensions of hierarchical item response models to estimate the aggregate policy preferences of partisan constituents.&lt;/li&gt;
-&lt;li&gt;Theoretical framework and practical guidance for Bayesian approaches to causal inference.&lt;/li&gt;
-&lt;li&gt;Flexible response modeling with Bayesian tools.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;i-teach-quantitative-research-methods-for-undergraduate-and-graduate-students&#34;&gt;I teach quantitative research methods for undergraduate and graduate students,&lt;/h2&gt;
-&lt;p&gt;focusing on the mathematical, statistical, and software foundations for social science research.
-I have taught &lt;a href=&#34;/teaching/&#34;&gt;courses and workshops&lt;/a&gt; on causal inference, predictive modeling, statistical computing, survey science, voting and public opinion, and U.S. campaign finance.&lt;/p&gt;
-&lt;p&gt;I have been recognized with the &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34;&gt;Honored Instructor&lt;/a&gt; award at UW–Madison.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;h2 id=&#34;quantitative-finance-work&#34;&gt;Quantitative Finance Work&lt;/h2&gt;
+&lt;p&gt;After finishing my Ph.D. in 2020, I joined DRW Holdings as a quantitative researcher.
+I use statistics and machine learning to analyze and trade options, futures, and other derivative assets.&lt;/p&gt;
+&lt;h2 id=&#34;political-science-research&#34;&gt;Political Science Research&lt;/h2&gt;
+&lt;p&gt;I received a Ph.D. in political science from the University of Wisconsin, where I was a student affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;&gt;Elections Research Center&lt;/a&gt;.
+My research focuses on statistical modeling in American electoral politics with a substantive focus on the performance and functioning of elections: how well elections represent citizen views, how elections are administered, and how citizens experience the task of voting.&lt;/p&gt;
+&lt;p&gt;My dissertation developed Bayesian models for measurement and causal models to study ideological competition and representation in congressional primary elections.
+Other projects analyze voter identification requirements in Wisconsin, the gender gap and other group dynamics in electoral coalitions, how voters understand with uncertainty in election polls and forecasts, and Bayesian causal inference.
+Most of this work is &lt;a href=&#34;https://www.github.com/mikedecr&#34;&gt;open-source&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;For more, see my &lt;a href=&#34;/#publications&#34;&gt;publications&lt;/a&gt; and &lt;a href=&#34;/#research&#34;&gt;projects in progress&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;teaching&#34;&gt;Teaching&lt;/h2&gt;
+&lt;p&gt;I have taught quantitative research courses and workshops at the undergraduate and graduate level.
+These courses focused on causal inference, predictive modeling, statistical computing, survey research, and essential mathematics for social sciences.&lt;/p&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I was recognized as an &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34;&gt;Honored Instructor&lt;/a&gt; at UW–Madison in 2019.&lt;/p&gt;
+&lt;p&gt;For more, see my &lt;a href=&#34;/teaching/&#34;&gt;teaching page&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

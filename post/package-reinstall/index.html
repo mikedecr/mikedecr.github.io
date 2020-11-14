@@ -226,6 +226,28 @@
         
         
         
+
+        <li class="nav-item">
+          <a class="nav-link  active" href="/post"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
           
           
           
@@ -309,28 +331,6 @@
 
         <li class="nav-item">
           <a class="nav-link " href="/code"><span>Code Projects</span></a>
-        </li>
-
-        
-        
-
-        
-
-        
-        
-        
-          
-        
-
-        
-        
-        
-        
-        
-        
-
-        <li class="nav-item">
-          <a class="nav-link  active" href="/post"><span>Blog</span></a>
         </li>
 
         
@@ -592,7 +592,7 @@ local_details &lt;-
 cran_pkgs &lt;- available.packages() %&gt;% 
   as_tibble(.name_repair = tolower) %&gt;%
   print()
-## # A tibble: 16,418 x 17
+## # A tibble: 16,578 x 17
 ##    package version priority depends imports linkingto suggests enhances license
 ##    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;  
 ##  1 A3      1.0.0   &lt;NA&gt;     R (&gt;= …  &lt;NA&gt;   &lt;NA&gt;      randomF… &lt;NA&gt;     GPL (&gt;…
@@ -605,7 +605,7 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##  8 ABC.RAP 0.9.0   &lt;NA&gt;     R (&gt;= … &quot;graph… &lt;NA&gt;      knitr, … &lt;NA&gt;     GPL-3  
 ##  9 abcADM  1.0     &lt;NA&gt;     &lt;NA&gt;    &quot;Rcpp … Rcpp, BH  &lt;NA&gt;     &lt;NA&gt;     GPL-3  
 ## 10 ABCana… 1.2.1   &lt;NA&gt;     R (&gt;= … &quot;plotr… &lt;NA&gt;      &lt;NA&gt;     &lt;NA&gt;     GPL-3  
-## # … with 16,408 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
+## # … with 16,568 more rows, and 8 more variables: license_is_foss &lt;chr&gt;,
 ## #   license_restricts_use &lt;chr&gt;, os_type &lt;chr&gt;, archs &lt;chr&gt;, md5sum &lt;chr&gt;,
 ## #   needscompilation &lt;chr&gt;, file &lt;chr&gt;, repository &lt;chr&gt;</code></pre>
 <p>We only care about the packages in this table that we have already installed, so we will narrow the table down using a join.</p>
@@ -620,14 +620,14 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;       
 ##  1 abind        1.4-5         CRAN (R 4.0.0) 1.4-5       
 ##  2 adagio       0.7.1         CRAN (R 4.0.0) 0.7.1       
-##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-15      
+##  3 ade4         1.7-15        CRAN (R 4.0.0) 1.7-16      
 ##  4 AER          1.2-9         CRAN (R 4.0.0) 1.2-9       
 ##  5 Amelia       1.7.6         CRAN (R 4.0.0) 1.7.6       
 ##  6 arrayhelpers 1.1-0         CRAN (R 4.0.0) 1.1-0       
 ##  7 askpass      1.1           CRAN (R 4.0.0) 1.1         
 ##  8 assertthat   0.2.1         CRAN (R 4.0.0) 0.2.1       
 ##  9 audio        0.1-7         CRAN (R 4.0.0) 0.1-7       
-## 10 backports    1.1.7         CRAN (R 4.0.0) 1.1.10      
+## 10 backports    1.1.7         CRAN (R 4.0.0) 1.2.0       
 ## # … with 368 more rows</code></pre>
 <p>Using this slimmer table, we categorize the sources of these packages and where we want to reinstall them from. Here is the basic idea: <strong>We want to install from Github only if our local Github version is more recent than the CRAN version.</strong> This also applies when there is no version of a package on CRAN.</p>
 <p>Stated another way, we install a package from CRAN in any case that the CRAN version is more recent than the local version. This is true even if the local version was installed from Github! Remember, we don’t install from Github simply because we did so in the past. We install from Github if there is no better choice.</p>
@@ -661,14 +661,14 @@ cran_pkgs &lt;- available.packages() %&gt;%
 ##    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;      
 ##  1 abind       1.4-5         CRAN (R 4.0… 1.4-5        CRAN          &lt;NA&gt;       
 ##  2 adagio      0.7.1         CRAN (R 4.0… 0.7.1        CRAN          &lt;NA&gt;       
-##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-15       CRAN          &lt;NA&gt;       
+##  3 ade4        1.7-15        CRAN (R 4.0… 1.7-16       CRAN          &lt;NA&gt;       
 ##  4 AER         1.2-9         CRAN (R 4.0… 1.2-9        CRAN          &lt;NA&gt;       
 ##  5 Amelia      1.7.6         CRAN (R 4.0… 1.7.6        CRAN          &lt;NA&gt;       
 ##  6 arrayhelpe… 1.1-0         CRAN (R 4.0… 1.1-0        CRAN          &lt;NA&gt;       
 ##  7 askpass     1.1           CRAN (R 4.0… 1.1          CRAN          &lt;NA&gt;       
 ##  8 assertthat  0.2.1         CRAN (R 4.0… 0.2.1        CRAN          &lt;NA&gt;       
 ##  9 audio       0.1-7         CRAN (R 4.0… 0.1-7        CRAN          &lt;NA&gt;       
-## 10 backports   1.1.7         CRAN (R 4.0… 1.1.10       CRAN          &lt;NA&gt;       
+## 10 backports   1.1.7         CRAN (R 4.0… 1.2.0        CRAN          &lt;NA&gt;       
 ## # … with 368 more rows</code></pre>
 </div>
 <div id="updating-r-and-reinstalling-packages" class="section level1">
@@ -761,7 +761,7 @@ And maybe I will do a fresh install of <em>everything</em> once the semester is 
 
     <div class="media-body">
       <h5 class="card-title" itemprop="name"><a href="/">Michael DeCrescenzo</a></h5>
-      <h6 class="card-subtitle">Ph.D. Candidate, Political Science</h6>
+      <h6 class="card-subtitle">Quantitative Researcher</h6>
       <p class="card-text" itemprop="description">U.S. Electoral Politics, Bayesian Analysis, Open Source Research</p>
       <ul class="network-icon" aria-hidden="true">
         
