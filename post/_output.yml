@@ -1,5 +1,0 @@
-knit: function(...) stop("DON'T KNIT")
-blogdown::html_page:
-  fig_retina: 2
-  new_session: true
-  highlight: tango

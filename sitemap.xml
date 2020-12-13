@@ -3,143 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/courses/example/example1/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/example/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/811/</loc>
-    <lastmod>2019-07-09T11:12:02-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/research/dissertation/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/about/</loc>
-    <lastmod>2020-11-14T12:23:50-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/example/example2/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/811/811-02-basics/</loc>
-    <lastmod>2018-02-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/811/811-03-data/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/811/811-04-graphics/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/811/811-05-analysis/</loc>
-    <lastmod>2019-05-05T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/great-lakes/</loc>
-    <lastmod>2019-08-25T15:46:29-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/causal-inf-2019/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/numbers/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/business-card/</loc>
-    <lastmod>2019-08-25T15:58:28-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/nonvoters/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/doc-templates/</loc>
-    <lastmod>2019-08-25T16:02:19-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/computing-811/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/math-camp/</loc>
-    <lastmod>2019-08-22T10:11:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/research/gender-gap/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/research/causal-bayes/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/latex-workshop/</loc>
-    <lastmod>2019-08-22T10:11:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/research/forecast-uncertainty/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/gender-2016/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/example/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-11-14T12:23:50-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/admin/</loc>
-    <lastmod>2020-11-14T12:23:50-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/</loc>
-    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/bayesian-statistics/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -149,7 +14,7 @@
   
   <url>
     <loc>/tags/computational-methods/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -158,23 +23,33 @@
   </url>
   
   <url>
-    <loc>/post/nonflat-implications/</loc>
+    <loc>/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/nonflat-implications/</loc>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
     <lastmod>2020-06-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
+    <lastmod>2020-06-30T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/package-reinstall/</loc>
+    <loc>/posts/package-reinstall/</loc>
     <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/methods/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
+    <lastmod>2020-04-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -183,7 +58,7 @@
   </url>
   
   <url>
-    <loc>/post/visualizing-what-matters/</loc>
+    <loc>/posts/visualizing-what-matters/</loc>
     <lastmod>2020-03-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -194,41 +69,31 @@
   
   <url>
     <loc>/tags/causal-inference/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/randomization-inference-purrr/</loc>
     <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication_types/2/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
+    <loc>/posts/randomization-inference-purrr/</loc>
+    <lastmod>2020-03-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/election-administration/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
+    <loc>/teaching/ps-811/</loc>
+    <lastmod>2020-01-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/elections/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
+    <loc>/teaching/</loc>
+    <lastmod>2020-01-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/kenneth-r.-mayer/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
+    <loc>/teaching/causal-inf-2019/</loc>
+    <lastmod>2019-08-31T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication_types/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/git-in-papers/</loc>
+    <loc>/posts/git-in-papers/</loc>
     <lastmod>2019-08-25T00:00:00+00:00</lastmod>
   </url>
   
@@ -238,143 +103,41 @@
   </url>
   
   <url>
-    <loc>/post/bayes-mediation/</loc>
+    <loc>/posts/bayes-mediation/</loc>
     <lastmod>2019-06-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/publication_types/3/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/example-publication/preprint/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/example-publication/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/source-themes/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/ggk-flat-priors/</loc>
+    <loc>/posts/ggk-flat-priors/</loc>
     <lastmod>2019-02-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/slides/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
+    <loc>/teaching/numbers/</loc>
+    <lastmod>2019-01-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/slides/example/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/viz-partials/</loc>
+    <loc>/posts/viz-partials/</loc>
     <lastmod>2018-10-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/barry-c.-burden/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
+    <loc>/teaching/latex-workshop/</loc>
+    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/authors/evan-crawford/</loc>
-    <lastmod>2020-06-29T16:47:37-05:00</lastmod>
+    <loc>/teaching/math-camp/</loc>
+    <lastmod>2018-08-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/deep-learning/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/demo/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/external-project/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/internal-project/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/teaching/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/example-publication/journal-article/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/robert-ford/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication_types/1/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/example-publication/conference-paper/</loc>
-    <lastmod>2020-01-01T12:27:14-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-07-09T11:16:18-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/code/</loc>
-    <lastmod>2019-07-09T11:31:06-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/courses/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/publication/</loc>
-    <lastmod>2020-04-27T11:59:11-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/</loc>
-    <lastmod>2019-06-28T17:56:11-05:00</lastmod>
+    <loc>/about/</loc>
   </url>
   
   <url>
     <loc>/research/</loc>
-    <lastmod>2019-07-09T11:19:12-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/teaching/</loc>
-    <lastmod>2020-10-03T23:32:37-05:00</lastmod>
   </url>
   
 </urlset>

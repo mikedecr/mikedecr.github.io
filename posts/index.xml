@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Michael DeCrescenzo</title>
+    <link>/posts/</link>
+    <description>Recent content in Posts on Michael DeCrescenzo</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Non-Flat Implications of Flat Priors</title>
+      <link>/posts/nonflat-implications/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/nonflat-implications/</guid>
+      <description>Understanding the &amp;ldquo;implied prior&amp;rdquo; for functions of parameters</description>
+    </item>
+    
+    <item>
+      <title>How do I reinstall my packages for R 4.0 when many of them came from Github?</title>
+      <link>/posts/package-reinstall/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/package-reinstall/</guid>
+      <description>A quick solution to an R upgrade headache</description>
+    </item>
+    
+    <item>
+      <title>Plotting What Matters</title>
+      <link>/posts/visualizing-what-matters/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/visualizing-what-matters/</guid>
+      <description>An exercise in communicating statistical results</description>
+    </item>
+    
+    <item>
+      <title>Purrrmutation Testing</title>
+      <link>/posts/randomization-inference-purrr/</link>
+      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/randomization-inference-purrr/</guid>
+      <description>Randomization Inference within the Tidyverse</description>
+    </item>
+    
+    <item>
+      <title>Git information in your open-source research paper (with Rmarkdown)
+</title>
+      <link>/posts/git-in-papers/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/git-in-papers/</guid>
+      <description>Timestamp a paper with a commit hash and branch name</description>
+    </item>
+    
+    <item>
+      <title>Causal Mediation, Bayesianly</title>
+      <link>/posts/bayes-mediation/</link>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bayes-mediation/</guid>
+      <description>This is what we were already doing</description>
+    </item>
+    
+    <item>
+      <title>Unrealistic Priors and the &#34;Illusion of Learning from Observational Research&#34;
+</title>
+      <link>/posts/ggk-flat-priors/</link>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ggk-flat-priors/</guid>
+      <description>Experimentalists agree! When flat priors lead to worse learning</description>
+    </item>
+    
+    <item>
+      <title>A Visualization of Partial Effects in Multiple Regression</title>
+      <link>/posts/viz-partials/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/viz-partials/</guid>
+      <description>Partial effects without high dimensions</description>
+    </item>
+    
+  </channel>
+</rss>

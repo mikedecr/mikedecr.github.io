@@ -1,117 +1,153 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Michael DeCrescenzo</title>
     <link>/</link>
     <description>Recent content on Michael DeCrescenzo</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <copyright>&amp;copy; Michael DeCrescenzo {year}</copyright>
-    <lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jun 2020 00:00:00 +0000</lastBuildDate>
     
-	    <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About Me</title>
+      <title>Non-Flat Implications of Flat Priors</title>
+      <link>/posts/nonflat-implications/</link>
+      <pubDate>Tue, 30 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/nonflat-implications/</guid>
+      <description>Understanding the &amp;ldquo;implied prior&amp;rdquo; for functions of parameters</description>
+    </item>
+    
+    <item>
+      <title>How do I reinstall my packages for R 4.0 when many of them came from Github?</title>
+      <link>/posts/package-reinstall/</link>
+      <pubDate>Sun, 26 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/package-reinstall/</guid>
+      <description>A quick solution to an R upgrade headache</description>
+    </item>
+    
+    <item>
+      <title>Plotting What Matters</title>
+      <link>/posts/visualizing-what-matters/</link>
+      <pubDate>Sun, 29 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/visualizing-what-matters/</guid>
+      <description>An exercise in communicating statistical results</description>
+    </item>
+    
+    <item>
+      <title>Purrrmutation Testing</title>
+      <link>/posts/randomization-inference-purrr/</link>
+      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/randomization-inference-purrr/</guid>
+      <description>Randomization Inference within the Tidyverse</description>
+    </item>
+    
+    <item>
+      <title>Political Science 811 (UW–Madison): Statistical Computing</title>
+      <link>/teaching/ps-811/</link>
+      <pubDate>Fri, 24 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/ps-811/</guid>
+      <description>Political Science 811: Statistical Computing PhD-level computing course covering R, R Markdown, and Git.
+2020 Materials View syllabus here. Weekly materials below:
+ Introduction. [Slides] Projects &amp;amp; Intro R Markdown. [Slides] [Example Project] [Rmd Demo] Basics of R. [Script] [Homework] Data Manipulation (tidyverse/dplyr). [Script] [Homework] Graphics (ggplot2). [Script] [Homework] Regression (broom). [Slides] [Script] [Homework] Data reading, cleaning, joining. [Lecture] [Script] Data shaping (tidyr). [Script] R Markdown. [Scripts/Rmd Setup] [Homework: Final Pt 1] Git: Introduction.</description>
+    </item>
+    
+    <item>
+      <title>Causal Inference Reading Workshop
+</title>
+      <link>/teaching/causal-inf-2019/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/causal-inf-2019/</guid>
+      <description>Causal Inference Reading Group In 2019 I organized and led discussion for a summer reading group on causal inference methods. Much of the material focused on &amp;ldquo;the view from political science,&amp;rdquo; but we regularly incorporated material from statistics, economics, and epidemiology. We discussed potential outcomes and graphical models for causal inference and estimation methods using regression, propensity score adjustment, and structural models.
+The reading list below contains both the assigned and the &amp;ldquo;bonus&amp;rdquo; readings.</description>
+    </item>
+    
+    <item>
+      <title>Git information in your open-source research paper (with Rmarkdown)
+</title>
+      <link>/posts/git-in-papers/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/git-in-papers/</guid>
+      <description>Timestamp a paper with a commit hash and branch name</description>
+    </item>
+    
+    <item>
+      <title>Causal Mediation, Bayesianly</title>
+      <link>/posts/bayes-mediation/</link>
+      <pubDate>Wed, 19 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bayes-mediation/</guid>
+      <description>This is what we were already doing</description>
+    </item>
+    
+    <item>
+      <title>Unrealistic Priors and the &#34;Illusion of Learning from Observational Research&#34;
+</title>
+      <link>/posts/ggk-flat-priors/</link>
+      <pubDate>Sat, 23 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/ggk-flat-priors/</guid>
+      <description>Experimentalists agree! When flat priors lead to worse learning</description>
+    </item>
+    
+    <item>
+      <title>Political Science 270 (UW–Madison): Understanding Political Numbers
+</title>
+      <link>/teaching/numbers/</link>
+      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/numbers/</guid>
+      <description>Political Science 270: Understanding Political Numbers Data are increasingly prevalent in politics (and in journalism, industry, academia&amp;hellip;), but data are complex and challenging. What can we learn about politics, and the social world more broadly, when we take an empirical view of it? When should we trust data, and when will data lead us astray?
+Political science 270 is an undergraduate course on consuming, criticizing, and producing data-driven analysis of political and social phenomena.</description>
+    </item>
+    
+    <item>
+      <title>A Visualization of Partial Effects in Multiple Regression</title>
+      <link>/posts/viz-partials/</link>
+      <pubDate>Fri, 19 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/viz-partials/</guid>
+      <description>Partial effects without high dimensions</description>
+    </item>
+    
+    <item>
+      <title>Political Science Graduate LaTeX/Rmd Workshop (UW–Madison)
+</title>
+      <link>/teaching/latex-workshop/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/latex-workshop/</guid>
+      <description>Political Science Graduate LaTeX/RMarkdown Workshop Annual graduate workshop for typesetting professional research documents with LaTeX and R Markdown. I was involved in preparing this workshop from 2015–2018 and led the workshop beginning in 2017.
+All materials for the workshop are publicly available in their 2018 vintage on my Github.</description>
+    </item>
+    
+    <item>
+      <title>Political Science Graduate Math Bootcamp (UW–Madison)
+</title>
+      <link>/teaching/math-camp/</link>
+      <pubDate>Wed, 01 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/teaching/math-camp/</guid>
+      <description>Political Science Math Bootcamp Annual mathematics &amp;ldquo;prefresher&amp;rdquo; mini-course for first-year PhD students.
+My most recent materials (2018) are open-source on Github.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
       <link>/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;h2 id=&#34;quantitative-finance-work&#34;&gt;Quantitative Finance Work&lt;/h2&gt;
-&lt;p&gt;After finishing my Ph.D. in 2020, I joined DRW Holdings as a quantitative researcher.
-I use statistics and machine learning to analyze and trade options, futures, and other derivative assets.&lt;/p&gt;
-&lt;h2 id=&#34;political-science-research&#34;&gt;Political Science Research&lt;/h2&gt;
-&lt;p&gt;I received a Ph.D. in political science from the University of Wisconsin, where I was a student affiliate of the &lt;a href=&#34;https://elections.wisc.edu/&#34;&gt;Elections Research Center&lt;/a&gt;.
-My research focuses on statistical modeling in American electoral politics with a substantive focus on the performance and functioning of elections: how well elections represent citizen views, how elections are administered, and how citizens experience the task of voting.&lt;/p&gt;
-&lt;p&gt;My dissertation developed Bayesian models for measurement and causal models to study ideological competition and representation in congressional primary elections.
-Other projects analyze voter identification requirements in Wisconsin, the gender gap and other group dynamics in electoral coalitions, how voters understand with uncertainty in election polls and forecasts, and Bayesian causal inference.
-Most of this work is &lt;a href=&#34;https://www.github.com/mikedecr&#34;&gt;open-source&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;For more, see my &lt;a href=&#34;/#publications&#34;&gt;publications&lt;/a&gt; and &lt;a href=&#34;/#research&#34;&gt;projects in progress&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&#34;teaching&#34;&gt;Teaching&lt;/h2&gt;
-&lt;p&gt;I have taught quantitative research courses and workshops at the undergraduate and graduate level.
-These courses focused on causal inference, predictive modeling, statistical computing, survey research, and essential mathematics for social sciences.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;I was recognized as an &lt;a href=&#34;https://www.housing.wisc.edu/residence-halls/academics/honored-instructors/&#34;&gt;Honored Instructor&lt;/a&gt; at UW–Madison in 2019.&lt;/p&gt;
-&lt;p&gt;For more, see my &lt;a href=&#34;/teaching/&#34;&gt;teaching page&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Example-publications</title>
-      <link>/example-publication/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/example-publication/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Slides</title>
-      <link>/slides/</link>
-      <pubDate>Tue, 05 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/slides/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>/project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Blog Posts</title>
-      <link>/post/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Code Projects</title>
-      <link>/code/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/code/</guid>
-      <description>&lt;p&gt;This page still under construction.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Courses</title>
-      <link>/courses/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/courses/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Published Research</title>
-      <link>/publication/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/publication/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Recent &amp; Upcoming Talks</title>
-      <link>/talk/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/talk/</guid>
-      <description></description>
+      <description>About Me I joined DRW Holdings as a quantitative researcher in October 2020. I use statistics and machine learning to research financial markets and, some day, develop principled trading strategies.
+I hold a Ph.D. in political science from the University of Wisconsin–Madison, where I used Bayesian statistical methods to study U.S. elections and public opinion with the Elections Research Center. My dissertation developed new Bayesian methods to measure political ideology in the electorate and its causal effects in congressional primary elections.</description>
     </item>
     
     <item>
@@ -120,20 +156,9 @@ These courses focused on causal inference, predictive modeling, statistical comp
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/research/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Teaching</title>
-      <link>/teaching/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/teaching/</guid>
-      <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-</description>
+      <description>Research Projects Completed/published   Do Primaries Work? Bayesian Models of Constituent Ideology and Congressional Nominations Doctoral thesis. Published on ProQuest and open-source on Github.
+  Voter Identification and Nonvoting in Wisconsin—Evidence from the 2016 Election Joint work with Ken Mayer. Published in the Election Law Journal. Ungated PDF available on request.
+  The Unremarkable Gender Gap of 2016 Joint work with Barry Burden and Evan Crawford. Published in The Forum.</description>
     </item>
     
   </channel>
